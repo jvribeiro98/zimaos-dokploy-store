@@ -10,8 +10,8 @@ services:
     - affine-config:/root/.affine/config
     environment:
     - REDIS_SERVER_HOST=redis
-    - REDIS_SERVER_PASSWORD=udNUwvzSBpruKCog
-    - DATABASE_URL=postgresql://postgres:ONyjsos1o8P6LCgC@db:5432/affinepro
+    - REDIS_SERVER_PASSWORD=XqyyqSzvLYHNew7J
+    - DATABASE_URL=postgresql://postgres:qFUyLgU5pXW3jCqt@db:5432/affinepro
     - AFFINE_INDEXER_ENABLED=false
     - AFFINE_SERVER_HOST=localhost
     - MAILER_HOST=
@@ -38,8 +38,8 @@ services:
     - node ./scripts/self-host-predeploy.js
     environment:
     - REDIS_SERVER_HOST=redis
-    - REDIS_SERVER_PASSWORD=udNUwvzSBpruKCog
-    - DATABASE_URL=postgresql://postgres:ONyjsos1o8P6LCgC@db:5432/affinepro
+    - REDIS_SERVER_PASSWORD=XqyyqSzvLYHNew7J
+    - DATABASE_URL=postgresql://postgres:qFUyLgU5pXW3jCqt@db:5432/affinepro
     - AFFINE_INDEXER_ENABLED=false
     - AFFINE_SERVER_HOST=localhost
     - MAILER_HOST=
@@ -60,7 +60,7 @@ services:
     image: pgvector/pgvector:pg16
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=ONyjsos1o8P6LCgC
+    - POSTGRES_PASSWORD=qFUyLgU5pXW3jCqt
     - POSTGRES_DB=affinepro
     - POSTGRES_INITDB_ARGS=--data-checksums
     volumes:

@@ -9,8 +9,8 @@ services:
     - OPENAI_API_KEY=
     - OPENAI_API_BASE_URL=https://api.openai.com
     - HEAD_SCRIPTS=
-    - SECRET_KEY=jbaGHSNiFdl04vot8NCyhhTni92EU8yR
-    - SITE_PASSWORD=B3vzbieYh3ZjruO8
+    - SECRET_KEY=NBfTtqyWdLywVc7mPLc3y4jL3r7tqw9i
+    - SITE_PASSWORD=EjL9yOeaF9rjJCu7
     - OPENAI_API_MODEL=gpt-4o-mini
     ports:
     - target: 3000

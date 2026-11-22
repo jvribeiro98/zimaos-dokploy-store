@@ -3,7 +3,7 @@ services:
   shlink:
     image: shlinkio/shlink:stable
     environment:
-    - INITIAL_API_KEY=um02LHKqgHadPUm188aNM4Z2pQEvrz
+    - INITIAL_API_KEY=X4D1m9eLruyHpp4LvSEHuqfCnCsmk2
     - DEFAULT_DOMAIN=localhost
     - IS_HTTPS_ENABLED=false
     volumes:
@@ -21,7 +21,7 @@ services:
   shlink-web:
     image: shlinkio/shlink-web-client
     environment:
-    - SHLINK_SERVER_API_KEY=um02LHKqgHadPUm188aNM4Z2pQEvrz
+    - SHLINK_SERVER_API_KEY=X4D1m9eLruyHpp4LvSEHuqfCnCsmk2
     - SHLINK_SERVER_URL=http://localhost
     healthcheck:
       test:

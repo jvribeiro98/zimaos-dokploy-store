@@ -14,13 +14,13 @@ services:
       ENABLE_MIGRATIONS: 'yes'
       ADMIN_USER: admin
       ADMIN_EMAIL: admin@localhost
-      ADMIN_PASSWORD: ABHWp5u6yCCDFOTeDEGl0pds5vpeyDv4
+      ADMIN_PASSWORD: kK9wzFX0uKcmKTdnk8mXEYEGV4a600W7
       DATABASE_HOST: db
       DATABASE_PORT: '5432'
       DATABASE_USER: mediacms
-      DATABASE_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      DATABASE_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       DATABASE_NAME: mediacms
-      POSTGRES_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      POSTGRES_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       REDIS_HOST: redis
       REDIS_PORT: '6379'
     command: ./deploy/docker/prestart.sh
@@ -47,9 +47,9 @@ services:
       DATABASE_HOST: db
       DATABASE_PORT: '5432'
       DATABASE_USER: mediacms
-      DATABASE_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      DATABASE_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       DATABASE_NAME: mediacms
-      POSTGRES_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      POSTGRES_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       REDIS_HOST: redis
       REDIS_PORT: '6379'
     depends_on:
@@ -73,9 +73,9 @@ services:
       DATABASE_HOST: db
       DATABASE_PORT: '5432'
       DATABASE_USER: mediacms
-      DATABASE_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      DATABASE_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       DATABASE_NAME: mediacms
-      POSTGRES_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      POSTGRES_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       REDIS_HOST: redis
       REDIS_PORT: '6379'
     depends_on:
@@ -96,9 +96,9 @@ services:
       DATABASE_HOST: db
       DATABASE_PORT: '5432'
       DATABASE_USER: mediacms
-      DATABASE_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      DATABASE_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       DATABASE_NAME: mediacms
-      POSTGRES_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      POSTGRES_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       REDIS_HOST: redis
       REDIS_PORT: '6379'
     depends_on:
@@ -111,7 +111,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: mediacms
-      POSTGRES_PASSWORD: JKIwixTb0v4PYncBGgVLfBXbraK6UFPN
+      POSTGRES_PASSWORD: RKH4Ks2kcKi0PvzLE75y2PAppxOKjMBD
       POSTGRES_DB: mediacms
       TZ: Europe/London
     healthcheck:

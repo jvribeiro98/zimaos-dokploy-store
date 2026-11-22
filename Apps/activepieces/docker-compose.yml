@@ -10,9 +10,9 @@ services:
         condition: service_healthy
     environment:
       AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
-      AP_API_KEY: IrHO9Ir2y5pf82wIcZFxMNzQaiFh9IOc
-      AP_ENCRYPTION_KEY: kpQBnNmIOu5VbViZMVxr3j1niP6l3Elr
-      AP_JWT_SECRET: dsg4XvAVmNKltuzzy2BKI3DvMJbB6TSu
+      AP_API_KEY: ZNCgCp9TjgWKGlUjRKWArzTbz89ZiTuA
+      AP_ENCRYPTION_KEY: 0BrvPbyBcXFZVTQabPQzNMlEYJhc1W2j
+      AP_JWT_SECRET: aDobCtQRwUPTN6BOYqW0dkDf1scisKBL
       AP_ENVIRONMENT: prod
       AP_FRONTEND_URL: https://localhost
       AP_WEBHOOK_TIMEOUT_SECONDS: '30'
@@ -21,7 +21,7 @@ services:
       AP_POSTGRES_HOST: postgres
       AP_POSTGRES_PORT: '5432'
       AP_POSTGRES_USERNAME: activepieces
-      AP_POSTGRES_PASSWORD: iKkIdvCRcnzTjPzhfCLDjLsITRBIUWlY
+      AP_POSTGRES_PASSWORD: 28qnovgrRFZk8wXPjppCNGivAI1AtwCv
       AP_EXECUTION_MODE: UNSANDBOXED
       AP_REDIS_HOST: redis
       AP_REDIS_PORT: '6379'
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: activepieces
-      POSTGRES_PASSWORD: iKkIdvCRcnzTjPzhfCLDjLsITRBIUWlY
+      POSTGRES_PASSWORD: 28qnovgrRFZk8wXPjppCNGivAI1AtwCv
       POSTGRES_USER: activepieces
     volumes:
     - postgres_data:/var/lib/postgresql/data

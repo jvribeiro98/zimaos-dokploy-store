@@ -10,7 +10,7 @@ services:
       NODE_ENV: production
       MODE: fullstack
       NEXT_PUBLIC_API_BASE_URL: /api
-      BETTER_AUTH_SECRET: rMgJobs6lwdcocUJIESvaIZHc7YkhuIUAeqPCF4cPqagGGQMkAXESu2ErjCvwlgd
+      BETTER_AUTH_SECRET: oxM4o37OPopgQImwvGZIi6dN0F5A3P4vC5y60FDxVHPIwA97VkszolmcrPWvAmxx
       BETTER_AUTH_URL: http://localhost
       ALLOWED_ORIGIN: http://localhost}
       DOCKER_CONTAINER: 'true'

@@ -4,14 +4,14 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
     restart: unless-stopped
     environment:
-    - ELASTIC_PASSWORD=deNFKkpCk7HF2TrSwQ7FKd6h7XLPRQxT
+    - ELASTIC_PASSWORD=1yoSZ3ynXiJPFWF6Rnpx7s64GdQ4uUHQ
     - discovery.type=single-node
     - xpack.security.enabled=true
     - xpack.security.http.ssl.enabled=false
     - node.store.allow_mmap=false
     - xpack.ml.enabled=false
     - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    mem_limit: ${ES_MEM_LIMIT}
+    mem_limit: 2g
     expose:
     - '9200'
     volumes:
@@ -30,14 +30,14 @@ services:
     environment:
     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     - ELASTICSEARCH_USERNAME=kibana_system
-    - ELASTICSEARCH_PASSWORD=N5NVj0YcsXXvlHj1v2vPmli9mMEqUNXi
+    - ELASTICSEARCH_PASSWORD=Sdu2SI4WD5kR2TwQ7tnuztRy9JjXON6H
     - ELASTICSEARCH_PUBLICBASEURL=https://localhost
     - SERVER_PUBLICBASEURL=https://localhost
     - XPACK_SECURITY_SECURECOOKIES=true
-    - XPACK_SECURITY_ENCRYPTIONKEY=5c5TZF3GpkeCHyrQzn6qxm8VaLx1tgjlonESYDUYr6IifvKB3RgpQ7vL3n1UwwbO
-    - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=9FQR7UiO3QtVjv8U1NFo2fiTCJRfgTmnrEYjLntjz9t5mAMrAAO3Cp0JTY7Ki73Q
-    - XPACK_REPORTING_ENCRYPTIONKEY=r5Ux8tYmWY8GXJig8U8sNXUqfCSUcWDZGAG5BNqNyGOkALBW1M7Lj8is2ZNjt2aC
-    mem_limit: ${KB_MEM_LIMIT}
+    - XPACK_SECURITY_ENCRYPTIONKEY=OF7xhWdoFY6QqfxVeoNAPss6Qt900M4d9yUxbSmxstOajGgvlhn0mRIcM3AX1Ylc
+    - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=zw7fIdjB3OI3Zbak1r6VIu5Tax0TOkFnb6hrgYk4AD4qZlZcpHGZsaJmcvvtQ2EY
+    - XPACK_REPORTING_ENCRYPTIONKEY=CZ2KbP7QGJFWavWetDtRLG6LFqIaPZoZBYtTmLnuVwZ9zuBD4OLtPSaMjy6LaifM
+    mem_limit: 2g
     expose:
     - '5601'
     volumes:
@@ -60,8 +60,8 @@ services:
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
     environment:
-    - ELASTIC_PASSWORD=deNFKkpCk7HF2TrSwQ7FKd6h7XLPRQxT
-    - KIBANA_PASSWORD=N5NVj0YcsXXvlHj1v2vPmli9mMEqUNXi
+    - ELASTIC_PASSWORD=1yoSZ3ynXiJPFWF6Rnpx7s64GdQ4uUHQ
+    - KIBANA_PASSWORD=Sdu2SI4WD5kR2TwQ7tnuztRy9JjXON6H
     depends_on:
       elasticsearch:
         condition: service_healthy

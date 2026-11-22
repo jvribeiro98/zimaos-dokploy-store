@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     stop_grace_period: 15s
     environment:
-      PP_DB_KEY: NXqILd3qOUGbCoJooUKsL4k8G+h/AjtyfrXdCmqUE/E=
-      PP_PASSWORD: sIZDLUkPjAKfWAn7qZr8ogLE
+      PP_DB_KEY: /5iQTmcXLJjK9E4FzADGX55Sb3D2ZljZyDFbwzLGNnQ=
+      PP_PASSWORD: M3DNcv41yDf24DSXxb1qUk3B
       PP_MAX_IMAGE_MB: '20'
       PP_MAX_FILE_MB: '25'
       PP_MAX_TEXT_KB: '1024'

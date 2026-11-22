@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloakuser
-      POSTGRES_PASSWORD: wLHJoZarQJbQ8GjibTaR7mGPKZ92P3WA
+      POSTGRES_PASSWORD: Cth4tCh2LjvPD14UBg85CXnLeqQjnoGE
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -25,9 +25,9 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
       KC_DB_USERNAME: keycloakuser
-      KC_DB_PASSWORD: wLHJoZarQJbQ8GjibTaR7mGPKZ92P3WA
+      KC_DB_PASSWORD: Cth4tCh2LjvPD14UBg85CXnLeqQjnoGE
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: ECk3IJkuKnlUmYNgRu8xpEHBrraid8bl
+      KC_BOOTSTRAP_ADMIN_PASSWORD: TaSF8nKV3zPxvEz0JT3EMiQl2Jnwy2vt
       KC_HOSTNAME: localhost
       KC_HTTP_ENABLED: 'true'
       KC_HEALTH_ENABLED: 'true'

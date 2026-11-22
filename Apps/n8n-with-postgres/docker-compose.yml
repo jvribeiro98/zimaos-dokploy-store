@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=boZ7cqMkMOs4cdMn7pthFIHP
+    - POSTGRES_PASSWORD=aQuvdgW1NB8aIx2AAZlmXZYk
     - POSTGRES_DB=n8n
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -26,8 +26,8 @@ services:
     - DB_POSTGRESDB_PORT=5432
     - DB_POSTGRESDB_DATABASE=n8n
     - DB_POSTGRESDB_USER=admin
-    - DB_POSTGRESDB_PASSWORD=boZ7cqMkMOs4cdMn7pthFIHP
-    - N8N_ENCRYPTION_KEY=85hqTGiEaldIvJCdB3ZZtQninA0Go6XQoIyStK/wyALWY1Q2xbTh2j+2mSHOHp997qUgCAcKGuF9Jtu5iSAf4w==
+    - DB_POSTGRESDB_PASSWORD=aQuvdgW1NB8aIx2AAZlmXZYk
+    - N8N_ENCRYPTION_KEY=TaYMHY1SpDb308NQVxU9fes0HWAUYs3ctaDkH8WPLTBsHB+WmmOF4VD+/2xM8nU93bucLetS7ZQlGZuuaZhUsw==
     - N8N_HOST=localhost
     - N8N_PORT=5678
     - N8N_PROTOCOL=http

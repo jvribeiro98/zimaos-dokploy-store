@@ -10,14 +10,14 @@ services:
     environment:
     - NODE_ENV=production
     - PORT=3000
-    - DATABASE_URL=postgresql://bookorbit:q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4@postgres:5432/bookorbit
+    - DATABASE_URL=postgresql://bookorbit:GQ4zw4cmwAldJODBY1D2Aqr8QS2yibJP@postgres:5432/bookorbit
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USER=bookorbit
-    - POSTGRES_PASSWORD=q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4
+    - POSTGRES_PASSWORD=GQ4zw4cmwAldJODBY1D2Aqr8QS2yibJP
     - POSTGRES_DB=bookorbit
-    - JWT_SECRET=5h8YVMX6rbicFI0xErmDhQ8O8kcpNl46
-    - SETUP_BOOTSTRAP_TOKEN=JP010hIo5zmRZyzkDXkRkmQg3h2zx8NY
+    - JWT_SECRET=WrNhvCeo2OfMLmsFTUqHx6gGgt7TEZnp
+    - SETUP_BOOTSTRAP_TOKEN=gGzPK9nXv6lJ4i6fpGH0porGwlvl8zDA
     - APP_URL=https://localhost
     - CLIENT_URL=https://localhost
     - PUID=1000
@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=bookorbit
-    - POSTGRES_PASSWORD=q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4
+    - POSTGRES_PASSWORD=GQ4zw4cmwAldJODBY1D2Aqr8QS2yibJP
     - POSTGRES_DB=bookorbit
     - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:

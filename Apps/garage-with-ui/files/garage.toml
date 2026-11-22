@@ -8,7 +8,7 @@ compression_level = 2
 
 rpc_bind_addr = "[::]:3901"
 rpc_public_addr = "localhost:3901" # Required
-rpc_secret = "ec53454e02933527c93115baeb311c5bdea777b20af8962884ebff04c3998f589648dc76d585dee0dbb47b6495198394a1e72db864632d813acb1d5d1e327475"
+rpc_secret = "fc1893d94818cb186e12b252cc6617ed152da0f47bb2850c295f022b0c2e5f6e44d1bdcdf123d3538fb11429c98514e4908a09b2f39c83b6221184e8aaf3627d"
 
 [s3_api]
 s3_region = "garage"
@@ -22,6 +22,6 @@ index = "index.html"
 
 [admin] # Required
 api_bind_addr = "[::]:3903"
-admin_token = "VtsmfoMlHKaHAAb3pErPFSCR9yBlDulW9nU6Zngloxw="
+admin_token = "Bl3n6CVvDJpCPtueKCxPcXFxkrrdBsmii0xnU3oOWmI="
 metrics_require_token = true
-metrics_token = "pSm0PfsjDfh7HkgfPWrcsX8mvfxjn2SbMxQFjjqXU58="
+metrics_token = "G67yve8UuscT1lNyLycK8HpDu6goobON+yqOXk2Wk5U="

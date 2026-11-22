@@ -11,8 +11,8 @@ services:
       DOCUMENT_STORAGE_LOCAL_PATH: /documents
       SESSION_SECURE: 'true'
       TRUST_PROXY: '1'
-      SESSION_SECRET: wAC1q0FoYLzQiP4jdowmqJO4i0j3RFFRxiiufqtnnDUPz29nHaq1dSbYKL8JtVEg
-      DB_ENCRYPTION_KEY: PZVl4OAelv8LAaOJKkWSMoBrnbl1KBZ8tVGRLxXJ03Qp0746cXXYExeeRNHDXaPh
+      SESSION_SECRET: WzATskBD07QCRvWCf6l337IOrH3iMlDzwMYOSX8EuehaT62Dhz0KcOalUdClu1f9
+      DB_ENCRYPTION_KEY: xRy9In5RiocC816QrWwOL419tr8SBCy23cFObCgTy5DFcPfmFyv1RddTigzZhudi
     volumes:
     - yuvomi-data:/data
     - yuvomi-backups:/backups

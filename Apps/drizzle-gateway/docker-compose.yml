@@ -6,7 +6,7 @@ services:
     environment:
       PORT: '4983'
       STORE_PATH: /app
-      MASTERPASS: fXNTPsmz5c6nBvaIWHklG3BJPNLzi4pYwhuXnB/XlHI=
+      MASTERPASS: shlk+pjIqkh+0WvP1HWSM+tIaRwjs7hW6tJLW8Peczc=
     volumes:
     - drizzle-gateway:/app
     ports:

@@ -28,9 +28,6 @@ services:
         VITE_REVERB_SCHEME: ${TRYPOST_PUBLIC_SCHEME:-http}
         VITE_REVERB_APP_KEY: ${REVERB_APP_KEY:?Keep the generated Reverb key}
     restart: unless-stopped
-    env_file:
-    - path: .env
-      required: false
     environment:
       APP_ENV: production
       APP_DEBUG: 'false'

@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: kaneo
       POSTGRES_USER: kaneo
-      POSTGRES_PASSWORD: ehruhYukz5dXl1SnmaG6hzZ84PRCHuYe
+      POSTGRES_PASSWORD: G0z6gI4rIcOyWbyhFptS7z9jyx9HNCnC
     volumes:
     - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -20,8 +20,8 @@ services:
     image: ghcr.io/usekaneo/kaneo:2.35.0
     environment:
       KANEO_CLIENT_URL: http://localhost
-      AUTH_SECRET: fca3fb4846be4f53bb908f852a68908a284c19604a291d8312ba82e243f787f49525c326a573f4b1c5f97302015a8784df66ab7f6c64123178ef62b0e1833a53
-      DATABASE_URL: postgresql://kaneo:ehruhYukz5dXl1SnmaG6hzZ84PRCHuYe@postgres:5432/kaneo
+      AUTH_SECRET: 0789d04fbf3b0f23179f6e0af85f20a4ad057e91929bf33080fadff9fd90c290f4bd7f6d7244b08a66ac4b8661856545ffc17040151a4b602c3af616e6946965
+      DATABASE_URL: postgresql://kaneo:G0z6gI4rIcOyWbyhFptS7z9jyx9HNCnC@postgres:5432/kaneo
     expose:
     - 5173
     depends_on:

@@ -7,7 +7,7 @@ services:
     - 3000
     environment:
     - PUBLIC_URL=https://localhost
-    - TOKEN_ENCRYPTION_KEY=gUWnSt2yty6sI8oLbxDQCDXL0EX2BMpmYl12Mm6dNmmCJWuF
+    - TOKEN_ENCRYPTION_KEY=sZvJu3UDBexV6s96JeVHZAxf5JcgCokniElWHtq2IapWjpdr
     - ALLOWED_WISE_USERS=
     - WRITES_ENABLED=true
     volumes:

@@ -7,7 +7,7 @@ services:
     - komari-data:/app/data
     environment:
     - ADMIN_USERNAME=admin
-    - ADMIN_PASSWORD=1e4zec9i5VFPrBhl
+    - ADMIN_PASSWORD=JK4acY8qd3x2WWiB
     ports:
     - target: 25774
       published: "25774"

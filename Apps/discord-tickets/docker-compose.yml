@@ -7,8 +7,8 @@ services:
     - tickets-mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: tickets
-      MYSQL_PASSWORD: HnjVxWIEWy6LTXIvEHLppxPrvhHhBIuD
-      MYSQL_ROOT_PASSWORD: 4S2pZmVkpeDqyOR59bEOqxP11jywIa3u
+      MYSQL_PASSWORD: HH53PpJjnuKzLOi37ZQG4JukiyJzWcpf
+      MYSQL_ROOT_PASSWORD: jlPrkDTg1DmmYPPJduVgv2MIOrIHwrgE
       MYSQL_USER: tickets
     healthcheck:
       test:
@@ -35,10 +35,10 @@ services:
     tty: true
     stdin_open: true
     environment:
-      DB_CONNECTION_URL: mysql://tickets:HnjVxWIEWy6LTXIvEHLppxPrvhHhBIuD@tickets-postgres/tickets
+      DB_CONNECTION_URL: mysql://tickets:HH53PpJjnuKzLOi37ZQG4JukiyJzWcpf@tickets-postgres/tickets
       DISCORD_SECRET: ''
       DISCORD_TOKEN: ''
-      ENCRYPTION_KEY: qeWOFXU0XNRdwzoCD9YJjCjfKqQasnXvW1FTgtxWK87iVOwD
+      ENCRYPTION_KEY: qppKqtVWFKdtVALa4qUZjgxdWzmjAY7qPEfWBEq9pMh8zU2x
       DB_PROVIDER: mysql
       HTTP_EXTERNAL: https://localhost
       HTTP_HOST: 0.0.0.0

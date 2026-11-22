@@ -3,9 +3,6 @@ services:
   wud:
     image: ghcr.io/getwud/wud:9.5.0
     restart: unless-stopped
-    env_file:
-    - path: .env
-      required: false
     environment:
       WUD_AUTH_ADMIN_USER: admin
       WUD_AUTH_ADMIN_PASSWORD: ${WUD_AUTH_ADMIN_PASSWORD:?Keep the generated administrator password}

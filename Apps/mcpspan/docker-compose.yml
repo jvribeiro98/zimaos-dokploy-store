@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: mcpspan
-      POSTGRES_PASSWORD: nLipchYsZbxnh9Zol4lOwPHR1b6PCMKu
+      POSTGRES_PASSWORD: gDvjnmFA1tdjiAvLyj74B6MsMOhBd16y
       POSTGRES_DB: mcpspan
     volumes:
     - db-data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://mcpspan:nLipchYsZbxnh9Zol4lOwPHR1b6PCMKu@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:gDvjnmFA1tdjiAvLyj74B6MsMOhBd16y@db:5432/mcpspan
     command:
     - ./node_modules/.bin/node-pg-migrate
     - up
@@ -34,9 +34,9 @@ services:
       migrate:
         condition: service_completed_successfully
     environment:
-      DATABASE_URL: postgres://mcpspan:nLipchYsZbxnh9Zol4lOwPHR1b6PCMKu@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:gDvjnmFA1tdjiAvLyj74B6MsMOhBd16y@db:5432/mcpspan
       PORT: '6271'
-      API_KEY_SECRET: 4vPK2Z7nqRS3Iu9CdG+Js05l5dMHeGUFnngrizrTD3Ox32aAXpEVV8+7C4vUEjaR
+      API_KEY_SECRET: EqhA+5qEHgnYLgJGmwD8V8lRuG0BOOlFQHv20p6nC90WgVB3hkYfOWyUmRuRKu7q
       MCPSPAN_DASHBOARD_URL: http://localhost
     expose:
     - 6271

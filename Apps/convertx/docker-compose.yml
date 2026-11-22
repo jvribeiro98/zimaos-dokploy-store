@@ -6,7 +6,7 @@ services:
     expose:
     - 3000
     environment:
-    - JWT_SECRET=f26ae265bd0512df4f44c5b1e47224ce2e6a94432573b660bf2d718ec9879732
+    - JWT_SECRET=4884f91cecbd1858f003d83e43384497aaeef62f031c063075725900f3a8274d
     - ACCOUNT_REGISTRATION=false
     - HTTP_ALLOWED=true
     - ALLOW_UNAUTHENTICATED=false

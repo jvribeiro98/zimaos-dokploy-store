@@ -7,14 +7,14 @@ services:
       STRAPI_TELEMETRY_DISABLED: 'True'
       STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE: en
       FAST_REFRESH: 'True'
-      JWT_SECRET: NgR1K4yI8dfunYlVTNosfxRHCufgsUaV
-      ADMIN_JWT_SECRET: nOikKUt1WevW2o2LcBak7uPS1i1Uq56y
+      JWT_SECRET: jnt45p61vk0qbahYt4JyBO4lDQ9qkiDs
+      ADMIN_JWT_SECRET: AL6PzeEmnepiYwcy9HBJ3ffK8tHqc2TP
       DATABASE_CLIENT: postgres
       DATABASE_HOST: strapi_postgres
       DATABASE_PORT: '5432'
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
-      DATABASE_PASSWORD: 8Zhxx2JT61Onx9JCe7gNI9hJAND5cjp4
+      DATABASE_PASSWORD: 5Ees4d1AdZMmbmoKQYLttOfEPMpLQrRb
     volumes:
     - strapi_data:/srv/app
     expose:
@@ -42,7 +42,7 @@ services:
     environment:
       POSTGRES_DB: strapi
       POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: 8Zhxx2JT61Onx9JCe7gNI9hJAND5cjp4
+      POSTGRES_PASSWORD: 5Ees4d1AdZMmbmoKQYLttOfEPMpLQrRb
     volumes:
     - strapi_postgres_data:/var/lib/postgresql
     healthcheck:

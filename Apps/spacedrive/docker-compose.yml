@@ -5,7 +5,7 @@ services:
     expose:
     - 8080
     environment:
-    - SD_AUTH=admin:0Y9yZ1WHe5bheFxNzSYAr5pkaS7Af9bl
+    - SD_AUTH=admin:uiXTTRBFGQfRfUTL4KtHoFAdJHjmv7Q9
     volumes:
     - /var/spacedrive:/var/spacedrive
     restart: unless-stopped

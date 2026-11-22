@@ -6,7 +6,7 @@ services:
     expose:
     - 9000
     environment:
-      LIBREDESK_SYSTEM_USER_PASSWORD: G9aMlFXktoXL2peeGE5jjtdsD2/F/qK4VXY7bbTAvfs=
+      LIBREDESK_SYSTEM_USER_PASSWORD: wkDEA2OpJFsxHjqKONnEGTesCkJOjC8uW5niz5GBeAo=
     depends_on:
     - db
     - redis
@@ -29,7 +29,7 @@ services:
     - 5432
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: k8EaMPG22tDbYv8V
+      POSTGRES_PASSWORD: HJYqyzmk0nnj0rQi
       POSTGRES_DB: libredesk
     healthcheck:
       test:

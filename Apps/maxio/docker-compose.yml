@@ -7,8 +7,8 @@ services:
     volumes:
     - maxio-data:/data
     environment:
-    - MAXIO_ACCESS_KEY=LgXLGDagbDcQuJ9DQRPX
-    - MAXIO_SECRET_KEY=Xg0PQhCuG49zuvO9JuqR
+    - MAXIO_ACCESS_KEY=uibPhwDBhzxPetmaTpK9
+    - MAXIO_SECRET_KEY=HDfxOAZkffeC9Qp31IDa
     restart: unless-stopped
     ports:
     - target: 9000

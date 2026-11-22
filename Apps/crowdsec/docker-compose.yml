@@ -10,7 +10,7 @@ services:
     - crowdsec-db:/var/lib/crowdsec/data/
     - crowdsec-config:/etc/crowdsec/
     - /etc/dokploy/traefik/dynamic/access.log:/var/log/traefik/access.log:ro
-    - ${AUTH_LOG_PATH}:/var/log/ssh/auth.log:ro
+    - /DATA/AppData/crowdsec/data:/var/log/ssh/auth.log:ro
     security_opt:
     - no-new-privileges:true
     labels:

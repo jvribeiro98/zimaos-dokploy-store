@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: xsshunterexpress
       POSTGRES_USER: xsshunterexpress
-      POSTGRES_PASSWORD: LIhcwzU605jmOCu9
+      POSTGRES_PASSWORD: 15JpAUHhCuFVcALD
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
@@ -23,12 +23,12 @@ services:
     build: https://github.com/rs-loves-bugs/xsshunter.git
     restart: unless-stopped
     environment:
-      SESSION_SECRET_KEY: 0p1XQEWd0/w3RsKK0fdKakU+Jk503kTEN1mXiAE+qQPwB301Uxxd1akW77rGGFlTpUXx+L2BWwhw0oHYjrGGRw==
+      SESSION_SECRET_KEY: 4sLc4xRHur7PyRIfiIaatBboCrpcABy8G+NOvVUCDLOmGAU+EvM5uAXdLyr3aXzoFdZ5xvcDE8eY7PNmhsIL4g==
       HOSTNAME: localhost
       XSS_HOSTNAME: xss.localhost
       PANEL_LOGIN: 'true'
       PANEL_USERNAME: admin@localhost
-      PANEL_PASSWORD: Wj29fXdAtYldPKYuKIzhqMpJXTJyXkv1
+      PANEL_PASSWORD: J1os6yLraT7MpLhX69KTCDv4PesBT195
       ALLOW_EMPTY_USERPATH: 'true'
       OAUTH_LOGIN: 'false'
       CLIENT_ID: ''
@@ -41,7 +41,7 @@ services:
       DATABASE_HOST: xsshunterexpress-db
       POSTGRES_DB: xsshunterexpress
       POSTGRES_USER: xsshunterexpress
-      POSTGRES_PASSWORD: LIhcwzU605jmOCu9
+      POSTGRES_PASSWORD: 15JpAUHhCuFVcALD
       NODE_ENV: production
       PORT: '8080'
       CONTROL_PANEL_ENABLED: 'true'

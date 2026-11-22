@@ -4,7 +4,7 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: qaMyGcOnPp3WJOXRLPEdrA0DQv46aKIC
+      POSTGRES_PASSWORD: D1bRBaPZAxsSqLkO6N1i5EiIbk7h72iQ
       POSTGRES_USER: joplin
       POSTGRES_DB: joplin
     volumes:
@@ -18,7 +18,7 @@ services:
       APP_BASE_URL: http://localhost
       APP_PORT: '22300'
       DB_CLIENT: pg
-      POSTGRES_PASSWORD: qaMyGcOnPp3WJOXRLPEdrA0DQv46aKIC
+      POSTGRES_PASSWORD: D1bRBaPZAxsSqLkO6N1i5EiIbk7h72iQ
       POSTGRES_DATABASE: joplin
       POSTGRES_USER: joplin
       POSTGRES_PORT: '5432'

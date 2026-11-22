@@ -6,7 +6,7 @@ services:
     expose:
     - 2226
     environment:
-    - APP_KEY=base64:N4Bfub2k1mFdivnWD2imq0cW4ar697MVrzxKAKZFqho=
+    - APP_KEY=base64:8exXBQp+NoixSeB96cx0BlrZz1SiytP+gBuSKb/V9mI=
     - APP_URL=https://localhost
     - DB_CONNECTION=sqlite
     - DB_DATABASE=/data/database.sqlite

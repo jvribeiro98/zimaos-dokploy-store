@@ -6,7 +6,7 @@ services:
     - discourse-postgresql-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: discourse
-      POSTGRES_PASSWORD: ExSXqE3dt5P3lhCWlJ7n0LEAf0HjSThG
+      POSTGRES_PASSWORD: gvTpbgRMljjiMfmFG4hMCzvyz5Ma3S1a
       POSTGRES_DB: discourse
     healthcheck:
       test:
@@ -46,11 +46,11 @@ services:
       DISCOURSE_DB_HOST: discourse-db
       DISCOURSE_DB_PORT: '5432'
       DISCOURSE_DB_USERNAME: discourse
-      DISCOURSE_DB_PASSWORD: ExSXqE3dt5P3lhCWlJ7n0LEAf0HjSThG
+      DISCOURSE_DB_PASSWORD: gvTpbgRMljjiMfmFG4hMCzvyz5Ma3S1a
       DISCOURSE_DB_NAME: discourse
       DISCOURSE_REDIS_HOST: discourse-redis
       DISCOURSE_REDIS_PORT: '6379'
-      DISCOURSE_REDIS_PASSWORD: O1R905o7wZYPF6WFpkHFGPduiOCntjjh
+      DISCOURSE_REDIS_PASSWORD: wRITLpqK2AjHnutCL80S6zb7CMG8Cznc
       DISCOURSE_DEVELOPER_EMAILS: admin@example.com
     expose:
     - 80

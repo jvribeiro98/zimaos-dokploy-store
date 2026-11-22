@@ -15,8 +15,8 @@ services:
       DB_PORT: '5432'
       DB_NAME: healthchecks
       DB_USER: healthchecks
-      DB_PASSWORD: fjtO3RJ8FE3cGARfxGI44KKGfMUcKajn
-      SECRET_KEY: ct1x0M6T7m4zkslFPawGP7JN94yxubS4V72jCmYCnbIGcajxQvq9X5oPjOmaQZIg
+      DB_PASSWORD: xrI4bm88p6uOvU7rVvjYzhJIzurlUbuA
+      SECRET_KEY: ZRyAJBbWE755MV8F9Ai3HuA3uLKkfefVw8DovFrF7EqdzqWOvtCNaKlGj7Nn8oGN
       SITE_ROOT: https://localhost
       SITE_NAME: Healthchecks
       ALLOWED_HOSTS: localhost
@@ -38,7 +38,7 @@ services:
     environment:
       POSTGRES_DB: healthchecks
       POSTGRES_USER: healthchecks
-      POSTGRES_PASSWORD: fjtO3RJ8FE3cGARfxGI44KKGfMUcKajn
+      POSTGRES_PASSWORD: xrI4bm88p6uOvU7rVvjYzhJIzurlUbuA
     volumes:
     - healthchecks-db:/var/lib/postgresql/data
     healthcheck:

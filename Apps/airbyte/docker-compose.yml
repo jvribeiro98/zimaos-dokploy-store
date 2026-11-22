@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: db-airbyte
       POSTGRES_USER: airbyte
-      POSTGRES_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      POSTGRES_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       PGDATA: /var/lib/postgresql/data/pgdata
     healthcheck:
       test:
@@ -30,7 +30,7 @@ services:
       \ \\\n  -s3 -s3.port=9000 -s3.config=/etc/seaweedfs/s3.json\n"
     environment:
       MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: svpeKvaW1uFd5dVgnUUjnx8b2Lt79MBb
+      MINIO_ROOT_PASSWORD: zDwwmMt1J0yQWLiIEDyeSQAMNPNl4taF
     volumes:
     - minio-data:/storage
     restart: unless-stopped
@@ -63,7 +63,7 @@ services:
       DB_PORT: '5432'
       POSTGRES_SEEDS: db
       POSTGRES_USER: airbyte
-      POSTGRES_PWD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      POSTGRES_PWD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       POSTGRES_TLS_ENABLED: 'false'
       POSTGRES_TLS_DISABLE_HOST_VERIFICATION: 'false'
       SQL_TLS_ENABLED: 'false'
@@ -145,14 +145,14 @@ services:
     - /bin/sh
     - /scripts/bootstrap-k3s.sh
     environment:
-      AIRBYTE_ADMIN_PASSWORD: jsQiLnb1gy2QTaZpL2FMBx6JqxXxBA6J
-      AIRBYTE_ADMIN_CLIENT_ID: 7z9zAaNXK3A2Le1i1YjAMd7w4xChXiti
-      AIRBYTE_ADMIN_CLIENT_SECRET: b4DqqEzcOwbYsVqh24AnFctd204nup2a
-      AIRBYTE_JWT_SIGNATURE_SECRET: Oky3H6rYfKnlrIQddsAKiz0a6kbXbv0f
+      AIRBYTE_ADMIN_PASSWORD: xiCKWjzHjsuW74GQcYvDTsfNLnohJHnD
+      AIRBYTE_ADMIN_CLIENT_ID: BL7humD26HVyoxEXCYMwyHnYdSR52X7G
+      AIRBYTE_ADMIN_CLIENT_SECRET: u4jaKPwiIzbSaSmGRDMgMj4VMxC2lMoi
+      AIRBYTE_JWT_SIGNATURE_SECRET: wtRZiJJoTt4b1qHuuIsqmKWpEUbl4qWw
       DATABASE_USER: airbyte
-      DATABASE_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      DATABASE_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: svpeKvaW1uFd5dVgnUUjnx8b2Lt79MBb
+      MINIO_ROOT_PASSWORD: zDwwmMt1J0yQWLiIEDyeSQAMNPNl4taF
     volumes:
     - k3s-kubeconfig:/kube
     - /DATA/AppData/$AppID/config/k3s-resources.yaml:/config/k3s-resources.yaml:ro
@@ -177,8 +177,6 @@ services:
         condition: service_completed_successfully
     restart: on-failure
   bootloader:
-    env_file: &id001
-    - ../files/config/airbyte.env
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -197,7 +195,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -223,7 +221,6 @@ services:
       k3s-bootstrap:
         condition: service_completed_successfully
   server:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -242,7 +239,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -289,7 +286,6 @@ services:
       published: "8001"
       protocol: tcp
   manifest-server:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -308,7 +304,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -341,7 +337,6 @@ services:
       retries: 10
       start_period: 30s
   workload-api-server:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -360,7 +355,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -401,7 +396,6 @@ services:
       retries: 10
       start_period: 30s
   worker:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -420,7 +414,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -461,7 +455,6 @@ services:
       retries: 10
       start_period: 30s
   cron:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -480,7 +473,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -521,7 +514,6 @@ services:
       retries: 10
       start_period: 30s
   workload-launcher:
-    env_file: *id001
     environment:
       AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
       AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
@@ -540,7 +532,7 @@ services:
       DATABASE_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_URL: jdbc:postgresql://db:5432/db-airbyte
       CONFIG_DATABASE_REPLICA_USER: airbyte
-      CONFIG_DATABASE_REPLICA_PASSWORD: WMV6mL0cQ1JbcpFoWRgNoDlSrTagaZg6
+      CONFIG_DATABASE_REPLICA_PASSWORD: 68Yh0u0Rw4hsCfvYheIddXea0YJN2JNk
       AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER in .env}
       AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD in .env}
       AB_INSTANCE_ADMIN_PASSWORD: ${AIRBYTE_ADMIN_PASSWORD:?Set AIRBYTE_ADMIN_PASSWORD in .env}
@@ -599,7 +591,7 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
-x-airbyte-environment: &id002
+x-airbyte-environment: &id001
   AIRBYTE_VERSION: ${AIRBYTE_VERSION:?Set AIRBYTE_VERSION in .env}
   AIRBYTE_URL: ${AIRBYTE_URL:?Set AIRBYTE_URL in .env}
   AIRBYTE_API_HOST: ${AIRBYTE_API_HOST:?Set AIRBYTE_API_HOST in .env}
@@ -630,8 +622,9 @@ x-airbyte-environment: &id002
   WORKLOAD_INIT_IMAGE: airbyte/workload-init-container:${AIRBYTE_VERSION}
   JAVA_OPTS: -XX:+ExitOnOutOfMemoryError -XX:MaxRAMPercentage=75.0 -XX:FlightRecorderOptions=stackdepth=256
 x-airbyte-service:
-  env_file: *id001
-  environment: *id002
+  env_file:
+  - ../files/config/airbyte.env
+  environment: *id001
   restart: unless-stopped
 volumes:
   db-data: null

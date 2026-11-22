@@ -6,8 +6,8 @@ services:
     - '80'
     environment:
     - COCKPIT_SESSION_NAME=cockpit
-    - COCKPIT_SALT=NmgbYRXrfb1rB132DD9qZ8oB3waSNNPo
-    - COCKPIT_DATABASE_SERVER=mongodb://mongo:jFcuXLFVG5TLbCSS@mongo:27017
+    - COCKPIT_SALT=3bZ0StYtLa7p5FbIFwsxbmfI8RsJVHpH
+    - COCKPIT_DATABASE_SERVER=mongodb://mongo:b4LHXomMkp97KKey@mongo:27017
     - COCKPIT_DATABASE_NAME=cockpit
     volumes:
     - config:/var/www/html/config
@@ -22,7 +22,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=jFcuXLFVG5TLbCSS
+    - MONGO_INITDB_ROOT_PASSWORD=b4LHXomMkp97KKey
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db

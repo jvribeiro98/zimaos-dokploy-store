@@ -7,7 +7,7 @@ services:
     - 80
     environment:
     - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASSWORD=3ZjFzsIN7z4ZOBfS
+    - ADMIN_PASSWORD=Q5KuOlyR5lHkmXus
     - CONTACT_EMAIL=admin@example.com
     volumes:
     - uploads:/var/www/html/uploads

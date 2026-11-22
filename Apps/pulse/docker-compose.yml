@@ -10,7 +10,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     environment:
     - PULSE_AUTH_USER=admin
-    - PULSE_AUTH_PASS=l3I7srqQeMmqK93WeDPTQuQJDtQsBwwM
+    - PULSE_AUTH_PASS=MNlJfWR3dAB4uGNNcpKW4MYON0iL0RKe
     healthcheck:
       test:
       - CMD

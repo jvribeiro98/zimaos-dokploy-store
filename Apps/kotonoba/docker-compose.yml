@@ -7,7 +7,7 @@ services:
       NODE_ENV: production
       DB_PATH: /app/data/kotonoba.db
       UPLOAD_DIR: /app/data/uploads
-      JWT_SECRET: rZSeMybqUf15DkmDtZQGxZpH6yQf91ah
+      JWT_SECRET: RkOrAVQKdYvLXl1bUNoTPuDsp6eTib5B
       SITE_URL: https://localhost
       ADMIN_DOMAIN: localhost
     volumes:

@@ -6,10 +6,10 @@ services:
     volumes:
     - /DATA/AppData/$AppID/db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: SWxJ1iTkTTiZfDAA1zU00EyjpPC4P0O6
+      MYSQL_ROOT_PASSWORD: w7sHBhCZdGneNVs0GhlWfBbbkSAVLf6b
       MYSQL_DATABASE: pastefy
       MYSQL_USER: pastefy
-      MYSQL_PASSWORD: 7gvckPkqskdi5Wh1AlxwD9urtdNA6CJF
+      MYSQL_PASSWORD: 4qLAb0fxx6dGvXq8JCqiYC6eWQHwb2Wm
   pastefy:
     image: interaapps/pastefy:latest
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
       DATABASE_DRIVER: mysql
       DATABASE_NAME: pastefy
       DATABASE_USER: pastefy
-      DATABASE_PASSWORD: 7gvckPkqskdi5Wh1AlxwD9urtdNA6CJF
+      DATABASE_PASSWORD: 4qLAb0fxx6dGvXq8JCqiYC6eWQHwb2Wm
       DATABASE_HOST: db
       DATABASE_PORT: '3306'
       SERVER_NAME: https://localhost

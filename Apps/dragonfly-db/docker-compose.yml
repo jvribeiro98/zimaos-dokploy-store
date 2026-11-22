@@ -9,7 +9,7 @@ services:
     volumes:
     - dragonflydata:/data
     environment:
-    - DFLY_requirepass=ssr8GOiJm93ur2Ta2CyHXSzw77nOOg13
+    - DFLY_requirepass=OpAZ5saHFkzYgEW3pyRJiiAgHL5MY6zF
     restart: unless-stopped
     ports:
     - target: 6379

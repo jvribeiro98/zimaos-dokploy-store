@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       LOUEZ_MODE: standalone
-      DATABASE_URL: mysql://louez:O9PXobGIn5eMhF7MAdxhPdRZBfucbKTd@mysql:3306/louez
+      DATABASE_URL: mysql://louez:0GbLAbcxpdxq7nnBuRLtcM0fMn9nhXRK@mysql:3306/louez
       AUTH_URL: https://localhost
       AUTH_TRUST_HOST: 'true'
       NEXT_PUBLIC_APP_URL: https://localhost
@@ -14,7 +14,7 @@ services:
       S3_REGION: us-east-1
       S3_BUCKET: louez
       S3_ACCESS_KEY_ID: louez
-      S3_SECRET_ACCESS_KEY: Vg7lNS0QgneqLLo89v17uiuCMywNMeBU
+      S3_SECRET_ACCESS_KEY: Qsfyb04Sf6Tc7c1qApaTb5gm2BTDusai
       S3_PUBLIC_URL: /files
     volumes:
     - louez-data:/app/data
@@ -33,8 +33,8 @@ services:
     environment:
       MYSQL_DATABASE: louez
       MYSQL_USER: louez
-      MYSQL_PASSWORD: O9PXobGIn5eMhF7MAdxhPdRZBfucbKTd
-      MYSQL_ROOT_PASSWORD: b0xzaMnTQc2G4swWEfzWsYQBUlnqvome
+      MYSQL_PASSWORD: 0GbLAbcxpdxq7nnBuRLtcM0fMn9nhXRK
+      MYSQL_ROOT_PASSWORD: aSI2ZI63wBcXMePsv7KJSvDG5lMODBW1
     volumes:
     - mysql-data:/var/lib/mysql
     healthcheck:
@@ -57,7 +57,7 @@ services:
     - mkdir -p /data/louez && exec minio server /data
     environment:
       MINIO_ROOT_USER: louez
-      MINIO_ROOT_PASSWORD: Vg7lNS0QgneqLLo89v17uiuCMywNMeBU
+      MINIO_ROOT_PASSWORD: Qsfyb04Sf6Tc7c1qApaTb5gm2BTDusai
     volumes:
     - minio-data:/data
     healthcheck:

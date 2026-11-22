@@ -26,8 +26,8 @@ services:
     - DISABLE_HTTPS=1
     - JICOFO_AUTH_USER=focus
     - JVB_AUTH_USER=jvb
-    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
-    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
+    - JICOFO_AUTH_PASSWORD=685DOqhBy8cRJAMtZKZ6jK6w8LoHPgDe
+    - JVB_AUTH_PASSWORD=w3d5ahe93pefcuPQUhcvqbpR2yzQLc4K
     ports:
     - target: 8000
       published: "8000"
@@ -47,9 +47,9 @@ services:
     - XMPP_RECORDER_DOMAIN=recorder.meet.jitsi
     - JICOFO_AUTH_USER=focus
     - JVB_AUTH_USER=jvb
-    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
-    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
-    - JICOFO_COMPONENT_SECRET=B6D3bhRiMeQ680qxqWf0M20LUQXnW1BX
+    - JICOFO_AUTH_PASSWORD=685DOqhBy8cRJAMtZKZ6jK6w8LoHPgDe
+    - JVB_AUTH_PASSWORD=w3d5ahe93pefcuPQUhcvqbpR2yzQLc4K
+    - JICOFO_COMPONENT_SECRET=a14qdFqhiSVXiqz6TvBzNSIJwGUN6Ean
     - JWT_APP_ID=
     - JWT_APP_SECRET=
     - ENABLE_AUTH=0
@@ -68,8 +68,8 @@ services:
     - XMPP_MUC_DOMAIN=muc.meet.jitsi
     - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
     - JICOFO_AUTH_USER=focus
-    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
-    - JICOFO_COMPONENT_SECRET=B6D3bhRiMeQ680qxqWf0M20LUQXnW1BX
+    - JICOFO_AUTH_PASSWORD=685DOqhBy8cRJAMtZKZ6jK6w8LoHPgDe
+    - JICOFO_COMPONENT_SECRET=a14qdFqhiSVXiqz6TvBzNSIJwGUN6Ean
     - JVB_BREWERY_MUC=jvbbrewery
   jvb:
     image: jitsi/jvb:${JITSI_IMAGE_VERSION:-unstable}
@@ -85,7 +85,7 @@ services:
     - XMPP_AUTH_DOMAIN=auth.meet.jitsi
     - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
     - JVB_AUTH_USER=jvb
-    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
+    - JVB_AUTH_PASSWORD=w3d5ahe93pefcuPQUhcvqbpR2yzQLc4K
     - JVB_BREWERY_MUC=jvbbrewery
     - JVB_PORT=10000
     - JVB_ADVERTISE_IPS=

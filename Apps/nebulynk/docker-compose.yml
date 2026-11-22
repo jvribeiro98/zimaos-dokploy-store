@@ -124,7 +124,7 @@ services:
       NODE_ENV: development
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
       AI_SECRET_KEY: ${AI_SECRET_KEY:?AI_SECRET_KEY must be set}
-      AUTH_2FA_SECRET_KEY: sjzR0OBqsHO6JvtlFAJBCYSXNLe4WV9CxdhWwMIyPr5e3c3SfqMcmPt8brcL7xLw
+      AUTH_2FA_SECRET_KEY: EqHrcqwOT2LgsSivDO8QTb8r3RhYWfYOIsgZwic0ntwWpZErSuaAX2aVI0tJZY8e
       BACKEND_PORT: ${BACKEND_PORT:-3030}
       LOG_LEVEL: info
       MAX_FILE_SIZE: '26214400'
@@ -195,8 +195,8 @@ services:
     - node
     - src/transcription-worker.js
     stop_grace_period: 75s
-    mem_limit: ${TRANSCRIPTION_WORKER_MEMORY_LIMIT:-1536m}
-    cpus: ${TRANSCRIPTION_WORKER_CPUS:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     healthcheck:
       test:
       - CMD

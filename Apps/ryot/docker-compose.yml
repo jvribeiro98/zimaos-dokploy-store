@@ -3,8 +3,8 @@ services:
   ryot-app:
     image: ignisda/ryot:v7.10
     environment:
-    - DATABASE_URL=postgres://postgres:vf4BeMcfHJl5hkOPkvpFNE3XesQ6KNlK@ryot-db:5432/postgres
-    - SERVER_ADMIN_ACCESS_TOKEN=c7+zrTEsqRK9UleZfibBX39aihW3fhQMejILkfaezaE=
+    - DATABASE_URL=postgres://postgres:gkbrPKJizu9KiGQAzGFXjIOwdhM6fkwR@ryot-db:5432/postgres
+    - SERVER_ADMIN_ACCESS_TOKEN=hcbpu5XFAbtPShBP+eraTUyM2rqeM/To/b12zWty+rQ=
     - TZ=UTC
     depends_on:
       ryot-db:
@@ -20,7 +20,7 @@ services:
     volumes:
     - ryot-postgres-data:/var/lib/postgresql/data
     environment:
-    - POSTGRES_PASSWORD=vf4BeMcfHJl5hkOPkvpFNE3XesQ6KNlK
+    - POSTGRES_PASSWORD=gkbrPKJizu9KiGQAzGFXjIOwdhM6fkwR
     - POSTGRES_USER=postgres
     - POSTGRES_DB=postgres
     - TZ=UTC

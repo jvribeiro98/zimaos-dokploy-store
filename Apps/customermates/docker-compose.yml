@@ -9,12 +9,12 @@ services:
     environment:
       APP_MODE: self-hosted
       NODE_ENV: production
-      DATABASE_URL: postgresql://customermates:046383440c6fbc5faf2126cf4bbc4e50@customermates-postgres:5432/customermates
+      DATABASE_URL: postgresql://customermates:bab96f08f7d3729911bb096533b1337d@customermates-postgres:5432/customermates
       WORKFLOW_TARGET_WORLD: '@workflow/world-postgres'
-      WORKFLOW_POSTGRES_URL: postgresql://customermates:046383440c6fbc5faf2126cf4bbc4e50@customermates-postgres:5432/customermates
+      WORKFLOW_POSTGRES_URL: postgresql://customermates:bab96f08f7d3729911bb096533b1337d@customermates-postgres:5432/customermates
       BASE_URL: http://localhost
-      BETTER_AUTH_SECRET: dd9e8686c36c3e5d00396f7aeadc359b30e2979a9298fe0e19320a2a59e9bb59
-      CRON_SECRET: 02f3918d45d09bcffd47cdb6d80fa47b87633a56cb67ed8f99b74fc281636bc8
+      BETTER_AUTH_SECRET: 10ef30305a125de0336f818e8188ba6f27a6e6f752b04f452f79ac4352205682
+      CRON_SECRET: 170c8a8f5e3f15ec86e6ab91d8f696fded89f0476b9e9fa043f9cb9c6edde51f
       RESEND_API_KEY: ''
       RESEND_OPERATOR_EMAIL: mail@your-company.com
     expose:
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: customermates
-      POSTGRES_PASSWORD: 046383440c6fbc5faf2126cf4bbc4e50
+      POSTGRES_PASSWORD: bab96f08f7d3729911bb096533b1337d
       POSTGRES_DB: customermates
     volumes:
     - customermates-postgres-data:/var/lib/postgresql/data

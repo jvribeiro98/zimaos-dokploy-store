@@ -8,8 +8,8 @@ services:
     - PORT=8080
     - RUST_LOG=info
     - SSL_PROXY=true
-    - SESSION_SECRET_KEY=Evumgf6ik9w1LxOCMIsEFJSTdWahhgjg6fpkhfTwWzT45bNDl3XxhybsygcHDu2r
-    - CREATE_SUPERUSER=admin@example.com:J1UvtE0THYZejpJB
+    - SESSION_SECRET_KEY=My2y8k1oiVjYp8n3WSiIK7ABhGdyTKkX05co7idWjUAPCxj34v31oWtHjSvUmT4M
+    - CREATE_SUPERUSER=admin@example.com:Ad8J2pYO7dqPiHIf
     volumes:
     - rustrak_data:/data
     expose:

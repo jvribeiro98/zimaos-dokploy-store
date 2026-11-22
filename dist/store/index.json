@@ -686,7 +686,7 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bluesky-pds/icon.svg"
     },
     {
-      "id": "com.dokploy.bolt.diy",
+      "id": "com.dokploy.bolt-diy",
       "folder": "bolt.diy",
       "name": "bolt.diy",
       "tagline": "Prompt, run, edit, and deploy full-stack web applications using any LLM you want!",
@@ -5606,7 +5606,7 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/portainer/icon.png"
     },
     {
-      "id": "com.dokploy.poste.io",
+      "id": "com.dokploy.poste-io",
       "folder": "poste.io",
       "name": "Poste.io",
       "tagline": "Complete mail server solution with SMTP, IMAP, POP3, antispam, antivirus, web administr...",
@@ -5702,7 +5702,7 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/powersync/icon.png"
     },
     {
-      "id": "com.dokploy.pre0.22.5-supabase",
+      "id": "com.dokploy.pre0-22-5-supabase",
       "folder": "pre0.22.5-supabase",
       "name": "SupaBase",
       "tagline": "The open source Firebase alternative",

@@ -7,12 +7,12 @@ services:
       mongo:
         condition: service_healthy
     environment:
-      NODE_DB_URI: mongodb://habitica:Y1DWmYEBp9RZ3DTYy3C1gEgorWSdhZTx@mongo/habitica?authSource=habitica
+      NODE_DB_URI: mongodb://habitica:TXObLSs7p9a5pspZxZN8IRvazF7kFfot@mongo/habitica?authSource=habitica
       INVITE_ONLY: 'false'
       EMAIL_SERVER_URL: mail.example.com
       EMAIL_SERVER_PORT: '587'
       EMAIL_SERVER_AUTH_USER: mail_user
-      EMAIL_SERVER_AUTH_PASSWORD: ECSt72PKdrY9e6IicKhLFNkpZUBxx2Nu
+      EMAIL_SERVER_AUTH_PASSWORD: rMlAFHMefIEUwFntTCoVnUdHXNNqsLO7
       ADMIN_EMAIL: no-reply@localhost
   client:
     image: docker.io/awinterstein/habitica-client:latest
@@ -33,10 +33,10 @@ services:
       \ --keyFile /etc/mongo-keyfile\n\"\n"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: oC2wPmkztb3FRY3yiClBMAtnM2WLinxc
-      MONGO_KEYFILE_CONTENT: oluhbrffF/fTqsjOIqWPQOyORVIGgZT6SHOOgHwRZUx+bu1gBS03qXHrM/xJ8lCB3SVbTRvrc5GetLjc4eFc9Co+UzMUKqb8zOnbgr5qAk0thvh2xIkda5TAtkjrPwjNQw7DnCjiGvvq7QfP4c1cSt3jPwdePC+t/JSb1DZzKD//JBnta5J4nMNipw3u7aKVLoaJNSxZAPrxRcBWMh6+GmdymplXqApkcSfU8QXYk8qlfUrdCuc0jwMVVFyDDcq5d1mvtF1AA3CD5tk4bHBOMQwzv8sc2Yjx9jRVqo/+dXFGxyL6boPOY1saU5Q2TzF4FHIQNl5YvGVN1XGuAIFxDmFrgw1ys0VYCzA/5XdPGLyAjBLlv8dsurnP0/qRdqCRiQ3LQTnWSxJCgWeHqfbYeKGScBL1tx0Jh80r7ORdYpb3oXGvFYhd7/DqiY2E8VScyxbdRZIEvyMKsmJoDwi+WR1QKetQp7Y+lJ/rouoRq1yMWcnTdRjffR1kSWS5vzcf0Qxuph/NNKc9JyNLDoNZyCAl+GB9DATpIr2IZpacr4f9bIXjChtkO3ipo7OknmGeJvmwke8qTD/HDOZQ/4FUHewQ1CizOBc2IkmEmZCnP9GQSTOOV1f7pGJbjWBKNbfKlORnwPsDM8hqzquYv4z09C9D2y+l3/WG+DJ9rdKRwu5OpRXWguStTw6UZH/Y3mSh27BfpQpkriGGXoqy8cUGgyeSVnoSNSp1E8BiU3cOqW04T0ZPtPoqvFwMj0ii4jQ3H17onxKV8Xj48cn0EE5W2isIibpjVlQgqkU2C1hIj76cxsAvt+1j0XX5wWOfRePsAz8z8QtQG2eIS51/RVRzjLHlHtCQWYTwYqxMVG4v3NF3332pn0AHKQZNb6Dlt+8nbfWGbwFPYeAav2OENmy9xt3iFZqPL636KrHCKBhihM5skr0F1Bktifw+YUA2pp8O1wWIKJ5HdoKWGilTkFsrb5XEbpIBn95puy2WQIgh23nHtNoK
+      MONGO_INITDB_ROOT_PASSWORD: 3ZPwDEgwizefLoxtNqsxHN713xY6PqmY
+      MONGO_KEYFILE_CONTENT: lZlVVBOkq6+gg8lgwUSi14Idxgyfs/+Bw1DD5nliE6soG2MH3JK5eCe2TvKRQsmH52rQc33y7KWo72/PjyyBOmlUDyhhHYDZBJB32/JPuQxc+H1Mp1C0qTEPwYwEZIsNgDyXU+cxl4+FJk2i96fOwstNO7NE0Go8I0lwzRRQWIoyPpp8DiRfBpDOmroH/ueYIcmqkStHlySWSxO5zdNB01Axkvmk/T+MeMShylSsplYsoIdSg6kqTIMyHC60d49FMm7IHIOFsXvPim7QZFdwOCCSjUpwhAH88suUxjhkitf22n0kNO/f8VNdUWWR5Nj+0NQueDm/ze1JzMd0y0OF85ul4sMB73bNCXR6ru8a/Px5Vk3WiYl58ioZUjeGkx1voyNRODKhSI0KEG5szJHhjO3uLjj3VoDAsB1uT7SzmV4/mtk+n6k6N2qTd9TtVIe/n58ivtZea8eCam6s1MfvZGcXpt2BvitUgyd4xUF4xhvtzQbxmPQr98tPUSGaAHUD2etJwy8U/630qzVivGxE6xDGx/uAn5sqO7hM63agvbovjAdyn/XbS01DWrhC/VFtvrZxjaotpdrcN3f4IBZTCb6VtPT+9KIHfx4jXxvtCg85jEmvGsPKTj45XfgWej9OEAlYafQt9w0Yu1u4NxeVsxaoPlBp7ar/UGhEdcPzkcGb0sp+62m6QB4288oXCRezamJp51CpR6Pw5bATHC4HRGZV7l0Uze7F9c2KIqMc0+eaw8ylxHa54DmyPQ1OFo8cXa2B8ruurRcU6mEbZhNa7zNOmeTCf18lc+OzBxCZIHyKWiPqeWaslZZ8k/MiQsQPSsbHfDuoZQGYDiBK9U308u2PNbjpWgYuXZqrK8SDlR3vOSf64+X+HdL7cMAVqGTL54S197WuXLO7/M4gs1M0LQZXuIq5iWjHeheURtLVS4l0dsNOr1hp8XkZkN03EO06ShBZFqhIvEB3dhNvxJLt4Y7mYkgd1wW/A2Hz5resD9y9681/
       MONGO_HABITICA_USER: habitica
-      MONGO_HABITICA_PASSWORD: Y1DWmYEBp9RZ3DTYy3C1gEgorWSdhZTx
+      MONGO_HABITICA_PASSWORD: TXObLSs7p9a5pspZxZN8IRvazF7kFfot
     healthcheck:
       test: "mongosh --port 27017 --quiet -u \"${MONGO_ADMIN_USER}\" -p \"${MONGO_ADMIN_PASSWORD}\" --authenticationDatabase\
         \ admin --eval \"\n  try {\n    // 1. Hostname Fix\n    const config = rs.conf();\n    const currentHost = require('os').hostname()\

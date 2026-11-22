@@ -248,7 +248,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${CONFIGURE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -277,7 +277,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${CREATE_SITE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -338,10 +338,10 @@ services:
     environment:
       SITE_NAME: frappe.lending
       MAIN_DOMAIN: ${main_domain}
-      ADMIN_PASSWORD: 1Fk7QAP5TOvjFHeV09gp9PogUDn2g3Kn
+      ADMIN_PASSWORD: bbyOyZS5DrGboWjh3hk52cPRPXJkqwLn
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: IcF5xJzj0K1kTfnyegTHL5hMgc0DxqW4
+      DB_ROOT_PASSWORD: Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
       INSTALL_APP_ARGS: --install-app erpnext --install-app lending
     restart: unless-stopped
   migration:
@@ -349,7 +349,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${MIGRATE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -369,7 +369,7 @@ services:
     image: mariadb:10.6
     deploy:
       mode: replicated
-      replicas: ${ENABLE_DB:-0}
+      replicas: 1
       restart_policy:
         condition: always
     healthcheck:
@@ -382,8 +382,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=IcF5xJzj0K1kTfnyegTHL5hMgc0DxqW4
-    - MARIADB_ROOT_PASSWORD=IcF5xJzj0K1kTfnyegTHL5hMgc0DxqW4
+    - MYSQL_ROOT_PASSWORD=Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
+    - MARIADB_ROOT_PASSWORD=Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

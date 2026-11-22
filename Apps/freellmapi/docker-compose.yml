@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: '3001'
-      ENCRYPTION_KEY: 2006fb5263274354bf4d694263460756c417511f1b2804f7c50e4716a4606b875981e11e9bed922480504d14572ca5f62bca9f7079ea3e8a4aeb4baa43331100
+      ENCRYPTION_KEY: f5cebde8b89ac0cc8265eb2f0cfbea70607338eeea70300ead83efcbb2d95c9979bb16ac1f599e393db741f8d25ee980877553394672a13b5f8c2a59c4e3963c
     expose:
     - 3001
     volumes:

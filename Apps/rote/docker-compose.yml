@@ -4,7 +4,7 @@ services:
     image: rabithua/rote-backend:${IMAGE_TAG:-latest}
     pull_policy: always
     environment:
-      POSTGRESQL_URL: postgresql://rote:Ptdd8TrpMcYywG1y7ZgPk5i4MBndlKuQ@rote-postgres:5432/rote
+      POSTGRESQL_URL: postgresql://rote:XHe6x0wJysoV5pOOT6VTAsr4SL9uxPpk@rote-postgres:5432/rote
     depends_on:
       rote-postgres:
         condition: service_healthy
@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: rote
-      POSTGRES_PASSWORD: Ptdd8TrpMcYywG1y7ZgPk5i4MBndlKuQ
+      POSTGRES_PASSWORD: XHe6x0wJysoV5pOOT6VTAsr4SL9uxPpk
       POSTGRES_DB: rote
     volumes:
     - rote-postgres-data:/var/lib/postgresql/data

@@ -3,8 +3,6 @@ services:
   spliit:
     image: ghcr.io/spliit-app/spliit:1.19.0
     restart: unless-stopped
-    env_file:
-    - .env
     depends_on:
       spliit-db:
         condition: service_healthy
@@ -15,10 +13,10 @@ services:
   spliit-db:
     image: pgvector/pgvector:pg16
     volumes:
-    - ${DB_DATA_LOCATION}:/var/lib/DBql/data
+    - /DATA/AppData/spliit/data:/var/lib/DBql/data
     environment:
       POSTGRES_USER: spliit-admin
-      POSTGRES_PASSWORD: DzmCboPwgxS7K0mvTwm2UgjKfshoYvtT
+      POSTGRES_PASSWORD: ff5NtfWD27Q9SOCtnplUPfYv6w3nfFE8
       POSTGRES_DB: spliit
       POSTGRES_INITDB_ARGS: --data-checksums
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -34,8 +32,6 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
-    env_file:
-    - .env
 x-casaos:
   id: com.dokploy.spliit
   main: spliit

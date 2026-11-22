@@ -11,9 +11,6 @@ services:
     entrypoint:
     - /bin/sh
     - /ethora/scripts/render-config.sh
-    env_file:
-    - path: .env
-      required: false
     environment:
       ROOT_DOMAIN: ${ROOT_DOMAIN:?ROOT_DOMAIN is not set; run ./configure.sh or fill in .env}
       API_DOMAIN: ${API_DOMAIN:-api.${ROOT_DOMAIN}}

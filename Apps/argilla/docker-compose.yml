@@ -8,10 +8,10 @@ services:
     environment:
     - ARGILLA_HOME_PATH=/var/lib/argilla
     - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
-    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:Q2j3YaBhjXFrzjD5@argilla-db:5432/argilla
-    - ARGILLA_REDIS_URL=redis://:TW2RIA5RlE1EMZ79@argilla-redis:6379/0
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:KjJYdqAuoJjonDqX@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:dE6HLVD1gqnOXSEn@argilla-redis:6379/0
     - USERNAME=admin
-    - PASSWORD=rghGNyYX
+    - PASSWORD=3Jtxf0vZ
     - API_KEY=argilla.apikey
     - WORKSPACE=default
     volumes:
@@ -31,8 +31,8 @@ services:
     - BACKGROUND_NUM_WORKERS=2
     - ARGILLA_HOME_PATH=/var/lib/argilla
     - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
-    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:Q2j3YaBhjXFrzjD5@argilla-db:5432/argilla
-    - ARGILLA_REDIS_URL=redis://:TW2RIA5RlE1EMZ79@argilla-redis:6379/0
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:KjJYdqAuoJjonDqX@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:dE6HLVD1gqnOXSEn@argilla-redis:6379/0
     volumes:
     - argilladata:/var/lib/argilla
     command: python -m argilla_server worker --num-workers ${BACKGROUND_NUM_WORKERS}
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=Q2j3YaBhjXFrzjD5
+    - POSTGRES_PASSWORD=KjJYdqAuoJjonDqX
     - POSTGRES_DB=argilla
     volumes:
     - dbdata:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     environment:
-    - REDIS_PASSWORD=TW2RIA5RlE1EMZ79
+    - REDIS_PASSWORD=dE6HLVD1gqnOXSEn
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
     - redisdata:/data

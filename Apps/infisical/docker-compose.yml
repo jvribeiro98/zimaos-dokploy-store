@@ -10,10 +10,10 @@ services:
         condition: service_started
     environment:
     - NODE_ENV=production
-    - ENCRYPTION_KEY=3563a06081a24f1c5f6958072d30ea28c70a5ff2ff34b376701533bdf4b99179
-    - AUTH_SECRET=+FcsVGQKMEIZJ5+tOq/OmfbVbnUjpEC91txQxT/uI60=
+    - ENCRYPTION_KEY=bcfe9253e1897578ae0b164b6c64b84a37f19bc00247dcefa69950638659e4f9
+    - AUTH_SECRET=DgQAj8ObjVMOpe7Eh8ZcShEpqcD/qB9hzI5BthLtyTQ=
     - SITE_URL=http://localhost
-    - DB_CONNECTION_URI=postgres://infisical:dFfcvX1ZwN5nafJBXkxmUKpYoswjtWuG@db:5432/infisical
+    - DB_CONNECTION_URI=postgres://infisical:Xf3H2hrMLurAfw5g4y7GJpDbKHiIBfUA@db:5432/infisical
     - REDIS_URL=redis://redis:6379
     - SMTP_HOST=
     - SMTP_PORT=587
@@ -34,7 +34,7 @@ services:
     image: postgres:14-alpine
     restart: always
     environment:
-    - POSTGRES_PASSWORD=dFfcvX1ZwN5nafJBXkxmUKpYoswjtWuG
+    - POSTGRES_PASSWORD=Xf3H2hrMLurAfw5g4y7GJpDbKHiIBfUA
     - POSTGRES_USER=infisical
     - POSTGRES_DB=infisical
     volumes:

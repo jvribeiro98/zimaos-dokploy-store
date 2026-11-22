@@ -15,7 +15,7 @@ services:
     - ORBIT_ENV=production
     - ORBIT_PUBLIC_ORIGIN=https://localhost
     - ORBIT_TRUSTED_PROXIES=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-    - ORBIT_APP_KEY=fzxYM5masLV8ZtxnzPoBfO8XeG5UoCMMBr9HGgwtSQM=
+    - ORBIT_APP_KEY=COYcdhlVl+YACU/nnz5Z4tAy1IkAiLtZXxILKIIcFww=
     expose:
     - '8080'
     volumes:

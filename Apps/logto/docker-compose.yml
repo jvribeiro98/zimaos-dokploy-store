@@ -12,7 +12,7 @@ services:
     - npm run cli db seed -- --swe && npm start
     environment:
       TRUST_PROXY_HEADER: '1'
-      DB_URL: postgres://logto:lOn2OYkD09rXExDIOffWEy0n8qGJ46Zk@postgres:5432/logto
+      DB_URL: postgres://logto:5L9LyLxEBgrSbhzvAQs4MVN49RJhNvmb@postgres:5432/logto
       ENDPOINT: http://localhost
       ADMIN_ENDPOINT: http://localhost
     volumes:
@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: logto
-      POSTGRES_PASSWORD: lOn2OYkD09rXExDIOffWEy0n8qGJ46Zk
+      POSTGRES_PASSWORD: 5L9LyLxEBgrSbhzvAQs4MVN49RJhNvmb
       POSTGRES_DB: logto
     volumes:
     - postgres-data:/var/lib/postgresql/data

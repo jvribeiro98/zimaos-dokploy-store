@@ -18,10 +18,10 @@ services:
       MONGODB_URL: mongodb://localhost:27017/lowcoder?authSource=admin
       REDIS_URL: redis://localhost:6379
       ENABLE_USER_SIGN_UP: 'False'
-      ENCRYPTION_PASSWORD: s6z74LUgkw8gPxw52KScnL4H1OiY2dUU
-      ENCRYPTION_SALT: nkMAN5IbCI1Fiw8y21594PCJsNZUpqIT
+      ENCRYPTION_PASSWORD: pjBNz2nF4TXIp6ZfIlpmtro0igkqmNS2
+      ENCRYPTION_SALT: q1jIG7heBTl3tn1TZX9VN9577VoOSuO3
       CORS_ALLOWED_DOMAINS: '*'
-      LOWCODER_API_KEY_SECRET: l9fmH4NRudjmvCPr355AxEdysnrQ5Uq0
+      LOWCODER_API_KEY_SECRET: ymILeN9HgujzURTAIRtWg6I7S9SC71pz
       LOWCODER_API_SERVICE_URL: http://localhost:8080
       LOWCODER_NODE_SERVICE_URL: http://localhost:6060
     volumes:

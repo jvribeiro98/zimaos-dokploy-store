@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: montara
-      POSTGRES_PASSWORD: 20jIKxd9zxUioSzfNuIQWdi2K1oJPFQw
+      POSTGRES_PASSWORD: Psn6AIr3E6QBihRw3tzvIv4SPya866eD
       POSTGRES_DB: montara_mail_agent
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -28,11 +28,11 @@ services:
       ENV: production
       PORT: '8080'
       APP_NAME: montara-mail-agent
-      APP_SECRET: hgmFcO1Bcnety0T6lrce9Ls+KPSLxNvrEOCG4pHBbJA=
-      DB_DSN: postgres://montara:20jIKxd9zxUioSzfNuIQWdi2K1oJPFQw@postgres:5432/montara_mail_agent?sslmode=disable
+      APP_SECRET: NUOVt/7IC3CWI5wI3auS91FJs9xg6rLADXxl9mk94ug=
+      DB_DSN: postgres://montara:Psn6AIr3E6QBihRw3tzvIv4SPya866eD@postgres:5432/montara_mail_agent?sslmode=disable
       MIGRATE_ON_BOOT: 'true'
       SEED_ON_BOOT: 'true'
-      SUPER_USER: admin@example.com:mGta4YnixT8mpxvhzyZCFrIX
+      SUPER_USER: admin@example.com:DOZxfh4n0aILWk5tPRNrECLA
       AUTH_BASE_URL: https://localhost
       FROM_ADDRESS: ''
       RESEND_API_KEY: ''

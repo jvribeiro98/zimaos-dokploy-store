@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: multica
       POSTGRES_USER: multica
-      POSTGRES_PASSWORD: fqvgo3PulaHprf932RAtbmUwmMqLWCep
+      POSTGRES_PASSWORD: Ig4EtG1n2orw833zGkxzaAHL102yPMnq
     volumes:
     - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -27,9 +27,9 @@ services:
     volumes:
     - backend_uploads:/app/data/uploads
     environment:
-      DATABASE_URL: postgres://multica:fqvgo3PulaHprf932RAtbmUwmMqLWCep@postgres:5432/multica?sslmode=disable
+      DATABASE_URL: postgres://multica:Ig4EtG1n2orw833zGkxzaAHL102yPMnq@postgres:5432/multica?sslmode=disable
       PORT: '8080'
-      JWT_SECRET: kT88ftkCdAXCasR2xeFhozXAe1cIARaNT9B5PXkYTuH80jdnE3RHLxtUVY798hr4
+      JWT_SECRET: bwgQiox3buA6HsAusCgY6jIQHkLUi8QrXR3nJzHIRcSnQaPmhzsh1x4rRULmvCb5
       FRONTEND_ORIGIN: https://localhost
       ALLOWED_ORIGINS: https://localhost
       MULTICA_APP_URL: https://localhost

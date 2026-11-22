@@ -7,8 +7,8 @@ services:
     - PUID=0
     - PGID=0
     - TZ=Europe/Vienna
-    - SETTINGS_ENCRYPTION_KEY=L1XVbQvwuvqg5LtHW7tjsGOMOIzjD5D6
-    - DUPLICATI__WEBSERVICE_PASSWORD=ioUtbgWVuwnoBkyJ
+    - SETTINGS_ENCRYPTION_KEY=s0rJ6XMqLD6SjzO7g5zuyTpGVjsIeMoe
+    - DUPLICATI__WEBSERVICE_PASSWORD=SaTvmRuU4WWpSAgb
     - DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES=*
     volumes:
     - duplicati-config:/config

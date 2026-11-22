@@ -2,9 +2,9 @@ name: my-links
 services:
   my-links:
     environment:
-    - APP_KEY=ILUh6bIq+i3aM/OUDY9sGpkiinJ+JIlmS2b9UZdaqkU=
+    - APP_KEY=+kp8OIxusjIvQzIZG4UTeFowYvu/STOvYben3ZBtvyE=
     - APP_URL=http://localhost
-    - DB_PASSWORD=9CNcgbDhAUPCE7qQUiCGtOfONjIZXkcP
+    - DB_PASSWORD=rhEIxguPZwnbv9hhisHEEMlS0635sJew
     - DB_HOST=postgres
     - DB_PORT=5432
     - DB_USER=mylinks
@@ -39,7 +39,7 @@ services:
     environment:
       POSTGRES_USER: mylinks
       POSTGRES_DB: mylinks
-      POSTGRES_PASSWORD: 9CNcgbDhAUPCE7qQUiCGtOfONjIZXkcP
+      POSTGRES_PASSWORD: rhEIxguPZwnbv9hhisHEEMlS0635sJew
     volumes:
     - postgres-data:/var/lib/postgresql
     healthcheck:

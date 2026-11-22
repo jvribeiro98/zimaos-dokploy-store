@@ -5,13 +5,13 @@ services:
     restart: unless-stopped
     environment:
       ZO_ROOT_USER_EMAIL: admin@example.com
-      ZO_ROOT_USER_PASSWORD: J4CKNPgX8rMXO8KLi6TJETIyajip2EgP
+      ZO_ROOT_USER_PASSWORD: u3aI9qNN9FzcOzNi2aMJ00mDeoS2IGhD
       ZO_DATA_DIR: /data
     expose:
     - 5080
     - 5081
     volumes:
-    - data:${ZO_DATA_DIR}
+    - data:/DATA/AppData/openobserve/data
     ports:
     - target: 5080
       published: "5080"

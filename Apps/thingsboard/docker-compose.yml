@@ -16,7 +16,7 @@ services:
       JAVA_OPTS: -Xms512m -Xmx2048m
       SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+      SPRING_DATASOURCE_PASSWORD: wvOLQqz4iWy3WZyZsxsIbmMrY8Eg4474
       SECURITY_CORS_ALLOWED_ORIGINS: http://localhost,https://localhost
     volumes:
     - thingsboard-logs:/var/log/thingsboard
@@ -51,7 +51,7 @@ services:
       LOAD_DEMO: 'false'
       SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+      SPRING_DATASOURCE_PASSWORD: wvOLQqz4iWy3WZyZsxsIbmMrY8Eg4474
     volumes:
     - thingsboard-install:/data
     - thingsboard-logs:/var/log/thingsboard
@@ -61,7 +61,7 @@ services:
     environment:
       POSTGRES_DB: thingsboard
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+      POSTGRES_PASSWORD: wvOLQqz4iWy3WZyZsxsIbmMrY8Eg4474
     volumes:
     - thingsboard-db:/var/lib/postgresql
     healthcheck:

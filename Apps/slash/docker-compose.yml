@@ -6,7 +6,7 @@ services:
     - slash-app-data:/var/opt/slash
     environment:
     - SLASH_DRIVER=postgres
-    - SLASH_DSN=postgresql://slash:FWA7OgFm0rda5B3LvM54mnhEvuqY5jul@slash-postgres:5432/slash?sslmode=disable
+    - SLASH_DSN=postgresql://slash:YKX2fb7HeBfH0HDi52HYcY8YLMQ95Zs1@slash-postgres:5432/slash?sslmode=disable
     depends_on:
       slash-postgres:
         condition: service_healthy
@@ -21,7 +21,7 @@ services:
     - slash-postgres-data:/var/lib/postgresql/data
     environment:
     - POSTGRES_USER=slash
-    - POSTGRES_PASSWORD=FWA7OgFm0rda5B3LvM54mnhEvuqY5jul
+    - POSTGRES_PASSWORD=YKX2fb7HeBfH0HDi52HYcY8YLMQ95Zs1
     - POSTGRES_DB=slash
     healthcheck:
       test:

@@ -1,4 +1,4 @@
-name: poste.io
+name: poste-io
 services:
   mailserver:
     image: analogic/poste.io
@@ -26,7 +26,7 @@ services:
 volumes:
   poste-data: {}
 x-casaos:
-  id: com.dokploy.poste.io
+  id: com.dokploy.poste-io
   main: mailserver
   index: /
   port_map: "8080"

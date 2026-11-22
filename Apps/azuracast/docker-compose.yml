@@ -16,7 +16,7 @@ services:
     - MYSQL_HOST=mariadb
     - MYSQL_PORT=3306
     - MYSQL_USER=azuracast
-    - MYSQL_PASSWORD=AnlXrVEReuJYkgMM
+    - MYSQL_PASSWORD=Zig2b39wyYLzncOj
     - MYSQL_DATABASE=azuracast
     depends_on:
     - mariadb
@@ -30,10 +30,10 @@ services:
     volumes:
     - mariadb-data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=2j68al8HDSsDYiEQxfaIgyp2u3uxJQFQ
+    - MYSQL_ROOT_PASSWORD=q1rJk26m3fwUyglgCLTDdaeC3Acfam5k
     - MYSQL_DATABASE=azuracast
     - MYSQL_USER=azuracast
-    - MYSQL_PASSWORD=AnlXrVEReuJYkgMM
+    - MYSQL_PASSWORD=Zig2b39wyYLzncOj
 volumes:
   azuracast-station-data: {}
   azuracast-data: {}

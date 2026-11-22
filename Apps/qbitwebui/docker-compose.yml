@@ -4,7 +4,7 @@ services:
     image: ghcr.io/maciejonos/qbitwebui:latest
     restart: unless-stopped
     environment:
-    - ENCRYPTION_KEY=HHZwfpyiSPV6bzoQtG7GiHyltBU3vGrd
+    - ENCRYPTION_KEY=U9rkLNX33sieuAz3QsWAU0Cj77ICPixQ
     - PORT=3000
     - DATABASE_PATH=/data/qbitwebui.db
     - SALT_PATH=/data/.salt

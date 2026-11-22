@@ -5,7 +5,7 @@ services:
     expose:
     - 8080
     environment:
-    - FMD_REGISTRATIONTOKEN=sz3bkUt2fckDtin6okS7cHEWfMVenLrG
+    - FMD_REGISTRATIONTOKEN=OYtvdIO2KuzbKZFMJieWKPnBUWCHoyq6
     - FMD_USERIDLENGTH=5
     - FMD_MAXSAVEDLOC=1000
     - FMD_MAXSAVEDPIC=10

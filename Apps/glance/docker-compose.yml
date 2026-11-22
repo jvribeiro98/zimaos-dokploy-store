@@ -7,7 +7,6 @@ services:
     - /DATA/AppData/$AppID/app/assets:/app/assets
     expose:
     - 8080
-    env_file: .env
     restart: unless-stopped
     ports:
     - target: 8080

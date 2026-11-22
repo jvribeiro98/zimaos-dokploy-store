@@ -10,7 +10,7 @@ services:
     - DB_HOST=db
     - DB_NAME=flarum
     - DB_USER=flarum
-    - DB_PASSWORD=A0wYzOG2dAD7KvwV
+    - DB_PASSWORD=Q7ZSlUK3WpNVeHsP
     volumes:
     - flarum-data:/data
     depends_on:
@@ -23,10 +23,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=j4R3bSgl3hkFM8up
+    - MYSQL_ROOT_PASSWORD=KqyuWi1VQMfhS6Lw
     - MYSQL_DATABASE=flarum
     - MYSQL_USER=flarum
-    - MYSQL_PASSWORD=A0wYzOG2dAD7KvwV
+    - MYSQL_PASSWORD=Q7ZSlUK3WpNVeHsP
     volumes:
     - db-data:/var/lib/mysql
 volumes:

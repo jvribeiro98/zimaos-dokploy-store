@@ -7,7 +7,7 @@ services:
     - 6805
     environment:
     - SILEX_URL=http://localhost
-    - SILEX_SESSION_SECRET=zsGBLgGOflhWWUsR9JkSGS3MvEVhp4F2
+    - SILEX_SESSION_SECRET=N1Lq3wbdprP6qpNiHLA27kJONYMVGax9
     - STORAGE_CONNECTORS=fs
     - HOSTING_CONNECTORS=fs,download
     - SILEX_FS_ROOT=/silex/silex/storage

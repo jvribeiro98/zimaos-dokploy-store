@@ -115,7 +115,7 @@ services:
     - TELEMETRY_ENABLED=true
     - DEPLOYMENT_TYPE=docker-standalone-amd
     - DOT_METRICS_ENABLED=true
-    - SIGNOZ_JWT_SECRET=eNo3VlecS7glHR2b8JRX7PGFRXpKzKcuowdBOmn0EqxPKWqCmMQogvDU745cUdsk
+    - SIGNOZ_JWT_SECRET=4sWVnYsKftd53qoI43Ds7k2qLTcyHEB4nYPasHH9rroSlI6JUPMa1h7A8Zip0sk1
     healthcheck:
       test:
       - CMD

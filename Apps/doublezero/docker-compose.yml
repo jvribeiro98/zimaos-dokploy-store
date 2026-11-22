@@ -11,7 +11,7 @@ services:
       AWS_REGION: your-aws-region
       SQS_URL: your-aws-sqs-url
       SYSTEM_EMAIL: ''
-      SECRET_KEY_BASE: GsY7hXXMZMueOCREmwCcPVMg1Ms6FiUOlMMaXerjoQ0H+AAYhN5xo4tlRw1CF6Jja5rWdQYxCUKdgNN7FTcqjA==
+      SECRET_KEY_BASE: SdAV48IycoyfosdO8EPCf7YTu0PGh9zIK9Vmk8IMzoElm7OXWzdD2hJ0HLBEQ7I+f9S0Yf3ZylAhHMu9Fvsq4g==
       PHX_HOST: localhost
       DATABASE_PATH: ./00.db
     ports:

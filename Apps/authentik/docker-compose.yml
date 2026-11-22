@@ -14,7 +14,7 @@ services:
     volumes:
     - database:/var/lib/postgresql
     environment:
-      POSTGRES_PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+      POSTGRES_PASSWORD: gDu6S2gkk0I2WCkj6nV4ZphuFg16v1XZ
       POSTGRES_USER: authentik
       POSTGRES_DB: authentik
     expose:
@@ -25,12 +25,12 @@ services:
     command: server
     shm_size: 512mb
     environment:
-      AUTHENTIK_SECRET_KEY: BST8zXAaCB1mS9Yxdfqn2Yi3C8UPMG7xWMiGXVdAqG2c1hzk7sPclcVQqmpFibjA
+      AUTHENTIK_SECRET_KEY: QZkwwHtgtAhSJXNFJPhwcIm2kuojC2fWphGvhlz8T0W6WAwL1rbVqWyozGU286sU
       AUTHENTIK_WEB__BASE_URL: https://localhost
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+      AUTHENTIK_POSTGRESQL__PASSWORD: gDu6S2gkk0I2WCkj6nV4ZphuFg16v1XZ
     volumes:
     - data:/data
     - custom-templates:/templates
@@ -50,12 +50,12 @@ services:
     command: worker
     shm_size: 512mb
     environment:
-      AUTHENTIK_SECRET_KEY: BST8zXAaCB1mS9Yxdfqn2Yi3C8UPMG7xWMiGXVdAqG2c1hzk7sPclcVQqmpFibjA
+      AUTHENTIK_SECRET_KEY: QZkwwHtgtAhSJXNFJPhwcIm2kuojC2fWphGvhlz8T0W6WAwL1rbVqWyozGU286sU
       AUTHENTIK_WEB__BASE_URL: https://localhost
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+      AUTHENTIK_POSTGRESQL__PASSWORD: gDu6S2gkk0I2WCkj6nV4ZphuFg16v1XZ
     user: root
     volumes:
     - data:/data

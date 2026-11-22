@@ -9,7 +9,7 @@ services:
       UPLOAD_DIR: /app/data/uploads
       GIN_MODE: release
       NODE_ENV: production
-      JWT_SECRET: 8GPE63JLODomcYpiwVwVZv5gVgXsQ0Y1
+      JWT_SECRET: jiv1jOtluhLWIFaVKi2oKnUN9XHOPWci
       RECOVERY_MODE: 'false'
     volumes:
     - kuno-data:/app/data

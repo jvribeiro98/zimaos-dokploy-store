@@ -4,12 +4,12 @@ services:
     image: ghcr.io/pouzor/homelable-backend:3.6.0
     restart: unless-stopped
     environment:
-      SECRET_KEY: s1pPrVBBDNbVxf2oBmldjBn/ZkryQ+rON2VOELhDmZ8=
+      SECRET_KEY: oTP979OVD/XnsWG75DziXIWWGnqvzSfkGtwJSBrlfek=
       SQLITE_PATH: /app/data/homelab.db
       CORS_ORIGINS: '["https://localhost", "http://localhost"]'
       AUTH_MODE: local
       AUTH_USERNAME: admin
-      INITIAL_ADMIN_PASSWORD: SkvUIKXBesVwEjv8yA8sk3Wu4OpKmfkB
+      INITIAL_ADMIN_PASSWORD: 6bcUh1YI5vmQD6ejWGEfqVEKApA58uLQ
       SCANNER_RANGES: '["192.168.1.0/24"]'
       STATUS_CHECKER_INTERVAL: '60'
       STATUS_CHECKER_ENABLED: 'true'

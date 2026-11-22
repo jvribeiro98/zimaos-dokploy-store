@@ -7,7 +7,7 @@ services:
     - 8477
     environment:
       MAILY_PORT: '8477'
-      MAILY_API_KEY: W2L8Goi6LlJ9I0HcjMLL3Sy6ZKDvGTFH
+      MAILY_API_KEY: lgKqND4DQxDTGJcoBwat9X8zHlcKYLAK
       MAILY_SECRET_KEY: ''
     volumes:
     - maily_data:/data

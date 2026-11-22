@@ -5,7 +5,6 @@ services:
     stdin_open: true
     image: tooljet/tooljet:ee-lts-latest
     restart: always
-    env_file: .env
     expose:
     - 80
     deploy:
@@ -33,10 +32,9 @@ services:
           memory: 3G
     volumes:
     - /DATA/AppData/$AppID/postgres:/var/lib/postgresql/data
-    env_file: .env
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=aGfemEDJPK8ENPMrb938XLs2mb5yJb0N
+    - POSTGRES_PASSWORD=lEmXwa5t4D6ArTrTFT8XFM0f9PDpn2Wm
 volumes:
   certs: null
   logs: null

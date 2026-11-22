@@ -10,7 +10,7 @@ services:
     volumes:
     - config:/config
     - metadata:/metadata
-    - ${AUDIOBOOKS_PATH}:/audiobooks
+    - /DATA/AppData/audiobookshelf/data:/audiobooks
     ports:
     - target: 80
       published: "80"

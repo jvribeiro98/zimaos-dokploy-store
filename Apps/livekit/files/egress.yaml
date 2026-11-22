@@ -1,7 +1,7 @@
 redis:
     address: redis:6379
     username: ""
-    password: rif1hsJVdXx2cwuxMuNI9I42dKplAIbd
+    password: eYlFnEuaQcQzGTtcklcBewpziSnNFWzC
     db: 0
     use_tls: false
     sentinel_master_name: ""
@@ -10,6 +10,6 @@ redis:
     sentinel_addresses: []
     cluster_addresses: []
     max_redirects: null
-api_key: APIdWsDX50TOFPG
-api_secret: l8SQ7qUjMLJlFy9oLs4IgAwe3Ec3C3YsLIeTGKPRCepr
+api_key: APIBPLMQdFXGqjT
+api_secret: iIqOeHicC5uoJMKf06UcGRI9VvQnP6Yfl3RceQh9bRyQ
 ws_url: wss://livekit.localhost

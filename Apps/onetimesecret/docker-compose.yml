@@ -21,8 +21,8 @@ services:
     - COLONEL=admin@example.com
     - HOST=localhost
     - RACK_ENV=production
-    - REDIS_URL=redis://:9RVvHtF45Dc1MjbHb3I0iUnfsQkRV7@onetimesecret-redis:6379/0
-    - SECRET=6jN8vRTAcXR4nZ1OuOFYrcubMtPFLP
+    - REDIS_URL=redis://:nuSEEXcPpq1Hz83JEEKSA2r8hpWO0S@onetimesecret-redis:6379/0
+    - SECRET=I5J7BIMfzDFggUAlk0NUu4Y2FtNE9N
     - SSL=true
     depends_on:
     - onetimesecret-redis

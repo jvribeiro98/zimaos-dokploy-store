@@ -8,7 +8,7 @@ services:
     environment:
     - PORT=3000
     - EMAKI_API_KEY=
-    - ACCESS_PASSWORD=6KSM103TYQjZn9ut
+    - ACCESS_PASSWORD=f3F7i9GSsbi0GQ9E
     - EMAKI_MODEL=seedance_2_5
     healthcheck:
       test:

@@ -14,7 +14,7 @@ services:
       DB_HOSTNAME: immich-database
       DB_PORT: '5432'
       DB_USERNAME: immich
-      DB_PASSWORD: MsynMwvst2MvLuNNIZPLRLtXAatGHdoy
+      DB_PASSWORD: bqMKKfHXE6u9zGuzQ15TjdJzAE2eiC5S
       DB_DATABASE_NAME: immich
       REDIS_HOSTNAME: immich-redis
       REDIS_PORT: '6379'
@@ -49,7 +49,7 @@ services:
     volumes:
     - immich-postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: MsynMwvst2MvLuNNIZPLRLtXAatGHdoy
+      POSTGRES_PASSWORD: bqMKKfHXE6u9zGuzQ15TjdJzAE2eiC5S
       POSTGRES_USER: immich
       POSTGRES_DB: immich
       POSTGRES_INITDB_ARGS: --data-checksums

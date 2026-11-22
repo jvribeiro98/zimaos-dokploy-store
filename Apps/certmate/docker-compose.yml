@@ -4,8 +4,8 @@ services:
     image: fabriziosalmi/certmate:2.21.3
     environment:
     - FLASK_ENV=production
-    - SECRET_KEY=xeaQMlld8SusduluJqn7noYFAzELWB1t
-    - API_BEARER_TOKEN=zsgSroyOErRD2eWsNV9NCTGOdGBBDOQ2
+    - SECRET_KEY=DOZAaBwjmhEV4EBQ6Qz3pPFu4WY8xE5M
+    - API_BEARER_TOKEN=lBYCssBztuGmekrS5YRyUjQ0QeSJTYUu
     - BEHIND_PROXY=true
     - CLOUDFLARE_TOKEN=
     - LETSENCRYPT_EMAIL=

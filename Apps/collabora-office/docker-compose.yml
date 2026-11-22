@@ -7,7 +7,7 @@ services:
     environment:
     - domain=localhost
     - username=user
-    - password=9BrPhHP5OGmAeUkT
+    - password=xGjHSIZgO0XgnoT3
     - extra_params=--o:ssl.enable=false
     restart: unless-stopped
     ports:

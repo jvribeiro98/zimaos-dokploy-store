@@ -6,7 +6,7 @@ services:
     expose:
     - 8529
     environment:
-    - ARANGO_ROOT_PASSWORD=d3dxZ5xAit2aNXaH
+    - ARANGO_ROOT_PASSWORD=gtXOF7HamreNz2dv
     volumes:
     - data:/var/lib/arangodb3
     ports:

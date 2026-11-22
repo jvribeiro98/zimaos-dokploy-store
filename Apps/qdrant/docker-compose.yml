@@ -4,7 +4,7 @@ services:
     image: qdrant/qdrant:latest
     environment:
     - SERVICE_FQDN_QDRANT_6333
-    - QDRANT__SERVICE__API_KEY=maTcMXfWV2o5zzzHLRXPzBFP4WTWTWTg
+    - QDRANT__SERVICE__API_KEY=buwoRPlaJpjdJgdI4SSduIzJW2oepc6y
     expose:
     - '6333'
     volumes:

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: paperclip
-      POSTGRES_PASSWORD: 8lxdw0ENeqrJPCCV5FTydSnYDB7WGqGH
+      POSTGRES_PASSWORD: HNybwgIAR8sBcaWB5KiijQn0pseTtcUD
       POSTGRES_DB: paperclip
     healthcheck:
       test:
@@ -26,8 +26,8 @@ services:
       HOST: 0.0.0.0
       PORT: '3100'
       SERVE_UI: 'true'
-      DATABASE_URL: postgres://paperclip:8lxdw0ENeqrJPCCV5FTydSnYDB7WGqGH@postgres:5432/paperclip
-      BETTER_AUTH_SECRET: U9mdMnpkzv7uop10DpwfEFmdEpQ0zx1HuQiustxMKq081WcXvehugtTsdp6mNoPp
+      DATABASE_URL: postgres://paperclip:HNybwgIAR8sBcaWB5KiijQn0pseTtcUD@postgres:5432/paperclip
+      BETTER_AUTH_SECRET: hRu4ovJmuEwMYFrgDQmM7dLCi62o6e0fVZlmSyj6GuXTdTApY5zcfk9bvAE8qJLJ
       PAPERCLIP_HOME: /paperclip
       PAPERCLIP_INSTANCE_ID: default
       PAPERCLIP_CONFIG: /paperclip/instances/default/config.json

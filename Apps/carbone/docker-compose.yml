@@ -4,7 +4,7 @@ services:
     image: carbone/carbone-ee:full-4.25.5
     restart: unless-stopped
     environment:
-    - CARBONE_EE_LICENSE=HPGqiKriuKPZd10fITIaPm4rTzlMGkr6
+    - CARBONE_EE_LICENSE=01pnXgVEBPz0xk7HuqxdVggnXQZdmuKB
     - CARBONE_EE_STUDIO=true
     expose:
     - 4000

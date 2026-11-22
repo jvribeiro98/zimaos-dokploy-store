@@ -5,7 +5,7 @@ services:
     environment:
     - DATABASE_URL=jdbc:mariadb://mariadb:3306/booklore
     - DATABASE_USERNAME=booklore
-    - DATABASE_PASSWORD=58KJld0niiKAcZNphmcpPQ2AAVcLUFr4
+    - DATABASE_PASSWORD=NAcilFXcWfMQXigEfsEsDbeS8PC0pezZ
     depends_on:
       mariadb:
         condition: service_healthy
@@ -25,10 +25,10 @@ services:
     - PUID=1000
     - PGID=1000
     - TZ=Etc/UTC
-    - MYSQL_ROOT_PASSWORD=DGZ8rte7LNPvn7pXxIb3YA04V4fLVIyd
+    - MYSQL_ROOT_PASSWORD=FBhBg7dM2bkY3NVhaycjuuCaIYRpe4eN
     - MYSQL_DATABASE=booklore
     - MYSQL_USER=booklore
-    - MYSQL_PASSWORD=58KJld0niiKAcZNphmcpPQ2AAVcLUFr4
+    - MYSQL_PASSWORD=NAcilFXcWfMQXigEfsEsDbeS8PC0pezZ
     volumes:
     - mariadb-config:/config
     restart: unless-stopped

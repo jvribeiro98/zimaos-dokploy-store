@@ -6,8 +6,8 @@ services:
     expose:
     - 3000
     environment:
-      DATABASE_URL: postgresql://excaliself:mTOV8TrOWgkBskGWkMZeavFoRdcT1wSp@db:5432/excaliself
-      BETTER_AUTH_SECRET: OhSqLHkgzxSuqNdGaEUl5XwHx75pGZ28liLoNEDJlXzofgDFqcvKuype1vLfRmSw
+      DATABASE_URL: postgresql://excaliself:352lbc7roURT3Zl11XZrKoBs9J590HQe@db:5432/excaliself
+      BETTER_AUTH_SECRET: 9872hJ1HqH6p376bACZV5x5E6RjvnSzUCktzLSlWEYE4RPRRoqGIDp8NHSleYmlb
       BASE_URL: http://localhost
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: excaliself
-      POSTGRES_PASSWORD: mTOV8TrOWgkBskGWkMZeavFoRdcT1wSp
+      POSTGRES_PASSWORD: 352lbc7roURT3Zl11XZrKoBs9J590HQe
       POSTGRES_DB: excaliself
     volumes:
     - excaliself-db:/var/lib/postgresql/data

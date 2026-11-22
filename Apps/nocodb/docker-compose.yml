@@ -7,7 +7,7 @@ services:
       root_db:
         condition: service_healthy
     environment:
-      NC_DB: pg://root_db:5432?u=postgres&p=xuZSYsBBOKnag0VWpB3d6FWQYbgYY9e0&d=root_db
+      NC_DB: pg://root_db:5432?u=postgres&p=ltk0W41I1pLaZjZn5b8aEULDVKutKn7B&d=root_db
     volumes:
     - nc_data:/usr/app/data
     ports:
@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_DB: root_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: xuZSYsBBOKnag0VWpB3d6FWQYbgYY9e0
+      POSTGRES_PASSWORD: ltk0W41I1pLaZjZn5b8aEULDVKutKn7B
     healthcheck:
       test:
       - CMD-SHELL

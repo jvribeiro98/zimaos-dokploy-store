@@ -14,7 +14,7 @@ services:
       FORCE_HTTPS: 'false'
       PHP_TIMEZONE: UTC
       MYSQL_USERNAME: admin
-      MYSQL_PASSWORD: q9UtjzSL5Y5UjOtro5pgReSqvl0LgkF5
+      MYSQL_PASSWORD: kIDwaUMSRDyo8G9HfzJQMbSpTLkzSDmO
       MYSQL_DB_NAME: ospos
       MYSQL_HOST_NAME: opensourcepos-db
     volumes:
@@ -28,10 +28,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: 5LudHDKpNoDdJOIbgtCFBRsNn5VPhEDF
+      MYSQL_ROOT_PASSWORD: QTO9avgzxsqS68XWTtPW0fVmoA18Hnh9
       MYSQL_DATABASE: ospos
       MYSQL_USER: admin
-      MYSQL_PASSWORD: q9UtjzSL5Y5UjOtro5pgReSqvl0LgkF5
+      MYSQL_PASSWORD: kIDwaUMSRDyo8G9HfzJQMbSpTLkzSDmO
     volumes:
     - opensourcepos-db:/var/lib/mysql
     healthcheck:

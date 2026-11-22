@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
     - ADMIN_USER=admin
-    - ADMIN_PASS=Vg7HjkvTHqfJMWyV
-    - JWT_SECRET=1dEei9ZkMEcP4lbKINYM9rqXSf8gdsvdq1BVgvuIbfKl81kD
+    - ADMIN_PASS=CppOibuZBJhP9aXC
+    - JWT_SECRET=s7xQkEPaSdo6fk8gMGk31Ul0CWhDLItYXRhPvJjNcNS30n2l
     - DATABASE_PATH=/app/data/invoice.db
     - PORT=3000
     - HOST=0.0.0.0

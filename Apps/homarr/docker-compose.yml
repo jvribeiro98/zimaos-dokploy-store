@@ -6,7 +6,7 @@ services:
     volumes:
     - homarr_appdata:/appdata
     environment:
-    - SECRET_ENCRYPTION_KEY=e80e966f8d0cfb553b7725366a8e91d4938ff436ccb37688dfd8fd7d52dc96e2894d73a4d9bfaf8a4e3b97e3b085a1eca3b09481d0a3eebb86f7b06af39bfe32
+    - SECRET_ENCRYPTION_KEY=48e9794c660ea1696c9e4fa44475465ff6cfcefde88ab34e5a07b1b9bb233871c12dbe6d40782b66185b3c633b27088c509a98cccc242b2e037c8613c0d8ccf7
     expose:
     - 7575
     ports:

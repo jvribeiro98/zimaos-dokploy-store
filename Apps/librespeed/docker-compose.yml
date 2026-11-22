@@ -11,7 +11,7 @@ services:
     - PUID=1000
     - PGID=1000
     - TZ=UTC
-    - PASSWORD=Yq2lkyZZmy43FppRikXGSvjk8cyADnyT
+    - PASSWORD=lbToGD8JwICGUiQApT5qJI9bFTRNPP40
     - CUSTOM_RESULTS=false
     - DB_TYPE=sqlite
     ports:

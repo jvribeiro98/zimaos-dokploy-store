@@ -15,8 +15,8 @@ services:
     - rutorrent-downloads:/downloads
     - rutorrent-passwd:/passwd
     ports:
-    - ${INCOMING_PORT:-50000}:50000/tcp
-    - ${DHT_PORT:-6881}:6881/udp
+    - '50000'
+    - '6881'
     - target: 8080
       published: "8080"
       protocol: tcp

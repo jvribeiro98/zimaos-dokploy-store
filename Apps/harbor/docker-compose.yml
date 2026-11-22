@@ -95,7 +95,7 @@ services:
     - FOWNER
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${INIT_MEMORY_LIMIT:-768m}
+    mem_limit: 2g
     logging:
       driver: local
       options:
@@ -157,8 +157,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${CORE_MEMORY_LIMIT:-1g}
-    cpus: ${CORE_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -221,8 +221,8 @@ services:
     - DAC_OVERRIDE
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${POSTGRESQL_MEMORY_LIMIT:-1536m}
-    cpus: ${POSTGRESQL_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -291,8 +291,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${REDIS_MEMORY_LIMIT:-256m}
-    cpus: ${REDIS_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -356,8 +356,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${REGISTRY_MEMORY_LIMIT:-768m}
-    cpus: ${REGISTRY_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -428,8 +428,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${REGISTRYCTL_MEMORY_LIMIT:-128m}
-    cpus: ${REGISTRYCTL_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -495,8 +495,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${JOBSERVICE_MEMORY_LIMIT:-512m}
-    cpus: ${JOBSERVICE_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -552,8 +552,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${PORTAL_MEMORY_LIMIT:-128m}
-    cpus: ${PORTAL_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -617,8 +617,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${PROXY_MEMORY_LIMIT:-256m}
-    cpus: ${PROXY_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -694,8 +694,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${TRIVY_ADAPTER_MEMORY_LIMIT:-1536m}
-    cpus: ${TRIVY_ADAPTER_CPU_LIMIT:-2.0}
+    mem_limit: 2g
+    cpus: 2.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s
@@ -757,8 +757,8 @@ services:
     - SETUID
     security_opt:
     - no-new-privileges:true
-    mem_limit: ${EXPORTER_MEMORY_LIMIT:-128m}
-    cpus: ${EXPORTER_CPU_LIMIT:-1.0}
+    mem_limit: 2g
+    cpus: 1.0
     stop_grace_period: 120s
     healthcheck:
       interval: 15s

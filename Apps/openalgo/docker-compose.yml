@@ -16,9 +16,9 @@ services:
     - BROKER_API_KEY=
     - BROKER_API_SECRET=
     - VALID_BROKERS=fivepaisa,fivepaisaxts,aliceblue,angel,arrow,compositedge,dhan,dhan_sandbox,definedge,deltaexchange,firstock,flattrade,fyers,groww,hdfcsecurities,hdfcsky,ibulls,iifl,iiflcapital,indmoney,jainamxts,kotak,motilal,mstock,nubra,nuvama,paytm,pocketful,rmoney,rupeezy,sahi,samco,shoonya,tradejini,tradesmart,upstox,wisdom,zebu,zerodha
-    - APP_KEY=Caut0kv8vBh4IvMP3V2MgabJeeDyXsAh
-    - API_KEY_PEPPER=6ELP9xSUhbL2Vz3sDkl0LYmHDOEUREjJ
-    - FERNET_SALT=cNvVPTAH6Yc7crAvdk9lj3A17uB2kwPg
+    - APP_KEY=8kuSyBU4oBIruiitLqGkxWdqjpNMLNy0
+    - API_KEY_PEPPER=GiHaO59bDNsVbcvvUxmU1oCoM1H0LyzA
+    - FERNET_SALT=emc6ZVjSHhMHKzc9VOrOZjqY8dYMqXvF
     - DATABASE_URL=sqlite:////app/db/openalgo.db
     - LATENCY_DATABASE_URL=sqlite:////app/db/latency.db
     - LOGS_DATABASE_URL=sqlite:////app/db/logs.db

@@ -3,8 +3,6 @@ services:
   didacta:
     image: ghcr.io/va360labs/didacta-community:0.0.1-alpha.107
     restart: unless-stopped
-    env_file:
-    - .env
     expose:
     - 3000
     volumes:
@@ -31,8 +29,6 @@ services:
   postgres:
     image: pgvector/pgvector:pg16
     restart: unless-stopped
-    env_file:
-    - .env
     volumes:
     - didacta-postgres-data:/var/lib/postgresql/data
     healthcheck:

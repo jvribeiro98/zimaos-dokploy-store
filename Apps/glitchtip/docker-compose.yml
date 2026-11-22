@@ -20,7 +20,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: e3td1j7jpNY1ev61PUvyaWYQCOpjyElyzv4bJ9B8/+w=
+      SECRET_KEY: TkJ0dMRAELBYQ0DS4w61en57ey15WujAtnTZAep9Ffk=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost
@@ -39,7 +39,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: e3td1j7jpNY1ev61PUvyaWYQCOpjyElyzv4bJ9B8/+w=
+      SECRET_KEY: TkJ0dMRAELBYQ0DS4w61en57ey15WujAtnTZAep9Ffk=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost
@@ -54,7 +54,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: e3td1j7jpNY1ev61PUvyaWYQCOpjyElyzv4bJ9B8/+w=
+      SECRET_KEY: TkJ0dMRAELBYQ0DS4w61en57ey15WujAtnTZAep9Ffk=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost

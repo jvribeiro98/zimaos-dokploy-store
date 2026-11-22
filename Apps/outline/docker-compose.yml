@@ -14,15 +14,15 @@ services:
       URL: https://localhost
       FORCE_HTTPS: 'false'
       PROXY_HEADERS_TRUSTED: 'true'
-      SECRET_KEY: 19360d43d62f74516ab6f5fdb45aa04318a91679f08f051c1dbc199715c609f4fe3dace293fe196762c43c62945752eefb4ddd0545ad146f55e41747c06e3e93
-      UTILS_SECRET: M2i8UR9J8psEL01qOlNAsnlZEZpfnrRahRtnzb79TYs=
-      DATABASE_URL: postgres://outline:3yMWXITR5DdprJBrzWvd590FJCvRrbNe@postgres:5432/outline
+      SECRET_KEY: 8777a521834fe9fea7f6ae894df719331aa37324ca360feab280ed9a4ae908f9672b7c1f83bc578d8dde27eb606bc52bd7c1924b07b2e4f6057df73ddfe1003c
+      UTILS_SECRET: wrba9zlQFeWhHIiQlALtkYTHLTDsdLfZGh2MwdT4TqE=
+      DATABASE_URL: postgres://outline:B59vKZSnqhQJVWbrx5Iaba7SX4oATAGN@postgres:5432/outline
       PGSSLMODE: disable
       REDIS_URL: redis://redis:6379
       FILE_STORAGE: local
       FILE_STORAGE_LOCAL_ROOT_DIR: /var/lib/outline/data
       OIDC_CLIENT_ID: outline
-      OIDC_CLIENT_SECRET: dqCOgrjaY7Sc9D6SpxVVIWTZXmLPGfOg/pBUT2NHoOo=
+      OIDC_CLIENT_SECRET: BZz8/ng8ldaD3yxw7yaSje0KAetUHvOny1JHCqvraA0=
       OIDC_AUTH_URI: https://dex-localhost/auth
       OIDC_TOKEN_URI: https://dex-localhost/token
       OIDC_USERINFO_URI: https://dex-localhost/userinfo
@@ -59,7 +59,7 @@ services:
     environment:
       POSTGRES_DB: outline
       POSTGRES_USER: outline
-      POSTGRES_PASSWORD: 3yMWXITR5DdprJBrzWvd590FJCvRrbNe
+      POSTGRES_PASSWORD: B59vKZSnqhQJVWbrx5Iaba7SX4oATAGN
     volumes:
     - postgres_data-test-outline-khufpx:/var/lib/postgresql/data
   redis:

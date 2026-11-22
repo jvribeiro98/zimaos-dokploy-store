@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - APP_URL=https://localhost
-    - APP_KEY=xayAyIqy03x2i1DNQ62GePLRoGgswmJI
+    - APP_KEY=EF6LveaOEOSHFXIhAumac4BIKyeggp8V
     volumes:
     - 2fauth_data:/2fauth
     expose:

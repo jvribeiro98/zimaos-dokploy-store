@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - DEXIO_PUBLIC_URL=https://localhost
-    - DEXIO_SECRET_KEY=mgKwBe2soT4WNMsbRvYl3pL2iMt60uOffi9eOQSyfvYWLW5RrcJ8nEjGTqpI88wU
+    - DEXIO_SECRET_KEY=liIZvigX7vGnDzX1KQwx1KmIDqJDzoy7zyWhqicUQ2srhnBN7SZ7dFtXIXWVfJdf
     - DEXIO_DB=/data/dexio.db
     - DEXIO_FILES_DIR=/data/files
     expose:

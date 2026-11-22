@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: freeframe
-      POSTGRES_PASSWORD: uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz
+      POSTGRES_PASSWORD: tJAilDZzGW8geQJMU9YJat976D5AjGbC
       POSTGRES_DB: freeframe
     volumes:
     - freeframe-postgres-data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
 
       '
     environment:
-      REDIS_PASSWORD: cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg
+      REDIS_PASSWORD: XMmUFcu59LxGPbR5fD35GNxLgLixEm3I
     volumes:
     - freeframe-redis-data:/data
     healthcheck:
@@ -39,7 +39,7 @@ services:
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: freeframe
-      MINIO_ROOT_PASSWORD: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      MINIO_ROOT_PASSWORD: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
     volumes:
     - freeframe-silo-data:/data
     healthcheck:
@@ -55,15 +55,15 @@ services:
     image: ghcr.io/techiebutler/freeframe-api:1.22.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
-      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
-      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      DATABASE_URL: postgresql://freeframe:tJAilDZzGW8geQJMU9YJat976D5AjGbC@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:XMmUFcu59LxGPbR5fD35GNxLgLixEm3I@freeframe-redis:6379/0
+      JWT_SECRET: 9b372167d1532800dd6ecc5fa75d32976e5e3a620b0fcacfbd99eb25b1981b59a8ff9574ff93e61db92e85fbf46e7b707dff37558215908fe5f64ff8da7536c9
       FRONTEND_URL: http://localhost
       S3_STORAGE: minio
       S3_ENDPOINT: http://freeframe-silo:9000
       S3_PUBLIC_ENDPOINT: http://localhost
       S3_ACCESS_KEY: freeframe
-      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_SECRET_KEY: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
       S3_BUCKET: freeframe
       S3_REGION: us-east-1
       MAIL_PROVIDER: smtp
@@ -106,15 +106,15 @@ services:
     image: ghcr.io/techiebutler/freeframe-api:1.22.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
-      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
-      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      DATABASE_URL: postgresql://freeframe:tJAilDZzGW8geQJMU9YJat976D5AjGbC@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:XMmUFcu59LxGPbR5fD35GNxLgLixEm3I@freeframe-redis:6379/0
+      JWT_SECRET: 9b372167d1532800dd6ecc5fa75d32976e5e3a620b0fcacfbd99eb25b1981b59a8ff9574ff93e61db92e85fbf46e7b707dff37558215908fe5f64ff8da7536c9
       FRONTEND_URL: http://localhost
       S3_STORAGE: minio
       S3_ENDPOINT: http://freeframe-silo:9000
       S3_PUBLIC_ENDPOINT: http://localhost
       S3_ACCESS_KEY: freeframe
-      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_SECRET_KEY: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
       S3_BUCKET: freeframe
       S3_REGION: us-east-1
       MAIL_PROVIDER: smtp
@@ -142,15 +142,15 @@ services:
     image: ghcr.io/techiebutler/freeframe-api:1.22.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
-      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
-      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      DATABASE_URL: postgresql://freeframe:tJAilDZzGW8geQJMU9YJat976D5AjGbC@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:XMmUFcu59LxGPbR5fD35GNxLgLixEm3I@freeframe-redis:6379/0
+      JWT_SECRET: 9b372167d1532800dd6ecc5fa75d32976e5e3a620b0fcacfbd99eb25b1981b59a8ff9574ff93e61db92e85fbf46e7b707dff37558215908fe5f64ff8da7536c9
       FRONTEND_URL: http://localhost
       S3_STORAGE: minio
       S3_ENDPOINT: http://freeframe-silo:9000
       S3_PUBLIC_ENDPOINT: http://localhost
       S3_ACCESS_KEY: freeframe
-      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_SECRET_KEY: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
       S3_BUCKET: freeframe
       S3_REGION: us-east-1
       MAIL_PROVIDER: smtp
@@ -174,15 +174,15 @@ services:
     image: ghcr.io/techiebutler/freeframe-api:1.22.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
-      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
-      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      DATABASE_URL: postgresql://freeframe:tJAilDZzGW8geQJMU9YJat976D5AjGbC@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:XMmUFcu59LxGPbR5fD35GNxLgLixEm3I@freeframe-redis:6379/0
+      JWT_SECRET: 9b372167d1532800dd6ecc5fa75d32976e5e3a620b0fcacfbd99eb25b1981b59a8ff9574ff93e61db92e85fbf46e7b707dff37558215908fe5f64ff8da7536c9
       FRONTEND_URL: http://localhost
       S3_STORAGE: minio
       S3_ENDPOINT: http://freeframe-silo:9000
       S3_PUBLIC_ENDPOINT: http://localhost
       S3_ACCESS_KEY: freeframe
-      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_SECRET_KEY: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
       S3_BUCKET: freeframe
       S3_REGION: us-east-1
       MAIL_PROVIDER: smtp
@@ -210,15 +210,15 @@ services:
     image: ghcr.io/techiebutler/freeframe-api:1.22.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
-      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
-      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      DATABASE_URL: postgresql://freeframe:tJAilDZzGW8geQJMU9YJat976D5AjGbC@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:XMmUFcu59LxGPbR5fD35GNxLgLixEm3I@freeframe-redis:6379/0
+      JWT_SECRET: 9b372167d1532800dd6ecc5fa75d32976e5e3a620b0fcacfbd99eb25b1981b59a8ff9574ff93e61db92e85fbf46e7b707dff37558215908fe5f64ff8da7536c9
       FRONTEND_URL: http://localhost
       S3_STORAGE: minio
       S3_ENDPOINT: http://freeframe-silo:9000
       S3_PUBLIC_ENDPOINT: http://localhost
       S3_ACCESS_KEY: freeframe
-      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_SECRET_KEY: yLn05QzqmwX1cdv2W5fM50lywNiwVwuX
       S3_BUCKET: freeframe
       S3_REGION: us-east-1
       MAIL_PROVIDER: smtp

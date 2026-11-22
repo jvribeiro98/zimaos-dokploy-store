@@ -9,7 +9,7 @@ services:
     - CRAWLAB_MONGO_PORT=27017
     - CRAWLAB_MONGO_DB=crawlab
     - CRAWLAB_MONGO_USERNAME=crawlab
-    - CRAWLAB_MONGO_PASSWORD=qpqDmMYTXsmslqlNVt5fgBzU
+    - CRAWLAB_MONGO_PASSWORD=Tty6w8V3g8VaGpKl75cjN0Mm
     - CRAWLAB_MONGO_AUTHSOURCE=admin
     volumes:
     - crawlab-master-data:/root/.crawlab
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
     - MONGO_INITDB_ROOT_USERNAME=crawlab
-    - MONGO_INITDB_ROOT_PASSWORD=qpqDmMYTXsmslqlNVt5fgBzU
+    - MONGO_INITDB_ROOT_PASSWORD=Tty6w8V3g8VaGpKl75cjN0Mm
     volumes:
     - mongo-data:/data/db
 volumes:

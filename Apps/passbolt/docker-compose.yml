@@ -7,14 +7,14 @@ services:
       DATASOURCES_DEFAULT_HOST: mariadb
       DATASOURCES_DEFAULT_PORT: '3306'
       DATASOURCES_DEFAULT_USERNAME: passbolt
-      DATASOURCES_DEFAULT_PASSWORD: 4Bnp9j335ysnKEU3yOcUyGOhmll9Avpz
+      DATASOURCES_DEFAULT_PASSWORD: 8zaac4Pdwl3KewDQy6opkuQt9O6OKwrr
       DATASOURCES_DEFAULT_DATABASE: passbolt
       PASSBOLT_PLUGINS_JWT_AUTHENTICATION_ENABLED: 'true'
       EMAIL_DEFAULT_FROM: passbolt@localhost
       EMAIL_TRANSPORT_DEFAULT_HOST: smtp.example.com
       EMAIL_TRANSPORT_DEFAULT_PORT: '587'
       EMAIL_TRANSPORT_DEFAULT_USERNAME: noreply@example.com
-      EMAIL_TRANSPORT_DEFAULT_PASSWORD: Tnxa3ZAK7EIKVMZQ
+      EMAIL_TRANSPORT_DEFAULT_PASSWORD: tI4keCis7juKFbW6
       EMAIL_TRANSPORT_DEFAULT_TLS: 'true'
     volumes:
     - gpg_volume:/etc/passbolt/gpg
@@ -46,10 +46,10 @@ services:
   mariadb:
     image: mariadb:11
     environment:
-      MARIADB_ROOT_PASSWORD: D1DKdG7TSQnNS5t6s6AtOyWrsTthuLKK
+      MARIADB_ROOT_PASSWORD: elQ9Y8OEyf62cC5Oc3eUoZ6kGxrm4MeQ
       MARIADB_DATABASE: passbolt
       MARIADB_USER: passbolt
-      MARIADB_PASSWORD: 4Bnp9j335ysnKEU3yOcUyGOhmll9Avpz
+      MARIADB_PASSWORD: 8zaac4Pdwl3KewDQy6opkuQt9O6OKwrr
     volumes:
     - passbolt_mariadb_data:/var/lib/mysql
     healthcheck:

@@ -4,7 +4,7 @@ services:
     image: postgres:18
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=2Zi9jCmxkVkgrMUzabkllvUT
+    - POSTGRES_PASSWORD=qpGnOUYradapk0RZGGabIFC6
     - POSTGRES_USER=danmuapi
     - POSTGRES_DB=danmuapi
     - TZ=Asia/Shanghai
@@ -34,7 +34,7 @@ services:
     - DANMUAPI_DATABASE__PORT=5432
     - DANMUAPI_DATABASE__NAME=danmuapi
     - DANMUAPI_DATABASE__USER=danmuapi
-    - DANMUAPI_DATABASE__PASSWORD=2Zi9jCmxkVkgrMUzabkllvUT
+    - DANMUAPI_DATABASE__PASSWORD=qpGnOUYradapk0RZGGabIFC6
     - DANMUAPI_ADMIN__INITIAL_USER=admin
     volumes:
     - danmu-config:/app/config

@@ -1,7 +1,7 @@
 use_default_settings: true
 
 server:
-  secret_key: "Msh30FDifq2uZW0aTtVLKiFmaRy6bE70JMxFpFNW9xfpD1K88SLHOMscApa2KNK4"
+  secret_key: "jcrIHC8DTHSZ69QyGLh1AAYk3Upcb3rHo8XjqiJzAWFAPHCVXsvHUgVhJWTpNLQm"
   limiter: false
   image_proxy: false
 

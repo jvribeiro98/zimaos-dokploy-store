@@ -7,7 +7,7 @@ services:
     - /DATA/AppData/$AppID/kutt/custom:/kutt/custom
     environment:
       DB_FILENAME: /var/lib/kutt/data.sqlite
-      JWT_SECRET: Jcid8UqE9E2o9fOlBncuPoxBk2tWPwl3
+      JWT_SECRET: kOpQo7paXULOja4eHupL34LsQobsMDnX
       DEFAULT_DOMAIN: localhost
       TRUST_PROXY: 'false'
       DISALLOW_ANONYMOUS_LINKS: 'true'

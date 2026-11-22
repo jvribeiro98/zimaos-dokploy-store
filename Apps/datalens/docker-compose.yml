@@ -47,7 +47,7 @@ services:
       POSTGRES_USER: us
       POSTGRES_PASSWORD: us
     volumes:
-    - ${VOLUME_US:-./metadata}:/var/lib/postgresql/data
+    - /DATA/AppData/datalens/data./metadata:/var/lib/postgresql/data
   us:
     image: ghcr.io/datalens-tech/datalens-us:0.310.0
     restart: always

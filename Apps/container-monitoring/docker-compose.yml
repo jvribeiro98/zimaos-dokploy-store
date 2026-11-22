@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: pfa5i8FxjeSFW42AgdKy9EJa
+      GF_SECURITY_ADMIN_PASSWORD: WfRDgDZ0sm4bWw4pH2LVpv9s
       GF_USERS_ALLOW_SIGN_UP: 'false'
       GF_AUTH_ANONYMOUS_ENABLED: 'false'
     volumes:

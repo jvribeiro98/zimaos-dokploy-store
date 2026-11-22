@@ -34,7 +34,7 @@ services:
       REDIS_PORT: '6379'
       REDIS_URL: redis://plane-redis:6379/
       API_BASE_URL: http://plane-api:8000
-      LIVE_SERVER_SECRET_KEY: KjLMSdVF7zixcuS0jQH5LD/mvQRdBY13OsikldM0a9CNs3UKUR5gctQuSPXrh3B5
+      LIVE_SERVER_SECRET_KEY: JtzVyhEIIgJfE/hTGlfHhJF4CP8m1jxVZhGXfVKgOhQmGTYiGI8m46ZKNiChcnnY
     depends_on:
       plane-api:
         condition: service_started
@@ -54,18 +54,18 @@ services:
       TRUSTED_PROXIES: private_ranges
       AWS_REGION: ''
       AWS_ACCESS_KEY_ID: access-key
-      AWS_SECRET_ACCESS_KEY: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      AWS_SECRET_ACCESS_KEY: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       AWS_S3_ENDPOINT_URL: http://plane-minio:9000
       AWS_S3_BUCKET_NAME: uploads
       MINIO_ROOT_USER: access-key
-      MINIO_ROOT_PASSWORD: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      MINIO_ROOT_PASSWORD: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       REDIS_HOST: plane-redis
       REDIS_PORT: '6379'
       REDIS_URL: redis://plane-redis:6379/
       PGHOST: plane-db
       PGDATABASE: plane
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ
+      POSTGRES_PASSWORD: 932uQ8tLz15eNUA1pZl0syQUPYuNonSi
       POSTGRES_DB: plane
       POSTGRES_PORT: '5432'
       PGDATA: /var/lib/postgresql/data
@@ -74,12 +74,12 @@ services:
       CORS_ALLOWED_ORIGINS: https://localhost
       GUNICORN_WORKERS: '1'
       USE_MINIO: '1'
-      DATABASE_URL: postgresql://plane:LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ@plane-db:5432/plane
-      SECRET_KEY: ifSjUHHJ+TUJK3UO6AE9FseXz90i0sjDfb/ffiJszhLLXHbjOetLer3kcSJkLoiW
-      AMQP_URL: amqp://plane:0WVBOVuTXkG0cpieIEaLhI4MyF1J6cW8@plane-mq:5672/plane
+      DATABASE_URL: postgresql://plane:932uQ8tLz15eNUA1pZl0syQUPYuNonSi@plane-db:5432/plane
+      SECRET_KEY: jWgwUaQzkYRbKStLJud7t1rdOspZKWy+2+bJF3UpuEyFTi1vqDnIxYJIq447sl76
+      AMQP_URL: amqp://plane:lTgyw6IkqZfkEXJscu2MJZkiJtlCGNF8@plane-mq:5672/plane
       API_KEY_RATE_LIMIT: 60/minute
       MINIO_ENDPOINT_SSL: '0'
-      LIVE_SERVER_SECRET_KEY: KjLMSdVF7zixcuS0jQH5LD/mvQRdBY13OsikldM0a9CNs3UKUR5gctQuSPXrh3B5
+      LIVE_SERVER_SECRET_KEY: JtzVyhEIIgJfE/hTGlfHhJF4CP8m1jxVZhGXfVKgOhQmGTYiGI8m46ZKNiChcnnY
       WEBHOOK_ALLOWED_IPS: ''
       WEBHOOK_ALLOWED_HOSTS: ''
     depends_on:
@@ -105,18 +105,18 @@ services:
       TRUSTED_PROXIES: private_ranges
       AWS_REGION: ''
       AWS_ACCESS_KEY_ID: access-key
-      AWS_SECRET_ACCESS_KEY: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      AWS_SECRET_ACCESS_KEY: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       AWS_S3_ENDPOINT_URL: http://plane-minio:9000
       AWS_S3_BUCKET_NAME: uploads
       MINIO_ROOT_USER: access-key
-      MINIO_ROOT_PASSWORD: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      MINIO_ROOT_PASSWORD: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       REDIS_HOST: plane-redis
       REDIS_PORT: '6379'
       REDIS_URL: redis://plane-redis:6379/
       PGHOST: plane-db
       PGDATABASE: plane
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ
+      POSTGRES_PASSWORD: 932uQ8tLz15eNUA1pZl0syQUPYuNonSi
       POSTGRES_DB: plane
       POSTGRES_PORT: '5432'
       PGDATA: /var/lib/postgresql/data
@@ -125,12 +125,12 @@ services:
       CORS_ALLOWED_ORIGINS: https://localhost
       GUNICORN_WORKERS: '1'
       USE_MINIO: '1'
-      DATABASE_URL: postgresql://plane:LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ@plane-db:5432/plane
-      SECRET_KEY: ifSjUHHJ+TUJK3UO6AE9FseXz90i0sjDfb/ffiJszhLLXHbjOetLer3kcSJkLoiW
-      AMQP_URL: amqp://plane:0WVBOVuTXkG0cpieIEaLhI4MyF1J6cW8@plane-mq:5672/plane
+      DATABASE_URL: postgresql://plane:932uQ8tLz15eNUA1pZl0syQUPYuNonSi@plane-db:5432/plane
+      SECRET_KEY: jWgwUaQzkYRbKStLJud7t1rdOspZKWy+2+bJF3UpuEyFTi1vqDnIxYJIq447sl76
+      AMQP_URL: amqp://plane:lTgyw6IkqZfkEXJscu2MJZkiJtlCGNF8@plane-mq:5672/plane
       API_KEY_RATE_LIMIT: 60/minute
       MINIO_ENDPOINT_SSL: '0'
-      LIVE_SERVER_SECRET_KEY: KjLMSdVF7zixcuS0jQH5LD/mvQRdBY13OsikldM0a9CNs3UKUR5gctQuSPXrh3B5
+      LIVE_SERVER_SECRET_KEY: JtzVyhEIIgJfE/hTGlfHhJF4CP8m1jxVZhGXfVKgOhQmGTYiGI8m46ZKNiChcnnY
       WEBHOOK_ALLOWED_IPS: ''
       WEBHOOK_ALLOWED_HOSTS: ''
     depends_on:
@@ -156,18 +156,18 @@ services:
       TRUSTED_PROXIES: private_ranges
       AWS_REGION: ''
       AWS_ACCESS_KEY_ID: access-key
-      AWS_SECRET_ACCESS_KEY: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      AWS_SECRET_ACCESS_KEY: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       AWS_S3_ENDPOINT_URL: http://plane-minio:9000
       AWS_S3_BUCKET_NAME: uploads
       MINIO_ROOT_USER: access-key
-      MINIO_ROOT_PASSWORD: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      MINIO_ROOT_PASSWORD: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       REDIS_HOST: plane-redis
       REDIS_PORT: '6379'
       REDIS_URL: redis://plane-redis:6379/
       PGHOST: plane-db
       PGDATABASE: plane
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ
+      POSTGRES_PASSWORD: 932uQ8tLz15eNUA1pZl0syQUPYuNonSi
       POSTGRES_DB: plane
       POSTGRES_PORT: '5432'
       PGDATA: /var/lib/postgresql/data
@@ -176,12 +176,12 @@ services:
       CORS_ALLOWED_ORIGINS: https://localhost
       GUNICORN_WORKERS: '1'
       USE_MINIO: '1'
-      DATABASE_URL: postgresql://plane:LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ@plane-db:5432/plane
-      SECRET_KEY: ifSjUHHJ+TUJK3UO6AE9FseXz90i0sjDfb/ffiJszhLLXHbjOetLer3kcSJkLoiW
-      AMQP_URL: amqp://plane:0WVBOVuTXkG0cpieIEaLhI4MyF1J6cW8@plane-mq:5672/plane
+      DATABASE_URL: postgresql://plane:932uQ8tLz15eNUA1pZl0syQUPYuNonSi@plane-db:5432/plane
+      SECRET_KEY: jWgwUaQzkYRbKStLJud7t1rdOspZKWy+2+bJF3UpuEyFTi1vqDnIxYJIq447sl76
+      AMQP_URL: amqp://plane:lTgyw6IkqZfkEXJscu2MJZkiJtlCGNF8@plane-mq:5672/plane
       API_KEY_RATE_LIMIT: 60/minute
       MINIO_ENDPOINT_SSL: '0'
-      LIVE_SERVER_SECRET_KEY: KjLMSdVF7zixcuS0jQH5LD/mvQRdBY13OsikldM0a9CNs3UKUR5gctQuSPXrh3B5
+      LIVE_SERVER_SECRET_KEY: JtzVyhEIIgJfE/hTGlfHhJF4CP8m1jxVZhGXfVKgOhQmGTYiGI8m46ZKNiChcnnY
       WEBHOOK_ALLOWED_IPS: ''
       WEBHOOK_ALLOWED_HOSTS: ''
     depends_on:
@@ -207,18 +207,18 @@ services:
       TRUSTED_PROXIES: private_ranges
       AWS_REGION: ''
       AWS_ACCESS_KEY_ID: access-key
-      AWS_SECRET_ACCESS_KEY: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      AWS_SECRET_ACCESS_KEY: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       AWS_S3_ENDPOINT_URL: http://plane-minio:9000
       AWS_S3_BUCKET_NAME: uploads
       MINIO_ROOT_USER: access-key
-      MINIO_ROOT_PASSWORD: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      MINIO_ROOT_PASSWORD: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
       REDIS_HOST: plane-redis
       REDIS_PORT: '6379'
       REDIS_URL: redis://plane-redis:6379/
       PGHOST: plane-db
       PGDATABASE: plane
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ
+      POSTGRES_PASSWORD: 932uQ8tLz15eNUA1pZl0syQUPYuNonSi
       POSTGRES_DB: plane
       POSTGRES_PORT: '5432'
       PGDATA: /var/lib/postgresql/data
@@ -227,12 +227,12 @@ services:
       CORS_ALLOWED_ORIGINS: https://localhost
       GUNICORN_WORKERS: '1'
       USE_MINIO: '1'
-      DATABASE_URL: postgresql://plane:LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ@plane-db:5432/plane
-      SECRET_KEY: ifSjUHHJ+TUJK3UO6AE9FseXz90i0sjDfb/ffiJszhLLXHbjOetLer3kcSJkLoiW
-      AMQP_URL: amqp://plane:0WVBOVuTXkG0cpieIEaLhI4MyF1J6cW8@plane-mq:5672/plane
+      DATABASE_URL: postgresql://plane:932uQ8tLz15eNUA1pZl0syQUPYuNonSi@plane-db:5432/plane
+      SECRET_KEY: jWgwUaQzkYRbKStLJud7t1rdOspZKWy+2+bJF3UpuEyFTi1vqDnIxYJIq447sl76
+      AMQP_URL: amqp://plane:lTgyw6IkqZfkEXJscu2MJZkiJtlCGNF8@plane-mq:5672/plane
       API_KEY_RATE_LIMIT: 60/minute
       MINIO_ENDPOINT_SSL: '0'
-      LIVE_SERVER_SECRET_KEY: KjLMSdVF7zixcuS0jQH5LD/mvQRdBY13OsikldM0a9CNs3UKUR5gctQuSPXrh3B5
+      LIVE_SERVER_SECRET_KEY: JtzVyhEIIgJfE/hTGlfHhJF4CP8m1jxVZhGXfVKgOhQmGTYiGI8m46ZKNiChcnnY
       WEBHOOK_ALLOWED_IPS: ''
       WEBHOOK_ALLOWED_HOSTS: ''
     depends_on:
@@ -248,7 +248,7 @@ services:
       PGHOST: plane-db
       PGDATABASE: plane
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: LPG5vkMLJFspnoEEgOUglTn9dWmI1pQJ
+      POSTGRES_PASSWORD: 932uQ8tLz15eNUA1pZl0syQUPYuNonSi
       POSTGRES_DB: plane
       POSTGRES_PORT: '5432'
       PGDATA: /var/lib/postgresql/data
@@ -282,7 +282,7 @@ services:
       RABBITMQ_HOST: plane-mq
       RABBITMQ_PORT: '5672'
       RABBITMQ_DEFAULT_USER: plane
-      RABBITMQ_DEFAULT_PASS: 0WVBOVuTXkG0cpieIEaLhI4MyF1J6cW8
+      RABBITMQ_DEFAULT_PASS: lTgyw6IkqZfkEXJscu2MJZkiJtlCGNF8
       RABBITMQ_DEFAULT_VHOST: plane
       RABBITMQ_VHOST: plane
     volumes:
@@ -303,7 +303,7 @@ services:
     command: server /export --console-address ":9090"
     environment:
       MINIO_ROOT_USER: access-key
-      MINIO_ROOT_PASSWORD: 4nHQZtPZB5uQ91gaFPT0iC41Wgak7IS9
+      MINIO_ROOT_PASSWORD: nqbSuggVmdd4u0CdcJrzJoz2otYu8kJc
     volumes:
     - uploads:/export
   proxy:

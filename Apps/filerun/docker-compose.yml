@@ -20,7 +20,7 @@ services:
       FR_DB_PORT: '3306'
       FR_DB_NAME: filerun
       FR_DB_USER: filerun
-      FR_DB_PASS: lroPpkkzmZcKJa7QxFisXswkK8qUIQEw
+      FR_DB_PASS: 0jMmxEQFDfgX35CWpgaw5ujSaYhHuGSS
     volumes:
     - filerun-html:/var/www/html
     - filerun-user-files:/user-files
@@ -33,9 +33,9 @@ services:
     restart: unless-stopped
     command: --old-mode=NO_PROGRESS_INFO
     environment:
-      MARIADB_ROOT_PASSWORD: hLNsycInwlYxBRn3DNvgMCZBo53WW8XG
+      MARIADB_ROOT_PASSWORD: Q81LxB9ZY1VBNQ4bSr15FnFiWILeQ73M
       MYSQL_USER: filerun
-      MYSQL_PASSWORD: lroPpkkzmZcKJa7QxFisXswkK8qUIQEw
+      MYSQL_PASSWORD: 0jMmxEQFDfgX35CWpgaw5ujSaYhHuGSS
       MYSQL_DATABASE: filerun
       MARIADB_AUTO_UPGRADE: '1'
     volumes:

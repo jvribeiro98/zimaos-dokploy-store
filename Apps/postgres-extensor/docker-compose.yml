@@ -13,7 +13,7 @@ services:
     - max_worker_processes=32
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=ueayT68xSPwmtpxeBDr0vaumdO85h0jP
+    - POSTGRES_PASSWORD=b6Kzeco3F3qPz0yqkK8iBRkZ09Fyfk2d
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql

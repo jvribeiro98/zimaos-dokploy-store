@@ -7,7 +7,7 @@ services:
       database:
         condition: service_healthy
     environment:
-    - CMD_DB_URL=postgres://hedgedoc:RGKRTqS3TEFlfvASDytl24G1Ml03sffa@database:5432/hedgedoc
+    - CMD_DB_URL=postgres://hedgedoc:OCRjFfLQHIPGDVXMEkVHIxG6O01pobMH@database:5432/hedgedoc
     - CMD_DOMAIN=localhost
     - CMD_PROTOCOL_USESSL=true
     - CMD_URL_ADDPORT=false
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=hedgedoc
-    - POSTGRES_PASSWORD=RGKRTqS3TEFlfvASDytl24G1Ml03sffa
+    - POSTGRES_PASSWORD=OCRjFfLQHIPGDVXMEkVHIxG6O01pobMH
     - POSTGRES_DB=hedgedoc
     volumes:
     - hedgedoc_database:/var/lib/postgresql/data

@@ -7,8 +7,8 @@ services:
     - redis
     environment:
     - APP_URL=http://localhost:3000
-    - APP_SECRET=1tsAnNviTm2IJCb94owq63X51bqkiiEv
-    - DATABASE_URL=postgresql://docmost:PEMAAT8s2PkrNfFGc2eI5JAFRcicOG75@db:5432/docmost?schema=public
+    - APP_SECRET=kjOApFRfinUld8db1dhc7P3hn6OEvwP1
+    - DATABASE_URL=postgresql://docmost:IkKCrM0l9OkLgfzKN5Mb5ZO5dFZzq1qR@db:5432/docmost?schema=public
     - REDIS_URL=redis://redis:6379
     restart: unless-stopped
     volumes:
@@ -22,7 +22,7 @@ services:
     environment:
     - POSTGRES_DB=docmost
     - POSTGRES_USER=docmost
-    - POSTGRES_PASSWORD=PEMAAT8s2PkrNfFGc2eI5JAFRcicOG75
+    - POSTGRES_PASSWORD=IkKCrM0l9OkLgfzKN5Mb5ZO5dFZzq1qR
     restart: unless-stopped
     volumes:
     - db_docmost_data:/var/lib/postgresql/data

@@ -5,7 +5,6 @@ services:
     volumes:
     - /DATA/AppData/$AppID/garage.toml:/etc/garage.toml
     - garage-storage:/var/lib/garage
-    - garage-storage:/var/lib/garage
     restart: unless-stopped
     expose:
     - 3900

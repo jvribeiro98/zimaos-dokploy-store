@@ -10,9 +10,6 @@ services:
     - ALL
     security_opt:
     - no-new-privileges:true
-    env_file:
-    - path: .env
-      required: false
     environment:
       KEYZORI_ADMIN_KEY: ${KEYZORI_ADMIN_KEY:?Set KEYZORI_ADMIN_KEY}
       KEYZORI_DATABASE_URL: postgresql://keyzori:${KEYZORI_POSTGRES_PASSWORD:?Set KEYZORI_POSTGRES_PASSWORD}@postgres:5432/keyzori

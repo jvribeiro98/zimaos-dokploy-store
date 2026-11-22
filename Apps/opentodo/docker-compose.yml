@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - OPENTODO_BASE_URL=
-    - OPENTODO_SETUP_TOKEN=ZA5ZgjkQQmN68WTqeNSo0z6RycsWYO0x
+    - OPENTODO_SETUP_TOKEN=Qdu8BfzudubdnbHL07kxIAqRNvlQj44k
     - OPENTODO_ALLOW_SIGNUP=false
     - OPENTODO_TRUSTED_PROXIES=
     volumes:

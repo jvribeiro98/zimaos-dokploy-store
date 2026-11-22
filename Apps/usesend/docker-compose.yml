@@ -47,7 +47,7 @@ services:
     - PORT=${PORT:-3000}
     - DATABASE_URL=postgresql://postgres:postgres@usesend-db-prod:5432/usesend
     - NEXTAUTH_URL=http://localhost:3000
-    - NEXTAUTH_SECRET=9mKrtXCbD2kphLdQGllatTLWZp8z/0GJmq5B4EdwCV7tnCI8yVgQhOeOqs5H8aVtwPf53DS917QKgygC4xhTpg==
+    - NEXTAUTH_SECRET=FIn0aXOLfMy/xbMuyZyXo4GQysApF74njipHWazm8hcfcv7bCT/ipqpbNL31PMYe+ZM0JMnApuR18Oruv4pZhA==
     - AWS_DEFAULT_REGION=us-east-1
     - AWS_SECRET_KEY='Fill'
     - AWS_ACCESS_KEY='Fill'

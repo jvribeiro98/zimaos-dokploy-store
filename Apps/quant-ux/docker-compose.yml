@@ -38,9 +38,9 @@ services:
     - QUX_MONGO_TABLE_PREFIX=quantux
     - QUX_MONGO_CONNECTION_STRING=mongodb://quant-ux-mongo:27017
     - QUX_MAIL_USER=admin@example.com
-    - QUX_MAIL_PASSWORD=91EUIJpORpvQEs657FFGaHBCvooVRT5l
+    - QUX_MAIL_PASSWORD=ciDcq9Fh6jQ5CI4QqmKoSEuDdDTlqzFl
     - QUX_MAIL_HOST=mail.example.com
-    - QUX_JWT_PASSWORD=nmPAZmTznLYZ2gAA1lSRJvzC6jzjwtfL67IrZIweIA8y2o7fGXw2h0Z0QHgWLFnb
+    - QUX_JWT_PASSWORD=AocZhsDNwIx9hQTtl7pU4SyZzkds5eyeqOOjZ7sQmsaAanYku0rmIWlwrXZvybhk
     - QUX_IMAGE_FOLDER_USER=/app-data/qux-images
     - QUX_IMAGE_FOLDER_APPS=/app-data/qux-image-apps
     - TZ=America/Chicago

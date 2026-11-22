@@ -22,13 +22,13 @@ services:
       start_interval: 5s
       start_period: 30s
     environment:
-      SECRET: UvB7Yr0TR7ar3lUHctnhkwb+0AHGbFr90KGmHLQfuJ38CX3+nGhXZueq3rTpwawlnPnGwy8b0HoEiLZO5r6g9w==
+      SECRET: TtDb3lCtgmpZGrSPeQLps2MDmyMtpuvrVT5qExoTcRuIeT9GD7m7Jo2qXsLaJf7aKmswLOq24oIRQIkKmOS1QA==
       DB_CLIENT: pg
       DB_HOST: database
       DB_PORT: '5432'
       DB_DATABASE: directus
       DB_USER: directus
-      DB_PASSWORD: ll0tmnv6JcSCf74CO3pTutfIuHmdAC8O
+      DB_PASSWORD: 3srVKAInTEZB23N44F8bprIT4LyKV3mz
       CACHE_ENABLED: 'true'
       CACHE_AUTO_PURGE: 'true'
       CACHE_STORE: redis
@@ -37,7 +37,7 @@ services:
       PUBLIC_URL: https://localhost
       LICENSE_KEY: ''
       ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: s2UFmd9HRWZHitCyVF7YB4WQ
+      ADMIN_PASSWORD: dqq5K7nMMbqU8scYCiLczABP
       STORAGE_LOCATIONS: local
       STORAGE_LOCAL_DRIVER: local
       STORAGE_LOCAL_ROOT: /directus/uploads
@@ -52,7 +52,7 @@ services:
     - directus_database:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: directus
-      POSTGRES_PASSWORD: ll0tmnv6JcSCf74CO3pTutfIuHmdAC8O
+      POSTGRES_PASSWORD: 3srVKAInTEZB23N44F8bprIT4LyKV3mz
       POSTGRES_DB: directus
     healthcheck:
       test:

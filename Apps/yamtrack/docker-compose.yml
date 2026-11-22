@@ -7,7 +7,7 @@ services:
     - redis
     environment:
     - TZ=Europe/Berlin
-    - SECRET=YN8PJ9orTQ1Dhi6YxT0QwBCBGGDSC4WqG1XG5WbKz7DK20HDgtyQ1YHKqqdBElnl
+    - SECRET=yfLBXH5mBn3TdI7QNzoqglTf0isJ2NnghA8x3iLyIQisaQsiOKoq41x82UUCuRa9
     - REDIS_URL=redis://redis:6379
     volumes:
     - yamtrack-db:/yamtrack/db

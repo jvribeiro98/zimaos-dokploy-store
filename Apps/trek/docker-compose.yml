@@ -6,13 +6,13 @@ services:
     environment:
     - NODE_ENV=production
     - PORT=3000
-    - ENCRYPTION_KEY=qFjpoz388HZGbus9CwcTnaXeJlvKXeg7ccWEkpGPJltWkJGB7MWrrCnWgQGiapkG
+    - ENCRYPTION_KEY=00RMvKDSA2rmdh0zBx3CzCjsg0lIXUbqIJpl9JiiNF5UZGSDlBvA1urN5iGPIyuc
     - TZ=UTC
     - LOG_LEVEL=info
     - APP_URL=http://localhost
     - ALLOWED_ORIGINS=http://localhost
     - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASSWORD=S0jdj3MDPvQirhwh
+    - ADMIN_PASSWORD=QhZ04XFiHlx6mEWi
     volumes:
     - trek-data:/app/data
     - trek-uploads:/app/uploads

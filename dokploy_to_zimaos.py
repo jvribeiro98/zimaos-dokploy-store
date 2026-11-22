@@ -243,7 +243,7 @@ ZimaOSDumper.add_representer(QuotedString, _quoted_str_representer)
 
 
 def slugify_app_id(raw_id: str) -> str:
-    cleaned = re.sub(r"[^a-zA-Z0-9._-]+", "-", raw_id.strip().lower()).strip("-")
+    cleaned = re.sub(r"[^a-z0-9_-]+", "-", raw_id.strip().lower()).strip("-")
     return cleaned or "app"
 
 
@@ -613,6 +613,76 @@ def infer_version(meta: dict[str, Any], services: dict[str, Any], main_svc: str)
     return "1.0.0"
 
 
+def sanitize_compose_for_zimaos(compose: dict[str, Any], app_slug: str) -> None:
+    """Ajusta o compose para compatibilidade estrita com o ZimaOS / CasaOS compose loader."""
+    services = compose.get("services") or {}
+    for svc_name, svc in services.items():
+        if not isinstance(svc, dict):
+            continue
+
+        # 1. Remove env_file para evitar falhas de arquivos inexistentes no ZimaOS
+        svc.pop("env_file", None)
+
+        # 2. Corrigir deploy.replicas para inteiro
+        if isinstance(svc.get("deploy"), dict):
+            deploy = svc["deploy"]
+            if "replicas" in deploy:
+                try:
+                    rep_str = str(deploy["replicas"]).split(":")[-1].strip("'\"}")
+                    deploy["replicas"] = int(rep_str) if rep_str.isdigit() else 1
+                except Exception:
+                    deploy["replicas"] = 1
+
+        # 3. Sanitizar mem_limit e cpus
+        if "mem_limit" in svc and isinstance(svc["mem_limit"], str):
+            if "${" in svc["mem_limit"]:
+                svc["mem_limit"] = "2g"
+        if "cpus" in svc and isinstance(svc["cpus"], str):
+            try:
+                cpu_clean = re.sub(r"[^\d.]", "", svc["cpus"])
+                svc["cpus"] = float(cpu_clean) if cpu_clean else 1.0
+            except Exception:
+                svc.pop("cpus", None)
+
+        # 4. Sanitizar ports
+        ports = svc.get("ports")
+        if isinstance(ports, list):
+            cleaned_ports = []
+            for p in ports:
+                if isinstance(p, str):
+                    if "${" in p:
+                        m = re.search(r":-(\d+)", p)
+                        if m:
+                            p = m.group(1)
+                        else:
+                            p = re.sub(r"\$\{[^}]*\}?", "8080", p)
+                cleaned_ports.append(p)
+            svc["ports"] = cleaned_ports
+
+        # 5. Sanitizar volumes (deduplicar e tratar subpath ou variáveis não resolvidas)
+        volumes = svc.get("volumes")
+        if isinstance(volumes, list):
+            seen: set[str] = set()
+            cleaned_vols: list[Any] = []
+            for v in volumes:
+                if isinstance(v, str):
+                    if "${" in v:
+                        v = re.sub(r"\$\{[A-Za-z0-9_:-]+", f"/DATA/AppData/{app_slug}/data", v).replace("}", "")
+                    if v not in seen:
+                        seen.add(v)
+                        cleaned_vols.append(v)
+                elif isinstance(v, dict):
+                    v = dict(v)
+                    v.pop("subpath", None)
+                    v_key = json.dumps(v, sort_keys=True)
+                    if v_key not in seen:
+                        seen.add(v_key)
+                        cleaned_vols.append(v)
+                else:
+                    cleaned_vols.append(v)
+            svc["volumes"] = cleaned_vols
+
+
 def convert_blueprint(
     bp_dir: Path,
     apps_out_dir: Path,
@@ -665,6 +735,8 @@ def convert_blueprint(
         rewrite_compose_volumes(svc)
         if svc_name == main_svc:
             ensure_service_port_published(svc, main_port)
+
+    sanitize_compose_for_zimaos(compose, app_slug)
 
     app_dir = apps_out_dir / app_folder_name
     app_dir.mkdir(parents=True, exist_ok=True)

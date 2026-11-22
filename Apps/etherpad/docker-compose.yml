@@ -12,11 +12,11 @@ services:
     - postgres
     environment:
       NODE_ENV: production
-      ADMIN_PASSWORD: OOLtUq0wnnAQ4GAoRY5B7Nm7I2DAfC54
+      ADMIN_PASSWORD: RG4ba5LCZGCNEclfDjVCe76jz0B4o6FF
       DB_CHARSET: utf8mb4
       DB_HOST: postgres
       DB_NAME: etherpad
-      DB_PASS: QLC2u9z0aUzZMV33q5ltYxK5nzBIiZh5
+      DB_PASS: ZpUDC2PEF3Neake3V7FfaUMRUSFvlDJi
       DB_PORT: '5432'
       DB_TYPE: postgres
       DB_USER: admin
@@ -35,7 +35,7 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_DB: etherpad
-      POSTGRES_PASSWORD: QLC2u9z0aUzZMV33q5ltYxK5nzBIiZh5
+      POSTGRES_PASSWORD: ZpUDC2PEF3Neake3V7FfaUMRUSFvlDJi
       POSTGRES_USER: admin
       PGDATA: /var/lib/postgresql/data/pgdata
     restart: always

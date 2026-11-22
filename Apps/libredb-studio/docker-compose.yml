@@ -6,10 +6,10 @@ services:
     environment:
     - ADMIN_PASSWORD_RESET=${ADMIN_PASSWORD_RESET:-}
     - ADMIN_EMAIL=admin@libredb.org
-    - ADMIN_PASSWORD=02wwfYeut9fpSnWfs8bCiNYJKntqJiPv
+    - ADMIN_PASSWORD=J66yc7q0T69rumD8Pl6u1TRbjERWSIWu
     - USER_EMAIL=user@libredb.org
-    - USER_PASSWORD=co8EM2agAADWWqVCpHbHQNunQvyI2N3Z
-    - JWT_SECRET=JkKT5k7XGG4RDtPaRCVWq2eHNuvnyR01qaTr8lOJlkJShqqdRqEn9NJkxdXL8yHu
+    - USER_PASSWORD=7xMI6D5igvrlvIZL1wGgxKNKwTFOwzm8
+    - JWT_SECRET=nU0syw5ZV2O9Llcp9txesH7MTGsRi8LBT90rhSG0Objj7Xy16FUE9ZfrUsW9OVAm
     - STORAGE_PROVIDER=sqlite
     - STORAGE_SQLITE_PATH=/app/data/libredb-storage.db
     - AUTH_COOKIE_SECURE=false

@@ -7,7 +7,7 @@ services:
     environment:
     - WORDPRESS_DB_HOST=db
     - WORDPRESS_DB_USER=wordpress
-    - WORDPRESS_DB_PASSWORD=bMyunma8GUFSGBaV
+    - WORDPRESS_DB_PASSWORD=tBdplsFPTudRaBrf
     - WORDPRESS_DB_NAME=wordpress
     volumes:
     - wordpress-data:/var/www/html
@@ -23,8 +23,8 @@ services:
     environment:
     - MYSQL_DATABASE=wordpress
     - MYSQL_USER=wordpress
-    - MYSQL_PASSWORD=bMyunma8GUFSGBaV
-    - MYSQL_ROOT_PASSWORD=0hvmEr9b9g61Cvls
+    - MYSQL_PASSWORD=tBdplsFPTudRaBrf
+    - MYSQL_ROOT_PASSWORD=069s9JSArXmOIyXo
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

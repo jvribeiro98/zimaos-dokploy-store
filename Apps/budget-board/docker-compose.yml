@@ -9,7 +9,7 @@ services:
       POSTGRES_HOST: budget-board-db
       POSTGRES_DATABASE: budgetboard
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: TevfzxA9bphsy0NfVoqM8ZuvucJNn4Ng
+      POSTGRES_PASSWORD: 9uA5DqMDHLQdS4CedmU5Wj68xNlXXGKl
       AUTO_UPDATE_DB: 'True'
     depends_on:
       budget-board-db:
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: TevfzxA9bphsy0NfVoqM8ZuvucJNn4Ng
+      POSTGRES_PASSWORD: 9uA5DqMDHLQdS4CedmU5Wj68xNlXXGKl
       POSTGRES_DB: budgetboard
     volumes:
     - /DATA/AppData/$AppID/db-data:/var/lib/postgresql/data

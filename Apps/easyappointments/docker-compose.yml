@@ -8,7 +8,7 @@ services:
     - DB_HOST=mysql
     - DB_NAME=easyappointments
     - DB_USERNAME=root
-    - DB_PASSWORD=hCwOXPoufkXddGrp4MCIjIuLipvokUjM
+    - DB_PASSWORD=UcWp7JuQc7sBMiXMtBa6Y4uDsqUrGfPb
     volumes:
     - easyappointments:/var/www/html
     depends_on:
@@ -21,7 +21,7 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=hCwOXPoufkXddGrp4MCIjIuLipvokUjM
+    - MYSQL_ROOT_PASSWORD=UcWp7JuQc7sBMiXMtBa6Y4uDsqUrGfPb
     - MYSQL_DATABASE=easyappointments
     volumes:
     - mysql:/var/lib/mysql

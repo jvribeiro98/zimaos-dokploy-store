@@ -7,7 +7,7 @@ services:
       firefly-iii-db:
         condition: service_healthy
     environment:
-      APP_KEY: base64:qPANK2o9GA9gtcyuMeiokRtRgeVNIeQRNM0bDP6ta3o=
+      APP_KEY: base64:uzunKETFORixNygdqgBgprL8ADXFB6E2m1dPLhDhH00=
       APP_URL: https://localhost
       TRUSTED_PROXIES: '**'
       TZ: UTC
@@ -19,8 +19,8 @@ services:
       DB_PORT: '3306'
       DB_DATABASE: firefly
       DB_USERNAME: firefly
-      DB_PASSWORD: 5kIm0ZFYQMXVxPDfV9SAiYoytjeeHkzU
-      STATIC_CRON_TOKEN: a3e6a02f7fc49e769624aec9dbf2b4331592579674912bed72dc7cc74cd63188
+      DB_PASSWORD: QwjgmF0P3g5RSApCnpMDr3fee4wo0V3X
+      STATIC_CRON_TOKEN: ed2dfcbb7e2ab0496e94921f75bee70c38ebbf8811a5b2abe515406bd0587461
     expose:
     - '8080'
     volumes:
@@ -35,7 +35,7 @@ services:
     environment:
       MYSQL_DATABASE: firefly
       MYSQL_USER: firefly
-      MYSQL_PASSWORD: 5kIm0ZFYQMXVxPDfV9SAiYoytjeeHkzU
+      MYSQL_PASSWORD: QwjgmF0P3g5RSApCnpMDr3fee4wo0V3X
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - firefly-iii-db:/var/lib/mysql
@@ -55,7 +55,7 @@ services:
     - firefly-iii
     environment:
       TZ: UTC
-      STATIC_CRON_TOKEN: a3e6a02f7fc49e769624aec9dbf2b4331592579674912bed72dc7cc74cd63188
+      STATIC_CRON_TOKEN: ed2dfcbb7e2ab0496e94921f75bee70c38ebbf8811a5b2abe515406bd0587461
     command:
     - sh
     - -c

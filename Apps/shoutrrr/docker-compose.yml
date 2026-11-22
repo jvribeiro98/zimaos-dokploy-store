@@ -3,9 +3,6 @@ services:
   shoutrrr:
     image: ghcr.io/coollabsio/shoutrrr:1.5.4
     restart: unless-stopped
-    env_file:
-    - path: .env
-      required: false
     environment:
       APP_ENV: production
       APP_DEBUG: 'false'

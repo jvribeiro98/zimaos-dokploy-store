@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=senddock
-    - POSTGRES_PASSWORD=2fLOKZIUOgkM0KaBa6IqvGC7sTmaCnaV
+    - POSTGRES_PASSWORD=2IUmynYJ8kiWMn1I5dDV5CxpqnRhereC
     - POSTGRES_DB=senddock
     volumes:
     - pgdata:/var/lib/postgresql/data
@@ -38,9 +38,9 @@ services:
       redis:
         condition: service_healthy
     environment:
-    - DATABASE_URL=postgres://senddock:2fLOKZIUOgkM0KaBa6IqvGC7sTmaCnaV@postgres:5432/senddock?sslmode=disable
+    - DATABASE_URL=postgres://senddock:2IUmynYJ8kiWMn1I5dDV5CxpqnRhereC@postgres:5432/senddock?sslmode=disable
     - REDIS_URL=redis://redis:6379
-    - JWT_SECRET=rO6iq9GQw6WjFaF10IcfF2zZqiqtMnc0bVrsFN2fkrjY8UlN1K0BWO6febeMyOGt
+    - JWT_SECRET=ofFTEwSqGWRGX18MW6KwVFywuhuTXzMN99fGZ07YXmOotJ7Waxww8Pc6QY3Og0gg
     - PUBLIC_URL=https://localhost
     - FRONTEND_URL=https://localhost
     - PORT=8080

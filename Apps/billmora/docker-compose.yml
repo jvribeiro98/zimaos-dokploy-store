@@ -6,16 +6,16 @@ services:
     environment:
     - APP_NAME=Billmora
     - APP_ENV=production
-    - APP_KEY=base64:5b0al2H4zCqJDNdMoxTac8tJWnrP+dww/h4M5dOOqr4=
+    - APP_KEY=base64:l94M4ln6xWELOCcIsjV0sRhli0nUjNZm5fz4Pw8RIxE=
     - APP_URL=https://localhost
     - DB_CONNECTION=mariadb
     - DB_HOST=billmora-db
     - DB_PORT=3306
     - DB_DATABASE=billmora
     - DB_USERNAME=billmora
-    - DB_PASSWORD=FxGY7m9rbxzBBkEp
+    - DB_PASSWORD=UbPihdVnzycxSq8N
     - REDIS_HOST=billmora-redis
-    - REDIS_PASSWORD=7c5hfyX7f7YMrTTX
+    - REDIS_PASSWORD=Zc7lGkgLIMaR5xhA
     - REDIS_PORT=6379
     - SESSION_DRIVER=redis
     - CACHE_STORE=redis
@@ -52,16 +52,16 @@ services:
     environment:
     - APP_NAME=Billmora
     - APP_ENV=production
-    - APP_KEY=base64:5b0al2H4zCqJDNdMoxTac8tJWnrP+dww/h4M5dOOqr4=
+    - APP_KEY=base64:l94M4ln6xWELOCcIsjV0sRhli0nUjNZm5fz4Pw8RIxE=
     - APP_URL=https://localhost
     - DB_CONNECTION=mariadb
     - DB_HOST=billmora-db
     - DB_PORT=3306
     - DB_DATABASE=billmora
     - DB_USERNAME=billmora
-    - DB_PASSWORD=FxGY7m9rbxzBBkEp
+    - DB_PASSWORD=UbPihdVnzycxSq8N
     - REDIS_HOST=billmora-redis
-    - REDIS_PASSWORD=7c5hfyX7f7YMrTTX
+    - REDIS_PASSWORD=Zc7lGkgLIMaR5xhA
     - REDIS_PORT=6379
     - SESSION_DRIVER=redis
     - CACHE_STORE=redis
@@ -87,16 +87,16 @@ services:
     environment:
     - APP_NAME=Billmora
     - APP_ENV=production
-    - APP_KEY=base64:5b0al2H4zCqJDNdMoxTac8tJWnrP+dww/h4M5dOOqr4=
+    - APP_KEY=base64:l94M4ln6xWELOCcIsjV0sRhli0nUjNZm5fz4Pw8RIxE=
     - APP_URL=https://localhost
     - DB_CONNECTION=mariadb
     - DB_HOST=billmora-db
     - DB_PORT=3306
     - DB_DATABASE=billmora
     - DB_USERNAME=billmora
-    - DB_PASSWORD=FxGY7m9rbxzBBkEp
+    - DB_PASSWORD=UbPihdVnzycxSq8N
     - REDIS_HOST=billmora-redis
-    - REDIS_PASSWORD=7c5hfyX7f7YMrTTX
+    - REDIS_PASSWORD=Zc7lGkgLIMaR5xhA
     - REDIS_PORT=6379
     - SESSION_DRIVER=redis
     - CACHE_STORE=redis
@@ -118,8 +118,8 @@ services:
     environment:
     - MARIADB_DATABASE=billmora
     - MARIADB_USER=billmora
-    - MARIADB_PASSWORD=FxGY7m9rbxzBBkEp
-    - MARIADB_ROOT_PASSWORD=UbUVjfvy3uXCnHU9
+    - MARIADB_PASSWORD=UbPihdVnzycxSq8N
+    - MARIADB_ROOT_PASSWORD=PllLCrbcvpd8pLzV
     volumes:
     - billmora-db-data:/var/lib/mysql
     healthcheck:

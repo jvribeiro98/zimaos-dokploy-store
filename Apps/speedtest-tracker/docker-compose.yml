@@ -6,7 +6,7 @@ services:
     environment:
       PUID: '1000'
       PGID: '1000'
-      APP_KEY: base64:Ghsq23xYljFm4rShlMROmd/lEAK8lJZ7HYcseq4RTgM=
+      APP_KEY: base64:3Hw6/bD/KNxSNhYW+0bKNFexo2aa872nvAB8rc0DF/k=
       DB_CONNECTION: sqlite
     volumes:
     - speedtest_config:/config

@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: OlAzSv3cgb1ypw3TOaoB4sh1VhbM36VD
+      POSTGRES_PASSWORD: 4QhFTXiMRpNtm9y24PbVKQI2QDhzUatL
     healthcheck:
       test:
       - CMD-SHELL
@@ -23,7 +23,7 @@ services:
     - minio_data:/data
     environment:
       MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: fEx49Y9zb5sJIZeoO0Pts9XL4l8PGumc
+      MINIO_ROOT_PASSWORD: 3ULKN4NvJwzBRSXrRIkEGTVRiT47wtB7
     restart: unless-stopped
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0
@@ -32,7 +32,7 @@ services:
     environment:
       TIMEOUT: '10000'
       CONCURRENT: '10'
-      TOKEN: BxxV74HtekwMlhu5MAemxhtTjPVUBqjZ
+      TOKEN: AjXGJ5gJlo11HyWIobtlLhUo103DhLC4
       EXIT_ON_HEALTH_FAILURE: 'true'
       PRE_REQUEST_HEALTH_CHECK: 'true'
     restart: unless-stopped
@@ -47,18 +47,18 @@ services:
       NODE_ENV: production
       PUBLIC_URL: https://localhost
       STORAGE_URL: https://localhost/default
-      CHROME_TOKEN: BxxV74HtekwMlhu5MAemxhtTjPVUBqjZ
+      CHROME_TOKEN: AjXGJ5gJlo11HyWIobtlLhUo103DhLC4
       CHROME_URL: ws://chrome:3000
-      DATABASE_URL: postgresql://postgres:OlAzSv3cgb1ypw3TOaoB4sh1VhbM36VD@postgres:5432/postgres
-      ACCESS_TOKEN_SECRET: 4dLxvEsf2jUPcPem0pdrAPJ4Ht3ssCijWj43GWihY7952tzMdpQUOyqtJh7IzR6E
-      REFRESH_TOKEN_SECRET: lmjY8x5c1wxktdxCRI8nFcXg4nbOOdkK0XOEkipYnVazauWxtVxG8pusL1JRrVe3
+      DATABASE_URL: postgresql://postgres:4QhFTXiMRpNtm9y24PbVKQI2QDhzUatL@postgres:5432/postgres
+      ACCESS_TOKEN_SECRET: cNqxNc3aVJ5tC9UJEX63xcaGY64rlIIGqKYERS4hvq5Hg0mfPbehL8UHBDBY3erW
+      REFRESH_TOKEN_SECRET: Kr9krwtcawR8ARuytcGlXzNlzMvR4Dkxfr8oEOHIQ1ZjGqw6cAvJcM5Be8jzRVuP
       MAIL_FROM: noreply@localhost
       STORAGE_ENDPOINT: minio
       STORAGE_PORT: '9000'
       STORAGE_REGION: us-east-1
       STORAGE_BUCKET: default
       STORAGE_ACCESS_KEY: minioadmin
-      STORAGE_SECRET_KEY: fEx49Y9zb5sJIZeoO0Pts9XL4l8PGumc
+      STORAGE_SECRET_KEY: 3ULKN4NvJwzBRSXrRIkEGTVRiT47wtB7
       STORAGE_USE_SSL: 'false'
       STORAGE_SKIP_BUCKET_CHECK: 'false'
     restart: unless-stopped

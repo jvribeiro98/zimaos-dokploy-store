@@ -25,8 +25,8 @@ services:
       RUN_HTTP: 'true'
       RUN_WORKERS: 'true'
       TRUST_PROXY: 'true'
-      DATABASE_URL: postgres://reelsaw:cy7ybtQeEmoaZB2QiRQ75G5ge2tay3S1@db:5432/reelsaw
-      BETTER_AUTH_SECRET: bnIucKVE4mUBtlMP1gmBpAAnVLCFMZQa+XceVYolEo5U+b/bindSGvmjZ5s1QaE1
+      DATABASE_URL: postgres://reelsaw:KvIeJNVNBvJLCEEHEb86ilC5mSvkuXdt@db:5432/reelsaw
+      BETTER_AUTH_SECRET: L2Bj9lJKcSCnnB2HpBI6EJIk9L0ygF74WnDWXejZfyGRuz08HT9z7x4/UdhZ29YK
       APP_URL: https://localhost
       SIGNUP_MODE: open
       AI_MODEL: openai:gpt-4o-mini
@@ -54,7 +54,7 @@ services:
       retries: 20
     environment:
       POSTGRES_USER: reelsaw
-      POSTGRES_PASSWORD: cy7ybtQeEmoaZB2QiRQ75G5ge2tay3S1
+      POSTGRES_PASSWORD: KvIeJNVNBvJLCEEHEb86ilC5mSvkuXdt
       POSTGRES_DB: reelsaw
     volumes:
     - pgdata:/var/lib/postgresql/data

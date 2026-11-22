@@ -8,7 +8,7 @@ services:
     - CLOUDCMD_ROOT=/mnt/fs
     - CLOUDCMD_AUTH=true
     - CLOUDCMD_USERNAME=user
-    - CLOUDCMD_PASSWORD=TIpMOe4Yb98pR9T6
+    - CLOUDCMD_PASSWORD=3r6fapIAvMtQQP6D
     volumes:
     - /root:/root
     - /:/mnt/fs

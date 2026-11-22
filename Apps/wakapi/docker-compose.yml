@@ -6,7 +6,7 @@ services:
     expose:
     - '3000'
     environment:
-    - WAKAPI_PASSWORD_SALT=my3rZ25ilbVcFnZG2ipIIJJbvtuthSI48jauBCApJudrO1JAit9zVaetQrKAo8q1
+    - WAKAPI_PASSWORD_SALT=XvGUb7hk1FwusvqPTuXHscNavuF7HOBasXQBa8n18Uk58QoyjnMXXEz56J6A8jA0
     - WAKAPI_DB_TYPE=sqlite3
     - WAKAPI_DB_NAME=/data/wakapi.db
     - WAKAPI_LISTEN_IPV4=0.0.0.0

@@ -8,9 +8,9 @@ services:
     - PORT=8080
     - RUST_LOG=info
     - SSL_PROXY=true
-    - DATABASE_URL=postgres://rustrak:KEPaifCxtcEWxvzaihZyi2UdqiDx3y6K@postgres:5432/rustrak
-    - SESSION_SECRET_KEY=EIz0LIbgerKr6G7oIIAHLAYyS7wsuba2Joz5QwRhGnNFOuK5LKQteV2XFLQBtbH6
-    - CREATE_SUPERUSER=admin@example.com:6j7WVJB2Q4huvMTv
+    - DATABASE_URL=postgres://rustrak:RYpZX9ueT7oA6sF2eelk8jkSArrLaOra@postgres:5432/rustrak
+    - SESSION_SECRET_KEY=NujRFzjLvu46fQa2q8XCQI3ftnKcqHTLtfZX6paMSOfWwHbnj8DjLKtTyQrQeJjq
+    - CREATE_SUPERUSER=admin@example.com:dVc912sPBNrScXfp
     expose:
     - 8080
     depends_on:
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=rustrak
-    - POSTGRES_PASSWORD=KEPaifCxtcEWxvzaihZyi2UdqiDx3y6K
+    - POSTGRES_PASSWORD=RYpZX9ueT7oA6sF2eelk8jkSArrLaOra
     - POSTGRES_DB=rustrak
     volumes:
     - postgres_data:/var/lib/postgresql/data

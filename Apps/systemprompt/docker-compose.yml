@@ -7,7 +7,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://systemprompt:Odxg3NyD0zyqtSmQsYAX07FYfLwyZTGs@postgres:5432/systemprompt
+      DATABASE_URL: postgres://systemprompt:liwYQehwp8vCJbrgLDPIh6aXHa0Ji6cu@postgres:5432/systemprompt
       ANTHROPIC_API_KEY: ''
       OPENAI_API_KEY: ''
       GEMINI_API_KEY: ''
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: systemprompt
-      POSTGRES_PASSWORD: Odxg3NyD0zyqtSmQsYAX07FYfLwyZTGs
+      POSTGRES_PASSWORD: liwYQehwp8vCJbrgLDPIh6aXHa0Ji6cu
       POSTGRES_DB: systemprompt
     volumes:
     - postgres_data:/var/lib/postgresql

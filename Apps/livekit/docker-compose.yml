@@ -7,9 +7,9 @@ services:
     volumes:
     - /DATA/AppData/$AppID/livekit.yaml:/etc/livekit.yaml
     ports:
-    - ${LIVEKIT_PORT}:${LIVEKIT_PORT}
-    - ${TURN_UDP_PORT}:${TURN_UDP_PORT}/udp
-    - ${LIVEKIT_UDP_PORT}:${LIVEKIT_UDP_PORT}/udp
+    - 8080:8080
+    - 8080:8080/udp
+    - 8080:8080/udp
     - target: 7880
       published: "7880"
       protocol: tcp
@@ -56,8 +56,8 @@ services:
     volumes:
     - /DATA/AppData/$AppID/ingress.yaml:/etc/ingress.yaml
     ports:
-    - ${RTMP_PORT}:${RTMP_PORT}
-    - ${INGRESS_UDP_PORT}:${INGRESS_UDP_PORT}/udp
+    - 8080:8080
+    - 8080:8080/udp
     depends_on:
       livekit:
         condition: service_healthy

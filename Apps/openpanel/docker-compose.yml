@@ -15,7 +15,7 @@ services:
     environment:
     - POSTGRES_DB=openpanel
     - POSTGRES_USER=openpanel
-    - POSTGRES_PASSWORD=3HW4uyAsho5oxXTcboHC6yNX5uismSvt
+    - POSTGRES_PASSWORD=gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1
   op-kv:
     image: redis:7.2.5-alpine
     restart: always
@@ -62,11 +62,11 @@ services:
       SELF_HOSTED: 'true'
       API_URL: http://localhost/api
       DASHBOARD_URL: http://localhost
-      DATABASE_URL: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      DATABASE_URL_DIRECT: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      REDIS_URL: redis://default:hHlycNQg70hWZrhjEZgmznQCbkoQZb6H@op-kv:6379
+      DATABASE_URL: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      DATABASE_URL_DIRECT: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      REDIS_URL: redis://default:yhintvVwbghi2Lf9kRgxWfNH8UJq2RRu@op-kv:6379
       CLICKHOUSE_URL: http://op-ch:8123/openpanel
-      COOKIE_SECRET: N54wZ74ZBZbq35DVfXSqXO9R7qCCT0LqoDANqAZtFrQ=
+      COOKIE_SECRET: ib4luzixduNNByDNzHveQEABdUenTfby8H0sQPhfy4c=
       ALLOW_REGISTRATION: 'true'
       ALLOW_INVITATION: 'true'
       EMAIL_SENDER: ''
@@ -96,9 +96,9 @@ services:
       SELF_HOSTED: 'true'
       API_URL: http://localhost/api
       DASHBOARD_URL: http://localhost
-      DATABASE_URL: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      DATABASE_URL_DIRECT: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      REDIS_URL: redis://default:hHlycNQg70hWZrhjEZgmznQCbkoQZb6H@op-kv:6379
+      DATABASE_URL: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      DATABASE_URL_DIRECT: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      REDIS_URL: redis://default:yhintvVwbghi2Lf9kRgxWfNH8UJq2RRu@op-kv:6379
       CLICKHOUSE_URL: http://op-ch:8123/openpanel
     healthcheck:
       test:
@@ -122,9 +122,9 @@ services:
       SELF_HOSTED: 'true'
       API_URL: http://localhost/api
       DASHBOARD_URL: http://localhost
-      DATABASE_URL: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      DATABASE_URL_DIRECT: postgres://openpanel:3HW4uyAsho5oxXTcboHC6yNX5uismSvt@op-db:5432/openpanel?schema=public
-      REDIS_URL: redis://default:hHlycNQg70hWZrhjEZgmznQCbkoQZb6H@op-kv:6379
+      DATABASE_URL: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      DATABASE_URL_DIRECT: postgres://openpanel:gGO2e3ifItJUdvlR6hgJuVZd65gMbZS1@op-db:5432/openpanel?schema=public
+      REDIS_URL: redis://default:yhintvVwbghi2Lf9kRgxWfNH8UJq2RRu@op-kv:6379
       CLICKHOUSE_URL: http://op-ch:8123/openpanel
     healthcheck:
       test:

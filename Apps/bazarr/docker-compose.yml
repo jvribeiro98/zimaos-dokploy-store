@@ -11,8 +11,8 @@ services:
     - TZ=UTC
     volumes:
     - config:/config
-    - ${MOVIES_PATH}:/movies
-    - ${TV_PATH}:/tv
+    - /DATA/AppData/bazarr/data:/movies
+    - /DATA/AppData/bazarr/data:/tv
     ports:
     - target: 6767
       published: "6767"

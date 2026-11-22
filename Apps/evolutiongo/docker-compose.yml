@@ -6,9 +6,9 @@ services:
     environment:
     - SERVER_PORT=8080
     - CLIENT_NAME=Evolution
-    - GLOBAL_API_KEY=OQHz8wtjXUo9DE4GIMJ+4toSMusFlApCfMtccP9mIty0hn+ywdwcCqik6caS5Dp47Dw49cfZiRV1GADBwGpAGg==
-    - POSTGRES_AUTH_DB=postgres://postgresql:3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE@evolution-postgres:5432/evogo_auth?sslmode=disable
-    - POSTGRES_USERS_DB=postgres://postgresql:3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE@evolution-postgres:5432/evogo_users?sslmode=disable
+    - GLOBAL_API_KEY=4xkM4eV4ijZ3mgB+YQlBGYBrCXkK3G1vnhf0dEH2w7GCNc3xE/7NERK20JnsZLy/Rj510bChen6JciKxI10cRw==
+    - POSTGRES_AUTH_DB=postgres://postgresql:jcLT9mVtUuxuq3tZUoikhZIGSXM9kJRd@evolution-postgres:5432/evogo_auth?sslmode=disable
+    - POSTGRES_USERS_DB=postgres://postgresql:jcLT9mVtUuxuq3tZUoikhZIGSXM9kJRd@evolution-postgres:5432/evogo_users?sslmode=disable
     - DATABASE_SAVE_MESSAGES=false
     - WADEBUG=INFO
     - LOGTYPE=console
@@ -34,7 +34,7 @@ services:
     environment:
     - POSTGRES_DB=evolution
     - POSTGRES_USER=postgresql
-    - POSTGRES_PASSWORD=3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE
+    - POSTGRES_PASSWORD=jcLT9mVtUuxuq3tZUoikhZIGSXM9kJRd
     volumes:
     - evolution-postgres-data:/var/lib/postgresql/data
 volumes:

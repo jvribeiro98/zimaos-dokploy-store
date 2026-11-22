@@ -3,7 +3,7 @@ services:
   browserless:
     image: ghcr.io/browserless/chromium:latest
     environment:
-      TOKEN: EubiLtKuFoOmrIzl
+      TOKEN: Xf8GeRV8o8yE14ql
     expose:
     - 3000
     healthcheck:

@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
     - PORT=7575
-    - SESSION_SECRET=MfDgOaC6pBVvyZpI4iqNwIgK01D8UfMoZZ3BNb34g38UmetNXurWgiNAG9B9QH67
+    - SESSION_SECRET=u23rdXb1eDnHVu0rQlz7q8wByHZ1hRKXDyFOBL3dOAi22xpnEco5ooLIpWcq5PbL
     - NODE_ENV=production
     - TZ=Asia/Jakarta
     volumes:

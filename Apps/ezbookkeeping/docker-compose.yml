@@ -4,10 +4,10 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=avzG7og8jcyb8lDwJ1uMNK6ZMT3mOdfT
+    - MYSQL_ROOT_PASSWORD=aA8yMU6M1d00ZueECJwfY9VhRE8IKOd3
     - MYSQL_DATABASE=ezbookkeeping
     - MYSQL_USER=ezbookkeeping
-    - MYSQL_PASSWORD=q1kXGyQJUL6OrzHY9mNA9pTfKYbwlX5P
+    - MYSQL_PASSWORD=cNFfFbqjopSoTO7Odq15A8lk99bjkizP
     volumes:
     - mysql-data:/var/lib/mysql
   ezbookkeeping:
@@ -22,9 +22,9 @@ services:
     - EBK_DATABASE_HOST=mysql:3306
     - EBK_DATABASE_NAME=ezbookkeeping
     - EBK_DATABASE_USER=ezbookkeeping
-    - EBK_DATABASE_PASSWD=q1kXGyQJUL6OrzHY9mNA9pTfKYbwlX5P
+    - EBK_DATABASE_PASSWD=cNFfFbqjopSoTO7Odq15A8lk99bjkizP
     - EBK_LOG_MODE=file
-    - EBK_SECURITY_SECRET_KEY=pvdWW4IsU7oZ4qDSKhmwsbwqWcIVsJ7u7U40uQkpgVFIKtTaddzrC5r9Oj4NUA5z
+    - EBK_SECURITY_SECRET_KEY=f8JclmxI6gNTTEherrmxHm0atDJu1xWTcS40SZ69HwwwyDMQY7tDASEzZT7Ltwyb
     volumes:
     - /etc/localtime:/etc/localtime:ro
     - storage:/ezbookkeeping/storage

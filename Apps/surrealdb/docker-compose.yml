@@ -4,7 +4,7 @@ services:
     image: surrealdb/surrealdb:v2.3.10
     environment:
       SURREAL_USER: admin
-      SURREAL_PASS: otOTHUwSTp9uSLlVSqprqMAAewcmAtCY
+      SURREAL_PASS: LzFy8GNzmkxsddthbODiuKaUfTH5wK6r
     volumes:
     - db_data:/usr/app/data
     user: root

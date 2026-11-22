@@ -4,7 +4,7 @@ services:
     image: linuxserver/calibre:7.26.0
     restart: unless-stopped
     environment:
-    - PASSWORD=SwUf1JYJCWRHXIgX
+    - PASSWORD=P0lzZJ5xRijNGqBu
     - TZ=Etc/UTC
     - PUID=1000
     - PGID=1000

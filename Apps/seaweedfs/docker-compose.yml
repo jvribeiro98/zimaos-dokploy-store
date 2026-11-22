@@ -87,7 +87,7 @@ services:
       '
     environment:
     - AWS_ACCESS_KEY_ID=admin
-    - AWS_SECRET_ACCESS_KEY=GPSg3qaLbl4cmlzI
+    - AWS_SECRET_ACCESS_KEY=MP86j0MZgry1aFOy
     restart: unless-stopped
     deploy:
       resources:

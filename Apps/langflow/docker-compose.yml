@@ -10,7 +10,7 @@ services:
     depends_on:
     - postgres-langflow
     environment:
-    - LANGFLOW_DATABASE_URL=postgresql://langflow:rtPxk70CgZvTgXhlalJmsOVdKxXvTKsC@postgres-langflow:5432/langflow
+    - LANGFLOW_DATABASE_URL=postgresql://langflow:Hx3X9PXbKyFDLYfur7kJjKfIjjtGdzI1@postgres-langflow:5432/langflow
     - LANGFLOW_CONFIG_DIR=/app/config
     - LANGFLOW_SUPERUSER=email@domain.com
     - LANGFLOW_SUPERUSER_PASSWORD=changepassword
@@ -39,7 +39,7 @@ services:
       retries: 10
     environment:
       POSTGRES_USER: langflow
-      POSTGRES_PASSWORD: rtPxk70CgZvTgXhlalJmsOVdKxXvTKsC
+      POSTGRES_PASSWORD: Hx3X9PXbKyFDLYfur7kJjKfIjjtGdzI1
       POSTGRES_DB: langflow
     volumes:
     - postgres-data:/var/lib/postgresql/data

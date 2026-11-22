@@ -8,8 +8,8 @@ services:
     - '8787'
     environment:
       PONOS_WEB_EMAIL: admin@localhost
-      PONOS_WEB_PASSWORD: 1hvJzCAQVUM5zM6WhPFknRjOaEpydlP8
-      PONOS_WEB_TOKEN: ESS1MvT5Apc4ZQDVTQxvhtwqgB1e7vHyC0bbrP4vhvYxxDCm
+      PONOS_WEB_PASSWORD: whXuVolhZte6vB9zZCcxbe3Vxk8w5kaw
+      PONOS_WEB_TOKEN: aTWDCAH7W1EJUk0EbF4jgVFp10pZJ73mJ5VjAuwhRZRxABg7
       PONOS_LANGUAGE: en
       TZ: UTC
       CLAUDE_CODE_OAUTH_TOKEN: ''

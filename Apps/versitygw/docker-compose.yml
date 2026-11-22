@@ -4,8 +4,8 @@ services:
     image: versity/versitygw:v1.8.0
     restart: unless-stopped
     environment:
-    - ROOT_ACCESS_KEY=1b3bf8185f86f279db800de4a889fd25
-    - ROOT_SECRET_KEY=j1gYEtf8Wt2TtDuIsgb29cxCxzPFHDVK
+    - ROOT_ACCESS_KEY=13024536f2e26d54ebb3c6ac6b899eed
+    - ROOT_SECRET_KEY=w8CK7ojyaA3o8qCS2CRW0CMSiVjOUXgx
     - VGW_BACKEND=posix
     - VGW_PORT=:7070
     - VGW_BACKEND_ARGS=/data/s3

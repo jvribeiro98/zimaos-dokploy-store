@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - PGADMIN_DEFAULT_EMAIL=user@example.com
-    - PGADMIN_DEFAULT_PASSWORD=o7J8MhCyxXP5au9Q
+    - PGADMIN_DEFAULT_PASSWORD=S7Y60scRwuEGpd7r
     - PGADMIN_CONFIG_SERVER_MODE=False
     - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
     volumes:

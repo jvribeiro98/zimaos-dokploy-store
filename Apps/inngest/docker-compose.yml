@@ -11,9 +11,9 @@ services:
     environment:
     - INNGEST_PORT=8288
     - INNGEST_HOST=0.0.0.0
-    - INNGEST_EVENT_KEY=8556cbd32c7b1363b89884e5bdccbbd54081e833295dcd016f5189dc5f224d1a
-    - INNGEST_SIGNING_KEY=148cb8a9922a540999802e91b7adb00b241ba149bf3e0d04efa480e987500c24
-    - INNGEST_POSTGRES_URI=postgresql://inngest:fpAIgJvcGOxRKEg9dStK9wPt@postgres:5432/inngest?sslmode=disable
+    - INNGEST_EVENT_KEY=f7bb0aecca866475b48d339d4fd5f51dc3f6f095b0756e69377ff422575eaf9e
+    - INNGEST_SIGNING_KEY=244445f408d19bf9667fe11aed4c1691bcd64740c0375930964b068517450ced
+    - INNGEST_POSTGRES_URI=postgresql://inngest:2klcgfUcmLLUgJNboj2ApRWx@postgres:5432/inngest?sslmode=disable
     - INNGEST_REDIS_URI=redis://redis:6379
     - INNGEST_POLL_INTERVAL=60
     - INNGEST_QUEUE_WORKERS=100
@@ -51,7 +51,7 @@ services:
     environment:
     - POSTGRES_DB=inngest
     - POSTGRES_USER=inngest
-    - POSTGRES_PASSWORD=fpAIgJvcGOxRKEg9dStK9wPt
+    - POSTGRES_PASSWORD=2klcgfUcmLLUgJNboj2ApRWx
     - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     - PGUSER=inngest
     volumes:

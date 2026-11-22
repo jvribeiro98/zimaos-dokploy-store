@@ -4,8 +4,8 @@ services:
     image: coollabsio/openclaw:2026.2.6
     environment:
     - AUTH_USERNAME=dokploy
-    - AUTH_PASSWORD=lopCffVkCJyuWhSN4MJ7wpiOsTGD2KNi
-    - OPENCLAW_GATEWAY_TOKEN=vTi0z5BnpBl6MWTpKT16DGWk8c8i3fUH
+    - AUTH_PASSWORD=OvgOOlaaBQKgkcbjN9dApMk3RSoeLOax
+    - OPENCLAW_GATEWAY_TOKEN=uyCvpPuayNyNkMvbLEjcktVIxt7ptE21
     - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     - OPENAI_API_KEY=${OPENAI_API_KEY}
     - OPENROUTER_API_KEY=YOUR-API-KEY

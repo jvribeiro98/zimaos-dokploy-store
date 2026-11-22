@@ -7,11 +7,11 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: user=miniflux password=ihz8iuqYGj3h5hMLCBrLcsL3V0GATKCM dbname=miniflux host=db sslmode=disable
+      DATABASE_URL: user=miniflux password=PbkeN1wAk9aPqd0ZeGuZ7BZiYJG6OS1I dbname=miniflux host=db sslmode=disable
       RUN_MIGRATIONS: '1'
       CREATE_ADMIN: '1'
       ADMIN_USERNAME: admin
-      ADMIN_PASSWORD: tZzBJzSmv9Gv1iYulMTHceVWrPPHb3uT
+      ADMIN_PASSWORD: 6fZWrdz0i6PFFessliHjcbKlhMptCXrc
       BASE_URL: https://localhost
     expose:
     - '8080'
@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: miniflux
-      POSTGRES_PASSWORD: ihz8iuqYGj3h5hMLCBrLcsL3V0GATKCM
+      POSTGRES_PASSWORD: PbkeN1wAk9aPqd0ZeGuZ7BZiYJG6OS1I
       POSTGRES_DB: miniflux
     expose:
     - '5432'

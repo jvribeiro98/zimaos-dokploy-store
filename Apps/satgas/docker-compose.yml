@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       SATGAS_PUBLIC_URL: http://localhost
-      SATGAS_TOKEN: NQ63NOtLsu96rjTKIKnOBdgkueKybc1M
+      SATGAS_TOKEN: S08k6dDWVfQg3UD517blGa8fjgY81eyE
     volumes:
     - satgas-data:/data
     - satgas-home:/home/node

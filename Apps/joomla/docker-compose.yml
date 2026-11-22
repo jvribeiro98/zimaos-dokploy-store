@@ -11,12 +11,12 @@ services:
     environment:
       JOOMLA_DB_HOST: joomla-db
       JOOMLA_DB_USER: joomla
-      JOOMLA_DB_PASSWORD: d5myfvtRNAzrhjOiomVyN02hZr4c8XT3
+      JOOMLA_DB_PASSWORD: oHDhI0gI0qxJDEgP1F1FoSt57N49YJPv
       JOOMLA_DB_NAME: joomla
       JOOMLA_SITE_NAME: Joomla
       JOOMLA_ADMIN_USER: Joomla Administrator
       JOOMLA_ADMIN_USERNAME: admin
-      JOOMLA_ADMIN_PASSWORD: DDyZN1vX37JeA0guAaS6wHsu
+      JOOMLA_ADMIN_PASSWORD: lIB4tCRHZLjRqm0ANMan3Gas
       JOOMLA_ADMIN_EMAIL: admin@example.com
     volumes:
     - joomla-data:/var/www/html
@@ -30,7 +30,7 @@ services:
     environment:
       MARIADB_DATABASE: joomla
       MARIADB_USER: joomla
-      MARIADB_PASSWORD: d5myfvtRNAzrhjOiomVyN02hZr4c8XT3
+      MARIADB_PASSWORD: oHDhI0gI0qxJDEgP1F1FoSt57N49YJPv
       MARIADB_RANDOM_ROOT_PASSWORD: '1'
     volumes:
     - joomla-db:/var/lib/mysql

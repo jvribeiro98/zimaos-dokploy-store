@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_DATABASE: panel
       MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: BbPl1Pttj7Q3tCWiqY5J0C2J
-      MYSQL_ROOT_PASSWORD: PNJMORW2AapEOCELTMYTS4I5
+      MYSQL_PASSWORD: K1PFNikw0rAT0j54angcCEM1
+      MYSQL_ROOT_PASSWORD: H2vRpW3ZED9OzZpiI7QSDFwq
     healthcheck:
       test:
       - CMD
@@ -42,13 +42,13 @@ services:
       APP_ENV: production
       APP_ENVIRONMENT_ONLY: 'false'
       APP_SERVICE_AUTHOR: admin@localhost
-      APP_SECRET: +6yCX62OEuRUW1OocQB768tt9Ob1hrnvzgFxSQ40Ba8=
+      APP_SECRET: Wt8uP/6H1ylCLF5QGbSbMfgBSf9yP3ugfeRPecewXFg=
       DB_CONNECTION: mysql
       DB_HOST: database
       DB_PORT: '3306'
       DB_DATABASE: panel
       DB_USERNAME: pterodactyl
-      DB_PASSWORD: BbPl1Pttj7Q3tCWiqY5J0C2J
+      DB_PASSWORD: K1PFNikw0rAT0j54angcCEM1
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       QUEUE_DRIVER: redis

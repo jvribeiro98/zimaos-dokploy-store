@@ -175,7 +175,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${CONFIGURE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -205,7 +205,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${CREATE_SITE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -227,10 +227,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: 7RoAKbeWpsVEiAhCmJBklIt0FpdUqbLP
+      ADMIN_PASSWORD: O5gSkRIPlNVGEWxsoimKkH4Y1rZBAX2t
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: lQjA2bbIL1eY320YTZWx7ESHSbnvUUFK
+      DB_ROOT_PASSWORD: Kh1Uiuzx6ogGv5phjuVbS8qD0GBYYz2S
       INSTALL_APP_ARGS: --install-app lms
       ENABLE_SCHEDULER: '1'
     restart: unless-stopped
@@ -239,7 +239,7 @@ services:
     pull_policy: ${PULL_POLICY:-always}
     deploy:
       mode: replicated
-      replicas: ${MIGRATE:-0}
+      replicas: 1
       restart_policy:
         condition: none
     entrypoint:
@@ -259,7 +259,7 @@ services:
     image: mariadb:${DB_VERSION:-11.8.6}
     deploy:
       mode: replicated
-      replicas: ${ENABLE_DB:-0}
+      replicas: 1
       restart_policy:
         condition: always
     healthcheck:
@@ -277,7 +277,7 @@ services:
     - --collation-server=utf8mb4_unicode_ci
     - --skip-character-set-client-handshake
     environment:
-    - MARIADB_ROOT_PASSWORD=lQjA2bbIL1eY320YTZWx7ESHSbnvUUFK
+    - MARIADB_ROOT_PASSWORD=Kh1Uiuzx6ogGv5phjuVbS8qD0GBYYz2S
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

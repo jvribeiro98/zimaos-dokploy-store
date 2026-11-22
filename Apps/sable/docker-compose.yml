@@ -7,8 +7,8 @@ services:
     - 1.1.1.1
     - 9.9.9.9
     ports:
-    - ${SABLE_DNS_PORT:-1053}:8053/tcp
-    - ${SABLE_DNS_PORT:-1053}:8053/udp
+    - '1053'
+    - '1053'
     - target: 5380
       published: "5380"
       protocol: tcp

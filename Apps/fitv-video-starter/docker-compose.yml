@@ -9,7 +9,7 @@ services:
     environment:
     - PORT=3000
     - FREEIMAGETOVIDEO_API_KEY=
-    - ACCESS_PASSWORD=549yvgrZ85gb0usI
+    - ACCESS_PASSWORD=pW33j9ieK4vSI9Wu
     healthcheck:
       test:
       - CMD

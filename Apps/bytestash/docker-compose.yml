@@ -7,7 +7,7 @@ services:
     - '5000'
     environment:
     - BASE_PATH=
-    - JWT_SECRET=Sqpf8WkS4FL21eVEdGm1lR83iHohKFHl
+    - JWT_SECRET=bN9PRs8QUIqFGuciiB0RB5QPX2nTQffZ
     - TOKEN_EXPIRY=24h
     - ALLOW_NEW_ACCOUNTS=true
     - DEBUG=true

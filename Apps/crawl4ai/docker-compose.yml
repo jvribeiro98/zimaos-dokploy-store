@@ -8,7 +8,7 @@ services:
     - 11235
     environment:
     - LLM_PROVIDER=openai/gpt-4o-mini
-    - OPENAI_API_KEY=vzAhJZjzWLnJ1REuLB3oBVA0vTG2JT8UDicJVKHk3Wkxty2W
+    - OPENAI_API_KEY=B2PG4f31Fx61G2H0kxV9E5y3gHyHGK0mJsjs7W1bzCApyfwj
     - ANTHROPIC_API_KEY=
     - DEEPSEEK_API_KEY=
     - GROQ_API_KEY=

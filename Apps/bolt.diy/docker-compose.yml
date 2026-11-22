@@ -1,4 +1,4 @@
-name: bolt.diy
+name: bolt-diy
 services:
   app:
     image: ghcr.io/stackblitz-labs/bolt.diy:latest
@@ -29,7 +29,7 @@ services:
       published: "5173"
       protocol: tcp
 x-casaos:
-  id: com.dokploy.bolt.diy
+  id: com.dokploy.bolt-diy
   main: app
   index: /
   port_map: "5173"

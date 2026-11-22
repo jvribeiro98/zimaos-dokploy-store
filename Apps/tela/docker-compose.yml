@@ -22,9 +22,9 @@ services:
     restart: unless-stopped
     environment:
     - TELA_PUBLIC_BASE_URL=https://localhost
-    - TELA_DATABASE_URL=postgres://tela:O9UIvuZkNqRtZ3KetSXxqSAgQab5QDWJ@postgres:5432/tela?sslmode=disable
-    - TELA_SHARE_SECRET=iDERvabqV43gMkxH0aUDCzVScjWhXwHTzFVXFm8rFNRWGplFKcoWPqwAuIRNHuLo
-    - TELA_API_KEY_SECRET=AlOqsTpanULRvi3k63FKCpjX8CbmLesNyH2WEgC4OSLIs9q5VhqciAqDGCH6UiBc
+    - TELA_DATABASE_URL=postgres://tela:i8EIGov8bzJ2qnVxZymNgI1tepxD7MKH@postgres:5432/tela?sslmode=disable
+    - TELA_SHARE_SECRET=xR1mtWMKaNcmcUumUmui6YLDTvQ4PxMevWFQX7lkDDgDoZIO9f9ixyvqU8m55oGk
+    - TELA_API_KEY_SECRET=ZtenKe00WOIo6phnLVw1p7vgngMUaHnPPo9HYmtNXPOHLAe2XWx4zoajTENCIt0j
     - TELA_DECK_URL=http://deck:3344
     - TELA_GOTENBERG_URL=http://gotenberg:3000
     - TELA_PDF_RENDER_BASE_URL=http://proxy
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=tela
-    - POSTGRES_PASSWORD=O9UIvuZkNqRtZ3KetSXxqSAgQab5QDWJ
+    - POSTGRES_PASSWORD=i8EIGov8bzJ2qnVxZymNgI1tepxD7MKH
     - POSTGRES_DB=tela
     healthcheck:
       test:

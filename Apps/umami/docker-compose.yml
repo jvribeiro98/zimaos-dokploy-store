@@ -14,9 +14,9 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://umami:zPfCTmlK31rWZZzK7EJggWMppqJFikFV@db:5432/umami
+      DATABASE_URL: postgresql://umami:ld0diCsMJyvXo3WemXX1Ao2wW14nbu2N@db:5432/umami
       DATABASE_TYPE: postgresql
-      APP_SECRET: oRBeBNE3UO7lmkarJsqvig+2TZVRbv6Pa2LFW3mwRNrCLNKR6oN+izviuwHX+eNqGRJLdMKZyETPeevDj6TMAg==
+      APP_SECRET: c2wRYauR/Q0dYZuGKgDtu9Ha1FvBzzfmD0brFoEvvltdqrChS/G01oeOwCxqQTdpNK58SAMdIFuS9FYookk9vA==
     ports:
     - target: 3000
       published: "3000"
@@ -36,7 +36,7 @@ services:
     environment:
       POSTGRES_DB: umami
       POSTGRES_USER: umami
-      POSTGRES_PASSWORD: zPfCTmlK31rWZZzK7EJggWMppqJFikFV
+      POSTGRES_PASSWORD: ld0diCsMJyvXo3WemXX1Ao2wW14nbu2N
 volumes:
   db-data: null
 x-casaos:

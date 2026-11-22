@@ -9,8 +9,8 @@ services:
     environment:
       MYSQL_DATABASE: panel
       MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: KAiznLjFA4L4BnCwaZjbpwbmc19K8DaC
-      MYSQL_ROOT_PASSWORD: xWBu0ChaZ3ckFMeYJHQtJAgbgI6Vjiz6
+      MYSQL_PASSWORD: UgeQHdo1ACgeFJGaSnM9gBFhSckDg9C3
+      MYSQL_ROOT_PASSWORD: Uj2S2DiBsWed1KaRYKTrhs1aMceD1LAm
   cache:
     image: redis:alpine
     restart: always
@@ -35,7 +35,7 @@ services:
       REDIS_HOST: cache
       DB_HOST: database
       DB_PORT: '3306'
-      DB_PASSWORD: KAiznLjFA4L4BnCwaZjbpwbmc19K8DaC
+      DB_PASSWORD: UgeQHdo1ACgeFJGaSnM9gBFhSckDg9C3
       DB_CONNECTION: mariadb
     ports:
     - target: 80

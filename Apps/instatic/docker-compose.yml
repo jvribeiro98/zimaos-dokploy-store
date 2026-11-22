@@ -14,8 +14,6 @@ services:
   instatic:
     image: ghcr.io/corebunch/instatic:0.0.18
     restart: unless-stopped
-    env_file:
-    - .env
     depends_on:
       instatic-init:
         condition: service_completed_successfully

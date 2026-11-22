@@ -3,10 +3,10 @@ services:
   db:
     image: mariadb:11.4
     environment:
-      MYSQL_ROOT_PASSWORD: ESzGGBn4ebVTZ5C4
+      MYSQL_ROOT_PASSWORD: fl3HRBwFYhZyZey4
       MYSQL_DATABASE: ojs
       MYSQL_USER: ojs
-      MYSQL_PASSWORD: pxSmR0lDaYRoORx1
+      MYSQL_PASSWORD: 2onbA19Jp2FtLhMx
     volumes:
     - ojs-db-data:/var/lib/mysql
     restart: unless-stopped

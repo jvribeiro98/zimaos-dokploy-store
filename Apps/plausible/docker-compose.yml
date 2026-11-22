@@ -32,8 +32,6 @@ services:
     - plausible-data:/var/lib/plausible
     environment:
     - TMPDIR=/var/lib/plausible/tmp
-    env_file:
-    - .env
     ports:
     - target: 8000
       published: "8000"

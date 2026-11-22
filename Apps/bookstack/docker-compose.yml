@@ -11,9 +11,9 @@ services:
     - APP_URL=http://localhost
     - DB_HOST=bookstack-db
     - DB_USERNAME=mariadb
-    - DB_PASSWORD=HyxsSIKh8xVXWDPr
+    - DB_PASSWORD=gH5TThxn9cEXWoE9
     - DB_DATABASE=bookstack
-    - APP_KEY=EOnrilZAABvXcyqmgYmjGXqx39lKSBwS
+    - APP_KEY=S6V2vUyZ3qk5dc2iIsigMp85Ml2srn1F
     volumes:
     - config:/config
     depends_on:
@@ -26,10 +26,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=HyxsSIKh8xVXWDPr
+    - MYSQL_ROOT_PASSWORD=gH5TThxn9cEXWoE9
     - MYSQL_DATABASE=bookstack
     - MYSQL_USER=mariadb
-    - MYSQL_PASSWORD=HyxsSIKh8xVXWDPr
+    - MYSQL_PASSWORD=gH5TThxn9cEXWoE9
     volumes:
     - db_data:/var/lib/mysql
 volumes:

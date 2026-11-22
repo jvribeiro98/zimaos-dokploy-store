@@ -9,7 +9,7 @@ services:
     - pocketbase-data:/pocketbase
     environment:
     - POCKETBASE_ADMIN_EMAIL=admin@example.com
-    - POCKETBASE_ADMIN_PASSWORD=ZUgtCMhUcYZ2onbI1uU2GxZqKAPXrdka
+    - POCKETBASE_ADMIN_PASSWORD=1dSJGX8vLZhsKeYoHFVmdH1pKja3QtPe
     - POCKETBASE_ADMIN_UPSERT=true
     - POCKETBASE_PORT_NUMBER=8090
     healthcheck:
