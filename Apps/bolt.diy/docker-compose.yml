@@ -1,0 +1,54 @@
+name: bolt.diy
+services:
+  app:
+    image: ghcr.io/stackblitz-labs/bolt.diy:latest
+    environment:
+    - NODE_ENV=production
+    - COMPOSE_PROFILES=production
+    - PORT=5173
+    - GROQ_API_KEY=
+    - HuggingFace_API_KEY=
+    - OPENAI_API_KEY=
+    - ANTHROPIC_API_KEY=
+    - OPEN_ROUTER_API_KEY=
+    - GOOGLE_GENERATIVE_AI_API_KEY=
+    - OLLAMA_API_BASE_URL=http://127.0.0.1:11434
+    - XAI_API_KEY=
+    - TOGETHER_API_KEY=
+    - TOGETHER_API_BASE_URL=
+    - AWS_BEDROCK_CONFIG=
+    - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-info}
+    - DEFAULT_NUM_CTX=32768
+    - RUNNING_IN_DOCKER=true
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    command: pnpm run dockerstart
+    restart: unless-stopped
+    ports:
+    - target: 5173
+      published: "5173"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.bolt.diy
+  main: app
+  index: /
+  port_map: "5173"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bolt.diy/icon.jpg
+  title:
+    en_US: bolt.diy
+  tagline:
+    en_US: Prompt, run, edit, and deploy full-stack web applications using any LLM you want!
+  description:
+    en_US: Prompt, run, edit, and deploy full-stack web applications using any LLM you want!
+  author: Dokploy Community
+  developer: bolt.diy
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://stackblitz-labs.github.io/bolt.diy/
+  repo: https://github.com/stackblitz-labs/bolt.diy
+  docs: https://stackblitz-labs.github.io/bolt.diy/

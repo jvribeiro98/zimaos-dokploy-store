@@ -1,0 +1,59 @@
+name: peppermint
+services:
+  peppermint-postgres:
+    image: postgres:latest
+    restart: always
+    volumes:
+    - peppermint-postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: peppermint
+      POSTGRES_PASSWORD: d38OfTvmcuHcY82kJe7mQ5DCP6oKk4dn
+      POSTGRES_DB: peppermint
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U peppermint
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  peppermint-app:
+    image: pepperlabs/peppermint:latest
+    restart: always
+    depends_on:
+      peppermint-postgres:
+        condition: service_healthy
+    environment:
+      DB_USERNAME: peppermint
+      DB_PASSWORD: d38OfTvmcuHcY82kJe7mQ5DCP6oKk4dn
+      DB_HOST: peppermint-postgres
+      SECRET: wMT/RKakEhIFu5Yu3aj0iG3YJzcJUEaEf/rC8HbfmB4=
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  peppermint-postgres-data: null
+x-casaos:
+  id: com.dokploy.peppermint
+  main: peppermint-app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/peppermint/icon.svg
+  title:
+    en_US: Peppermint
+  tagline:
+    en_US: Peppermint is a modern, open-source API development platform that helps you build, test...
+  description:
+    en_US: Peppermint is a modern, open-source API development platform that helps you build, test and document your APIs.
+  author: Dokploy Community
+  developer: Peppermint
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://peppermint.sh/
+  repo: https://github.com/Peppermint-Lab/peppermint
+  docs: https://docs.peppermint.sh/

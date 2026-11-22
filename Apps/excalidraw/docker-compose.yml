@@ -1,0 +1,44 @@
+name: excalidraw
+services:
+  excalidraw:
+    restart: unless-stopped
+    image: excalidraw/excalidraw:latest
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - --quiet
+      - http://localhost
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.excalidraw
+  main: excalidraw
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/excalidraw/icon.jpg
+  title:
+    en_US: Excalidraw
+  tagline:
+    en_US: Excalidraw is an open-source whiteboard tool for sketching hand-drawn-style diagrams
+  description:
+    en_US: Excalidraw is an open-source whiteboard tool for sketching hand-drawn-style diagrams. Self-host it on your own
+      server with Dokploy, which deploys Excalidraw as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Excalidraw
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://excalidraw.com/
+  repo: https://github.com/excalidraw/excalidraw
+  docs: https://docs.excalidraw.com/

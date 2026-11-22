@@ -1,0 +1,43 @@
+name: couchdb
+services:
+  couchdb:
+    image: couchdb:latest
+    expose:
+    - '5984'
+    volumes:
+    - couchdb-data:/opt/couchdb/data
+    environment:
+    - COUCHDB_USER=mxrK78TYvb0y9s7U
+    - COUCHDB_PASSWORD=eEgzuvI6xbaowUpGC5Nf5VPyJ0tldAwX
+    restart: unless-stopped
+    ports:
+    - target: 5984
+      published: "5984"
+      protocol: tcp
+volumes:
+  couchdb-data:
+    driver: local
+x-casaos:
+  id: com.dokploy.couchdb
+  main: couchdb
+  index: /
+  port_map: "5984"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/couchdb/icon.png
+  title:
+    en_US: CouchDB
+  tagline:
+    en_US: CouchDB is a document-oriented NoSQL database that excels at replication and horizontal...
+  description:
+    en_US: CouchDB is a document-oriented NoSQL database that excels at replication and horizontal scaling.
+  author: Dokploy Community
+  developer: CouchDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://couchdb.apache.org/
+  repo: https://github.com/apache/couchdb
+  docs: https://docs.couchdb.org/en/stable/

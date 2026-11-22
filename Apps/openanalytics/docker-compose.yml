@@ -1,0 +1,381 @@
+name: openanalytics
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openanalytics
+      POSTGRES_DB: openanalytics
+      POSTGRES_PASSWORD: 8hxJdsYxsgRP3MmlyUTqi0WNdsu6ilyG
+    volumes:
+    - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  clickhouse:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/clickhouse:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_INGEST_PASSWORD: 2ZPUwh8Pgnr5JmCuOu8VwWdFiq67zuGZ
+      CLICKHOUSE_READ_PASSWORD: JBzZwSKwsUPsD3S0wXWdVn185SIw89O1
+      CLICKHOUSE_MAINTENANCE_PASSWORD: ThQRUCUCNcZyVQtM8CKeyjRCidkAluuB
+      CLICKHOUSE_MIGRATION_PASSWORD: 2RLygtBvKBGmUhzwx3XZYJ121u6nMAvh
+    volumes:
+    - ch-data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test:
+      - CMD
+      - clickhouse-client
+      - --query
+      - SELECT 1
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+  valkey-queue:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/valkey:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: SYRmTVPinMa0gcoVhCzDbYnKenpqjXPc
+      OA_VALKEY_CONF: /usr/local/etc/valkey/valkey-queue.conf
+    volumes:
+    - valkey-queue-data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - REDISCLI_AUTH="$$VALKEY_PASSWORD" valkey-cli ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  valkey-realtime:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/valkey:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv
+      OA_VALKEY_CONF: /usr/local/etc/valkey/valkey-realtime.conf
+    volumes:
+    - valkey-realtime-data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - REDISCLI_AUTH="$$VALKEY_PASSWORD" valkey-cli ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  keygen:
+    image: alpine:3.21
+    restart: 'no'
+    command:
+    - sh
+    - -ec
+    - "apk add --no-cache openssl >/dev/null\nmkdir -p /keys/api /keys/gateway /keys/realtime /keyring\nfor entry in \"query\
+      \ gateway\" \"realtime realtime\"; do\n  set -- $$entry\n  pair=$$1\n  dest=$$2\n  if [ ! -f \"/keys/api/$$pair.private.pem\"\
+      \ ]; then\n    openssl genpkey -algorithm ed25519 -out \"/keys/api/$$pair.private.pem\"\n    echo \"$$pair: private\
+      \ half generated\"\n  else\n    echo \"$$pair: private half exists, left alone\"\n  fi\n  if [ ! -f \"/keys/$$dest/$$pair.public.pem\"\
+      \ ]; then\n    openssl pkey -in \"/keys/api/$$pair.private.pem\" -pubout \\\n      -out \"/keys/$$dest/$$pair.public.pem\"\
+      \n    echo \"$$pair: public half derived for $$dest\"\n  fi\ndone\n# 32 bytes, which is what `CREDENTIAL_KEY_BYTES`\
+      \ in\n# `packages/integrations/src/credential-vault.ts` checks rather than\n# trusts. Written only when missing: rotating\
+      \ it on a redeploy would\n# strand every provider credential a customer had already connected.\nif [ ! -f /keyring/credential-keyring.json\
+      \ ]; then\n  printf '{\"active\":\"k1\",\"keys\":{\"k1\":\"%s\"}}' \"$$(openssl rand -base64 32)\" \\\n    > /keyring/credential-keyring.json\n\
+      \  echo \"credential keyring: generated\"\nelse\n  echo \"credential keyring: exists, left alone\"\nfi\n# uid 1000 is\
+      \ `node` in the runtime image, which is the user every\n# service runs as.\nchown -R 1000:1000 /keys /keyring\nchmod\
+      \ 700 /keys/api /keys/gateway /keys/realtime /keyring\nchmod 400 /keys/api/*.pem /keyring/credential-keyring.json\n\
+      chmod 444 /keys/gateway/*.pem /keys/realtime/*.pem\nls -l /keys/api /keys/gateway /keys/realtime /keyring\n"
+    volumes:
+    - keys-api:/keys/api
+    - keys-gateway:/keys/gateway
+    - keys-realtime:/keys/realtime
+    - keyring:/keyring
+  geoip:
+    image: alpine:3.21
+    restart: 'no'
+    command:
+    - sh
+    - -ec
+    - "if [ -f /geoip/dbip-city-lite.mmdb ]; then\n  echo \"geoip: database present, left alone\"\n  exit 0\nfi\napk add --no-cache\
+      \ curl >/dev/null\n\n# Two candidates. A month's build appears a day or two into it, so on the\n# first of the month\
+      \ the current one is a 404 rather than an error.\n# Written out rather than `date -d '1 month ago'`, which busybox does\
+      \ not\n# take. Leading zeros are stripped because POSIX arithmetic reads `08` as\n# octal and refuses it.\ny=$$(date\
+      \ -u +%Y)\nm=$$(date -u +%m | sed \"s/^0*//\")\npm=$$((m - 1))\npy=$$y\nif [ \"$$pm\" -le 0 ]; then pm=12; py=$$((y\
+      \ - 1)); fi\nprev=$$(printf \"%04d-%02d\" \"$$py\" \"$$pm\")\n\nfetched=\"\"\nfor month in \"$$(date -u +%Y-%m)\" \"\
+      $$prev\"; do\n  echo \"geoip: trying $$month\"\n  # --fail so a 404 is a non-zero exit rather than an HTML error page\n\
+      \  # saved as a .gz, which would fail later inside gzip with nothing\n  # pointing here.\n  if curl -fsSL --retry 2\
+      \ --max-time 300 -o /tmp/dbip.gz \\\n    \"https://download.db-ip.com/free/dbip-city-lite-$$month.mmdb.gz\"; then\n\
+      \    fetched=\"$$month\"\n    break\n  fi\ndone\nif [ -z \"$$fetched\" ]; then\n  echo \"geoip: no build available.\
+      \ Check https://db-ip.com/db/download/ip-to-city-lite\" >&2\n  exit 1\nfi\n\ngzip -dc /tmp/dbip.gz > /tmp/dbip.mmdb\n\
+      # Verified before it is moved into place. Every MaxMind-format file ends\n# with the metadata marker; `strings` and\
+      \ not `grep -a`, because\n# busybox's `-a` does not match inside this file.\nif ! tail -c 200000 /tmp/dbip.mmdb | strings\
+      \ | grep -q \"MaxMind.com\"; then\n  echo \"geoip: the download is not a MaxMind-format database\" >&2\n  exit 1\nfi\n\
+      # Moved last, so an interrupted run leaves nothing half-written.\nmv /tmp/dbip.mmdb /geoip/dbip-city-lite.mmdb\nchown\
+      \ 1000:1000 /geoip/dbip-city-lite.mmdb\nchmod 444 /geoip/dbip-city-lite.mmdb\necho \"geoip: wrote dbip-city-lite.mmdb\
+      \ ($$fetched, $$(du -h /geoip/dbip-city-lite.mmdb | cut -f1))\"\necho \"geoip: IP Geolocation by DB-IP, https://db-ip.com,\
+      \ CC BY 4.0.\"\n"
+    volumes:
+    - geoip:/geoip
+  migrate:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/migrate:${OA_IMAGE_TAG:-v0.5.0}
+    restart: 'no'
+    entrypoint:
+    - sh
+    - -c
+    - node packages/postgres/dist/cli.js && node packages/clickhouse/dist/cli.js
+    environment:
+      ENVIRONMENT: production
+      POSTGRES_MIGRATION_URL: postgres://openanalytics:8hxJdsYxsgRP3MmlyUTqi0WNdsu6ilyG@postgres:5432/openanalytics
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_DATABASE: analytics
+      CLICKHOUSE_MIGRATION_USER: oa_migration
+      CLICKHOUSE_MIGRATION_PASSWORD: 2RLygtBvKBGmUhzwx3XZYJ121u6nMAvh
+    depends_on:
+      postgres:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+  gateway:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/query-gateway:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PORT: '8081'
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_DB: analytics
+      CLICKHOUSE_READ_USER: oa_read
+      CLICKHOUSE_READ_PASSWORD: JBzZwSKwsUPsD3S0wXWdVn185SIw89O1
+      REALTIME_CACHE_REDIS_URL: redis://:R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv@valkey-realtime:6379
+      QUERY_SIGNING_KEY_ID: oa-selfhost-1
+      QUERY_SIGNING_PUBLIC_KEY_FILE: /keys/query.public.pem
+    volumes:
+    - keys-gateway:/keys:ro
+    healthcheck: &id001
+      test:
+      - CMD
+      - node
+      - -e
+      - fetch('http://127.0.0.1:'+process.env.PORT+'/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      keygen:
+        condition: service_completed_successfully
+      valkey-realtime:
+        condition: service_healthy
+  api:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/api:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PORT: '8082'
+      DATABASE_URL: postgres://openanalytics:8hxJdsYxsgRP3MmlyUTqi0WNdsu6ilyG@postgres:5432/openanalytics
+      REALTIME_CACHE_REDIS_URL: redis://:R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv@valkey-realtime:6379
+      QUERY_GATEWAY_URL: http://gateway:8081
+      AUTH_BASE_URL: https://localhost
+      APP_BASE_URL: https://localhost
+      COLLECTOR_BASE_URL: https://localhost
+      AUTH_TRUSTED_ORIGINS: https://localhost
+      PRODUCT_NAME: Open Analytics
+      AUTH_SECRET: enLsUHdDPlwWQ6Xt+iBr81wn5Z1LArLvEeSjme9BjNWQzt1ZwHAZtn0nvh2Hg9rNo1JgcLTEEKHHEX6q/5oTzg==
+      TRIAL_IDENTITY_SECRET: EUg4cqAIloLwUCARjxBGf4lt/aBW5RR4hlug7BmrUzl2yAU1mQQ0dn/CJHBC7QCwE31ixNSU9+xWgIfsylMrpg==
+      CREDENTIAL_SOURCE_SECRET: mKH0mFud4K65X0jeVR/Uma2S47IG4YTIHxlSpcCSjm2wxf+Niq6KTbe/kgBvFEda8iBcuctW7NaDLonjnxbZZg==
+      OA_CREDENTIAL_KEYRING_FILE: /keyring/credential-keyring.json
+      QUERY_SIGNING_KEY_ID: oa-selfhost-1
+      AUTH_PASSWORD_SIGNIN: enabled
+      QUERY_SIGNING_PRIVATE_KEY_FILE: /keys/query.private.pem
+      REALTIME_TOKEN_SIGNING_KEY_FILE: /keys/realtime.private.pem
+    volumes:
+    - keys-api:/keys:ro
+    - keyring:/keyring:ro
+    healthcheck: *id001
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      keygen:
+        condition: service_completed_successfully
+      gateway:
+        condition: service_healthy
+      valkey-realtime:
+        condition: service_healthy
+  collector:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/collector:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PORT: '8083'
+      DATABASE_URL: postgres://openanalytics:8hxJdsYxsgRP3MmlyUTqi0WNdsu6ilyG@postgres:5432/openanalytics
+      EVENT_STREAM_REDIS_URL: redis://:SYRmTVPinMa0gcoVhCzDbYnKenpqjXPc@valkey-queue:6379
+      REALTIME_CACHE_REDIS_URL: redis://:R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv@valkey-realtime:6379
+      ANONYMOUS_IDENTITY_SECRET: Fg7XIFIB3tOao7irhUUMB9wVfkcOR5aNPHaHq5iwnfwERSP5CEa3zF1w0NsysOiD37igrfY/3f4SA2zb9yJToQ==
+      ANONYMOUS_IDENTITY_KEY_VERSION: '1'
+      GEOIP_DB_PATH: /geoip/dbip-city-lite.mmdb
+    volumes:
+    - geoip:/geoip
+    healthcheck: *id001
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      keygen:
+        condition: service_completed_successfully
+      geoip:
+        condition: service_completed_successfully
+      valkey-queue:
+        condition: service_healthy
+      valkey-realtime:
+        condition: service_healthy
+  realtime:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/realtime:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PORT: '8084'
+      REALTIME_CACHE_REDIS_URL: redis://:R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv@valkey-realtime:6379
+      REALTIME_TOKEN_VERIFY_KEY_FILE: /keys/realtime.public.pem
+    volumes:
+    - keys-realtime:/keys:ro
+    healthcheck: *id001
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      keygen:
+        condition: service_completed_successfully
+      valkey-realtime:
+        condition: service_healthy
+  worker:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/worker:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      ENVIRONMENT: production
+      LOG_LEVEL: info
+      PORT: '8085'
+      DATABASE_URL: postgres://openanalytics:8hxJdsYxsgRP3MmlyUTqi0WNdsu6ilyG@postgres:5432/openanalytics
+      EVENT_STREAM_REDIS_URL: redis://:SYRmTVPinMa0gcoVhCzDbYnKenpqjXPc@valkey-queue:6379
+      REALTIME_CACHE_REDIS_URL: redis://:R3YR7PPgSV7YXl6GCMeYlqTCiXE4EcEv@valkey-realtime:6379
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_DB: analytics
+      CLICKHOUSE_INGEST_USER: oa_ingest
+      CLICKHOUSE_INGEST_PASSWORD: 2ZPUwh8Pgnr5JmCuOu8VwWdFiq67zuGZ
+      CLICKHOUSE_MAINTENANCE_USER: oa_maintenance
+      CLICKHOUSE_MAINTENANCE_PASSWORD: ThQRUCUCNcZyVQtM8CKeyjRCidkAluuB
+      ANONYMOUS_IDENTITY_SECRET: Fg7XIFIB3tOao7irhUUMB9wVfkcOR5aNPHaHq5iwnfwERSP5CEa3zF1w0NsysOiD37igrfY/3f4SA2zb9yJToQ==
+      ANONYMOUS_IDENTITY_KEY_VERSION: '1'
+      OA_CREDENTIAL_KEYRING_FILE: /keyring/credential-keyring.json
+      PRODUCT_NAME: Open Analytics
+      EMAIL_FROM: Open Analytics <analytics@analytics.example>
+    volumes:
+    - keyring:/keyring:ro
+    healthcheck: *id001
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      keygen:
+        condition: service_completed_successfully
+      valkey-queue:
+        condition: service_healthy
+      valkey-realtime:
+        condition: service_healthy
+  web:
+    image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/web:${OA_IMAGE_TAG:-v0.5.0}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: '3000'
+      NEXT_PUBLIC_API_URL: https://localhost
+      NEXT_PUBLIC_REALTIME_URL: https://localhost
+      NEXT_PUBLIC_COLLECTOR_URL: https://localhost
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - fetch('http://127.0.0.1:3000/login').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      api:
+        condition: service_healthy
+  edge:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      OA_APP_HOST: localhost
+      OA_API_HOST: localhost
+      OA_COLLECTOR_HOST: localhost
+      OA_REALTIME_HOST: localhost
+    volumes:
+    - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile:ro
+    expose:
+    - '80'
+    depends_on:
+      web:
+        condition: service_started
+      api:
+        condition: service_started
+      collector:
+        condition: service_started
+      realtime:
+        condition: service_started
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-node-healthcheck: *id001
+volumes:
+  pg-data: null
+  ch-data: null
+  valkey-queue-data: null
+  valkey-realtime-data: null
+  keys-api: null
+  keys-gateway: null
+  keys-realtime: null
+  keyring: null
+  geoip: null
+x-casaos:
+  id: com.dokploy.openanalytics
+  main: edge
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openanalytics/icon.svg
+  title:
+    en_US: Open Analytics
+  tagline:
+    en_US: 'Open Analytics is an open-source, AI-native web analytics platform: realtime dashboards...'
+  description:
+    en_US: 'Open Analytics is an open-source, AI-native web analytics platform: realtime dashboards, funnels, visitor journeys,
+      custom events, revenue analytics, and an MCP server for AI agents. Deploys the complete official self-hosted stack.'
+  author: Dokploy Community
+  developer: Open Analytics
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.5.0"
+  update_at: "2026-11-22"
+  website: https://getopen.so
+  repo: https://github.com/OpenLabs-so/openanalytics
+  docs: https://github.com/OpenLabs-so/openanalytics/blob/main/infra/selfhost/DOKPLOY.md
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (Caddyfile). Review environment
+        variables before starting.

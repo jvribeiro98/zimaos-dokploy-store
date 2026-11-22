@@ -1,0 +1,41 @@
+name: filegator
+services:
+  filegator:
+    image: filegator/filegator:v7.14.3
+    restart: unless-stopped
+    volumes:
+    - filegator_repository:/var/www/filegator/repository
+    - filegator_private:/var/www/filegator/private
+    expose:
+    - '8080'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  filegator_repository: null
+  filegator_private: null
+x-casaos:
+  id: com.dokploy.filegator
+  main: filegator
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/filegator/icon.svg
+  title:
+    en_US: FileGator
+  tagline:
+    en_US: FileGator is a simple self-hosted web file manager with multi-user support
+  description:
+    en_US: FileGator is a simple self-hosted web file manager with multi-user support.
+  author: Dokploy Community
+  developer: FileGator
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "7.14.3"
+  update_at: "2026-11-22"
+  website: https://filegator.io/
+  repo: https://github.com/filegator/filegator
+  docs: https://docs.filegator.io/

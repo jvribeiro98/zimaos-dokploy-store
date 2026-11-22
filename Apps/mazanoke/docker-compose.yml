@@ -1,0 +1,34 @@
+name: mazanoke
+services:
+  mazanoke:
+    image: ghcr.io/civilblur/mazanoke:latest
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.mazanoke
+  main: mazanoke
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mazanoke/icon.svg
+  title:
+    en_US: MAZANOKE
+  tagline:
+    en_US: MAZANOKE is a modern, self-hosted image hosting and sharing platform
+  description:
+    en_US: MAZANOKE is a modern, self-hosted image hosting and sharing platform. Upload, organize, and share your images with
+      a clean and intuitive interface.
+  author: Dokploy Community
+  developer: MAZANOKE
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/civilblur/mazanoke
+  repo: https://github.com/civilblur/mazanoke
+  docs: https://github.com/civilblur/mazanoke

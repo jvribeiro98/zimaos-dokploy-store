@@ -1,0 +1,1662 @@
+name: fluxer
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+    - '80'
+    configs:
+    - source: caddyfile
+      target: /etc/caddy/Caddyfile
+    volumes:
+    - caddy-data:/data
+    - caddy-config:/config
+    depends_on:
+    - api
+    - gateway
+    - media-proxy
+    - static-proxy
+    - admin
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fluxer
+      POSTGRES_USER: fluxer
+      POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U fluxer -d fluxer
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  valkey:
+    image: valkey/valkey:8.1-alpine
+    restart: unless-stopped
+    command:
+    - valkey-server
+    - --save
+    - ''
+    - --appendonly
+    - 'no'
+    healthcheck:
+      test:
+      - CMD
+      - valkey-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  nats:
+    image: nats:2.14-alpine
+    restart: unless-stopped
+    command:
+    - -js
+    - -sd
+    - /data
+    - -m
+    - '8222'
+    volumes:
+    - nats-data:/data
+  meilisearch:
+    image: getmeili/meilisearch:v1.12
+    restart: unless-stopped
+    environment:
+      MEILI_ENV: production
+      MEILI_NO_ANALYTICS: 'true'
+      MEILI_MASTER_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+    volumes:
+    - meilisearch-data:/meili_data
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.34
+    restart: unless-stopped
+    command:
+    - server
+    - -s3
+    - -dir=/data
+    volumes:
+    - seaweedfs-data:/data
+  gifs:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-gifs:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_NAME: gifs
+      FLUXER_SVC_MODE: router
+      FLUXER_MEDIA_PROXY_PUBLIC_ENDPOINT: http://localhost/media
+    depends_on:
+      nats:
+        condition: service_started
+  gifs-shard:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-gifs:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_NAME: gifs
+      FLUXER_SVC_MODE: shard
+      FLUXER_SVC_SHARD_ID: '0'
+      FLUXER_MEDIA_PROXY_PUBLIC_ENDPOINT: http://localhost/media
+    depends_on:
+      nats:
+        condition: service_started
+  seaweedfs-init:
+    image: chrislusf/seaweedfs:4.34
+    depends_on:
+    - seaweedfs
+    restart: 'no'
+    entrypoint:
+    - /bin/sh
+    - -c
+    - 'echo "Waiting for SeaweedFS to initialise..."
+
+      sleep 12
+
+      echo "Creating S3 buckets..."
+
+      printf ''s3.bucket.create -name fluxer\ns3.bucket.create -name fluxer-uploads\ns3.bucket.create -name fluxer-downloads\ns3.bucket.create
+      -name fluxer-reports\ns3.bucket.create -name fluxer-harvests\nexit\n'' | weed shell -master=seaweedfs:9333 2>&1 &
+
+      WEED_PID=$$!
+
+      sleep 15
+
+      kill $$WEED_PID 2>/devnull || true
+
+      echo "buckets ready"
+
+      '
+  livekit:
+    image: livekit/livekit-server:v1.12.0
+    restart: unless-stopped
+    command:
+    - --config
+    - /etc/livekit.yaml
+    environment:
+      LIVEKIT_KEYS: 'fluxer: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420'
+    configs:
+    - source: livekit_config
+      target: /etc/livekit.yaml
+    ports:
+    - '7881'
+    - 7882/udp
+  api:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-api:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_API_PORT: '8080'
+      FLUXER_API_PRESIGNED_ATTACHMENT_UPLOADS_ENABLED: 'true'
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - node -e "fetch('http://127.0.0.1:8080/_health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+      nats:
+        condition: service_started
+      meilisearch:
+        condition: service_started
+      seaweedfs-init:
+        condition: service_completed_successfully
+      snowflakes:
+        condition: service_started
+      snowflakes-shard:
+        condition: service_started
+      messages:
+        condition: service_started
+      messages-shard:
+        condition: service_started
+      users:
+        condition: service_started
+      users-shard:
+        condition: service_started
+  worker:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-api:${FLUXER_IMAGE_TAG:-v1}
+    working_dir: /usr/src/app/fluxer_api
+    command:
+    - ./node_modules/.bin/tsx
+    - src/WorkerEntrypoint.ts
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_API_WORKER_MODE: all_lanes
+      FLUXER_API_WORKER_ENABLE_CRON_SCHEDULER: 'true'
+      FLUXER_API_WORKER_ENABLE_VOICE_RECONCILIATION: 'true'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+      nats:
+        condition: service_started
+      seaweedfs-init:
+        condition: service_completed_successfully
+      snowflakes-shard:
+        condition: service_started
+      messages-shard:
+        condition: service_started
+      users-shard:
+        condition: service_started
+  gateway:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-gateway:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_GATEWAY_PORT: '8080'
+      FLUXER_GATEWAY_MEDIA_PROXY_ENDPOINT: http://localhost/media
+      FLUXER_GATEWAY_STATIC_CDN_ENDPOINT: http://localhost
+      FLUXER_GATEWAY_LOGGER_LEVEL: info
+    depends_on:
+      nats:
+        condition: service_started
+      valkey:
+        condition: service_healthy
+  media-proxy:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-media-proxy:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_MEDIA_PROXY_HOST: 0.0.0.0
+      FLUXER_MEDIA_PROXY_PORT: '8080'
+      FLUXER_MEDIA_PROXY_MODE: upload
+      FLUXER_MEDIA_PROXY_STORAGE_BACKEND: s3
+    depends_on:
+      seaweedfs-init:
+        condition: service_completed_successfully
+      nats:
+        condition: service_started
+  static-proxy:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-static:${FLUXER_IMAGE_TAG:-v1}
+  app-proxy:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-app-proxy-self-hosted:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_APP_PROXY_HOST: 0.0.0.0
+      FLUXER_APP_PROXY_PORT: '8080'
+      DISCOVERY_UPSTREAM_URL: http://caddy:8088/api/.well-known/fluxer
+      PUBLIC_BOOTSTRAP_API_ENDPOINT: /api
+      PUBLIC_BOOTSTRAP_API_PUBLIC_ENDPOINT: http://localhost/api
+    depends_on:
+      api:
+        condition: service_healthy
+      caddy:
+        condition: service_started
+  snowflakes:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-snowflakes:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: router
+    depends_on:
+      nats:
+        condition: service_started
+  snowflakes-shard:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-snowflakes:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: shard
+      FLUXER_SVC_SHARD_ID: '0'
+    depends_on:
+      nats:
+        condition: service_started
+  users:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-users:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: router
+    depends_on:
+      nats:
+        condition: service_started
+  users-shard:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-users:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: shard
+      FLUXER_SVC_SHARD_ID: '0'
+    depends_on:
+      nats:
+        condition: service_started
+  messages:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-messages:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: router
+    depends_on:
+      nats:
+        condition: service_started
+  messages-shard:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-messages:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: shard
+      FLUXER_SVC_SHARD_ID: '0'
+    depends_on:
+      nats:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+  unfurl:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-unfurl:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: router
+    depends_on:
+      nats:
+        condition: service_started
+  unfurl-shard:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-unfurl:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_SVC_MODE: shard
+      FLUXER_SVC_SHARD_ID: '0'
+    depends_on:
+      nats:
+        condition: service_started
+  admin:
+    restart: unless-stopped
+    image: ${FLUXER_REGISTRY:-ghcr.io/fluxerapp}/fluxer-admin:${FLUXER_IMAGE_TAG:-v1}
+    environment:
+      FLUXER_ENV: production
+      NODE_ENV: production
+      FLUXER_SELF_HOSTED: 'true'
+      FLUXER_BASE_DOMAIN: localhost
+      FLUXER_PUBLIC_SCHEME: http
+      FLUXER_PUBLIC_PORT: '80'
+      FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+      FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+      FLUXER_DATABASE_BACKEND: postgres
+      FLUXER_POSTGRES_HOST: postgres
+      FLUXER_POSTGRES_PORT: '5432'
+      FLUXER_POSTGRES_DATABASE: fluxer
+      FLUXER_POSTGRES_USERNAME: fluxer
+      FLUXER_POSTGRES_PASSWORD: 63f75434b09d9cf684cf2b603d5d6cbbac2204029b9d45f2de3b9d589b17111e489d43bab698c5d2ae402c59965f0b35ab548a8933acc11ed82b19e58247fd92
+      FLUXER_POSTGRES_SSL: 'false'
+      FLUXER_KV_URL: redis://valkey:6379/0
+      FLUXER_NATS_URL: nats://nats:4222
+      FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+      FLUXER_SVC_NATS_URL: nats://nats:4222
+      FLUXER_SVC_SHARD_COUNT: '1'
+      FLUXER_SEARCH_ENGINE: meilisearch
+      FLUXER_SEARCH_URL: http://meilisearch:7700
+      FLUXER_SEARCH_API_KEY: 287ffc82404869efeb82a9ecba377e05040de932ceb637394ce16f70c6268a32ba8790c25fc42ee26f7e9a679a9ab16c60920440160ad3cc879060214a11e988
+      FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+      FLUXER_S3_REGION: us-east-1
+      FLUXER_S3_ACCESS_KEY_ID: fluxer
+      FLUXER_S3_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      FLUXER_S3_FORCE_PATH_STYLE: 'true'
+      FLUXER_S3_BUCKET_CDN: fluxer
+      FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+      FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+      FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+      FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+      AWS_ACCESS_KEY_ID: fluxer
+      AWS_SECRET_ACCESS_KEY: 63205494480d73d2ced1dcbcf9bcfe1b0f97ae808648042d12cefd82a401a3252f460d410cb9213761e01b34b157b1cd541cfcabd8657f6349b2b6ccb341a5df
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_EC2_METADATA_DISABLED: 'true'
+      FLUXER_LIVEKIT_ENABLED: 'true'
+      FLUXER_LIVEKIT_API_KEY: fluxer
+      FLUXER_LIVEKIT_API_SECRET: d7445af860a05563e5fd2d13474f4fdf4e092bd87a61cb773745a0d42f81a4ba933d6754b59ff872a32d4f348bd83a89c216fd03c8ccf1600633b25c2bb8c420
+      FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+      FLUXER_EMAIL_ENABLED: 'false'
+      FLUXER_EMAIL_PROVIDER: none
+      FLUXER_EMAIL_FROM_EMAIL: noreply@example.com
+      FLUXER_EMAIL_FROM_NAME: Fluxer
+      FLUXER_EMAIL_SMTP_HOST: ''
+      FLUXER_EMAIL_SMTP_PORT: '587'
+      FLUXER_EMAIL_SMTP_USERNAME: ''
+      FLUXER_EMAIL_SMTP_PASSWORD: ''
+      FLUXER_EMAIL_SMTP_SECURE: 'true'
+      FLUXER_SMS_ENABLED: 'false'
+      FLUXER_CAPTCHA_ENABLED: 'false'
+      FLUXER_CAPTCHA_PROVIDER: none
+      FLUXER_STRIPE_ENABLED: 'false'
+      FLUXER_NCMEC_ENABLED: 'false'
+      FLUXER_CLAMAV_ENABLED: 'false'
+      FLUXER_DISCOVERY_ENABLED: 'true'
+      FLUXER_SUDO_MODE_SECRET: 026ff52c841ee70f78996be091cdfcee580ba9b7b2af44ab58c3b1715fa055029327405dbb0dc8b63879beba74b28d3ec6ee01a641ee5098e41ba385ea58b614
+      FLUXER_CONNECTION_INITIATION_SECRET: 05182f9790fb84bfee26440c7a0b7aa1f0d320a077e448d9ed3b5d2538e086c6a855cea8ad3e91a805381df8509c999a65be4e0a5d308f171d718ff907d1d898
+      FLUXER_VAPID_PUBLIC_KEY: ''
+      FLUXER_VAPID_PRIVATE_KEY: ''
+      FLUXER_VAPID_EMAIL: admin@example.com
+      FLUXER_GATEWAY_RPC_AUTH_TOKEN: 661811ff8ca79626e55cac55a03b99e43651727195445dc01ae36d1f0a84b283b0f916cee0729b204f71790cf583cdf90fb001578a4714f3a598df7548fae680
+      FLUXER_MEDIA_PROXY_SECRET_KEY: 1276240dcd69873499db6a30ac7e3cb50565d3e0d340600931b49e36d54f870613a5ace3b206e90d508dbc107cf2d96833524eeb163ce41fee1476a658dbe2ab
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: nFjbNhsxqugtssm3ZO68wCaf5hnLJq93dlStMuNrBns=
+      FLUXER_ADMIN_SECRET_KEY_BASE: f0c271c2f25409d30690f0d671622330d9c4c4e028b200563f19f43bd08f9381c26899481acc04957acbb9e19f6f9d989ef52e703ae787438225946c8c2e9731
+      FLUXER_ADMIN_OAUTH_CLIENT_SECRET: 95120c579d22a716934f900cb65f18748e5ce967af74d62a7be94a72796ea13e7d7fa0813875acb88da442a48249a25665225fcf1b82487a4da9bb164f3c8eff
+      FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+      FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+      FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MARKETING_ENDPOINT: http://localhost
+      FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+      FLUXER_MEDIA_ENDPOINT: http://localhost/media
+      FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: http://localhost/media
+      FLUXER_ERLANG_COOKIE: d644721510f216794287376b78d354262a24f98f085ddf450e8312058d1732ba2d9fa778c218641bff821132403e76bb733f8b12f9fb4f9adb3f9773b005ed2e
+      FLUXER_PROFILE_PSEUDONYM_SECRET: 804fd9d0a14fcc1443f7c9613c026580e68ffac8234456f3264ce4efa333987efdfe1de39e080c0f78bf66ccb3257a2ba7a340c25e3d30c3ada06da220221c48
+      FLUXER_PASSKEY_RP_NAME: Fluxer
+      FLUXER_PASSKEY_RP_ID: localhost}
+      FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: http://localhost}
+      FLUXER_ADMIN_HOST: 0.0.0.0
+      FLUXER_ADMIN_PORT: '8080'
+      FLUXER_ADMIN_BASE_PATH: /admin
+      FLUXER_API_ENDPOINT: http://api:8080
+      FLUXER_ADMIN_ENDPOINT: http://localhost/admin
+      FLUXER_APP_ENDPOINT: http://localhost
+      FLUXER_STATIC_CDN_ENDPOINT: http://localhost
+      FLUXER_ADMIN_OAUTH_REDIRECT_URI: http://localhost/admin/oauth2_callback
+    depends_on:
+      api:
+        condition: service_healthy
+x-fluxer-env:
+  FLUXER_ENV: production
+  NODE_ENV: production
+  FLUXER_SELF_HOSTED: 'true'
+  FLUXER_BASE_DOMAIN: ${FLUXER_DOMAIN}
+  FLUXER_PUBLIC_SCHEME: ${FLUXER_PUBLIC_SCHEME:-https}
+  FLUXER_PUBLIC_PORT: ${FLUXER_PUBLIC_PORT:-443}
+  FLUXER_TRUST_CLIENT_IP_HEADER: 'true'
+  FLUXER_CLIENT_IP_HEADER_NAME: x-forwarded-for
+  FLUXER_DATABASE_BACKEND: postgres
+  FLUXER_POSTGRES_HOST: postgres
+  FLUXER_POSTGRES_PORT: '5432'
+  FLUXER_POSTGRES_DATABASE: fluxer
+  FLUXER_POSTGRES_USERNAME: fluxer
+  FLUXER_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  FLUXER_POSTGRES_SSL: 'false'
+  FLUXER_KV_URL: redis://valkey:6379/0
+  FLUXER_NATS_URL: nats://nats:4222
+  FLUXER_NATS_JETSTREAM_URL: nats://nats:4222
+  FLUXER_SVC_NATS_URL: nats://nats:4222
+  FLUXER_SVC_SHARD_COUNT: '1'
+  FLUXER_SEARCH_ENGINE: meilisearch
+  FLUXER_SEARCH_URL: http://meilisearch:7700
+  FLUXER_SEARCH_API_KEY: ${MEILI_MASTER_KEY}
+  FLUXER_S3_ENDPOINT: http://seaweedfs:8333
+  FLUXER_S3_PUBLIC_ENDPOINT: http://seaweedfs:8333
+  FLUXER_S3_REGION: us-east-1
+  FLUXER_S3_ACCESS_KEY_ID: ${FLUXER_S3_ACCESS_KEY}
+  FLUXER_S3_SECRET_ACCESS_KEY: ${FLUXER_S3_SECRET_KEY}
+  FLUXER_S3_FORCE_PATH_STYLE: 'true'
+  FLUXER_S3_BUCKET_CDN: fluxer
+  FLUXER_S3_BUCKET_UPLOADS: fluxer-uploads
+  FLUXER_S3_BUCKET_DOWNLOADS: fluxer-downloads
+  FLUXER_S3_BUCKET_REPORTS: fluxer-reports
+  FLUXER_S3_BUCKET_HARVESTS: fluxer-harvests
+  AWS_ACCESS_KEY_ID: ${FLUXER_S3_ACCESS_KEY}
+  AWS_SECRET_ACCESS_KEY: ${FLUXER_S3_SECRET_KEY}
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_EC2_METADATA_DISABLED: 'true'
+  FLUXER_LIVEKIT_ENABLED: 'true'
+  FLUXER_LIVEKIT_API_KEY: ${LIVEKIT_API_KEY}
+  FLUXER_LIVEKIT_API_SECRET: ${LIVEKIT_API_SECRET}
+  FLUXER_LIVEKIT_WEBHOOK_URL: http://api:8080/webhooks/livekit
+  FLUXER_EMAIL_ENABLED: ${FLUXER_EMAIL_ENABLED:-false}
+  FLUXER_EMAIL_PROVIDER: ${FLUXER_EMAIL_PROVIDER:-none}
+  FLUXER_EMAIL_FROM_EMAIL: ${FLUXER_EMAIL_FROM_EMAIL:-noreply@localhost}
+  FLUXER_EMAIL_FROM_NAME: ${FLUXER_EMAIL_FROM_NAME:-Fluxer}
+  FLUXER_EMAIL_SMTP_HOST: ${FLUXER_EMAIL_SMTP_HOST:-}
+  FLUXER_EMAIL_SMTP_PORT: ${FLUXER_EMAIL_SMTP_PORT:-587}
+  FLUXER_EMAIL_SMTP_USERNAME: ${FLUXER_EMAIL_SMTP_USERNAME:-}
+  FLUXER_EMAIL_SMTP_PASSWORD: ${FLUXER_EMAIL_SMTP_PASSWORD:-}
+  FLUXER_EMAIL_SMTP_SECURE: ${FLUXER_EMAIL_SMTP_SECURE:-true}
+  FLUXER_SMS_ENABLED: 'false'
+  FLUXER_CAPTCHA_ENABLED: ${FLUXER_CAPTCHA_ENABLED:-false}
+  FLUXER_CAPTCHA_PROVIDER: ${FLUXER_CAPTCHA_PROVIDER:-none}
+  FLUXER_STRIPE_ENABLED: 'false'
+  FLUXER_NCMEC_ENABLED: 'false'
+  FLUXER_CLAMAV_ENABLED: 'false'
+  FLUXER_DISCOVERY_ENABLED: ${FLUXER_DISCOVERY_ENABLED:-true}
+  FLUXER_SUDO_MODE_SECRET: ${FLUXER_SUDO_MODE_SECRET}
+  FLUXER_CONNECTION_INITIATION_SECRET: ${FLUXER_CONNECTION_INITIATION_SECRET}
+  FLUXER_VAPID_PUBLIC_KEY: ${FLUXER_VAPID_PUBLIC_KEY:-BHi1FsTNSH8j-8uPnftAFXtBq98twI1crO6b1KC9io4aWWDOSG5lb-8OvUy-2FTwl8co5u2EF2CpBuj08Qvm-LQ}
+  FLUXER_VAPID_PRIVATE_KEY: ${FLUXER_VAPID_PRIVATE_KEY:-iXyKG6bHtSNGF9j5duIo71W79lPFqyVsehtFCJIZvzQ}
+  FLUXER_VAPID_EMAIL: ${FLUXER_VAPID_EMAIL}
+  FLUXER_GATEWAY_RPC_AUTH_TOKEN: ${FLUXER_GATEWAY_RPC_AUTH_TOKEN}
+  FLUXER_MEDIA_PROXY_SECRET_KEY: ${FLUXER_MEDIA_PROXY_SECRET_KEY}
+  FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64: ${FLUXER_MEDIA_PROXY_UPLOAD_RELAY_SECRET_BASE64}
+  FLUXER_ADMIN_SECRET_KEY_BASE: ${FLUXER_ADMIN_SECRET_KEY_BASE}
+  FLUXER_ADMIN_OAUTH_CLIENT_SECRET: ${FLUXER_ADMIN_OAUTH_CLIENT_SECRET}
+  FLUXER_INTERNAL_API_ENDPOINT: http://api:8080
+  FLUXER_INTERNAL_GATEWAY_ENDPOINT: http://gateway:8080
+  FLUXER_INTERNAL_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+  FLUXER_MARKETING_ENDPOINT: ${FLUXER_PUBLIC_SCHEME:-https}://${FLUXER_DOMAIN}
+  FLUXER_MEDIA_PROXY_ENDPOINT: http://media-proxy:8080
+  FLUXER_MEDIA_ENDPOINT: ${FLUXER_PUBLIC_SCHEME:-https}://${FLUXER_DOMAIN}/media
+  FLUXER_MEDIA_PROXY_UPLOAD_RELAY_ENDPOINT: ${FLUXER_PUBLIC_SCHEME:-https}://${FLUXER_DOMAIN}/media
+  FLUXER_ERLANG_COOKIE: ${FLUXER_ERLANG_COOKIE}
+  FLUXER_PROFILE_PSEUDONYM_SECRET: ${FLUXER_PROFILE_PSEUDONYM_SECRET}
+  FLUXER_PASSKEY_RP_NAME: ${FLUXER_PASSKEY_RP_NAME:-Fluxer}
+  FLUXER_PASSKEY_RP_ID: ${FLUXER_PASSKEY_RP_ID:-${FLUXER_DOMAIN}}
+  FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS: ${FLUXER_PASSKEY_ADDITIONAL_ALLOWED_ORIGINS:-https://${FLUXER_DOMAIN}}
+x-fluxer-service:
+  restart: unless-stopped
+volumes:
+  caddy-data: null
+  caddy-config: null
+  postgres-data: null
+  nats-data: null
+  meilisearch-data: null
+  seaweedfs-data: null
+configs:
+  caddyfile:
+    content: ":80 {\n    encode zstd gzip\n    handle /.well-known/* {\n        reverse_proxy api:8080\n    }\n    handle_path\
+      \ /api/* {\n        reverse_proxy api:8080\n    }\n    handle /gateway {\n        rewrite * /\n        reverse_proxy\
+      \ gateway:8080\n    }\n    handle_path /gateway/* {\n        reverse_proxy gateway:8080\n    }\n    handle_path /media/*\
+      \ {\n        reverse_proxy media-proxy:8080\n    }\n    handle_path /livekit/* {\n        reverse_proxy livekit:7880\n\
+      \    }\n    handle /admin {\n        rewrite * /\n        reverse_proxy admin:8080\n    }\n    handle_path /admin/*\
+      \ {\n        reverse_proxy admin:8080\n    }\n    @staticAssets path /fonts/* /web/* /emoji/* /libs/* /avatars/* /badges/*\
+      \ /desktop/* /embeds/*\n    handle @staticAssets {\n        reverse_proxy static-proxy:8080\n    }\n    handle {\n \
+      \       reverse_proxy app-proxy:8080\n    }\n}\n:8088 {\n    handle_path /api/* {\n        reverse_proxy api:8080\n\
+      \    }\n}\n"
+  livekit_config:
+    content: "port: 7880\nlog_level: info\nrtc:\n  tcp_port: 7881\n  udp_port: 7882\n  use_external_ip: true\n  stun_servers:\n\
+      \    - stun.l.google.com:19302\n    - stun1.l.google.com:19302\nwebhook:\n  api_key: ${LIVEKIT_API_KEY}\n  urls:\n \
+      \   - http://api:8080/webhooks/livekit\n"
+x-casaos:
+  id: com.dokploy.fluxer
+  main: caddy
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/fluxer/icon.svg
+  title:
+    en_US: Fluxer
+  tagline:
+    en_US: Fluxer is a self-hosted, scalable chat and community platform
+  description:
+    en_US: Fluxer is a self-hosted, scalable chat and community platform.
+  author: Dokploy Community
+  developer: Fluxer
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://fluxer.app
+  repo: https://github.com/fluxerapp
+  docs: https://github.com/fluxerapp

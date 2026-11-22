@@ -1,0 +1,67 @@
+name: keycloak
+services:
+  postgres:
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloakuser
+      POSTGRES_PASSWORD: wLHJoZarQJbQ8GjibTaR7mGPKZ92P3WA
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.3.5
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloakuser
+      KC_DB_PASSWORD: wLHJoZarQJbQ8GjibTaR7mGPKZ92P3WA
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ECk3IJkuKnlUmYNgRu8xpEHBrraid8bl
+      KC_HOSTNAME: localhost
+      KC_HTTP_ENABLED: 'true'
+      KC_HEALTH_ENABLED: 'true'
+      KC_PROXY_HEADERS: xforwarded
+    command: start-dev
+    restart: always
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.keycloak
+  main: keycloak
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/keycloak/icon.svg
+  title:
+    en_US: Keycloak
+  tagline:
+    en_US: Keycloak is an open-source identity and access management tool with single sign-on (SSO)
+  description:
+    en_US: Keycloak is an open-source identity and access management tool with single sign-on (SSO). Self-host it on your
+      own server with Dokploy, which deploys Keycloak as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Keycloak
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "26.0"
+  update_at: "2026-11-22"
+  website: https://www.keycloak.org/
+  repo: https://github.com/keycloak/keycloak
+  docs: https://www.keycloak.org/documentation

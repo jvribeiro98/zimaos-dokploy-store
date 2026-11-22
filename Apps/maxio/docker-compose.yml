@@ -1,0 +1,42 @@
+name: maxio
+services:
+  maxio:
+    image: ghcr.io/coollabsio/maxio:0.2.1
+    expose:
+    - 9000
+    volumes:
+    - maxio-data:/data
+    environment:
+    - MAXIO_ACCESS_KEY=LgXLGDagbDcQuJ9DQRPX
+    - MAXIO_SECRET_KEY=Xg0PQhCuG49zuvO9JuqR
+    restart: unless-stopped
+    ports:
+    - target: 9000
+      published: "9000"
+      protocol: tcp
+volumes:
+  maxio-data: null
+x-casaos:
+  id: com.dokploy.maxio
+  main: maxio
+  index: /
+  port_map: "9000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/maxio/icon.svg
+  title:
+    en_US: MaxIO
+  tagline:
+    en_US: MaxIO is a lightweight, single-binary S3-compatible object storage server written in Rust
+  description:
+    en_US: MaxIO is a lightweight, single-binary S3-compatible object storage server written in Rust
+  author: Dokploy Community
+  developer: MaxIO
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.1"
+  update_at: "2026-11-22"
+  website: https://github.com/coollabsio/maxio
+  repo: https://github.com/coollabsio/maxio
+  docs: https://github.com/coollabsio/maxio/blob/main/README.md

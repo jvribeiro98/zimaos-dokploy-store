@@ -1,0 +1,39 @@
+name: 3dokploy
+services:
+  3dokploy:
+    image: ghcr.io/suleyman/3dokploy:0.1.1
+    restart: unless-stopped
+    environment:
+    - DOKPLOY_URL=http://host.docker.internal:3000
+    - DOKPLOY_API_KEY=
+    - BASIC_AUTH=admin:sR69oArzRE2RTvoD7XxRRoAY
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.3dokploy
+  main: 3dokploy
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/3dokploy/icon.svg
+  title:
+    en_US: 3Dokploy
+  tagline:
+    en_US: 'A live, isometric 3D view of your Dokploy: projects as buildings, services as racks, de...'
+  description:
+    en_US: 'A live, isometric 3D view of your Dokploy: projects as buildings, services as racks, deploys rolling in on carts,
+      network traffic as packets. Read-only.'
+  author: Dokploy Community
+  developer: 3Dokploy
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.1"
+  update_at: "2026-11-22"
+  repo: https://github.com/suleyman/3dokploy
+  docs: https://github.com/suleyman/3dokploy#readme

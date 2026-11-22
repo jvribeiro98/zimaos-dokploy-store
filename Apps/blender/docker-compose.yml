@@ -1,0 +1,54 @@
+name: blender
+services:
+  blender:
+    image: lscr.io/linuxserver/blender:latest
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities:
+            - gpu
+    environment:
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=all
+    - PUID=1000
+    - PGID=1000
+    - TZ=Etc/UTC
+    - SUBFOLDER=/
+    expose:
+    - 3000
+    - 3001
+    restart: unless-stopped
+    shm_size: 1gb
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.blender
+  main: blender
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/blender/icon.svg
+  title:
+    en_US: Blender
+  tagline:
+    en_US: Blender is a free and open-source 3D creation suite
+  description:
+    en_US: Blender is a free and open-source 3D creation suite. It supports the entire 3D pipelineâ€”modeling, rigging, animation,
+      simulation, rendering, compositing and motion tracking, video editing and 2D animation pipeline.
+  author: Dokploy Community
+  developer: Blender
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.blender.org/
+  repo: https://github.com/linuxserver/docker-blender
+  docs: https://docs.blender.org/

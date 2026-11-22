@@ -1,0 +1,47 @@
+name: calibre
+services:
+  calibre:
+    image: linuxserver/calibre:7.26.0
+    restart: unless-stopped
+    environment:
+    - PASSWORD=SwUf1JYJCWRHXIgX
+    - TZ=Etc/UTC
+    - PUID=1000
+    - PGID=1000
+    expose:
+    - 8080
+    volumes:
+    - books:/books
+    - data:/config
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  books: null
+  data: null
+x-casaos:
+  id: com.dokploy.calibre
+  main: calibre
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/calibre/icon.png
+  title:
+    en_US: Calibre
+  tagline:
+    en_US: Calibre is a comprehensive e-book management tool designed to organize, convert, and re...
+  description:
+    en_US: Calibre is a comprehensive e-book management tool designed to organize, convert, and read your e-book collection.
+      It supports most of the major e-book formats and is compatible with various e-book reader devices.
+  author: Dokploy Community
+  developer: Calibre
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "7.26.0"
+  update_at: "2026-11-22"
+  website: https://calibre-ebook.com/
+  repo: https://github.com/kovidgoyal/calibre
+  docs: https://manual.calibre-ebook.com/

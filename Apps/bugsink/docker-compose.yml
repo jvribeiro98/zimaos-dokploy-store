@@ -1,0 +1,71 @@
+name: bugsink
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bugsinkuser
+      POSTGRES_PASSWORD: 0tkmMnIc9ibOpdKyJaahfp7KiCc0F0Pl
+      POSTGRES_DB: bugsink
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -h db
+      retries: 5
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+  web:
+    image: bugsink/bugsink:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    expose:
+    - 8000
+    environment:
+      SECRET_KEY: 7S6gsEkzWL7YFduaOJ3BIQSyd1lxuJRGnQfqM9R5GhVXjdDkcxEq4zUa2Fc5Oo33
+      CREATE_SUPERUSER: admin:admin
+      PORT: '8000'
+      DATABASE_URL: postgresql://bugsinkuser:0tkmMnIc9ibOpdKyJaahfp7KiCc0F0Pl@db:5432/bugsink
+      BEHIND_HTTPS_PROXY: 'false'
+      BASE_URL: https://localhost
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - python -c 'import requests; requests.get("http://localhost:8000/").raise_for_status()'
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  db-data: null
+x-casaos:
+  id: com.dokploy.bugsink
+  main: web
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bugsink/icon.png
+  title:
+    en_US: Bugsink
+  tagline:
+    en_US: Bugsink is a self-hosted Error Tracker
+  description:
+    en_US: Bugsink is a self-hosted Error Tracker. Built to self-host; Sentry-SDK compatible; Scalable and reliable
+  author: Dokploy Community
+  developer: Bugsink
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.bugsink.com/
+  repo: https://github.com/bugsink/bugsink/
+  docs: https://www.bugsink.com/docs/

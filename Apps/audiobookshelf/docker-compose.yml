@@ -1,0 +1,45 @@
+name: audiobookshelf
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:2.19.4
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - TZ=UTC
+    volumes:
+    - config:/config
+    - metadata:/metadata
+    - ${AUDIOBOOKS_PATH}:/audiobooks
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  config: {}
+  metadata: {}
+x-casaos:
+  id: com.dokploy.audiobookshelf
+  main: audiobookshelf
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/audiobookshelf/icon.png
+  title:
+    en_US: Audiobookshelf
+  tagline:
+    en_US: Audiobookshelf is a self-hosted server designed to manage and play your audiobooks and...
+  description:
+    en_US: Audiobookshelf is a self-hosted server designed to manage and play your audiobooks and podcasts. It works best
+      when you have an organized directory structure.
+  author: Dokploy Community
+  developer: Audiobookshelf
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.19.4"
+  update_at: "2026-11-22"
+  website: https://www.audiobookshelf.org
+  repo: https://github.com/advplyr/audiobookshelf
+  docs: https://www.audiobookshelf.org/docs

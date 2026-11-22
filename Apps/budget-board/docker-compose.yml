@@ -1,0 +1,70 @@
+name: budget-board
+services:
+  budget-board-server:
+    restart: unless-stopped
+    image: ghcr.io/teelur/budget-board/server:release
+    environment:
+      Logging__LogLevel__Default: Information
+      CLIENT_URL: http://budget-board-client:6253
+      POSTGRES_HOST: budget-board-db
+      POSTGRES_DATABASE: budgetboard
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: TevfzxA9bphsy0NfVoqM8ZuvucJNn4Ng
+      AUTO_UPDATE_DB: 'True'
+    depends_on:
+      budget-board-db:
+        condition: service_healthy
+  budget-board-client:
+    restart: unless-stopped
+    image: ghcr.io/teelur/budget-board/client:release
+    environment:
+      VITE_API_URL: http://budget-board-server
+      PORT: '6253'
+    expose:
+    - 6253
+    depends_on:
+    - budget-board-server
+    ports:
+    - target: 6253
+      published: "6253"
+      protocol: tcp
+  budget-board-db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: TevfzxA9bphsy0NfVoqM8ZuvucJNn4Ng
+      POSTGRES_DB: budgetboard
+    volumes:
+    - /DATA/AppData/$AppID/db-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres -d budgetboard
+      interval: 5s
+      timeout: 5s
+      retries: 5
+x-casaos:
+  id: com.dokploy.budget-board
+  main: budget-board-client
+  index: /
+  port_map: "6253"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/budget-board/icon.png
+  title:
+    en_US: Budget Board
+  tagline:
+    en_US: Self-hosted budgeting app with a web UI and a server backed by PostgreSQL
+  description:
+    en_US: Self-hosted budgeting app with a web UI and a server backed by PostgreSQL.
+  author: Dokploy Community
+  developer: Budget Board
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "release"
+  update_at: "2026-11-22"
+  website: https://budgetboard.net/
+  repo: https://github.com/teelur/budget-board
+  docs: https://budgetboard.net/

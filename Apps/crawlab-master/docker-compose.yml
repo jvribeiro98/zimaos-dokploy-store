@@ -1,0 +1,68 @@
+name: crawlab-master
+services:
+  crawlab-master:
+    image: crawlabteam/crawlab:latest
+    restart: unless-stopped
+    environment:
+    - CRAWLAB_NODE_MASTER=Y
+    - CRAWLAB_MONGO_HOST=mongo
+    - CRAWLAB_MONGO_PORT=27017
+    - CRAWLAB_MONGO_DB=crawlab
+    - CRAWLAB_MONGO_USERNAME=crawlab
+    - CRAWLAB_MONGO_PASSWORD=qpqDmMYTXsmslqlNVt5fgBzU
+    - CRAWLAB_MONGO_AUTHSOURCE=admin
+    volumes:
+    - crawlab-master-data:/root/.crawlab
+    - crawlab-app-data:/data
+    - crawlab-logs:/var/log/crawlab
+    expose:
+    - '8080'
+    - '9666'
+    depends_on:
+    - mongo
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.8}
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  mongo:
+    image: mongo:4.2
+    restart: unless-stopped
+    environment:
+    - MONGO_INITDB_ROOT_USERNAME=crawlab
+    - MONGO_INITDB_ROOT_PASSWORD=qpqDmMYTXsmslqlNVt5fgBzU
+    volumes:
+    - mongo-data:/data/db
+volumes:
+  crawlab-master-data: null
+  crawlab-app-data: null
+  crawlab-logs: null
+  mongo-data: null
+x-casaos:
+  id: com.dokploy.crawlab-master
+  main: crawlab-master
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/crawlab-master/icon.jpeg
+  title:
+    en_US: Crawlab (Master)
+  tagline:
+    en_US: Crawlab is a distributed web crawler admin platform supporting multiple programming lan...
+  description:
+    en_US: Crawlab is a distributed web crawler admin platform supporting multiple programming languages and frameworks. This
+      template deploys the master node with MongoDB.
+  author: Dokploy Community
+  developer: Crawlab (Master)
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://crawlab.cn
+  repo: https://github.com/crawlab-team/crawlab
+  docs: https://docs.crawlab.cn

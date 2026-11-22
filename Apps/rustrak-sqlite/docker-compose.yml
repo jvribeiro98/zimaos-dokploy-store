@@ -1,0 +1,57 @@
+name: rustrak-sqlite
+services:
+  rustrak-server:
+    image: rustrak/rustrak-server:latest
+    restart: unless-stopped
+    environment:
+    - HOST=0.0.0.0
+    - PORT=8080
+    - RUST_LOG=info
+    - SSL_PROXY=true
+    - SESSION_SECRET_KEY=eVvCbrgbRZ2KhwTYrff2tGmV1gRKHwz8vzAfCJWcfzUE0I8wBcmAb0UJu0eA6A0l
+    - CREATE_SUPERUSER=admin@example.com:LkzmPTdSU11aUowR
+    volumes:
+    - rustrak_data:/data
+    expose:
+    - 8080
+  rustrak-ui:
+    image: rustrak/rustrak-ui:latest
+    restart: unless-stopped
+    environment:
+    - RUSTRAK_API_URL=https://localhost
+    - HOSTNAME=0.0.0.0
+    expose:
+    - 3000
+    depends_on:
+    - rustrak-server
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  rustrak_data: null
+x-casaos:
+  id: com.dokploy.rustrak-sqlite
+  main: rustrak-ui
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rustrak-sqlite/icon.svg
+  title:
+    en_US: Rustrak (Full Stack SQLite)
+  tagline:
+    en_US: Self-hosted error tracking compatible with Sentry SDKs
+  description:
+    en_US: Self-hosted error tracking compatible with Sentry SDKs. Full stack with the Rust server, web dashboard and built-in
+      SQLite storage. No external database required.
+  author: Dokploy Community
+  developer: Rustrak (Full Stack SQLite)
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rustrak.github.io/rustrak/
+  repo: https://github.com/rustrak/rustrak
+  docs: https://rustrak.github.io/rustrak/getting-started/overview

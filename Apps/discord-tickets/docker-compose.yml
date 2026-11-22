@@ -1,0 +1,80 @@
+name: discord-tickets
+services:
+  tickets-postgres:
+    image: mysql:8
+    restart: unless-stopped
+    volumes:
+    - tickets-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: tickets
+      MYSQL_PASSWORD: HnjVxWIEWy6LTXIvEHLppxPrvhHhBIuD
+      MYSQL_ROOT_PASSWORD: 4S2pZmVkpeDqyOR59bEOqxP11jywIa3u
+      MYSQL_USER: tickets
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      - -u${MYSQL_USER}
+      - -p${MYSQL_PASSWORD}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  tickets-app:
+    image: eartharoid/discord-tickets:4.0.21
+    depends_on:
+      tickets-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    volumes:
+    - tickets-app-data:/home/container/user
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
+    tty: true
+    stdin_open: true
+    environment:
+      DB_CONNECTION_URL: mysql://tickets:HnjVxWIEWy6LTXIvEHLppxPrvhHhBIuD@tickets-postgres/tickets
+      DISCORD_SECRET: ''
+      DISCORD_TOKEN: ''
+      ENCRYPTION_KEY: qeWOFXU0XNRdwzoCD9YJjCjfKqQasnXvW1FTgtxWK87iVOwD
+      DB_PROVIDER: mysql
+      HTTP_EXTERNAL: https://localhost
+      HTTP_HOST: 0.0.0.0
+      HTTP_PORT: '8169'
+      HTTP_TRUST_PROXY: 'true'
+      PUBLIC_BOT: 'false'
+      PUBLISH_COMMANDS: 'true'
+      SUPER: YOUR_DISCORD_USER_ID
+    ports:
+    - target: 8169
+      published: "8169"
+      protocol: tcp
+volumes:
+  tickets-mysql-data: null
+  tickets-app-data: null
+x-casaos:
+  id: com.dokploy.discord-tickets
+  main: tickets-app
+  index: /
+  port_map: "8169"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/discord-tickets/icon.png
+  title:
+    en_US: Discord Tickets
+  tagline:
+    en_US: An open-source Discord bot for creating and managing support ticket channels
+  description:
+    en_US: An open-source Discord bot for creating and managing support ticket channels.
+  author: Dokploy Community
+  developer: Discord Tickets
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "4.0.21"
+  update_at: "2026-11-22"
+  website: https://discordtickets.app
+  repo: https://github.com/discord-tickets/bot
+  docs: https://discordtickets.app/self-hosting/installation/docker/

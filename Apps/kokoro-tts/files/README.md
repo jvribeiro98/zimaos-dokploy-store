@@ -1,0 +1,49 @@
+# Kokoro TTS FastAPI
+
+This template provides a Dockerized FastAPI wrapper for the Kokoro-82M text-to-speech model.
+
+## Features
+
+- Multi-language support (English, Japanese, Chinese)
+- OpenAI-compatible speech endpoint
+- CPU and GPU support
+- Web interface for monitoring
+- RESTful API with comprehensive documentation
+- Streaming audio generation
+- Word-level timestamps and phonemes
+
+## Usage
+
+- **Web Interface**: Access the web UI at `https://localhost/web`
+- **API Documentation**: Available at `https://localhost/docs`
+- **Health Check**: Monitor service health at `https://localhost/health`
+
+## Configuration
+
+The service runs on port 8880 and supports both CPU and GPU inference.
+For GPU support, ensure your Dokploy instance has NVIDIA GPU support enabled.
+
+## API Endpoints
+
+- `POST /v1/audio/speech` - Generate speech from text (OpenAI compatible)
+- `POST /dev/captioned_speech` - Generate speech with timestamps
+- `POST /dev/phonemize` - Convert text to phonemes
+- `POST /dev/generate_from_phonemes` - Generate audio from phonemes
+- `GET /health` - Health check endpoint
+- `GET /docs` - Interactive API documentation
+- `GET /web` - Web interface
+
+## Model Information
+
+- Model: Kokoro-82M
+- License: Apache-2.0
+- Repository: https://github.com/remsky/Kokoro-FastAPI
+- HuggingFace Model: https://huggingface.co/hexgrad/Kokoro-82M
+
+## Notes
+
+- This template builds the image from source during deployment
+- Uses CPU-optimized Dockerfile by default
+- Initial build may take several minutes due to model download
+- Ensure sufficient disk space for model storage
+- For GPU support, change dockerfile path to `docker/gpu/Dockerfile` in docker-compose.yml

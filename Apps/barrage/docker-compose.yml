@@ -1,0 +1,42 @@
+name: barrage
+services:
+  barrage:
+    image: maulik9898/barrage:0.3.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - NEXTAUTH_SECRET=GUJ2d8w6GzstFicYk1hDHrCW3s5MH/vpH08qmwQsD5s=
+    - NEXTAUTH_URL=http://${DOMAIN}
+    - DELUGE_URL=http://your-deluge-ip:8112
+    - DELUGE_PASSWORD=YRVn4SdcueRePfah
+    - BARRAGE_PASSWORD=IwmGEm3T6pR1kESA
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.barrage
+  main: barrage
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/barrage/icon.png
+  title:
+    en_US: Barrage
+  tagline:
+    en_US: Barrage is a minimalistic Deluge WebUI app with full mobile support
+  description:
+    en_US: Barrage is a minimalistic Deluge WebUI app with full mobile support. It features a responsive mobile-first design,
+      allowing you to manage your torrents with ease from any device.
+  author: Dokploy Community
+  developer: Barrage
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.3.0"
+  update_at: "2026-11-22"
+  website: https://github.com/maulik9898/barrage
+  repo: https://github.com/maulik9898/barrage
+  docs: https://github.com/maulik9898/barrage/blob/main/README.md

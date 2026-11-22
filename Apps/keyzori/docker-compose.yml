@@ -1,0 +1,109 @@
+name: keyzori
+services:
+  keyzori:
+    image: ghcr.io/keyzori/keyzori:93b5d75ac8e5a4cd0740bfe1a46b5663674767fb
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+    - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    env_file:
+    - path: .env
+      required: false
+    environment:
+      KEYZORI_ADMIN_KEY: ${KEYZORI_ADMIN_KEY:?Set KEYZORI_ADMIN_KEY}
+      KEYZORI_DATABASE_URL: postgresql://keyzori:${KEYZORI_POSTGRES_PASSWORD:?Set KEYZORI_POSTGRES_PASSWORD}@postgres:5432/keyzori
+      KEYZORI_REDIS_URL: redis://redis:6379
+    expose:
+    - '6284'
+    stop_grace_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - -T
+      - '5'
+      - -O
+      - /dev/null
+      - http://127.0.0.1:6284/ready
+      interval: 15s
+      timeout: 6s
+      start_period: 60s
+      retries: 3
+    ports:
+    - target: 6284
+      published: "6284"
+      protocol: tcp
+  postgres:
+    image: postgres:18.3-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: keyzori
+      POSTGRES_DB: keyzori
+      POSTGRES_PASSWORD: ${KEYZORI_POSTGRES_PASSWORD:?Set KEYZORI_POSTGRES_PASSWORD}
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U keyzori -d keyzori
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:8.6.1-alpine
+    restart: unless-stopped
+    command:
+    - redis-server
+    - --appendonly
+    - 'yes'
+    - --maxmemory
+    - 256mb
+    - --maxmemory-policy
+    - noeviction
+    volumes:
+    - redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  postgres-data: null
+  redis-data: null
+x-casaos:
+  id: com.dokploy.keyzori
+  main: keyzori
+  index: /
+  port_map: "6284"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/keyzori/icon.png
+  title:
+    en_US: Keyzori
+  tagline:
+    en_US: Self-hosted software license server with customer management, device access controls, s...
+  description:
+    en_US: Self-hosted software license server with customer management, device access controls, sessions, and usage metering
+      through an HTTP API and CLI.
+  author: Dokploy Community
+  developer: Keyzori
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "93b5d75ac8e5a4cd0740bfe1a46b5663674767fb"
+  update_at: "2026-11-22"
+  repo: https://github.com/keyzori/keyzori
+  docs: https://github.com/keyzori/keyzori/wiki

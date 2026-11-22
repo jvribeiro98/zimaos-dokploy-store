@@ -1,0 +1,39 @@
+name: dumbassets
+services:
+  dumbassets:
+    image: dumbwareio/dumbassets:latest
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - dumbassets-data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  dumbassets-data: {}
+x-casaos:
+  id: com.dokploy.dumbassets
+  main: dumbassets
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dumbassets/icon.svg
+  title:
+    en_US: DumbAssets
+  tagline:
+    en_US: DumbAssets is a simple, self-hosted asset tracking service with no database or authenti...
+  description:
+    en_US: DumbAssets is a simple, self-hosted asset tracking service with no database or authentication required.
+  author: Dokploy Community
+  developer: DumbAssets
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dumbware.io/DumbAssets/
+  repo: https://github.com/dumbwareio/dumbassets
+  docs: https://github.com/dumbwareio/dumbassets

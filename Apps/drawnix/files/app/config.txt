@@ -1,0 +1,1 @@
+# Placeholder content - customize if the application requires persistent configuration

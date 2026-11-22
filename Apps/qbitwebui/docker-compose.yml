@@ -1,0 +1,54 @@
+name: qbitwebui
+services:
+  qbitwebui:
+    image: ghcr.io/maciejonos/qbitwebui:latest
+    restart: unless-stopped
+    environment:
+    - ENCRYPTION_KEY=HHZwfpyiSPV6bzoQtG7GiHyltBU3vGrd
+    - PORT=3000
+    - DATABASE_PATH=/data/qbitwebui.db
+    - SALT_PATH=/data/.salt
+    volumes:
+    - qbitwebui_data:/data
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --no-verbose
+      - --tries=1
+      - --spider
+      - http://localhost:3000
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  qbitwebui_data: null
+x-casaos:
+  id: com.dokploy.qbitwebui
+  main: qbitwebui
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/qbitwebui/icon.png
+  title:
+    en_US: qBittorrent Web UI
+  tagline:
+    en_US: A modern web interface for managing multiple qBittorrent instances
+  description:
+    en_US: A modern web interface for managing multiple qBittorrent instances. Built with React, Hono, and Bun.
+  author: Dokploy Community
+  developer: qBittorrent Web UI
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/Maciejonos/qbitwebui
+  repo: https://github.com/Maciejonos/qbitwebui
+  docs: https://github.com/Maciejonos/qbitwebui#readme

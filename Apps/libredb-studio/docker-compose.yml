@@ -1,0 +1,58 @@
+name: libredb-studio
+services:
+  libredb-studio:
+    image: ghcr.io/libredb/libredb-studio:1.3.0
+    restart: unless-stopped
+    environment:
+    - ADMIN_PASSWORD_RESET=${ADMIN_PASSWORD_RESET:-}
+    - ADMIN_EMAIL=admin@libredb.org
+    - ADMIN_PASSWORD=02wwfYeut9fpSnWfs8bCiNYJKntqJiPv
+    - USER_EMAIL=user@libredb.org
+    - USER_PASSWORD=co8EM2agAADWWqVCpHbHQNunQvyI2N3Z
+    - JWT_SECRET=JkKT5k7XGG4RDtPaRCVWq2eHNuvnyR01qaTr8lOJlkJShqqdRqEn9NJkxdXL8yHu
+    - STORAGE_PROVIDER=sqlite
+    - STORAGE_SQLITE_PATH=/app/data/libredb-storage.db
+    - AUTH_COOKIE_SECURE=false
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - 'fetch(''http://127.0.0.1:3000/api/db/health'').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    volumes:
+    - libredb-data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  libredb-data: null
+x-casaos:
+  id: com.dokploy.libredb-studio
+  main: libredb-studio
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/libredb-studio/icon.svg
+  title:
+    en_US: LibreDB Studio
+  tagline:
+    en_US: The open-source SQL IDE you host yourself
+  description:
+    en_US: The open-source SQL IDE you host yourself. Query PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse,
+      Cassandra and more from your browser, forty-two drivers reaching sixty-nine named engines.
+  author: Dokploy Community
+  developer: LibreDB Studio
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.3.0"
+  update_at: "2026-11-22"
+  website: https://libredb.org/
+  repo: https://github.com/libredb/libredb-studio
+  docs: https://libredb.org/

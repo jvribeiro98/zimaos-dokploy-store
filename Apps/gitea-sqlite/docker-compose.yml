@@ -1,0 +1,53 @@
+name: gitea-sqlite
+services:
+  gitea:
+    image: docker.gitea.com/gitea:1.24.4
+    restart: unless-stopped
+    environment:
+    - USER_UID=1000
+    - USER_GID=1000
+    volumes:
+    - gitea-data:/data
+    expose:
+    - '3000'
+    - '22'
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - --spider
+      - http://localhost:3000/
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  gitea-data: {}
+x-casaos:
+  id: com.dokploy.gitea-sqlite
+  main: gitea
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gitea-sqlite/icon.png
+  title:
+    en_US: Gitea (SQLite)
+  tagline:
+    en_US: Self-hosted Git service using SQLite for a simple one-container setup
+  description:
+    en_US: Self-hosted Git service using SQLite for a simple one-container setup.
+  author: Dokploy Community
+  developer: Gitea (SQLite)
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.24.4"
+  update_at: "2026-11-22"
+  website: https://gitea.io/
+  repo: https://github.com/go-gitea/gitea
+  docs: https://docs.gitea.com/

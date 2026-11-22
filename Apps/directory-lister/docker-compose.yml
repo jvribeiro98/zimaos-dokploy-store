@@ -1,0 +1,40 @@
+name: directory-lister
+services:
+  directory-lister:
+    image: directorylister/directorylister:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    volumes:
+    - directory-lister-data:/data
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  directory-lister-data: {}
+x-casaos:
+  id: com.dokploy.directory-lister
+  main: directory-lister
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/directory-lister/icon.png
+  title:
+    en_US: Directory Lister
+  tagline:
+    en_US: Directory Lister is a simple PHP application that lists the contents of any web-accessi...
+  description:
+    en_US: Directory Lister is a simple PHP application that lists the contents of any web-accessible directory and allows
+      navigation there within.
+  author: Dokploy Community
+  developer: Directory Lister
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.directorylister.com/
+  repo: https://github.com/DirectoryLister/DirectoryLister
+  docs: https://docs.directorylister.com/

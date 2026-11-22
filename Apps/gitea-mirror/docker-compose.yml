@@ -1,0 +1,59 @@
+name: gitea-mirror
+services:
+  gitea-mirror:
+    image: ghcr.io/raylabshq/gitea-mirror:latest
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --no-verbose
+      - --tries=3
+      - --spider
+      - http://localhost:4321/api/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    environment:
+    - BETTER_AUTH_SECRET=qSca7GUh5IqnfBAL5XVb1O3ZiLEveV2KjPk7KX2siwQpkVP1XaqzIn/zGwbaLEJZMOIZKgMtb0u6t0UQxZvoPA==
+    - BETTER_AUTH_URL=https://localhost
+    - NODE_ENV=production
+    - DATABASE_URL=file:data/gitea-mirror.db
+    - HOST=0.0.0.0
+    - PORT=4321
+    volumes:
+    - gitea_mirror_data:/app/data
+    ports:
+    - target: 4321
+      published: "4321"
+      protocol: tcp
+volumes:
+  gitea_mirror_data: null
+x-casaos:
+  id: com.dokploy.gitea-mirror
+  main: gitea-mirror
+  index: /
+  port_map: "4321"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gitea-mirror/icon.png
+  title:
+    en_US: Gitea Mirror
+  tagline:
+    en_US: Gitea Mirror is a modern web app for automatically mirroring repositories from GitHub t...
+  description:
+    en_US: Gitea Mirror is a modern web app for automatically mirroring repositories from GitHub to your self-hosted Gitea
+      instance. It features a user-friendly interface to sync public, private, or starred GitHub repos, mirror entire organizations
+      with structure preservation, and optionally mirror issues and labels. The application includes smart filtering, detailed
+      logs, and scheduled automatic mirroring.
+  author: Dokploy Community
+  developer: Gitea Mirror
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.11.2"
+  update_at: "2026-11-22"
+  website: https://github.com/arunavo4/gitea-mirror
+  repo: https://github.com/arunavo4/gitea-mirror
+  docs: https://github.com/arunavo4/gitea-mirror#readme

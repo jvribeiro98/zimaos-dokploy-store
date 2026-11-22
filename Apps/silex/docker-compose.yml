@@ -1,0 +1,49 @@
+name: silex
+services:
+  silex:
+    image: silexlabs/silex:3.7.0
+    restart: unless-stopped
+    expose:
+    - 6805
+    environment:
+    - SILEX_URL=http://localhost
+    - SILEX_SESSION_SECRET=zsGBLgGOflhWWUsR9JkSGS3MvEVhp4F2
+    - STORAGE_CONNECTORS=fs
+    - HOSTING_CONNECTORS=fs,download
+    - SILEX_FS_ROOT=/silex/silex/storage
+    - SILEX_FS_HOSTING_ROOT=/silex/silex/hosting
+    volumes:
+    - silex-storage:/silex/silex/storage
+    - silex-hosting:/silex/silex/hosting
+    ports:
+    - target: 6805
+      published: "6805"
+      protocol: tcp
+volumes:
+  silex-storage: null
+  silex-hosting: null
+x-casaos:
+  id: com.dokploy.silex
+  main: silex
+  index: /
+  port_map: "6805"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/silex/icon.png
+  title:
+    en_US: Silex
+  tagline:
+    en_US: Silex is a free and open-source website builder for professional designers
+  description:
+    en_US: Silex is a free and open-source website builder for professional designers. It lets you create static websites
+      visually with a drag-and-drop editor, custom CSS and JavaScript, and publish them anywhere.
+  author: Dokploy Community
+  developer: Silex
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "3.7.0"
+  update_at: "2026-11-22"
+  website: https://www.silex.me
+  repo: https://github.com/silexlabs/Silex
+  docs: https://docs.silex.me

@@ -1,0 +1,44 @@
+name: checkcle
+services:
+  checkcle:
+    image: operacle/checkcle:latest
+    restart: unless-stopped
+    expose:
+    - 8090
+    volumes:
+    - checkcle-data:/mnt/pb_data
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8192
+    ports:
+    - target: 8090
+      published: "8090"
+      protocol: tcp
+volumes:
+  checkcle-data: {}
+x-casaos:
+  id: com.dokploy.checkcle
+  main: checkcle
+  index: /
+  port_map: "8090"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/checkcle/icon.png
+  title:
+    en_US: Checkcle
+  tagline:
+    en_US: Checkcle is a security and compliance tool by Operacle, providing insights into system...
+  description:
+    en_US: Checkcle is a security and compliance tool by Operacle, providing insights into system configuration and runtime
+      checks.
+  author: Dokploy Community
+  developer: Checkcle
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://operacle.com/
+  repo: https://github.com/Operacle/checkcle
+  docs: https://github.com/Operacle/checkcle#readme

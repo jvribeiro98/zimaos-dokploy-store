@@ -1,0 +1,44 @@
+name: uptimy-agent
+services:
+  uptimy-agent:
+    image: ghcr.io/uptimy/agent:0.3.2
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - ADMIN_USERNAME=admin
+    - ADMIN_PASSWORD=8Jc7dG2nBMw3XLQU7tVOTXHV
+    volumes:
+    - uptimy-agent-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  uptimy-agent-data: {}
+x-casaos:
+  id: com.dokploy.uptimy-agent
+  main: uptimy-agent
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/uptimy-agent/icon.svg
+  title:
+    en_US: Uptimy Agent
+  tagline:
+    en_US: 'Uptimy Agent is a lightweight, open-source uptime monitor with a status page: HTTP, TCP...'
+  description:
+    en_US: 'Uptimy Agent is a lightweight, open-source uptime monitor with a status page: HTTP, TCP, ping, DNS, TLS and database
+      checks, heartbeats for cron jobs, and alerts to Slack, Discord, Telegram, email and more. A single Go binary that idles
+      at a few MiB of memory.'
+  author: Dokploy Community
+  developer: Uptimy Agent
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.3.2"
+  update_at: "2026-11-22"
+  website: https://www.upti.my/agent
+  repo: https://github.com/uptimy/agent
+  docs: https://www.upti.my/docs/agent

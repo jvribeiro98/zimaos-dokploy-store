@@ -1,0 +1,74 @@
+name: langflow
+services:
+  langflow:
+    image: langflowai/langflow:latest
+    user: root
+    restart: always
+    pull_policy: always
+    expose:
+    - 7860
+    depends_on:
+    - postgres-langflow
+    environment:
+    - LANGFLOW_DATABASE_URL=postgresql://langflow:rtPxk70CgZvTgXhlalJmsOVdKxXvTKsC@postgres-langflow:5432/langflow
+    - LANGFLOW_CONFIG_DIR=/app/config
+    - LANGFLOW_SUPERUSER=email@domain.com
+    - LANGFLOW_SUPERUSER_PASSWORD=changepassword
+    - LANGFLOW_SECRET_KEY=PP_G4Gwm1lOkyG8r8N0LrdlpWXZ7Tyq5CVyfBquuj6g=
+    - DO_NOT_TRACK=True
+    - LANGFLOW_AUTO_SAVING=True
+    - LANGFLOW_AUTO_LOGIN=False
+    - LANGFLOW_NEW_USER_IS_ACTIVE=False
+    - LANGFLOW_ENABLE_SUPERUSER_CLI=False
+    volumes:
+    - app-data:/app/langflow
+    - app-config:/app/config
+    ports:
+    - target: 7860
+      published: "7860"
+      protocol: tcp
+  postgres-langflow:
+    image: postgres:16
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${DB_USERNAME} -d langflow
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: rtPxk70CgZvTgXhlalJmsOVdKxXvTKsC
+      POSTGRES_DB: langflow
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data: null
+  app-data: null
+  app-config: null
+x-casaos:
+  id: com.dokploy.langflow
+  main: langflow
+  index: /
+  port_map: "7860"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/langflow/icon.svg
+  title:
+    en_US: Langflow
+  tagline:
+    en_US: Langflow is a low-code app builder for RAG and multi-agent AI applications
+  description:
+    en_US: Langflow is a low-code app builder for RAG and multi-agent AI applications. It's Python-based and agnostic to any
+      model, API, or database.
+  author: Dokploy Community
+  developer: Langflow
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.1.1"
+  update_at: "2026-11-22"
+  website: https://www.langflow.org/
+  repo: https://github.com/langflow-ai/langflow/tree/main
+  docs: https://docs.langflow.org/

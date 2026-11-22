@@ -1,0 +1,90 @@
+name: rallly
+services:
+  rallly:
+    image: lukevella/rallly:4.11.1
+    restart: unless-stopped
+    depends_on:
+    - db
+    - minio
+    - minio-init
+    environment:
+      NEXT_PUBLIC_BASE_URL: https://localhost
+      DATABASE_URL: postgres://postgres:KJyTwa6yUwYCNffywOj1dhzRoSvg8E1V@db:5432/rallly
+      SECRET_PASSWORD: qQJjCnY5LZyJQZ0xFwvK00WV09pPfZjh
+      SUPPORT_EMAIL: admin@example.com
+      NOREPLY_EMAIL: admin@example.com
+      SMTP_HOST: smtp.example.com
+      SMTP_PORT: '587'
+      SMTP_USER: change-me
+      SMTP_PWD: 4MzudmSUGmLLh2ukwtLxQ0FZHdgwbiTA
+      SMTP_SECURE: 'false'
+      S3_ENDPOINT: http://minio:9000
+      S3_BUCKET_NAME: rallly
+      S3_REGION: us-east-1
+      S3_ACCESS_KEY_ID: rallly
+      S3_SECRET_ACCESS_KEY: S5VG8m1qAy7Bvz1tlmK14vscrgckAt7v
+      INITIAL_ADMIN_EMAIL: admin@example.com
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: rallly
+      POSTGRES_PASSWORD: KJyTwa6yUwYCNffywOj1dhzRoSvg8E1V
+    volumes:
+    - rallly-db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres -d rallly
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: rallly
+      MINIO_ROOT_PASSWORD: S5VG8m1qAy7Bvz1tlmK14vscrgckAt7v
+    volumes:
+    - rallly-minio:/data
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+    - minio
+    restart: 'no'
+    entrypoint: '/bin/sh -c " until mc alias set local http://minio:9000 ${S3_ACCESS_KEY_ID} ${S3_SECRET_ACCESS_KEY}; do sleep
+      2; done; mc mb --ignore-existing local/rallly; "
+
+      '
+volumes:
+  rallly-db: null
+  rallly-minio: null
+x-casaos:
+  id: com.dokploy.rallly
+  main: rallly
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rallly/icon.svg
+  title:
+    en_US: Rallly
+  tagline:
+    en_US: Rallly is an open-source scheduling and collaboration tool for organizing events and me...
+  description:
+    en_US: Rallly is an open-source scheduling and collaboration tool for organizing events and meetings.
+  author: Dokploy Community
+  developer: Rallly
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "4.11.1"
+  update_at: "2026-11-22"
+  website: https://rallly.co/
+  repo: https://github.com/lukevella/rallly
+  docs: https://support.rallly.co/self-hosting/introduction

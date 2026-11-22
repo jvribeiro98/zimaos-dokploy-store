@@ -1,0 +1,64 @@
+name: certmate
+services:
+  certmate:
+    image: fabriziosalmi/certmate:2.21.3
+    environment:
+    - FLASK_ENV=production
+    - SECRET_KEY=xeaQMlld8SusduluJqn7noYFAzELWB1t
+    - API_BEARER_TOKEN=zsgSroyOErRD2eWsNV9NCTGOdGBBDOQ2
+    - BEHIND_PROXY=true
+    - CLOUDFLARE_TOKEN=
+    - LETSENCRYPT_EMAIL=
+    - LOG_LEVEL=INFO
+    expose:
+    - 8000
+    volumes:
+    - certmate_certificates:/app/certificates
+    - certmate_data:/app/data
+    - certmate_logs:/app/logs
+    - certmate_backups:/app/backups
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8000/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  certmate_certificates: null
+  certmate_data: null
+  certmate_logs: null
+  certmate_backups: null
+x-casaos:
+  id: com.dokploy.certmate
+  main: certmate
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/certmate/icon.png
+  title:
+    en_US: CertMate
+  tagline:
+    en_US: CertMate is an SSL certificate management system with a web UI and REST API
+  description:
+    en_US: CertMate is an SSL certificate management system with a web UI and REST API. It automates issuing and renewing
+      Let's Encrypt certificates via DNS-01 challenges across 20+ DNS providers, with unified backups and multi-account support.
+  author: Dokploy Community
+  developer: CertMate
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2.21.3"
+  update_at: "2026-11-22"
+  website: https://www.certmate.org/
+  repo: https://github.com/fabriziosalmi/certmate
+  docs: https://www.certmate.org/docs/

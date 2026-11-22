@@ -1,0 +1,43 @@
+name: macos
+services:
+  macos:
+    image: dockurr/macos:1.14
+    volumes:
+    - macos-storage:/storage
+    environment:
+    - VERSION=15
+    devices:
+    - /dev/kvm
+    cap_add:
+    - NET_ADMIN
+    stop_grace_period: 2m
+    restart: unless-stopped
+    ports:
+    - target: 8006
+      published: "8006"
+      protocol: tcp
+volumes:
+  macos-storage: null
+x-casaos:
+  id: com.dokploy.macos
+  main: macos
+  index: /
+  port_map: "8006"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/macos/icon.png
+  title:
+    en_US: MacOS (dockerized)
+  tagline:
+    en_US: MacOS inside a Docker container
+  description:
+    en_US: MacOS inside a Docker container.
+  author: Dokploy Community
+  developer: MacOS (dockerized)
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.14"
+  update_at: "2026-11-22"
+  repo: https://github.com/dockur/macos
+  docs: https://github.com/dockur/macos?tab=readme-ov-file#how-do-i-use-it

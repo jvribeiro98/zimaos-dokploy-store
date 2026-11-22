@@ -1,0 +1,129 @@
+name: jitsi
+services:
+  web:
+    image: jitsi/web:${JITSI_IMAGE_VERSION:-unstable}
+    restart: unless-stopped
+    depends_on:
+    - prosody
+    volumes:
+    - jitsiWebConfig:/config
+    - jitsiWebTranscripts:/usr/share/jitsi-meet/transcripts
+    environment:
+    - PUBLIC_URL=https://localhost
+    - TZ=UTC
+    - XMPP_DOMAIN=meet.jitsi
+    - XMPP_AUTH_DOMAIN=auth.meet.jitsi
+    - XMPP_BOSH_URL_BASE=http://prosody:5280
+    - XMPP_MUC_DOMAIN=muc.meet.jitsi
+    - XMPP_GUEST_DOMAIN=guest.meet.jitsi
+    - XMPP_RECORDER_DOMAIN=recorder.meet.jitsi
+    - ENABLE_AUTH=0
+    - ENABLE_GUESTS=1
+    - ENABLE_LETSENCRYPT=0
+    - ENABLE_HTTP_REDIRECT=0
+    - ENABLE_XMPP_WEBSOCKET=1
+    - ENABLE_COLIBRI_WEBSOCKET=1
+    - DISABLE_HTTPS=1
+    - JICOFO_AUTH_USER=focus
+    - JVB_AUTH_USER=jvb
+    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
+    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  prosody:
+    image: jitsi/prosody:${JITSI_IMAGE_VERSION:-unstable}
+    restart: unless-stopped
+    volumes:
+    - jitsiProsodyConfig:/config
+    - jitsiProsodyPlugins:/prosody-plugins-custom
+    environment:
+    - TZ=UTC
+    - XMPP_DOMAIN=meet.jitsi
+    - XMPP_AUTH_DOMAIN=auth.meet.jitsi
+    - XMPP_MUC_DOMAIN=muc.meet.jitsi
+    - XMPP_GUEST_DOMAIN=guest.meet.jitsi
+    - XMPP_RECORDER_DOMAIN=recorder.meet.jitsi
+    - JICOFO_AUTH_USER=focus
+    - JVB_AUTH_USER=jvb
+    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
+    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
+    - JICOFO_COMPONENT_SECRET=B6D3bhRiMeQ680qxqWf0M20LUQXnW1BX
+    - JWT_APP_ID=
+    - JWT_APP_SECRET=
+    - ENABLE_AUTH=0
+    - ENABLE_GUESTS=1
+  jicofo:
+    image: jitsi/jicofo:${JITSI_IMAGE_VERSION:-unstable}
+    restart: unless-stopped
+    depends_on:
+    - prosody
+    volumes:
+    - jitsiJicofoConfig:/config
+    environment:
+    - TZ=UTC
+    - XMPP_DOMAIN=meet.jitsi
+    - XMPP_AUTH_DOMAIN=auth.meet.jitsi
+    - XMPP_MUC_DOMAIN=muc.meet.jitsi
+    - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
+    - JICOFO_AUTH_USER=focus
+    - JICOFO_AUTH_PASSWORD=C1lTld8NAWdKryysRhIb5uWQ7UzDfKAN
+    - JICOFO_COMPONENT_SECRET=B6D3bhRiMeQ680qxqWf0M20LUQXnW1BX
+    - JVB_BREWERY_MUC=jvbbrewery
+  jvb:
+    image: jitsi/jvb:${JITSI_IMAGE_VERSION:-unstable}
+    restart: unless-stopped
+    depends_on:
+    - prosody
+    expose:
+    - 10000
+    volumes:
+    - jitsiJvbConfig:/config
+    environment:
+    - TZ=UTC
+    - XMPP_AUTH_DOMAIN=auth.meet.jitsi
+    - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
+    - JVB_AUTH_USER=jvb
+    - JVB_AUTH_PASSWORD=GNXYhDhcOZnF6Kyr3CgnuXZVOMGNUzui
+    - JVB_BREWERY_MUC=jvbbrewery
+    - JVB_PORT=10000
+    - JVB_ADVERTISE_IPS=
+    - PUBLIC_URL=https://localhost
+volumes:
+  jitsiWebConfig:
+    driver: local
+  jitsiWebTranscripts:
+    driver: local
+  jitsiProsodyConfig:
+    driver: local
+  jitsiProsodyPlugins:
+    driver: local
+  jitsiJicofoConfig:
+    driver: local
+  jitsiJvbConfig:
+    driver: local
+x-casaos:
+  id: com.dokploy.jitsi
+  main: web
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/jitsi/icon.svg
+  title:
+    en_US: Jitsi Meet
+  tagline:
+    en_US: Jitsi Meet is an open-source video conferencing platform for secure, self-hosted meetings
+  description:
+    en_US: Jitsi Meet is an open-source video conferencing platform for secure, self-hosted meetings.
+  author: Dokploy Community
+  developer: Jitsi Meet
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://jitsi.org/jitsi-meet/
+  repo: https://github.com/jitsi/docker-jitsi-meet
+  docs: https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker

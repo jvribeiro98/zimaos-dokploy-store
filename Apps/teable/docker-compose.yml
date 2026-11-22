@@ -1,0 +1,84 @@
+name: teable
+services:
+  teable:
+    image: ghcr.io/teableio/teable:latest
+    restart: always
+    volumes:
+    - teable-data:/app/.assets
+    environment:
+    - TZ=UTC
+    - NEXT_ENV_IMAGES_ALL_REMOTE=true
+    - PUBLIC_ORIGIN=https://localhost
+    - PRISMA_DATABASE_URL=postgresql://teable:M81Rw2S7BS35C572h3BI2T2oGZRN164e@teable-db:5432/teable
+    - PUBLIC_DATABASE_PROXY=${TEABLE_HOST}:${TEABLE_DB_PORT}
+    - BACKEND_MAIL_HOST=${BACKEND_MAIL_HOST}
+    - BACKEND_MAIL_PORT=${BACKEND_MAIL_PORT}
+    - BACKEND_MAIL_SECURE=${BACKEND_MAIL_SECURE}
+    - BACKEND_MAIL_SENDER=${BACKEND_MAIL_SENDER}
+    - BACKEND_MAIL_SENDER_NAME=${BACKEND_MAIL_SENDER_NAME}
+    - BACKEND_MAIL_AUTH_USER=${BACKEND_MAIL_AUTH_USER}
+    - BACKEND_MAIL_AUTH_PASS=${BACKEND_MAIL_AUTH_PASS}
+    depends_on:
+      teable-db-migrate:
+        condition: service_completed_successfully
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  teable-db:
+    image: postgres:15.4
+    restart: always
+    ports:
+    - ${TEABLE_DB_PORT}:${POSTGRES_PORT}
+    volumes:
+    - teable-db:/var/lib/postgresql/data
+    environment:
+    - TZ=UTC
+    - POSTGRES_DB=teable
+    - POSTGRES_USER=teable
+    - POSTGRES_PASSWORD=M81Rw2S7BS35C572h3BI2T2oGZRN164e
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  teable-db-migrate:
+    image: ghcr.io/teableio/teable-db-migrate:latest
+    environment:
+    - TZ=UTC
+    - PRISMA_DATABASE_URL=postgresql://teable:M81Rw2S7BS35C572h3BI2T2oGZRN164e@teable-db:5432/teable
+    depends_on:
+      teable-db:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  teable-data: {}
+  teable-db: {}
+x-casaos:
+  id: com.dokploy.teable
+  main: teable
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/teable/icon.png
+  title:
+    en_US: teable
+  tagline:
+    en_US: Teable is a Super fast, Real-time, Professional, Developer friendly, No-code database b...
+  description:
+    en_US: Teable is a Super fast, Real-time, Professional, Developer friendly, No-code database built on Postgres. It uses
+      a simple, spreadsheet-like interface to create complex enterprise-level database applications. Unlock efficient app
+      development with no-code, free from the hurdles of data security and scalability.
+  author: Dokploy Community
+  developer: teable
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.3.1-alpha-build.460"
+  update_at: "2026-11-22"
+  website: https://teable.io/
+  repo: https://github.com/teableio/teable
+  docs: https://help.teable.io/

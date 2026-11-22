@@ -1,0 +1,71 @@
+name: rote
+services:
+  rote-backend:
+    image: rabithua/rote-backend:${IMAGE_TAG:-latest}
+    pull_policy: always
+    environment:
+      POSTGRESQL_URL: postgresql://rote:Ptdd8TrpMcYywG1y7ZgPk5i4MBndlKuQ@rote-postgres:5432/rote
+    depends_on:
+      rote-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    command:
+    - sh
+    - -c
+    - sleep 15 && bun run dist/scripts/runMigrations.js && bun run dist/server.js
+  rote-frontend:
+    image: rabithua/rote-frontend:${IMAGE_TAG:-latest}
+    pull_policy: always
+    depends_on:
+    - rote-backend
+    environment:
+      VITE_API_BASE: http://localhost
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  rote-postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rote
+      POSTGRES_PASSWORD: Ptdd8TrpMcYywG1y7ZgPk5i4MBndlKuQ
+      POSTGRES_DB: rote
+    volumes:
+    - rote-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U rote -d rote
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+volumes:
+  rote-postgres-data: {}
+x-casaos:
+  id: com.dokploy.rote
+  main: rote-frontend
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rote/icon.png
+  title:
+    en_US: Rote
+  tagline:
+    en_US: Rote is an open-source multi-platform personal note system featuring an open API, full...
+  description:
+    en_US: Rote is an open-source multi-platform personal note system featuring an open API, full data ownership, and effortless
+      Docker deployment.
+  author: Dokploy Community
+  developer: Rote
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "-latest}"
+  update_at: "2026-11-22"
+  website: https://rote.ink
+  repo: https://github.com/Rabithua/Rote
+  docs: https://github.com/Rabithua/Rote/tree/main/doc/userguide

@@ -1,0 +1,48 @@
+name: homebridge
+services:
+  homebridge:
+    image: homebridge/homebridge:latest
+    restart: always
+    expose:
+    - 8581
+    volumes:
+    - /DATA/AppData/$AppID/volumes/homebridge:/homebridge
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://homebridge:8581/
+      interval: 60s
+      retries: 5
+      start_period: 300s
+      timeout: 2s
+    ports:
+    - target: 8581
+      published: "8581"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.homebridge
+  main: homebridge
+  index: /
+  port_map: "8581"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/homebridge/icon.svg
+  title:
+    en_US: Homebridge
+  tagline:
+    en_US: Homebridge is a tool that brings Apple HomeKit support to smart home devices that don't...
+  description:
+    en_US: Homebridge is a tool that brings Apple HomeKit support to smart home devices that don't support it natively. Self-host
+      it on your own server with Dokploy, which deploys Homebridge as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Homebridge
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://homebridge.io/
+  repo: https://github.com/homebridge/homebridge
+  docs: https://github.com/homebridge/homebridge/wiki

@@ -1,0 +1,81 @@
+name: listmonk
+services:
+  db:
+    image: postgres:17-alpine
+    expose:
+    - 5432
+    environment:
+    - POSTGRES_USER=listmonk
+    - POSTGRES_PASSWORD=listmonk
+    - POSTGRES_DB=listmonk
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U listmonk
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+    - listmonk-data:/var/lib/postgresql/data
+  app:
+    restart: unless-stopped
+    image: listmonk/listmonk:v5.0.0
+    environment:
+    - LISTMONK_app__address=0.0.0.0:9000
+    - LISTMONK_db__user=listmonk
+    - LISTMONK_db__password=listmonk
+    - LISTMONK_db__database=listmonk
+    - LISTMONK_db__host=db
+    - LISTMONK_db__port=5432
+    - LISTMONK_db__ssl_mode=disable
+    - LISTMONK_db__max_open=25
+    - LISTMONK_db__max_idle=25
+    - LISTMONK_db__max_lifetime=300s
+    - TZ=Etc/UTC
+    depends_on:
+    - db
+    command:
+    - sh
+    - -c
+    - ./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config
+      ''
+    volumes:
+    - /DATA/AppData/$AppID/config.toml:/listmonk/config.toml
+    - listmonk-uploads:/listmonk/uploads
+    ports:
+    - target: 9000
+      published: "9000"
+      protocol: tcp
+volumes:
+  listmonk-uploads: null
+  listmonk-data:
+    driver: local
+x-casaos:
+  id: com.dokploy.listmonk
+  main: app
+  index: /
+  port_map: "9000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/listmonk/icon.png
+  title:
+    en_US: Listmonk
+  tagline:
+    en_US: High performance, self-hosted, newsletter and mailing list manager with a modern dashboard
+  description:
+    en_US: High performance, self-hosted, newsletter and mailing list manager with a modern dashboard.
+  author: Dokploy Community
+  developer: Listmonk
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.0.0"
+  update_at: "2026-11-22"
+  website: https://listmonk.app/
+  repo: https://github.com/knadh/listmonk
+  docs: https://listmonk.app/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config.toml). Review environment
+        variables before starting.

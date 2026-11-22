@@ -1,0 +1,90 @@
+name: multica
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: multica
+      POSTGRES_USER: multica
+      POSTGRES_PASSWORD: fqvgo3PulaHprf932RAtbmUwmMqLWCep
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  backend:
+    build:
+      context: https://github.com/multica-ai/multica.git#main
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+    - backend_uploads:/app/data/uploads
+    environment:
+      DATABASE_URL: postgres://multica:fqvgo3PulaHprf932RAtbmUwmMqLWCep@postgres:5432/multica?sslmode=disable
+      PORT: '8080'
+      JWT_SECRET: kT88ftkCdAXCasR2xeFhozXAe1cIARaNT9B5PXkYTuH80jdnE3RHLxtUVY798hr4
+      FRONTEND_ORIGIN: https://localhost
+      ALLOWED_ORIGINS: https://localhost
+      MULTICA_APP_URL: https://localhost
+      RESEND_API_KEY: ''
+      RESEND_FROM_EMAIL: noreply@multica.ai
+      GOOGLE_CLIENT_ID: ''
+      GOOGLE_CLIENT_SECRET: ''
+      GOOGLE_REDIRECT_URI: https://localhost/auth/callback
+      COOKIE_DOMAIN: ''
+      S3_BUCKET: ''
+      S3_REGION: us-west-2
+      CLOUDFRONT_DOMAIN: ''
+      CLOUDFRONT_KEY_PAIR_ID: ''
+      CLOUDFRONT_PRIVATE_KEY: ''
+  frontend:
+    build:
+      context: https://github.com/multica-ai/multica.git#main
+      dockerfile: Dockerfile.web
+      args:
+        REMOTE_API_URL: http://backend:8080
+        NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+    restart: unless-stopped
+    depends_on:
+    - backend
+    environment:
+      HOSTNAME: 0.0.0.0
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  pgdata: null
+  backend_uploads: null
+x-casaos:
+  id: com.dokploy.multica
+  main: frontend
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/multica/icon.svg
+  title:
+    en_US: Multica
+  tagline:
+    en_US: Multica is an open-source managed agents platform for teams
+  description:
+    en_US: Multica is an open-source managed agents platform for teams. Assign tasks to AI coding agents (Claude Code, Codex,
+      OpenClaw and more) that execute autonomously, report progress, and build reusable skills over time.
+  author: Dokploy Community
+  developer: Multica
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://multica.ai
+  repo: https://github.com/multica-ai/multica
+  docs: https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md

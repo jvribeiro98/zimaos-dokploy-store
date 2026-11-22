@@ -1,0 +1,70 @@
+name: filerun
+services:
+  filerun-init:
+    image: busybox:1.37
+    restart: 'no'
+    command: chown -R 1001:1001 /var/www/html /user-files
+    volumes:
+    - filerun-html:/var/www/html
+    - filerun-user-files:/user-files
+  filerun:
+    image: filerun/filerun:latest
+    restart: unless-stopped
+    depends_on:
+      filerun-init:
+        condition: service_completed_successfully
+      db:
+        condition: service_started
+    environment:
+      FR_DB_HOST: db
+      FR_DB_PORT: '3306'
+      FR_DB_NAME: filerun
+      FR_DB_USER: filerun
+      FR_DB_PASS: lroPpkkzmZcKJa7QxFisXswkK8qUIQEw
+    volumes:
+    - filerun-html:/var/www/html
+    - filerun-user-files:/user-files
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: mariadb:12.2
+    restart: unless-stopped
+    command: --old-mode=NO_PROGRESS_INFO
+    environment:
+      MARIADB_ROOT_PASSWORD: hLNsycInwlYxBRn3DNvgMCZBo53WW8XG
+      MYSQL_USER: filerun
+      MYSQL_PASSWORD: lroPpkkzmZcKJa7QxFisXswkK8qUIQEw
+      MYSQL_DATABASE: filerun
+      MARIADB_AUTO_UPGRADE: '1'
+    volumes:
+    - filerun-db:/var/lib/mysql
+volumes:
+  filerun-html: null
+  filerun-user-files: null
+  filerun-db: null
+x-casaos:
+  id: com.dokploy.filerun
+  main: filerun
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/filerun/icon.svg
+  title:
+    en_US: FileRun
+  tagline:
+    en_US: FileRun is a self-hosted file manager and file sharing platform
+  description:
+    en_US: FileRun is a self-hosted file manager and file sharing platform.
+  author: Dokploy Community
+  developer: FileRun
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://filerun.com/
+  repo: https://github.com/filerun/docker
+  docs: https://docs.filerun.com/docker

@@ -1,0 +1,99 @@
+name: penpot
+services:
+  penpot-frontend:
+    image: penpotapp/frontend:2.6.1
+    restart: always
+    expose:
+    - 8080
+    - 9001
+    volumes:
+    - penpot_assets:/opt/data/assets
+    depends_on:
+    - penpot-backend
+    - penpot-exporter
+    environment:
+      PENPOT_FLAGS: disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  penpot-backend:
+    image: penpotapp/backend:2.6.1
+    restart: always
+    volumes:
+    - penpot_assets:/opt/data/assets
+    depends_on:
+    - penpot-postgres
+    - penpot-redis
+    environment:
+      PENPOT_PUBLIC_URI: http://localhost
+      PENPOT_FLAGS: disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
+      PENPOT_DATABASE_URI: postgresql://penpot-postgres/penpot
+      PENPOT_DATABASE_USERNAME: penpot
+      PENPOT_DATABASE_PASSWORD: penpot
+      PENPOT_REDIS_URI: redis://penpot-redis/0
+      PENPOT_ASSETS_STORAGE_BACKEND: assets-fs
+      PENPOT_STORAGE_ASSETS_FS_DIRECTORY: /opt/data/assets
+      PENPOT_TELEMETRY_ENABLED: 'True'
+      PENPOT_SMTP_DEFAULT_FROM: no-reply@example.com
+      PENPOT_SMTP_DEFAULT_REPLY_TO: no-reply@example.com
+      PENPOT_SMTP_HOST: penpot-mailcatch
+      PENPOT_SMTP_PORT: '1025'
+      PENPOT_SMTP_USERNAME: ''
+      PENPOT_SMTP_PASSWORD: ''
+      PENPOT_SMTP_TLS: 'False'
+      PENPOT_SMTP_SSL: 'False'
+  penpot-exporter:
+    image: penpotapp/exporter:2.6.1
+    restart: always
+    environment:
+      PENPOT_PUBLIC_URI: http://penpot-frontend
+      PENPOT_REDIS_URI: redis://penpot-redis/0
+  penpot-postgres:
+    image: postgres:15
+    restart: always
+    stop_signal: SIGINT
+    volumes:
+    - penpot_postgres_v15:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_INITDB_ARGS=--data-checksums
+    - POSTGRES_DB=penpot
+    - POSTGRES_USER=penpot
+    - POSTGRES_PASSWORD=penpot
+  penpot-redis:
+    image: redis:7.2
+    restart: always
+  penpot-mailcatch:
+    image: sj26/mailcatcher:latest
+    restart: always
+    expose:
+    - '1025'
+    - '1080'
+volumes:
+  penpot_postgres_v15: null
+  penpot_assets: null
+  penpot_traefik: null
+x-casaos:
+  id: com.dokploy.penpot
+  main: penpot-frontend
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/penpot/icon.svg
+  title:
+    en_US: Penpot
+  tagline:
+    en_US: Penpot is the web-based open-source design tool that bridges the gap between designers...
+  description:
+    en_US: Penpot is the web-based open-source design tool that bridges the gap between designers and developers.
+  author: Dokploy Community
+  developer: Penpot
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.3.2"
+  update_at: "2026-11-22"
+  website: https://penpot.app/
+  repo: https://github.com/penpot/penpot
+  docs: https://docs.penpot.app/

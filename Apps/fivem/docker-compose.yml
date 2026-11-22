@@ -1,0 +1,47 @@
+name: fivem
+services:
+  fivem:
+    image: spritsail/fivem:latest
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    environment:
+    - LICENSE_KEY=${license_key}
+    - RCON_PASSWORD=${rcon_password}
+    - NO_DEFAULT_CONFIG=${NO_DEFAULT_CONFIG:-}
+    volumes:
+    - fivem_config:/config
+    - fivem_txdata:/txData
+    ports:
+    - 30120:30120
+    - 30120:30120/udp
+    - 40120
+    labels:
+    - traefik.enable=true
+volumes:
+  fivem_config: null
+  fivem_txdata: null
+x-casaos:
+  id: com.dokploy.fivem
+  main: fivem
+  index: /
+  port_map: "40120"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/fivem/icon.svg
+  title:
+    en_US: FiveM Server
+  tagline:
+    en_US: A modded GTA V multiplayer server with optional txAdmin web interface for easy server m...
+  description:
+    en_US: A modded GTA V multiplayer server with optional txAdmin web interface for easy server management.
+  author: Dokploy Community
+  developer: FiveM Server
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://fivem.net/
+  repo: https://github.com/spritsail/fivem
+  docs: https://docs.fivem.net/docs/server-manual/

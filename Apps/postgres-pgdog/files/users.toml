@@ -1,0 +1,4 @@
+[[users]]
+name = "admin"
+database = "postgres"
+password = "8iqaYX4bAtOo1dd3IrT7e0ziNIJerncp"

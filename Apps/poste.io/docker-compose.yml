@@ -1,0 +1,51 @@
+name: poste.io
+services:
+  mailserver:
+    image: analogic/poste.io
+    restart: unless-stopped
+    hostname: mail.${DOMAIN}
+    ports:
+    - '25:25'
+    - 110:110
+    - 143:143
+    - 465:465
+    - 587:587
+    - 993:993
+    - 995:995
+    - 4190:4190
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+    environment:
+    - TZ=UTC
+    - HTTPS=OFF
+    - HTTP_PORT=8080
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - poste-data:/data
+volumes:
+  poste-data: {}
+x-casaos:
+  id: com.dokploy.poste.io
+  main: mailserver
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/poste.io/icon.svg
+  title:
+    en_US: Poste.io
+  tagline:
+    en_US: Complete mail server solution with SMTP, IMAP, POP3, antispam, antivirus, web administr...
+  description:
+    en_US: Complete mail server solution with SMTP, IMAP, POP3, antispam, antivirus, web administration and webmail client.
+  author: Dokploy Community
+  developer: Poste.io
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://poste.io/
+  repo: https://bitbucket.org/analogic/mailserver
+  docs: https://poste.io/doc/

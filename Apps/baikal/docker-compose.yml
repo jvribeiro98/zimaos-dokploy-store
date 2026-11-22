@@ -1,0 +1,45 @@
+name: baikal
+services:
+  baikal:
+    image: ckulka/baikal:nginx-php8.2
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - TZ=UTC
+    volumes:
+    - config:/var/www/baikal/config
+    - data:/var/www/baikal/Specific
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  config: {}
+  data: {}
+x-casaos:
+  id: com.dokploy.baikal
+  main: baikal
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/baikal/icon.png
+  title:
+    en_US: Baikal
+  tagline:
+    en_US: Baikal is a lightweight, self-hosted CalDAV and CardDAV server that enables users to ma...
+  description:
+    en_US: Baikal is a lightweight, self-hosted CalDAV and CardDAV server that enables users to manage calendars and contacts
+      efficiently. It provides a simple and effective solution for syncing and sharing events, tasks, and address books across
+      multiple devices.
+  author: Dokploy Community
+  developer: Baikal
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "nginx-php8.2"
+  update_at: "2026-11-22"
+  website: https://sabre.io/baikal/
+  repo: https://sabre.io/baikal/
+  docs: https://sabre.io/baikal/install/

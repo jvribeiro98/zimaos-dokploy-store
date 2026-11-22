@@ -1,0 +1,53 @@
+name: mailpit
+services:
+  mailpit:
+    image: axllent/mailpit:v1.22.3
+    restart: unless-stopped
+    expose:
+    - 1025
+    volumes:
+    - mailpit-data:/data
+    environment:
+    - MP_SMTP_AUTH_ALLOW_INSECURE=true
+    - MP_MAX_MESSAGES=5000
+    - MP_DATABASE=/data/mailpit.db
+    - MP_UI_AUTH=${MP_UI_AUTH}
+    - MP_SMTP_AUTH=${MP_SMTP_AUTH}
+    healthcheck:
+      test:
+      - CMD
+      - /mailpit
+      - readyz
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    ports:
+    - target: 8025
+      published: "8025"
+      protocol: tcp
+volumes:
+  mailpit-data: null
+x-casaos:
+  id: com.dokploy.mailpit
+  main: mailpit
+  index: /
+  port_map: "8025"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mailpit/icon.svg
+  title:
+    en_US: Mailpit
+  tagline:
+    en_US: Mailpit is a tiny, self-contained, and secure email & SMTP testing tool with API for de...
+  description:
+    en_US: Mailpit is a tiny, self-contained, and secure email & SMTP testing tool with API for developers.
+  author: Dokploy Community
+  developer: Mailpit
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.22.3"
+  update_at: "2026-11-22"
+  website: https://mailpit.axllent.org/
+  repo: https://github.com/axllent/mailpit
+  docs: https://mailpit.axllent.org/docs/

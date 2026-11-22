@@ -1,0 +1,40 @@
+name: cloudflared
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    environment:
+    - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:?}
+    network_mode: host
+    restart: unless-stopped
+    command:
+    - tunnel
+    - --no-autoupdate
+    - run
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.cloudflared
+  main: cloudflared
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cloudflared/icon.svg
+  title:
+    en_US: Cloudflared
+  tagline:
+    en_US: A lightweight daemon that securely connects local services to the internet through Clou...
+  description:
+    en_US: A lightweight daemon that securely connects local services to the internet through Cloudflare Tunnel.
+  author: Dokploy Community
+  developer: Cloudflared
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/
+  repo: https://github.com/cloudflare/cloudflared
+  docs: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/get-started/

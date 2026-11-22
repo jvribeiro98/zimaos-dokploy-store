@@ -1,0 +1,43 @@
+name: nginx
+services:
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    - 443
+    volumes:
+    - nginx-config:/etc/nginx
+    - nginx-html:/usr/share/nginx/html
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  nginx-config: {}
+  nginx-html: {}
+x-casaos:
+  id: com.dokploy.nginx
+  main: nginx
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nginx/icon.png
+  title:
+    en_US: Nginx
+  tagline:
+    en_US: Nginx is a high-performance web server and reverse proxy
+  description:
+    en_US: Nginx is a high-performance web server and reverse proxy. Self-host it on your own server with Dokploy, which deploys
+      Nginx as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Nginx
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://nginx.org/
+  repo: https://github.com/nginx/nginx
+  docs: https://nginx.org/en/docs/

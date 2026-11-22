@@ -1,0 +1,76 @@
+name: rustrak-full
+services:
+  rustrak-server:
+    image: rustrak/rustrak-server:postgres
+    restart: unless-stopped
+    environment:
+    - HOST=0.0.0.0
+    - PORT=8080
+    - RUST_LOG=info
+    - SSL_PROXY=true
+    - DATABASE_URL=postgres://rustrak:KEPaifCxtcEWxvzaihZyi2UdqiDx3y6K@postgres:5432/rustrak
+    - SESSION_SECRET_KEY=EIz0LIbgerKr6G7oIIAHLAYyS7wsuba2Joz5QwRhGnNFOuK5LKQteV2XFLQBtbH6
+    - CREATE_SUPERUSER=admin@example.com:6j7WVJB2Q4huvMTv
+    expose:
+    - 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+  rustrak-ui:
+    image: rustrak/rustrak-ui:latest
+    restart: unless-stopped
+    environment:
+    - RUSTRAK_API_URL=https://localhost
+    - HOSTNAME=0.0.0.0
+    expose:
+    - 3000
+    depends_on:
+    - rustrak-server
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=rustrak
+    - POSTGRES_PASSWORD=KEPaifCxtcEWxvzaihZyi2UdqiDx3y6K
+    - POSTGRES_DB=rustrak
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U rustrak -d rustrak
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    expose:
+    - 5432
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.rustrak-full
+  main: rustrak-ui
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rustrak-full/icon.svg
+  title:
+    en_US: Rustrak (Full Stack)
+  tagline:
+    en_US: Self-hosted error tracking compatible with Sentry SDKs
+  description:
+    en_US: 'Self-hosted error tracking compatible with Sentry SDKs. Full stack: Rust server, web dashboard and PostgreSQL.'
+  author: Dokploy Community
+  developer: Rustrak (Full Stack)
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rustrak.github.io/rustrak/
+  repo: https://github.com/rustrak/rustrak
+  docs: https://rustrak.github.io/rustrak/getting-started/overview

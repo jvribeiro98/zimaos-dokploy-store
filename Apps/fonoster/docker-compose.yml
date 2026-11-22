@@ -1,0 +1,225 @@
+name: fonoster
+services:
+  dashboard:
+    image: fonoster/dashboard:0.15.15
+    restart: unless-stopped
+    expose:
+    - 3030
+    environment:
+    - SERVER_DASHBOARD_SESSION_SECRET=ld9sWTH3Bu8ClJF83ZphlxN04B6PKGcspHb5gEMUUNdcIO8Jxjdvt9CqnU1NyY64
+    ports:
+    - target: 3030
+      published: "3030"
+      protocol: tcp
+  apiserver:
+    image: fonoster/apiserver:0.15.15
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+    - APISERVER_APP_URL=https://localhost
+    - APISERVER_ASTERISK_ARI_PROXY_URL=http://asterisk:8088
+    - APISERVER_ASTERISK_ARI_SECRET=28D1CD3CSEdtGw6kLuUslIdcAotQfzbw
+    - APISERVER_ASTERISK_ARI_USERNAME=ari
+    - APISERVER_AUTHZ_SERVICE_ENABLED=false
+    - APISERVER_AUTHZ_SERVICE_HOST=fnauthz
+    - APISERVER_AUTHZ_SERVICE_METHODS=/fonoster.calls.v1beta2.Calls/CreateCall,/fonoster.identity.v1beta2.Identity/CreateWorkspace
+    - APISERVER_AUTHZ_SERVICE_PORT=50071
+    - APISERVER_CLOAK_ENCRYPTION_KEY=QMzMKbI5VG20C32oUsczYmtqg2NubSo0bP3g4gjYk9s=
+    - APISERVER_DATABASE_URL=postgresql://postgres:ED1EFzFieBNGdfq8nV077y0Yw9oJnau8@postgres:5432/fonoster
+    - APISERVER_IDENTITY_DATABASE_URL=postgresql://postgres:ED1EFzFieBNGdfq8nV077y0Yw9oJnau8@postgres:5432/fnidentity
+    - APISERVER_IDENTITY_ISSUER=https://localhost
+    - APISERVER_IDENTITY_CONTACT_VERIFICATION_REQUIRED=false
+    - APISERVER_IDENTITY_TWO_FACTOR_AUTHENTICATION_REQUIRED=false
+    - APISERVER_IDENTITY_WORKSPACE_INVITE_EXPIRATION=1d
+    - APISERVER_IDENTITY_WORKSPACE_INVITE_FAIL_URL=https://localhost/invite-fail
+    - APISERVER_IDENTITY_WORKSPACE_INVITE_URL=https://localhost:8449/api/identity/accept-invite
+    - APISERVER_IDENTITY_OAUTH2_GITHUB_CLIENT_ID=
+    - APISERVER_IDENTITY_OAUTH2_GITHUB_CLIENT_SECRET=
+    - APISERVER_IDENTITY_OAUTH2_GITHUB_ENABLED=false
+    - APISERVER_INFLUXDB_INIT_ORG=fonoster
+    - APISERVER_INFLUXDB_INIT_PASSWORD=Q2cTzP5RcCPmvd1nrwNwiBgzG3dQNFyv
+    - APISERVER_INFLUXDB_INIT_TOKEN=E2zbTIR3o7kxnCATGmKwYqvDtBCLja2ywFhjF7gnve8TfodkPFxQbg4SrMH9gIFL
+    - APISERVER_INFLUXDB_INIT_USERNAME=influxdb
+    - APISERVER_INFLUXDB_URL=http://influxdb:8086
+    - APISERVER_LOGS_FORMAT=json
+    - APISERVER_LOGS_LEVEL=verbose
+    - APISERVER_LOGS_TRANSPORT=none
+    - APISERVER_NATS_URL=nats://nats:4222
+    - APISERVER_OWNER_EMAIL=admin@localhost
+    - APISERVER_OWNER_NAME=Admin User
+    - APISERVER_OWNER_PASSWORD=QOaIZzaU2DRiuMKmVLDoeZiP0bxnbcrY
+    - APISERVER_ROOT_DOMAIN=localhost
+    - APISERVER_SMTP_AUTH_PASS=secret
+    - APISERVER_SMTP_AUTH_USER=postmaster@localhost
+    - APISERVER_SMTP_HOST=your-smtp-server
+    - APISERVER_SMTP_PORT=587
+    - APISERVER_SMTP_SECURE=true
+    - APISERVER_SMTP_SENDER=Fonoster Info <info@localhost>
+    - APISERVER_SIGNALING_SERVER=ws://localhost:5062
+    - APISERVER_TWILIO_ACCOUNT_SID=
+    - APISERVER_TWILIO_AUTH_TOKEN=
+    - APISERVER_TWILIO_PHONE_NUMBER=
+    expose:
+    - 50051
+    volumes:
+    - /DATA/AppData/$AppID/config/keys:/opt/fonoster/keys:ro
+    - /DATA/AppData/$AppID/config/integrations.json:/opt/fonoster/integrations.json:ro
+  autopilot:
+    image: fonoster/autopilot:0.15.15
+    restart: unless-stopped
+    expose:
+    - 50061
+    environment:
+    - AUTOPILOT_AWS_S3_ACCESS_KEY_ID=
+    - AUTOPILOT_AWS_S3_ENDPOINT=
+    - AUTOPILOT_AWS_S3_REGION=us-east-1
+    - AUTOPILOT_AWS_S3_SECRET_ACCESS_KEY=
+    - AUTOPILOT_CONVERSATION_PROVIDER=api
+    - AUTOPILOT_KNOWLEDGE_BASE_ENABLED=false
+    - AUTOPILOT_LOGS_FORMAT=none
+    - AUTOPILOT_LOGS_LEVEL=verbose
+    - AUTOPILOT_LOGS_TRANSPORT=none
+    - AUTOPILOT_OPENAI_API_KEY=
+    - AUTOPILOT_UNSTRUCTURED_API_KEY=
+    - AUTOPILOT_UNSTRUCTURED_API_URL=
+    volumes:
+    - /DATA/AppData/$AppID/config/integrations.json:/opt/fonoster/integrations.json:ro
+  routr:
+    image: fonoster/routr-one:2.13.13
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:ED1EFzFieBNGdfq8nV077y0Yw9oJnau8@postgres:5432/routr
+      EXTERNAL_ADDRS: CHANGE_ME_TO_HOST_IP
+      LOGS_FORMAT: none
+      LOGS_LEVEL: verbose
+      LOGS_TRANSPORT: none
+      NATS_PUBLISHER_ENABLED: 'true'
+      NATS_PUBLISHER_URL: nats://nats:4222
+      RTPENGINE_HOST: rtpengine
+      START_INTERNAL_DB: 'false'
+      CONNECT_VERIFIER_PUBLIC_KEY_PATH: /etc/routr/keys/public.pem
+    expose:
+    - 51907
+    - 51908
+    ports:
+    - 5060:5060/udp
+    - 5060-5063:5060-5063
+    volumes:
+    - /DATA/AppData/$AppID/config/keys/public.pem:/etc/routr/keys/public.pem
+  rtpengine:
+    image: fonoster/rtpengine:0.3.17
+    restart: unless-stopped
+    platform: linux/x86_64
+    ports:
+    - 10000-10100:10000-10100/udp
+    - 8080:8080
+    environment:
+      PORT_MAX: '20000'
+      PORT_MIN: '10000'
+      PUBLIC_IP: CHANGE_ME_TO_HOST_IP
+  asterisk:
+    image: fonoster/asterisk:20
+    restart: unless-stopped
+    environment:
+      ARI_PROXY_URL: http://asterisk:8088
+      ARI_SECRET: VimMnNY8Twt11K3uujEqndsXE00qAwBX
+      ARI_USERNAME: ari
+      CODECS: g722,ulaw,alaw
+      DTMF_MODE: auto_info
+      RTP_PORT_END: '20000'
+      RTP_PORT_START: '10000'
+      SIPPROXY_HOST: CHANGE_ME_TO_HOST_IP
+      SIPPROXY_PORT: '5060'
+      SIPPROXY_SECRET: GRkCVor8rP3JKQJm9dAJDPFO9pLkKYAe
+      SIPPROXY_USERNAME: voice
+    expose:
+    - 6060
+  postgres:
+    image: postgres:16.10-alpine3.22
+    restart: unless-stopped
+    environment:
+      PGTZ: UTC
+      POSTGRES_PASSWORD: ED1EFzFieBNGdfq8nV077y0Yw9oJnau8
+      POSTGRES_USER: postgres
+      POSTGRES_DB: fonoster
+      TZ: UTC
+    expose:
+    - 5432
+    volumes:
+    - db:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/config/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  influxdb:
+    image: influxdb:2.7
+    restart: unless-stopped
+    expose:
+    - 8086
+    environment:
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: E2zbTIR3o7kxnCATGmKwYqvDtBCLja2ywFhjF7gnve8TfodkPFxQbg4SrMH9gIFL
+      DOCKER_INFLUXDB_INIT_BUCKET: calls
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_ORG: fonoster
+      DOCKER_INFLUXDB_INIT_PASSWORD: Q2cTzP5RcCPmvd1nrwNwiBgzG3dQNFyv
+      DOCKER_INFLUXDB_INIT_USERNAME: influxdb
+    volumes:
+    - influxdb:/var/lib/influxdb2
+  nats:
+    image: nats:2.11.8
+    restart: unless-stopped
+    expose:
+    - 4222
+  envoy:
+    image: envoyproxy/envoy:v1.35.0
+    restart: unless-stopped
+    command:
+    - /usr/local/bin/envoy
+    - -c
+    - /etc/envoy/envoy.yaml
+    volumes:
+    - /DATA/AppData/$AppID/config:/etc/envoy:ro
+    ports:
+    - 8449:8449
+volumes:
+  db: null
+  influxdb: null
+x-casaos:
+  id: com.dokploy.fonoster
+  main: dashboard
+  index: /
+  port_map: "3030"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/fonoster/icon.svg
+  title:
+    en_US: Fonoster
+  tagline:
+    en_US: Fonoster is an open-source alternative to Twilio
+  description:
+    en_US: Fonoster is an open-source alternative to Twilio. A complete telephony stack for building voice applications with
+      SIP, WebRTC, and PSTN connectivity.
+  author: Dokploy Community
+  developer: Fonoster
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.15.15"
+  update_at: "2026-11-22"
+  website: https://fonoster.com/
+  repo: https://github.com/fonoster/fonoster
+  docs: https://docs.fonoster.com/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config/integrations.json,
+        config/init-db.sh, config/keys/.gitkeep, config/keys/public.pem, config/envoy.yaml). Review environment variables
+        before starting.

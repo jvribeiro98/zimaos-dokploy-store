@@ -1,0 +1,67 @@
+name: instatic
+services:
+  instatic-init:
+    image: ghcr.io/corebunch/instatic:0.0.18
+    user: 0:0
+    entrypoint:
+    - chown
+    - -R
+    - bun:bun
+    - /app/storage
+    volumes:
+    - instatic-storage:/app/storage
+    restart: unless-stopped
+  instatic:
+    image: ghcr.io/corebunch/instatic:0.0.18
+    restart: unless-stopped
+    env_file:
+    - .env
+    depends_on:
+      instatic-init:
+        condition: service_completed_successfully
+    expose:
+    - 3001
+    volumes:
+    - instatic-storage:/app/storage
+    healthcheck:
+      test:
+      - CMD
+      - bun
+      - run
+      - server/healthcheck.ts
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  instatic-storage:
+    driver: local
+x-casaos:
+  id: com.dokploy.instatic
+  main: instatic
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/instatic/icon.svg
+  title:
+    en_US: Instatic
+  tagline:
+    en_US: Instatic is a self-hosted, open-source visual CMS combining a canvas editor, content en...
+  description:
+    en_US: Instatic is a self-hosted, open-source visual CMS combining a canvas editor, content engine, and static site publisher,
+      producing clean semantic HTML with no framework runtime shipped to visitors.
+  author: Dokploy Community
+  developer: Instatic
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.0.18"
+  update_at: "2026-11-22"
+  website: https://instatic.com
+  repo: https://github.com/corebunch/instatic
+  docs: https://github.com/corebunch/instatic/tree/main/docs

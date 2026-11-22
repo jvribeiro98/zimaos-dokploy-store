@@ -1,0 +1,116 @@
+name: brightbean-studio
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: brightbean
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qRV9SSUvt4Lr67KhRLUdtXhYOGNV4uOn
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres -d brightbean
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  migrate:
+    build:
+      context: https://github.com/brightbeanxyz/brightbean-studio.git#main
+    command: python manage.py migrate --noinput
+    restart: 'no'
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SECRET_KEY: Fx7cWztp5IndOELa3Pz30uC0GvEAsvU1sJcGFKjGyjW7oCqUer
+      ENCRYPTION_KEY_SALT: u2GDvPp19sQge19cRON0PNX1c6rYQ5l1
+      DATABASE_URL: postgres://postgres:qRV9SSUvt4Lr67KhRLUdtXhYOGNV4uOn@postgres:5432/brightbean
+      ALLOWED_HOSTS: localhost
+      APP_URL: https://localhost
+      STORAGE_BACKEND: local
+      MEDIA_ROOT: /app/media
+      SERVE_MEDIA: 'true'
+    depends_on:
+      postgres:
+        condition: service_healthy
+  app:
+    build:
+      context: https://github.com/brightbeanxyz/brightbean-studio.git#main
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2 --threads 4
+    restart: unless-stopped
+    expose:
+    - '8000'
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SECRET_KEY: Fx7cWztp5IndOELa3Pz30uC0GvEAsvU1sJcGFKjGyjW7oCqUer
+      ENCRYPTION_KEY_SALT: u2GDvPp19sQge19cRON0PNX1c6rYQ5l1
+      DATABASE_URL: postgres://postgres:qRV9SSUvt4Lr67KhRLUdtXhYOGNV4uOn@postgres:5432/brightbean
+      ALLOWED_HOSTS: localhost
+      APP_URL: https://localhost
+      STORAGE_BACKEND: local
+      MEDIA_ROOT: /app/media
+      SERVE_MEDIA: 'true'
+    volumes:
+    - media_data:/app/media
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  worker:
+    build:
+      context: https://github.com/brightbeanxyz/brightbean-studio.git#main
+    command: python manage.py process_tasks
+    restart: unless-stopped
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      SECRET_KEY: Fx7cWztp5IndOELa3Pz30uC0GvEAsvU1sJcGFKjGyjW7oCqUer
+      ENCRYPTION_KEY_SALT: u2GDvPp19sQge19cRON0PNX1c6rYQ5l1
+      DATABASE_URL: postgres://postgres:qRV9SSUvt4Lr67KhRLUdtXhYOGNV4uOn@postgres:5432/brightbean
+      ALLOWED_HOSTS: localhost
+      APP_URL: https://localhost
+      STORAGE_BACKEND: local
+      MEDIA_ROOT: /app/media
+      SERVE_MEDIA: 'true'
+    volumes:
+    - media_data:/app/media
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+x-brightbean-repo: https://github.com/brightbeanxyz/brightbean-studio.git#main
+volumes:
+  postgres_data: null
+  media_data: null
+x-casaos:
+  id: com.dokploy.brightbean-studio
+  main: app
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/brightbean-studio/icon.svg
+  title:
+    en_US: Brightbean Studio
+  tagline:
+    en_US: 'Open-source, self-hostable social media management platform: schedule, publish and mana...'
+  description:
+    en_US: 'Open-source, self-hostable social media management platform: schedule, publish and manage content across 10+ platforms
+      (Facebook, Instagram, LinkedIn, TikTok, YouTube, Pinterest, Threads, Bluesky, Mastodon, Google Business, DEV.to) from
+      a single dashboard. Free alternative to Buffer, Sendible and SocialPilot.'
+  author: Dokploy Community
+  developer: Brightbean Studio
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://brightbean.xyz/studio/
+  repo: https://github.com/brightbeanxyz/brightbean-studio
+  docs: https://github.com/brightbeanxyz/brightbean-studio#readme
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

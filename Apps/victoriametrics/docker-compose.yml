@@ -1,0 +1,44 @@
+name: victoriametrics
+services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:v1.108.1
+    restart: unless-stopped
+    expose:
+    - 8428
+    command:
+    - --storageDataPath=/storage
+    - --retentionPeriod=${RETENTION_PERIOD}
+    - --httpListenAddr=:8428
+    volumes:
+    - vm-data:/storage
+    ports:
+    - target: 8428
+      published: "8428"
+      protocol: tcp
+volumes:
+  vm-data: {}
+x-casaos:
+  id: com.dokploy.victoriametrics
+  main: victoriametrics
+  index: /
+  port_map: "8428"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/victoriametrics/icon.png
+  title:
+    en_US: VictoriaMetrics
+  tagline:
+    en_US: VictoriaMetrics is a fast, cost-effective, and scalable monitoring solution and time se...
+  description:
+    en_US: VictoriaMetrics is a fast, cost-effective, and scalable monitoring solution and time series database. It is a drop-in
+      replacement for Prometheus.
+  author: Dokploy Community
+  developer: VictoriaMetrics
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.108.1"
+  update_at: "2026-11-22"
+  website: https://victoriametrics.com/
+  repo: https://github.com/VictoriaMetrics/VictoriaMetrics
+  docs: https://docs.victoriametrics.com/

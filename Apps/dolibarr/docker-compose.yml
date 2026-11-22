@@ -1,0 +1,70 @@
+name: dolibarr
+services:
+  dolibarr:
+    image: dolibarr/dolibarr:21.0.0
+    restart: always
+    environment:
+      DOLI_DB_HOST: db
+      DOLI_DB_NAME: $DB_NAME
+      DOLI_DB_USER: $DB_USER
+      DOLI_DB_PASSWORD: $DB_PASSWORD
+      DOLI_URL_ROOT: localhost
+      DOLI_ADMIN_LOGIN: admin
+      DOLI_ADMIN_PASSWORD: $ADMIN_PASSWORD
+    volumes:
+    - dolibarr_documents:/var/www/documents
+    - dolibarr_html:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+    volumes:
+    - db_data:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - healthcheck.sh --connect --innodb_initialized
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  dolibarr_documents: null
+  dolibarr_html: null
+  db_data: null
+x-casaos:
+  id: com.dokploy.dolibarr
+  main: dolibarr
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dolibarr/icon.svg
+  title:
+    en_US: Dolibarr
+  tagline:
+    en_US: Dolibarr ERP & CRM is a modern software package that helps manage your organization's a...
+  description:
+    en_US: Dolibarr ERP & CRM is a modern software package that helps manage your organization's activities (contacts, quotes,
+      invoices, orders, stocks, agenda, human resources, ecm, manufacturing).
+  author: Dokploy Community
+  developer: Dolibarr
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "21.0.0"
+  update_at: "2026-11-22"
+  website: https://www.dolibarr.org/
+  repo: https://github.com/Dolibarr/dolibarr
+  docs: https://wiki.dolibarr.org/

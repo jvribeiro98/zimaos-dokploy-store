@@ -1,0 +1,57 @@
+name: alarik
+services:
+  alarik:
+    image: ghcr.io/achtungsoftware/alarik:latest
+    restart: unless-stopped
+    volumes:
+    - alarik-storage:/app/Storage
+    environment:
+    - API_BASE_URL=http://localhost
+    - CONSOLE_BASE_URL=http://localhost
+    - ADMIN_USERNAME=alarik
+    - ADMIN_PASSWORD=1UYOuswpXxmwFBXA
+    - JWT=vjp5U6LMnpaOW5ct6zmZqv012JWuEaROsOZsU9/RX0dQIGLH0bpBlePdDTpq/oT37HMh5DX4kEsJqfrHFI198A==
+    - ALLOW_ACCOUNT_CREATION=false
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  console:
+    image: ghcr.io/achtungsoftware/alarik-console:latest
+    restart: unless-stopped
+    environment:
+    - NUXT_PUBLIC_API_BASE_URL=http://localhost
+    - NUXT_PUBLIC_CONSOLE_BASE_URL=http://localhost
+    - NUXT_PUBLIC_ALLOW_ACCOUNT_CREATION=false
+    expose:
+    - 3000
+    depends_on:
+    - alarik
+volumes:
+  alarik-storage: null
+x-casaos:
+  id: com.dokploy.alarik
+  main: alarik
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/alarik/icon.png
+  title:
+    en_US: Alarik
+  tagline:
+    en_US: Alarik is a high-performance, S3-compatible object storage
+  description:
+    en_US: Alarik is a high-performance, S3-compatible object storage.
+  author: Dokploy Community
+  developer: Alarik
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://alarik.io/
+  repo: https://github.com/achtungsoftware/alarik
+  docs: https://alarik.io/docs

@@ -1,0 +1,49 @@
+name: networking-toolbox
+services:
+  app:
+    image: lissy93/networking-toolbox:latest
+    expose:
+    - '3000'
+    environment:
+      NODE_ENV: production
+      PORT: '3000'
+      HOST: 0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.networking-toolbox
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/networking-toolbox/icon.png
+  title:
+    en_US: Networking Toolbox
+  tagline:
+    en_US: A collection of handy networking utilities by Lissy93, packaged as a self-hostable web app
+  description:
+    en_US: A collection of handy networking utilities by Lissy93, packaged as a self-hostable web app.
+  author: Dokploy Community
+  developer: Networking Toolbox
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://networkingtoolbox.net
+  repo: https://github.com/lissy93/networking-toolbox
+  docs: https://github.com/lissy93/networking-toolbox#readme

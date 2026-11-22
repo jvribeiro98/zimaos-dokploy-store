@@ -1,0 +1,61 @@
+name: gitlab-ce
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:19.1.2-ce.0
+    restart: unless-stopped
+    shm_size: 256m
+    environment:
+      GITLAB_OMNIBUS_CONFIG: 'external_url ''http://localhost''
+
+        nginx[''listen_port''] = 80
+
+        nginx[''listen_https''] = false
+
+        gitlab_rails[''initial_root_password''] = ''Woxo7l7BgBA1CVijwYwocoAXuQYaeoSl''
+
+        gitlab_rails[''gitlab_email_enabled''] = false
+
+        puma[''worker_processes''] = 0
+
+        sidekiq[''concurrency''] = 10
+
+        prometheus_monitoring[''enable''] = false
+
+        '
+    volumes:
+    - gitlab_config:/etc/gitlab
+    - gitlab_logs:/var/log/gitlab
+    - gitlab_data:/var/opt/gitlab
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  gitlab_config: null
+  gitlab_logs: null
+  gitlab_data: null
+x-casaos:
+  id: com.dokploy.gitlab-ce
+  main: gitlab
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gitlab-ce/icon.svg
+  title:
+    en_US: GitLab CE
+  tagline:
+    en_US: GitLab CE is a platform for Git repositories, CI/CD, and project management
+  description:
+    en_US: GitLab CE is a platform for Git repositories, CI/CD, and project management. Self-host it on your own server with
+      Dokploy, which deploys GitLab CE as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: GitLab CE
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "19.1.2"
+  update_at: "2026-11-22"
+  website: https://gitlab.com/
+  repo: https://gitlab.com/gitlab-org/gitlab-ce
+  docs: https://docs.gitlab.com/ee/

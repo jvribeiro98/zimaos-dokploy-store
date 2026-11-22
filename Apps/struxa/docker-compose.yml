@@ -1,0 +1,119 @@
+name: struxa
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=LsKwKGVHKHwi4jFPvMpExhGZlYGoEi5W
+    - MYSQL_DATABASE=struxa
+    - MYSQL_USER=struxa
+    - MYSQL_PASSWORD=2D39HH6PK8qoAs2sn6TAFkca2mjPQ14P
+    volumes:
+    - struxa-mysql:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      - -u
+      - root
+      - -p${MYSQL_ROOT_PASSWORD}
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+    - MINIO_ROOT_USER=admin
+    - MINIO_ROOT_PASSWORD=hZDVrNvEWhnYMGT4gVhMM8ZNcA1FWGa5
+    volumes:
+    - struxa-minio:/data
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:9000/minio/health/live
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  migrate:
+    image: ghcr.io/struxadotcloud/migrate:${IMAGE_TAG}
+    restart: on-failure:5
+    environment:
+    - DATABASE_URL=mysql://struxa:2D39HH6PK8qoAs2sn6TAFkca2mjPQ14P@mysql:3306/struxa
+    depends_on:
+      mysql:
+        condition: service_healthy
+  struxa:
+    image: ghcr.io/struxadotcloud/dashboard:${IMAGE_TAG}
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    - -c
+    - "eval \"$$(node -e '\n  const {generateKeyPairSync}=require(\"crypto\");\n  const {publicKey,privateKey}=generateKeyPairSync(\"\
+      rsa\",{modulusLength:2048,\n    publicKeyEncoding:{type:\"spki\",format:\"pem\"},\n    privateKeyEncoding:{type:\"pkcs8\"\
+      ,format:\"pem\"}});\n  console.log(\"export JWT_PRIVATE_KEY=\"+JSON.stringify(privateKey.replace(/\\n/g,\"\\\\n\")));\n\
+      \  console.log(\"export JWT_PUBLIC_KEY=\"+JSON.stringify(publicKey.replace(/\\n/g,\"\\\\n\")));\n')\"\nexec node apps/web/server.js\n"
+    environment:
+    - DATABASE_URL=mysql://struxa:2D39HH6PK8qoAs2sn6TAFkca2mjPQ14P@mysql:3306/struxa
+    - BETTER_AUTH_SECRET=EcP0siYzY5KvS2S5xyQnom2sYOjEph8ZyLSVAYMjArw=
+    - BETTER_AUTH_URL=http://localhost
+    - CORS_ORIGIN=http://localhost
+    - APP_URL=http://localhost
+    - DATABASE_ENCRYPTION_KEY=63a1144bf45c13537b9f0f5bf618a9588b93beb5a1e387605fbd4806c839efeffd01677f785474c2a994821697400c03f7a0b9559164cc14cf3ac6e2f799858b
+    - MINIO_ENDPOINT=http://minio:9000
+    - MINIO_ACCESS_KEY=admin
+    - MINIO_SECRET_KEY=hZDVrNvEWhnYMGT4gVhMM8ZNcA1FWGa5
+    - MINIO_BUCKET=struxa
+    - NODE_ENV=production
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      minio:
+        condition: service_healthy
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+  watchkeeper:
+    image: ghcr.io/struxadotcloud/watchkeeper:${IMAGE_TAG}
+    restart: unless-stopped
+    environment:
+    - DATABASE_URL=mysql://struxa:2D39HH6PK8qoAs2sn6TAFkca2mjPQ14P@mysql:3306/struxa
+    - DATABASE_ENCRYPTION_KEY=63a1144bf45c13537b9f0f5bf618a9588b93beb5a1e387605fbd4806c839efeffd01677f785474c2a994821697400c03f7a0b9559164cc14cf3ac6e2f799858b
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+volumes:
+  struxa-mysql: null
+  struxa-minio: null
+x-casaos:
+  id: com.dokploy.struxa
+  main: struxa
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/struxa/icon.svg
+  title:
+    en_US: Struxa
+  tagline:
+    en_US: Struxa is a self-hosted, open-source server management panel — a modern, fully typed re...
+  description:
+    en_US: Struxa is a self-hosted, open-source server management panel — a modern, fully typed replacement for Pterodactyl.
+  author: Dokploy Community
+  developer: Struxa
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "${IMAGE_TAG}"
+  update_at: "2026-11-22"
+  website: https://struxa.cloud
+  repo: https://github.com/struxadotcloud/struxa
+  docs: https://docs.struxa.cloud

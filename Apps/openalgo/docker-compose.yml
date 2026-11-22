@@ -1,0 +1,81 @@
+name: openalgo
+services:
+  openalgo:
+    image: marketcalls/openalgo:ee12327
+    restart: unless-stopped
+    shm_size: 512m
+    environment:
+    - ENV_CONFIG_VERSION=1.0.7
+    - FLASK_ENV=production
+    - FLASK_DEBUG=False
+    - FLASK_HOST_IP=0.0.0.0
+    - FLASK_PORT=5000
+    - TZ=Asia/Kolkata
+    - HOST_SERVER=https://localhost
+    - REDIRECT_URL=https://localhost/<broker>/callback
+    - BROKER_API_KEY=
+    - BROKER_API_SECRET=
+    - VALID_BROKERS=fivepaisa,fivepaisaxts,aliceblue,angel,arrow,compositedge,dhan,dhan_sandbox,definedge,deltaexchange,firstock,flattrade,fyers,groww,hdfcsecurities,hdfcsky,ibulls,iifl,iiflcapital,indmoney,jainamxts,kotak,motilal,mstock,nubra,nuvama,paytm,pocketful,rmoney,rupeezy,sahi,samco,shoonya,tradejini,tradesmart,upstox,wisdom,zebu,zerodha
+    - APP_KEY=Caut0kv8vBh4IvMP3V2MgabJeeDyXsAh
+    - API_KEY_PEPPER=6ELP9xSUhbL2Vz3sDkl0LYmHDOEUREjJ
+    - FERNET_SALT=cNvVPTAH6Yc7crAvdk9lj3A17uB2kwPg
+    - DATABASE_URL=sqlite:////app/db/openalgo.db
+    - LATENCY_DATABASE_URL=sqlite:////app/db/latency.db
+    - LOGS_DATABASE_URL=sqlite:////app/db/logs.db
+    - HEALTH_DATABASE_URL=sqlite:////app/db/health.db
+    - SANDBOX_DATABASE_URL=sqlite:////app/db/sandbox.db
+    - HISTORIFY_DATABASE_URL=sqlite:////app/db/historify.db
+    - NGROK_ALLOW=FALSE
+    - WEBSOCKET_HOST=0.0.0.0
+    - WEBSOCKET_PORT=8765
+    - WEBSOCKET_URL=wss://localhost
+    - OPENBLAS_NUM_THREADS=2
+    - OMP_NUM_THREADS=2
+    - MKL_NUM_THREADS=2
+    - NUMEXPR_NUM_THREADS=2
+    - NUMBA_NUM_THREADS=2
+    - STRATEGY_MEMORY_LIMIT_MB=1024
+    expose:
+    - '5000'
+    - '8765'
+    volumes:
+    - openalgo_db:/app/db
+    - openalgo_log:/app/log
+    - openalgo_strategies:/app/strategies
+    - openalgo_keys:/app/keys
+    - openalgo_tmp:/app/tmp
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+volumes:
+  openalgo_db: null
+  openalgo_log: null
+  openalgo_strategies: null
+  openalgo_keys: null
+  openalgo_tmp: null
+x-casaos:
+  id: com.dokploy.openalgo
+  main: openalgo
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openalgo/icon.png
+  title:
+    en_US: OpenAlgo
+  tagline:
+    en_US: OpenAlgo is an open-source algorithmic trading platform with a unified API layer across...
+  description:
+    en_US: OpenAlgo is an open-source algorithmic trading platform with a unified API layer across 38+ broker plugins, a strategy
+      and flow builder, and live trading from the web UI.
+  author: Dokploy Community
+  developer: OpenAlgo
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "2.0.3.3"
+  update_at: "2026-11-22"
+  website: https://openalgo.in
+  repo: https://github.com/marketcalls/openalgo
+  docs: https://docs.openalgo.in

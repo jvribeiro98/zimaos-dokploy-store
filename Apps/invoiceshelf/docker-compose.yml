@@ -1,0 +1,78 @@
+name: invoiceshelf
+services:
+  invoiceshelf-postgres:
+    image: postgres:15
+    volumes:
+    - invoiceshelf-postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_PASSWORD=JnOFYLZzGwXbGq4ddTEmCONqduIRAaaB
+    - POSTGRES_USER=invoiceshelf
+    - POSTGRES_DB=invoiceshelf
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${DB_USERNAME}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  invoiceshelf-app:
+    image: invoiceshelf/invoiceshelf:nightly
+    volumes:
+    - invoiceshelf-storage:/var/www/html/storage
+    environment:
+    - PHP_TZ=UTC
+    - TIMEZONE=UTC
+    - APP_NAME=InvoiceShelf
+    - APP_ENV=production
+    - APP_DEBUG=false
+    - APP_URL=http://localhost
+    - DB_CONNECTION=pgsql
+    - DB_HOST=invoiceshelf-postgres
+    - DB_PORT=5432
+    - DB_DATABASE=invoiceshelf
+    - DB_USERNAME=invoiceshelf
+    - DB_PASSWORD=JnOFYLZzGwXbGq4ddTEmCONqduIRAaaB
+    - CACHE_STORE=file
+    - SESSION_DRIVER=file
+    - SESSION_LIFETIME=120
+    - SESSION_ENCRYPT=true
+    - SESSION_PATH=/
+    - SESSION_DOMAIN=localhost
+    - SANCTUM_STATEFUL_DOMAINS=localhost
+    - STARTUP_DELAY=10
+    depends_on:
+      invoiceshelf-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  invoiceshelf-postgres-data: null
+  invoiceshelf-storage: null
+x-casaos:
+  id: com.dokploy.invoiceshelf
+  main: invoiceshelf-app
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/invoiceshelf/icon.png
+  title:
+    en_US: InvoiceShelf
+  tagline:
+    en_US: InvoiceShelf is a self-hosted open source invoicing system for freelancers and small bu...
+  description:
+    en_US: InvoiceShelf is a self-hosted open source invoicing system for freelancers and small businesses.
+  author: Dokploy Community
+  developer: InvoiceShelf
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "nightly"
+  update_at: "2026-11-22"
+  website: https://invoiceshelf.com
+  repo: https://github.com/InvoiceShelf/invoiceshelf
+  docs: https://github.com/InvoiceShelf/invoiceshelf#readme

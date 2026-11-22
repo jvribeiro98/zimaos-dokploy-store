@@ -1,0 +1,64 @@
+name: goatcounter
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: goatcounter
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      POSTGRES_DB: goatcounter
+    volumes:
+    - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U goatcounter -d goatcounter
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  goatcounter:
+    image: arp242/goatcounter:2.7
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+    - '8080'
+    environment:
+      GOATCOUNTER_DB: postgresql+postgresql://goatcounter:${DB_PASSWORD:?DB_PASSWORD is required}@postgres:5432/goatcounter?sslmode=disable
+      GOATCOUNTER_LISTEN: 0.0.0.0:8080
+    command:
+    - serve
+    - -automigrate
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.goatcounter
+  main: goatcounter
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/goatcounter/icon.svg
+  title:
+    en_US: GoatCounter
+  tagline:
+    en_US: GoatCounter is an open source web analytics platform available as a free donation-suppo...
+  description:
+    en_US: GoatCounter is an open source web analytics platform available as a free donation-supported hosted service or self-hosted
+      app. It aims to offer easy to use and meaningful privacy-friendly web analytics as an alternative to Google Analytics
+      or Matomo.
+  author: Dokploy Community
+  developer: GoatCounter
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2.7.0"
+  update_at: "2026-11-22"
+  website: https://www.goatcounter.com/
+  repo: https://github.com/arp242/goatcounter
+  docs: https://www.goatcounter.com/help/

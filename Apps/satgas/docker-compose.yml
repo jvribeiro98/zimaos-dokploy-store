@@ -1,0 +1,44 @@
+name: satgas
+services:
+  satgas:
+    image: ghcr.io/zeative/satgas:0.1.13
+    restart: unless-stopped
+    environment:
+      SATGAS_PUBLIC_URL: http://localhost
+      SATGAS_TOKEN: NQ63NOtLsu96rjTKIKnOBdgkueKybc1M
+    volumes:
+    - satgas-data:/data
+    - satgas-home:/home/node
+    stop_grace_period: 15s
+    ports:
+    - target: 4317
+      published: "4317"
+      protocol: tcp
+volumes:
+  satgas-data: {}
+  satgas-home: {}
+x-casaos:
+  id: com.dokploy.satgas
+  main: satgas
+  index: /
+  port_map: "4317"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/satgas/icon.svg
+  title:
+    en_US: Satgas
+  tagline:
+    en_US: Your own AI team, self-hosted
+  description:
+    en_US: Your own AI team, self-hosted. Describe what you want, and a lead hires the right agents, runs them in parallel
+      on the model you choose, and puts the results on a shared canvas you can watch and edit.
+  author: Dokploy Community
+  developer: Satgas
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.13"
+  update_at: "2026-11-22"
+  website: https://github.com/zeative/satgas
+  repo: https://github.com/zeative/satgas
+  docs: https://github.com/zeative/satgas#self-hosting

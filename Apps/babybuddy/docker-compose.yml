@@ -1,0 +1,48 @@
+name: babybuddy
+services:
+  babybuddy:
+    image: linuxserver/babybuddy:2.7.0
+    restart: unless-stopped
+    expose:
+    - 8000
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    - CSRF_TRUSTED_ORIGINS=https://localhost
+    - TIME_ZONE=America/New_York
+    - SECRET_KEY=LerbhzRtvrBYCMfUHNVrFfaWaJD0wg1D
+    volumes:
+    - config:/config
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.babybuddy
+  main: babybuddy
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/babybuddy/icon.png
+  title:
+    en_US: BabyBuddy
+  tagline:
+    en_US: BabyBuddy is a comprehensive, user-friendly platform designed to help parents and careg...
+  description:
+    en_US: BabyBuddy is a comprehensive, user-friendly platform designed to help parents and caregivers manage essential details
+      about their child's growth and development. It provides tools for tracking feedings, sleep schedules, diaper changes,
+      and milestones.
+  author: Dokploy Community
+  developer: BabyBuddy
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.7.0"
+  update_at: "2026-11-22"
+  website: https://babybuddy.app
+  repo: https://github.com/babybuddy/babybuddy
+  docs: https://docs.baby-buddy.net/

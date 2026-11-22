@@ -1,0 +1,54 @@
+name: kutt
+services:
+  kutt:
+    image: kutt/kutt:main
+    volumes:
+    - kutt_db_data:/var/lib/kutt
+    - /DATA/AppData/$AppID/kutt/custom:/kutt/custom
+    environment:
+      DB_FILENAME: /var/lib/kutt/data.sqlite
+      JWT_SECRET: Jcid8UqE9E2o9fOlBncuPoxBk2tWPwl3
+      DEFAULT_DOMAIN: localhost
+      TRUST_PROXY: 'false'
+      DISALLOW_ANONYMOUS_LINKS: 'true'
+      CUSTOM_DOMAIN_USE_HTTPS: 'true'
+      MAIL_ENABLED: 'false'
+      MAIL_HOST: ''''''
+      MAIL_PORT: '''22'''
+      MAIL_SECURE: 'true'
+      MAIL_USER: ''''''
+      MAIL_FROM: ''''''
+      MAIL_PASSWORD: ''''''
+      CONTACT_EMAIL: ''''''
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  kutt_db_data: {}
+x-casaos:
+  id: com.dokploy.kutt
+  main: kutt
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kutt/icon.png
+  title:
+    en_US: Kutt
+  tagline:
+    en_US: Kutt is a modern URL shortener with support for custom domains
+  description:
+    en_US: Kutt is a modern URL shortener with support for custom domains. Create and edit links, view statistics, manage
+      users, and more.
+  author: Dokploy Community
+  developer: Kutt
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "main"
+  update_at: "2026-11-22"
+  website: https://kutt.it
+  repo: https://github.com/thedevs-network/kutt
+  docs: https://github.com/thedevs-network/kutt#kuttit

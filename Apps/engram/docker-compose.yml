@@ -1,0 +1,66 @@
+name: engram
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: engram
+      POSTGRES_PASSWORD: engram
+      POSTGRES_DB: engram_cloud
+    volumes:
+    - engram-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U engram -d engram_cloud
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  engram:
+    image: ghcr.io/gentleman-programming/engram:1.16.3
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ENGRAM_DATABASE_URL: postgres://engram:engram@postgres:5432/engram_cloud?sslmode=disable
+      ENGRAM_JWT_SECRET: Ztc8ONNnzS3hU5AqNdc6ZWxCNCwSlGWbhQZjHC9PPEfcQQTmArUXQfIQFFHAijI3
+      ENGRAM_CLOUD_TOKEN: syKLKJiYZfShKhPPUKuqXqcA6yQ0LaKxML853tNHVOJg0qyt
+      ENGRAM_CLOUD_ADMIN: vP25loiKLA1bMLZiomDSz4MQgtnRRP1IjfwXOm9fvrAzSojh
+      ENGRAM_CLOUD_ALLOWED_PROJECTS: '*'
+      ENGRAM_CLOUD_HOST: 0.0.0.0
+      ENGRAM_PORT: '8080'
+    command:
+    - cloud
+    - serve
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  engram-postgres: null
+x-casaos:
+  id: com.dokploy.engram
+  main: engram
+  index: /dashboard
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/engram/icon.png
+  title:
+    en_US: Engram
+  tagline:
+    en_US: Persistent memory for AI coding agents — self-hosted Engram Cloud sync server with a we...
+  description:
+    en_US: Persistent memory for AI coding agents — self-hosted Engram Cloud sync server with a web dashboard, backed by PostgreSQL.
+  author: Dokploy Community
+  developer: Engram
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.16.3"
+  update_at: "2026-11-22"
+  repo: https://github.com/Gentleman-Programming/engram
+  docs: https://github.com/Gentleman-Programming/engram/blob/main/docs/engram-cloud/README.md

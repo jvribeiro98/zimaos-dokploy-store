@@ -1,0 +1,69 @@
+name: kanbn
+services:
+  kanbn:
+    image: ghcr.io/kanbn/kan:0.6.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      NEXT_PUBLIC_BASE_URL: https://localhost
+      BETTER_AUTH_SECRET: iW8tVfmhXMzlnI3bzONJBeYDO6hbUwgB
+      POSTGRES_URL: postgresql://kan:Y5hocO7pUUFWab16y336qYg28vsuivb4@postgres:5432/kan_db
+      NEXT_PUBLIC_ALLOW_CREDENTIALS: 'true'
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  migrate:
+    image: ghcr.io/kanbn/kan-migrate:0.6.0
+    restart: 'no'
+    environment:
+      POSTGRES_URL: postgresql://kan:Y5hocO7pUUFWab16y336qYg28vsuivb4@postgres:5432/kan_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kan_db
+      POSTGRES_USER: kan
+      POSTGRES_PASSWORD: Y5hocO7pUUFWab16y336qYg28vsuivb4
+    volumes:
+    - kan_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U kan -d kan_db
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  kan_postgres_data: null
+x-casaos:
+  id: com.dokploy.kanbn
+  main: kanbn
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kanbn/icon.svg
+  title:
+    en_US: Kanbn
+  tagline:
+    en_US: The open-source project management alternative to Trello
+  description:
+    en_US: The open-source project management alternative to Trello.
+  author: Dokploy Community
+  developer: Kanbn
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.6.0"
+  update_at: "2026-11-22"
+  website: https://kan.bn/
+  repo: https://github.com/kanbn/kan
+  docs: https://docs.kan.bn/

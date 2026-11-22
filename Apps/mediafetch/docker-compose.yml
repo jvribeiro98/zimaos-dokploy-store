@@ -1,0 +1,52 @@
+name: mediafetch
+services:
+  mediafetch:
+    image: lukedunsmoto/mediafetch:1.3.5
+    restart: unless-stopped
+    expose:
+    - '3002'
+    volumes:
+    - mediafetch_data:/data/downloads
+    environment:
+    - PORT=3002
+    - BASIC_AUTH_USER=${BASIC_AUTH_USER}
+    - BASIC_AUTH_PASS=${BASIC_AUTH_PASS}
+    - PUBLIC_BASE_URL=${PUBLIC_BASE_URL}
+    - OUTPUT_DIR=${OUTPUT_DIR}
+    - MAX_CONCURRENT_JOBS=${MAX_CONCURRENT_JOBS}
+    - JOB_TIMEOUT_MS=${JOB_TIMEOUT_MS}
+    - VERSION_CHECK_TTL_MS=${VERSION_CHECK_TTL_MS}
+    ports:
+    - target: 3002
+      published: "3002"
+      protocol: tcp
+volumes:
+  mediafetch_data: null
+x-casaos:
+  id: com.dokploy.mediafetch
+  main: mediafetch
+  index: /
+  port_map: "3002"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mediafetch/icon.svg
+  title:
+    en_US: MediaFetch
+  tagline:
+    en_US: A tiny, self-hosted web wrapper for yt-dlp to download video and audio
+  description:
+    en_US: A tiny, self-hosted web wrapper for yt-dlp to download video and audio. Optional basic auth.
+  author: Dokploy Community
+  developer: MediaFetch
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.1.1"
+  update_at: "2026-11-22"
+  website: https://www.lukedunsmore.com/mediafetch
+  repo: https://github.com/lukedunsmoto/mediafetch
+  docs: https://docs.lukedunsmore.com/docs/self-hosted/mediafetch/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (data/downloads). Review
+        environment variables before starting.

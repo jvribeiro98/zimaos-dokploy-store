@@ -1,0 +1,43 @@
+name: pgadmin
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    environment:
+    - PGADMIN_DEFAULT_EMAIL=user@example.com
+    - PGADMIN_DEFAULT_PASSWORD=o7J8MhCyxXP5au9Q
+    - PGADMIN_CONFIG_SERVER_MODE=False
+    - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    volumes:
+    - pgadmin-data:/var/lib/pgadmin
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  pgadmin-data: null
+x-casaos:
+  id: com.dokploy.pgadmin
+  main: pgadmin
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pgadmin/icon.webp
+  title:
+    en_US: pgAdmin
+  tagline:
+    en_US: pgAdmin is an administration and management tool for PostgreSQL databases
+  description:
+    en_US: pgAdmin is an administration and management tool for PostgreSQL databases. Self-host it on your own server with
+      Dokploy, which deploys pgAdmin as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: pgAdmin
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "8.3"
+  update_at: "2026-11-22"
+  website: https://www.pgadmin.org/
+  repo: https://github.com/pgadmin-org/pgadmin4
+  docs: https://www.pgadmin.org/docs/

@@ -1,0 +1,188 @@
+name: langfuse
+services:
+  postgres:
+    image: docker.io/postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: CGW3aS4pVrvxvRpEwCa7ceekh527JEvz
+      POSTGRES_DB: postgres
+      TZ: UTC
+      PGTZ: UTC
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    volumes:
+    - langfuse-postgres-data:/var/lib/postgresql/data
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server:25.12
+    restart: unless-stopped
+    user: 101:101
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: NmUvhofOue3FlIJKm3fBfPz30OtXTidL
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 1s
+    volumes:
+    - langfuse-clickhouse-data:/var/lib/clickhouse
+    - langfuse-clickhouse-logs:/var/log/clickhouse-server
+  minio:
+    image: cgr.dev/chainguard/minio
+    restart: unless-stopped
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: hNbRtt8MupOnacxgwdiO5pX6rFrRIbhw
+    healthcheck:
+      test:
+      - CMD
+      - mc
+      - ready
+      - local
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+    volumes:
+    - langfuse-minio-data:/data
+  redis:
+    image: docker.io/redis:7
+    restart: unless-stopped
+    command: '--requirepass ${REDIS_AUTH} --maxmemory-policy noeviction
+
+      '
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 3s
+      timeout: 10s
+      retries: 10
+    volumes:
+    - langfuse-redis-data:/data
+  langfuse-worker:
+    image: docker.io/langfuse/langfuse-worker:4
+    restart: unless-stopped
+    depends_on: &id001
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    environment:
+      NEXTAUTH_URL: http://localhost
+      DATABASE_URL: postgresql://postgres:CGW3aS4pVrvxvRpEwCa7ceekh527JEvz@postgres:5432/postgres
+      SALT: nGunJhtVwuLK6Cx8Jji69KLED0g2bomY
+      ENCRYPTION_KEY: 5076c50adcef98bb24023044d13541ba0a57c1f352c1598979a47b02eb702891341fc77cc5a104fea88d360a14e839f50d9458870b53910db2565af188e61bda
+      TELEMETRY_ENABLED: 'true'
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: 'false'
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: NmUvhofOue3FlIJKm3fBfPz30OtXTidL
+      CLICKHOUSE_CLUSTER_ENABLED: 'false'
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: hNbRtt8MupOnacxgwdiO5pX6rFrRIbhw
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: 'true'
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: hNbRtt8MupOnacxgwdiO5pX6rFrRIbhw
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: 'true'
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+      LANGFUSE_S3_BATCH_EXPORT_ENABLED: 'false'
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_AUTH: 5EenvxXK6VP7CbOAFvG8NlbMugSagDUI
+      REDIS_TLS_ENABLED: 'false'
+  langfuse-web:
+    image: docker.io/langfuse/langfuse:4
+    restart: unless-stopped
+    depends_on: *id001
+    environment:
+      NEXTAUTH_URL: http://localhost
+      DATABASE_URL: postgresql://postgres:CGW3aS4pVrvxvRpEwCa7ceekh527JEvz@postgres:5432/postgres
+      SALT: nGunJhtVwuLK6Cx8Jji69KLED0g2bomY
+      ENCRYPTION_KEY: 5076c50adcef98bb24023044d13541ba0a57c1f352c1598979a47b02eb702891341fc77cc5a104fea88d360a14e839f50d9458870b53910db2565af188e61bda
+      TELEMETRY_ENABLED: 'true'
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: 'false'
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: NmUvhofOue3FlIJKm3fBfPz30OtXTidL
+      CLICKHOUSE_CLUSTER_ENABLED: 'false'
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: hNbRtt8MupOnacxgwdiO5pX6rFrRIbhw
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: 'true'
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: hNbRtt8MupOnacxgwdiO5pX6rFrRIbhw
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: 'true'
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+      LANGFUSE_S3_BATCH_EXPORT_ENABLED: 'false'
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_AUTH: 5EenvxXK6VP7CbOAFvG8NlbMugSagDUI
+      REDIS_TLS_ENABLED: 'false'
+      HOSTNAME: 0.0.0.0
+      NEXTAUTH_SECRET: LRKWJNDxtKYGOmezjlXIwtLLZTjVQiXn
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  langfuse-postgres-data: null
+  langfuse-clickhouse-data: null
+  langfuse-clickhouse-logs: null
+  langfuse-minio-data: null
+  langfuse-redis-data: null
+x-casaos:
+  id: com.dokploy.langfuse
+  main: langfuse-web
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/langfuse/icon.svg
+  title:
+    en_US: Langfuse
+  tagline:
+    en_US: Langfuse is an open-source LLM engineering platform for tracing, prompt management, eva...
+  description:
+    en_US: Langfuse is an open-source LLM engineering platform for tracing, prompt management, evaluation, and cost/usage
+      analytics of LLM applications.
+  author: Dokploy Community
+  developer: Langfuse
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "4"
+  update_at: "2026-11-22"
+  website: https://langfuse.com/
+  repo: https://github.com/langfuse/langfuse
+  docs: https://langfuse.com/self-hosting

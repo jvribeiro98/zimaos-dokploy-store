@@ -1,0 +1,44 @@
+name: chromium
+services:
+  chromium:
+    image: lscr.io/linuxserver/chromium:5f5dd27e-ls102
+    expose:
+    - '3000'
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  config: null
+x-casaos:
+  id: com.dokploy.chromium
+  main: chromium
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chromium/icon.png
+  title:
+    en_US: Chromium
+  tagline:
+    en_US: Chromium is an open-source browser project that is designed to provide a safer, faster,...
+  description:
+    en_US: Chromium is an open-source browser project that is designed to provide a safer, faster, and more stable way for
+      all users to experience the web in a containerized environment.
+  author: Dokploy Community
+  developer: Chromium
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "5f5dd27e-ls102"
+  update_at: "2026-11-22"
+  website: https://docs.linuxserver.io/images/docker-chromium
+  repo: https://github.com/linuxserver/docker-chromium
+  docs: https://docs.linuxserver.io/images/docker-chromium

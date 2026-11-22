@@ -1,0 +1,43 @@
+name: seq
+services:
+  seq:
+    image: datalust/seq:2025.2
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+      SEQ_API_CANONICALURI: https://localhost
+      SEQ_FIRSTRUN_ADMINPASSWORD: 617GO9eWIYUEP2aqg20fYrrG8qIcTTzT
+    expose:
+    - '80'
+    volumes:
+    - seq-data:/data
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  seq-data: {}
+x-casaos:
+  id: com.dokploy.seq
+  main: seq
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/seq/icon.svg
+  title:
+    en_US: Seq
+  tagline:
+    en_US: Seq is a self-hosted search, analysis, and alerting server for structured application l...
+  description:
+    en_US: Seq is a self-hosted search, analysis, and alerting server for structured application logs and events.
+  author: Dokploy Community
+  developer: Seq
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2025.2"
+  update_at: "2026-11-22"
+  website: https://datalust.co/seq
+  repo: https://github.com/datalust/seq-tickets
+  docs: https://datalust.co/docs

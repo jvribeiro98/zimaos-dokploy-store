@@ -1,0 +1,37 @@
+name: appsmith
+services:
+  appsmith:
+    image: appsmith/appsmith-ee:v1.94
+    volumes:
+    - appsmith-data:/appsmith-stacks
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  appsmith-data: null
+x-casaos:
+  id: com.dokploy.appsmith
+  main: appsmith
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/appsmith/icon.png
+  title:
+    en_US: Appsmith
+  tagline:
+    en_US: Appsmith is a free and open source platform for building internal tools and applications
+  description:
+    en_US: Appsmith is a free and open source platform for building internal tools and applications.
+  author: Dokploy Community
+  developer: Appsmith
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.94"
+  update_at: "2026-11-22"
+  website: https://appsmith.com/
+  repo: https://github.com/appsmithorg/appsmith
+  docs: https://docs.appsmith.com/

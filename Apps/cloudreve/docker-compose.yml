@@ -1,0 +1,75 @@
+name: cloudreve
+services:
+  cloudreve:
+    image: cloudreve/cloudreve:4.10.1
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    environment:
+    - CR_CONF_Database.Type=postgres
+    - CR_CONF_Database.Host=postgresql
+    - CR_CONF_Database.User=cloudreve
+    - CR_CONF_Database.Password=IkLWExs1KAVxAL7fU9Kv84mmdnpO6J9A
+    - CR_CONF_Database.Name=cloudreve
+    - CR_CONF_Database.Port=5432
+    - CR_CONF_Redis.Server=redis:6379
+    volumes:
+    - cloudreve_data:/cloudreve/data
+    ports:
+    - target: 5212
+      published: "5212"
+      protocol: tcp
+  postgresql:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=cloudreve
+    - POSTGRES_PASSWORD=IkLWExs1KAVxAL7fU9Kv84mmdnpO6J9A
+    - POSTGRES_DB=cloudreve
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+  redis:
+    image: redis:8.4.0
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+volumes:
+  cloudreve_data: null
+  postgres_data: null
+  redis_data: null
+x-casaos:
+  id: com.dokploy.cloudreve
+  main: cloudreve
+  index: /
+  port_map: "5212"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cloudreve/icon.png
+  title:
+    en_US: Cloudreve
+  tagline:
+    en_US: Self-hosted file management and sharing system with multi-cloud storage support
+  description:
+    en_US: Self-hosted file management and sharing system with multi-cloud storage support. Compatible with local, OneDrive,
+      S3, and various cloud providers.
+  author: Dokploy Community
+  developer: Cloudreve
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "4.10.1"
+  update_at: "2026-11-22"
+  website: https://cloudreve.org
+  repo: https://github.com/cloudreve/Cloudreve
+  docs: https://docs.cloudreve.org

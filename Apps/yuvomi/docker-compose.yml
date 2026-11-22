@@ -1,0 +1,66 @@
+name: yuvomi
+services:
+  yuvomi:
+    image: ghcr.io/ulsklyc/yuvomi:2.80.0
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DB_PATH: /data/yuvomi.db
+      BACKUP_DIR: /backups
+      DOCUMENT_STORAGE_LOCAL_ENABLED: 'false'
+      DOCUMENT_STORAGE_LOCAL_PATH: /documents
+      SESSION_SECURE: 'true'
+      TRUST_PROXY: '1'
+      SESSION_SECRET: wAC1q0FoYLzQiP4jdowmqJO4i0j3RFFRxiiufqtnnDUPz29nHaq1dSbYKL8JtVEg
+      DB_ENCRYPTION_KEY: PZVl4OAelv8LAaOJKkWSMoBrnbl1KBZ8tVGRLxXJ03Qp0746cXXYExeeRNHDXaPh
+    volumes:
+    - yuvomi-data:/data
+    - yuvomi-backups:/backups
+    - yuvomi-modules:/app/modules
+    - yuvomi-documents:/documents
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - 'require(''http'').get(''http://localhost:3000/health'', r => process.exit(r.statusCode === 200 ? 0 : 1))'
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  yuvomi-data: null
+  yuvomi-backups: null
+  yuvomi-modules: null
+  yuvomi-documents: null
+x-casaos:
+  id: com.dokploy.yuvomi
+  main: yuvomi
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/yuvomi/icon.svg
+  title:
+    en_US: Yuvomi
+  tagline:
+    en_US: 'Privacy-first, self-hosted family planner: tasks, calendar sync, shopping, meals, budge...'
+  description:
+    en_US: 'Privacy-first, self-hosted family planner: tasks, calendar sync, shopping, meals, budget, health and more in one
+      PWA. No cloud, no subscriptions, no tracking.'
+  author: Dokploy Community
+  developer: Yuvomi
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.80.0"
+  update_at: "2026-11-22"
+  website: https://yuvomi.cloud/
+  repo: https://github.com/ulsklyc/yuvomi
+  docs: https://github.com/ulsklyc/yuvomi#readme

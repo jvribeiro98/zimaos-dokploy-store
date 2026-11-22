@@ -1,0 +1,61 @@
+name: ryot
+services:
+  ryot-app:
+    image: ignisda/ryot:v7.10
+    environment:
+    - DATABASE_URL=postgres://postgres:vf4BeMcfHJl5hkOPkvpFNE3XesQ6KNlK@ryot-db:5432/postgres
+    - SERVER_ADMIN_ACCESS_TOKEN=c7+zrTEsqRK9UleZfibBX39aihW3fhQMejILkfaezaE=
+    - TZ=UTC
+    depends_on:
+      ryot-db:
+        condition: service_healthy
+    restart: always
+    pull_policy: always
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  ryot-db:
+    image: postgres:16-alpine
+    volumes:
+    - ryot-postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_PASSWORD=vf4BeMcfHJl5hkOPkvpFNE3XesQ6KNlK
+    - POSTGRES_USER=postgres
+    - POSTGRES_DB=postgres
+    - TZ=UTC
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  ryot-postgres-data: null
+x-casaos:
+  id: com.dokploy.ryot
+  main: ryot-app
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ryot/icon.png
+  title:
+    en_US: Ryot
+  tagline:
+    en_US: A self-hosted platform for tracking various media types including movies, TV shows, vid...
+  description:
+    en_US: A self-hosted platform for tracking various media types including movies, TV shows, video games, books, audiobooks,
+      and more.
+  author: Dokploy Community
+  developer: Ryot
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "7.10"
+  update_at: "2026-11-22"
+  website: https://ryot.io/
+  repo: https://github.com/IgnisDa/ryot
+  docs: https://docs.ryot.io/

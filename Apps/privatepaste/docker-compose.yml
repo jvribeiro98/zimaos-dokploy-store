@@ -1,0 +1,48 @@
+name: privatepaste
+services:
+  privatepaste:
+    image: ghcr.io/dynamicsninja/privatepaste:0.5.0
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      PP_DB_KEY: NXqILd3qOUGbCoJooUKsL4k8G+h/AjtyfrXdCmqUE/E=
+      PP_PASSWORD: sIZDLUkPjAKfWAn7qZr8ogLE
+      PP_MAX_IMAGE_MB: '20'
+      PP_MAX_FILE_MB: '25'
+      PP_MAX_TEXT_KB: '1024'
+      PP_TRUST_CLOUDFLARE: 'false'
+    volumes:
+    - privatepaste-data:/data
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  privatepaste-data: null
+x-casaos:
+  id: com.dokploy.privatepaste
+  main: privatepaste
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/privatepaste/icon.svg
+  title:
+    en_US: PrivatePaste
+  tagline:
+    en_US: 'Self-hosted clipboard sync: copy on one device, paste on your others, with an encrypted...'
+  description:
+    en_US: 'Self-hosted clipboard sync: copy on one device, paste on your others, with an encrypted, searchable history and
+      apps for Windows, macOS, Linux and Android.'
+  author: Dokploy Community
+  developer: PrivatePaste
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.5.0"
+  update_at: "2026-11-22"
+  website: https://github.com/DynamicsNinja/privatepaste
+  repo: https://github.com/DynamicsNinja/privatepaste
+  docs: https://github.com/DynamicsNinja/privatepaste/blob/main/docs/self-hosting.md

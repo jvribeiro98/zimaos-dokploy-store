@@ -1,0 +1,46 @@
+name: emby
+services:
+  emby:
+    image: emby/embyserver
+    environment:
+    - UID=1000
+    - GID=100
+    - GIDLIST=100
+    volumes:
+    - /emby/programdata:/config
+    - /emby/series:/mnt/share1
+    - /emby/movies:/mnt/share2
+    expose:
+    - 8096
+    - 8920
+    devices:
+    - /dev/dri:/dev/dri
+    restart: on-failure
+    ports:
+    - target: 8096
+      published: "8096"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.emby
+  main: emby
+  index: /
+  port_map: "8096"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/emby/icon.png
+  title:
+    en_US: Emby
+  tagline:
+    en_US: Emby Server is a personal media server with apps on just about every device
+  description:
+    en_US: Emby Server is a personal media server with apps on just about every device.
+  author: Dokploy Community
+  developer: Emby
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "4.9.1.17"
+  update_at: "2026-11-22"
+  website: https://emby.media/
+  repo: https://github.com/MediaBrowser/Emby
+  docs: https://emby.media/support/articles/Home.html

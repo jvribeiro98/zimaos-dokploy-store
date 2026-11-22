@@ -1,0 +1,70 @@
+name: bluesky-pds
+services:
+  pds:
+    image: ghcr.io/bluesky-social/pds:0.4.182
+    volumes:
+    - pds-data:/pds
+    environment:
+    - SERVICE_URL_PDS_3000
+    - PDS_HOSTNAME=localhost
+    - PDS_JWT_SECRET=9e83aa9dadff5b2afb29109246afbc0fad9c49f379fd028084052264269b731c
+    - PDS_ADMIN_PASSWORD=p99t63Rh9V5hIk0RuGfzyUxvBCahh0fH
+    - PDS_ADMIN_EMAIL=
+    - PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX=c10224e3451b3e533d4b6da8af17a77e9d93b17f005f887d4a6de45d18911902
+    - PDS_DATA_DIRECTORY=/pds
+    - PDS_BLOBSTORE_DISK_LOCATION=/pds/blocks
+    - PDS_BLOB_UPLOAD_LIMIT=104857600
+    - PDS_DID_PLC_URL=https://plc.directory
+    - PDS_EMAIL_FROM_ADDRESS=
+    - PDS_EMAIL_SMTP_URL=
+    - PDS_BSKY_APP_VIEW_URL=https://api.bsky.app
+    - PDS_BSKY_APP_VIEW_DID=did:web:api.bsky.app
+    - PDS_REPORT_SERVICE_URL=https://mod.bsky.app/xrpc/com.atproto.moderation.createReport
+    - PDS_REPORT_SERVICE_DID=did:plc:ar7c4by46qjdydhdevvrndac
+    - PDS_CRAWLERS=https://bsky.network
+    - LOG_ENABLED=true
+    command: "sh -c '\n  set -euo pipefail\n  echo \"Installing required packages and pdsadmin...\"\n  apk add --no-cache\
+      \ openssl curl bash jq coreutils gnupg util-linux-misc >/dev/null\n  curl -o /usr/local/bin/pdsadmin.sh https://raw.githubusercontent.com/bluesky-social/pds/main/pdsadmin.sh\n\
+      \  chmod 700 /usr/local/bin/pdsadmin.sh\n  ln -sf /usr/local/bin/pdsadmin.sh /usr/local/bin/pdsadmin\n  echo \"Creating\
+      \ an empty pds.env file so pdsadmin works...\"\n  touch /pds/pds.env\n  echo \"Launching PDS, enjoy!...\"\n  exec node\
+      \ --enable-source-maps index.js\n'\n"
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - http://127.0.0.1:3000/xrpc/_health
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  pds-data: null
+x-casaos:
+  id: com.dokploy.bluesky-pds
+  main: pds
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bluesky-pds/icon.svg
+  title:
+    en_US: Bluesky PDS
+  tagline:
+    en_US: Bluesky PDS is a personal data server for Bluesky
+  description:
+    en_US: Bluesky PDS is a personal data server for Bluesky.
+  author: Dokploy Community
+  developer: Bluesky PDS
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.4.182"
+  update_at: "2026-11-22"
+  website: https://bsky.social/about
+  repo: https://github.com/bluesky-social/pds
+  docs: https://github.com/bluesky-social/pds

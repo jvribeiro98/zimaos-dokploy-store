@@ -1,0 +1,72 @@
+name: booklore
+services:
+  booklore:
+    image: ghcr.io/booklore-app/booklore:${BOOKLORE_IMAGE_TAG}
+    environment:
+    - DATABASE_URL=jdbc:mariadb://mariadb:3306/booklore
+    - DATABASE_USERNAME=booklore
+    - DATABASE_PASSWORD=58KJld0niiKAcZNphmcpPQ2AAVcLUFr4
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    expose:
+    - 6060
+    volumes:
+    - booklore-data:/app/data
+    - booklore-books:/books
+    restart: unless-stopped
+    ports:
+    - target: 6060
+      published: "6060"
+      protocol: tcp
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Etc/UTC
+    - MYSQL_ROOT_PASSWORD=DGZ8rte7LNPvn7pXxIb3YA04V4fLVIyd
+    - MYSQL_DATABASE=booklore
+    - MYSQL_USER=booklore
+    - MYSQL_PASSWORD=58KJld0niiKAcZNphmcpPQ2AAVcLUFr4
+    volumes:
+    - mariadb-config:/config
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - mariadb-admin
+      - ping
+      - -h
+      - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  booklore-data: {}
+  booklore-books: {}
+  mariadb-config: {}
+x-casaos:
+  id: com.dokploy.booklore
+  main: booklore
+  index: /
+  port_map: "6060"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/booklore/icon.png
+  title:
+    en_US: Booklore
+  tagline:
+    en_US: Booklore is an application for managing and serving book-related data, backed by a Mari...
+  description:
+    en_US: Booklore is an application for managing and serving book-related data, backed by a MariaDB database.
+  author: Dokploy Community
+  developer: Booklore
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "${BOOKLORE_IMAGE_TAG}"
+  update_at: "2026-11-22"
+  website: https://github.com/booklore-app/BookLore
+  repo: https://github.com/booklore-app/BookLore
+  docs: https://github.com/booklore-app/BookLore/tree/develop/docs

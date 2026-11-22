@@ -1,0 +1,59 @@
+name: answer
+services:
+  answer:
+    image: apache/answer:1.4.1
+    expose:
+    - '80'
+    restart: on-failure
+    volumes:
+    - answer-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 9080
+      published: "9080"
+      protocol: tcp
+  db:
+    image: postgres:16
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: answer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+volumes:
+  answer-data: null
+  db-data: null
+x-casaos:
+  id: com.dokploy.answer
+  main: answer
+  index: /
+  port_map: "9080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/answer/icon.png
+  title:
+    en_US: Answer
+  tagline:
+    en_US: Answer is an open-source Q&A platform for building a self-hosted question-and-answer se...
+  description:
+    en_US: Answer is an open-source Q&A platform for building a self-hosted question-and-answer service.
+  author: Dokploy Community
+  developer: Answer
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.4.1"
+  update_at: "2026-11-22"
+  website: https://answer.apache.org/
+  repo: https://github.com/apache/answer
+  docs: https://answer.apache.org/docs

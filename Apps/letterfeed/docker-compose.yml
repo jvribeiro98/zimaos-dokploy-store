@@ -1,0 +1,62 @@
+name: letterfeed
+services:
+  backend:
+    image: ghcr.io/leonmuscoden/letterfeed-backend:latest
+    restart: unless-stopped
+    environment:
+      LETTERFEED_APP_BASE_URL: https://localhost
+      LETTERFEED_BACKEND_URL: http://backend:8000
+      LETTERFEED_DATABASE_URL: sqlite:////data/letterfeed.db
+      LETTERFEED_IMAP_SERVER: ''
+      LETTERFEED_IMAP_USERNAME: ''
+      LETTERFEED_IMAP_PASSWORD: ''
+      LETTERFEED_SEARCH_FOLDER: INBOX
+      LETTERFEED_MOVE_TO_FOLDER: ''
+      LETTERFEED_MARK_AS_READ: 'true'
+      LETTERFEED_EMAIL_CHECK_INTERVAL: '15'
+      LETTERFEED_AUTO_ADD_NEW_SENDERS: 'false'
+      LETTERFEED_SECRET_KEY: xFp8F7ofK7x2B4aDqrMe2uDqNSjazoY7HPrvGsPh6FJCjkGVkndmQhoWtIk0Lafa
+      LETTERFEED_AUTH_USERNAME: admin
+      LETTERFEED_AUTH_PASSWORD: tMW0UyC42XacFIxuJz6DZ78fPWBgSvaL
+    volumes:
+    - letterfeed_data:/data
+  frontend:
+    image: ghcr.io/leonmuscoden/letterfeed-frontend:latest
+    restart: unless-stopped
+    environment:
+      LETTERFEED_APP_BASE_URL: https://localhost
+      LETTERFEED_BACKEND_URL: http://backend:8000
+    expose:
+    - 3000
+    depends_on:
+    - backend
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  letterfeed_data: null
+x-casaos:
+  id: com.dokploy.letterfeed
+  main: frontend
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/letterfeed/icon.png
+  title:
+    en_US: Letterfeed
+  tagline:
+    en_US: Convert email newsletters into RSS feeds
+  description:
+    en_US: Convert email newsletters into RSS feeds
+  author: Dokploy Community
+  developer: Letterfeed
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/leonmuscoden/letterfeed
+  repo: https://github.com/leonmuscoden/letterfeed
+  docs: https://github.com/leonmuscoden/letterfeed

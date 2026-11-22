@@ -1,0 +1,483 @@
+name: grovs
+services:
+  postgres:
+    image: postgres:16.10-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: grovs
+      POSTGRES_PASSWORD: FrwuJNf8dAtodnJWo2yYtWuK2wliQwks
+      POSTGRES_DB: grovs_production
+    command:
+    - postgres
+    - -c
+    - max_connections=200
+    volumes:
+    - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  redis:
+    image: redis:7.4.5-alpine
+    restart: unless-stopped
+    command:
+    - redis-server
+    - --appendonly
+    - 'yes'
+    - --maxmemory-policy
+    - noeviction
+    volumes:
+    - redis_data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.3.6.56
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: grovs_production
+      CLICKHOUSE_USER: grovs
+      CLICKHOUSE_PASSWORD: 5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m
+    volumes:
+    - clickhouse_data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - -q
+      - http://localhost:8123/ping
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  migrate:
+    image: ghcr.io/grovs-io/backend:2.3.1
+    restart: 'no'
+    environment:
+      ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: 11bc360d69544ae760d864d3fe33d3fd82c132ab73bab4e9c0853a2449a05849bb1b9c557ec2f908c34a11eec9545dcafb75ddb817ef7888bdc9a55bd182166d
+      ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: 130acddff46123c9bf99931e5b8279f8779e31a7b55aeaec1002ad094d50b76b999b91c8223dda772af7c58c7bf88ea51aa5bc58e706778a2a431311e9d14c57
+      ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: 23360b3a75f2904264e443e86bbf7d7d6f2cac04c6e801b0a2331ffe2327e7ac4a4f20df1e4e3f883c7b0672d783081d786f446da33bf8c254ffdecb38d94eaf
+      ACTIVE_STORAGE_SERVICE: local
+      ADMIN_API_KEY: 1f11bafb9d494cbbca4d20d5442199374d06fbbef46d9483062c063ad8bc8cd35406f4fffe70ddfc901496dfb882d21736b267e38f69d7e8078ad856ce41d65f
+      API_HOST: api.localhost
+      BOOTSTRAP_ADMIN_EMAIL: admin@localhost
+      BOOTSTRAP_ADMIN_PASSWORD: 9zea5YgzYIysKSDgObFCg5sf
+      CLICKHOUSE_ANALYTICS_ROLLUPS_READ_ENABLED: 'true'
+      CLICKHOUSE_ATTRIBUTION_READ_ENABLED: 'true'
+      CLICKHOUSE_DATABASE: grovs_production
+      CLICKHOUSE_LINK_DIMENSIONS_READ_ENABLED: 'true'
+      CLICKHOUSE_PASSWORD: 5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m
+      CLICKHOUSE_PRIMARY: 'true'
+      CLICKHOUSE_READ_ENABLED: 'true'
+      CLICKHOUSE_ROLLUP_FAST_LANE: 'true'
+      CLICKHOUSE_URL: http://grovs:5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m@clickhouse:8123
+      CLICKHOUSE_WRITE_ENABLED: 'true'
+      DASHBOARD_CACHE_TTL_SECONDS: '60'
+      DASHBOARD_HOST: dashboard.localhost
+      DATABASE_URL: postgres://grovs:FrwuJNf8dAtodnJWo2yYtWuK2wliQwks@postgres:5432/grovs_production
+      DEFAULT_LINK_SUBTITLE: Dynamic links, attributions, and referrals across mobile and web platforms.
+      DEFAULT_LINK_TITLE: grovs
+      DEFAULT_LOGO_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/logo-square-new.svg
+      DEFAULT_SOCIAL_PREVIEW_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/social-media-placeholder.jpg
+      DIAGNOSTICS_API_KEY: 292273c500fb64e647d391288b01473b588d70f8c25a5e07dd327df99305862505c6c11587457f62b688f7ffea761398213c560f2e3ed3a8635b601be3146533
+      DOMAIN_LIVE: localhost
+      DOMAIN_TEST: test.localhost
+      GO_HOST: go.localhost
+      GROVS_EE: 'false'
+      GROVS_SELF_HOSTED: 'true'
+      LINKS_PROD_HOST: links.localhost
+      LINKS_TEST_HOST: links.test.localhost
+      MAILER_DELIVERY_METHOD: ''
+      MAILER_FROM: Grovs <noreply@localhost>
+      MCP_CONSENT_URL: http://dashboard.localhost/mcp/authorize
+      MCP_HOST: mcp.localhost
+      OAUTH_CLIENT_SECRET: 87baca5a96a36f303531816a9960f601d17e51154a71ede00636dbc9660b47470044512584659629f0265d01635feac0a1430e531f06d53d5ac0fafaa2ac48b7
+      OAUTH_CLIENT_UID: 8a18041067b2a44393262f6ed0dbb6cfed45aaee66b510d19878d74b0ad6ada11d87189151583f695d1ea8e4df6fc19f
+      PG_SHADOW_WRITES: 'false'
+      POSTGRES_DB: grovs_production
+      POSTGRES_MAX_CONNECTIONS: '200'
+      POSTGRES_PASSWORD: FrwuJNf8dAtodnJWo2yYtWuK2wliQwks
+      POSTGRES_USER: grovs
+      PREVIEW_BASE_URL: http://preview.localhost
+      PREVIEW_HOST: preview.localhost
+      PUBLIC_GO_PROJECT_IDENTIFIER: go-self-hosted
+      RAILS_DB_POOL: '10'
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_MAX_THREADS: '5'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      REACT_HOST: dashboard.localhost
+      REACT_HOST_PROTOCOL: http://
+      REDIS_URL: redis://redis:6379/0
+      REVENUE_READS_FROM_LEDGER: 'true'
+      S3_ASSET_PREFIX: http://api.localhost
+      SDK_HOST: sdk.localhost
+      SECRET_KEY_BASE: f61f435e9b272a0fb544637ef203e1c90cb8f0d96ad17b0ffe57dcc580d94869f4024b01c66cec0287968ed080672df49eb85a592fc51b8fdbcfdea426cc401b
+      SENT_QUOTAS_WEBHOOK_KEY: 43e3aab0cf5f6e9f0bc8e7ec6e84dc13cb1f8c3c67c644052c69475aeef3144e4d80427a0aec31d33a23721f96f076b19bed7ffbd0b8348efa6afe567ae4c546
+      SERVER_HOST: localhost
+      SERVER_HOST_PROTOCOL: http://
+      SIDEKIQ_EVENTS_CONCURRENCY: '10'
+      SMTP_ADDRESS: smtp.example.com
+      SMTP_AUTHENTICATION: plain
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_STARTTLS_AUTO: 'true'
+      SMTP_PASSWORD: ''
+      SMTP_PORT: '587'
+      SMTP_USERNAME: ''
+      WEB_CONCURRENCY: '2'
+    volumes:
+    - storage:/app/storage
+    command:
+    - bash
+    - -c
+    - bin/rails db:prepare && bin/rails db:seed && bin/rails clickhouse:setup
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+  web:
+    image: ghcr.io/grovs-io/backend:2.3.1
+    restart: unless-stopped
+    environment:
+      ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: 11bc360d69544ae760d864d3fe33d3fd82c132ab73bab4e9c0853a2449a05849bb1b9c557ec2f908c34a11eec9545dcafb75ddb817ef7888bdc9a55bd182166d
+      ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: 130acddff46123c9bf99931e5b8279f8779e31a7b55aeaec1002ad094d50b76b999b91c8223dda772af7c58c7bf88ea51aa5bc58e706778a2a431311e9d14c57
+      ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: 23360b3a75f2904264e443e86bbf7d7d6f2cac04c6e801b0a2331ffe2327e7ac4a4f20df1e4e3f883c7b0672d783081d786f446da33bf8c254ffdecb38d94eaf
+      ACTIVE_STORAGE_SERVICE: local
+      ADMIN_API_KEY: 1f11bafb9d494cbbca4d20d5442199374d06fbbef46d9483062c063ad8bc8cd35406f4fffe70ddfc901496dfb882d21736b267e38f69d7e8078ad856ce41d65f
+      API_HOST: api.localhost
+      BOOTSTRAP_ADMIN_EMAIL: admin@localhost
+      BOOTSTRAP_ADMIN_PASSWORD: 9zea5YgzYIysKSDgObFCg5sf
+      CLICKHOUSE_ANALYTICS_ROLLUPS_READ_ENABLED: 'true'
+      CLICKHOUSE_ATTRIBUTION_READ_ENABLED: 'true'
+      CLICKHOUSE_DATABASE: grovs_production
+      CLICKHOUSE_LINK_DIMENSIONS_READ_ENABLED: 'true'
+      CLICKHOUSE_PASSWORD: 5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m
+      CLICKHOUSE_PRIMARY: 'true'
+      CLICKHOUSE_READ_ENABLED: 'true'
+      CLICKHOUSE_ROLLUP_FAST_LANE: 'true'
+      CLICKHOUSE_URL: http://grovs:5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m@clickhouse:8123
+      CLICKHOUSE_WRITE_ENABLED: 'true'
+      DASHBOARD_CACHE_TTL_SECONDS: '60'
+      DASHBOARD_HOST: dashboard.localhost
+      DATABASE_URL: postgres://grovs:FrwuJNf8dAtodnJWo2yYtWuK2wliQwks@postgres:5432/grovs_production
+      DEFAULT_LINK_SUBTITLE: Dynamic links, attributions, and referrals across mobile and web platforms.
+      DEFAULT_LINK_TITLE: grovs
+      DEFAULT_LOGO_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/logo-square-new.svg
+      DEFAULT_SOCIAL_PREVIEW_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/social-media-placeholder.jpg
+      DIAGNOSTICS_API_KEY: 292273c500fb64e647d391288b01473b588d70f8c25a5e07dd327df99305862505c6c11587457f62b688f7ffea761398213c560f2e3ed3a8635b601be3146533
+      DOMAIN_LIVE: localhost
+      DOMAIN_TEST: test.localhost
+      GO_HOST: go.localhost
+      GROVS_EE: 'false'
+      GROVS_SELF_HOSTED: 'true'
+      LINKS_PROD_HOST: links.localhost
+      LINKS_TEST_HOST: links.test.localhost
+      MAILER_DELIVERY_METHOD: ''
+      MAILER_FROM: Grovs <noreply@localhost>
+      MCP_CONSENT_URL: http://dashboard.localhost/mcp/authorize
+      MCP_HOST: mcp.localhost
+      OAUTH_CLIENT_SECRET: 87baca5a96a36f303531816a9960f601d17e51154a71ede00636dbc9660b47470044512584659629f0265d01635feac0a1430e531f06d53d5ac0fafaa2ac48b7
+      OAUTH_CLIENT_UID: 8a18041067b2a44393262f6ed0dbb6cfed45aaee66b510d19878d74b0ad6ada11d87189151583f695d1ea8e4df6fc19f
+      PG_SHADOW_WRITES: 'false'
+      POSTGRES_DB: grovs_production
+      POSTGRES_MAX_CONNECTIONS: '200'
+      POSTGRES_PASSWORD: FrwuJNf8dAtodnJWo2yYtWuK2wliQwks
+      POSTGRES_USER: grovs
+      PREVIEW_BASE_URL: http://preview.localhost
+      PREVIEW_HOST: preview.localhost
+      PUBLIC_GO_PROJECT_IDENTIFIER: go-self-hosted
+      RAILS_DB_POOL: '10'
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_MAX_THREADS: '5'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      REACT_HOST: dashboard.localhost
+      REACT_HOST_PROTOCOL: http://
+      REDIS_URL: redis://redis:6379/0
+      REVENUE_READS_FROM_LEDGER: 'true'
+      S3_ASSET_PREFIX: http://api.localhost
+      SDK_HOST: sdk.localhost
+      SECRET_KEY_BASE: f61f435e9b272a0fb544637ef203e1c90cb8f0d96ad17b0ffe57dcc580d94869f4024b01c66cec0287968ed080672df49eb85a592fc51b8fdbcfdea426cc401b
+      SENT_QUOTAS_WEBHOOK_KEY: 43e3aab0cf5f6e9f0bc8e7ec6e84dc13cb1f8c3c67c644052c69475aeef3144e4d80427a0aec31d33a23721f96f076b19bed7ffbd0b8348efa6afe567ae4c546
+      SERVER_HOST: localhost
+      SERVER_HOST_PROTOCOL: http://
+      SIDEKIQ_EVENTS_CONCURRENCY: '10'
+      SMTP_ADDRESS: smtp.example.com
+      SMTP_AUTHENTICATION: plain
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_STARTTLS_AUTO: 'true'
+      SMTP_PASSWORD: ''
+      SMTP_PORT: '587'
+      SMTP_USERNAME: ''
+      WEB_CONCURRENCY: '2'
+    volumes:
+    - storage:/app/storage
+    command:
+    - bundle
+    - exec
+    - puma
+    - -b
+    - tcp://0.0.0.0:3000
+    expose:
+    - 3000
+    labels:
+    - traefik.http.services.${APP_NAME}-links.loadbalancer.server.port=3000
+    - traefik.http.routers.${APP_NAME}-links.rule=HostRegexp(`^[a-z0-9-]+\.${DOMAIN_LIVE}$$`) || HostRegexp(`^[a-z0-9-]+\.${DOMAIN_TEST}$$`)
+    - traefik.http.routers.${APP_NAME}-links.entrypoints=web
+    - traefik.http.routers.${APP_NAME}-links.priority=1
+    - traefik.http.routers.${APP_NAME}-links.service=${APP_NAME}-links
+    - traefik.http.routers.${APP_NAME}-links-secure.rule=HostRegexp(`^[a-z0-9-]+\.${DOMAIN_LIVE}$$`) || HostRegexp(`^[a-z0-9-]+\.${DOMAIN_TEST}$$`)
+    - traefik.http.routers.${APP_NAME}-links-secure.entrypoints=websecure
+    - traefik.http.routers.${APP_NAME}-links-secure.priority=1
+    - traefik.http.routers.${APP_NAME}-links-secure.service=${APP_NAME}-links
+    - traefik.http.routers.${APP_NAME}-links-secure.tls=true
+    - traefik.http.routers.${APP_NAME}-links-secure.tls.certresolver=${GROVS_CERT_RESOLVER:-}
+    - traefik.http.routers.${APP_NAME}-links-secure.tls.domains[0].main=${DOMAIN_LIVE}
+    - traefik.http.routers.${APP_NAME}-links-secure.tls.domains[0].sans=*.${DOMAIN_LIVE}
+    - traefik.http.routers.${APP_NAME}-links-secure.tls.domains[1].main=${DOMAIN_TEST}
+    - traefik.http.routers.${APP_NAME}-links-secure.tls.domains[1].sans=*.${DOMAIN_TEST}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:3000/up
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+  worker-1:
+    image: ghcr.io/grovs-io/backend:2.3.1
+    restart: unless-stopped
+    environment:
+      ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: 11bc360d69544ae760d864d3fe33d3fd82c132ab73bab4e9c0853a2449a05849bb1b9c557ec2f908c34a11eec9545dcafb75ddb817ef7888bdc9a55bd182166d
+      ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: 130acddff46123c9bf99931e5b8279f8779e31a7b55aeaec1002ad094d50b76b999b91c8223dda772af7c58c7bf88ea51aa5bc58e706778a2a431311e9d14c57
+      ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: 23360b3a75f2904264e443e86bbf7d7d6f2cac04c6e801b0a2331ffe2327e7ac4a4f20df1e4e3f883c7b0672d783081d786f446da33bf8c254ffdecb38d94eaf
+      ACTIVE_STORAGE_SERVICE: local
+      ADMIN_API_KEY: 1f11bafb9d494cbbca4d20d5442199374d06fbbef46d9483062c063ad8bc8cd35406f4fffe70ddfc901496dfb882d21736b267e38f69d7e8078ad856ce41d65f
+      API_HOST: api.localhost
+      BOOTSTRAP_ADMIN_EMAIL: admin@localhost
+      BOOTSTRAP_ADMIN_PASSWORD: 9zea5YgzYIysKSDgObFCg5sf
+      CLICKHOUSE_ANALYTICS_ROLLUPS_READ_ENABLED: 'true'
+      CLICKHOUSE_ATTRIBUTION_READ_ENABLED: 'true'
+      CLICKHOUSE_DATABASE: grovs_production
+      CLICKHOUSE_LINK_DIMENSIONS_READ_ENABLED: 'true'
+      CLICKHOUSE_PASSWORD: 5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m
+      CLICKHOUSE_PRIMARY: 'true'
+      CLICKHOUSE_READ_ENABLED: 'true'
+      CLICKHOUSE_ROLLUP_FAST_LANE: 'true'
+      CLICKHOUSE_URL: http://grovs:5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m@clickhouse:8123
+      CLICKHOUSE_WRITE_ENABLED: 'true'
+      DASHBOARD_CACHE_TTL_SECONDS: '60'
+      DASHBOARD_HOST: dashboard.localhost
+      DATABASE_URL: postgres://grovs:FrwuJNf8dAtodnJWo2yYtWuK2wliQwks@postgres:5432/grovs_production
+      DEFAULT_LINK_SUBTITLE: Dynamic links, attributions, and referrals across mobile and web platforms.
+      DEFAULT_LINK_TITLE: grovs
+      DEFAULT_LOGO_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/logo-square-new.svg
+      DEFAULT_SOCIAL_PREVIEW_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/social-media-placeholder.jpg
+      DIAGNOSTICS_API_KEY: 292273c500fb64e647d391288b01473b588d70f8c25a5e07dd327df99305862505c6c11587457f62b688f7ffea761398213c560f2e3ed3a8635b601be3146533
+      DOMAIN_LIVE: localhost
+      DOMAIN_TEST: test.localhost
+      GO_HOST: go.localhost
+      GROVS_EE: 'false'
+      GROVS_SELF_HOSTED: 'true'
+      LINKS_PROD_HOST: links.localhost
+      LINKS_TEST_HOST: links.test.localhost
+      MAILER_DELIVERY_METHOD: ''
+      MAILER_FROM: Grovs <noreply@localhost>
+      MCP_CONSENT_URL: http://dashboard.localhost/mcp/authorize
+      MCP_HOST: mcp.localhost
+      OAUTH_CLIENT_SECRET: 87baca5a96a36f303531816a9960f601d17e51154a71ede00636dbc9660b47470044512584659629f0265d01635feac0a1430e531f06d53d5ac0fafaa2ac48b7
+      OAUTH_CLIENT_UID: 8a18041067b2a44393262f6ed0dbb6cfed45aaee66b510d19878d74b0ad6ada11d87189151583f695d1ea8e4df6fc19f
+      PG_SHADOW_WRITES: 'false'
+      POSTGRES_DB: grovs_production
+      POSTGRES_MAX_CONNECTIONS: '200'
+      POSTGRES_PASSWORD: FrwuJNf8dAtodnJWo2yYtWuK2wliQwks
+      POSTGRES_USER: grovs
+      PREVIEW_BASE_URL: http://preview.localhost
+      PREVIEW_HOST: preview.localhost
+      PUBLIC_GO_PROJECT_IDENTIFIER: go-self-hosted
+      RAILS_DB_POOL: '10'
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_MAX_THREADS: '5'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      REACT_HOST: dashboard.localhost
+      REACT_HOST_PROTOCOL: http://
+      REDIS_URL: redis://redis:6379/0
+      REVENUE_READS_FROM_LEDGER: 'true'
+      S3_ASSET_PREFIX: http://api.localhost
+      SDK_HOST: sdk.localhost
+      SECRET_KEY_BASE: f61f435e9b272a0fb544637ef203e1c90cb8f0d96ad17b0ffe57dcc580d94869f4024b01c66cec0287968ed080672df49eb85a592fc51b8fdbcfdea426cc401b
+      SENT_QUOTAS_WEBHOOK_KEY: 43e3aab0cf5f6e9f0bc8e7ec6e84dc13cb1f8c3c67c644052c69475aeef3144e4d80427a0aec31d33a23721f96f076b19bed7ffbd0b8348efa6afe567ae4c546
+      SERVER_HOST: localhost
+      SERVER_HOST_PROTOCOL: http://
+      SIDEKIQ_EVENTS_CONCURRENCY: '10'
+      SMTP_ADDRESS: smtp.example.com
+      SMTP_AUTHENTICATION: plain
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_STARTTLS_AUTO: 'true'
+      SMTP_PASSWORD: ''
+      SMTP_PORT: '587'
+      SMTP_USERNAME: ''
+      WEB_CONCURRENCY: '2'
+    volumes:
+    - storage:/app/storage
+    command:
+    - bash
+    - -c
+    - bundle exec sidekiq -C config/sidekiq_scheduler.yml & bundle exec sidekiq -C config/sidekiq_worker.yml & bundle exec
+      sidekiq -C config/sidekiq_batch.yml & wait -n
+    depends_on:
+      web:
+        condition: service_healthy
+  worker-2:
+    image: ghcr.io/grovs-io/backend:2.3.1
+    restart: unless-stopped
+    environment:
+      ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: 11bc360d69544ae760d864d3fe33d3fd82c132ab73bab4e9c0853a2449a05849bb1b9c557ec2f908c34a11eec9545dcafb75ddb817ef7888bdc9a55bd182166d
+      ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: 130acddff46123c9bf99931e5b8279f8779e31a7b55aeaec1002ad094d50b76b999b91c8223dda772af7c58c7bf88ea51aa5bc58e706778a2a431311e9d14c57
+      ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: 23360b3a75f2904264e443e86bbf7d7d6f2cac04c6e801b0a2331ffe2327e7ac4a4f20df1e4e3f883c7b0672d783081d786f446da33bf8c254ffdecb38d94eaf
+      ACTIVE_STORAGE_SERVICE: local
+      ADMIN_API_KEY: 1f11bafb9d494cbbca4d20d5442199374d06fbbef46d9483062c063ad8bc8cd35406f4fffe70ddfc901496dfb882d21736b267e38f69d7e8078ad856ce41d65f
+      API_HOST: api.localhost
+      BOOTSTRAP_ADMIN_EMAIL: admin@localhost
+      BOOTSTRAP_ADMIN_PASSWORD: 9zea5YgzYIysKSDgObFCg5sf
+      CLICKHOUSE_ANALYTICS_ROLLUPS_READ_ENABLED: 'true'
+      CLICKHOUSE_ATTRIBUTION_READ_ENABLED: 'true'
+      CLICKHOUSE_DATABASE: grovs_production
+      CLICKHOUSE_LINK_DIMENSIONS_READ_ENABLED: 'true'
+      CLICKHOUSE_PASSWORD: 5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m
+      CLICKHOUSE_PRIMARY: 'true'
+      CLICKHOUSE_READ_ENABLED: 'true'
+      CLICKHOUSE_ROLLUP_FAST_LANE: 'true'
+      CLICKHOUSE_URL: http://grovs:5ifmV8em9ln5MRm51eYiMVTw5zwYOc7m@clickhouse:8123
+      CLICKHOUSE_WRITE_ENABLED: 'true'
+      DASHBOARD_CACHE_TTL_SECONDS: '60'
+      DASHBOARD_HOST: dashboard.localhost
+      DATABASE_URL: postgres://grovs:FrwuJNf8dAtodnJWo2yYtWuK2wliQwks@postgres:5432/grovs_production
+      DEFAULT_LINK_SUBTITLE: Dynamic links, attributions, and referrals across mobile and web platforms.
+      DEFAULT_LINK_TITLE: grovs
+      DEFAULT_LOGO_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/logo-square-new.svg
+      DEFAULT_SOCIAL_PREVIEW_URL: https://appssemble-assets.s3.eu-north-1.amazonaws.com/linksquared/social-media-placeholder.jpg
+      DIAGNOSTICS_API_KEY: 292273c500fb64e647d391288b01473b588d70f8c25a5e07dd327df99305862505c6c11587457f62b688f7ffea761398213c560f2e3ed3a8635b601be3146533
+      DOMAIN_LIVE: localhost
+      DOMAIN_TEST: test.localhost
+      GO_HOST: go.localhost
+      GROVS_EE: 'false'
+      GROVS_SELF_HOSTED: 'true'
+      LINKS_PROD_HOST: links.localhost
+      LINKS_TEST_HOST: links.test.localhost
+      MAILER_DELIVERY_METHOD: ''
+      MAILER_FROM: Grovs <noreply@localhost>
+      MCP_CONSENT_URL: http://dashboard.localhost/mcp/authorize
+      MCP_HOST: mcp.localhost
+      OAUTH_CLIENT_SECRET: 87baca5a96a36f303531816a9960f601d17e51154a71ede00636dbc9660b47470044512584659629f0265d01635feac0a1430e531f06d53d5ac0fafaa2ac48b7
+      OAUTH_CLIENT_UID: 8a18041067b2a44393262f6ed0dbb6cfed45aaee66b510d19878d74b0ad6ada11d87189151583f695d1ea8e4df6fc19f
+      PG_SHADOW_WRITES: 'false'
+      POSTGRES_DB: grovs_production
+      POSTGRES_MAX_CONNECTIONS: '200'
+      POSTGRES_PASSWORD: FrwuJNf8dAtodnJWo2yYtWuK2wliQwks
+      POSTGRES_USER: grovs
+      PREVIEW_BASE_URL: http://preview.localhost
+      PREVIEW_HOST: preview.localhost
+      PUBLIC_GO_PROJECT_IDENTIFIER: go-self-hosted
+      RAILS_DB_POOL: '10'
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_MAX_THREADS: '5'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      REACT_HOST: dashboard.localhost
+      REACT_HOST_PROTOCOL: http://
+      REDIS_URL: redis://redis:6379/0
+      REVENUE_READS_FROM_LEDGER: 'true'
+      S3_ASSET_PREFIX: http://api.localhost
+      SDK_HOST: sdk.localhost
+      SECRET_KEY_BASE: f61f435e9b272a0fb544637ef203e1c90cb8f0d96ad17b0ffe57dcc580d94869f4024b01c66cec0287968ed080672df49eb85a592fc51b8fdbcfdea426cc401b
+      SENT_QUOTAS_WEBHOOK_KEY: 43e3aab0cf5f6e9f0bc8e7ec6e84dc13cb1f8c3c67c644052c69475aeef3144e4d80427a0aec31d33a23721f96f076b19bed7ffbd0b8348efa6afe567ae4c546
+      SERVER_HOST: localhost
+      SERVER_HOST_PROTOCOL: http://
+      SIDEKIQ_EVENTS_CONCURRENCY: '10'
+      SMTP_ADDRESS: smtp.example.com
+      SMTP_AUTHENTICATION: plain
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_STARTTLS_AUTO: 'true'
+      SMTP_PASSWORD: ''
+      SMTP_PORT: '587'
+      SMTP_USERNAME: ''
+      WEB_CONCURRENCY: '2'
+    volumes:
+    - storage:/app/storage
+    command:
+    - bash
+    - -c
+    - bundle exec sidekiq -C config/sidekiq_maintenance.yml & bundle exec sidekiq -C config/sidekiq_device_updates.yml & wait
+      -n
+    depends_on:
+      web:
+        condition: service_healthy
+  dashboard:
+    image: ghcr.io/grovs-io/dashboard:2.3.1
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      API_URL: http://api.localhost
+      OAUTH_CLIENT_UID: 8a18041067b2a44393262f6ed0dbb6cfed45aaee66b510d19878d74b0ad6ada11d87189151583f695d1ea8e4df6fc19f
+      OAUTH_CLIENT_SECRET: 87baca5a96a36f303531816a9960f601d17e51154a71ede00636dbc9660b47470044512584659629f0265d01635feac0a1430e531f06d53d5ac0fafaa2ac48b7
+      HOSTNAME: 0.0.0.0
+      PORT: '3000'
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  pg_data: {}
+  redis_data: {}
+  clickhouse_data: {}
+  storage: {}
+x-casaos:
+  id: com.dokploy.grovs
+  main: dashboard
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grovs/icon.svg
+  title:
+    en_US: Grovs
+  tagline:
+    en_US: Self-hosted deep linking, attribution and analytics for mobile and web apps
+  description:
+    en_US: Self-hosted deep linking, attribution and analytics for mobile and web apps.
+  author: Dokploy Community
+  developer: Grovs
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2.3.1"
+  update_at: "2026-11-22"
+  website: https://www.grovs.io
+  repo: https://github.com/grovs-io/self-host
+  docs: https://github.com/grovs-io/self-host/blob/main/deploy/catalogs/dokploy/README.md

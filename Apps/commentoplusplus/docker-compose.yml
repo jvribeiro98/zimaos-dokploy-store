@@ -1,0 +1,54 @@
+name: commentoplusplus
+services:
+  commentoplusplus:
+    image: caroga/commentoplusplus:v1.8.7
+    expose:
+    - '8080'
+    environment:
+    - COMMENTO_ORIGIN=http://localhost
+    - COMMENTO_POSTGRES=postgres://postgres:6aSSNpzXDy0aOvMY@postgres:5432/postgres?sslmode=disable
+    - COMMENTO_ENABLE_WILDCARDS=true
+    depends_on:
+    - postgres
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  postgres:
+    image: postgres:11
+    environment:
+    - POSTGRES_PASSWORD=6aSSNpzXDy0aOvMY
+    - POSTGRES_DB=postgres
+    - POSTGRES_USER=postgres
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.commentoplusplus
+  main: commentoplusplus
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/commentoplusplus/icon.png
+  title:
+    en_US: Commento++
+  tagline:
+    en_US: Commento++ is a free, open-source application designed to provide a fast, lightweight c...
+  description:
+    en_US: Commento++ is a free, open-source application designed to provide a fast, lightweight comments box that you can
+      embed in your static website. It offers features like Markdown support, Disqus import, voting, automated spam detection,
+      moderation tools, sticky comments, thread locking, and OAuth login.
+  author: Dokploy Community
+  developer: Commento++
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.7"
+  update_at: "2026-11-22"
+  website: https://commento.io/
+  repo: https://github.com/souramoo/commentoplusplus
+  docs: https://commento.io/

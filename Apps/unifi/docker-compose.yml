@@ -1,0 +1,60 @@
+name: unifi
+services:
+  unifi-network-application:
+    image: lscr.io/linuxserver/unifi-network-application:latest
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Etc/UTC
+    - MONGO_HOST=unifi-db
+    - MONGO_USER=unifi
+    - MONGO_PASS=unifi_password
+    - MONGO_PORT=27017
+    - MONGO_DBNAME=unifi
+    - MEM_LIMIT=1024
+    - MEM_STARTUP=1024
+    - MONGO_TLS=
+    - MONGO_AUTHSOURCE=
+    volumes:
+    - /DATA/AppData/$AppID/config:/config
+    ports:
+    - 8443:8443
+    restart: unless-stopped
+    depends_on:
+    - unifi-db
+  unifi-db:
+    image: mongo:4.4
+    volumes:
+    - /DATA/AppData/$AppID/db/data:/data/db
+    - /DATA/AppData/$AppID/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    expose:
+    - 27017
+    restart: unless-stopped
+x-casaos:
+  id: com.dokploy.unifi
+  main: unifi-network-application
+  index: /
+  port_map: "8443"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/unifi/icon.webp
+  title:
+    en_US: Unifi Network
+  tagline:
+    en_US: Unifi Network is an open-source enterprise network management platform for wireless net...
+  description:
+    en_US: Unifi Network is an open-source enterprise network management platform for wireless networks.
+  author: Dokploy Community
+  developer: Unifi Network
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "11.6.6"
+  update_at: "2026-11-22"
+  website: https://www.ui.com/
+  repo: https://github.com/ubiquiti
+  docs: https://help.ui.com/hc/en-us/articles/360012282453-Self-Hosting-a-UniFi-Network-Server
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (init-mongo.sh). Review
+        environment variables before starting.

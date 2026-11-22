@@ -1,0 +1,98 @@
+name: capso
+services:
+  cap-web:
+    image: ghcr.io/capsoftware/cap-web:latest
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: mysql://root:MRJFwg0SkpiXirida5cXiaNKYaQW3Gfg@ps-mysql:3306/planetscale?ssl={"rejectUnauthorized":false}
+      WEB_URL: http://localhost:3000
+      NEXTAUTH_URL: http://localhost:3000
+      DATABASE_ENCRYPTION_KEY: VyPi9KcTbjv1V8L0petIqGyMj89dJD58
+      NEXTAUTH_SECRET: bpNbWpHNMnLU3KYEBFJcIXC8ejUf4bke
+      CAP_AWS_ACCESS_KEY: TBBvtWVC9rp0Y208
+      CAP_AWS_SECRET_KEY: n6LH8QeZDP5AXBHf
+      CAP_AWS_BUCKET: capso
+      CAP_AWS_REGION: us-east-1
+      S3_PUBLIC_ENDPOINT: http://localhost:3902
+      S3_INTERNAL_ENDPOINT: http://minio:3902
+    expose:
+    - 3000
+    depends_on:
+    - ps-mysql
+    - minio
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  ps-mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: planetscale
+      MYSQL_ROOT_PASSWORD: 0b7dpZcKvtKlxLjlUHuGzRQoTEFQZ9zI
+      MYSQL_ROOT_HOST: '%'
+    command:
+    - --max_connections=1000
+    - --default-authentication-plugin=mysql_native_password
+    expose:
+    - 3306
+    volumes:
+    - ps-mysql:/var/lib/mysql
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-05-24T17-08-30Z
+    restart: unless-stopped
+    command: server /bitnami/minio/data --address ":3902" --console-address ":3903"
+    environment:
+      MINIO_ROOT_USER: LzsYaGVJP5FsFUUA
+      MINIO_ROOT_PASSWORD: UuodYawYqYfInnkM
+    expose:
+    - 3902
+    - 3903
+    volumes:
+    - minio-data:/bitnami/minio/data
+    - minio-certs:/certs
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:3902/minio/health/ready
+      interval: 30s
+      timeout: 20s
+      retries: 3
+volumes:
+  ps-mysql:
+    driver: local
+  minio-data:
+    driver: local
+  minio-certs:
+    driver: local
+x-casaos:
+  id: com.dokploy.capso
+  main: cap-web
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/capso/icon.png
+  title:
+    en_US: Cap.so
+  tagline:
+    en_US: Cap
+  description:
+    en_US: Cap.so is a platform for web and desktop applications with MySQL and S3 storage. It provides a complete development
+      environment with database and file storage capabilities.
+  author: Dokploy Community
+  developer: Cap.so
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://cap.so/
+  repo: https://github.com/CapSoftware/Cap
+  docs: https://cap.so/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (certs). Review environment
+        variables before starting.

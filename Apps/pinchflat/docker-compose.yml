@@ -1,0 +1,41 @@
+name: pinchflat
+services:
+  pinchflat:
+    image: ghcr.io/kieraneglin/pinchflat:latest
+    volumes:
+    - /DATA/AppData/$AppID/config:/config
+    - /DATA/AppData/$AppID/downloads:/downloads
+    restart: unless-stopped
+    ports:
+    - target: 8945
+      published: "8945"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.pinchflat
+  main: pinchflat
+  index: /
+  port_map: "8945"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pinchflat/icon.png
+  title:
+    en_US: Pinchflat
+  tagline:
+    en_US: Pinchflat is a self-hosted YouTube downloader that allows you to download videos and pl...
+  description:
+    en_US: Pinchflat is a self-hosted YouTube downloader that allows you to download videos and playlists with a simple web
+      interface.
+  author: Dokploy Community
+  developer: Pinchflat
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/kieraneglin/pinchflat
+  repo: https://github.com/kieraneglin/pinchflat
+  docs: https://github.com/kieraneglin/pinchflat
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/config, files/downloads).
+        Review environment variables before starting.

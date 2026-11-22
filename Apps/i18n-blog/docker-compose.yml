@@ -1,0 +1,45 @@
+name: i18n-blog
+services:
+  kuno:
+    image: ictrun/kuno:latest
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://localhost/api
+      DB_PATH: /app/data/blog.db
+      UPLOAD_DIR: /app/data/uploads
+      GIN_MODE: release
+      NODE_ENV: production
+      JWT_SECRET: 8GPE63JLODomcYpiwVwVZv5gVgXsQ0Y1
+      RECOVERY_MODE: 'false'
+    volumes:
+    - kuno-data:/app/data
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  kuno-data: {}
+x-casaos:
+  id: com.dokploy.i18n-blog
+  main: kuno
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/i18n-blog/icon.png
+  title:
+    en_US: i18n Blog (Kuno)
+  tagline:
+    en_US: Kuno is an internationalized blogging platform with a backend built in Go and a fronten...
+  description:
+    en_US: Kuno is an internationalized blogging platform with a backend built in Go and a frontend in Next.js.
+  author: Dokploy Community
+  developer: i18n Blog (Kuno)
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://qut.edu.kg/
+  repo: https://github.com/xuemian168/kuno
+  docs: https://github.com/xuemian168/kuno#readme

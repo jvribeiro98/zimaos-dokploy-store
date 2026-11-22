@@ -1,0 +1,63 @@
+name: codex-docs
+services:
+  codex:
+    image: ghcr.io/codex-team/codex.docs:v2.2
+    expose:
+    - '3000'
+    environment:
+    - APP_CONFIG_database_driver=mongodb
+    - APP_CONFIG_database_mongodb_uri=mongodb://mongo:mSZWNzO7EAi83sYL@mongo:27017
+    - APP_CONFIG_auth_password=IG1w3kz1P727ginO
+    - APP_CONFIG_auth_secret=pu21iacCL63NWFFaUDtc5SGFbke4ArLd
+    volumes:
+    - uploads:/usr/src/app/uploads
+    - db:/usr/src/app/db
+    - /DATA/AppData/$AppID/docs-config.yaml:/usr/src/app/docs-config.yaml
+    depends_on:
+    - mongo
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  mongo:
+    image: mongo:4
+    environment:
+    - MONGO_INITDB_ROOT_PASSWORD=mSZWNzO7EAi83sYL
+    - MONGO_INITDB_ROOT_USERNAME=mongo
+    volumes:
+    - mongo-data:/data/db
+    restart: unless-stopped
+volumes:
+  uploads: null
+  db: null
+  mongo-data: null
+x-casaos:
+  id: com.dokploy.codex-docs
+  main: codex
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/codex-docs/icon.svg
+  title:
+    en_US: CodeX Docs
+  tagline:
+    en_US: CodeX is a comprehensive platform that brings together passionate engineers, designers,...
+  description:
+    en_US: CodeX is a comprehensive platform that brings together passionate engineers, designers, and specialists to create
+      high-quality open-source projects. It includes Editor.js, Hawk.so, CodeX Notes, and more.
+  author: Dokploy Community
+  developer: CodeX Docs
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2"
+  update_at: "2026-11-22"
+  website: https://codex.so
+  repo: https://github.com/codex-team/codex.docs
+  docs: https://docs.codex.so
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (docs-config.yaml). Review
+        environment variables before starting.

@@ -1,0 +1,39 @@
+name: prozesswerk
+services:
+  prozesswerk:
+    image: ghcr.io/guidoesser/prozesswerk:1.0.0
+    restart: unless-stopped
+    expose:
+    - '8000'
+    environment:
+    - LLM_API_KEY=LzrfaWeCnliCTZisf0gUB71zWiFIqXd1
+    - LLM_BASE_URL=https://api.openai.com/v1
+    - LLM_MODEL=gpt-4o
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.prozesswerk
+  main: prozesswerk
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/prozesswerk/icon.svg
+  title:
+    en_US: Prozesswerk
+  tagline:
+    en_US: Describe business processes in plain language and get editable BPMN 2
+  description:
+    en_US: Describe business processes in plain language and get editable BPMN 2.0 diagrams. Self-hosted and model-agnostic
+      — works with any OpenAI-compatible LLM.
+  author: Dokploy Community
+  developer: Prozesswerk
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  repo: https://github.com/guidoesser/prozesswerk
+  docs: https://github.com/guidoesser/prozesswerk#readme

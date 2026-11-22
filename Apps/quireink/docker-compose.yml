@@ -1,0 +1,46 @@
+name: quireink
+services:
+  quireink:
+    image: quireink/quireink:2.2.1
+    restart: unless-stopped
+    environment:
+      SITE_URL: https://localhost
+    volumes:
+    - quireink-data:/var/lib/quire/data
+    - quireink-uploads:/var/lib/quire/uploads
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  quireink-data: {}
+  quireink-uploads: {}
+x-casaos:
+  id: com.dokploy.quireink
+  main: quireink
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/quireink/icon.png
+  title:
+    en_US: Quire Ink
+  tagline:
+    en_US: 'A self-hosted blog in one container: a real editor over Markdown with tables, footnotes...'
+  description:
+    en_US: 'A self-hosted blog in one container: a real editor over Markdown with tables, footnotes and mathematics, scheduled
+      publishing, newsletters over your own SMTP, comments with a built-in spam gate, cookie-free analytics, full-text search
+      and a book reading mode. Importers bring a WordPress, Ghost, Substack or Medium blog across with its redirects and images.
+      There is no database service to run and nothing is fetched from a third party: two SQLite files and an uploads folder
+      are the whole of it. After the first start, open the container logs for the one-time link that claims the blog and creates
+      your account.'
+  author: Dokploy Community
+  developer: Quire Ink
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2.1"
+  update_at: "2026-11-22"
+  website: https://quireink.com
+  repo: https://github.com/joiha-steven/quireink
+  docs: https://github.com/joiha-steven/quireink/blob/main/docs/self-host-docker.md

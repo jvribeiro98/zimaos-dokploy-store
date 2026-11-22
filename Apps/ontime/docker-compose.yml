@@ -1,0 +1,43 @@
+name: ontime
+services:
+  ontime:
+    image: getontime/ontime:v3.8.0
+    expose:
+    - 4001
+    - 8888
+    - 9999
+    volumes:
+    - ontime-data:/data/
+    environment:
+    - TZ=UTC
+    restart: unless-stopped
+    ports:
+    - target: 4001
+      published: "4001"
+      protocol: tcp
+volumes:
+  ontime-data: null
+x-casaos:
+  id: com.dokploy.ontime
+  main: ontime
+  index: /
+  port_map: "4001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ontime/icon.png
+  title:
+    en_US: Ontime
+  tagline:
+    en_US: Ontime is browser-based application that manages event rundowns, scheduliing and cuing
+  description:
+    en_US: Ontime is browser-based application that manages event rundowns, scheduliing and cuing
+  author: Dokploy Community
+  developer: Ontime
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "3.8.0"
+  update_at: "2026-11-22"
+  website: https://getontime.no
+  repo: https://github.com/cpvalente/ontime/
+  docs: https://docs.getontime.no

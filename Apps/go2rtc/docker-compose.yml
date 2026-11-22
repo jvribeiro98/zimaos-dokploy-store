@@ -1,0 +1,43 @@
+name: go2rtc
+services:
+  go2rtc:
+    image: alexxit/go2rtc:1.9.14
+    restart: unless-stopped
+    expose:
+    - 1984
+    - 8554
+    - 8555
+    environment:
+    - TZ=${TZ}
+    volumes:
+    - go2rtc-config:/config
+    ports:
+    - target: 1984
+      published: "1984"
+      protocol: tcp
+volumes:
+  go2rtc-config: {}
+x-casaos:
+  id: com.dokploy.go2rtc
+  main: go2rtc
+  index: /
+  port_map: "1984"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/go2rtc/icon.png
+  title:
+    en_US: go2rtc
+  tagline:
+    en_US: Ultimate camera streaming application with support for dozens formats and protocols
+  description:
+    en_US: Ultimate camera streaming application with support for dozens formats and protocols.
+  author: Dokploy Community
+  developer: go2rtc
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.9.14"
+  update_at: "2026-11-22"
+  website: https://go2rtc.org/
+  repo: https://github.com/AlexxIT/go2rtc
+  docs: https://go2rtc.org/

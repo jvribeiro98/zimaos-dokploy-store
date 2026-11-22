@@ -1,0 +1,35 @@
+name: flaresolverr
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    expose:
+    - 8191
+    restart: unless-stopped
+    ports:
+    - target: 8191
+      published: "8191"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.flaresolverr
+  main: flaresolverr
+  index: /
+  port_map: "8191"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/flaresolverr/icon.png
+  title:
+    en_US: FlareSolverr
+  tagline:
+    en_US: FlareSolverr is a proxy server to bypass Cloudflare and DDoS-GUARD protection
+  description:
+    en_US: FlareSolverr is a proxy server to bypass Cloudflare and DDoS-GUARD protection.
+  author: Dokploy Community
+  developer: FlareSolverr
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/FlareSolverr/FlareSolverr
+  repo: https://github.com/FlareSolverr/FlareSolverr
+  docs: https://github.com/FlareSolverr/FlareSolverr

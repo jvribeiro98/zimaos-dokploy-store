@@ -1,0 +1,54 @@
+name: valkey
+services:
+  valkey:
+    image: valkey/valkey:8.1.4
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/valkey.conf:/etc/valkey/valkey.conf
+    - valkey-data:/data
+    command: valkey-server /etc/valkey/valkey.conf
+    environment:
+    - VALKEY_PASSWORD=IPyZ8ycjHMvbJBDMA9a9cGtYgCBVzGUL
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - valkey-cli -a "$$VALKEY_PASSWORD" ping | grep PONG
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  valkey-data: {}
+x-casaos:
+  id: com.dokploy.valkey
+  main: valkey
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/valkey/icon.svg
+  title:
+    en_US: Valkey
+  tagline:
+    en_US: Valkey is an open-source fork of Redis, backed by AWS and the Linux Foundation
+  description:
+    en_US: Valkey is an open-source fork of Redis, backed by AWS and the Linux Foundation. It provides a high-performance,
+      in-memory data structure store with Redis compatibility.
+  author: Dokploy Community
+  developer: Valkey
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "8.1.4"
+  update_at: "2026-11-22"
+  website: https://valkey.io/
+  repo: https://github.com/valkey-io/valkey
+  docs: https://github.com/valkey-io/valkey
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (valkey.conf). Review environment
+        variables before starting.

@@ -1,0 +1,49 @@
+name: openseo
+services:
+  openseo:
+    image: ghcr.io/every-app/open-seo:v0.1.6
+    restart: unless-stopped
+    environment:
+    - CLOUDFLARE_INCLUDE_PROCESS_ENV=true
+    - PORT=3001
+    - ALLOWED_HOST=localhost
+    - AUTH_MODE=local_noauth
+    - DATAFORSEO_API_KEY=
+    - OPENROUTER_API_KEY=
+    - OPENROUTER_MODEL=openai/gpt-4o-mini
+    - OPENSEO_TELEMETRY_DISABLED=
+    expose:
+    - 3001
+    volumes:
+    - openseo-data:/app/.wrangler
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  openseo-data: {}
+x-casaos:
+  id: com.dokploy.openseo
+  main: openseo
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openseo/icon.png
+  title:
+    en_US: OpenSEO
+  tagline:
+    en_US: OpenSEO is an open source, self-hosted alternative to Semrush and Ahrefs for keyword re...
+  description:
+    en_US: OpenSEO is an open source, self-hosted alternative to Semrush and Ahrefs for keyword research, rank tracking, backlinks,
+      and site audits.
+  author: Dokploy Community
+  developer: OpenSEO
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.6"
+  update_at: "2026-11-22"
+  website: https://openseo.so
+  repo: https://github.com/every-app/open-seo
+  docs: https://openseo.so/docs/self-hosting

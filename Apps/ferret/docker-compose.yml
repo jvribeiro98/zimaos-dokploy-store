@@ -1,0 +1,43 @@
+name: ferret
+services:
+  ferret:
+    image: ghcr.io/ferret-project/ferret:2026.11.4
+    restart: unless-stopped
+    environment:
+      PUBLIC_URL: http://localhost
+      TRUSTED_PROXIES: 172.16.0.0/12
+    volumes:
+    - ferret-data:/data
+    expose:
+    - 8787
+    ports:
+    - target: 8787
+      published: "8787"
+      protocol: tcp
+volumes:
+  ferret-data: null
+x-casaos:
+  id: com.dokploy.ferret
+  main: ferret
+  index: /
+  port_map: "8787"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ferret/icon.svg
+  title:
+    en_US: Ferret
+  tagline:
+    en_US: 'Self-hosted home inventory: find anything you own'
+  description:
+    en_US: 'Self-hosted home inventory: find anything you own. Photos, barcodes, QR labels, warranties, maintenance and an
+      insurance report, with a REST API, an MCP server and optional AI on your own models.'
+  author: Dokploy Community
+  developer: Ferret
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.11.4"
+  update_at: "2026-11-22"
+  website: https://github.com/ferret-project/ferret
+  repo: https://github.com/ferret-project/ferret
+  docs: https://github.com/ferret-project/ferret/tree/main/apps/docs/hosting

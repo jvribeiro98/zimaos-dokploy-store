@@ -1,0 +1,40 @@
+name: komari-monitor
+services:
+  komari:
+    image: ghcr.io/komari-monitor/komari:latest
+    restart: unless-stopped
+    volumes:
+    - komari-data:/app/data
+    environment:
+    - ADMIN_USERNAME=admin
+    - ADMIN_PASSWORD=1e4zec9i5VFPrBhl
+    ports:
+    - target: 25774
+      published: "25774"
+      protocol: tcp
+volumes:
+  komari-data: {}
+x-casaos:
+  id: com.dokploy.komari-monitor
+  main: komari
+  index: /
+  port_map: "25774"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/komari-monitor/icon.ico
+  title:
+    en_US: Komari Monitor
+  tagline:
+    en_US: A lightweight, self-hosted server monitoring tool for tracking server performance
+  description:
+    en_US: A lightweight, self-hosted server monitoring tool for tracking server performance.
+  author: Dokploy Community
+  developer: Komari Monitor
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/komari-monitor/komari
+  repo: https://github.com/komari-monitor/komari
+  docs: https://github.com/komari-monitor/komari#readme

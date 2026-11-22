@@ -1,0 +1,62 @@
+name: coralproject
+services:
+  coral:
+    image: coralproject/talk:9.7.0
+    expose:
+    - '3000'
+    environment:
+    - MONGODB_URI=mongodb://mongo:Pw3GLWNVueJ2QNR2@mongo:27017
+    - REDIS_URI=redis://default:84WL5tXm4BC7VtjX@redis:6379
+    - SIGNING_SECRET=23EyMKgTGiqkoYRNq1LzA5DyhlvBFegYnS4PlQRjeTFHs
+    - NODE_ENV=production
+    depends_on:
+    - mongo
+    - redis
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  mongo:
+    image: mongo:4
+    environment:
+    - MONGO_INITDB_ROOT_PASSWORD=Pw3GLWNVueJ2QNR2
+    - MONGO_INITDB_ROOT_USERNAME=mongo
+    volumes:
+    - mongo-data:/data/db
+    restart: unless-stopped
+  redis:
+    image: redis:6
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+    - redis-data:/data
+    restart: unless-stopped
+volumes:
+  mongo-data: null
+  redis-data: null
+x-casaos:
+  id: com.dokploy.coralproject
+  main: coral
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/coralproject/icon.png
+  title:
+    en_US: Coral
+  tagline:
+    en_US: Coral is a revolutionary commenting platform designed to enhance website interactions
+  description:
+    en_US: Coral is a revolutionary commenting platform designed to enhance website interactions. It features smart technology
+      for meaningful discussions, journalist identification, moderation tools with AI support, and complete data control without
+      ads or trackers. Used by major news sites worldwide.
+  author: Dokploy Community
+  developer: Coral
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "9.7.0"
+  update_at: "2026-11-22"
+  website: https://coralproject.net/
+  repo: https://github.com/coralproject/talk
+  docs: https://docs.coralproject.net/

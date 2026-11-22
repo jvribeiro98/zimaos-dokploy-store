@@ -1,0 +1,45 @@
+name: ampache
+services:
+  ampache:
+    image: ampache/ampache:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    volumes:
+    - config:/var/www/config
+    - log:/var/log/ampache
+    - mysql:/var/lib/mysql
+    - ${MEDIA_PATH}:/media
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  config: {}
+  log: {}
+  mysql: {}
+x-casaos:
+  id: com.dokploy.ampache
+  main: ampache
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ampache/icon.png
+  title:
+    en_US: Ampache
+  tagline:
+    en_US: Ampache is a web-based audio/video streaming application and file manager allowing you...
+  description:
+    en_US: Ampache is a web-based audio/video streaming application and file manager allowing you to access your music & videos
+      from anywhere, using almost any internet enabled device.
+  author: Dokploy Community
+  developer: Ampache
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: http://ampache.org/
+  repo: https://github.com/ampache/ampache
+  docs: https://github.com/ampache/ampache/wiki

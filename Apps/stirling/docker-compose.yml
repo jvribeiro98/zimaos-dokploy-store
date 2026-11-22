@@ -1,0 +1,50 @@
+name: stirling
+services:
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    expose:
+    - 8080
+    volumes:
+    - stirling_pdf_trainingdata:/usr/share/tessdata
+    - stirling_pdf_extraconfigs:/configs
+    - stirling_pdf_customfiles:/customFiles/
+    - stirling_pdf_logs:/logs/
+    - stirling_pdf_pipeline:/pipeline/
+    environment:
+    - DOCKER_ENABLE_SECURITY=false
+    - LANGS=en_GB
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  stirling_pdf_trainingdata: null
+  stirling_pdf_extraconfigs: null
+  stirling_pdf_customfiles: null
+  stirling_pdf_logs: null
+  stirling_pdf_pipeline: null
+x-casaos:
+  id: com.dokploy.stirling
+  main: stirling-pdf
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/stirling/icon.svg
+  title:
+    en_US: Stirling PDF
+  tagline:
+    en_US: A locally hosted one-stop shop for all your PDF needs
+  description:
+    en_US: A locally hosted one-stop shop for all your PDF needs
+  author: Dokploy Community
+  developer: Stirling PDF
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.30.1"
+  update_at: "2026-11-22"
+  website: https://www.stirlingpdf.com/
+  repo: https://github.com/Stirling-Tools/Stirling-PDF
+  docs: https://docs.stirlingpdf.com/

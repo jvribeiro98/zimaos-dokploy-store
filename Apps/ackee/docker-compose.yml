@@ -1,0 +1,49 @@
+name: ackee
+services:
+  ackee:
+    image: electerious/ackee:3.4.2
+    expose:
+    - '3000'
+    environment:
+    - ACKEE_USERNAME=default
+    - ACKEE_PASSWORD=RDUFGAeqRwn20rHO
+    - ACKEE_MONGODB=mongodb://mongo:guHy6JgK1le2As5O@mongo:27017
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  mongo:
+    image: mongo:4
+    environment:
+    - MONGO_INITDB_ROOT_PASSWORD=guHy6JgK1le2As5O
+    - MONGO_INITDB_ROOT_USERNAME=mongo
+    volumes:
+    - mongo-data:/data/db
+    restart: unless-stopped
+volumes:
+  mongo-data: null
+x-casaos:
+  id: com.dokploy.ackee
+  main: ackee
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ackee/icon.png
+  title:
+    en_US: Ackee
+  tagline:
+    en_US: Ackee is a self-hosted analytics tool for your website
+  description:
+    en_US: Ackee is a self-hosted analytics tool for your website.
+  author: Dokploy Community
+  developer: Ackee
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "3.4.2"
+  update_at: "2026-11-22"
+  website: https://ackee.electerious.com/
+  repo: https://github.com/electerious/Ackee
+  docs: https://docs.ackee.electerious.com/

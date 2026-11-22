@@ -1,0 +1,64 @@
+name: ezbookkeeping
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=avzG7og8jcyb8lDwJ1uMNK6ZMT3mOdfT
+    - MYSQL_DATABASE=ezbookkeeping
+    - MYSQL_USER=ezbookkeeping
+    - MYSQL_PASSWORD=q1kXGyQJUL6OrzHY9mNA9pTfKYbwlX5P
+    volumes:
+    - mysql-data:/var/lib/mysql
+  ezbookkeeping:
+    image: mayswind/ezbookkeeping
+    restart: unless-stopped
+    depends_on:
+    - mysql
+    environment:
+    - EBK_SERVER_DOMAIN=localhost
+    - EBK_SERVER_ENABLE_GZIP=true
+    - EBK_DATABASE_TYPE=mysql
+    - EBK_DATABASE_HOST=mysql:3306
+    - EBK_DATABASE_NAME=ezbookkeeping
+    - EBK_DATABASE_USER=ezbookkeeping
+    - EBK_DATABASE_PASSWD=q1kXGyQJUL6OrzHY9mNA9pTfKYbwlX5P
+    - EBK_LOG_MODE=file
+    - EBK_SECURITY_SECRET_KEY=pvdWW4IsU7oZ4qDSKhmwsbwqWcIVsJ7u7U40uQkpgVFIKtTaddzrC5r9Oj4NUA5z
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - storage:/ezbookkeeping/storage
+    - logs:/ezbookkeeping/log
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  mysql-data: {}
+  storage: {}
+  logs: {}
+x-casaos:
+  id: com.dokploy.ezbookkeeping
+  main: ezbookkeeping
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ezbookkeeping/icon.png
+  title:
+    en_US: EZBookkeeping
+  tagline:
+    en_US: EZBookkeeping is a self-hosted bookkeeping application that helps you manage your perso...
+  description:
+    en_US: EZBookkeeping is a self-hosted bookkeeping application that helps you manage your personal and business finances.
+      It provides features for tracking income, expenses, accounts, and generating financial reports.
+  author: Dokploy Community
+  developer: EZBookkeeping
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/mayswind/ezbookkeeping
+  repo: https://github.com/mayswind/ezbookkeeping
+  docs: https://github.com/mayswind/ezbookkeeping

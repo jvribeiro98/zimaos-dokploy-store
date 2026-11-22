@@ -1,0 +1,66 @@
+name: umami
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:3.4.1
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl http://localhost:3000/api/heartbeat
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://umami:zPfCTmlK31rWZZzK7EJggWMppqJFikFV@db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: oRBeBNE3UO7lmkarJsqvig+2TZVRbv6Pa2LFW3mwRNrCLNKR6oN+izviuwHX+eNqGRJLdMKZyETPeevDj6TMAg==
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:15-alpine
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: zPfCTmlK31rWZZzK7EJggWMppqJFikFV
+volumes:
+  db-data: null
+x-casaos:
+  id: com.dokploy.umami
+  main: umami
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/umami/icon.png
+  title:
+    en_US: Umami
+  tagline:
+    en_US: Umami is a simple website analytics tool and an alternative to Google Analytics
+  description:
+    en_US: Umami is a simple website analytics tool and an alternative to Google Analytics. Self-host it on your own server
+      with Dokploy, which deploys Umami as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Umami
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "3.4.1"
+  update_at: "2026-11-22"
+  website: https://umami.is
+  repo: https://github.com/umami-software/umami
+  docs: https://umami.is/docs

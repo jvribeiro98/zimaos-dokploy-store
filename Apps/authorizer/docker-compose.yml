@@ -1,0 +1,66 @@
+name: authorizer
+services:
+  authorizer:
+    image: lakhansamani/authorizer:1.4.4
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - DATABASE_TYPE=postgres
+    - DATABASE_URL=postgres://postgres:Ta3MiWQ9e2EPHluc@authorizer-db:5432/authorizer?sslmode=disable
+    - REDIS_URL=redis://authorizer-redis:6379
+    - ADMIN_SECRET=ZbRhTnaoyDmFvCdx8LdoKlRCtQ9dy59I
+    - JWT_SECRET=i9UQxH4btY7fIv7zw2gR9CFqnz0IlCOH
+    - COOKIE_NAME=authorizer
+    - ACCESS_TOKEN_EXPIRY_TIME=86400
+    - REFRESH_TOKEN_EXPIRY_TIME=86400
+    - DISABLE_PLAYGROUND=true
+    depends_on:
+    - authorizer-db
+    - authorizer-redis
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  authorizer-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=Ta3MiWQ9e2EPHluc
+    - POSTGRES_DB=authorizer
+    volumes:
+    - db_data:/var/lib/postgresql/data
+  authorizer-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+volumes:
+  db_data: {}
+  redis_data: {}
+x-casaos:
+  id: com.dokploy.authorizer
+  main: authorizer
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/authorizer/icon.png
+  title:
+    en_US: Authorizer
+  tagline:
+    en_US: Authorizer is a powerful tool designed to simplify the process of user authentication a...
+  description:
+    en_US: Authorizer is a powerful tool designed to simplify the process of user authentication and authorization in your
+      applications. It allows you to build secure apps 10x faster with its low code tool and low-cost deployment.
+  author: Dokploy Community
+  developer: Authorizer
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.4.4"
+  update_at: "2026-11-22"
+  website: https://authorizer.dev
+  repo: https://github.com/authorizerdev/authorizer
+  docs: https://docs.authorizer.dev/

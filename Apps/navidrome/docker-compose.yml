@@ -1,0 +1,46 @@
+name: navidrome
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    environment:
+    - ND_SCANSCHEDULE=1h
+    - ND_LOGLEVEL=info
+    - ND_SESSIONTIMEOUT=24h
+    volumes:
+    - navidrome-data:/data
+    - navidrome-music:/music:ro
+    expose:
+    - 4533
+    ports:
+    - target: 4533
+      published: "4533"
+      protocol: tcp
+volumes:
+  navidrome-data: {}
+  navidrome-music: {}
+x-casaos:
+  id: com.dokploy.navidrome
+  main: navidrome
+  index: /
+  port_map: "4533"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/navidrome/icon.png
+  title:
+    en_US: Navidrome
+  tagline:
+    en_US: Navidrome is a modern music server and streamer compatible with Subsonic/Airsonic
+  description:
+    en_US: Navidrome is a modern music server and streamer compatible with Subsonic/Airsonic. Stream your music collection
+      anywhere.
+  author: Dokploy Community
+  developer: Navidrome
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.navidrome.org/
+  repo: https://github.com/navidrome/navidrome
+  docs: https://www.navidrome.org/docs/

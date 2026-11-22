@@ -1,0 +1,38 @@
+name: keydb
+services:
+  keydb:
+    image: eqalpha/keydb:latest
+    restart: unless-stopped
+    command: keydb-server /etc/keydb/keydb.conf --server-threads 2 --requirepass ${KEYDB_PASSWORD}
+    volumes:
+    - keydb-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  keydb-data: {}
+x-casaos:
+  id: com.dokploy.keydb
+  main: keydb
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/keydb/icon.png
+  title:
+    en_US: KeyDB
+  tagline:
+    en_US: KeyDB is a high-performance fork of Redis with multithreading, active replication, and...
+  description:
+    en_US: KeyDB is a high-performance fork of Redis with multithreading, active replication, and flash storage support.
+  author: Dokploy Community
+  developer: KeyDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://docs.keydb.dev/
+  repo: https://github.com/Snapchat/KeyDB
+  docs: https://docs.keydb.dev/docs/

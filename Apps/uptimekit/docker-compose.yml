@@ -1,0 +1,96 @@
+name: uptimekit
+services:
+  dash:
+    image: ghcr.io/uptimekit/dash:5.2.1
+    env_file:
+    - .env
+    environment:
+    - DATABASE_URL=postgresql://postgres:0SXF7TtFXCc8AUyTQ3h28i8m2TIa8QfT@db:5432/uptimekit
+    - TIMESERIES_BACKEND=clickhouse
+    - CLICKHOUSE_URL=http://clickhouse:8123
+    - CLICKHOUSE_USER=default
+    - CLICKHOUSE_PASSWORD=UUQXhDeSdMqQJ8jaD6A20WdXqgrSmShL
+    - REDIS_URL=redis://redis:6379
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - IP=$$(hostname -i | awk '{print $$1}'); wget -qO- "http://$$IP:3000/api/health" >/dev/null 2>&1
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: always
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0SXF7TtFXCc8AUyTQ3h28i8m2TIa8QfT
+      POSTGRES_DB: uptimekit
+    volumes:
+    - db_data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres -d uptimekit
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: always
+  redis:
+    image: redis:8.0-alpine
+    volumes:
+    - redis_data:/data
+    restart: always
+  clickhouse:
+    image: clickhouse/clickhouse-server:26.8-alpine
+    volumes:
+    - clickhouse_data:/var/lib/clickhouse
+    environment:
+      CLICKHOUSE_DB: uptimekit
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: UUQXhDeSdMqQJ8jaD6A20WdXqgrSmShL
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
+    user: root
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    restart: always
+volumes:
+  db_data: null
+  clickhouse_data: null
+  redis_data: null
+x-casaos:
+  id: com.dokploy.uptimekit
+  main: dash
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/uptimekit/icon.svg
+  title:
+    en_US: Uptimekit
+  tagline:
+    en_US: The modern open-source status page and monitoring solution
+  description:
+    en_US: The modern open-source status page and monitoring solution.
+  author: Dokploy Community
+  developer: Uptimekit
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "5.2.1"
+  update_at: "2026-11-22"
+  website: https://uptimekit.dev/
+  repo: https://github.com/uptimekit/uptimekit
+  docs: https://docs.uptimekit.dev/

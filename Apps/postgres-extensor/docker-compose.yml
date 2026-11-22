@@ -1,0 +1,58 @@
+name: postgres-extensor
+services:
+  postgres-extensor:
+    image: ruxwez/postgres:18-v1.1.0
+    restart: unless-stopped
+    command:
+    - postgres
+    - -c
+    - shared_preload_libraries=${SHARED_PRELOAD_LIBRARIES}
+    - -c
+    - cron.database_name=${POSTGRES_DB}
+    - -c
+    - max_worker_processes=32
+    environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=ueayT68xSPwmtpxeBDr0vaumdO85h0jP
+    - POSTGRES_DB=postgres
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.postgres-extensor
+  main: postgres-extensor
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/postgres-extensor/icon.svg
+  title:
+    en_US: PostgreSQL with 80+ Extensions
+  tagline:
+    en_US: 'The official PostgreSQL 18 image with 80+ tested extensions preinstalled: pgvector, Pos...'
+  description:
+    en_US: 'The official PostgreSQL 18 image with 80+ tested extensions preinstalled: pgvector, PostGIS, TimescaleDB, pgmq,
+      pg_cron, pg_duckdb, Apache AGE, pg_graphql and more. Multi-arch (amd64, arm64).'
+  author: Dokploy Community
+  developer: PostgreSQL with 80+ Extensions
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "18-v1.1.0"
+  update_at: "2026-11-22"
+  website: https://hub.docker.com/r/ruxwez/postgres
+  repo: https://github.com/ruxwez/postgres
+  docs: https://github.com/ruxwez/postgres/blob/main/.docs/included-extensions.md

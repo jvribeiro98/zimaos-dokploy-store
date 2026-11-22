@@ -1,0 +1,44 @@
+{
+	auto_https off
+}
+
+(client_identity_hygiene) {
+	header_up -Fly-Client-IP
+	header_up -CF-Connecting-IP
+	header_up -True-Client-IP
+	header_up -X-Vercel-IP-Country
+	header_up -X-Vercel-IP-City
+	header_up -Fly-Client-Country
+	header_up -CF-IPCountry
+	header_up -CF-IPCity
+}
+
+:80 {
+	@web host {$OA_APP_HOST}
+	handle @web {
+		reverse_proxy web:3000
+	}
+
+	@api host {$OA_API_HOST}
+	handle @api {
+		reverse_proxy api:8082 {
+			import client_identity_hygiene
+		}
+	}
+
+	@collector host {$OA_COLLECTOR_HOST}
+	handle @collector {
+		reverse_proxy collector:8083 {
+			import client_identity_hygiene
+		}
+	}
+
+	@realtime host {$OA_REALTIME_HOST}
+	handle @realtime {
+		reverse_proxy realtime:8084 {
+			import client_identity_hygiene
+		}
+	}
+
+	respond 404
+}

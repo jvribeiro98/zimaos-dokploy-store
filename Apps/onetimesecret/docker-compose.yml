@@ -1,0 +1,66 @@
+name: onetimesecret
+services:
+  onetimesecret-redis:
+    image: redis:7-alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  onetimesecret:
+    image: onetimesecret/onetimesecret:latest
+    restart: unless-stopped
+    environment:
+    - AUTH_AUTOVERIFY=true
+    - AUTH_SIGNUP=true
+    - COLONEL=admin@example.com
+    - HOST=localhost
+    - RACK_ENV=production
+    - REDIS_URL=redis://:9RVvHtF45Dc1MjbHb3I0iUnfsQkRV7@onetimesecret-redis:6379/0
+    - SECRET=6jN8vRTAcXR4nZ1OuOFYrcubMtPFLP
+    - SSL=true
+    depends_on:
+    - onetimesecret-redis
+    healthcheck:
+      test:
+      - CMD
+      - ruby
+      - -rnet/http
+      - -e
+      - 'exit(Net::HTTP.get_response(URI(''http://localhost:3000'')).is_a?(Net::HTTPSuccess) ? 0 : 1)'
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.onetimesecret
+  main: onetimesecret
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/onetimesecret/icon.svg
+  title:
+    en_US: One Time Secret
+  tagline:
+    en_US: Share sensitive information securely with self-destructing links that are only viewable...
+  description:
+    en_US: Share sensitive information securely with self-destructing links that are only viewable once.
+  author: Dokploy Community
+  developer: One Time Secret
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://onetimesecret.com
+  repo: https://github.com/onetimesecret/onetimesecret
+  docs: https://docs.onetimesecret.com

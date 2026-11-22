@@ -1,0 +1,48 @@
+name: garage
+services:
+  garage:
+    image: dxflrs/garage:v2.0.0
+    volumes:
+    - /DATA/AppData/$AppID/garage.toml:/etc/garage.toml
+    - garage-storage:/var/lib/garage
+    - garage-storage:/var/lib/garage
+    restart: unless-stopped
+    expose:
+    - 3900
+    - 3901
+    - 3902
+    - 3903
+    ports:
+    - target: 3900
+      published: "3900"
+      protocol: tcp
+volumes:
+  garage-storage: {}
+x-casaos:
+  id: com.dokploy.garage
+  main: garage
+  index: /
+  port_map: "3900"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/garage/icon.svg
+  title:
+    en_US: Garage S3
+  tagline:
+    en_US: Garage is an open-source distributed object storage service tailored for self-hosting
+  description:
+    en_US: Garage is an open-source distributed object storage service tailored for self-hosting.
+  author: Dokploy Community
+  developer: Garage S3
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.0.0"
+  update_at: "2026-11-22"
+  website: https://garagehq.deuxfleurs.fr
+  repo: https://git.deuxfleurs.fr/Deuxfleurs/garage
+  docs: https://garagehq.deuxfleurs.fr/documentation/quick-start/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (garage.toml). Review environment
+        variables before starting.

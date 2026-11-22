@@ -1,0 +1,36 @@
+name: openspeedtest
+services:
+  openspeedtest:
+    image: openspeedtest/latest:latest
+    restart: unless-stopped
+    expose:
+    - 3000
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.openspeedtest
+  main: openspeedtest
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openspeedtest/icon.png
+  title:
+    en_US: OpenSpeedTest
+  tagline:
+    en_US: OpenSpeedTest is a 100% browser-based HTML5 network performance estimation tool for acc...
+  description:
+    en_US: OpenSpeedTest is a 100% browser-based HTML5 network performance estimation tool for accurately measuring network
+      speed.
+  author: Dokploy Community
+  developer: OpenSpeedTest
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://openspeedtest.com/
+  repo: https://github.com/openspeedtest/Speed-Test
+  docs: https://github.com/openspeedtest/Speed-Test/wiki

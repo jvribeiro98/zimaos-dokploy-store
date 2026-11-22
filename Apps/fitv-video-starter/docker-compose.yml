@@ -1,0 +1,50 @@
+name: fitv-video-starter
+services:
+  fitv-video-starter:
+    build:
+      context: https://github.com/hanshs474/fitv-video-starter.git#1df9221e56636b81007ed8fbc9936b923f30f8e5
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - PORT=3000
+    - FREEIMAGETOVIDEO_API_KEY=
+    - ACCESS_PASSWORD=549yvgrZ85gb0usI
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.fitv-video-starter
+  main: fitv-video-starter
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/fitv-video-starter/icon.png
+  title:
+    en_US: Free Image to Video Generator
+  tagline:
+    en_US: 'Free image to video AI with no daily cap: start with no sign-up, keep going on a free a...'
+  description:
+    en_US: 'Free image to video AI with no daily cap: start with no sign-up, keep going on a free account. Every video comes
+      with sound and no watermark. One-page web app on the Free Image to Video API; set FREEIMAGETOVIDEO_API_KEY and ACCESS_PASSWORD.'
+  author: Dokploy Community
+  developer: Free Image to Video Generator
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://freeimagetovideo.ai/?utm_source=dokploy&utm_medium=template
+  repo: https://github.com/hanshs474/fitv-video-starter
+  docs: https://freeimagetovideo.readthedocs.io/en/latest/

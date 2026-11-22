@@ -1,0 +1,42 @@
+name: legejo
+services:
+  legejo:
+    image: slurvdjur/legejo:1.33.0
+    restart: unless-stopped
+    expose:
+    - '3000'
+    env_file:
+    - .env
+    volumes:
+    - legejo-data:/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  legejo-data: null
+x-casaos:
+  id: com.dokploy.legejo
+  main: legejo
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/legejo/icon.svg
+  title:
+    en_US: Legejo
+  tagline:
+    en_US: Legejo is a self-hosted library for your EPUB books, with a web reader, Kobo sync, OPDS...
+  description:
+    en_US: Legejo is a self-hosted library for your EPUB books, with a web reader, Kobo sync, OPDS for reading apps, KOReader
+      progress sync, shared shelves and audiobooks. Runs on SQLite with no other services needed.
+  author: Dokploy Community
+  developer: Legejo
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.33.0"
+  update_at: "2026-11-22"
+  website: https://github.com/jularboolean/legejo
+  repo: https://github.com/jularboolean/legejo
+  docs: https://github.com/jularboolean/legejo#readme

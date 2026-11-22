@@ -1,0 +1,67 @@
+name: orca-server
+services:
+  orca-server:
+    build:
+      args:
+        ORCA_VERSION: v1.4.205
+      dockerfile_inline: "FROM ubuntu:24.04\nARG ORCA_VERSION\nARG TARGETARCH\nENV DEBIAN_FRONTEND=noninteractive\nRUN apt-get\
+        \ update && apt-get install -y --no-install-recommends \\\n      bash ca-certificates curl file git jq openssh-client\
+        \ procps \\\n      xvfb zlib1g-dev libgtk-3-0t64 libpango-1.0-0 libcairo2 \\\n      libnss3 libgbm1 libdrm2 libasound2t64\
+        \ libcups2t64 libxkbcommon0 \\\n      libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 \\\n      libx11-xcb1\
+        \ libxcb-dri3-0 libxcomposite1 libxdamage1 libxfixes3 \\\n      libxrandr2 libxrender1 libxss1 libxtst6 \\\n    &&\
+        \ rm -rf /var/lib/apt/lists/*\nRUN if [ \"$$TARGETARCH\" = arm64 ]; then asset=orca-linux-arm64.AppImage; else asset=orca-linux.AppImage;\
+        \ fi \\\n    && curl -fL --retry 3 -o /tmp/orca.AppImage \\\n      \"https://github.com/stablyai/orca/releases/download/$$ORCA_VERSION/$$asset\"\
+        \ \\\n    && chmod +x /tmp/orca.AppImage \\\n    && cd /opt && /tmp/orca.AppImage --appimage-extract >/dev/null \\\
+        \n    && mv /opt/squashfs-root /opt/orca \\\n    && chmod -R a+rX /opt/orca \\\n    && rm /tmp/orca.AppImage\nRUN\
+        \ useradd --create-home --shell /bin/bash orca\nUSER orca\nWORKDIR /home/orca\nENV PATH=/home/orca/.local/bin:/opt/orca/resources/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\
+        \ \\\n    LIBGL_ALWAYS_SOFTWARE=1\n# Chromium cannot create its sandbox namespaces in an unprivileged\n# container;\
+        \ the container is the isolation boundary instead.\nENTRYPOINT [\"/opt/orca/AppRun\", \"--no-sandbox\"]\n"
+    restart: unless-stopped
+    init: true
+    shm_size: 1gb
+    command: serve --port 6768 --pairing-address ${ORCA_PAIRING_ADDRESS} ${ORCA_SERVE_ARGS:-}
+    expose:
+    - 6768
+    volumes:
+    - orca-home:/home/orca
+    healthcheck:
+      test:
+      - CMD
+      - bash
+      - -c
+      - ': > /dev/tcp/127.0.0.1/6768'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    ports:
+    - target: 6768
+      published: "6768"
+      protocol: tcp
+volumes:
+  orca-home: {}
+x-casaos:
+  id: com.dokploy.orca-server
+  main: orca-server
+  index: /
+  port_map: "6768"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/orca-server/icon.png
+  title:
+    en_US: Orca Server
+  tagline:
+    en_US: 'Headless Orca runtime: run a fleet of parallel coding agents in isolated git worktrees...'
+  description:
+    en_US: 'Headless Orca runtime: run a fleet of parallel coding agents in isolated git worktrees on your server and drive
+      them from the Orca desktop, web or mobile app.'
+  author: Dokploy Community
+  developer: Orca Server
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.4.205"
+  update_at: "2026-11-22"
+  website: https://www.onorca.dev
+  repo: https://github.com/stablyai/orca
+  docs: https://github.com/stablyai/orca/blob/main/docs/reference/headless-linux-server.md

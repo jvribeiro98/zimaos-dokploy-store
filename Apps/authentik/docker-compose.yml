@@ -1,0 +1,103 @@
+name: authentik
+services:
+  postgresql:
+    image: docker.io/library/postgres:18-alpine
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+    - database:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+      POSTGRES_USER: authentik
+      POSTGRES_DB: authentik
+    expose:
+    - 5432
+  server:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.8.2}
+    restart: unless-stopped
+    command: server
+    shm_size: 512mb
+    environment:
+      AUTHENTIK_SECRET_KEY: BST8zXAaCB1mS9Yxdfqn2Yi3C8UPMG7xWMiGXVdAqG2c1hzk7sPclcVQqmpFibjA
+      AUTHENTIK_WEB__BASE_URL: https://localhost
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+    volumes:
+    - data:/data
+    - custom-templates:/templates
+    expose:
+    - 9000
+    - 9443
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    ports:
+    - target: 9000
+      published: "9000"
+      protocol: tcp
+  worker:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.8.2}
+    restart: unless-stopped
+    command: worker
+    shm_size: 512mb
+    environment:
+      AUTHENTIK_SECRET_KEY: BST8zXAaCB1mS9Yxdfqn2Yi3C8UPMG7xWMiGXVdAqG2c1hzk7sPclcVQqmpFibjA
+      AUTHENTIK_WEB__BASE_URL: https://localhost
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_POSTGRESQL__PASSWORD: xw20krB6IaIeGclFpigcnUGcBYC8ZU6s
+    user: root
+    volumes:
+    - data:/data
+    - certs:/certs
+    - custom-templates:/templates
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      server:
+        condition: service_started
+volumes:
+  database:
+    driver: local
+  data:
+    driver: local
+  certs:
+    driver: local
+  custom-templates:
+    driver: local
+x-casaos:
+  id: com.dokploy.authentik
+  main: server
+  index: /
+  port_map: "9000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/authentik/icon.svg
+  title:
+    en_US: Authentik
+  tagline:
+    en_US: Authentik is an identity provider for single sign-on (SSO) authorization and authentica...
+  description:
+    en_US: Authentik is an identity provider for single sign-on (SSO) authorization and authentication, with support for SAML,
+      OAuth2, OIDC, and more. Self-host it on your own server with Dokploy, which deploys Authentik as a Docker Compose service
+      in a few clicks.
+  author: Dokploy Community
+  developer: Authentik
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.8.2"
+  update_at: "2026-11-22"
+  website: https://goauthentik.io/
+  repo: https://github.com/goauthentik/authentik
+  docs: https://goauthentik.io/docs/

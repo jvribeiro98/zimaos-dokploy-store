@@ -1,0 +1,76 @@
+name: opensourcepos
+services:
+  opensourcepos:
+    image: jekkos/opensourcepos:master
+    restart: unless-stopped
+    depends_on:
+      opensourcepos-db:
+        condition: service_healthy
+    expose:
+    - '80'
+    environment:
+      CI_ENVIRONMENT: production
+      ALLOWED_HOSTNAMES: localhost
+      FORCE_HTTPS: 'false'
+      PHP_TIMEZONE: UTC
+      MYSQL_USERNAME: admin
+      MYSQL_PASSWORD: q9UtjzSL5Y5UjOtro5pgReSqvl0LgkF5
+      MYSQL_DB_NAME: ospos
+      MYSQL_HOST_NAME: opensourcepos-db
+    volumes:
+    - opensourcepos-uploads:/app/public/uploads
+    - opensourcepos-logs:/app/writable/logs
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  opensourcepos-db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 5LudHDKpNoDdJOIbgtCFBRsNn5VPhEDF
+      MYSQL_DATABASE: ospos
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: q9UtjzSL5Y5UjOtro5pgReSqvl0LgkF5
+    volumes:
+    - opensourcepos-db:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - healthcheck.sh --connect --innodb_initialized
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  opensourcepos-db: null
+  opensourcepos-uploads: null
+  opensourcepos-logs: null
+x-casaos:
+  id: com.dokploy.opensourcepos
+  main: opensourcepos
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/opensourcepos/icon.svg
+  title:
+    en_US: OpenSourcePOS
+  tagline:
+    en_US: OpenSourcePOS is a web-based point of sale system for managing sales, inventory, custom...
+  description:
+    en_US: OpenSourcePOS is a web-based point of sale system for managing sales, inventory, customers, and reports.
+  author: Dokploy Community
+  developer: OpenSourcePOS
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "master"
+  update_at: "2026-11-22"
+  website: https://opensourcepos.org/
+  repo: https://github.com/opensourcepos/opensourcepos
+  docs: https://github.com/opensourcepos/opensourcepos/blob/master/README.md
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

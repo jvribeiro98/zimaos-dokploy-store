@@ -1,0 +1,44 @@
+name: gatus
+services:
+  gatus:
+    image: ghcr.io/twin/gatus:v5.36.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    volumes:
+    - gatus-data:/data
+    - /DATA/AppData/$AppID/config.yaml:/config/config.yaml:ro
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  gatus-data: {}
+x-casaos:
+  id: com.dokploy.gatus
+  main: gatus
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gatus/icon.svg
+  title:
+    en_US: Gatus
+  tagline:
+    en_US: Gatus is an automated service health dashboard for monitoring HTTP, DNS, TCP, ICMP, and...
+  description:
+    en_US: Gatus is an automated service health dashboard for monitoring HTTP, DNS, TCP, ICMP, and other endpoints.
+  author: Dokploy Community
+  developer: Gatus
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "5.36.0"
+  update_at: "2026-11-22"
+  website: https://gatus.io/
+  repo: https://github.com/TwiN/gatus
+  docs: https://github.com/TwiN/gatus#configuration
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config.yaml). Review environment
+        variables before starting.

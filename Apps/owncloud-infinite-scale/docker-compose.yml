@@ -1,0 +1,72 @@
+name: owncloud-infinite-scale
+services:
+  gateway:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+    - owncloud-infinite-scale
+    expose:
+    - '8080'
+    volumes:
+    - /DATA/AppData/$AppID/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  owncloud-infinite-scale:
+    image: owncloud/ocis:8.0.3
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    command:
+    - -c
+    - ocis init --insecure yes || true; ocis server
+    expose:
+    - '9200'
+    environment:
+      OCIS_URL: https://localhost
+      OCIS_LOG_LEVEL: info
+      OCIS_INSECURE: 'true'
+      PROXY_TLS: 'false'
+      PROXY_HTTP_ADDR: 0.0.0.0:9200
+      IDM_ADMIN_PASSWORD: coYFSJkAEF4YFSsoDsPzrBKJWWZS1YUv
+      SETTINGS_GRPC_ADDR: 0.0.0.0:9191
+      GATEWAY_GRPC_ADDR: 0.0.0.0:9142
+      STORAGE_USERS_DATA_GATEWAY_URL: http://owncloud-infinite-scale:9200/data
+      THUMBNAILS_FILESYSTEMSTORAGE_ROOT: /var/lib/ocis-thumbnails
+    volumes:
+    - owncloud-infinite-scale-config:/etc/ocis
+    - owncloud-infinite-scale-data:/var/lib/ocis
+    - owncloud-infinite-scale-thumbnails:/var/lib/ocis-thumbnails
+volumes:
+  owncloud-infinite-scale-config: null
+  owncloud-infinite-scale-data: null
+  owncloud-infinite-scale-thumbnails: null
+x-casaos:
+  id: com.dokploy.owncloud-infinite-scale
+  main: gateway
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/owncloud-infinite-scale/icon.svg
+  title:
+    en_US: ownCloud Infinite Scale
+  tagline:
+    en_US: ownCloud Infinite Scale is a modern file sync and share platform with WebDAV and ownClo...
+  description:
+    en_US: ownCloud Infinite Scale is a modern file sync and share platform with WebDAV and ownCloud client support.
+  author: Dokploy Community
+  developer: ownCloud Infinite Scale
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "8.0.3"
+  update_at: "2026-11-22"
+  website: https://owncloud.com/infinite-scale/
+  repo: https://github.com/owncloud/ocis
+  docs: https://doc.owncloud.com/ocis/latest/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (etc/nginx/conf.d/default.conf,
+        README.md). Review environment variables before starting.

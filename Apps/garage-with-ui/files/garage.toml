@@ -1,0 +1,27 @@
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/var/lib/garage/data"
+db_engine = "sqlite"
+metadata_auto_snapshot_interval = "6h"
+
+replication_factor = 1
+compression_level = 2
+
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "localhost:3901" # Required
+rpc_secret = "ec53454e02933527c93115baeb311c5bdea777b20af8962884ebff04c3998f589648dc76d585dee0dbb47b6495198394a1e72db864632d813acb1d5d1e327475"
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.domain.com"
+
+[s3_web] # Optional, if you want to expose bucket as web
+bind_addr = "[::]:3902"
+root_domain = ".web.domain.com"
+index = "index.html"
+
+[admin] # Required
+api_bind_addr = "[::]:3903"
+admin_token = "VtsmfoMlHKaHAAb3pErPFSCR9yBlDulW9nU6Zngloxw="
+metrics_require_token = true
+metrics_token = "pSm0PfsjDfh7HkgfPWrcsX8mvfxjn2SbMxQFjjqXU58="

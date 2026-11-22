@@ -1,0 +1,48 @@
+name: verdaccio
+services:
+  verdaccio:
+    image: verdaccio/verdaccio:6
+    environment:
+    - VERDACCIO_PORT=4873
+    expose:
+    - 4873
+    volumes:
+    - verdaccio_storage:/verdaccio/storage
+    - verdaccio_plugins:/verdaccio/plugins
+    - /DATA/AppData/$AppID/conf:/verdaccio/conf
+    restart: unless-stopped
+    ports:
+    - target: 4873
+      published: "4873"
+      protocol: tcp
+volumes:
+  verdaccio_storage: null
+  verdaccio_plugins: null
+x-casaos:
+  id: com.dokploy.verdaccio
+  main: verdaccio
+  index: /
+  port_map: "4873"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/verdaccio/icon.svg
+  title:
+    en_US: Verdaccio
+  tagline:
+    en_US: A lightweight Node
+  description:
+    en_US: A lightweight Node.js private proxy registry
+  author: Dokploy Community
+  developer: Verdaccio
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "6"
+  update_at: "2026-11-22"
+  website: https://www.verdaccio.org/
+  repo: https://github.com/verdaccio/verdaccio
+  docs: https://www.verdaccio.org/docs/what-is-verdaccio
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (conf/config.yaml). Review
+        environment variables before starting.

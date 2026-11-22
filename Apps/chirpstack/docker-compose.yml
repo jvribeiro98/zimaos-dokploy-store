@@ -1,0 +1,119 @@
+name: chirpstack
+services:
+  chirpstack:
+    image: chirpstack/chirpstack:4
+    command: -c /etc/chirpstack
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/chirpstack:/etc/chirpstack
+    expose:
+    - 8080
+    environment:
+    - MQTT_BROKER_HOST=mosquitto
+    - REDIS_HOST=redis
+    - POSTGRESQL_HOST=postgres
+    depends_on:
+    - postgres
+    - mosquitto
+    - redis
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  chirpstack-gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:4
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    expose:
+    - 1700/udp
+    environment:
+    - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}
+    - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/state/{{ .StateType }}
+    - INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/command/#
+    depends_on:
+    - mosquitto
+  chirpstack-gateway-bridge-basicstation:
+    image: chirpstack/chirpstack-gateway-bridge:4
+    command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-eu868.toml
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    expose:
+    - 3001
+    depends_on:
+    - mosquitto
+  chirpstack-rest-api:
+    image: chirpstack/chirpstack-rest-api:4
+    restart: unless-stopped
+    command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
+    expose:
+    - 8090
+    depends_on:
+    - chirpstack
+  postgres:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    volumes:
+    - postgresqldata:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/postgresql/initdb:/docker-entrypoint-initdb.d
+    environment:
+    - POSTGRES_USER=chirpstack
+    - POSTGRES_PASSWORD=pcE4lnmOpgA4Vr8YuySZSP9xda2RUtfU
+    - POSTGRES_DB=chirpstack
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 300 1 --save 60 100 --appendonly no
+    volumes:
+    - redisdata:/data
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/mosquitto/config/:/mosquitto/config/
+    expose:
+    - 1883
+volumes:
+  postgresqldata: null
+  redisdata: null
+x-casaos:
+  id: com.dokploy.chirpstack
+  main: chirpstack
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chirpstack/icon.png
+  title:
+    en_US: ChirpStack
+  tagline:
+    en_US: Open-source LoRaWAN Network Server for IoT applications
+  description:
+    en_US: Open-source LoRaWAN Network Server for IoT applications. Complete stack with gateway bridges, REST API, and web
+      interface for managing LoRaWAN devices and gateways.
+  author: Dokploy Community
+  developer: ChirpStack
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "4"
+  update_at: "2026-11-22"
+  website: https://www.chirpstack.io/
+  repo: https://github.com/chirpstack/chirpstack
+  docs: https://www.chirpstack.io/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (chirpstack/chirpstack.toml,
+        chirpstack/region_as923_2.toml, chirpstack/region_as923_3.toml, chirpstack/region_as923_4.toml, chirpstack/region_as923.toml,
+        chirpstack/region_au915_0.toml, chirpstack/region_au915_1.toml, chirpstack/region_au915_2.toml, chirpstack/region_au915_3.toml,
+        chirpstack/region_au915_4.toml, chirpstack/region_au915_5.toml, chirpstack/region_au915_6.toml, chirpstack/region_au915_7.toml,
+        chirpstack/region_cn470_0.toml, chirpstack/region_cn470_10.toml, chirpstack/region_cn470_11.toml, chirpstack/region_cn470_1.toml,
+        chirpstack/region_cn470_2.toml, chirpstack/region_cn470_3.toml, chirpstack/region_cn470_4.toml, chirpstack/region_cn470_5.toml,
+        chirpstack/region_cn470_6.toml, chirpstack/region_cn470_7.toml, chirpstack/region_cn470_8.toml, chirpstack/region_cn470_9.toml,
+        chirpstack/region_cn779.toml, chirpstack/region_eu433.toml, chirpstack/region_eu868.toml, chirpstack/region_in865.toml,
+        chirpstack/region_ism2400.toml, chirpstack/region_kr920.toml, chirpstack/region_ru864.toml, chirpstack/region_us915_0.toml,
+        chirpstack/region_us915_1.toml, chirpstack/region_us915_2.toml, chirpstack/region_us915_3.toml, chirpstack/region_us915_4.toml,
+        chirpstack/region_us915_5.toml, chirpstack/region_us915_6.toml, chirpstack/region_us915_7.toml, chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml,
+        chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-eu868.toml, mosquitto/config/mosquitto.conf, postgresql/initdb/001-chirpstack_extensions.sh).
+        Review environment variables before starting.

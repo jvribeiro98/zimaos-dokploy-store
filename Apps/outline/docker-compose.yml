@@ -1,0 +1,103 @@
+name: outline
+services:
+  outline:
+    image: outlinewiki/outline:0.82.0
+    restart: always
+    depends_on:
+    - postgres
+    - redis
+    - dex
+    expose:
+    - 3000
+    environment:
+      NODE_ENV: production
+      URL: https://localhost
+      FORCE_HTTPS: 'false'
+      PROXY_HEADERS_TRUSTED: 'true'
+      SECRET_KEY: 19360d43d62f74516ab6f5fdb45aa04318a91679f08f051c1dbc199715c609f4fe3dace293fe196762c43c62945752eefb4ddd0545ad146f55e41747c06e3e93
+      UTILS_SECRET: M2i8UR9J8psEL01qOlNAsnlZEZpfnrRahRtnzb79TYs=
+      DATABASE_URL: postgres://outline:3yMWXITR5DdprJBrzWvd590FJCvRrbNe@postgres:5432/outline
+      PGSSLMODE: disable
+      REDIS_URL: redis://redis:6379
+      FILE_STORAGE: local
+      FILE_STORAGE_LOCAL_ROOT_DIR: /var/lib/outline/data
+      OIDC_CLIENT_ID: outline
+      OIDC_CLIENT_SECRET: dqCOgrjaY7Sc9D6SpxVVIWTZXmLPGfOg/pBUT2NHoOo=
+      OIDC_AUTH_URI: https://dex-localhost/auth
+      OIDC_TOKEN_URI: https://dex-localhost/token
+      OIDC_USERINFO_URI: https://dex-localhost/userinfo
+      OIDC_USERNAME_CLAIM: preferred_username
+      OIDC_DISPLAY_NAME: OpenID Connect
+      OIDC_SCOPES: openid profile email
+    volumes:
+    - outline_data-test-outline-khufpx:/var/lib/outline/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  dex:
+    image: nginx:1.27-alpine
+    restart: always
+    depends_on:
+    - dex-server
+    volumes:
+    - /DATA/AppData/$AppID/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    expose:
+    - 5556
+  dex-server:
+    image: ghcr.io/dexidp/dex:v2.37.0
+    restart: always
+    volumes:
+    - /DATA/AppData/$AppID/etc/dex/config.yaml:/etc/dex/config.yaml
+    command:
+    - dex
+    - serve
+    - /etc/dex/config.yaml
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: outline
+      POSTGRES_USER: outline
+      POSTGRES_PASSWORD: 3yMWXITR5DdprJBrzWvd590FJCvRrbNe
+    volumes:
+    - postgres_data-test-outline-khufpx:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+    - redis_data-test-outline-khufpx:/data
+volumes:
+  outline_data-test-outline-khufpx: null
+  postgres_data-test-outline-khufpx: null
+  redis_data-test-outline-khufpx: null
+x-casaos:
+  id: com.dokploy.outline
+  main: outline
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/outline/icon.png
+  title:
+    en_US: Outline
+  tagline:
+    en_US: Outline is a self-hosted knowledge base for team documentation
+  description:
+    en_US: Outline is a self-hosted knowledge base for team documentation. Self-host it on your own server with Dokploy, which
+      deploys Outline as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Outline
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.82.0"
+  update_at: "2026-11-22"
+  website: https://getoutline.com/
+  repo: https://github.com/outline/outline
+  docs: https://docs.getoutline.com/s/guide
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (etc/dex/config.yaml, etc/nginx/conf.d/default.conf).
+        Review environment variables before starting.

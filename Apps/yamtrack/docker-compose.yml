@@ -1,0 +1,51 @@
+name: yamtrack
+services:
+  yamtrack:
+    image: ghcr.io/fuzzygrim/yamtrack
+    restart: unless-stopped
+    depends_on:
+    - redis
+    environment:
+    - TZ=Europe/Berlin
+    - SECRET=YN8PJ9orTQ1Dhi6YxT0QwBCBGGDSC4WqG1XG5WbKz7DK20HDgtyQ1YHKqqdBElnl
+    - REDIS_URL=redis://redis:6379
+    volumes:
+    - yamtrack-db:/yamtrack/db
+    expose:
+    - 8000
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+volumes:
+  yamtrack-db: {}
+  redis_data: {}
+x-casaos:
+  id: com.dokploy.yamtrack
+  main: yamtrack
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/yamtrack/icon.png
+  title:
+    en_US: Yamtrack
+  tagline:
+    en_US: Yamtrack is a self-hosted anime and manga tracker with Redis backend support
+  description:
+    en_US: Yamtrack is a self-hosted anime and manga tracker with Redis backend support.
+  author: Dokploy Community
+  developer: Yamtrack
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/fuzzygrim/yamtrack
+  repo: https://github.com/fuzzygrim/yamtrack
+  docs: https://github.com/fuzzygrim/yamtrack

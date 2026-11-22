@@ -1,0 +1,97 @@
+name: montara-mail
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: montara
+      POSTGRES_PASSWORD: 20jIKxd9zxUioSzfNuIQWdi2K1oJPFQw
+      POSTGRES_DB: montara_mail_agent
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  montara-mail:
+    image: ghcr.io/montara-project/montara-mail-agent/community:v1.8.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ENV: production
+      PORT: '8080'
+      APP_NAME: montara-mail-agent
+      APP_SECRET: hgmFcO1Bcnety0T6lrce9Ls+KPSLxNvrEOCG4pHBbJA=
+      DB_DSN: postgres://montara:20jIKxd9zxUioSzfNuIQWdi2K1oJPFQw@postgres:5432/montara_mail_agent?sslmode=disable
+      MIGRATE_ON_BOOT: 'true'
+      SEED_ON_BOOT: 'true'
+      SUPER_USER: admin@example.com:mGta4YnixT8mpxvhzyZCFrIX
+      AUTH_BASE_URL: https://localhost
+      FROM_ADDRESS: ''
+      RESEND_API_KEY: ''
+      GOOGLE_CLIENT_ID: ''
+      GOOGLE_CLIENT_SECRET: ''
+      OAUTH_GOOGLE_CLIENT_ID: ''
+      OAUTH_GOOGLE_CLIENT_SECRET: ''
+      OAUTH_MICROSOFT_CLIENT_ID: ''
+      OAUTH_MICROSOFT_CLIENT_SECRET: ''
+      OAUTH_YAHOO_CLIENT_ID: ''
+      OAUTH_YAHOO_CLIENT_SECRET: ''
+      OAUTH_ZOHO_CLIENT_ID: ''
+      OAUTH_ZOHO_CLIENT_SECRET: ''
+      ANTHROPIC_API_KEY: ''
+      TRUSTED_PROXIES: 10.0.1.0/24,173.245.48.0/20,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,141.101.64.0/18,108.162.192.0/18,190.93.240.0/20,188.114.96.0/20,197.234.240.0/22,198.41.128.0/17,162.158.0.0/15,104.16.0.0/13,104.24.0.0/14,172.64.0.0/13,131.0.72.0/22,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32
+      CORS_ALLOWED_ORIGINS: https://localhost
+      SENTRY_DSN: ''
+      MAIL_SYNC_INTERVAL: 5m
+      ALLOW_PRIVATE_HOSTS: 'false'
+      ACTIVITY_LOG_RETENTION: 8760h
+      AGENT_AUTO_DRAFT_INTERVAL: 1h
+      AGENT_AUTO_DRAFT_DAILY_CAP: '10'
+      TOKEN_USAGE_RETENTION: 4320h
+    healthcheck:
+      test:
+      - CMD
+      - /app/healthcheck
+      interval: 5m
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.montara-mail
+  main: montara-mail
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/montara-mail/icon.png
+  title:
+    en_US: Montara Mail
+  tagline:
+    en_US: 'AI mail client for teams: connect Gmail, Outlook, Yahoo, iCloud, Lark, Zoho or any IMAP...'
+  description:
+    en_US: 'AI mail client for teams: connect Gmail, Outlook, Yahoo, iCloud, Lark, Zoho or any IMAP mailbox and get inbox
+      triage, summaries and suggested replies, with send/reply/forward built in.'
+  author: Dokploy Community
+  developer: Montara Mail
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.0"
+  update_at: "2026-11-22"
+  website: https://montaramail.web.id
+  repo: https://github.com/montara-project/montara-mail-agent
+  docs: https://docs.montaramail.web.id

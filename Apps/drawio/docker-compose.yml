@@ -1,0 +1,83 @@
+name: drawio
+services:
+  plantuml-server:
+    image: plantuml/plantuml-server
+    expose:
+    - '8080'
+    volumes:
+    - fonts_volume:/usr/share/fonts/drawio
+    restart: unless-stopped
+  image-export:
+    image: jgraph/export-server
+    expose:
+    - '8000'
+    volumes:
+    - fonts_volume:/usr/share/fonts/drawio
+    environment:
+    - DRAWIO_BASE_URL=https://localhost
+    restart: unless-stopped
+  drawio:
+    image: jgraph/drawio:24.7.17
+    expose:
+    - '8080'
+    links:
+    - plantuml-server:plantuml-server
+    - image-export:image-export
+    depends_on:
+    - plantuml-server
+    - image-export
+    environment:
+      RAWIO_SELF_CONTAINED: '1'
+      DRAWIO_USE_HTTP: '1'
+      PLANTUML_URL: http://plantuml-server:8080/
+      EXPORT_URL: http://image-export:8000/
+      DRAWIO_BASE_URL: https://localhost
+      DRAWIO_SERVER_URL: https://localhost/
+      DRAWIO_CSP_HEADER: ${DRAWIO_CSP_HEADER}
+      DRAWIO_VIEWER_URL: ${DRAWIO_VIEWER_URL}
+      DRAWIO_LIGHTBOX_URL: ${DRAWIO_LIGHTBOX_URL}
+      DRAWIO_CONFIG: ${DRAWIO_CONFIG}
+      DRAWIO_GOOGLE_CLIENT_ID: ${DRAWIO_GOOGLE_CLIENT_ID}
+      DRAWIO_GOOGLE_APP_ID: ${DRAWIO_GOOGLE_APP_ID}
+      DRAWIO_GOOGLE_CLIENT_SECRET: ${DRAWIO_GOOGLE_CLIENT_SECRET}
+      DRAWIO_GOOGLE_VIEWER_CLIENT_ID: ${DRAWIO_GOOGLE_VIEWER_CLIENT_ID}
+      DRAWIO_GOOGLE_VIEWER_APP_ID: ${DRAWIO_GOOGLE_VIEWER_APP_ID}
+      DRAWIO_GOOGLE_VIEWER_CLIENT_SECRET: ${DRAWIO_GOOGLE_VIEWER_CLIENT_SECRET}
+      DRAWIO_MSGRAPH_CLIENT_ID: ${DRAWIO_MSGRAPH_CLIENT_ID}
+      DRAWIO_MSGRAPH_CLIENT_SECRET: ${DRAWIO_MSGRAPH_CLIENT_SECRET}
+      DRAWIO_MSGRAPH_TENANT_ID: ${DRAWIO_MSGRAPH_TENANT_ID}
+      DRAWIO_GITLAB_ID: ${DRAWIO_GITLAB_ID}
+      DRAWIO_GITLAB_SECRET: ${DRAWIO_GITLAB_SECRET}
+      DRAWIO_GITLAB_URL: ${DRAWIO_GITLAB_URL}
+      DRAWIO_CLOUD_CONVERT_APIKEY: ${DRAWIO_CLOUD_CONVERT_APIKEY}
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  fonts_volume: null
+x-casaos:
+  id: com.dokploy.drawio
+  main: drawio
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/drawio/icon.svg
+  title:
+    en_US: draw.io
+  tagline:
+    en_US: draw
+  description:
+    en_US: draw.io is a configurable diagramming/whiteboarding visualization application.
+  author: Dokploy Community
+  developer: draw.io
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "24.7.17"
+  update_at: "2026-11-22"
+  website: https://www.drawio.com/
+  repo: https://github.com/jgraph/drawio
+  docs: https://www.drawio.com/docs/

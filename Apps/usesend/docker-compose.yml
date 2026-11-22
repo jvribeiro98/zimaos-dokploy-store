@@ -1,0 +1,95 @@
+name: usesend
+services:
+  usesend-db-prod:
+    image: postgres:16
+    restart: always
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=usesend
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - database:/var/lib/postgresql/data
+  usesend-redis-prod:
+    image: redis:7
+    restart: always
+    volumes:
+    - cache:/data
+    command:
+    - redis-server
+    - --maxmemory-policy
+    - noeviction
+  usesend-storage-prod:
+    image: minio/minio:latest
+    expose:
+    - 9002
+    - 9001
+    volumes:
+    - storage:/data
+    environment:
+      MINIO_ROOT_USER: usesend
+      MINIO_ROOT_PASSWORD: password
+    entrypoint: sh
+    command: -c 'mkdir -p /data/usesend && minio server /data --console-address ":9001" --address ":9002"'
+    restart: unless-stopped
+  usesend:
+    image: usesend/usesend:latest
+    restart: always
+    expose:
+    - ${PORT:-3000}
+    environment:
+    - PORT=${PORT:-3000}
+    - DATABASE_URL=postgresql://postgres:postgres@usesend-db-prod:5432/usesend
+    - NEXTAUTH_URL=http://localhost:3000
+    - NEXTAUTH_SECRET=9mKrtXCbD2kphLdQGllatTLWZp8z/0GJmq5B4EdwCV7tnCI8yVgQhOeOqs5H8aVtwPf53DS917QKgygC4xhTpg==
+    - AWS_DEFAULT_REGION=us-east-1
+    - AWS_SECRET_KEY='Fill'
+    - AWS_ACCESS_KEY='Fill'
+    - GITHUB_ID='Fill'
+    - GITHUB_SECRET='Fill'
+    - REDIS_URL=redis://usesend-redis-prod:6379
+    - NEXT_PUBLIC_IS_CLOUD=${NEXT_PUBLIC_IS_CLOUD:-false}
+    - API_RATE_LIMIT=1
+    depends_on:
+      usesend-db-prod:
+        condition: service_healthy
+      usesend-redis-prod:
+        condition: service_started
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  database: null
+  cache: null
+  storage: null
+x-casaos:
+  id: com.dokploy.usesend
+  main: usesend
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/usesend/icon.png
+  title:
+    en_US: useSend
+  tagline:
+    en_US: Open source alternative to Resend, Sendgrid, Postmark etc
+  description:
+    en_US: Open source alternative to Resend, Sendgrid, Postmark etc.
+  author: Dokploy Community
+  developer: useSend
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://usesend.com/
+  repo: https://github.com/usesend/usesend
+  docs: https://docs.usesend.com/introduction

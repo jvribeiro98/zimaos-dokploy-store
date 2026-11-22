@@ -1,0 +1,53 @@
+name: openlmnp
+services:
+  openlmnp:
+    image: manganate06/openlmnp:1.6.6
+    restart: unless-stopped
+    environment:
+      APP_URL: https://localhost
+      ALLOW_REGISTRATION: auto
+    volumes:
+    - openlmnp-database:/var/www/html/database
+    - openlmnp-storage:/var/www/html/storage
+    healthcheck:
+      test:
+      - CMD
+      - php
+      - -r
+      - 'exit(@file_get_contents(''http://127.0.0.1:8000/up'') === false ? 1 : 0);'
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  openlmnp-database: null
+  openlmnp-storage: null
+x-casaos:
+  id: com.dokploy.openlmnp
+  main: openlmnp
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openlmnp/icon.png
+  title:
+    en_US: OpenLMNP
+  tagline:
+    en_US: 'Self-hosted accounting for French furnished rentals (LMNP): depreciation schedules, rea...'
+  description:
+    en_US: 'Self-hosted accounting for French furnished rentals (LMNP): depreciation schedules, ready-to-file 2031/2033 tax
+      forms, FEC export and Airbnb CSV import.'
+  author: Dokploy Community
+  developer: OpenLMNP
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.6"
+  update_at: "2026-11-22"
+  website: https://openlmnp.fr
+  repo: https://github.com/manganate006/openlmnp
+  docs: https://github.com/manganate006/openlmnp/blob/main/docs/INSTALLATION.md

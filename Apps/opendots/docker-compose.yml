@@ -1,0 +1,87 @@
+name: opendots
+services:
+  opendots:
+    build:
+      context: https://github.com/CopilotKit/OpenDots.git#625452e06cde74cb25b0ce319e2c1be0488f5a5f
+      dockerfile: Dockerfile
+      target: app
+    restart: unless-stopped
+    init: true
+    environment:
+      OWNER_TOKEN: AxjINm90Wyz4hziVOSMJSHsAqiW1HB8gz3HR7PXZfYTtTdea
+      OWNER_ID: opendots-owner
+      APP_ORIGIN: https://localhost
+      INTELLIGENCE_API_KEY: ''
+      INTELLIGENCE_API_URL: ''
+      INTELLIGENCE_WS_URL: ''
+      OPENAI_API_KEY: ''
+      OPENAI_BASE_URL: https://api.openai.com/v1
+      OPENAI_MODEL: ''
+      WEB_SEARCH_PROVIDER: parallel
+      PARALLEL_API_KEY: ''
+      BROWSER_URL: http://opendots-browser:4311
+      BROWSER_SECRET: Wkn64XMeAQJZ0KSjXmEvgupJNPLnnZLEPbrRRAIhHM05pijR
+      VOICE_API_KEY: ''
+      VOICE_MODEL: ''
+      VOICE_NAME: marin
+      SLACK_CHANNEL_NAME: ''
+      SLACK_TEAM_ID: ''
+      SLACK_USER_IDS: ''
+      SLACK_DOT_ID: ''
+    expose:
+    - '4310'
+    volumes:
+    - opendots-data:/data
+    ports:
+    - target: 4310
+      published: "4310"
+      protocol: tcp
+  opendots-browser:
+    build:
+      context: https://github.com/CopilotKit/OpenDots.git#625452e06cde74cb25b0ce319e2c1be0488f5a5f
+      dockerfile: Dockerfile
+      target: browser
+    restart: unless-stopped
+    init: true
+    environment:
+      BROWSER_SECRET: Wkn64XMeAQJZ0KSjXmEvgupJNPLnnZLEPbrRRAIhHM05pijR
+    expose:
+    - '4311'
+    shm_size: 256mb
+    read_only: true
+    volumes:
+    - type: tmpfs
+      target: /tmp
+      tmpfs:
+        size: 268435456
+    security_opt:
+    - no-new-privileges:true
+    cap_drop:
+    - ALL
+volumes:
+  opendots-data: null
+x-casaos:
+  id: com.dokploy.opendots
+  main: opendots
+  index: /
+  port_map: "4310"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/opendots/icon.svg
+  title:
+    en_US: OpenDots
+  tagline:
+    en_US: 'OpenDots is an open-source template from CopilotKit for always-on AI coworkers: special...'
+  description:
+    en_US: 'OpenDots is an open-source template from CopilotKit for always-on AI coworkers: specialist Dots with their own
+      computer, a document workspace with Spaces and pages, chat, calls and Slack, built with CopilotKit and AG-UI.'
+  author: Dokploy Community
+  developer: OpenDots
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.0-625452e"
+  update_at: "2026-11-22"
+  website: https://www.copilotkit.ai/opendots
+  repo: https://github.com/CopilotKit/OpenDots
+  docs: https://github.com/CopilotKit/OpenDots/blob/main/docs/SETUP.md

@@ -1,0 +1,46 @@
+name: jellyfin
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10
+    volumes:
+    - config:/config
+    - cache:/cache
+    - media:/media
+    restart: unless-stopped
+    environment:
+    - JELLYFIN_PublishedServerUrl=http://localhost
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - target: 8096
+      published: "8096"
+      protocol: tcp
+volumes:
+  config: null
+  cache: null
+  media: null
+x-casaos:
+  id: com.dokploy.jellyfin
+  main: jellyfin
+  index: /
+  port_map: "8096"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/jellyfin/icon.svg
+  title:
+    en_US: jellyfin
+  tagline:
+    en_US: Jellyfin is a Free Software Media System that puts you in control of managing and strea...
+  description:
+    en_US: Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media. Self-host
+      it on your own server with Dokploy, which deploys Jellyfin as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: jellyfin
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "10.9.7"
+  update_at: "2026-11-22"
+  website: https://jellyfin.org/
+  repo: https://github.com/jellyfin/jellyfin
+  docs: https://jellyfin.org/docs/

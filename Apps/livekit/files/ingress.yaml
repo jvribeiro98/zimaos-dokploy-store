@@ -1,0 +1,26 @@
+redis:
+    address: redis:6379
+    username: ""
+    password: rif1hsJVdXx2cwuxMuNI9I42dKplAIbd
+    db: 0
+    use_tls: false
+    sentinel_master_name: ""
+    sentinel_username: ""
+    sentinel_password: ""
+    sentinel_addresses: []
+    cluster_addresses: []
+    max_redirects: null
+api_key: APIdWsDX50TOFPG
+api_secret: l8SQ7qUjMLJlFy9oLs4IgAwe3Ec3C3YsLIeTGKPRCepr
+ws_url: wss://livekit.localhost
+rtmp_port: 1935
+whip_port: 8080
+http_relay_port: 9090
+logging:
+    json: false
+    level: ""
+development: false
+rtc_config:
+    udp_port: 7885
+    use_external_ip: true
+    enable_loopback_candidate: false

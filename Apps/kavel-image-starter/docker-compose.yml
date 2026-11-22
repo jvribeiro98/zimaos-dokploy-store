@@ -1,0 +1,49 @@
+name: kavel-image-starter
+services:
+  kavel-image-starter:
+    image: san8888/kavel-image-starter:1.0.1
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - PORT=3000
+    - KAVEL_API_KEY=
+    - KAVEL_MODEL=kavel-image-v1
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.kavel-image-starter
+  main: kavel-image-starter
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kavel-image-starter/icon.png
+  title:
+    en_US: Kavel Image Starter
+  tagline:
+    en_US: 'One-page text-to-image web app: type a prompt, pick an aspect ratio, get the image back...'
+  description:
+    en_US: 'One-page text-to-image web app: type a prompt, pick an aspect ratio, get the image back in about a minute. Runs
+      on Kavel''s free tier with nothing configured; set KAVEL_API_KEY to use your own account.'
+  author: Dokploy Community
+  developer: Kavel Image Starter
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.1"
+  update_at: "2026-11-22"
+  website: https://www.kavel.ai
+  repo: https://github.com/hanshs474/kavel-image-starter
+  docs: https://kavel.readthedocs.io/

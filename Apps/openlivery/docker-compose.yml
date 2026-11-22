@@ -1,0 +1,139 @@
+name: openlivery
+services:
+  openlivery:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile:ro
+    expose:
+    - '80'
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: postgres:17.6-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: openlivery
+      POSTGRES_USER: openlivery
+      POSTGRES_PASSWORD: 52b99f9ff92d36752c104309b093059304046e742decb2cf35dca7ad548fd2ce6b9398406264b6f64481d03de903940e
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U openlivery -d openlivery
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  api:
+    image: ghcr.io/sarrazola/openlivery-api:v0.4.0
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://openlivery:52b99f9ff92d36752c104309b093059304046e742decb2cf35dca7ad548fd2ce6b9398406264b6f64481d03de903940e@db:5432/openlivery
+      SECRET_KEY: cd153e0110bd37f3ac23de8a2768be99e14cdc361db22794687b25837f69540500114aa2ab639c0f2b3edf279cbaa1361cdd801a16c7b86bb565f3d50a59bff2
+      ENCRYPTION_KEY: 46bd24f49e1c5f10b1d8d7f336e847f527a2df09e056a27ae69c1468ea3897a0c3ce7ef937bf811c51da33cf1133984a1978cead6463e970c92ff9337c5d8428
+      WHATSAPP_BRIDGE_TOKEN: ae5874fcf9a16f1db3e740c5f2c9161187048425fba9bfcac7b919ddc59bfeb232404da78d71e38969961074e909ff65384182367aedd104cc43f6b0f364d0e0
+      FRONTEND_URL: http://localhost
+      COOKIE_SECURE: 'false'
+      COOKIE_SAMESITE: lax
+      BACKEND_URL: http://api:8000
+      WHATSAPP_BRIDGE_URL: http://whatsapp:3101
+      STORAGE_DIR: /app/backend/storage
+      ALLOW_MULTI_AGENCY: 'false'
+    volumes:
+    - backend-storage:/app/backend/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+  web:
+    image: ghcr.io/sarrazola/openlivery-web:v0.4.0
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      BACKEND_INTERNAL_URL: http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - fetch('http://127.0.0.1:3000/login').then(r => { if (!r.ok) process.exit(1) }).catch(() => process.exit(1))
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+  whatsapp:
+    image: ghcr.io/sarrazola/openlivery-whatsapp:v0.4.0
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      BACKEND_URL: http://api:8000
+      WHATSAPP_BRIDGE_HOST: 0.0.0.0
+      WHATSAPP_BRIDGE_PORT: '3101'
+      WHATSAPP_BRIDGE_TOKEN: ae5874fcf9a16f1db3e740c5f2c9161187048425fba9bfcac7b919ddc59bfeb232404da78d71e38969961074e909ff65384182367aedd104cc43f6b0f364d0e0
+      WHATSAPP_STORE_URL: postgres://openlivery:52b99f9ff92d36752c104309b093059304046e742decb2cf35dca7ad548fd2ce6b9398406264b6f64481d03de903940e@db:5432/openlivery?sslmode=disable&search_path=whatsmeow
+      WHATSAPP_LOG_LEVEL: silent
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - /app/bridge
+      - -healthcheck
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+volumes:
+  postgres-data: null
+  backend-storage: null
+x-casaos:
+  id: com.dokploy.openlivery
+  main: openlivery
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openlivery/icon.png
+  title:
+    en_US: OpenLivery
+  tagline:
+    en_US: MIT-licensed WhatsApp AI agents for agencies, with separate client workspaces and brand...
+  description:
+    en_US: MIT-licensed WhatsApp AI agents for agencies, with separate client workspaces and branded portals in one self-hosted
+      installation
+  author: Dokploy Community
+  developer: OpenLivery
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.4.0"
+  update_at: "2026-11-22"
+  website: https://www.openlivery.com
+  repo: https://github.com/sarrazola/openlivery
+  docs: https://github.com/sarrazola/openlivery/blob/main/docs/en/self-hosting.md
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./Caddyfile). Review environment
+        variables before starting.

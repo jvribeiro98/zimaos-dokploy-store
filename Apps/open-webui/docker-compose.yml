@@ -1,0 +1,46 @@
+name: open-webui
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - OLLAMA_BASE_URL=http://ollama:11434
+    - WEBUI_SECRET_KEY=uf9Di1ObyOeAHhZmTcVs4s2kXBWMakUw
+    volumes:
+    - open-webui:/app/backend/data
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  open-webui: {}
+  ollama: {}
+x-casaos:
+  id: com.dokploy.open-webui
+  main: open-webui
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/open-webui/icon.png
+  title:
+    en_US: Open WebUI
+  tagline:
+    en_US: Open WebUI is an OpenSource ChatGPT-style chat interface for running AI models
+  description:
+    en_US: Open WebUI is an OpenSource ChatGPT-style chat interface for running AI models. Self-host it on your own server
+      with Dokploy, which deploys Open WebUI as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Open WebUI
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "0.3.7"
+  update_at: "2026-11-22"
+  website: https://openwebui.com/
+  repo: https://github.com/open-webui/open-webui
+  docs: https://docs.openwebui.com/

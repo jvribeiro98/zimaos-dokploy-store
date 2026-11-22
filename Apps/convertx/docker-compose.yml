@@ -1,0 +1,47 @@
+name: convertx
+services:
+  convertx:
+    image: ghcr.io/c4illin/convertx
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - JWT_SECRET=f26ae265bd0512df4f44c5b1e47224ce2e6a94432573b660bf2d718ec9879732
+    - ACCOUNT_REGISTRATION=false
+    - HTTP_ALLOWED=true
+    - ALLOW_UNAUTHENTICATED=false
+    - AUTO_DELETE_EVERY_N_HOURS=24
+    - WEBROOT=
+    - FFMPEG_ARGS=
+    - HIDE_HISTORY=false
+    - LANGUAGE=en
+    volumes:
+    - /DATA/AppData/$AppID/data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.convertx
+  main: convertx
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/convertx/icon.png
+  title:
+    en_US: ConvertX
+  tagline:
+    en_US: ConvertX is a service for converting media files, with optional user registration and f...
+  description:
+    en_US: ConvertX is a service for converting media files, with optional user registration and file management features.
+  author: Dokploy Community
+  developer: ConvertX
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/c4illin/ConvertX
+  repo: https://github.com/c4illin/ConvertX
+  docs: https://github.com/c4illin/ConvertX#environment-variables

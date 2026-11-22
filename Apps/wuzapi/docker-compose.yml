@@ -1,0 +1,64 @@
+name: wuzapi
+services:
+  wuzapi-server:
+    image: asternic/wuzapi:sha-30c1805
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - WUZAPI_ADMIN_TOKEN=W6xVoH6fqn1X64xmFy4UplZG8lXS5ofD
+    - WUZAPI_GLOBAL_ENCRYPTION_KEY=lkL894Q6ZUlg9rKVZ3BUlkeKPT9fm95y
+    - DB_USER=wuzapi
+    - DB_PASSWORD=xec0pm2FT9Sq6jbijFzEavnjiKuWAsXe
+    - DB_NAME=wuzapi
+    - DB_HOST=db
+    - DB_PORT=5432
+    - TZ=${TZ:-UTC}
+    depends_on:
+    - db
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: wuzapi
+      POSTGRES_PASSWORD: xec0pm2FT9Sq6jbijFzEavnjiKuWAsXe
+      POSTGRES_DB: wuzapi
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${DB_USER:-wuzapi}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  db_data: null
+x-casaos:
+  id: com.dokploy.wuzapi
+  main: wuzapi-server
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wuzapi/icon.png
+  title:
+    en_US: WuzAPI
+  tagline:
+    en_US: A RESTful API service for WhatsApp with multiple device support and concurrent sessions
+  description:
+    en_US: A RESTful API service for WhatsApp with multiple device support and concurrent sessions.
+  author: Dokploy Community
+  developer: WuzAPI
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.wuzapi.app/
+  repo: https://github.com/asternic/wuzapi
+  docs: https://github.com/asternic/wuzapi/blob/main/README.md

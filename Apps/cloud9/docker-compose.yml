@@ -1,0 +1,48 @@
+name: cloud9
+services:
+  cloud9:
+    image: lscr.io/linuxserver/cloud9:1.29.2
+    expose:
+    - '8000'
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+    - GITURL=https://github.com/linuxserver/docker-cloud9.git
+    - USERNAME=user
+    - PASSWORD=SxbAZ6nCscPU3rHn
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - code:/code
+    restart: unless-stopped
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  code: null
+x-casaos:
+  id: com.dokploy.cloud9
+  main: cloud9
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cloud9/icon.png
+  title:
+    en_US: Cloud9
+  tagline:
+    en_US: Cloud9 is a cloud-based integrated development environment (IDE) designed for developer...
+  description:
+    en_US: Cloud9 is a cloud-based integrated development environment (IDE) designed for developers to code, build, and debug
+      applications collaboratively in real time.
+  author: Dokploy Community
+  developer: Cloud9
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.29.2"
+  update_at: "2026-11-22"
+  website: https://aws.amazon.com/cloud9/
+  repo: https://github.com/c9
+  docs: https://docs.aws.amazon.com/cloud9/

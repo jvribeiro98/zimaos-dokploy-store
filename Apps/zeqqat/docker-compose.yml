@@ -1,0 +1,83 @@
+name: zeqqat
+services:
+  zeqqat:
+    image: ghcr.io/zeqqat/zeqqat:${ZEQQAT_VERSION:-latest}
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ZEQQAT_PUBLIC_URL: ${ZEQQAT_PUBLIC_URL:?set ZEQQAT_PUBLIC_URL}
+      ZEQQAT_EDITION: self-hosted
+      DATABASE_URL: postgresql://zeqqat:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/zeqqat
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?set BETTER_AUTH_SECRET}
+      ZEQQAT_ENCRYPTION_KEY: ${ZEQQAT_ENCRYPTION_KEY:?set ZEQQAT_ENCRYPTION_KEY}
+      ENABLED_AUTH_PROVIDERS: ${ENABLED_AUTH_PROVIDERS:-password}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      SMTP_URL: ${SMTP_URL:-}
+      ZEQQAT_TELEMETRY: ${ZEQQAT_TELEMETRY:-1}
+    expose:
+    - '3000'
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/api/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zeqqat
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: zeqqat
+    volumes:
+    - zeqqat-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U zeqqat -d zeqqat
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  zeqqat-postgres: null
+x-casaos:
+  id: com.dokploy.zeqqat
+  main: zeqqat
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/zeqqat/icon.svg
+  title:
+    en_US: Zeqqat
+  tagline:
+    en_US: Give AI agents access to your Dokploy without handing them your API key
+  description:
+    en_US: Give AI agents access to your Dokploy without handing them your API key. Per-tool permissions, team roles and a
+      full log of every call.
+  author: Dokploy Community
+  developer: Zeqqat
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "-latest}"
+  update_at: "2026-11-22"
+  website: https://zeqqat.com
+  repo: https://github.com/zeqqat/zeqqat
+  docs: https://zeqqat.com/docs/self-host

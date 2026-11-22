@@ -1,0 +1,50 @@
+name: freshrss
+services:
+  freshrss:
+    image: freshrss/freshrss:${FRESHRSS_VERSION:-latest}
+    restart: unless-stopped
+    volumes:
+    - freshrss_data:/var/www/FreshRSS/data
+    - freshrss_extensions:/var/www/FreshRSS/extensions
+    expose:
+    - '80'
+    environment:
+      TZ: UTC
+      CRON_MIN: 13,43
+      FRESHRSS_ENV: production
+      COPY_LOG_TO_SYSLOG: 'On'
+      COPY_SYSLOG_TO_STDERR: 'On'
+      FRESHRSS_INSTALL: ${FRESHRSS_INSTALL:-}
+      FRESHRSS_USER: ${FRESHRSS_USER:-}
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  freshrss_data: null
+  freshrss_extensions: null
+x-casaos:
+  id: com.dokploy.freshrss
+  main: freshrss
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/freshrss/icon.svg
+  title:
+    en_US: FreshRSS
+  tagline:
+    en_US: FreshRSS is a lightweight RSS and Atom feed aggregator
+  description:
+    en_US: FreshRSS is a lightweight RSS and Atom feed aggregator. Self-host it on your own server with Dokploy, which deploys
+      FreshRSS as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: FreshRSS
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "-latest}"
+  update_at: "2026-11-22"
+  website: https://freshrss.org/
+  repo: https://github.com/FreshRSS/FreshRSS
+  docs: https://freshrss.github.io/FreshRSS/

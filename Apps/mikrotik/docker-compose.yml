@@ -1,0 +1,51 @@
+name: mikrotik
+services:
+  mikrotik:
+    image: ghcr.io/ramezhany/mikrotik-chr-containerized:7.20.4
+    privileged: true
+    restart: unless-stopped
+    mem_limit: 4g
+    cpus: 4.0
+    environment:
+    - QEMU_RAM=4096
+    - QEMU_CPUS=4
+    - DISK_SIZE=1G
+    cap_add:
+    - NET_ADMIN
+    devices:
+    - /dev/net/tun
+    volumes:
+    - mikrotik_data:/routeros/data
+    ports:
+    - 8291:8291
+    - 8728:8728
+    - 808:80
+    - '322:22'
+    - 1010:443
+volumes:
+  mikrotik_data: null
+x-casaos:
+  id: com.dokploy.mikrotik
+  main: mikrotik
+  index: /
+  port_map: "8291"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mikrotik/icon.svg
+  title:
+    en_US: MikroTik RouterOS
+  tagline:
+    en_US: MikroTik RouterOS CHR running in a container — routing and firewall managed with WinBox...
+  description:
+    en_US: MikroTik RouterOS CHR running in a container — routing and firewall managed with WinBox, WebFig and SSH, with an
+      SSTP passthrough on host port 1010.
+  author: Dokploy Community
+  developer: MikroTik RouterOS
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "7.20.4"
+  update_at: "2026-11-22"
+  website: https://mikrotik.com
+  repo: https://github.com/RamezHany/Mikrotik-CHR-Containerized
+  docs: https://help.mikrotik.com/docs/

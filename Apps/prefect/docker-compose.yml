@@ -1,0 +1,139 @@
+name: prefect
+services:
+  prefect:
+    image: prefecthq/prefect:3.7.5-python3.12
+    restart: unless-stopped
+    depends_on:
+      prefect-postgres:
+        condition: service_healthy
+      prefect-redis:
+        condition: service_healthy
+    environment:
+    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:aWXZIOsYUw1oLPD8bXhWHfeoKsupYwRa@prefect-postgres:5432/prefect
+    - PREFECT_SERVER_API_HOST=0.0.0.0
+    - PREFECT_SERVER_UI_API_URL=https://localhost/api
+    - PREFECT_MESSAGING_BROKER=prefect_redis.messaging
+    - PREFECT_MESSAGING_CACHE=prefect_redis.messaging
+    - PREFECT_REDIS_MESSAGING_HOST=prefect-redis
+    - PREFECT_REDIS_MESSAGING_PORT=6379
+    - PREFECT_REDIS_MESSAGING_DB=0
+    - USE_AUTH=False
+    - PREFECT_AUTH_USER=admin
+    - PREFECT_AUTH_PASSWORD=fcRihqztVbRpuxc6JcDP249JmV56RXs5
+    command:
+    - sh
+    - -c
+    - "case \"$$USE_AUTH\" in\n  [Tt]rue|1|[Yy]es) export PREFECT_SERVER_API_AUTH_STRING=\"$$PREFECT_AUTH_USER:$$PREFECT_AUTH_PASSWORD\"\
+      ; export PREFECT_API_AUTH_STRING=\"$$PREFECT_AUTH_USER:$$PREFECT_AUTH_PASSWORD\"; echo \"Prefect basic auth enabled\"\
+      \ ;;\nesac\nexec prefect server start --no-services\n"
+    expose:
+    - 4200
+    healthcheck:
+      test:
+      - CMD
+      - python
+      - -c
+      - import urllib.request as u; u.urlopen('http://localhost:4200/api/health', timeout=1)
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    ports:
+    - target: 4200
+      published: "4200"
+      protocol: tcp
+  prefect-services:
+    image: prefecthq/prefect:3.7.5-python3.12
+    restart: unless-stopped
+    depends_on:
+      prefect:
+        condition: service_healthy
+    environment:
+    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:aWXZIOsYUw1oLPD8bXhWHfeoKsupYwRa@prefect-postgres:5432/prefect
+    - PREFECT_MESSAGING_BROKER=prefect_redis.messaging
+    - PREFECT_MESSAGING_CACHE=prefect_redis.messaging
+    - PREFECT_REDIS_MESSAGING_HOST=prefect-redis
+    - PREFECT_REDIS_MESSAGING_PORT=6379
+    - PREFECT_REDIS_MESSAGING_DB=0
+    - USE_AUTH=False
+    - PREFECT_AUTH_USER=admin
+    - PREFECT_AUTH_PASSWORD=fcRihqztVbRpuxc6JcDP249JmV56RXs5
+    command:
+    - sh
+    - -c
+    - "case \"$$USE_AUTH\" in\n  [Tt]rue|1|[Yy]es) export PREFECT_SERVER_API_AUTH_STRING=\"$$PREFECT_AUTH_USER:$$PREFECT_AUTH_PASSWORD\"\
+      ; export PREFECT_API_AUTH_STRING=\"$$PREFECT_AUTH_USER:$$PREFECT_AUTH_PASSWORD\"; echo \"Prefect basic auth enabled\"\
+      \ ;;\nesac\nexec prefect server services start\n"
+  prefect-worker:
+    image: prefecthq/prefect:3.7.5-python3.12
+    restart: unless-stopped
+    depends_on:
+      prefect:
+        condition: service_healthy
+    environment:
+    - PREFECT_API_URL=http://prefect:4200/api
+    - USE_AUTH=False
+    - PREFECT_AUTH_USER=admin
+    - PREFECT_AUTH_PASSWORD=fcRihqztVbRpuxc6JcDP249JmV56RXs5
+    command:
+    - sh
+    - -c
+    - "case \"$$USE_AUTH\" in\n  [Tt]rue|1|[Yy]es) export PREFECT_API_AUTH_STRING=\"$$PREFECT_AUTH_USER:$$PREFECT_AUTH_PASSWORD\"\
+      ; echo \"Prefect basic auth enabled\" ;;\nesac\nexec prefect worker start --pool local-pool\n"
+  prefect-postgres:
+    image: postgres:14-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=prefect
+    - POSTGRES_PASSWORD=aWXZIOsYUw1oLPD8bXhWHfeoKsupYwRa
+    - POSTGRES_DB=prefect
+    volumes:
+    - prefect-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U prefect -d prefect
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  prefect-redis:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    volumes:
+    - prefect-redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  prefect-postgres-data: null
+  prefect-redis-data: null
+x-casaos:
+  id: com.dokploy.prefect
+  main: prefect
+  index: /
+  port_map: "4200"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/prefect/icon.svg
+  title:
+    en_US: Prefect
+  tagline:
+    en_US: Prefect is an open-source workflow orchestration platform for building, scheduling, mon...
+  description:
+    en_US: Prefect is an open-source workflow orchestration platform for building, scheduling, monitoring, and managing data
+      pipelines and Python workflows.
+  author: Dokploy Community
+  developer: Prefect
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.7.5-python3.12"
+  update_at: "2026-11-22"
+  website: https://www.prefect.io/
+  repo: https://github.com/PrefectHQ/prefect
+  docs: https://docs.prefect.io/

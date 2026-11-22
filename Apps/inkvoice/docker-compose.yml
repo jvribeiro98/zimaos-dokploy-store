@@ -1,0 +1,52 @@
+name: inkvoice
+services:
+  inkvoice:
+    image: ghcr.io/pigontech/inkvoice:0.3.0
+    restart: unless-stopped
+    environment:
+    - ADMIN_USER=admin
+    - ADMIN_PASS=Vg7HjkvTHqfJMWyV
+    - JWT_SECRET=1dEei9ZkMEcP4lbKINYM9rqXSf8gdsvdq1BVgvuIbfKl81kD
+    - DATABASE_PATH=/app/data/invoice.db
+    - PORT=3000
+    - HOST=0.0.0.0
+    - COOKIE_SECURE=false
+    volumes:
+    - inkvoice-data:/app/data
+    expose:
+    - 3000
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  inkvoice-data: null
+x-casaos:
+  id: com.dokploy.inkvoice
+  main: inkvoice
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/inkvoice/icon.svg
+  title:
+    en_US: Inkvoice
+  tagline:
+    en_US: 'Open-source invoicing for freelancers and small teams: invoices, online payments (Strip...'
+  description:
+    en_US: 'Open-source invoicing for freelancers and small teams: invoices, online payments (Stripe & PayPal), expenses,
+      multi-currency and reports.'
+  author: Dokploy Community
+  developer: Inkvoice
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "0.3.0"
+  update_at: "2026-11-22"
+  website: https://inkvoice.app
+  repo: https://github.com/pigontech/inkvoice
+  docs: https://docs.inkvoice.app

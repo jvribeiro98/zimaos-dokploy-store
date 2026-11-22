@@ -1,0 +1,76 @@
+name: akaunting
+services:
+  akaunting:
+    image: docker.io/akaunting/akaunting:latest
+    restart: unless-stopped
+    depends_on:
+      akaunting-db:
+        condition: service_healthy
+    environment:
+      APP_URL: localhost
+      LOCALE: en-US
+      DB_HOST: akaunting-db
+      DB_PORT: '3306'
+      DB_NAME: akaunting
+      DB_USERNAME: admin
+      DB_PASSWORD: jXWCme9Pt7XiqlbshrANfXv5
+      DB_PREFIX: 320a1cf8_
+      COMPANY_NAME: My Company
+      COMPANY_EMAIL: admin@example.com
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASSWORD: 92hVIAERnSnYt0w5SCiCB64u
+    expose:
+    - '80'
+    volumes:
+    - akaunting-data:/var/www/html
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  akaunting-db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: akaunting
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: jXWCme9Pt7XiqlbshrANfXv5
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+    - akaunting-db:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  akaunting-data: {}
+  akaunting-db: {}
+x-casaos:
+  id: com.dokploy.akaunting
+  main: akaunting
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/akaunting/icon.png
+  title:
+    en_US: Akaunting
+  tagline:
+    en_US: Akaunting is a self-hosted, open-source accounting app for small businesses
+  description:
+    en_US: Akaunting is a self-hosted, open-source accounting app for small businesses.
+  author: Dokploy Community
+  developer: Akaunting
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://akaunting.com
+  repo: https://github.com/akaunting/akaunting
+  docs: https://akaunting.com/docs

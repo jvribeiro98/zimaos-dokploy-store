@@ -1,0 +1,41 @@
+name: alist
+services:
+  alist:
+    image: xhofe/alist:v3.55.0
+    volumes:
+    - alist-data:/opt/alist/data
+    environment:
+    - PUID=0
+    - PGID=0
+    - UMASK=022
+    restart: unless-stopped
+    ports:
+    - target: 5244
+      published: "5244"
+      protocol: tcp
+volumes:
+  alist-data: null
+x-casaos:
+  id: com.dokploy.alist
+  main: alist
+  index: /
+  port_map: "5244"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/alist/icon.svg
+  title:
+    en_US: AList
+  tagline:
+    en_US: "ðŸ—‚ï¸\x8FA file list/WebDAV program that supports multiple storages, powered by Gin and S..."
+  description:
+    en_US: "ðŸ—‚ï¸\x8FA file list/WebDAV program that supports multiple storages, powered by Gin and Solidjs."
+  author: Dokploy Community
+  developer: AList
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.55.0"
+  update_at: "2026-11-22"
+  website: https://alistgo.com/
+  repo: https://github.com/AlistGo/alist
+  docs: https://alistgo.com/guide/install/docker.html

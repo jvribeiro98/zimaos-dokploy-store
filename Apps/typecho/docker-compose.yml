@@ -1,0 +1,55 @@
+name: typecho
+services:
+  typecho:
+    image: 80x86/typecho:latest
+    restart: unless-stopped
+    environment:
+      PHP_TZ: Asia/Shanghai
+      PHP_MAX_EXECUTION_TIME: 600
+    volumes:
+    - typecho_data:/data
+    depends_on:
+    - db
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: typecho
+      MYSQL_USER: typecho
+      MYSQL_PASSWORD: typecho_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+    - db_data:/var/lib/mysql
+volumes:
+  typecho_data: null
+  db_data: null
+x-casaos:
+  id: com.dokploy.typecho
+  main: typecho
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/typecho/icon.png
+  title:
+    en_US: Typecho
+  tagline:
+    en_US: "Typecho æ˜¯ä¸€ä¸ªè½»é‡\x8Fçº§çš„å¼€æº\x90å\x8Dšå®¢ç¨‹åº\x8Fï¼ŒåŸºäºŽ PHP å¼€å\x8F‘ï¼Œæ”¯æŒ\x81å¤šç§\x8Dæ•°æ\x8D\
+      ..."
+  description:
+    en_US: "Typecho æ˜¯ä¸€ä¸ªè½»é‡\x8Fçº§çš„å¼€æº\x90å\x8Dšå®¢ç¨‹åº\x8Fï¼ŒåŸºäºŽ PHP å¼€å\x8F‘ï¼Œæ”¯æŒ\x81å¤šç§\x8Dæ•°æ\x8D\
+      ®åº“ï¼Œç®€æ´\x81è€Œå¼ºå¤§ã€‚"
+  author: Dokploy Community
+  developer: Typecho
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "stable"
+  update_at: "2026-11-22"
+  website: https://typecho.org/
+  repo: https://github.com/typecho/typecho
+  docs: http://docs.typecho.org

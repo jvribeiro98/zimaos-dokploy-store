@@ -1,0 +1,55 @@
+name: bytestash
+services:
+  bytestash:
+    image: ghcr.io/jordan-dalby/bytestash:1.5.6
+    restart: unless-stopped
+    expose:
+    - '5000'
+    environment:
+    - BASE_PATH=
+    - JWT_SECRET=Sqpf8WkS4FL21eVEdGm1lR83iHohKFHl
+    - TOKEN_EXPIRY=24h
+    - ALLOW_NEW_ACCOUNTS=true
+    - DEBUG=true
+    - DISABLE_ACCOUNTS=false
+    - DISABLE_INTERNAL_ACCOUNTS=false
+    - OIDC_ENABLED=false
+    - OIDC_DISPLAY_NAME=
+    - OIDC_ISSUER_URL=
+    - OIDC_CLIENT_ID=
+    - OIDC_CLIENT_SECRET=
+    - OIDC_SCOPES=
+    volumes:
+    - snippets:/data/snippets
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+volumes:
+  snippets: null
+x-casaos:
+  id: com.dokploy.bytestash
+  main: bytestash
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bytestash/icon.png
+  title:
+    en_US: ByteStash
+  tagline:
+    en_US: ByteStash is a self-hosted web application designed to store, organise, and manage your...
+  description:
+    en_US: ByteStash is a self-hosted web application designed to store, organise, and manage your code snippets efficiently.
+      With support for creating, editing, and filtering snippets, ByteStash helps you keep track of your code in one secure
+      place.
+  author: Dokploy Community
+  developer: ByteStash
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.5.6"
+  update_at: "2026-11-22"
+  website: https://github.com/jordan-dalby/ByteStash
+  repo: https://github.com/jordan-dalby/ByteStash
+  docs: https://github.com/jordan-dalby/ByteStash

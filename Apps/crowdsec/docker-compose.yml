@@ -1,0 +1,50 @@
+name: crowdsec
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    environment:
+      GID: ${GID-1000}
+      COLLECTIONS: crowdsecurity/linux crowdsecurity/traefik crowdsecurity/http-cve
+    volumes:
+    - /DATA/AppData/$AppID/acquis.yaml:/etc/crowdsec/acquis.yaml
+    - crowdsec-db:/var/lib/crowdsec/data/
+    - crowdsec-config:/etc/crowdsec/
+    - /etc/dokploy/traefik/dynamic/access.log:/var/log/traefik/access.log:ro
+    - ${AUTH_LOG_PATH}:/var/log/ssh/auth.log:ro
+    security_opt:
+    - no-new-privileges:true
+    labels:
+    - traefik.enable=false
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  crowdsec-db: null
+  crowdsec-config: null
+x-casaos:
+  id: com.dokploy.crowdsec
+  main: crowdsec
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/crowdsec/icon.png
+  title:
+    en_US: Crowdsec
+  tagline:
+    en_US: CrowdSec provides open source solution for detecting and blocking malicious IPs, safegu...
+  description:
+    en_US: CrowdSec provides open source solution for detecting and blocking malicious IPs, safeguarding both infrastructure
+      and application security.
+  author: Dokploy Community
+  developer: Crowdsec
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://crowdsec.net/
+  repo: https://github.com/crowdsecurity/crowdsec
+  docs: https://docs.crowdsec.net

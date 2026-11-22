@@ -1,0 +1,44 @@
+name: kividb
+services:
+  kividb:
+    image: kividb/kividb:v1.2.0
+    restart: unless-stopped
+    command:
+    - --requirepass
+    - ${KIVIDB_PASSWORD}
+    - --aof
+    expose:
+    - 6380
+    volumes:
+    - kividb-data:/home/kividb
+    ports:
+    - target: 6380
+      published: "6380"
+      protocol: tcp
+volumes:
+  kividb-data: {}
+x-casaos:
+  id: com.dokploy.kividb
+  main: kividb
+  index: /
+  port_map: "6380"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kividb/icon.png
+  title:
+    en_US: KiviDB
+  tagline:
+    en_US: KiviDB is a Redis-compatible in-memory database written in Rust, with full-text and vec...
+  description:
+    en_US: KiviDB is a Redis-compatible in-memory database written in Rust, with full-text and vector search (FT.*) built
+      in.
+  author: Dokploy Community
+  developer: KiviDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.2.0"
+  update_at: "2026-11-22"
+  website: https://kividb.io/
+  repo: https://github.com/kividbio/kividb
+  docs: https://kividb.io/docs

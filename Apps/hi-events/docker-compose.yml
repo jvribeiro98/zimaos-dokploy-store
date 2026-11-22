@@ -1,0 +1,69 @@
+name: hi-events
+services:
+  all-in-one:
+    image: daveearley/hi.events-all-in-one:v1.9.0-beta
+    restart: always
+    environment:
+    - VITE_FRONTEND_URL=https://localhost
+    - APP_FRONTEND_URL=https://localhost
+    - VITE_API_URL_CLIENT=https://localhost/api
+    - VITE_API_URL_SERVER=http://localhost:80/api
+    - VITE_STRIPE_PUBLISHABLE_KEY=
+    - LOG_CHANNEL=stderr
+    - QUEUE_CONNECTION=sync
+    - MAIL_MAILER=array
+    - APP_KEY=czw4vy04rzwdk6uIb82K6oHGIgoeup5k
+    - JWT_SECRET=oL2xFKrEeKn3HlwUBIbBmhySwII2wlKp
+    - FILESYSTEM_PUBLIC_DISK=public
+    - FILESYSTEM_PRIVATE_DISK=local
+    - APP_CDN_URL=https://localhost/storage
+    - DATABASE_URL=postgresql://hievents:NSz02SwZE941qiF2EDUfSq03KOP2zvVg@postgres:5432/hievents
+    - MAIL_MAILER=
+    - MAIL_HOST=
+    - MAIL_PORT=
+    - MAIL_USERNAME=
+    - MAIL_PASSWORD=
+    - MAIL_FROM_ADDRESS=
+    - MAIL_FROM_NAME=
+    depends_on:
+    - postgres
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  postgres:
+    image: elestio/postgres:16
+    restart: always
+    environment:
+    - POSTGRES_DB=hievents
+    - POSTGRES_USER=hievents
+    - POSTGRES_PASSWORD=NSz02SwZE941qiF2EDUfSq03KOP2zvVg
+    volumes:
+    - pg_hi-events_data:/var/lib/postgresql/data
+volumes:
+  pg_hi-events_data: null
+x-casaos:
+  id: com.dokploy.hi-events
+  main: all-in-one
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/hi-events/icon.svg
+  title:
+    en_US: Hi.events
+  tagline:
+    en_US: Hi
+  description:
+    en_US: Hi.Events is a self-hosted event management and ticket selling platform that allows you to create, manage and promote
+      events easily.
+  author: Dokploy Community
+  developer: Hi.events
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.9.0-beta"
+  update_at: "2026-11-22"
+  website: https://hi.events/
+  repo: https://github.com/HiEventsDev/hi.events
+  docs: https://hi.events/docs

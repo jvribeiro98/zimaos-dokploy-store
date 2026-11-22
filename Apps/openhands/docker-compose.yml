@@ -1,0 +1,53 @@
+name: openhands
+services:
+  openhands:
+    image: docker.all-hands.dev/all-hands-ai/openhands:latest
+    restart: unless-stopped
+    expose:
+    - '3000'
+    environment:
+    - SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime:0.50-nikolaik
+    - WORKSPACE_MOUNT_PATH=/opt/workspace_base
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - openhands-config:/.openhands
+    - openhands-workspace:/opt/workspace_base
+    stdin_open: true
+    tty: true
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  openhands-config: {}
+  openhands-workspace: {}
+x-casaos:
+  id: com.dokploy.openhands
+  main: openhands
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openhands/icon.png
+  title:
+    en_US: OpenHands
+  tagline:
+    en_US: OpenHands is an open-source platform for running and managing AI agents
+  description:
+    en_US: OpenHands is an open-source platform for running and managing AI agents.
+  author: Dokploy Community
+  developer: OpenHands
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.1"
+  update_at: "2026-11-22"
+  website: https://github.com/all-hands-ai/OpenHands
+  repo: https://github.com/all-hands-ai/OpenHands
+  docs: https://github.com/all-hands-ai/OpenHands
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (.openhands/config.toml).
+        Review environment variables before starting.

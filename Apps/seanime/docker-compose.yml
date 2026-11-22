@@ -1,0 +1,57 @@
+name: seanime
+services:
+  seanime-init:
+    image: busybox:1.37.0
+    user: 0:0
+    volumes:
+    - /DATA/AppData/$AppID/seanime-config:/mnt/config
+    - /DATA/AppData/$AppID/anime:/mnt/anime
+    - /DATA/AppData/$AppID/downloads:/mnt/downloads
+    command:
+    - sh
+    - -c
+    - chown -R 1000:1000 /mnt/config && find /mnt/config -type d -exec chmod 755 {} + && find /mnt/config -type f -exec chmod
+      644 {} +
+    restart: unless-stopped
+  seanime:
+    image: umagistr/seanime:v3.6.1-rootless
+    depends_on:
+      seanime-init:
+        condition: service_completed_successfully
+    environment:
+    - SEANIME_SERVER_HOST=0.0.0.0
+    expose:
+    - '43211'
+    volumes:
+    - /DATA/AppData/$AppID/seanime-config:/home/seanime/.config/Seanime
+    - /DATA/AppData/$AppID/anime:/anime
+    - /DATA/AppData/$AppID/downloads:/downloads
+    restart: unless-stopped
+    ports:
+    - target: 43211
+      published: "43211"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.seanime
+  main: seanime
+  index: /
+  port_map: "43211"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/seanime/icon.png
+  title:
+    en_US: Seanime
+  tagline:
+    en_US: A self-hosted anime streaming platform
+  description:
+    en_US: A self-hosted anime streaming platform.
+  author: Dokploy Community
+  developer: Seanime
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "3.6.1-rootless"
+  update_at: "2026-11-22"
+  website: https://seanime.app/
+  repo: https://github.com/5rahim/seanime
+  docs: https://seanime.app/docs

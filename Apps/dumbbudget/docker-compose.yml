@@ -1,0 +1,39 @@
+name: dumbbudget
+services:
+  dumbbudget:
+    image: dumbwareio/dumbbudget:latest
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - dumbbudget-data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  dumbbudget-data: {}
+x-casaos:
+  id: com.dokploy.dumbbudget
+  main: dumbbudget
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dumbbudget/icon.svg
+  title:
+    en_US: DumbBudget
+  tagline:
+    en_US: DumbBudget is a simple, self-hosted budget tracking service with PIN protection and no...
+  description:
+    en_US: DumbBudget is a simple, self-hosted budget tracking service with PIN protection and no database required.
+  author: Dokploy Community
+  developer: DumbBudget
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dumbware.io/DumbBudget
+  repo: https://github.com/DumbWareio/DumbBudget
+  docs: https://github.com/DumbWareio/DumbBudget/blob/main/README.md

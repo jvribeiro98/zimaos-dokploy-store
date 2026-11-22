@@ -1,0 +1,42 @@
+name: chroma
+services:
+  chroma:
+    image: chromadb/chroma:1.5.6
+    restart: unless-stopped
+    expose:
+    - '8000'
+    environment:
+    - ANONYMIZED_TELEMETRY=FALSE
+    volumes:
+    - chroma-data:/data
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  chroma-data: null
+x-casaos:
+  id: com.dokploy.chroma
+  main: chroma
+  index: /api/v2/heartbeat
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chroma/icon.svg
+  title:
+    en_US: Chroma
+  tagline:
+    en_US: Chroma is an open-source embedding database for AI applications, with persistent vector...
+  description:
+    en_US: Chroma is an open-source embedding database for AI applications, with persistent vector storage and a simple HTTP
+      API.
+  author: Dokploy Community
+  developer: Chroma
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.5.6"
+  update_at: "2026-11-22"
+  website: https://www.trychroma.com/
+  repo: https://github.com/chroma-core/chroma
+  docs: https://docs.trychroma.com/

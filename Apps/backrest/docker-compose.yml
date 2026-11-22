@@ -1,0 +1,52 @@
+name: backrest
+services:
+  backrest:
+    image: garethgeorge/backrest:v1.7.3
+    restart: unless-stopped
+    expose:
+    - 9898
+    environment:
+    - BACKREST_PORT=9898
+    - BACKREST_DATA=/data
+    - BACKREST_CONFIG=/config/config.json
+    - XDG_CACHE_HOME=/cache
+    - TZ=Europe/Paris
+    volumes:
+    - backrest/data:/data
+    - backrest/config:/config
+    - backrest/config:/cache
+    - /:/userdata:ro
+    ports:
+    - target: 9898
+      published: "9898"
+      protocol: tcp
+volumes:
+  backrest: null
+  backrest-cache: null
+x-casaos:
+  id: com.dokploy.backrest
+  main: backrest
+  index: /
+  port_map: "9898"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/backrest/icon.svg
+  title:
+    en_US: Backrest
+  tagline:
+    en_US: Backrest is a web-based backup solution powered by restic, offering an intuitive WebUI...
+  description:
+    en_US: Backrest is a web-based backup solution powered by restic, offering an intuitive WebUI for easy repository management,
+      snapshot browsing, and file restoration. It runs in the background, automating snapshot scheduling and repository maintenance.
+      Built with Go, Backrest is a lightweight standalone binary with restic as its only dependency. It provides a secure
+      and user-friendly way to manage backups while still allowing direct access to the restic CLI for advanced operations.
+  author: Dokploy Community
+  developer: Backrest
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.0"
+  update_at: "2026-11-22"
+  website: https://garethgeorge.github.io/backrest
+  repo: https://github.com/garethgeorge/backrest
+  docs: https://garethgeorge.github.io/backrest/introduction/getting-started

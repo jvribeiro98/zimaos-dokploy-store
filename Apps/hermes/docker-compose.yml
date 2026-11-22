@@ -1,0 +1,55 @@
+name: hermes
+services:
+  hermes:
+    image: nousresearch/hermes-agent:v2026.6.19
+    restart: unless-stopped
+    command: gateway run
+    expose:
+    - 9119
+    - 8642
+    environment:
+    - HERMES_DASHBOARD=1
+    - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
+    - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=Hus2nQlSL4SWKXG1wqw6fvx3v+PL033AHI0/0nHsfIWesrJtKp1+zAu3eegrsCav3BEbAZS4eJeiSDO6ZOds4BVqNO+d+7KNiE4gGoS4lH3CidTisayCuIRUwKxZFwss
+    - HERMES_DASHBOARD_BASIC_AUTH_SECRET=go+D1BeifigOyazVynMWAtjnB44jxLo/YcurE+wcYbA=
+    - API_SERVER_ENABLED=true
+    - API_SERVER_HOST=0.0.0.0
+    - API_SERVER_KEY=KmT61lCmI6xMUSgQRUm6Pu33igoJBZox
+    volumes:
+    - hermes_data:/opt/data
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+    ports:
+    - target: 9119
+      published: "9119"
+      protocol: tcp
+volumes:
+  hermes_data: null
+x-casaos:
+  id: com.dokploy.hermes
+  main: hermes
+  index: /
+  port_map: "9119"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/hermes/icon.png
+  title:
+    en_US: Hermes
+  tagline:
+    en_US: Hermes is an open agent runtime from Nous Research, exposing an OpenAI-compatible gatew...
+  description:
+    en_US: Hermes is an open agent runtime from Nous Research, exposing an OpenAI-compatible gateway API and a supervised
+      web dashboard for building and running AI agents.
+  author: Dokploy Community
+  developer: Hermes
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.6.19"
+  update_at: "2026-11-22"
+  website: https://hermes-agent.nousresearch.com/
+  repo: https://github.com/NousResearch/hermes-agent
+  docs: https://hermes-agent.nousresearch.com/docs/user-guide/docker

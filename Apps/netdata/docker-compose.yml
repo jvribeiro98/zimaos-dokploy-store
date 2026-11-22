@@ -1,0 +1,59 @@
+name: netdata
+services:
+  netdata:
+    image: netdata/netdata:latest
+    restart: unless-stopped
+    cap_add:
+    - SYS_PTRACE
+    - SYS_ADMIN
+    security_opt:
+    - apparmor:unconfined
+    volumes:
+    - netdata-config:/etc/netdata
+    - netdata-lib:/var/lib/netdata
+    - netdata-cache:/var/cache/netdata
+    - /etc/passwd:/host/etc/passwd:ro
+    - /etc/group:/host/etc/group:ro
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /etc/os-release:/host/etc/os-release:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+    - NETDATA_CLAIM_TOKEN=${NETDATA_CLAIM_TOKEN:-}
+    - NETDATA_CLAIM_URL=${NETDATA_CLAIM_URL:-}
+    - NETDATA_CLAIM_ROOMS=${NETDATA_CLAIM_ROOMS:-}
+    expose:
+    - '19999'
+    ports:
+    - target: 19999
+      published: "19999"
+      protocol: tcp
+volumes:
+  netdata-config: null
+  netdata-lib: null
+  netdata-cache: null
+x-casaos:
+  id: com.dokploy.netdata
+  main: netdata
+  index: /
+  port_map: "19999"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/netdata/icon.svg
+  title:
+    en_US: Netdata
+  tagline:
+    en_US: Netdata is a real-time monitoring tool for system and application performance
+  description:
+    en_US: Netdata is a real-time monitoring tool for system and application performance. Self-host it on your own server
+      with Dokploy, which deploys Netdata as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Netdata
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.netdata.cloud/
+  repo: https://github.com/netdata/netdata
+  docs: https://learn.netdata.cloud/

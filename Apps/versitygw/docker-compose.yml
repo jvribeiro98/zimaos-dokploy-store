@@ -1,0 +1,59 @@
+name: versitygw
+services:
+  versitygw:
+    image: versity/versitygw:v1.8.0
+    restart: unless-stopped
+    environment:
+    - ROOT_ACCESS_KEY=1b3bf8185f86f279db800de4a889fd25
+    - ROOT_SECRET_KEY=j1gYEtf8Wt2TtDuIsgb29cxCxzPFHDVK
+    - VGW_BACKEND=posix
+    - VGW_PORT=:7070
+    - VGW_BACKEND_ARGS=/data/s3
+    - VGW_IAM_DIR=/data/iam
+    - VGW_VERSIONING_DIR=/data/versioning
+    - VGW_ADMIN_PORT=:7071
+    - VGW_WEBUI_PORT=:8080
+    - VGW_WEBUI_NO_TLS=true
+    - VGW_WEBUI_GATEWAYS=http://localhost:7070
+    - VGW_WEBUI_ADMIN_GATEWAYS=http://localhost:7071
+    expose:
+    - '7070'
+    - '7071'
+    - '8080'
+    volumes:
+    - versitygw_s3:/data/s3
+    - versitygw_versioning:/data/versioning
+    - versitygw_iam:/data/iam
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  versitygw_s3: null
+  versitygw_versioning: null
+  versitygw_iam: null
+x-casaos:
+  id: com.dokploy.versitygw
+  main: versitygw
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/versitygw/icon.svg
+  title:
+    en_US: VersityGW
+  tagline:
+    en_US: VersityGW is a high-performance S3-compatible gateway that exposes POSIX filesystems, S...
+  description:
+    en_US: VersityGW is a high-performance S3-compatible gateway that exposes POSIX filesystems, ScoutFS, Azure Blob, or other
+      S3 servers over the S3 API, with a built-in WebUI for bucket and user management.
+  author: Dokploy Community
+  developer: VersityGW
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.0"
+  update_at: "2026-11-22"
+  website: https://www.versity.com/
+  repo: https://github.com/versity/versitygw
+  docs: https://github.com/versity/versitygw/wiki

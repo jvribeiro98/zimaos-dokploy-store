@@ -1,0 +1,48 @@
+name: browserless
+services:
+  browserless:
+    image: ghcr.io/browserless/chromium:latest
+    environment:
+      TOKEN: EubiLtKuFoOmrIzl
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://127.0.0.1:3000/docs
+      interval: 2s
+      timeout: 10s
+      retries: 15
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.browserless
+  main: browserless
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/browserless/icon.svg
+  title:
+    en_US: Browserless
+  tagline:
+    en_US: Browserless allows remote clients to connect and execute headless work, all inside of d...
+  description:
+    en_US: Browserless allows remote clients to connect and execute headless work, all inside of docker. It supports the standard,
+      unforked Puppeteer and Playwright libraries, as well offering REST-based APIs for common actions like data collection,
+      PDF generation and more.
+  author: Dokploy Community
+  developer: Browserless
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.23.0"
+  update_at: "2026-11-22"
+  website: https://www.browserless.io/
+  repo: https://github.com/browserless/browserless
+  docs: https://docs.browserless.io/

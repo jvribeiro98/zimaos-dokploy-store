@@ -1,0 +1,60 @@
+name: trek
+services:
+  trek:
+    image: mauriceboe/trek:3.3.0
+    restart: unless-stopped
+    environment:
+    - NODE_ENV=production
+    - PORT=3000
+    - ENCRYPTION_KEY=qFjpoz388HZGbus9CwcTnaXeJlvKXeg7ccWEkpGPJltWkJGB7MWrrCnWgQGiapkG
+    - TZ=UTC
+    - LOG_LEVEL=info
+    - APP_URL=http://localhost
+    - ALLOWED_ORIGINS=http://localhost
+    - ADMIN_EMAIL=admin@example.com
+    - ADMIN_PASSWORD=S0jdj3MDPvQirhwh
+    volumes:
+    - trek-data:/app/data
+    - trek-uploads:/app/uploads
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://localhost:3000/api/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  trek-data: null
+  trek-uploads: null
+x-casaos:
+  id: com.dokploy.trek
+  main: trek
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/trek/icon.png
+  title:
+    en_US: TREK
+  tagline:
+    en_US: A minimalist, self-hosted trip planner with Kanban-style task boards, budgets, packing...
+  description:
+    en_US: A minimalist, self-hosted trip planner with Kanban-style task boards, budgets, packing lists, interactive maps,
+      real-time collaboration, and OIDC single sign-on.
+  author: Dokploy Community
+  developer: TREK
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.3.0"
+  update_at: "2026-11-22"
+  website: https://github.com/mauriceboe/TREK
+  repo: https://github.com/mauriceboe/TREK
+  docs: https://github.com/mauriceboe/TREK/wiki

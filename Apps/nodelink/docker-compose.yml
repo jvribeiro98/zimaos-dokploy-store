@@ -1,0 +1,65 @@
+name: nodelink
+services:
+  nodelink:
+    image: performanc/nodelink:3.8.0
+    restart: unless-stopped
+    expose:
+    - '2333'
+    environment:
+      NODELINK_SERVER_HOST: 0.0.0.0
+      NODELINK_SERVER_PORT: '2333'
+      NODELINK_SERVER_PASSWORD: mY033N0iNoo0AJU382qzgEZuuIc26uxP
+      NODELINK_LOGGING_LEVEL: info
+      NODELINK_LOGGING_FILE_ENABLED: 'false'
+      NODELINK_SOURCES_LOCAL_ENABLED: 'false'
+      NODELINK_SOURCES_LOCAL_BASEPATH: /app/local-music/
+      NODELINK_METRICS_ENABLED: 'false'
+    volumes:
+    - nodelink-cache:/app/.cache
+    - nodelink-local-music:/app/local-music
+    - nodelink-logs:/app/logs
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - node -e "fetch('http://127.0.0.1:2333/version',{headers:{authorization:process.env.NODELINK_SERVER_PASSWORD||''}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+    - target: 2333
+      published: "2333"
+      protocol: tcp
+volumes:
+  nodelink-cache: null
+  nodelink-local-music: null
+  nodelink-logs: null
+x-casaos:
+  id: com.dokploy.nodelink
+  main: nodelink
+  index: /
+  port_map: "2333"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nodelink/icon.svg
+  title:
+    en_US: NodeLink
+  tagline:
+    en_US: NodeLink is a lightweight Lavalink-compatible audio server built in Node
+  description:
+    en_US: NodeLink is a lightweight Lavalink-compatible audio server built in Node.js for Discord music bots and real-time
+      audio systems.
+  author: Dokploy Community
+  developer: NodeLink
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "3.8.0"
+  update_at: "2026-11-22"
+  website: https://nodelink.js.org/
+  repo: https://github.com/PerformanC/NodeLink
+  docs: https://nodelink.js.org/docs/advanced/docker
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

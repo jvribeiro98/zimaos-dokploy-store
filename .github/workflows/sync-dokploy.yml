@@ -1,0 +1,42 @@
+name: Sync Dokploy Templates to ZimaOS App Store
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout store repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Convert Dokploy templates
+        run: |
+          python3 dokploy_to_zimaos.py \
+            --clone \
+            --output . \
+            --base-url "https://raw.githubusercontent.com/${{ github.repository }}/main" \
+            --repo-url "https://github.com/${{ github.repository }}" \
+            --maintainer "${{ github.repository_owner }}" \
+            --zip
+
+      - name: Commit updated store
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Apps store-config.json store.json supported-languages.json category-list.json recommend-list.json index.json dist README.md dokploy_to_zimaos.py
+          git diff --cached --quiet || git commit -m "chore: sync Dokploy templates"
+          git push

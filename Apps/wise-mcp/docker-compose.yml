@@ -1,0 +1,45 @@
+name: wise-mcp
+services:
+  wise-mcp:
+    image: ghcr.io/blanketbyte/wise-mcp:1.1.1
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - PUBLIC_URL=https://localhost
+    - TOKEN_ENCRYPTION_KEY=gUWnSt2yty6sI8oLbxDQCDXL0EX2BMpmYl12Mm6dNmmCJWuF
+    - ALLOWED_WISE_USERS=
+    - WRITES_ENABLED=true
+    volumes:
+    - wise-mcp-data:/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  wise-mcp-data: {}
+x-casaos:
+  id: com.dokploy.wise-mcp
+  main: wise-mcp
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wise-mcp/icon.svg
+  title:
+    en_US: Wise MCP (unofficial)
+  tagline:
+    en_US: Self-hosted MCP connector that lets Claude and ChatGPT read your Wise balances, card pa...
+  description:
+    en_US: Self-hosted MCP connector that lets Claude and ChatGPT read your Wise balances, card payments and transfers, and
+      prepare transfers you approve twice.
+  author: Dokploy Community
+  developer: Wise MCP (unofficial)
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.1.1"
+  update_at: "2026-11-22"
+  website: https://blanketbyte.com
+  repo: https://github.com/BlanketByte/wise-mcp
+  docs: https://github.com/BlanketByte/wise-mcp#readme

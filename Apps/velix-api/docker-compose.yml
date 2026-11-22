@@ -1,0 +1,67 @@
+name: velix-api
+services:
+  velix-api:
+    image: ghcr.io/paulolinder/velix-api:1.1.0
+    restart: always
+    environment:
+    - DATABASE_URL=postgres://postgres:4HTf3OPL0p32f0UjefQN6wH7eG8fYdzG@postgres:5432/velix?sslmode=disable
+    - REDIS_URL=redis://redis:6379
+    - JWT_SECRET=PoGcEblPZj10JQzNPE9Cot0NSeXyrdc3nUiE9saLp4RPFmsnmo4wtMIRfYpIiw2E
+    - HTTP_PORT=8080
+    - APP_ENV=production
+    - LOG_LEVEL=info
+    - MEDIA_STORAGE_PATH=/data/media
+    - ENGINE_STORE_PATH=/data/instances
+    - ENGINE_AUTO_RECONNECT=true
+    - ENGINE_MAX_INSTANCES=200
+    - REGISTRATION_ENABLED=false
+    volumes:
+    - velix-data:/data
+    depends_on:
+    - postgres
+    - redis
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+    - POSTGRES_DB=velix
+    - POSTGRES_PASSWORD=4HTf3OPL0p32f0UjefQN6wH7eG8fYdzG
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+    - redis-data:/data
+volumes:
+  velix-data: null
+  postgres-data: null
+  redis-data: null
+x-casaos:
+  id: com.dokploy.velix-api
+  main: velix-api
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/velix-api/icon.svg
+  title:
+    en_US: Velix API
+  tagline:
+    en_US: Self-hosted WhatsApp API with multi-instance support, webhooks, n8n node, and Chatwoot...
+  description:
+    en_US: Self-hosted WhatsApp API with multi-instance support, webhooks, n8n node, and Chatwoot integration.
+  author: Dokploy Community
+  developer: Velix API
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.1.0"
+  update_at: "2026-11-22"
+  website: https://velix.dev
+  repo: https://github.com/paulolinder/velix-api
+  docs: https://github.com/paulolinder/velix-api#readme

@@ -1,0 +1,47 @@
+name: borgitory
+services:
+  borgitory:
+    image: mlapaglia/borgitory:latest
+    restart: unless-stopped
+    expose:
+    - 8000
+    cap_add:
+    - SYS_ADMIN
+    devices:
+    - /dev/fuse
+    volumes:
+    - borgitory-data:/app/data
+    - borgitory-sources:/mnt/sources:ro
+    - borgitory-repos:/mnt/repos:ro
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  borgitory-data: {}
+  borgitory-sources: {}
+  borgitory-repos: {}
+x-casaos:
+  id: com.dokploy.borgitory
+  main: borgitory
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/borgitory/icon.png
+  title:
+    en_US: Borgitory
+  tagline:
+    en_US: A web interface for managing BorgBackup archives
+  description:
+    en_US: A web interface for managing BorgBackup archives. Allows browsing, mounting (via FUSE), and handling backup repositories.
+  author: Dokploy Community
+  developer: Borgitory
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/mlapaglia/borgitory
+  repo: https://github.com/mlapaglia/borgitory
+  docs: https://github.com/mlapaglia/borgitory

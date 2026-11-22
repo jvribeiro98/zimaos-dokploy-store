@@ -1,0 +1,67 @@
+name: azuracast
+services:
+  azuracast:
+    image: ghcr.io/azuracast/azuracast:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    volumes:
+    - azuracast-station-data:/var/azuracast/stations
+    - azuracast-data:/var/azuracast/www_tmp
+    - azuracast-uploads:/var/azuracast/uploads
+    - azuracast-backups:/var/azuracast/backups
+    environment:
+    - LANG=en_US.UTF-8
+    - AZURACAST_DC_REVISION=1
+    - MYSQL_HOST=mariadb
+    - MYSQL_PORT=3306
+    - MYSQL_USER=azuracast
+    - MYSQL_PASSWORD=AnlXrVEReuJYkgMM
+    - MYSQL_DATABASE=azuracast
+    depends_on:
+    - mariadb
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mariadb:
+    image: mariadb:11.4
+    restart: unless-stopped
+    volumes:
+    - mariadb-data:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=2j68al8HDSsDYiEQxfaIgyp2u3uxJQFQ
+    - MYSQL_DATABASE=azuracast
+    - MYSQL_USER=azuracast
+    - MYSQL_PASSWORD=AnlXrVEReuJYkgMM
+volumes:
+  azuracast-station-data: {}
+  azuracast-data: {}
+  azuracast-uploads: {}
+  azuracast-backups: {}
+  mariadb-data: {}
+x-casaos:
+  id: com.dokploy.azuracast
+  main: azuracast
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/azuracast/icon.png
+  title:
+    en_US: AzuraCast
+  tagline:
+    en_US: AzuraCast is a self-hosted, all-in-one web radio management suite
+  description:
+    en_US: AzuraCast is a self-hosted, all-in-one web radio management suite. Easily manage your online radio stations with
+      a powerful web interface.
+  author: Dokploy Community
+  developer: AzuraCast
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.azuracast.com/
+  repo: https://github.com/AzuraCast/AzuraCast
+  docs: https://docs.azuracast.com/

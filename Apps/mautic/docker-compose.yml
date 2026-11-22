@@ -1,0 +1,147 @@
+name: mautic
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: M6G8WnFbwBLSw5azmocSrzd36yQH068Z
+      MYSQL_DATABASE: mautic
+      MYSQL_USER: mautic
+      MYSQL_PASSWORD: oHFz49wECJ51oCaOGUD03vJKa68nIcgL
+    volumes:
+    - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  mautic:
+    image: mautic/mautic:5.1.1-apache
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    expose:
+    - 80
+    environment:
+    - DOCKER_MAUTIC_ROLE=mautic_web
+    - DOCKER_MAUTIC_RUN_MIGRATIONS=true
+    - MAUTIC_DB_HOST=mysql
+    - MAUTIC_DB_PORT=3306
+    - MAUTIC_DB_DATABASE=mautic
+    - MAUTIC_DB_USER=mautic
+    - MAUTIC_DB_PASSWORD=oHFz49wECJ51oCaOGUD03vJKa68nIcgL
+    - MAUTIC_URL=https://localhost
+    - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
+    - MAUTIC_MESSENGER_DSN_EMAIL=doctrine://default
+    - MAUTIC_MESSENGER_DSN_HIT=doctrine://default
+    - PHP_INI_DATE_TIMEZONE=UTC
+    - PHP_MEMORY_LIMIT=512M
+    volumes:
+    - mautic_data:/var/www/html
+    entrypoint:
+    - /bin/sh
+    - -c
+    - chown -R www-data:www-data /var/www/html && /entrypoint.sh apache2-foreground
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - test -f /var/www/html/config/local.php || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 300s
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mautic-cron:
+    image: mautic/mautic:5.1.1-apache
+    restart: unless-stopped
+    depends_on:
+      mautic:
+        condition: service_healthy
+    environment:
+    - DOCKER_MAUTIC_ROLE=mautic_cron
+    - MAUTIC_DB_HOST=mysql
+    - MAUTIC_DB_PORT=3306
+    - MAUTIC_DB_DATABASE=mautic
+    - MAUTIC_DB_USER=mautic
+    - MAUTIC_DB_PASSWORD=oHFz49wECJ51oCaOGUD03vJKa68nIcgL
+    - MAUTIC_URL=https://localhost
+    - PHP_INI_DATE_TIMEZONE=UTC
+    volumes:
+    - mautic_data:/var/www/html
+  mautic-worker:
+    image: mautic/mautic:5.1.1-apache
+    restart: unless-stopped
+    depends_on:
+      mautic:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    environment:
+    - DOCKER_MAUTIC_ROLE=mautic_worker
+    - DOCKER_MAUTIC_WORKERS_CONSUME_EMAIL=2
+    - DOCKER_MAUTIC_WORKERS_CONSUME_HIT=2
+    - DOCKER_MAUTIC_WORKERS_CONSUME_FAILED=2
+    - MAUTIC_DB_HOST=mysql
+    - MAUTIC_DB_PORT=3306
+    - MAUTIC_DB_DATABASE=mautic
+    - MAUTIC_DB_USER=mautic
+    - MAUTIC_DB_PASSWORD=oHFz49wECJ51oCaOGUD03vJKa68nIcgL
+    - MAUTIC_URL=https://localhost
+    - MAUTIC_MESSENGER_DSN_EMAIL=doctrine://default
+    - MAUTIC_MESSENGER_DSN_HIT=doctrine://default
+    - PHP_INI_DATE_TIMEZONE=UTC
+    volumes:
+    - mautic_data:/var/www/html
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: '3306'
+      UPLOAD_LIMIT: 64M
+    expose:
+    - 80
+volumes:
+  mysql_data: null
+  mautic_data: null
+x-casaos:
+  id: com.dokploy.mautic
+  main: mautic
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mautic/icon.svg
+  title:
+    en_US: Mautic
+  tagline:
+    en_US: Mautic is the world's largest open-source marketing automation project
+  description:
+    en_US: Mautic is the world's largest open-source marketing automation project. It allows you to automate the process of
+      finding and nurturing contacts through landing pages and forms, sending email, text messages, web notifications, and
+      tracking your contacts.
+  author: Dokploy Community
+  developer: Mautic
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "5.1.1"
+  update_at: "2026-11-22"
+  website: https://www.mautic.org/
+  repo: https://github.com/mautic/mautic
+  docs: https://docs.mautic.org/en

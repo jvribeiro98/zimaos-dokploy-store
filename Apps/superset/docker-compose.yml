@@ -1,0 +1,83 @@
+name: superset
+services:
+  superset:
+    image: amancevice/superset:6.0.0
+    restart: unless-stopped
+    depends_on:
+    - superset_postgres
+    - superset_redis
+    volumes:
+    - /DATA/AppData/$AppID/superset/superset_config.py:/etc/superset/superset_config.py
+    environment:
+      SECRET_KEY: iGplivIkYXLOq1XrA9NbZTwLgjBaBs
+      MAPBOX_API_KEY: ''
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: H6M8XpPwWh8BJwxIxOJYfZay8cW033
+      POSTGRES_DB: superset
+      REDIS_PASSWORD: VpikiGP11irjq9sqvAiuTp7DKeTF57
+      POSTGRES_HOST: superset_postgres
+      REDIS_HOST: superset_redis
+    ports:
+    - target: 8088
+      published: "8088"
+      protocol: tcp
+  superset_postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: H6M8XpPwWh8BJwxIxOJYfZay8cW033
+      POSTGRES_DB: superset
+    volumes:
+    - superset_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  superset_redis:
+    image: redis:8
+    restart: unless-stopped
+    volumes:
+    - superset_redis_data:/data
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - redis-cli -a $${REDIS_PASSWORD} ping
+      interval: 30s
+      timeout: 10s
+      retries: 3
+volumes:
+  superset_postgres_data: null
+  superset_redis_data: null
+x-casaos:
+  id: com.dokploy.superset
+  main: superset
+  index: /
+  port_map: "8088"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/superset/icon.svg
+  title:
+    en_US: Superset (Unofficial)
+  tagline:
+    en_US: Data visualization and data exploration platform
+  description:
+    en_US: Data visualization and data exploration platform.
+  author: Dokploy Community
+  developer: Superset (Unofficial)
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "6.0.0"
+  update_at: "2026-11-22"
+  website: https://superset.apache.org
+  repo: https://github.com/amancevice/docker-superset
+  docs: https://superset.apache.org/docs/intro
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./superset/superset_config.py).
+        Review environment variables before starting.

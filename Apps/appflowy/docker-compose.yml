@@ -1,0 +1,253 @@
+name: appflowy
+services:
+  nginx:
+    restart: on-failure
+    image: nginx
+    volumes:
+    - /DATA/AppData/$AppID/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  minio:
+    restart: on-failure
+    image: minio/minio
+    environment:
+    - MINIO_BROWSER_REDIRECT_URL=https://localhost/minio
+    - MINIO_ROOT_USER=NTq74xvijiHNnkyJ
+    - MINIO_ROOT_PASSWORD=BI6VxmLLnqj4ID3mdZCYKznEXgVg40F6
+    command: server /data --console-address ":9001"
+    volumes:
+    - minio_data:/data
+  postgres:
+    restart: on-failure
+    image: pgvector/pgvector:pg16
+    environment:
+    - POSTGRES_USER=appflowy
+    - POSTGRES_DB=appflowy
+    - POSTGRES_PASSWORD=MCPGT2frkg97NgtE0A7teAW8eS41iBdRPK1mk6q3V7xE3atj7Vb8da99AbO1OF2u
+    - POSTGRES_HOST=postgres
+    healthcheck:
+      test:
+      - CMD
+      - pg_isready
+      - -U
+      - ${POSTGRES_USER}
+      - -d
+      - ${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/files/volumes/postgres/:/docker-entrypoint-initdb.d/
+  redis:
+    restart: on-failure
+    image: redis
+  gotrue:
+    restart: on-failure
+    image: appflowyinc/gotrue:${GOTRUE_VERSION:-latest}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - --fail
+      - http://127.0.0.1:9999/health
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    environment:
+    - GOTRUE_ADMIN_EMAIL=admin@example.com
+    - GOTRUE_ADMIN_PASSWORD=0oc2aWdBtfBMM3zD
+    - GOTRUE_DISABLE_SIGNUP=false
+    - GOTRUE_SITE_URL=appflowy-flutter://
+    - GOTRUE_URI_ALLOW_LIST=**
+    - API_EXTERNAL_URL=https://localhost/gotrue
+    - GOTRUE_JWT_SECRET=yE68I1NuN1OLwQ4u6V51qBPDggpEuzZLN7COAhCLzEB53yPSUKbgSKAionCAAVbk
+    - GOTRUE_JWT_EXP=7200
+    - GOTRUE_JWT_ADMIN_GROUP_NAME=supabase_admin
+    - GOTRUE_DB_DRIVER=postgres
+    - DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy?search_path=auth
+    - PORT=9999
+    - GOTRUE_SMTP_HOST=
+    - GOTRUE_SMTP_PORT=465
+    - GOTRUE_SMTP_USER=
+    - GOTRUE_SMTP_PASS=
+    - GOTRUE_SMTP_ADMIN_EMAIL=${GOTRUE_ADMIN_EMAIL}
+    - GOTRUE_SMTP_MAX_FREQUENCY=1ns
+    - GOTRUE_RATE_LIMIT_EMAIL_SENT=100
+    - GOTRUE_MAILER_AUTOCONFIRM=true
+    - GOTRUE_MAILER_URLPATHS_CONFIRMATION=/gotrue/verify
+    - GOTRUE_MAILER_URLPATHS_INVITE=/gotrue/verify
+    - GOTRUE_MAILER_URLPATHS_RECOVERY=/gotrue/verify
+    - GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE=/gotrue/verify
+    - GOTRUE_MAILER_TEMPLATES_MAGIC_LINK=
+    - GOTRUE_EXTERNAL_GOOGLE_ENABLED=false
+    - GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID=
+    - GOTRUE_EXTERNAL_GOOGLE_SECRET=
+    - GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI=https://localhost/gotrue/callback
+    - GOTRUE_EXTERNAL_GITHUB_ENABLED=false
+    - GOTRUE_EXTERNAL_GITHUB_CLIENT_ID=
+    - GOTRUE_EXTERNAL_GITHUB_SECRET=
+    - GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI=https://localhost/gotrue/callback
+    - GOTRUE_EXTERNAL_DISCORD_ENABLED=false
+    - GOTRUE_EXTERNAL_DISCORD_CLIENT_ID=
+    - GOTRUE_EXTERNAL_DISCORD_SECRET=
+    - GOTRUE_EXTERNAL_DISCORD_REDIRECT_URI=https://localhost/gotrue/callback
+    - GOTRUE_SAML_ENABLED=false
+    - GOTRUE_SAML_PRIVATE_KEY=
+  appflowy_cloud:
+    restart: on-failure
+    image: appflowyinc/appflowy_cloud:${APPFLOWY_CLOUD_VERSION:-latest}
+    depends_on:
+      gotrue:
+        condition: service_healthy
+    environment:
+    - RUST_LOG=info
+    - APPFLOWY_ENVIRONMENT=production
+    - APPFLOWY_DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy
+    - APPFLOWY_REDIS_URI=redis://redis:6379
+    - APPFLOWY_WEB_URL=https://localhost
+    - APPFLOWY_GOTRUE_JWT_SECRET=yE68I1NuN1OLwQ4u6V51qBPDggpEuzZLN7COAhCLzEB53yPSUKbgSKAionCAAVbk
+    - APPFLOWY_GOTRUE_JWT_EXP=7200
+    - APPFLOWY_GOTRUE_BASE_URL=http://gotrue:9999
+    - APPFLOWY_S3_CREATE_BUCKET=true
+    - APPFLOWY_S3_USE_MINIO=true
+    - APPFLOWY_S3_MINIO_URL=http://minio:9000
+    - APPFLOWY_S3_ACCESS_KEY=NTq74xvijiHNnkyJ
+    - APPFLOWY_S3_SECRET_KEY=BI6VxmLLnqj4ID3mdZCYKznEXgVg40F6
+    - APPFLOWY_S3_BUCKET=appflowy
+    - APPFLOWY_S3_REGION=us-east-1
+    - APPFLOWY_S3_PRESIGNED_URL_ENDPOINT=https://localhost/minio-api
+    - APPFLOWY_MAILER_SMTP_HOST=
+    - APPFLOWY_MAILER_SMTP_PORT=465
+    - APPFLOWY_MAILER_SMTP_USERNAME=
+    - APPFLOWY_MAILER_SMTP_EMAIL=
+    - APPFLOWY_MAILER_SMTP_PASSWORD=
+    - APPFLOWY_MAILER_SMTP_TLS_KIND=wrapper
+    - APPFLOWY_ACCESS_CONTROL=true
+    - APPFLOWY_DATABASE_MAX_CONNECTIONS=40
+    - APPFLOWY_WEBSOCKET_MAILBOX_SIZE=6000
+    - AI_SERVER_HOST=ai
+    - AI_SERVER_PORT=5001
+    - AI_OPENAI_API_KEY=
+  admin_frontend:
+    restart: on-failure
+    image: appflowyinc/admin_frontend:${APPFLOWY_ADMIN_FRONTEND_VERSION:-latest}
+    depends_on:
+      gotrue:
+        condition: service_healthy
+      appflowy_cloud:
+        condition: service_started
+    environment:
+    - RUST_LOG=info
+    - ADMIN_FRONTEND_REDIS_URL=redis://redis:6379
+    - ADMIN_FRONTEND_GOTRUE_URL=http://gotrue:9999
+    - ADMIN_FRONTEND_APPFLOWY_CLOUD_URL=http://appflowy_cloud:8000
+    - ADMIN_FRONTEND_PATH_PREFIX=/console
+  ai:
+    restart: on-failure
+    image: appflowyinc/appflowy_ai:${APPFLOWY_AI_VERSION:-latest}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      appflowy_cloud:
+        condition: service_started
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:5001/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    environment:
+    - AI_SERVER_PORT=5001
+    - OPENAI_API_KEY=
+    - DEFAULT_AI_MODEL=gpt-4o-mini
+    - DEFAULT_AI_COMPLETION_MODEL=gpt-4o-mini
+    - AZURE_OPENAI_API_KEY=
+    - AZURE_OPENAI_ENDPOINT=
+    - AZURE_OPENAI_API_VERSION=
+    - AI_DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy
+    - AI_REDIS_URL=redis://redis:6379
+    - APPFLOWY_S3_ACCESS_KEY=NTq74xvijiHNnkyJ
+    - APPFLOWY_S3_SECRET_KEY=BI6VxmLLnqj4ID3mdZCYKznEXgVg40F6
+    - APPFLOWY_S3_BUCKET=appflowy
+    - APPFLOWY_S3_REGION=us-east-1
+    - AI_USE_MINIO=true
+    - AI_MINIO_URL=http://minio:9000
+    - AI_APPFLOWY_HOST=https://localhost
+    - APPFLOWY_GOTRUE_JWT_SECRET=yE68I1NuN1OLwQ4u6V51qBPDggpEuzZLN7COAhCLzEB53yPSUKbgSKAionCAAVbk
+  appflowy_worker:
+    restart: on-failure
+    image: appflowyinc/appflowy_worker:${APPFLOWY_WORKER_VERSION:-latest}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+    - RUST_LOG=info
+    - APPFLOWY_ENVIRONMENT=production
+    - APPFLOWY_WORKER_REDIS_URL=redis://redis:6379
+    - APPFLOWY_WORKER_ENVIRONMENT=production
+    - APPFLOWY_WORKER_DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy
+    - APPFLOWY_WORKER_DATABASE_NAME=appflowy
+    - APPFLOWY_WORKER_IMPORT_TICK_INTERVAL=30
+    - APPFLOWY_S3_USE_MINIO=true
+    - APPFLOWY_S3_MINIO_URL=http://minio:9000
+    - APPFLOWY_S3_ACCESS_KEY=NTq74xvijiHNnkyJ
+    - APPFLOWY_S3_SECRET_KEY=BI6VxmLLnqj4ID3mdZCYKznEXgVg40F6
+    - APPFLOWY_S3_BUCKET=appflowy
+    - APPFLOWY_S3_REGION=us-east-1
+    - APPFLOWY_MAILER_SMTP_HOST=
+    - APPFLOWY_MAILER_SMTP_PORT=465
+    - APPFLOWY_MAILER_SMTP_USERNAME=
+    - APPFLOWY_MAILER_SMTP_EMAIL=
+    - APPFLOWY_MAILER_SMTP_PASSWORD=
+    - APPFLOWY_MAILER_SMTP_TLS_KIND=wrapper
+  appflowy_web:
+    restart: on-failure
+    image: appflowyinc/appflowy_web:${APPFLOWY_WEB_VERSION:-latest}
+    depends_on:
+    - appflowy_cloud
+    environment:
+    - AF_BASE_URL=https://localhost
+    - AF_GOTRUE_URL=https://localhost/gotrue
+    - AF_WS_V2_URL=wss://localhost/ws/v2
+volumes:
+  postgres_data: null
+  minio_data: null
+x-casaos:
+  id: com.dokploy.appflowy
+  main: nginx
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/appflowy/icon.png
+  title:
+    en_US: App Flowy
+  tagline:
+    en_US: AppFlowy is a workspace app for notes, docs, and projects, and an open-source alternati...
+  description:
+    en_US: AppFlowy is a workspace app for notes, docs, and projects, and an open-source alternative to Notion. Self-host
+      it on your own server with Dokploy, which deploys AppFlowy as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: App Flowy
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.9.3"
+  update_at: "2026-11-22"
+  website: https://appflowy.io/
+  repo: https://github.com/AppFlowy-IO/AppFlowy
+  docs: https://docs.appflowy.io/docs
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (nginx/nginx.conf). Review
+        environment variables before starting.

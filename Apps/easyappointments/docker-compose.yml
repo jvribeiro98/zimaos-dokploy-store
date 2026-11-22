@@ -1,0 +1,55 @@
+name: easyappointments
+services:
+  easyappointments:
+    image: alextselegidis/easyappointments:1.5.0
+    restart: unless-stopped
+    environment:
+    - BASE_URL=http://localhost
+    - DB_HOST=mysql
+    - DB_NAME=easyappointments
+    - DB_USERNAME=root
+    - DB_PASSWORD=hCwOXPoufkXddGrp4MCIjIuLipvokUjM
+    volumes:
+    - easyappointments:/var/www/html
+    depends_on:
+    - mysql
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=hCwOXPoufkXddGrp4MCIjIuLipvokUjM
+    - MYSQL_DATABASE=easyappointments
+    volumes:
+    - mysql:/var/lib/mysql
+volumes:
+  easyappointments: null
+  mysql: null
+x-casaos:
+  id: com.dokploy.easyappointments
+  main: easyappointments
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/easyappointments/icon.png
+  title:
+    en_US: Easy!Appointments
+  tagline:
+    en_US: Easy!Appointments is a highly customizable web application that allows customers to boo...
+  description:
+    en_US: Easy!Appointments is a highly customizable web application that allows customers to book appointments with you
+      via a sophisticated web interface.
+  author: Dokploy Community
+  developer: Easy!Appointments
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.5.0"
+  update_at: "2026-11-22"
+  website: https://easyappointments.org
+  repo: https://github.com/alextselegidis/easyappointments
+  docs: https://easyappointments.org/docs

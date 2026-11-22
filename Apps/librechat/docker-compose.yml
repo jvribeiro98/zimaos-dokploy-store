@@ -1,0 +1,129 @@
+name: librechat
+services:
+  librechat:
+    image: ghcr.io/danny-avila/librechat-dev:latest
+    restart: always
+    depends_on:
+    - mongodb
+    - rag_api
+    environment:
+    - HOST=0.0.0.0
+    - PORT=3080
+    - DOMAIN_CLIENT=https://localhost
+    - DOMAIN_SERVER=https://localhost
+    - MONGO_URI=mongodb://mongodb:27017/LibreChat
+    - MEILI_HOST=http://meilisearch:7700
+    - SEARCH=true
+    - NO_INDEX=true
+    - MEILI_NO_ANALYTICS=true
+    - MEILI_MASTER_KEY=L19oS9EWjzNJL4b6vWNcJAF5QKO1z3Co
+    - JWT_SECRET=N5SE6J9PjZGcg2v4OOGvPDcJcmfAcs4oA27zg0uzwxI0oj3Arg9QSOX5vazVdSnV
+    - JWT_REFRESH_SECRET=KPb7YQw8BEUK1TuQgq56ck8VVB72iGnsY9Zh2nYSTNINlBB1Umx5MsLsodbecabF
+    - CREDS_KEY=f34be427ebb29de8d88c107a71546019685ed8b241d8f2ed00c3df97ad2566f0
+    - CREDS_IV=e2341419ec3dd3d19b13a1a87fafcbfb
+    - RAG_PORT=${RAG_PORT:-8000}
+    - RAG_API_URL=http://rag_api:${RAG_PORT:-8000}
+    - OPENAI_API_KEY=
+    - ANTHROPIC_API_KEY=
+    - OPENROUTER_KEY=
+    - GOOGLE_KEY=
+    - ENDPOINTS=google,openAI,assistants,azureOpenAI,anthropic
+    - APP_TITLE=LibreChat
+    - CUSTOM_FOOTER=Made with ❤️ by LibreChat
+    - ALLOW_EMAIL_LOGIN=true
+    - ALLOW_SOCIAL_LOGIN=false
+    - ALLOW_REGISTRATION=false
+    volumes:
+    - type: bind
+      source: /DATA/AppData/$AppID/librechat.yaml
+      target: /app/librechat.yaml
+    - librechat_data:/app/client/public/images
+    - librechat_data:/app/uploads
+    - librechat_data:/app/logs
+    ports:
+    - target: 3080
+      published: "3080"
+      protocol: tcp
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+    - mongo_data:/data/db
+    command: mongod --noauth
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.3
+    restart: always
+    environment:
+    - MEILI_HOST=http://meilisearch:7700
+    - MEILI_NO_ANALYTICS=true
+    - MEILI_MASTER_KEY=L19oS9EWjzNJL4b6vWNcJAF5QKO1z3Co
+    volumes:
+    - meili_data:/meili_data
+  vectordb:
+    image: pgvector/pgvector:0.8.0-pg15-trixie
+    environment:
+    - POSTGRES_DB=librechat_db
+    - POSTGRES_USER=librechat_user
+    - POSTGRES_PASSWORD=FqIg2S7efA1YS5R2
+    restart: always
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+  rag_api:
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
+    environment:
+    - DB_HOST=vectordb
+    - VECTOR_DB_TYPE=pgvector
+    - POSTGRES_DB=librechat_db
+    - POSTGRES_USER=librechat_user
+    - POSTGRES_PASSWORD=FqIg2S7efA1YS5R2
+    - RAG_PORT=${RAG_PORT:-8000}
+    - OPENAI_API_KEY=
+    - RAG_OPENAI_API_KEY=
+    - GOOGLE_KEY=
+    - RAG_GOOGLE_API_KEY=
+    - JWT_SECRET=N5SE6J9PjZGcg2v4OOGvPDcJcmfAcs4oA27zg0uzwxI0oj3Arg9QSOX5vazVdSnV
+    - COLLECTION_NAME=${COLLECTION_NAME:-librechat_collection}
+    - CHUNK_SIZE=1500
+    - CHUNK_OVERLAP=100
+    - EMBEDDINGS_PROVIDER=openai
+    - EMBEDDINGS_MODEL=text-embedding-3-small
+    - DEBUG_RAG_API=false
+    - DEBUG_PGVECTOR_QUERIES=false
+    - CONSOLE_JSON=false
+    restart: always
+    depends_on:
+    - vectordb
+volumes:
+  mongo_data: null
+  meili_data: null
+  postgres_data: null
+  librechat_data: null
+x-casaos:
+  id: com.dokploy.librechat
+  main: librechat
+  index: /
+  port_map: "3080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/librechat/icon.png
+  title:
+    en_US: LibreChat
+  tagline:
+    en_US: LibreChat is the ultimate open-source app for all your AI conversations, fully customiz...
+  description:
+    en_US: LibreChat is the ultimate open-source app for all your AI conversations, fully customizable and compatible with
+      any AI provider (Openai, Ollama, Google etc.) â€” all in one sleek interface.
+  author: Dokploy Community
+  developer: LibreChat
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://librechat.ai
+  repo: https://github.com/danny-avila/librechat
+  docs: https://docs.librechat.ai
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (librechat.yaml). Review
+        environment variables before starting.

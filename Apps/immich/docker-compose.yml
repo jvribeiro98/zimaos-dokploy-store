@@ -1,0 +1,92 @@
+name: immich
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:v3.0.2
+    volumes:
+    - immich-library:/data
+    - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      immich-redis:
+        condition: service_healthy
+      immich-database:
+        condition: service_healthy
+    environment:
+      DB_HOSTNAME: immich-database
+      DB_PORT: '5432'
+      DB_USERNAME: immich
+      DB_PASSWORD: MsynMwvst2MvLuNNIZPLRLtXAatGHdoy
+      DB_DATABASE_NAME: immich
+      REDIS_HOSTNAME: immich-redis
+      REDIS_PORT: '6379'
+      REDIS_DBINDEX: '0'
+      TZ: UTC
+    restart: unless-stopped
+    healthcheck:
+      disable: false
+    ports:
+    - target: 2283
+      published: "2283"
+      protocol: tcp
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:v3.0.2
+    volumes:
+    - immich-model-cache:/cache
+    restart: unless-stopped
+    healthcheck:
+      disable: false
+  immich-redis:
+    image: valkey/valkey:9
+    volumes:
+    - immich-redis-data:/data
+    healthcheck:
+      test: redis-cli ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  immich-database:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+    volumes:
+    - immich-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: MsynMwvst2MvLuNNIZPLRLtXAatGHdoy
+      POSTGRES_USER: immich
+      POSTGRES_DB: immich
+      POSTGRES_INITDB_ARGS: --data-checksums
+    shm_size: 128mb
+    healthcheck:
+      test: pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE_NAME} || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  immich-model-cache: null
+  immich-postgres: null
+  immich-library: null
+  immich-redis-data: null
+x-casaos:
+  id: com.dokploy.immich
+  main: immich-server
+  index: /
+  port_map: "2283"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/immich/icon.svg
+  title:
+    en_US: Immich
+  tagline:
+    en_US: Immich is a photo and video backup app and an alternative to Google Photos
+  description:
+    en_US: Immich is a photo and video backup app and an alternative to Google Photos. Self-host it on your own server with
+      Dokploy, which deploys Immich as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Immich
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "3.0.2"
+  update_at: "2026-11-22"
+  website: https://immich.app/
+  repo: https://github.com/immich-app/immich
+  docs: https://immich.app/docs/overview/introduction

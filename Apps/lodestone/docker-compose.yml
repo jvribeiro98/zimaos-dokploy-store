@@ -1,0 +1,44 @@
+name: lodestone
+services:
+  lodestone:
+    image: ghcr.io/lodestone-team/lodestone_core
+    ports:
+    - 16662:16662
+    - 25565-25590:25565-25590
+    volumes:
+    - lodestone:/home/user/.lodestone
+    restart: unless-stopped
+  lodestone_dashboard:
+    image: ghcr.io/lodestone-team/lodestone_dashboard:v0.5.1
+    restart: always
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  lodestone:
+    driver: local
+x-casaos:
+  id: com.dokploy.lodestone
+  main: lodestone_dashboard
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/lodestone/icon.png
+  title:
+    en_US: Lodestone
+  tagline:
+    en_US: A free, open source server hosting tool for Minecraft and other multiplayers games
+  description:
+    en_US: A free, open source server hosting tool for Minecraft and other multiplayers games.
+  author: Dokploy Community
+  developer: Lodestone
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.5.1"
+  update_at: "2026-11-22"
+  website: https://lodestone.cc
+  repo: https://github.com/Lodestone-Team/lodestone
+  docs: https://github.com/Lodestone-Team/lodestone/wiki

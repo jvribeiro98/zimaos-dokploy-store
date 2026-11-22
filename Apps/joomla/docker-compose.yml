@@ -1,0 +1,75 @@
+name: joomla
+services:
+  joomla:
+    image: joomla:6.1.0-apache
+    restart: unless-stopped
+    depends_on:
+      joomla-db:
+        condition: service_healthy
+    expose:
+    - '80'
+    environment:
+      JOOMLA_DB_HOST: joomla-db
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: d5myfvtRNAzrhjOiomVyN02hZr4c8XT3
+      JOOMLA_DB_NAME: joomla
+      JOOMLA_SITE_NAME: Joomla
+      JOOMLA_ADMIN_USER: Joomla Administrator
+      JOOMLA_ADMIN_USERNAME: admin
+      JOOMLA_ADMIN_PASSWORD: DDyZN1vX37JeA0guAaS6wHsu
+      JOOMLA_ADMIN_EMAIL: admin@example.com
+    volumes:
+    - joomla-data:/var/www/html
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  joomla-db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: joomla
+      MARIADB_USER: joomla
+      MARIADB_PASSWORD: d5myfvtRNAzrhjOiomVyN02hZr4c8XT3
+      MARIADB_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+    - joomla-db:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - healthcheck.sh --connect --innodb_initialized
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  joomla-data: null
+  joomla-db: null
+x-casaos:
+  id: com.dokploy.joomla
+  main: joomla
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/joomla/icon.svg
+  title:
+    en_US: Joomla
+  tagline:
+    en_US: Joomla is a flexible open-source content management system for building websites, porta...
+  description:
+    en_US: Joomla is a flexible open-source content management system for building websites, portals, and online applications.
+  author: Dokploy Community
+  developer: Joomla
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "6.1.0-apache"
+  update_at: "2026-11-22"
+  website: https://www.joomla.org/
+  repo: https://github.com/joomla/joomla-cms
+  docs: https://manual.joomla.org/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

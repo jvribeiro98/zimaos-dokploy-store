@@ -1,0 +1,43 @@
+name: 2fauth
+services:
+  2fauth:
+    image: 2fauth/2fauth:9.0.1
+    restart: unless-stopped
+    environment:
+    - APP_URL=https://localhost
+    - APP_KEY=xayAyIqy03x2i1DNQ62GePLRoGgswmJI
+    volumes:
+    - 2fauth_data:/2fauth
+    expose:
+    - '8000'
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  2fauth_data: null
+x-casaos:
+  id: com.dokploy.2fauth
+  main: 2fauth
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/2fauth/icon.svg
+  title:
+    en_US: 2FAuth
+  tagline:
+    en_US: '2FAuth is a self-hosted web app for managing two-factor authentication tokens: organize...'
+  description:
+    en_US: '2FAuth is a self-hosted web app for managing two-factor authentication tokens: organize all your 2FA accounts,
+      generate codes in the browser, and sign in with passkeys or WebAuthn.'
+  author: Dokploy Community
+  developer: 2FAuth
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "9.0.1"
+  update_at: "2026-11-22"
+  website: https://2fauth.app
+  repo: https://github.com/Bubka/2FAuth
+  docs: https://docs.2fauth.app

@@ -1,0 +1,56 @@
+name: geoserver
+services:
+  geoserver:
+    image: kartoza/geoserver:2.24.1
+    depends_on:
+    - db
+    environment:
+    - GEOSERVER_ADMIN_USER=${GEOSERVER_ADMIN_USER}
+    - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD}
+    - INITIAL_MEMORY=${INITIAL_MEMORY}
+    - MAXIMUM_MEMORY=${MAXIMUM_MEMORY}
+    volumes:
+    - geoserver-data:/opt/geoserver/data_dir
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgis/postgis:17-3.4
+    environment:
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+    - postgis-data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  geoserver-data: null
+  postgis-data: null
+x-casaos:
+  id: com.dokploy.geoserver
+  main: geoserver
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/geoserver/icon.png
+  title:
+    en_US: GeoServer & PostGIS
+  tagline:
+    en_US: An open-source server for sharing geospatial data, paired with a PostGIS database
+  description:
+    en_US: 'An open-source server for sharing geospatial data, paired with a PostGIS database. Template created and maintained
+      by OpenGeoCity Tanzania (info@ogctz.org). For further assistance contact +255759968919 or visit https://opengeocity.org
+      or github: https://github.com/ShabaniMagawila or linkedin: https://www.linkedin.com/in/shabani-magawila/'
+  author: Dokploy Community
+  developer: GeoServer & PostGIS
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.24.1"
+  update_at: "2026-11-22"
+  website: https://geoserver.org/
+  repo: https://github.com/geoserver/geoserver
+  docs: https://docs.geoserver.org/

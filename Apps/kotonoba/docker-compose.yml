@@ -1,0 +1,44 @@
+name: kotonoba
+services:
+  kotonoba:
+    image: ghcr.io/trixtylab/kotonoba:1.0.19
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DB_PATH: /app/data/kotonoba.db
+      UPLOAD_DIR: /app/data/uploads
+      JWT_SECRET: rZSeMybqUf15DkmDtZQGxZpH6yQf91ah
+      SITE_URL: https://localhost
+      ADMIN_DOMAIN: localhost
+    volumes:
+    - blog_data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  blog_data: {}
+x-casaos:
+  id: com.dokploy.kotonoba
+  main: kotonoba
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kotonoba/icon.svg
+  title:
+    en_US: Kotonoba
+  tagline:
+    en_US: A high-performance, self-hosted, multi-tenant blog CMS built with Next
+  description:
+    en_US: A high-performance, self-hosted, multi-tenant blog CMS built with Next.js 16, SQLite, Tailwind CSS v4, and Docker.
+  author: Dokploy Community
+  developer: Kotonoba
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.19"
+  update_at: "2026-11-22"
+  website: https://github.com/trixtylab/kotonoba
+  repo: https://github.com/trixtylab/kotonoba
+  docs: https://github.com/TrixtyLab/kotonoba/tree/master/docs

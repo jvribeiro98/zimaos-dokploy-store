@@ -1,0 +1,88 @@
+name: dokploy-actions-runner
+services:
+  dokploy-actions-runner:
+    image: ghcr.io/simplarix/dokploy-actions-runner:2.338.2-node24.22.3-ubuntu-noble-r2@sha256:67a0863b831643700c8a2870b326d6451e131fd21a69535aa29aa7693b3adad2
+    restart: unless-stopped
+    user: runner
+    init: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    stop_grace_period: 2m
+    environment:
+      ACCESS_TOKEN: ${ACCESS_TOKEN:?Set ACCESS_TOKEN to a GitHub PAT in Dokploy Environment}
+      RUNNER_SCOPE: ${RUNNER_SCOPE:?Set RUNNER_SCOPE to repo or org}
+      REPO_URL: ''
+      ORG_NAME: ''
+      RUNNER_NAME: ${RUNNER_NAME:?Set a unique RUNNER_NAME for each deployment}
+      LABELS: ${LABELS:?Set comma-separated runner LABELS}
+      RUNNER_GROUP: Default
+      PATH: /actions-runner/externals/node24/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    entrypoint:
+    - /bin/bash
+    - -c
+    - "set -euo pipefail\nfail() { printf 'Configuration error: %s\\n' \"$$1\" >&2; exit 64; }\n[[ \"$${ACCESS_TOKEN:-}\"\
+      \ =~ ^[A-Za-z0-9_]+$$ ]] || fail 'ACCESS_TOKEN must be a PAT without whitespace, quotes or variable placeholders'\n\
+      case \"$${ACCESS_TOKEN}\" in\n  changeme|CHANGEME|replace_me|your_token) fail 'Replace the ACCESS_TOKEN placeholder\
+      \ with a GitHub PAT' ;;\nesac\n[[ \"$${RUNNER_NAME:-}\" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$$ ]] || fail 'RUNNER_NAME\
+      \ must be 1-64 letters, digits, dots, underscores or hyphens; start with a letter or digit'\n[[ \"$${LABELS:-}\" =~\
+      \ ^[A-Za-z0-9][A-Za-z0-9._-]*(,[A-Za-z0-9][A-Za-z0-9._-]*)*$$ ]] || fail 'LABELS must be comma-separated labels without\
+      \ spaces (letters, digits, dots, underscores or hyphens)'\n[[ \"$${RUNNER_GROUP:-}\" =~ ^[A-Za-z0-9][A-Za-z0-9\\ ._-]{0,99}$$\
+      \ ]] || fail 'RUNNER_GROUP must be 1-100 letters, digits, spaces, dots, underscores or hyphens; start with a letter\
+      \ or digit'\ncase \"$${RUNNER_SCOPE:-}\" in\n  repo)\n    [[ \"$${REPO_URL:-}\" =~ ^https://github\\.com/[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+$$\
+      \ ]] || fail 'repo scope requires REPO_URL=https://github.com/OWNER/REPO (no trailing slash or .git suffix)'\n    [[\
+      \ \"$${REPO_URL}\" != *.git ]] || fail 'REPO_URL must not have a .git suffix'\n    [[ -z \"$${ORG_NAME:-}\" ]] || fail\
+      \ 'Clear ORG_NAME when RUNNER_SCOPE=repo'\n    [[ \"$${RUNNER_GROUP}\" == Default ]] || fail 'Custom RUNNER_GROUP is\
+      \ only supported with RUNNER_SCOPE=org'\n    ;;\n  org)\n    [[ \"$${ORG_NAME:-}\" =~ ^[A-Za-z0-9][A-Za-z0-9-]{0,38}$$\
+      \ ]] || fail 'org scope requires an ORG_NAME slug (not a URL)'\n    [[ -z \"$${REPO_URL:-}\" ]] || fail 'Clear REPO_URL\
+      \ when RUNNER_SCOPE=org'\n    ;;\n  *) fail 'RUNNER_SCOPE must be exactly repo or org' ;;\nesac\n# Runtime gate: require\
+      \ the reviewed embedded Node24.\nnode_binary=/actions-runner/externals/node24/bin/node\n[[ -x \"$${node_binary}\" ]]\
+      \ || fail 'The maintained Node24 runtime is missing; update the image'\n[[ \"$$(command -v node)\" == \"$${node_binary}\"\
+      \ ]] || fail 'Default node must use the maintained Node24 runtime'\nnode_version=\"$$(\"$${node_binary}\" --version)\"\
+      \n[[ \"$${node_version}\" =~ ^v24\\.([0-9]+)\\.([0-9]+)$$ ]] || fail 'The maintained Node24 runtime is required'\n((\
+      \ 10#$${BASH_REMATCH[1]} > 22 || (10#$${BASH_REMATCH[1]} == 22 && 10#$${BASH_REMATCH[2]} >= 3) )) || fail 'Node24 is\
+      \ below the security baseline; update the image'\n# End runtime gate.\nexec /entrypoint.sh ./bin/Runner.Listener run\
+      \ --startuptype service\n"
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pgrep -x 'Runner[.]Listener' > /dev/null
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 2m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.dokploy-actions-runner
+  main: dokploy-actions-runner
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dokploy-actions-runner/icon.svg
+  title:
+    en_US: GitHub Actions Runner
+  tagline:
+    en_US: Self-hosted GitHub Actions runner for repositories or organizations, with independent n...
+  description:
+    en_US: Self-hosted GitHub Actions runner for repositories or organizations, with independent names, labels and runner
+      groups. Runs without privileged mode or Docker socket access.
+  author: Dokploy Community
+  developer: GitHub Actions Runner
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.338.2-node24.22.3-ubuntu-noble-r2"
+  update_at: "2026-11-22"
+  website: https://docs.github.com/en/actions/concepts/runners/self-hosted-runners
+  repo: https://github.com/Simplarix/dokploy-actions-runner
+  docs: https://github.com/Simplarix/dokploy-actions-runner#readme

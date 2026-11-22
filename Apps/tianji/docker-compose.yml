@@ -1,0 +1,53 @@
+name: tianji
+services:
+  tianji:
+    image: moonrailgun/tianji
+    expose:
+    - '12345'
+    environment:
+      DATABASE_URL: postgresql://tianji:tianji@postgres:5432/tianji
+      JWT_SECRET: ${jwt_secret}
+      ALLOW_REGISTER: 'false'
+      ALLOW_OPENAPI: 'true'
+    depends_on:
+    - postgres
+    restart: unless-stopped
+    ports:
+    - target: 12345
+      published: "12345"
+      protocol: tcp
+  postgres:
+    image: postgres:15.4-alpine
+    environment:
+      POSTGRES_DB: tianji
+      POSTGRES_USER: tianji
+      POSTGRES_PASSWORD: tianji
+    volumes:
+    - tianji-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  tianji-db-data: {}
+x-casaos:
+  id: com.dokploy.tianji
+  main: tianji
+  index: /
+  port_map: "12345"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tianji/icon.svg
+  title:
+    en_US: Tianji
+  tagline:
+    en_US: Tianji is a lightweight web analytic service and uptime monitoring tool
+  description:
+    en_US: Tianji is a lightweight web analytic service and uptime monitoring tool.
+  author: Dokploy Community
+  developer: Tianji
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://tianji.dev/
+  repo: https://github.com/msgbyte/tianji
+  docs: https://tianji.dev/docs/intro

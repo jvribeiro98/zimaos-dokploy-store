@@ -1,0 +1,54 @@
+name: orbit-coollabs
+services:
+  orbit:
+    image: ghcr.io/coollabsio/orbit:0.3.0
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    tmpfs:
+    - /tmp
+    stop_grace_period: 40s
+    environment:
+    - ORBIT_ENV=production
+    - ORBIT_PUBLIC_ORIGIN=https://localhost
+    - ORBIT_TRUSTED_PROXIES=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+    - ORBIT_APP_KEY=fzxYM5masLV8ZtxnzPoBfO8XeG5UoCMMBr9HGgwtSQM=
+    expose:
+    - '8080'
+    volumes:
+    - orbit-data:/var/lib/orbit
+    - orbit-backups:/var/backups/orbit
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  orbit-data: null
+  orbit-backups: null
+x-casaos:
+  id: com.dokploy.orbit-coollabs
+  main: orbit
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/orbit-coollabs/icon.png
+  title:
+    en_US: Orbit by Coolify
+  tagline:
+    en_US: 'Self-hosted workspace for teams: tasks, docs and chat in one app on your own server, wi...'
+  description:
+    en_US: 'Self-hosted workspace for teams: tasks, docs and chat in one app on your own server, with an MCP endpoint for
+      AI clients. By the team behind Coolify, on the latest stable release, without the inbound mail server.'
+  author: Dokploy Community
+  developer: Orbit by Coolify
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.3.0"
+  update_at: "2026-11-22"
+  repo: https://github.com/coollabsio/orbit
+  docs: https://github.com/coollabsio/orbit/blob/main/docs/operations.md

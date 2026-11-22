@@ -1,0 +1,50 @@
+name: calibre-web
+services:
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    restart: unless-stopped
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Etc/UTC
+    - OAUTHLIB_RELAX_TOKEN_SCOPE=1
+    volumes:
+    - calibre-config:/config
+    - calibre-books:/books
+    - /DATA/AppData/$AppID/startup-scripts:/custom-cont-init.d:ro
+    ports:
+    - target: 8083
+      published: "8083"
+      protocol: tcp
+volumes:
+  calibre-config: {}
+  calibre-books: {}
+x-casaos:
+  id: com.dokploy.calibre-web
+  main: calibre-web
+  index: /
+  port_map: "8083"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/calibre-web/icon.png
+  title:
+    en_US: Calibre-Web
+  tagline:
+    en_US: Calibre-Web is a web interface for browsing, reading, and downloading ebooks from a Cal...
+  description:
+    en_US: Calibre-Web is a web interface for browsing, reading, and downloading ebooks from a Calibre library. Self-host
+      it on your own server with Dokploy, which deploys Calibre-Web as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Calibre-Web
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/janeczku/calibre-web
+  repo: https://github.com/janeczku/calibre-web
+  docs: https://github.com/janeczku/calibre-web/wiki
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (startup-scripts/metadata-db-generator.sh).
+        Review environment variables before starting.

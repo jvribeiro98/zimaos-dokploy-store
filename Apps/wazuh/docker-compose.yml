@@ -1,0 +1,202 @@
+name: wazuh
+services:
+  wazuh-certs:
+    image: wazuh/wazuh-certs-generator:0.0.4
+    restart: 'no'
+    environment:
+    - CERT_TOOL_VERSION=4.14
+    entrypoint:
+    - /bin/bash
+    - -c
+    command:
+    - "set -e\nif [ ! -f /certificates/wazuh.indexer.pem ]; then\n  bash /entrypoint.sh\nfi\n# entrypoint.sh exits 0 even\
+      \ when the cert tool fails\ntest -f /certificates/wazuh.indexer.pem\n# The generator leaves the directory root-only\
+      \ (500); the indexer and\n# dashboard run as uid 1000 and must be able to traverse it.\nchmod 755 /certificates\n"
+    volumes:
+    - wazuh-certs:/certificates
+    - /DATA/AppData/$AppID/certs.yml:/config/certs.yml:ro
+  wazuh-indexer-init:
+    image: wazuh/wazuh-indexer:4.14.8
+    restart: 'no'
+    environment:
+    - INDEXER_PASSWORD=v2AHNeB90vFFFDm9nfksYvfBWBjeqBLO
+    - DASHBOARD_PASSWORD=AyHGY5SFaj52NktAVcA7QLOFRo3xhJfm
+    entrypoint:
+    - /bin/bash
+    - -c
+    command:
+    - "set -e\nSEC=/usr/share/wazuh-indexer/config/opensearch-security\n[ -f \"$$SEC/.dokploy-users\" ] && exit 0\nexport\
+      \ JAVA_HOME=/usr/share/wazuh-indexer/jdk\nHASH=/usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh\n\
+      ADMIN_HASH=$$(bash $$HASH -p \"$$INDEXER_PASSWORD\" | tail -1)\nKIBANA_HASH=$$(bash $$HASH -p \"$$DASHBOARD_PASSWORD\"\
+      \ | tail -1)\ncat > \"$$SEC/internal_users.yml\" <<EOF\n---\n_meta:\n  type: \"internalusers\"\n  config_version: 2\n\
+      admin:\n  hash: \"$$ADMIN_HASH\"\n  reserved: true\n  backend_roles:\n  - \"admin\"\n  description: \"Admin user\"\n\
+      kibanaserver:\n  hash: \"$$KIBANA_HASH\"\n  reserved: true\n  description: \"Wazuh dashboard server user\"\nEOF\ntouch\
+      \ \"$$SEC/.dokploy-users\"\n"
+    volumes:
+    - wazuh-indexer-security:/usr/share/wazuh-indexer/config/opensearch-security
+  wazuh.indexer:
+    image: wazuh/wazuh-indexer:4.14.8
+    hostname: wazuh.indexer
+    restart: unless-stopped
+    environment:
+    - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    expose:
+    - 9200
+    volumes:
+    - wazuh-indexer-data:/var/lib/wazuh-indexer
+    - type: volume
+      source: wazuh-certs
+      target: /usr/share/wazuh-indexer/config/certs
+      read_only: true
+      volume:
+        nocopy: true
+    - wazuh-indexer-security:/usr/share/wazuh-indexer/config/opensearch-security
+    - /DATA/AppData/$AppID/wazuh-indexer.yml:/usr/share/wazuh-indexer/config/opensearch.yml
+    depends_on:
+      wazuh-certs:
+        condition: service_completed_successfully
+      wazuh-indexer-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -sk -o /dev/null https://localhost:9200 || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+  wazuh.manager:
+    image: wazuh/wazuh-manager:4.14.8
+    hostname: wazuh.manager
+    restart: unless-stopped
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 655360
+        hard: 655360
+    ports:
+    - 1514:1514
+    - 1515:1515
+    expose:
+    - 55000
+    environment:
+    - INDEXER_URL=https://wazuh.indexer:9200
+    - INDEXER_USERNAME=admin
+    - INDEXER_PASSWORD=v2AHNeB90vFFFDm9nfksYvfBWBjeqBLO
+    - FILEBEAT_SSL_VERIFICATION_MODE=full
+    - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/wazuh/root-ca-manager.pem
+    - SSL_CERTIFICATE=/etc/ssl/wazuh/wazuh.manager.pem
+    - SSL_KEY=/etc/ssl/wazuh/wazuh.manager-key.pem
+    - API_USERNAME=wazuh-wui
+    - API_PASSWORD=UVUGaAYKSEKPnSqkfeQoMPpO-Aa1.
+    volumes:
+    - wazuh-api-configuration:/var/ossec/api/configuration
+    - wazuh-etc:/var/ossec/etc
+    - wazuh-logs:/var/ossec/logs
+    - wazuh-queue:/var/ossec/queue
+    - wazuh-var-multigroups:/var/ossec/var/multigroups
+    - wazuh-integrations:/var/ossec/integrations
+    - wazuh-active-response:/var/ossec/active-response/bin
+    - wazuh-agentless:/var/ossec/agentless
+    - wazuh-wodles:/var/ossec/wodles
+    - filebeat-etc:/etc/filebeat
+    - filebeat-var:/var/lib/filebeat
+    - type: volume
+      source: wazuh-certs
+      target: /etc/ssl/wazuh
+      read_only: true
+      volume:
+        nocopy: true
+    - /DATA/AppData/$AppID/ossec.conf:/wazuh-config-mount/etc/ossec.conf
+    depends_on:
+      wazuh.indexer:
+        condition: service_healthy
+  wazuh:
+    image: wazuh/wazuh-dashboard:4.14.8
+    hostname: wazuh.dashboard
+    restart: unless-stopped
+    expose:
+    - 5601
+    environment:
+    - INDEXER_USERNAME=admin
+    - INDEXER_PASSWORD=v2AHNeB90vFFFDm9nfksYvfBWBjeqBLO
+    - WAZUH_API_URL=https://wazuh.manager
+    - DASHBOARD_USERNAME=kibanaserver
+    - DASHBOARD_PASSWORD=AyHGY5SFaj52NktAVcA7QLOFRo3xhJfm
+    - API_USERNAME=wazuh-wui
+    - API_PASSWORD=UVUGaAYKSEKPnSqkfeQoMPpO-Aa1.
+    volumes:
+    - type: volume
+      source: wazuh-certs
+      target: /usr/share/wazuh-dashboard/certs
+      read_only: true
+      volume:
+        nocopy: true
+    - /DATA/AppData/$AppID/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
+    - /DATA/AppData/$AppID/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+    - wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config
+    - wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
+    depends_on:
+      wazuh.indexer:
+        condition: service_healthy
+      wazuh.manager:
+        condition: service_started
+    ports:
+    - target: 5601
+      published: "5601"
+      protocol: tcp
+volumes:
+  wazuh-certs: null
+  wazuh-indexer-security: null
+  wazuh-indexer-data: null
+  wazuh-api-configuration: null
+  wazuh-etc: null
+  wazuh-logs: null
+  wazuh-queue: null
+  wazuh-var-multigroups: null
+  wazuh-integrations: null
+  wazuh-active-response: null
+  wazuh-agentless: null
+  wazuh-wodles: null
+  filebeat-etc: null
+  filebeat-var: null
+  wazuh-dashboard-config: null
+  wazuh-dashboard-custom: null
+x-casaos:
+  id: com.dokploy.wazuh
+  main: wazuh
+  index: /
+  port_map: "5601"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wazuh/icon.png
+  title:
+    en_US: Wazuh
+  tagline:
+    en_US: 'Open source security platform (SIEM/XDR): threat detection, integrity monitoring, vulne...'
+  description:
+    en_US: 'Open source security platform (SIEM/XDR): threat detection, integrity monitoring, vulnerability detection and
+      compliance. Single-node manager, indexer and dashboard.'
+  author: Dokploy Community
+  developer: Wazuh
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "4.14.8"
+  update_at: "2026-11-22"
+  website: https://wazuh.com
+  repo: https://github.com/wazuh/wazuh
+  docs: https://documentation.wazuh.com/current/deployment-options/docker/index.html
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (certs.yml, wazuh-indexer.yml,
+        opensearch_dashboards.yml, wazuh.yml, ossec.conf). Review environment variables before starting.

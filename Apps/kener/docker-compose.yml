@@ -1,0 +1,68 @@
+name: kener
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    expose:
+    - 6379
+  kener:
+    image: rajnandan1/kener:4.1.1
+    environment:
+    - TZ=Etc/UTC
+    - KENER_SECRET_KEY=LkuPvelV8y2QK5lXfVyTKCCQufyPNVK89MZ5NMQfQx6mu6LnWz7fRg5krLmIm9AO
+    - ORIGIN=http://localhost:3000
+    - REDIS_URL=redis://redis:6379
+    - DATABASE_URL=sqlite://./database/kener.sqlite.db
+    - RESEND_API_KEY=
+    - RESEND_SENDER_EMAIL=
+    expose:
+    - 3000
+    volumes:
+    - data:/app/database
+    - /DATA/AppData/$AppID/uploads:/app/uploads
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  data: null
+  redis_data: null
+x-casaos:
+  id: com.dokploy.kener
+  main: kener
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kener/icon.png
+  title:
+    en_US: Kener
+  tagline:
+    en_US: Kener is an open-source status page system for monitoring and alerting
+  description:
+    en_US: Kener is an open-source status page system for monitoring and alerting. It provides a modern interface for tracking
+      service uptime and sending notifications.
+  author: Dokploy Community
+  developer: Kener
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "4.1.1"
+  update_at: "2026-11-22"
+  website: https://kener.ing/
+  repo: https://github.com/rajnandan1/kener
+  docs: https://kener.ing/docs/

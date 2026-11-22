@@ -1,0 +1,60 @@
+name: odoo_19
+services:
+  web:
+    image: odoo:19.0
+    depends_on:
+    - db
+    environment:
+    - HOST=db
+    - USER=odoo
+    - PASSWORD=odoo
+    volumes:
+    - odoo-web-data:/var/lib/odoo
+    - /DATA/AppData/$AppID/config:/etc/odoo
+    - /DATA/AppData/$AppID/addons:/mnt/extra-addons
+    restart: unless-stopped
+    ports:
+    - target: 8069
+      published: "8069"
+      protocol: tcp
+  db:
+    image: postgres:17
+    environment:
+    - POSTGRES_DB=postgres
+    - POSTGRES_USER=odoo
+    - POSTGRES_PASSWORD=odoo
+    volumes:
+    - odoo-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  odoo-web-data: null
+  odoo-db-data: null
+x-casaos:
+  id: com.dokploy.odoo_19
+  main: web
+  index: /
+  port_map: "8069"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/odoo_19/icon.png
+  title:
+    en_US: Odoo
+  tagline:
+    en_US: Odoo is a suite of business management apps, including ERP, CRM, and accounting
+  description:
+    en_US: Odoo is a suite of business management apps, including ERP, CRM, and accounting. Self-host it on your own server
+      with Dokploy, which deploys Odoo as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Odoo
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "19.0"
+  update_at: "2026-11-22"
+  website: https://odoo.com/
+  repo: https://github.com/odoo/odoo
+  docs: https://www.odoo.com/documentation/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config/odoo.conf). Review
+        environment variables before starting.

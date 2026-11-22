@@ -1,0 +1,80 @@
+name: nextcloud-aio
+services:
+  nextcloud:
+    image: nextcloud:33.0.6
+    restart: always
+    volumes:
+    - nextcloud_data:/var/www/html
+    - /DATA/AppData/$AppID/fix-nextcloud.sh:/usr/local/bin/fix-nextcloud.sh:ro
+    environment:
+    - MYSQL_HOST=nextcloud_db
+    - MYSQL_DATABASE=nextcloud
+    - MYSQL_USER=nextcloud
+    - MYSQL_PASSWORD=iXmtHaLgnA2sBCZwv6Izylp6VsnTzMo3
+    depends_on:
+    - nextcloud_db
+    - nextcloud_redis
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  nextcloud_cron:
+    image: nextcloud:33.0.6
+    restart: always
+    volumes:
+    - nextcloud_data:/var/www/html
+    environment:
+    - MYSQL_HOST=nextcloud_db
+    - MYSQL_DATABASE=nextcloud
+    - MYSQL_USER=nextcloud
+    - MYSQL_PASSWORD=iXmtHaLgnA2sBCZwv6Izylp6VsnTzMo3
+    entrypoint: /cron.sh
+    depends_on:
+    - nextcloud_db
+    - nextcloud_redis
+  nextcloud_db:
+    image: mariadb:10.11
+    restart: always
+    volumes:
+    - nextcloud_db_data:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=sxf74I6AlNCwwCQPjSmCN4GtMDNbXnF0
+    - MYSQL_DATABASE=nextcloud
+    - MYSQL_USER=nextcloud
+    - MYSQL_PASSWORD=iXmtHaLgnA2sBCZwv6Izylp6VsnTzMo3
+  nextcloud_redis:
+    image: redis:alpine
+    restart: always
+volumes:
+  nextcloud_data: null
+  nextcloud_db_data: null
+x-casaos:
+  id: com.dokploy.nextcloud-aio
+  main: nextcloud
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nextcloud-aio/icon.png
+  title:
+    en_US: Nextcloud
+  tagline:
+    en_US: Nextcloud is a self-hosted file storage and sync platform with powerful collaboration c...
+  description:
+    en_US: Nextcloud is a self-hosted file storage and sync platform with powerful collaboration capabilities. It integrates
+      Files, Talk, Groupware, Office, Assistant, and more into a single platform. Self-host it on your own server with Dokploy,
+      which deploys Nextcloud as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Nextcloud
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "33.0.6"
+  update_at: "2026-11-22"
+  website: https://nextcloud.com/
+  repo: https://github.com/nextcloud/docker
+  docs: https://docs.nextcloud.com/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (fix-nextcloud.sh). Review
+        environment variables before starting.

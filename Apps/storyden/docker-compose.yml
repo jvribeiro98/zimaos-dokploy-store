@@ -1,0 +1,43 @@
+name: storyden
+services:
+  storyden:
+    image: ghcr.io/southclaws/storyden:latest
+    expose:
+    - 8000
+    volumes:
+    - storyden_data:/storyden/data
+    environment:
+      PUBLIC_WEB_ADDRESS: http://localhost
+      PUBLIC_API_ADDRESS: http://localhost
+    restart: unless-stopped
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  storyden_data: null
+x-casaos:
+  id: com.dokploy.storyden
+  main: storyden
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/storyden/icon.png
+  title:
+    en_US: Storyden
+  tagline:
+    en_US: With a fresh new take on traditional bulletin board forum software, Storyden is a moder...
+  description:
+    en_US: With a fresh new take on traditional bulletin board forum software, Storyden is a modern, secure and extensible
+      platform for building communities.
+  author: Dokploy Community
+  developer: Storyden
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.storyden.org/
+  repo: https://github.com/Southclaws/storyden
+  docs: https://www.storyden.org/docs/introduction

@@ -1,0 +1,69 @@
+name: registry
+services:
+  registry:
+    image: registry:3
+    restart: unless-stopped
+    environment:
+    - USERNAME=admin
+    - PASSWORD=kgomobx6Zd8atFJ7RJR8yMmrcqdmUwtM
+    - REGISTRY_AUTH=htpasswd
+    - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
+    - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password
+    - REGISTRY_HTTP_RELATIVEURLS=true
+    entrypoint:
+    - sh
+    - /entrypoint.sh
+    volumes:
+    - registry-data:/var/lib/registry
+    - type: bind
+      source: /DATA/AppData/$AppID/entrypoint.sh
+      target: /entrypoint.sh
+    - type: bind
+      source: /DATA/AppData/$AppID/config.yml
+      target: /etc/docker/registry/config.yml
+    expose:
+    - 5000
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - --spider
+      - http://localhost:5000/
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+volumes:
+  registry-data: null
+x-casaos:
+  id: com.dokploy.registry
+  main: registry
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/registry/icon.png
+  title:
+    en_US: Docker Registry
+  tagline:
+    en_US: Distribution implementation for storing and distributing of Docker container images and...
+  description:
+    en_US: Distribution implementation for storing and distributing of Docker container images and artifacts.
+  author: Dokploy Community
+  developer: Docker Registry
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2"
+  update_at: "2026-11-22"
+  website: https://hub.docker.com/_/registry
+  repo: https://github.com/distribution/distribution
+  docs: https://distribution.github.io/distribution/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./config.yml, ./entrypoint.sh).
+        Review environment variables before starting.

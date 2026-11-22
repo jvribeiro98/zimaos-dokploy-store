@@ -1,0 +1,40 @@
+name: qui
+services:
+  qui:
+    image: ghcr.io/autobrr/qui:latest
+    restart: unless-stopped
+    expose:
+    - '7476'
+    volumes:
+    - qui-config:/config
+    ports:
+    - target: 7476
+      published: "7476"
+      protocol: tcp
+volumes:
+  qui-config: null
+x-casaos:
+  id: com.dokploy.qui
+  main: qui
+  index: /
+  port_map: "7476"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/qui/icon.png
+  title:
+    en_US: qui
+  tagline:
+    en_US: A fast, modern web interface for qBittorrent
+  description:
+    en_US: A fast, modern web interface for qBittorrent. Manage multiple qBittorrent instances from a single, lightweight
+      application built by autobrr.
+  author: Dokploy Community
+  developer: qui
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://getqui.com
+  repo: https://github.com/autobrr/qui
+  docs: https://getqui.com

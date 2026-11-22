@@ -1,0 +1,73 @@
+name: typebot
+services:
+  typebot-db:
+    image: postgres:14-alpine
+    restart: always
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: typebot
+      POSTGRES_DB: typebot
+      POSTGRES_PASSWORD: typebot
+  typebot-builder:
+    image: baptistearno/typebot-builder:2.27
+    restart: always
+    depends_on:
+    - typebot-db
+    environment:
+      ENCRYPTION_SECRET: MVJwInlRV62MGjWQpR5+9isEanvYjlih
+      DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
+      NEXTAUTH_URL: http://localhost
+      NEXT_PUBLIC_VIEWER_URL: http://localhost
+      ADMIN_EMAIL: typebot@example.com
+      SMTP_HOST: '''Fill'''
+      SMTP_PORT: '25'
+      NEXT_PUBLIC_SMTP_FROM: typebot@example.com
+      SMTP_USERNAME: '''Fill'''
+      SMTP_PASSWORD: '''Fill'''
+      DEFAULT_WORKSPACE_PLAN: UNLIMITED
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  typebot-viewer:
+    image: baptistearno/typebot-viewer:2.27.0
+    restart: always
+    environment:
+      ENCRYPTION_SECRET: MVJwInlRV62MGjWQpR5+9isEanvYjlih
+      DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
+      NEXTAUTH_URL: http://localhost
+      NEXT_PUBLIC_VIEWER_URL: http://localhost
+      ADMIN_EMAIL: typebot@example.com
+      SMTP_HOST: '''Fill'''
+      SMTP_PORT: '25'
+      NEXT_PUBLIC_SMTP_FROM: typebot@example.com
+      SMTP_USERNAME: '''Fill'''
+      SMTP_PASSWORD: '''Fill'''
+      DEFAULT_WORKSPACE_PLAN: UNLIMITED
+volumes:
+  db-data: null
+x-casaos:
+  id: com.dokploy.typebot
+  main: typebot-builder
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/typebot/icon.svg
+  title:
+    en_US: Typebot
+  tagline:
+    en_US: Typebot is an open-source chatbot builder platform
+  description:
+    en_US: Typebot is an open-source chatbot builder platform.
+  author: Dokploy Community
+  developer: Typebot
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "2.27.0"
+  update_at: "2026-11-22"
+  website: https://typebot.io/
+  repo: https://github.com/baptisteArno/typebot.io
+  docs: https://docs.typebot.io/get-started/introduction

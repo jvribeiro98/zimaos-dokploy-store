@@ -1,0 +1,101 @@
+name: argilla
+services:
+  argilla-web:
+    image: argilla/argilla-server:latest
+    restart: unless-stopped
+    expose:
+    - 6900
+    environment:
+    - ARGILLA_HOME_PATH=/var/lib/argilla
+    - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:Q2j3YaBhjXFrzjD5@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:TW2RIA5RlE1EMZ79@argilla-redis:6379/0
+    - USERNAME=admin
+    - PASSWORD=rghGNyYX
+    - API_KEY=argilla.apikey
+    - WORKSPACE=default
+    volumes:
+    - argilladata:/var/lib/argilla
+    depends_on:
+    - argilla-elasticsearch
+    - argilla-db
+    - argilla-redis
+    ports:
+    - target: 6900
+      published: "6900"
+      protocol: tcp
+  argilla-worker:
+    image: argilla/argilla-server:latest
+    restart: unless-stopped
+    environment:
+    - BACKGROUND_NUM_WORKERS=2
+    - ARGILLA_HOME_PATH=/var/lib/argilla
+    - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:Q2j3YaBhjXFrzjD5@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:TW2RIA5RlE1EMZ79@argilla-redis:6379/0
+    volumes:
+    - argilladata:/var/lib/argilla
+    command: python -m argilla_server worker --num-workers ${BACKGROUND_NUM_WORKERS}
+    depends_on:
+    - argilla-elasticsearch
+    - argilla-db
+    - argilla-redis
+  argilla-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+    restart: unless-stopped
+    environment:
+    - node.name=elasticsearch
+    - cluster.name=es-argilla-local
+    - discovery.type=single-node
+    - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    - cluster.routing.allocation.disk.threshold_enabled=false
+    - xpack.security.enabled=false
+    volumes:
+    - elasticdata:/usr/share/elasticsearch/data
+  argilla-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=Q2j3YaBhjXFrzjD5
+    - POSTGRES_DB=argilla
+    volumes:
+    - dbdata:/var/lib/postgresql/data
+  argilla-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    environment:
+    - REDIS_PASSWORD=TW2RIA5RlE1EMZ79
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+    - redisdata:/data
+volumes:
+  argilladata: {}
+  elasticdata: {}
+  dbdata: {}
+  redisdata: {}
+x-casaos:
+  id: com.dokploy.argilla
+  main: argilla-web
+  index: /
+  port_map: "6900"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/argilla/icon.svg
+  title:
+    en_US: Argilla
+  tagline:
+    en_US: Argilla is a robust platform designed to help engineers and data scientists streamline...
+  description:
+    en_US: Argilla is a robust platform designed to help engineers and data scientists streamline the management of machine
+      learning data workflows. It simplifies tasks like data labeling, annotation, and quality control.
+  author: Dokploy Community
+  developer: Argilla
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.argilla.io/
+  repo: https://github.com/argilla-io/argilla
+  docs: https://docs.argilla.io/

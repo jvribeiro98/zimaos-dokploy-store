@@ -1,0 +1,51 @@
+name: commento
+services:
+  commento:
+    image: registry.gitlab.com/commento/commento:v1.8.0
+    expose:
+    - '8080'
+    environment:
+    - COMMENTO_ORIGIN=http://localhost
+    - COMMENTO_POSTGRES=postgres://postgres:BFS99Op9jhmv3nr0@postgres:5432/postgres?sslmode=disable
+    depends_on:
+    - postgres
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  postgres:
+    image: postgres:11
+    environment:
+    - POSTGRES_PASSWORD=BFS99Op9jhmv3nr0
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.commento
+  main: commento
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/commento/icon.png
+  title:
+    en_US: Commento
+  tagline:
+    en_US: Commento is a comments widget designed to enhance the interaction on your website
+  description:
+    en_US: Commento is a comments widget designed to enhance the interaction on your website. It allows your readers to contribute
+      to the discussion by upvoting comments that add value and downvoting those that don't. The widget supports markdown
+      formatting and provides moderation tools to manage conversations.
+  author: Dokploy Community
+  developer: Commento
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.0"
+  update_at: "2026-11-22"
+  website: https://commento.io/
+  repo: https://github.com/souramoo/commentoplusplus
+  docs: https://commento.io/

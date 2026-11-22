@@ -1,0 +1,62 @@
+name: leantime
+services:
+  leantime:
+    image: leantime/leantime:latest
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - LEAN_APP_URL=http://localhost
+    - LEAN_SESSION_PASSWORD=MjSRKlKjxhSBTB1KYFxcTEMeIeF5KCm9
+    - LEAN_DB_HOST=db
+    - LEAN_DB_USER=leantime
+    - LEAN_DB_PASSWORD=rZuDA4NFcTrMB5Mc
+    - LEAN_DB_DATABASE=leantime
+    volumes:
+    - leantime-files:/var/www/html/userfiles
+    - leantime-public:/var/www/html/public/userfiles
+    depends_on:
+    - db
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=PfNeLC8D93Uuhu30
+    - MYSQL_DATABASE=leantime
+    - MYSQL_USER=leantime
+    - MYSQL_PASSWORD=rZuDA4NFcTrMB5Mc
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - db-data:/var/lib/mysql
+volumes:
+  leantime-files: {}
+  leantime-public: {}
+  db-data: {}
+x-casaos:
+  id: com.dokploy.leantime
+  main: leantime
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/leantime/icon.png
+  title:
+    en_US: Leantime
+  tagline:
+    en_US: Leantime is an open-source project management system for small teams and startups, buil...
+  description:
+    en_US: Leantime is an open-source project management system for small teams and startups, built with PHP and MySQL.
+  author: Dokploy Community
+  developer: Leantime
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://leantime.io/
+  repo: https://github.com/Leantime/leantime
+  docs: https://docs.leantime.io/

@@ -1,0 +1,41 @@
+name: dokploy-prom-monitoring-extension
+services:
+  dokploy-monitoring:
+    image: dokploy/monitoring:canary
+    restart: unless-stopped
+    env_file:
+    - .env
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - monitoring-data:/app/data
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  monitoring-data: {}
+x-casaos:
+  id: com.dokploy.dokploy-prom-monitoring-extension
+  main: dokploy-monitoring
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dokploy-prom-monitoring-extension/icon.svg
+  title:
+    en_US: Dokploy Prometheus Monitoring Extension
+  tagline:
+    en_US: Dokploy monitoring extension with Prometheus metrics export for external monitoring sys...
+  description:
+    en_US: Dokploy monitoring extension with Prometheus metrics export for external monitoring systems like Grafana Cloud.
+      Tracks server and container metrics with configurable thresholds and alerting.
+  author: Dokploy Community
+  developer: Dokploy Prometheus Monitoring Extension
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "canary"
+  update_at: "2026-11-22"
+  website: https://dokploy.com/
+  repo: https://github.com/Dokploy/dokploy
+  docs: https://docs.dokploy.com/

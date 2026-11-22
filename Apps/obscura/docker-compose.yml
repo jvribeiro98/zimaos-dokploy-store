@@ -1,0 +1,90 @@
+name: obscura
+services:
+  obscura-cdp:
+    image: h4ckf0r0day/obscura:0.2.1
+    restart: unless-stopped
+    command:
+    - serve
+    - --host
+    - 0.0.0.0
+    - --port
+    - '9222'
+    - --stealth
+    - --storage-dir
+    - /data
+    expose:
+    - '9222'
+    volumes:
+    - obscura-data:/data
+  obscura-mcp:
+    image: h4ckf0r0day/obscura:0.2.1
+    restart: unless-stopped
+    command:
+    - mcp
+    - --http
+    - --host
+    - 0.0.0.0
+    - --port
+    - '3000'
+    - --stealth
+    environment:
+      OBSCURA_MCP_ALLOWED_ORIGINS: https://localhost
+    expose:
+    - '3000'
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: unless-stopped
+    environment:
+      OBSCURA_HOST: localhost
+      OBSCURA_API_TOKEN: pzIIzoYRbdW0V7FaVAr5lecNFy6lGQKj08RPUYWItAk7lov8
+    volumes:
+    - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+    - obscura-cdp
+    - obscura-mcp
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - -O
+      - /dev/null
+      - http://127.0.0.1:2019/config/
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  obscura-data: null
+x-casaos:
+  id: com.dokploy.obscura
+  main: caddy
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/obscura/icon.png
+  title:
+    en_US: Obscura Browser
+  tagline:
+    en_US: Headless browser for AI agents with authenticated remote MCP and Chrome DevTools Protoc...
+  description:
+    en_US: Headless browser for AI agents with authenticated remote MCP and Chrome DevTools Protocol endpoints.
+  author: Dokploy Community
+  developer: Obscura Browser
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.1"
+  update_at: "2026-11-22"
+  website: https://github.com/h4ckf0r0day/obscura
+  repo: https://github.com/h4ckf0r0day/obscura
+  docs: https://github.com/h4ckf0r0day/obscura/blob/master/docs/Use-the-MCP-server.md
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (Caddyfile). Review environment
+        variables before starting.

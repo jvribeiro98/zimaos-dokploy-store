@@ -1,0 +1,81 @@
+name: cachkey
+services:
+  cachkey:
+    image: ghcr.io/joyboy-dy/cachkey-web:0.2.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      APP_URL: http://localhost
+      API_INTERNAL_URL: http://cachkey-api:3001
+    depends_on:
+      cachkey-api:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  cachkey-api:
+    image: ghcr.io/joyboy-dy/cachkey-api:0.2.0
+    restart: unless-stopped
+    expose:
+    - 3001
+    environment:
+      APP_URL: http://localhost
+      DATABASE_URL: postgresql://cachkey:40e30db8d07fd414f7c3060cf1ccd6a93a6534a1ab02bbeb32b832847cc8deb0@postgres:5432/cachkey
+      BETTER_AUTH_SECRET: 9bxVZUU9eJ/YCyFz/PljzGuPfrXhCQQV5ZY2UYcf4Z6Nzqdbur7f3R8QoWfs1Y1Y
+      ENCRYPTION_KEY: PJ/RVpWFGHLOl+9J8Xp2S+l54gc8oJTzclyYcUczdQY=
+      EMAIL_PROVIDER: smtp
+      EMAIL_FROM: Cachkey <no-reply@example.com>
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_SECURE: 'false'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      RESEND_API_KEY: ''
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cachkey
+      POSTGRES_PASSWORD: 40e30db8d07fd414f7c3060cf1ccd6a93a6534a1ab02bbeb32b832847cc8deb0
+      POSTGRES_DB: cachkey
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U cachkey -d cachkey
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  postgres-data: {}
+x-casaos:
+  id: com.dokploy.cachkey
+  main: cachkey
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cachkey/icon.svg
+  title:
+    en_US: Cachkey
+  tagline:
+    en_US: 'Cachkey is an open-source, self-hosted manager for secrets and environment variables: e...'
+  description:
+    en_US: 'Cachkey is an open-source, self-hosted manager for secrets and environment variables: encrypted values, per-environment
+      access for your team, a CLI and a read-only API for servers and CI.'
+  author: Dokploy Community
+  developer: Cachkey
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.0"
+  update_at: "2026-11-22"
+  website: https://github.com/Joyboy-dy/cachkey
+  repo: https://github.com/Joyboy-dy/cachkey
+  docs: https://github.com/Joyboy-dy/cachkey/tree/main/docs

@@ -1,0 +1,44 @@
+name: anythingllm
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm:latest
+    restart: unless-stopped
+    expose:
+    - 3001
+    environment:
+    - STORAGE_DIR=/app/server/storage
+    volumes:
+    - storage:/app/server/storage
+    cap_add:
+    - SYS_ADMIN
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  storage: {}
+x-casaos:
+  id: com.dokploy.anythingllm
+  main: anythingllm
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/anythingllm/icon.png
+  title:
+    en_US: AnythingLLM
+  tagline:
+    en_US: AnythingLLM is a private AI chat app for working with your own documents
+  description:
+    en_US: AnythingLLM is a private AI chat app for working with your own documents. Self-host it on your own server with
+      Dokploy, which deploys AnythingLLM as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: AnythingLLM
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://anythingllm.com/
+  repo: https://github.com/Mintplex-Labs/anything-llm
+  docs: https://docs.anythingllm.com/

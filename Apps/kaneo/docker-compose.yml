@@ -1,0 +1,75 @@
+name: kaneo
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kaneo
+      POSTGRES_USER: kaneo
+      POSTGRES_PASSWORD: ehruhYukz5dXl1SnmaG6hzZ84PRCHuYe
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  kaneo:
+    image: ghcr.io/usekaneo/kaneo:2.35.0
+    environment:
+      KANEO_CLIENT_URL: http://localhost
+      AUTH_SECRET: fca3fb4846be4f53bb908f852a68908a284c19604a291d8312ba82e243f787f49525c326a573f4b1c5f97302015a8784df66ab7f6c64123178ef62b0e1833a53
+      DATABASE_URL: postgresql://kaneo:ehruhYukz5dXl1SnmaG6hzZ84PRCHuYe@postgres:5432/kaneo
+    expose:
+    - 5173
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -Y
+      - 'off'
+      - --no-verbose
+      - --tries=1
+      - --spider
+      - http://127.0.0.1:5173/api/health
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+    ports:
+    - target: 5173
+      published: "5173"
+      protocol: tcp
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.kaneo
+  main: kaneo
+  index: /
+  port_map: "5173"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kaneo/icon.png
+  title:
+    en_US: Kaneo
+  tagline:
+    en_US: Kaneo - an open source project management platform focused on simplicity and efficiency
+  description:
+    en_US: Kaneo - an open source project management platform focused on simplicity and efficiency. Self-host it, customize
+      it, make it yours.
+  author: Dokploy Community
+  developer: Kaneo
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.35.0"
+  update_at: "2026-11-22"
+  website: https://kaneo.app/
+  repo: https://github.com/usekaneo/kaneo
+  docs: https://kaneo.app/docs/

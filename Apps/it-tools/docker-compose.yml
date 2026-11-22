@@ -1,0 +1,42 @@
+name: it-tools
+services:
+  it-tools:
+    image: corentinth/it-tools:latest
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://127.0.0.1:80
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.it-tools
+  main: it-tools
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/it-tools/icon.svg
+  title:
+    en_US: IT Tools
+  tagline:
+    en_US: A collection of handy online it-tools for developers
+  description:
+    en_US: A collection of handy online it-tools for developers.
+  author: Dokploy Community
+  developer: IT Tools
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://it-tools.tech
+  repo: https://github.com/CorentinTh/it-tools
+  docs: https://it-tools.tech/docs

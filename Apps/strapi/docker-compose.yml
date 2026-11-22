@@ -1,0 +1,84 @@
+name: strapi
+services:
+  strapi:
+    image: elestio/strapi-production:v5.33.0
+    environment:
+      NODE_ENV: production
+      STRAPI_TELEMETRY_DISABLED: 'True'
+      STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE: en
+      FAST_REFRESH: 'True'
+      JWT_SECRET: NgR1K4yI8dfunYlVTNosfxRHCufgsUaV
+      ADMIN_JWT_SECRET: nOikKUt1WevW2o2LcBak7uPS1i1Uq56y
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: strapi_postgres
+      DATABASE_PORT: '5432'
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: 8Zhxx2JT61Onx9JCe7gNI9hJAND5cjp4
+    volumes:
+    - strapi_data:/srv/app
+    expose:
+    - 1337
+    depends_on:
+    - strapi_postgres
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - --spider
+      - http://127.0.0.1:1337
+      start_period: 3s
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    ports:
+    - target: 1337
+      published: "1337"
+      protocol: tcp
+  strapi_postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: 8Zhxx2JT61Onx9JCe7gNI9hJAND5cjp4
+    volumes:
+    - strapi_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      start_period: 3s
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  strapi_data: null
+  strapi_postgres_data: null
+x-casaos:
+  id: com.dokploy.strapi
+  main: strapi
+  index: /
+  port_map: "1337"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/strapi/icon.svg
+  title:
+    en_US: Strapi
+  tagline:
+    en_US: Strapi is an open-source headless CMS for building APIs and managing content
+  description:
+    en_US: Strapi is an open-source headless CMS for building APIs and managing content. Self-host it on your own server with
+      Dokploy, which deploys Strapi as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Strapi
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "5.33.0"
+  update_at: "2026-11-22"
+  website: https://strapi.io
+  repo: https://github.com/strapi/strapi
+  docs: https://docs.strapi.io

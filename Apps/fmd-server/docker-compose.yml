@@ -1,0 +1,53 @@
+name: fmd-server
+services:
+  fmd-server:
+    image: registry.gitlab.com/fmd-foss/fmd-server:0.16.0
+    expose:
+    - 8080
+    environment:
+    - FMD_REGISTRATIONTOKEN=sz3bkUt2fckDtin6okS7cHEWfMVenLrG
+    - FMD_USERIDLENGTH=5
+    - FMD_MAXSAVEDLOC=1000
+    - FMD_MAXSAVEDPIC=10
+    volumes:
+    - fmd-server-data:/var/lib/fmd-server/db/
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080'
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+      start_interval: 3s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  fmd-server-data: null
+x-casaos:
+  id: com.dokploy.fmd-server
+  main: fmd-server
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/fmd-server/icon.svg
+  title:
+    en_US: FMD Server
+  tagline:
+    en_US: A server to communicate with the FMD Android app, to locate and control your devices
+  description:
+    en_US: A server to communicate with the FMD Android app, to locate and control your devices.
+  author: Dokploy Community
+  developer: FMD Server
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.16.0"
+  update_at: "2026-11-22"
+  website: https://fmd-foss.org
+  repo: https://gitlab.com/fmd-foss/fmd-server
+  docs: https://fmd-foss.org/docs/fmd-server/overview

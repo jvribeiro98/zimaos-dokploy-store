@@ -1,0 +1,35 @@
+name: bentopdf
+services:
+  bentopdf:
+    image: ghcr.io/alam00000/bentopdf-simple:sha-72d20bb
+    restart: unless-stopped
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.bentopdf
+  main: bentopdf
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bentopdf/icon.png
+  title:
+    en_US: BentoPDF
+  tagline:
+    en_US: BentoPDF is a lightweight PDF conversion microservice that exposes a simple HTTP API fo...
+  description:
+    en_US: BentoPDF is a lightweight PDF conversion microservice that exposes a simple HTTP API for generating PDFs.
+  author: Dokploy Community
+  developer: BentoPDF
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "sha-72d20bb"
+  update_at: "2026-11-22"
+  website: https://bentopdf.com/
+  repo: https://github.com/alam00000/bentopdf/
+  docs: https://www.bentopdf.com/docs/

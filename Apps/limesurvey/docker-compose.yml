@@ -1,0 +1,66 @@
+name: limesurvey
+services:
+  db:
+    image: mariadb:10.11
+    restart: always
+    volumes:
+    - db_data:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=Sq2GYV2bQcyfX22birMzhs4bO0rqzN6j
+    - MYSQL_DATABASE=limesurvey
+    - MYSQL_USER=limesurvey
+    - MYSQL_PASSWORD=rC0gK1QOaMhMTCoLjONGw9cnX6EOCqfp
+  limesurvey:
+    image: martialblog/limesurvey:latest
+    restart: always
+    volumes:
+    - limesurvey_upload:/var/www/html/upload
+    environment:
+    - ADMIN_EMAIL=admin@example.com
+    - ADMIN_NAME=Admin
+    - ADMIN_USER=admin
+    - ADMIN_PASSWORD=24snC5FNlmfv4zC3cC2QiFVSNXeZybK0
+    - DB_HOST=db
+    - DB_MYSQL_ENGINE=InnoDB
+    - DB_NAME=limesurvey
+    - DB_PASSWORD=rC0gK1QOaMhMTCoLjONGw9cnX6EOCqfp
+    - DB_USERNAME=limesurvey
+    - DEBUG=0
+    - DEBUG_SQL=0
+    - PUBLIC_URL=http://localhost
+    - SHOW_SCRIPT_NAME=false
+    - URL_FORMAT=path
+    depends_on:
+    - db
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  db_data: null
+  limesurvey_upload: null
+x-casaos:
+  id: com.dokploy.limesurvey
+  main: limesurvey
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/limesurvey/icon.svg
+  title:
+    en_US: LimeSurvey
+  tagline:
+    en_US: LimeSurvey is an open-source research platform for building and running online surveys
+  description:
+    en_US: LimeSurvey is an open-source research platform for building and running online surveys. Self-host it on your own
+      server with Dokploy, which deploys LimeSurvey as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: LimeSurvey
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "6.17.2+260507"
+  update_at: "2026-11-22"
+  website: https://www.limesurvey.org
+  repo: https://github.com/LimeSurvey/LimeSurvey
+  docs: https://www.limesurvey.org/manual/

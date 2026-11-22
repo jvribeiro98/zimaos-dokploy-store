@@ -1,0 +1,69 @@
+name: heyform
+services:
+  heyform:
+    image: heyform/community-edition:v0.1.0
+    restart: always
+    volumes:
+    - heyform-data:/app/static/upload
+    depends_on:
+    - mongo
+    - keydb
+    expose:
+    - 8000
+    env_file:
+    - .env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/heyform
+      REDIS_HOST: keydb
+      REDIS_PORT: '6379'
+      SMTP_FROM: HeyForm <noreply@localhost>
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_SECURE: 'false'
+      SMTP_IGNORE_CERT: 'false'
+      SMTP_PASSWORD: ''
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  mongo:
+    image: percona/percona-server-mongodb:4.4
+    restart: always
+    volumes:
+    - mongo-data:/data/db
+  keydb:
+    image: eqalpha/keydb:alpine
+    restart: always
+    command: keydb-server --appendonly yes --protected-mode no
+    volumes:
+    - keydb-data:/data
+volumes:
+  heyform-data: null
+  mongo-data: null
+  keydb-data: null
+x-casaos:
+  id: com.dokploy.heyform
+  main: heyform
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/heyform/icon.svg
+  title:
+    en_US: HeyForm
+  tagline:
+    en_US: Allows anyone to create engaging conversational forms for surveys, questionnaires, quiz...
+  description:
+    en_US: Allows anyone to create engaging conversational forms for surveys, questionnaires, quizzes, and polls. No coding
+      skills required.
+  author: Dokploy Community
+  developer: HeyForm
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.0"
+  update_at: "2026-11-22"
+  website: https://heyform.net
+  repo: https://github.com/heyform/heyform
+  docs: https://docs.heyform.net

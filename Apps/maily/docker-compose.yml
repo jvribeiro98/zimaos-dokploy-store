@@ -1,0 +1,43 @@
+name: maily
+services:
+  maily:
+    image: ghcr.io/stormsia/maily:0.9.1
+    restart: unless-stopped
+    expose:
+    - 8477
+    environment:
+      MAILY_PORT: '8477'
+      MAILY_API_KEY: W2L8Goi6LlJ9I0HcjMLL3Sy6ZKDvGTFH
+      MAILY_SECRET_KEY: ''
+    volumes:
+    - maily_data:/data
+    ports:
+    - target: 8477
+      published: "8477"
+      protocol: tcp
+volumes:
+  maily_data: null
+x-casaos:
+  id: com.dokploy.maily
+  main: maily
+  index: /
+  port_map: "8477"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/maily/icon.svg
+  title:
+    en_US: Maily
+  tagline:
+    en_US: Temporary email REST API gateway with multi-provider rotation, real-time SSE streaming,...
+  description:
+    en_US: Temporary email REST API gateway with multi-provider rotation, real-time SSE streaming, and persistent storage.
+  author: Dokploy Community
+  developer: Maily
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.9.1"
+  update_at: "2026-11-22"
+  website: https://github.com/stormsia/maily
+  repo: https://github.com/stormsia/maily
+  docs: https://github.com/stormsia/maily#readme

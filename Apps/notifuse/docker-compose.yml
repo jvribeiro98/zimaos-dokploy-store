@@ -1,0 +1,83 @@
+name: notifuse
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  notifuse:
+    image: notifuse/notifuse:latest
+    restart: unless-stopped
+    depends_on:
+    - db
+    environment:
+      ROOT_EMAIL: admin@example.com
+      API_ENDPOINT: https://localhost
+      DB_HOST: db
+      DB_PORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_PREFIX: notifuse
+      DB_NAME: postgres
+      DB_SSLMODE: disable
+      SECRET_KEY: Ie/Ydeix+IGJmJ73k8R8OZ7hdSa40eIY1T96blLORQTVHm6t6J7DZoWYdoU7dHhWQDQ6ZD+2Lk0sPPPJW1fnYg==
+      SERVER_PORT: '8080'
+      SERVER_HOST: 0.0.0.0
+      ENVIRONMENT: production
+    volumes:
+    - notifuse_data:/app/data
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --no-verbose
+      - --tries=1
+      - --spider
+      - http://localhost:8080/healthz
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  db_data: {}
+  notifuse_data: {}
+x-casaos:
+  id: com.dokploy.notifuse
+  main: notifuse
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/notifuse/icon.png
+  title:
+    en_US: Notifuse
+  tagline:
+    en_US: Open-source newsletter and notification platform that empowers teams to create, send, a...
+  description:
+    en_US: Open-source newsletter and notification platform that empowers teams to create, send, and track communications
+      at scale.
+  author: Dokploy Community
+  developer: Notifuse
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://notifuse.com/
+  repo: https://github.com/notifuse/notifuse
+  docs: https://docs.notifuse.com/

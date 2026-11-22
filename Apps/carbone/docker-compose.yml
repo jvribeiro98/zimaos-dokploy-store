@@ -1,0 +1,43 @@
+name: carbone
+services:
+  carbone:
+    image: carbone/carbone-ee:full-4.25.5
+    restart: unless-stopped
+    environment:
+    - CARBONE_EE_LICENSE=HPGqiKriuKPZd10fITIaPm4rTzlMGkr6
+    - CARBONE_EE_STUDIO=true
+    expose:
+    - 4000
+    volumes:
+    - template:/app/template
+    ports:
+    - target: 4000
+      published: "4000"
+      protocol: tcp
+volumes:
+  template: null
+x-casaos:
+  id: com.dokploy.carbone
+  main: carbone
+  index: /
+  port_map: "4000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/carbone/icon.png
+  title:
+    en_US: Carbone
+  tagline:
+    en_US: Carbone is a high-performance, self-hosted document generation engine
+  description:
+    en_US: Carbone is a high-performance, self-hosted document generation engine. It allows you to generate reports, invoices,
+      and documents in various formats (e.g., PDF, DOCX, XLSX) using JSON data and template-based rendering.
+  author: Dokploy Community
+  developer: Carbone
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "4.25.5"
+  update_at: "2026-11-22"
+  website: https://carbone.io/
+  repo: https://github.com/carboneio/carbone
+  docs: https://carbone.io/documentation/design/overview/getting-started.html

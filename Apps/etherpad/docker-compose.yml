@@ -1,0 +1,67 @@
+name: etherpad
+services:
+  app:
+    user: 0:0
+    image: etherpad/etherpad:latest
+    tty: true
+    stdin_open: true
+    volumes:
+    - /DATA/AppData/$AppID/plugins:/opt/etherpad-lite/src/plugin_packages
+    - /DATA/AppData/$AppID/etherpad_var:/opt/etherpad-lite/var
+    depends_on:
+    - postgres
+    environment:
+      NODE_ENV: production
+      ADMIN_PASSWORD: OOLtUq0wnnAQ4GAoRY5B7Nm7I2DAfC54
+      DB_CHARSET: utf8mb4
+      DB_HOST: postgres
+      DB_NAME: etherpad
+      DB_PASS: QLC2u9z0aUzZMV33q5ltYxK5nzBIiZh5
+      DB_PORT: '5432'
+      DB_TYPE: postgres
+      DB_USER: admin
+      DEFAULT_PAD_TEXT: ' '
+      DISABLE_IP_LOGGING: 'false'
+      SOFFICE: 'null'
+      TRUST_PROXY: 'true'
+    restart: always
+    expose:
+    - 9001
+    ports:
+    - target: 9001
+      published: "9001"
+      protocol: tcp
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: etherpad
+      POSTGRES_PASSWORD: QLC2u9z0aUzZMV33q5ltYxK5nzBIiZh5
+      POSTGRES_USER: admin
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+    - /DATA/AppData/$AppID/postgres_data:/var/lib/postgresql/data/pgdata
+x-casaos:
+  id: com.dokploy.etherpad
+  main: app
+  index: /
+  port_map: "9001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/etherpad/icon.png
+  title:
+    en_US: Etherpad
+  tagline:
+    en_US: Etherpad is a real-time collaborative text editor that allows multiple users to edit do...
+  description:
+    en_US: Etherpad is a real-time collaborative text editor that allows multiple users to edit documents simultaneously.
+  author: Dokploy Community
+  developer: Etherpad
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://etherpad.org/
+  repo: https://github.com/ether/etherpad-lite
+  docs: https://github.com/ether/etherpad-lite/wiki

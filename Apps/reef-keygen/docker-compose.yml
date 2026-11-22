@@ -1,0 +1,60 @@
+name: reef-keygen
+services:
+  reef-keygen:
+    image: anukulpandey/reef-chain-node:latest
+    restart: unless-stopped
+    working_dir: /workspace
+    volumes:
+    - /DATA/AppData/$AppID/output:/output
+    expose:
+    - ${PORT}
+    entrypoint: /bin/sh
+    command: '-c " set -e &&
+
+      echo ''📦 Installing python3...'' && apt-get update && apt-get install -y python3 &&
+
+      mkdir -p /output && chmod -R 777 /output &&
+
+      echo ''====================================='' && echo ''🔑 Generating Validator Keys'' && echo ''=====================================''
+      &&
+
+      reef-node key generate --scheme Sr25519 --output-type json > /output/validator1.json && reef-node key generate-node-key
+      --chain local > /output/v1_node_key.txt &&
+
+      reef-node key generate --scheme Sr25519 --output-type json > /output/validator2.json && reef-node key generate-node-key
+      --chain local > /output/v2_node_key.txt &&
+
+      reef-node key generate --scheme Sr25519 --output-type json > /output/validator3.json && reef-node key generate-node-key
+      --chain local > /output/v3_node_key.txt &&
+
+      echo ''✅ Keys generated:'' && ls -lah /output &&
+
+      echo ''🌐 Starting HTTP server on port ${PORT}'' && cd /output && python3 -m http.server ${PORT} --bind 0.0.0.0"'
+    ports:
+    - target: 48765
+      published: "48765"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.reef-keygen
+  main: reef-keygen
+  index: /
+  port_map: "48765"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/reef-keygen/icon.svg
+  title:
+    en_US: Reef Chain - Keys Generator
+  tagline:
+    en_US: Generates 3 Validators keys for a custom Reef Chain cluster
+  description:
+    en_US: Generates 3 Validators keys for a custom Reef Chain cluster
+  author: Dokploy Community
+  developer: Reef Chain - Keys Generator
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1"
+  update_at: "2026-11-22"
+  website: https://hub.docker.com/repository/docker/anukulpandey/reef-chain-node
+  repo: https://github.com/reef-chain/chain-upgrade
+  docs: https://docs.reef.io/

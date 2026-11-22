@@ -1,0 +1,56 @@
+name: cakephp
+services:
+  cakephp:
+    image: ghcr.io/themusicdev/cakephp-hello:1.0.0
+    restart: unless-stopped
+    depends_on:
+    - mariadb
+    environment:
+    - DEBUG=false
+    - SECURITY_SALT=zDY4axzbLu7aLiXGZH4JJVItkoNse3tH56dMOe+0kXc=
+    - DATABASE_URL=mysql://admin:6OuU8wSfywJOLbhTn5njJBQwWlfxVUKW@mariadb:3306/cakephp?encoding=utf8mb4
+    expose:
+    - 80
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mariadb:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+    - MARIADB_ROOT_PASSWORD=SNEVu7QIeqRIYBsQ2yPfloDT9JKxp3lK
+    - MARIADB_DATABASE=cakephp
+    - MARIADB_USER=admin
+    - MARIADB_PASSWORD=6OuU8wSfywJOLbhTn5njJBQwWlfxVUKW
+    volumes:
+    - mariadb-data:/var/lib/mysql
+    expose:
+    - 3306
+volumes:
+  mariadb-data: null
+x-casaos:
+  id: com.dokploy.cakephp
+  main: cakephp
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cakephp/icon.svg
+  title:
+    en_US: CakePHP 5
+  tagline:
+    en_US: CakePHP 5 starter app running on the themusicdev/php-apache 8
+  description:
+    en_US: CakePHP 5 starter app running on the themusicdev/php-apache 8.5 Apache + PHP runtime image, backed by MariaDB.
+      Fork the starter repo, build your app, and deploy it on Dokploy in a few clicks.
+  author: Dokploy Community
+  developer: CakePHP 5
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://cakephp.org/
+  repo: https://github.com/TheMusicDev/cakephp-hello
+  docs: https://book.cakephp.org/5/en/index.html

@@ -1,0 +1,68 @@
+name: checkmate
+services:
+  server:
+    image: ghcr.io/bluewave-labs/checkmate-backend-mono:latest
+    restart: always
+    expose:
+    - 52345
+    environment:
+    - UPTIME_APP_API_BASE_URL=http://localhost:52345/api/v1
+    - UPTIME_APP_CLIENT_HOST=http://localhost
+    - DB_CONNECTION_STRING=mongodb://mongodb:27017/uptime_db?replicaSet=rs0
+    - REDIS_URL=redis://redis:6379
+    - CLIENT_HOST=http://localhost
+    - JWT_SECRET=0T08h8GirgwoLX0Z8J8PhnIOSjGgk0eG
+    depends_on:
+    - mongodb
+    ports:
+    - target: 52345
+      published: "52345"
+      protocol: tcp
+  mongodb:
+    image: ghcr.io/bluewave-labs/checkmate-mongo:latest
+    restart: always
+    command:
+    - mongod
+    - --quiet
+    - --replSet
+    - rs0
+    - --bind_ip_all
+    volumes:
+    - /DATA/AppData/$AppID/mongo-data:/data/db
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}) }" | mongosh
+        --port 27017 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
+x-casaos:
+  id: com.dokploy.checkmate
+  main: server
+  index: /
+  port_map: "52345"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/checkmate/icon.png
+  title:
+    en_US: Checkmate
+  tagline:
+    en_US: Checkmate is an open-source, self-hosted tool designed to track and monitor server hard...
+  description:
+    en_US: Checkmate is an open-source, self-hosted tool designed to track and monitor server hardware, uptime, response times,
+      and incidents in real-time with beautiful visualizations.
+  author: Dokploy Community
+  developer: Checkmate
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://checkmate.so/
+  repo: https://github.com/bluewave-labs/checkmate
+  docs: https://checkmate.so/docs
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/mongo-data). Review
+        environment variables before starting.

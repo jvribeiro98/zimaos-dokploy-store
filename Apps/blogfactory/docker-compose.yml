@@ -1,0 +1,137 @@
+name: blogfactory
+services:
+  postgres:
+    image: postgres:17.6-alpine3.22
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: blogfactory
+      POSTGRES_USER: blogfactory
+      POSTGRES_PASSWORD: XG1SQmsqXwdvssNb9MOTZEUOaomMjioHK2jV6zfMowaM8DQb
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U blogfactory -d blogfactory
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    restart: unless-stopped
+    command: server /data --console-address :9001
+    environment:
+      MINIO_ROOT_USER: blogfactory
+      MINIO_ROOT_PASSWORD: ipPOCERRiGCzwkUU9NJNp5VMyJLtEQ2BY5V6eNiOuA3OT3AF
+    volumes:
+    - minio-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:9000/minio/health/live
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  api:
+    image: ghcr.io/blogfactoryhq/blogfactory-api:v0.1.0
+    restart: unless-stopped
+    command: sh -c "bun run src/init-s3-bucket.ts && bun run src/db/migrate.ts && exec bun run src/index.ts"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    expose:
+    - 3000
+    environment:
+      NODE_ENV: production
+      PORT: '3000'
+      BLOGFACTORY_SELF_HOSTED: 'true'
+      DATABASE_URL: postgresql://blogfactory:XG1SQmsqXwdvssNb9MOTZEUOaomMjioHK2jV6zfMowaM8DQb@postgres:5432/blogfactory
+      JWT_SECRET: dr5cIWrmiNxf/Or0nefVM4ewrZ1BeWqjDHAAL/m7r6k5zNbpiujzzJTRRBaSzdmP
+      API_KEY_ENCRYPTION_SECRET: bEvpv/7Jm9a5jaqD38xTEVG9BnWX1p8JMtL1vjtxLVokRnKP1ck4tNxcHEFpFoGb
+      ADMIN_EMAILS: admin@example.com
+      BLOGFACTORY_ALLOW_SIGNUP: 'true'
+      CRON_SECRET: 8llQpoAvlTziZ4PRplGLVZPYBdkGMH7Ugh4QQsSJA0Yi9dd5NQ5ZfOFpOLqXbl/+
+      WEB_APP_URL: https://localhost
+      MCP_APP_URL: http://web/mcp-review.html
+      MCP_ALLOWED_ORIGINS: https://localhost
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY_ID: blogfactory
+      S3_SECRET_ACCESS_KEY: ipPOCERRiGCzwkUU9NJNp5VMyJLtEQ2BY5V6eNiOuA3OT3AF
+      S3_BUCKET: blogfactory
+      S3_REGION: us-east-1
+    healthcheck:
+      test:
+      - CMD
+      - bun
+      - -e
+      - fetch('http://localhost:3000/api/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  web:
+    image: ghcr.io/blogfactoryhq/blogfactory-web:v0.1.0
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    expose:
+    - 80
+    environment:
+      API_UPSTREAM: http://api:3000
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - nginx -t >/dev/null 2>&1 && wget -q -O /dev/null http://api:3000/api/ready
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  scheduler:
+    image: curlimages/curl:8.15.0
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      CRON_SECRET: 8llQpoAvlTziZ4PRplGLVZPYBdkGMH7Ugh4QQsSJA0Yi9dd5NQ5ZfOFpOLqXbl/+
+      CRON_INTERVAL_SECONDS: '21600'
+    entrypoint:
+    - /bin/sh
+    - -c
+    command:
+    - 'while true; do curl --fail --silent --show-error --output /dev/null -H "Authorization: Bearer $${CRON_SECRET}" http://api:3000/api/cron/drain
+      && echo "Scheduler drain completed"; sleep "$${CRON_INTERVAL_SECONDS}"; done'
+volumes:
+  postgres-data: null
+  minio-data: null
+x-casaos:
+  id: com.dokploy.blogfactory
+  main: web
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/blogfactory/icon.svg
+  title:
+    en_US: BlogFactory
+  tagline:
+    en_US: Self-hosted control plane for AI-assisted content operations and human-approved CMS dra...
+  description:
+    en_US: Self-hosted control plane for AI-assisted content operations and human-approved CMS draft delivery.
+  author: Dokploy Community
+  developer: BlogFactory
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.0"
+  update_at: "2026-11-22"
+  website: https://blogfactory.io/
+  repo: https://github.com/BlogFactoryHQ/blogfactory
+  docs: https://github.com/BlogFactoryHQ/blogfactory/blob/main/docs/self-hosting.md

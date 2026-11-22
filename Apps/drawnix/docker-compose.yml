@@ -1,0 +1,37 @@
+name: drawnix
+services:
+  drawnix:
+    image: pubuzhixing/drawnix:latest
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.drawnix
+  main: drawnix
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/drawnix/icon.png
+  title:
+    en_US: Drawnix
+  tagline:
+    en_US: Drawnix is an application for generating and managing visual content, powered by pubuzh...
+  description:
+    en_US: Drawnix is an application for generating and managing visual content, powered by pubuzhixing/drawnix Docker image.
+  author: Dokploy Community
+  developer: Drawnix
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://drawnix.com/
+  repo: https://github.com/plait-board/drawnix/
+  docs: https://github.com/plait-board/drawnix/blob/develop/README_en.md#docker
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (app/config.txt). Review
+        environment variables before starting.

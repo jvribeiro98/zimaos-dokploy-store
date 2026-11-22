@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Media",
+    "font": "apps"
+  },
+  {
+    "name": "Productivity",
+    "font": "apps"
+  },
+  {
+    "name": "Home",
+    "font": "apps"
+  },
+  {
+    "name": "Networking",
+    "font": "apps"
+  },
+  {
+    "name": "AI",
+    "font": "apps"
+  },
+  {
+    "name": "Finance",
+    "font": "apps"
+  },
+  {
+    "name": "Social",
+    "font": "apps"
+  },
+  {
+    "name": "Developer",
+    "font": "apps"
+  },
+  {
+    "name": "Others",
+    "font": "apps"
+  }
+]

@@ -1,0 +1,49 @@
+name: flatnotes-totp
+services:
+  flatnotes:
+    image: dullage/flatnotes:latest
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      FLATNOTES_AUTH_TYPE: totp
+      FLATNOTES_USERNAME: admin
+      FLATNOTES_PASSWORD: 5pTrqavLf86ArBD1
+      FLATNOTES_SECRET_KEY: 9r8q4ZQ2NhWpW3w4irfWqw6AgS8b9Alb
+      FLATNOTES_TOTP_KEY: Hw5KfBnKaqYDyD5eK0YLG9yQv1hw2eWH
+      FLATNOTES_SESSION_EXPIRY_DAYS: '30'
+      FLATNOTES_PATH_PREFIX: ''
+    expose:
+    - 8080
+    volumes:
+    - flatnotes-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  flatnotes-data: {}
+x-casaos:
+  id: com.dokploy.flatnotes-totp
+  main: flatnotes
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/flatnotes-totp/icon.png
+  title:
+    en_US: Flatnotes (TOTP)
+  tagline:
+    en_US: Flatnotes with TOTP authentication enabled (username + password + one-time passcode)
+  description:
+    en_US: Flatnotes with TOTP authentication enabled (username + password + one-time passcode).
+  author: Dokploy Community
+  developer: Flatnotes (TOTP)
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://flatnotes.io
+  repo: https://github.com/dullage/flatnotes
+  docs: https://github.com/dullage/flatnotes

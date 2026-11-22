@@ -1,0 +1,38 @@
+name: cup
+services:
+  cup:
+    image: ghcr.io/sergi0g/cup:latest
+    restart: unless-stopped
+    command: serve
+    expose:
+    - '8000'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.cup
+  main: cup
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cup/icon.png
+  title:
+    en_US: Cup
+  tagline:
+    en_US: Cup is a self-hosted Docker container management UI
+  description:
+    en_US: Cup is a self-hosted Docker container management UI.
+  author: Dokploy Community
+  developer: Cup
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://cup.sergi0g.dev/
+  repo: https://github.com/sergi0g/cup
+  docs: https://cup.sergi0g.dev/docs

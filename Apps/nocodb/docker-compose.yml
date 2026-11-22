@@ -1,0 +1,61 @@
+name: nocodb
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    restart: always
+    depends_on:
+      root_db:
+        condition: service_healthy
+    environment:
+      NC_DB: pg://root_db:5432?u=postgres&p=xuZSYsBBOKnag0VWpB3d6FWQYbgYY9e0&d=root_db
+    volumes:
+    - nc_data:/usr/app/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  root_db:
+    image: postgres:16.6
+    restart: always
+    environment:
+      POSTGRES_DB: root_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: xuZSYsBBOKnag0VWpB3d6FWQYbgYY9e0
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -h 127.0.0.1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 10
+    volumes:
+    - db_data:/var/lib/postgresql/data
+volumes:
+  db_data: {}
+  nc_data: {}
+x-casaos:
+  id: com.dokploy.nocodb
+  main: nocodb
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nocodb/icon.png
+  title:
+    en_US: NocoDB
+  tagline:
+    en_US: NocoDB is an open-source alternative to Airtable that turns your database into a smart...
+  description:
+    en_US: NocoDB is an open-source alternative to Airtable that turns your database into a smart spreadsheet. Self-host it
+      on your own server with Dokploy, which deploys NocoDB as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: NocoDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://nocodb.com/
+  repo: https://github.com/nocodb/nocodb
+  docs: https://docs.nocodb.com/

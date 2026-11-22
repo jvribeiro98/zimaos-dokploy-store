@@ -1,0 +1,41 @@
+name: openfault
+services:
+  openfault:
+    image: ghcr.io/openfault/openfault:0.1.0
+    restart: unless-stopped
+    environment:
+    - OPENFAULT_BASE_URL=https://localhost
+    - OPENFAULT_TRUST_PROXY=1
+    - OPENFAULT_SETUP_TOKEN=CPCFAVHO6kX93pIFnhLU9B76hTbGv02u
+    volumes:
+    - openfault-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  openfault-data: {}
+x-casaos:
+  id: com.dokploy.openfault
+  main: openfault
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openfault/icon.svg
+  title:
+    en_US: OpenFault
+  tagline:
+    en_US: Self-hosted, Sentry-compatible error tracker
+  description:
+    en_US: Self-hosted, Sentry-compatible error tracker. One container, SQLite inside, built for coding agents.
+  author: Dokploy Community
+  developer: OpenFault
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.0"
+  update_at: "2026-11-22"
+  website: https://openfault.dev
+  repo: https://github.com/OpenFault/openfault
+  docs: https://openfault.dev/docs/install

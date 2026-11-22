@@ -1,0 +1,35 @@
+name: omni-tools
+services:
+  omni-tools:
+    image: iib0011/omni-tools:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.omni-tools
+  main: omni-tools
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/omni-tools/icon.png
+  title:
+    en_US: Omni-Tools
+  tagline:
+    en_US: Omni-Tools is a collection of useful tools in a single self-hosted web application
+  description:
+    en_US: Omni-Tools is a collection of useful tools in a single self-hosted web application.
+  author: Dokploy Community
+  developer: Omni-Tools
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/iib0011/omni-tools
+  repo: https://github.com/iib0011/omni-tools
+  docs: https://github.com/iib0011/omni-tools

@@ -1,0 +1,59 @@
+name: databasement
+services:
+  databasement:
+    image: davidcrty/databasement:1.8.4
+    restart: unless-stopped
+    expose:
+    - 2226
+    environment:
+    - APP_KEY=base64:N4Bfub2k1mFdivnWD2imq0cW4ar697MVrzxKAKZFqho=
+    - APP_URL=https://localhost
+    - DB_CONNECTION=sqlite
+    - DB_DATABASE=/data/database.sqlite
+    - ENABLE_QUEUE_WORKER=true
+    - TRUSTED_PROXIES=*
+    - LOG_CHANNEL=stderr
+    - APP_DISPLAY_TIMEZONE=UTC
+    volumes:
+    - databasement-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:2226/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    ports:
+    - target: 2226
+      published: "2226"
+      protocol: tcp
+volumes:
+  databasement-data: null
+x-casaos:
+  id: com.dokploy.databasement
+  main: databasement
+  index: /
+  port_map: "2226"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/databasement/icon.png
+  title:
+    en_US: Databasement
+  tagline:
+    en_US: Self-hosted database backup manager with a web UI
+  description:
+    en_US: Self-hosted database backup manager with a web UI. Schedule, backup, and restore MySQL, PostgreSQL, MariaDB, Microsoft
+      SQL Server, MongoDB, SQLite, Firebird and Redis to S3, SFTP, Samba or local storage. SSH tunnel support.
+  author: Dokploy Community
+  developer: Databasement
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.4"
+  update_at: "2026-11-22"
+  website: https://david-crty.github.io/databasement/
+  repo: https://github.com/David-Crty/databasement
+  docs: https://david-crty.github.io/databasement/self-hosting/docker

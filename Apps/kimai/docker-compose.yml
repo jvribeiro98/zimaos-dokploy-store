@@ -1,0 +1,80 @@
+name: kimai
+services:
+  app:
+    image: kimai/kimai2:apache-2.31.0
+    restart: unless-stopped
+    environment:
+      APP_ENV: prod
+      DATABASE_URL: mysql://kimai:avQv2AvTsFmPLTGuCpp9GuM2C0rjrMam@db/kimai
+      TRUSTED_PROXIES: localhost
+      APP_SECRET: TunuGNCj9iBHdQcKNnoGSqFYJyWpDbRi
+      MAILER_FROM: ${KI_MAILER_FROM:-admin@kimai.local}
+      MAILER_URL: ${KI_MAILER_URL:-null://null}
+      ADMINMAIL: admin@kimai.local
+      ADMINPASS: IM73dAycHUBh6XsrRP2qPFQw9NvyqIlz
+    volumes:
+    - kimai-data:/opt/kimai/var
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 8001
+      published: "8001"
+      protocol: tcp
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+    - MYSQL_DATABASE=kimai
+    - MYSQL_USER=kimai
+    - MYSQL_PASSWORD=avQv2AvTsFmPLTGuCpp9GuM2C0rjrMam
+    - MYSQL_ROOT_PASSWORD=XBxP3I34x2cPYzvLxVLucs1ADAt542cD
+    volumes:
+    - mysql-data:/var/lib/mysql
+    command:
+    - --character-set-server=utf8mb4
+    - --collation-server=utf8mb4_unicode_ci
+    - --innodb-buffer-pool-size=256M
+    - --innodb-flush-log-at-trx-commit=2
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      - -u
+      - kimai
+      - -p${KI_MYSQL_PASSWORD}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  kimai-data: null
+  mysql-data: null
+x-casaos:
+  id: com.dokploy.kimai
+  main: app
+  index: /
+  port_map: "8001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kimai/icon.svg
+  title:
+    en_US: Kimai
+  tagline:
+    en_US: Kimai is a time-tracking app for freelancers and teams
+  description:
+    en_US: Kimai is a time-tracking app for freelancers and teams. Self-host it on your own server with Dokploy, which deploys
+      Kimai as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Kimai
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "2.31.0"
+  update_at: "2026-11-22"
+  website: https://www.kimai.org
+  repo: https://github.com/kimai/kimai
+  docs: https://www.kimai.org/documentation

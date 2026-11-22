@@ -1,0 +1,44 @@
+name: code-server
+services:
+  code-server:
+    image: codercom/code-server:4.121.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    volumes:
+    - code-server-home:/home/coder
+    environment:
+    - PASSWORD=dO279dTQJ2wETvno9v4qMQdIRrJw3ILA
+    - TZ=UTC
+    user: 1000:1000
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  code-server-home: null
+x-casaos:
+  id: com.dokploy.code-server
+  main: code-server
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/code-server/icon.png
+  title:
+    en_US: code-server
+  tagline:
+    en_US: code-server is a version of VS Code that runs in your browser
+  description:
+    en_US: code-server is a version of VS Code that runs in your browser. Self-host it on your own server with Dokploy, which
+      deploys code-server as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: code-server
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "4.121.0"
+  update_at: "2026-11-22"
+  website: https://coder.com/docs/code-server
+  repo: https://github.com/coder/code-server
+  docs: https://coder.com/docs/code-server

@@ -1,0 +1,58 @@
+name: cockpit
+services:
+  cockpit:
+    image: cockpithq/cockpit:core-2.11.0
+    expose:
+    - '80'
+    environment:
+    - COCKPIT_SESSION_NAME=cockpit
+    - COCKPIT_SALT=NmgbYRXrfb1rB132DD9qZ8oB3waSNNPo
+    - COCKPIT_DATABASE_SERVER=mongodb://mongo:jFcuXLFVG5TLbCSS@mongo:27017
+    - COCKPIT_DATABASE_NAME=cockpit
+    volumes:
+    - config:/var/www/html/config
+    - storage:/var/www/html/storage
+    depends_on:
+    - mongo
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mongo:
+    image: mongo:4
+    environment:
+    - MONGO_INITDB_ROOT_PASSWORD=jFcuXLFVG5TLbCSS
+    - MONGO_INITDB_ROOT_USERNAME=mongo
+    volumes:
+    - mongo-data:/data/db
+    restart: unless-stopped
+volumes:
+  config: null
+  storage: null
+  mongo-data: null
+x-casaos:
+  id: com.dokploy.cockpit
+  main: cockpit
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cockpit/icon.png
+  title:
+    en_US: Cockpit
+  tagline:
+    en_US: Cockpit is a headless content platform designed to streamline the creation, connection,...
+  description:
+    en_US: Cockpit is a headless content platform designed to streamline the creation, connection, and delivery of content
+      for creators, marketers, and developers. It is built with an API-first approach, enabling limitless digital solutions.
+  author: Dokploy Community
+  developer: Cockpit
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "core-2.11.0"
+  update_at: "2026-11-22"
+  website: https://getcockpit.com
+  repo: https://github.com/Cockpit-HQ
+  docs: https://getcockpit.com/documentation

@@ -1,0 +1,44 @@
+name: mumble
+services:
+  mumble-server:
+    image: mumblevoip/mumble-server:latest
+    restart: unless-stopped
+    expose:
+    - 64738
+    - 64738/udp
+    volumes:
+    - mumble-data:/data
+    environment:
+    - MUMBLE_SUPERUSER_PASSWORD=7Z9lYgGCLtQnBb0KksysRwaN52eB3dZa
+    - MUMBLE_CONFIG_WELCOMETEXT=Welcome to Mumble Server! Low-latency voice chat.
+    - MUMBLE_CONFIG_USERS=50
+    ports:
+    - target: 64738
+      published: "64738"
+      protocol: tcp
+volumes:
+  mumble-data: null
+x-casaos:
+  id: com.dokploy.mumble
+  main: mumble-server
+  index: /
+  port_map: "64738"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mumble/icon.png
+  title:
+    en_US: Mumble
+  tagline:
+    en_US: Mumble is an open-source, low-latency, high-quality voice chat software primarily inten...
+  description:
+    en_US: Mumble is an open-source, low-latency, high-quality voice chat software primarily intended for use while gaming.
+  author: Dokploy Community
+  developer: Mumble
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.mumble.info/
+  repo: https://github.com/mumble-voip/mumble
+  docs: https://www.mumble.info/documentation/

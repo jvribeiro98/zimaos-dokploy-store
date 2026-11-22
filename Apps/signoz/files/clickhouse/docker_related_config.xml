@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <!-- Overrides the docker image's default config.d/docker_related_config.xml,
+         which listens on the IPv6 wildcard address ([::]) first. On hosts without
+         IPv6 support the bind fails, so listen on IPv4 only. -->
+    <listen_host>0.0.0.0</listen_host>
+    <listen_try>1</listen_try>
+    <!-- Container IPs can change and DNS records (zookeeper-1, clickhouse) may not
+         be ready the moment ClickHouse starts. Do not cache DNS lookup failures. -->
+    <disable_internal_dns_cache>1</disable_internal_dns_cache>
+</clickhouse>

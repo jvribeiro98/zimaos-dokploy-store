@@ -1,0 +1,47 @@
+name: confluence
+services:
+  confluence:
+    image: atlassian/confluence-server:8.6-ubuntu-jdk17
+    expose:
+    - '8090'
+    volumes:
+    - confluence-data:/var/atlassian/application-data/confluence
+    environment:
+    - JVM_MINIMUM_MEMORY=${JVM_MIN_MEM}
+    - JVM_MAXIMUM_MEMORY=${JVM_MAX_MEM}
+    - CATALINA_CONNECTOR_PROXYNAME=${DOMAIN}
+    - CATALINA_CONNECTOR_SCHEME=http
+    - CATALINA_CONNECTOR_SECURE=true
+    restart: unless-stopped
+    ports:
+    - target: 8090
+      published: "8090"
+      protocol: tcp
+volumes:
+  confluence-data: null
+x-casaos:
+  id: com.dokploy.confluence
+  main: confluence
+  index: /
+  port_map: "8090"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/confluence/icon.svg
+  title:
+    en_US: Confluence
+  tagline:
+    en_US: Confluence is a powerful team collaboration and knowledge-sharing tool
+  description:
+    en_US: Confluence is a powerful team collaboration and knowledge-sharing tool. It allows you to create, organize, and
+      collaborate on content in a centralized space. Designed for project management, documentation, and team communication,
+      Confluence helps streamline workflows and enhances productivity.
+  author: Dokploy Community
+  developer: Confluence
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "8.6"
+  update_at: "2026-11-22"
+  website: https://confluence.atlassian.com
+  repo: https://confluence.atlassian.com
+  docs: https://confluence.atlassian.com/doc/confluence-documentation-135922.html

@@ -1,0 +1,47 @@
+name: dragonfly-db
+services:
+  dragonflydb:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly
+    ulimits:
+      memlock: -1
+    expose:
+    - 6379
+    volumes:
+    - dragonflydata:/data
+    environment:
+    - DFLY_requirepass=ssr8GOiJm93ur2Ta2CyHXSzw77nOOg13
+    restart: unless-stopped
+    ports:
+    - target: 6379
+      published: "6379"
+      protocol: tcp
+volumes:
+  dragonflydata: null
+x-casaos:
+  id: com.dokploy.dragonfly-db
+  main: dragonflydb
+  index: /
+  port_map: "6379"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dragonfly-db/icon.png
+  title:
+    en_US: Dragonfly
+  tagline:
+    en_US: Dragonfly is a drop-in Redis replacement that is designed for heavy data workloads runn...
+  description:
+    en_US: Dragonfly is a drop-in Redis replacement that is designed for heavy data workloads running on modern cloud hardware.
+  author: Dokploy Community
+  developer: Dragonfly
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.28.1"
+  update_at: "2026-11-22"
+  website: https://www.dragonflydb.io/
+  repo: https://github.com/dragonflydb/dragonfly
+  docs: https://www.dragonflydb.io/docs
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (content/configuration.conf).
+        Review environment variables before starting.

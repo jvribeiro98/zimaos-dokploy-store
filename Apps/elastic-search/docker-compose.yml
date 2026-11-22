@@ -1,0 +1,104 @@
+name: elastic-search
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
+    restart: unless-stopped
+    environment:
+    - ELASTIC_PASSWORD=deNFKkpCk7HF2TrSwQ7FKd6h7XLPRQxT
+    - discovery.type=single-node
+    - xpack.security.enabled=true
+    - xpack.security.http.ssl.enabled=false
+    - node.store.allow_mmap=false
+    - xpack.ml.enabled=false
+    - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    mem_limit: ${ES_MEM_LIMIT}
+    expose:
+    - '9200'
+    volumes:
+    - es_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -s http://localhost:9200 | grep -q "missing authentication credentials"
+      interval: 10s
+      timeout: 10s
+      retries: 60
+      start_period: 120s
+  kibana:
+    image: docker.elastic.co/kibana/kibana:9.5.3
+    restart: unless-stopped
+    environment:
+    - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    - ELASTICSEARCH_USERNAME=kibana_system
+    - ELASTICSEARCH_PASSWORD=N5NVj0YcsXXvlHj1v2vPmli9mMEqUNXi
+    - ELASTICSEARCH_PUBLICBASEURL=https://localhost
+    - SERVER_PUBLICBASEURL=https://localhost
+    - XPACK_SECURITY_SECURECOOKIES=true
+    - XPACK_SECURITY_ENCRYPTIONKEY=5c5TZF3GpkeCHyrQzn6qxm8VaLx1tgjlonESYDUYr6IifvKB3RgpQ7vL3n1UwwbO
+    - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=9FQR7UiO3QtVjv8U1NFo2fiTCJRfgTmnrEYjLntjz9t5mAMrAAO3Cp0JTY7Ki73Q
+    - XPACK_REPORTING_ENCRYPTIONKEY=r5Ux8tYmWY8GXJig8U8sNXUqfCSUcWDZGAG5BNqNyGOkALBW1M7Lj8is2ZNjt2aC
+    mem_limit: ${KB_MEM_LIMIT}
+    expose:
+    - '5601'
+    volumes:
+    - kibana_data:/usr/share/kibana/data
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -s -I http://localhost:5601 | grep -q "HTTP/1.1 302 Found"
+      interval: 10s
+      timeout: 10s
+      retries: 60
+      start_period: 30s
+    ports:
+    - target: 5601
+      published: "5601"
+      protocol: tcp
+  setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
+    environment:
+    - ELASTIC_PASSWORD=deNFKkpCk7HF2TrSwQ7FKd6h7XLPRQxT
+    - KIBANA_PASSWORD=N5NVj0YcsXXvlHj1v2vPmli9mMEqUNXi
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    command:
+    - bash
+    - -c
+    - "echo \"Setting kibana_system password\"\n\nescaped_password=\"$$(printf '%s' \"$$KIBANA_PASSWORD\" | sed 's/\\\\/\\\
+      \\\\\\/g; s/\"/\\\\\"/g')\"\n\nuntil curl -fsS \\\n  -X POST \\\n  -u \"elastic:$$ELASTIC_PASSWORD\" \\\n  -H \"Content-Type:\
+      \ application/json\" \\\n  http://elasticsearch:9200/_security/user/kibana_system/_password \\\n  --data-binary \"{\\\
+      \"password\\\":\\\"$$escaped_password\\\"}\" \\\n  | grep -q \"^{}\"\ndo\n  sleep 5\ndone\n\necho \"kibana_system password\
+      \ configured\"\n"
+    restart: unless-stopped
+volumes:
+  es_data: null
+  kibana_data: null
+x-casaos:
+  id: com.dokploy.elastic-search
+  main: kibana
+  index: /
+  port_map: "5601"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/elastic-search/icon.svg
+  title:
+    en_US: Elasticsearch
+  tagline:
+    en_US: Elasticsearch is an open-source search and analytics engine, used for full-text search...
+  description:
+    en_US: Elasticsearch is an open-source search and analytics engine, used for full-text search and analytics on structured
+      data such as text, web pages, images, and videos.
+  author: Dokploy Community
+  developer: Elasticsearch
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "9.5.3"
+  update_at: "2026-11-22"
+  website: https://www.elastic.co/elasticsearch/
+  repo: https://github.com/elastic/elasticsearch
+  docs: https://www.elastic.co/docs/solutions/search

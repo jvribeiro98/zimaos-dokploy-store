@@ -1,0 +1,39 @@
+name: baserow
+services:
+  baserow:
+    image: baserow/baserow:1.25.2
+    environment:
+      BASEROW_PUBLIC_URL: http://localhost
+    volumes:
+    - baserow_data:/baserow/data
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  baserow_data: null
+x-casaos:
+  id: com.dokploy.baserow
+  main: baserow
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/baserow/icon.webp
+  title:
+    en_US: Baserow
+  tagline:
+    en_US: Baserow is an open source database management tool that allows you to create and manage...
+  description:
+    en_US: Baserow is an open source database management tool that allows you to create and manage databases.
+  author: Dokploy Community
+  developer: Baserow
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.25.2"
+  update_at: "2026-11-22"
+  website: https://baserow.io/
+  repo: https://github.com/Baserow/baserow
+  docs: https://baserow.io/docs/index

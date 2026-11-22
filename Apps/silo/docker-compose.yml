@@ -1,0 +1,44 @@
+name: silo
+services:
+  silo:
+    image: pgsty/silo:RELEASE.2026-08-06T00-00-00Z
+    restart: unless-stopped
+    expose:
+    - 9000
+    - 9001
+    environment:
+    - MINIO_ROOT_USER=silo_usr
+    - MINIO_ROOT_PASSWORD=ahyZMY6Io0tyYezJwXyiSe2vv4WkyJak
+    volumes:
+    - silo:/data
+    command: server /data --console-address ":9001"
+    ports:
+    - target: 9000
+      published: "9000"
+      protocol: tcp
+volumes:
+  silo: null
+x-casaos:
+  id: com.dokploy.silo
+  main: silo
+  index: /
+  port_map: "9000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/silo/icon.svg
+  title:
+    en_US: Silo
+  tagline:
+    en_US: S3-Compatible Object Storage
+  description:
+    en_US: S3-Compatible Object Storage. A MinIO fork maintained by PGSTY
+  author: Dokploy Community
+  developer: Silo
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "RELEASE.2026-08-06T00-00-00Z"
+  update_at: "2026-11-22"
+  website: https://silo.pgsty.com
+  repo: https://github.com/pgsty/silo
+  docs: https://silo.pgsty.com/docs/

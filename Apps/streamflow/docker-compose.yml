@@ -1,0 +1,50 @@
+name: streamflow
+services:
+  streamflow:
+    build:
+      context: https://github.com/bangtutorial/streamflow.git
+    restart: unless-stopped
+    environment:
+    - PORT=7575
+    - SESSION_SECRET=MfDgOaC6pBVvyZpI4iqNwIgK01D8UfMoZZ3BNb34g38UmetNXurWgiNAG9B9QH67
+    - NODE_ENV=production
+    - TZ=Asia/Jakarta
+    volumes:
+    - streamflow-db:/app/db
+    - streamflow-logs:/app/logs
+    - streamflow-uploads:/app/public/uploads
+    expose:
+    - 7575
+    ports:
+    - target: 7575
+      published: "7575"
+      protocol: tcp
+volumes:
+  streamflow-db: {}
+  streamflow-logs: {}
+  streamflow-uploads: {}
+x-casaos:
+  id: com.dokploy.streamflow
+  main: streamflow
+  index: /
+  port_map: "7575"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/streamflow/icon.png
+  title:
+    en_US: StreamFlow
+  tagline:
+    en_US: StreamFlow is a multi-platform live streaming web application that enables simultaneous...
+  description:
+    en_US: StreamFlow is a multi-platform live streaming web application that enables simultaneous RTMP streaming to YouTube,
+      Facebook, and other platforms with video gallery, scheduled streaming, and real-time monitoring.
+  author: Dokploy Community
+  developer: StreamFlow
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.1"
+  update_at: "2026-11-22"
+  website: https://github.com/bangtutorial/streamflow
+  repo: https://github.com/bangtutorial/streamflow
+  docs: https://github.com/bangtutorial/streamflow#readme

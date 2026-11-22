@@ -1,0 +1,41 @@
+name: alltube
+services:
+  alltube:
+    image: dnomd343/alltube:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - TITLE=My AllTube Site
+    - CONVERT=true
+    - STREAM=true
+    - REMUX=true
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.alltube
+  main: alltube
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/alltube/icon.png
+  title:
+    en_US: AllTube
+  tagline:
+    en_US: AllTube Download is an application designed to facilitate the downloading of videos fro...
+  description:
+    en_US: AllTube Download is an application designed to facilitate the downloading of videos from YouTube and other video
+      sites. It provides an HTML GUI for youtube-dl with video conversion capabilities and JSON API support.
+  author: Dokploy Community
+  developer: AllTube
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/Rudloff/alltube
+  repo: https://github.com/Rudloff/alltube
+  docs: https://github.com/Rudloff/alltube/wiki

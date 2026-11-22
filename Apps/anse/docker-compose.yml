@@ -1,0 +1,42 @@
+name: anse
+services:
+  anse-demo:
+    image: ddiu8081/anse:latest
+    restart: always
+    expose:
+    - 3000
+    environment:
+    - OPENAI_API_KEY=
+    - OPENAI_API_BASE_URL=https://api.openai.com
+    - HEAD_SCRIPTS=
+    - SECRET_KEY=jbaGHSNiFdl04vot8NCyhhTni92EU8yR
+    - SITE_PASSWORD=B3vzbieYh3ZjruO8
+    - OPENAI_API_MODEL=gpt-4o-mini
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.anse
+  main: anse-demo
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/anse/icon.png
+  title:
+    en_US: Anse
+  tagline:
+    en_US: Anse is an open-source alternative to ChatGPT web UI, supporting OpenAI-compatible APIs
+  description:
+    en_US: Anse is an open-source alternative to ChatGPT web UI, supporting OpenAI-compatible APIs.
+  author: Dokploy Community
+  developer: Anse
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://anse.app/
+  repo: https://github.com/ddiu8081/anse
+  docs: https://github.com/ddiu8081/anse#readme

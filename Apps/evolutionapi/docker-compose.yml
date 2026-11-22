@@ -1,0 +1,85 @@
+name: evolutionapi
+services:
+  evolution-api:
+    image: evoapicloud/evolution-api:v2.3.7
+    restart: always
+    volumes:
+    - evolution-instances:/evolution/instances
+    environment:
+    - SERVER_URL=https://localhost
+    - AUTHENTICATION_TYPE=apikey
+    - AUTHENTICATION_API_KEY=VlXb8yHnptziO7tca09KlGbZdkrTVl3rMdaDoCaz2ZMSoW01mxUIJSgq8c/FAGfYc0yiTf4HneQ0ZX2eGFzisQ==
+    - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+    - LANGUAGE=en
+    - CONFIG_SESSION_PHONE_CLIENT=Evolution API
+    - CONFIG_SESSION_PHONE_NAME=Chrome
+    - TELEMETRY=false
+    - TELEMETRY_URL=
+    - DATABASE_ENABLED=true
+    - DATABASE_PROVIDER=postgresql
+    - DATABASE_CONNECTION_URI=postgres://postgresql:s069PLAmJbfAovNTDEN3ubWCB2w8f1Qg@evolution-postgres:5432/evolution
+    - DATABASE_SAVE_DATA_INSTANCE=true
+    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+    - DATABASE_SAVE_MESSAGE_UPDATE=true
+    - DATABASE_SAVE_DATA_CONTACTS=true
+    - DATABASE_SAVE_DATA_CHATS=true
+    - DATABASE_SAVE_DATA_LABELS=true
+    - DATABASE_SAVE_DATA_HISTORIC=true
+    - CACHE_REDIS_ENABLED=true
+    - CACHE_REDIS_URI=redis://evolution-redis:6379
+    - CACHE_REDIS_PREFIX_KEY=evolution
+    - CACHE_REDIS_SAVE_INSTANCES=true
+    - TYPEBOT_ENABLED=true
+    - TYPEBOT_API_VERSION=latest
+    - CHATWOOT_ENABLED=true
+    - OPENAI_ENABLED=true
+    - DIFY_ENABLED=true
+    - N8N_ENABLED=true
+    - EVOAI_ENABLED=true
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  evolution-postgres:
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+    - evolution-postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_DB=evolution
+    - POSTGRES_USER=postgresql
+    - POSTGRES_PASSWORD=s069PLAmJbfAovNTDEN3ubWCB2w8f1Qg
+  evolution-redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+    - evolution-redis-data:/data
+volumes:
+  evolution-instances: null
+  evolution-postgres-data: null
+  evolution-redis-data: null
+x-casaos:
+  id: com.dokploy.evolutionapi
+  main: evolution-api
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/evolutionapi/icon.png
+  title:
+    en_US: Evolution API
+  tagline:
+    en_US: Evolution API is a robust platform dedicated to empowering small businesses with limite...
+  description:
+    en_US: Evolution API is a robust platform dedicated to empowering small businesses with limited resources, going beyond
+      a simple messaging solution via WhatsApp.
+  author: Dokploy Community
+  developer: Evolution API
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.3.7"
+  update_at: "2026-11-22"
+  website: https://evolutionfoundation.com.br/
+  repo: https://github.com/evolution-foundation/evolution-api
+  docs: https://docs.evolutionfoundation.com.br/en

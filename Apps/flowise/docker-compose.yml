@@ -1,0 +1,88 @@
+name: flowise
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+    - redis_data:/data
+  flowise:
+    image: flowiseai/flowise:latest
+    restart: always
+    expose:
+    - 3000
+    volumes:
+    - flowise_data:/root/.flowise
+    environment:
+      PORT: '3000'
+      DATABASE_PATH: /root/.flowise
+      REDIS_URL: redis://redis:6379
+      JWT_AUTH_TOKEN_SECRET: KVHBwAYOnp7z0avSqqNfkJo66OOVCRUZ
+      JWT_REFRESH_TOKEN_SECRET: Fw9c8KZDEHlliyNCj4MYheML9yCVe2wf
+      EXPRESS_SESSION_SECRET: jfmFZYJcONNZUfgG0MAo5p5UO8l2PGUJ
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:3000/api/v1/ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    entrypoint: /bin/sh -c "sleep 3; flowise start"
+    depends_on:
+    - redis
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  flowise-worker:
+    image: flowiseai/flowise-worker:latest
+    restart: always
+    volumes:
+    - flowise_data:/root/.flowise
+    environment:
+      WORKER_PORT: '5566'
+      DATABASE_PATH: /root/.flowise
+      REDIS_URL: redis://redis:6379
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:5566/healthz
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    entrypoint: /bin/sh -c "node /app/healthcheck/healthcheck.js & sleep 5 && pnpm run start-worker"
+    depends_on:
+    - redis
+    - flowise
+volumes:
+  redis_data: null
+  flowise_data: null
+x-casaos:
+  id: com.dokploy.flowise
+  main: flowise
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/flowise/icon.png
+  title:
+    en_US: Flowise
+  tagline:
+    en_US: Flowise is an open-source UI visual tool to build and run LLM-powered applications
+  description:
+    en_US: Flowise is an open-source UI visual tool to build and run LLM-powered applications.
+  author: Dokploy Community
+  developer: Flowise
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://flowiseai.com/
+  repo: https://github.com/FlowiseAI/Flowise
+  docs: https://docs.flowiseai.com/

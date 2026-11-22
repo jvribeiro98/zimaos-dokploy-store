@@ -1,0 +1,44 @@
+name: openhabittracker
+services:
+  openhabittracker:
+    image: jinjinov/openhabittracker:latest
+    expose:
+    - '8080'
+    environment:
+      AppSettings__UserName: admin
+      AppSettings__Email: admin@example.com
+      AppSettings__Password: rgZm7fjC7dlnVKzpgZJNM2n6
+      AppSettings__JwtSecret: wATU8uR49H5OlXFUeLUffl1ZPodVDXw3afy1rb+wE6KD6DyqS948eZa967e4+7UD
+    volumes:
+    - openhabittracker-data:/app/.OpenHabitTracker
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  openhabittracker-data: null
+x-casaos:
+  id: com.dokploy.openhabittracker
+  main: openhabittracker
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openhabittracker/icon.png
+  title:
+    en_US: OpenHabitTracker
+  tagline:
+    en_US: Take notes, plan tasks and track habits - free, ad-free, open source, with all data on...
+  description:
+    en_US: Take notes, plan tasks and track habits - free, ad-free, open source, with all data on your own server. Native
+      apps for Windows, Linux, Android, iOS and macOS sync to it.
+  author: Dokploy Community
+  developer: OpenHabitTracker
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://openhabittracker.net
+  repo: https://github.com/Jinjinov/OpenHabitTracker

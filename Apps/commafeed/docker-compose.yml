@@ -1,0 +1,42 @@
+name: commafeed
+services:
+  commafeed:
+    image: athou/commafeed:latest-h2
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/commafeed-data:/commafeed/data
+    expose:
+    - 8082
+    ports:
+    - target: 8082
+      published: "8082"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.commafeed
+  main: commafeed
+  index: /
+  port_map: "8082"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/commafeed/icon.svg
+  title:
+    en_US: CommaFeed
+  tagline:
+    en_US: CommaFeed is an open-source feed reader and news aggregator, designed to be lightweight...
+  description:
+    en_US: CommaFeed is an open-source feed reader and news aggregator, designed to be lightweight and extensible, with PostgreSQL
+      as its database.
+  author: Dokploy Community
+  developer: CommaFeed
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "latest-h2"
+  update_at: "2026-11-22"
+  website: https://www.commafeed.com/
+  repo: https://github.com/Athou/commafeed
+  docs: https://github.com/Athou/commafeed/wiki
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/commafeed-data).
+        Review environment variables before starting.

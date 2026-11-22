@@ -1,0 +1,41 @@
+name: linkding
+services:
+  linkding:
+    image: sissbruecker/linkding:latest
+    restart: unless-stopped
+    expose:
+    - 9090
+    volumes:
+    - /DATA/AppData/$AppID/linkding-data:/etc/linkding/data
+    ports:
+    - target: 9090
+      published: "9090"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.linkding
+  main: linkding
+  index: /
+  port_map: "9090"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/linkding/icon.svg
+  title:
+    en_US: Linkding
+  tagline:
+    en_US: Linkding is a self-hosted bookmark manager with a clean and simple interface
+  description:
+    en_US: Linkding is a self-hosted bookmark manager with a clean and simple interface.
+  author: Dokploy Community
+  developer: Linkding
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://linkding.link/
+  repo: https://github.com/sissbruecker/linkding
+  docs: https://github.com/sissbruecker/linkding/tree/master/docs
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/linkding-data).
+        Review environment variables before starting.

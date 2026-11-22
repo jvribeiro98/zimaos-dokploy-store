@@ -1,0 +1,42 @@
+name: glances
+services:
+  glances:
+    image: nicolargo/glances:4.3.0.8-full
+    restart: unless-stopped
+    pid: host
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - glances-data:/glances/exports
+    environment:
+      GLANCES_OPT: -w
+    ports:
+    - target: 61208
+      published: "61208"
+      protocol: tcp
+volumes:
+  glances-data: null
+x-casaos:
+  id: com.dokploy.glances
+  main: glances
+  index: /
+  port_map: "61208"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/glances/icon.svg
+  title:
+    en_US: Glances
+  tagline:
+    en_US: Glances is a cross-platform system monitoring tool
+  description:
+    en_US: Glances is a cross-platform system monitoring tool. Self-host it on your own server with Dokploy, which deploys
+      Glances as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Glances
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "4.3.0.8"
+  update_at: "2026-11-22"
+  website: https://nicolargo.github.io/glances/
+  repo: https://github.com/nicolargo/glances
+  docs: https://glances.readthedocs.io/

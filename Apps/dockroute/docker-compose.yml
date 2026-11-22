@@ -1,0 +1,45 @@
+name: dockroute
+services:
+  dockroute:
+    image: ghcr.io/dockroute/dockroute:0.2.0
+    restart: unless-stopped
+    environment:
+    - DOCKROUTE_PROVIDER=log
+    - DOCKROUTE_OWNER_ID=default
+    - DOCKROUTE_POLICY=sync
+    - DOCKROUTE_DEFAULT_TARGET=
+    - DOCKROUTE_DOMAIN_FILTER=
+    - CLOUDFLARE_API_TOKEN=
+    - CLOUDFLARE_ACCOUNT_ID=
+    - CLOUDFLARE_TUNNEL_ID=
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.dockroute
+  main: dockroute
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dockroute/icon.png
+  title:
+    en_US: DockRoute
+  tagline:
+    en_US: 'External-DNS for plain Docker hosts: watches container labels and reconciles DNS record...'
+  description:
+    en_US: 'External-DNS for plain Docker hosts: watches container labels and reconciles DNS records and Cloudflare Tunnel
+      routes, never touching records it cannot prove it manages.'
+  author: Dokploy Community
+  developer: DockRoute
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.0"
+  update_at: "2026-11-22"
+  website: https://www.dockroute.dev
+  repo: https://github.com/Dockroute/Dockroute
+  docs: https://www.dockroute.dev

@@ -1,0 +1,61 @@
+name: snapp
+services:
+  snapp:
+    image: uraniadev/snapp:0.9-rc-020
+    expose:
+    - 3000
+    environment:
+    - DATABASE_URL=file:./db.sqlite
+    - DATABASE_PROVIDER=sqlite
+    - TOKEN_SECRET=5wseVIf55awuRMqFqTQ8nnuAG5bnTqrF
+    - ORIGIN=http://localhost
+    - DISABLED_EMAIL_AND_PASSWORD=false
+    - LOG_LEVEL=debug
+    - PORT=3000
+    - ADMIN_USERNAME=admin
+    - ADMIN_EMAIL=info@example.org
+    - ADMIN_PASSWORD=EjGXgnAhb4Cp2AeQ
+    - ENABLE_SIGNUP=true
+    - ENABLED_MFA=false
+    - PUBLIC_URL=localhost
+    - APPNAME=Snapp
+    - PUBLIC_EXTRA_GROUPS_EDITABLE=true
+    - URLS_VIA_GROUPS_ONLY=false
+    - HOST=0.0.0.0
+    volumes:
+    - /DATA/AppData/$AppID/snapp-db:/app/db.sqlite
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  snapp-db: {}
+x-casaos:
+  id: com.dokploy.snapp
+  main: snapp
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/snapp/icon.png
+  title:
+    en_US: Snapp
+  tagline:
+    en_US: Snapp is a self-hosted screenshot sharing service with user management and authentication
+  description:
+    en_US: Snapp is a self-hosted screenshot sharing service with user management and authentication.
+  author: Dokploy Community
+  developer: Snapp
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.9-rc-020"
+  update_at: "2026-11-22"
+  website: https://github.com/UraniaDev/snapp
+  repo: https://github.com/UraniaDev/snapp
+  docs: https://github.com/UraniaDev/snapp
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/snapp-db/db.sqlite).
+        Review environment variables before starting.

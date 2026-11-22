@@ -1,0 +1,53 @@
+name: ghost
+services:
+  ghost:
+    image: ghost:6-alpine
+    restart: always
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+      url: http://localhost
+    volumes:
+    - ghost:/var/lib/ghost/content
+    ports:
+    - target: 2368
+      published: "2368"
+      protocol: tcp
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+    - db:/var/lib/mysql
+volumes:
+  ghost: null
+  db: null
+x-casaos:
+  id: com.dokploy.ghost
+  main: ghost
+  index: /
+  port_map: "2368"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ghost/icon.jpeg
+  title:
+    en_US: Ghost
+  tagline:
+    en_US: Ghost is an open-source publishing platform for blogs, newsletters, and paid memberships
+  description:
+    en_US: Ghost is an open-source publishing platform for blogs, newsletters, and paid memberships. Self-host it on your
+      own server with Dokploy, which deploys Ghost as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Ghost
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "6.0.0"
+  update_at: "2026-11-22"
+  website: https://ghost.org/
+  repo: https://github.com/TryGhost/Ghost
+  docs: https://ghost.org/docs/

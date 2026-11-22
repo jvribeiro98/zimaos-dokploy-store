@@ -1,0 +1,40 @@
+name: owncast
+services:
+  owncast:
+    image: owncast/owncast:latest
+    restart: unless-stopped
+    volumes:
+    - owncast-data:/app/data
+    expose:
+    - 8080
+    - 1935
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  owncast-data: {}
+x-casaos:
+  id: com.dokploy.owncast
+  main: owncast
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/owncast/icon.png
+  title:
+    en_US: Owncast
+  tagline:
+    en_US: Owncast is a self-hosted live video streaming and chat server for use with existing bro...
+  description:
+    en_US: Owncast is a self-hosted live video streaming and chat server for use with existing broadcasting software.
+  author: Dokploy Community
+  developer: Owncast
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://owncast.online/
+  repo: https://github.com/owncast/owncast
+  docs: https://owncast.online/docs/

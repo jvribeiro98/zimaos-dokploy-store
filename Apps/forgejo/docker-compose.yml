@@ -1,0 +1,67 @@
+name: forgejo
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:16
+    depends_on:
+    - db
+    environment:
+    - USER_UID=1000
+    - USER_GID=1000
+    - FORGEJO__database__DB_TYPE=postgres
+    - FORGEJO__database__HOST=db:5432
+    - FORGEJO__database__NAME=forgejo
+    - FORGEJO__database__USER=forgejo
+    - FORGEJO__database__PASSWD=forgejo
+    - FORGEJO__server__DOMAIN=localhost
+    - FORGEJO__server__SSH_DOMAIN=localhost
+    - FORGEJO__server__ROOT_URL=https://localhost/
+    restart: always
+    expose:
+    - 3000
+    - 22
+    volumes:
+    - forgejo_server:/data
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+    - POSTGRES_USER=forgejo
+    - POSTGRES_PASSWORD=forgejo
+    - POSTGRES_DB=forgejo
+    volumes:
+    - forgejo_db:/var/lib/postgresql/data
+volumes:
+  forgejo_db:
+    driver: local
+  forgejo_server:
+    driver: local
+x-casaos:
+  id: com.dokploy.forgejo
+  main: forgejo
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/forgejo/icon.svg
+  title:
+    en_US: Forgejo
+  tagline:
+    en_US: Forgejo is a self-hosted lightweight software forge
+  description:
+    en_US: Forgejo is a self-hosted lightweight software forge. Easy to install and low maintenance, it just does the job
+  author: Dokploy Community
+  developer: Forgejo
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "16"
+  update_at: "2026-11-22"
+  website: https://forgejo.org/
+  repo: https://codeberg.org/forgejo/forgejo
+  docs: https://forgejo.org/docs/latest/

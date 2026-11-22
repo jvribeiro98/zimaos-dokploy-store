@@ -1,0 +1,71 @@
+name: blinko
+services:
+  blinko-website:
+    image: blinkospace/blinko:1.6.3
+    environment:
+      NODE_ENV: production
+      NEXTAUTH_SECRET: tp7raT5WUMHpqK5s1VQqj0riDUOjl05w
+      DATABASE_URL: postgresql://postgres:9HJrKjvUporp4a76pye09QKYhuUOIgFG@blinko-postgres:5432/postgres
+      NEXTAUTH_URL: http://localhost
+      NEXT_PUBLIC_BASE_URL: http://localhost
+    depends_on:
+      blinko-postgres:
+        condition: service_healthy
+    restart: always
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    expose:
+    - 1111
+    ports:
+    - target: 1111
+      published: "1111"
+      protocol: tcp
+  blinko-postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 9HJrKjvUporp4a76pye09QKYhuUOIgFG
+      TZ: Asia/Shanghai
+    volumes:
+    - blinko-db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD
+      - pg_isready
+      - -U
+      - postgres
+      - -d
+      - postgres
+      interval: 5s
+      timeout: 10s
+      retries: 5
+volumes:
+  blinko-db: {}
+x-casaos:
+  id: com.dokploy.blinko
+  main: blinko-website
+  index: /
+  port_map: "1111"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/blinko/icon.svg
+  title:
+    en_US: Blinko
+  tagline:
+    en_US: Blinko is a modern web application for managing and organizing your digital content and...
+  description:
+    en_US: Blinko is a modern web application for managing and organizing your digital content and workflows.
+  author: Dokploy Community
+  developer: Blinko
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.3"
+  update_at: "2026-11-22"
+  website: https://blinko.space/
+  repo: https://github.com/blinkospace/blinko
+  docs: https://docs.blinko.space/

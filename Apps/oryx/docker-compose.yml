@@ -1,0 +1,42 @@
+name: oryx
+services:
+  oryx:
+    image: ossrs/oryx:5.15.20
+    restart: unless-stopped
+    ports:
+    - 1935:1935
+    - 8000:8000/udp
+    - 10080:10080/udp
+    - target: 2022
+      published: "2022"
+      protocol: tcp
+    volumes:
+    - oryx-data:/data
+volumes:
+  oryx-data: {}
+x-casaos:
+  id: com.dokploy.oryx
+  main: oryx
+  index: /
+  port_map: "2022"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/oryx/icon.svg
+  title:
+    en_US: Oryx
+  tagline:
+    en_US: Oryx (formerly SRS Stack) is an all-in-one, open-source video streaming server with a w...
+  description:
+    en_US: Oryx (formerly SRS Stack) is an all-in-one, open-source video streaming server with a web console. It ingests RTMP,
+      WebRTC (WHIP) and SRT streams and plays them back over HLS, HTTP-FLV and WebRTC (WHEP), with built-in recording, forwarding,
+      transcoding and virtual live streaming.
+  author: Dokploy Community
+  developer: Oryx
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "5.15.20"
+  update_at: "2026-11-22"
+  website: https://ossrs.io/
+  repo: https://github.com/ossrs/oryx
+  docs: https://ossrs.io/lts/en-us/docs/v6/doc/getting-started-oryx

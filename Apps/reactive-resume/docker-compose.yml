@@ -1,0 +1,95 @@
+name: reactive-resume
+services:
+  postgres:
+    image: postgres:16-alpine
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: OlAzSv3cgb1ypw3TOaoB4sh1VhbM36VD
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  minio:
+    image: minio/minio:latest
+    command: server /data
+    volumes:
+    - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: fEx49Y9zb5sJIZeoO0Pts9XL4l8PGumc
+    restart: unless-stopped
+  chrome:
+    image: ghcr.io/browserless/chromium:v2.18.0
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    environment:
+      TIMEOUT: '10000'
+      CONCURRENT: '10'
+      TOKEN: BxxV74HtekwMlhu5MAemxhtTjPVUBqjZ
+      EXIT_ON_HEALTH_FAILURE: 'true'
+      PRE_REQUEST_HEALTH_CHECK: 'true'
+    restart: unless-stopped
+  app:
+    image: amruthpillai/reactive-resume:latest
+    depends_on:
+    - postgres
+    - minio
+    - chrome
+    environment:
+      PORT: '3000'
+      NODE_ENV: production
+      PUBLIC_URL: https://localhost
+      STORAGE_URL: https://localhost/default
+      CHROME_TOKEN: BxxV74HtekwMlhu5MAemxhtTjPVUBqjZ
+      CHROME_URL: ws://chrome:3000
+      DATABASE_URL: postgresql://postgres:OlAzSv3cgb1ypw3TOaoB4sh1VhbM36VD@postgres:5432/postgres
+      ACCESS_TOKEN_SECRET: 4dLxvEsf2jUPcPem0pdrAPJ4Ht3ssCijWj43GWihY7952tzMdpQUOyqtJh7IzR6E
+      REFRESH_TOKEN_SECRET: lmjY8x5c1wxktdxCRI8nFcXg4nbOOdkK0XOEkipYnVazauWxtVxG8pusL1JRrVe3
+      MAIL_FROM: noreply@localhost
+      STORAGE_ENDPOINT: minio
+      STORAGE_PORT: '9000'
+      STORAGE_REGION: us-east-1
+      STORAGE_BUCKET: default
+      STORAGE_ACCESS_KEY: minioadmin
+      STORAGE_SECRET_KEY: fEx49Y9zb5sJIZeoO0Pts9XL4l8PGumc
+      STORAGE_USE_SSL: 'false'
+      STORAGE_SKIP_BUCKET_CHECK: 'false'
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  minio_data: null
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.reactive-resume
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/reactive-resume/icon.svg
+  title:
+    en_US: Reactive Resume
+  tagline:
+    en_US: A free and open-source resume builder that simplifies the process of creating, updating...
+  description:
+    en_US: A free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.
+  author: Dokploy Community
+  developer: Reactive Resume
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rxresu.me/
+  repo: https://github.com/AmruthPillai/Reactive-Resume
+  docs: https://docs.rxresu.me/

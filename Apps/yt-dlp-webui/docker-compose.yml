@@ -1,0 +1,44 @@
+name: yt-dlp-webui
+services:
+  yt-dlp-webui:
+    image: marcobaobao/yt-dlp-webui
+    expose:
+    - 3033
+    volumes:
+    - downloads:/downloads
+    - config:/config
+    healthcheck:
+      test: curl -f http://localhost:3033 || exit 1
+    restart: unless-stopped
+    ports:
+    - target: 3033
+      published: "3033"
+      protocol: tcp
+volumes:
+  downloads: {}
+  config: {}
+x-casaos:
+  id: com.dokploy.yt-dlp-webui
+  main: yt-dlp-webui
+  index: /
+  port_map: "3033"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/yt-dlp-webui/icon.ico
+  title:
+    en_US: yt-dlp-webui
+  tagline:
+    en_US: yt-dlp-webui is a web interface for yt-dlp, allowing you to download videos and audio f...
+  description:
+    en_US: yt-dlp-webui is a web interface for yt-dlp, allowing you to download videos and audio from various platforms with
+      a simple web UI.
+  author: Dokploy Community
+  developer: yt-dlp-webui
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/marcopiovanello/yt-dlp-web-ui
+  repo: https://github.com/marcopiovanello/yt-dlp-web-ui
+  docs: https://github.com/marcopiovanello/yt-dlp-web-ui

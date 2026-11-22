@@ -1,0 +1,44 @@
+name: cloudcommander
+services:
+  cloudcmd:
+    image: coderaiser/cloudcmd:18.5.1
+    expose:
+    - '80'
+    environment:
+    - CLOUDCMD_ROOT=/mnt/fs
+    - CLOUDCMD_AUTH=true
+    - CLOUDCMD_USERNAME=user
+    - CLOUDCMD_PASSWORD=TIpMOe4Yb98pR9T6
+    volumes:
+    - /root:/root
+    - /:/mnt/fs
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.cloudcommander
+  main: cloudcmd
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cloudcommander/icon.png
+  title:
+    en_US: Cloud Commander
+  tagline:
+    en_US: Cloud Commander is a file manager for the web
+  description:
+    en_US: Cloud Commander is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander
+      helps you manage your server and work with files, directories and programs in a web browser.
+  author: Dokploy Community
+  developer: Cloud Commander
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "18.5.1"
+  update_at: "2026-11-22"
+  website: https://cloudcmd.io
+  repo: https://github.com/coderaiser/cloudcmd
+  docs: https://cloudcmd.io/#install

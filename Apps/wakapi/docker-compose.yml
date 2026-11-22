@@ -1,0 +1,44 @@
+name: wakapi
+services:
+  wakapi:
+    image: ghcr.io/muety/wakapi:latest
+    restart: unless-stopped
+    expose:
+    - '3000'
+    environment:
+    - WAKAPI_PASSWORD_SALT=my3rZ25ilbVcFnZG2ipIIJJbvtuthSI48jauBCApJudrO1JAit9zVaetQrKAo8q1
+    - WAKAPI_DB_TYPE=sqlite3
+    - WAKAPI_DB_NAME=/data/wakapi.db
+    - WAKAPI_LISTEN_IPV4=0.0.0.0
+    volumes:
+    - wakapi-data:/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  wakapi-data: null
+x-casaos:
+  id: com.dokploy.wakapi
+  main: wakapi
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wakapi/icon.svg
+  title:
+    en_US: Wakapi
+  tagline:
+    en_US: Wakapi is a self-hosted WakaTime-compatible backend for tracking coding activity and de...
+  description:
+    en_US: Wakapi is a self-hosted WakaTime-compatible backend for tracking coding activity and developer statistics.
+  author: Dokploy Community
+  developer: Wakapi
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://wakapi.dev/
+  repo: https://github.com/muety/wakapi
+  docs: https://github.com/muety/wakapi#-installation

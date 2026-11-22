@@ -1,0 +1,40 @@
+name: dashy
+services:
+  dashy:
+    image: lissy93/dashy:latest
+    restart: unless-stopped
+    expose:
+    - 8080
+    volumes:
+    - dashy-config:/app/user-data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  dashy-config: {}
+x-casaos:
+  id: com.dokploy.dashy
+  main: dashy
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dashy/icon.png
+  title:
+    en_US: Dashy
+  tagline:
+    en_US: Dashy is a customizable dashboard for organizing your apps and services
+  description:
+    en_US: Dashy is a customizable dashboard for organizing your apps and services. Self-host it on your own server with Dokploy,
+      which deploys Dashy as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Dashy
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dashy.to/
+  repo: https://github.com/Lissy93/dashy
+  docs: https://github.com/Lissy93/dashy/tree/master/docs

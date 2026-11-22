@@ -1,0 +1,91 @@
+name: reelsaw
+services:
+  reelsaw:
+    image: ghcr.io/osbytes/reelsaw:0.18.2
+    restart: always
+    stop_grace_period: 330s
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:3000/api/health
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: '3000'
+      DATA_DIR: /data
+      LOG_FILE: /data/logs/reelsaw.log
+      RUN_HTTP: 'true'
+      RUN_WORKERS: 'true'
+      TRUST_PROXY: 'true'
+      DATABASE_URL: postgres://reelsaw:cy7ybtQeEmoaZB2QiRQ75G5ge2tay3S1@db:5432/reelsaw
+      BETTER_AUTH_SECRET: bnIucKVE4mUBtlMP1gmBpAAnVLCFMZQa+XceVYolEo5U+b/bindSGvmjZ5s1QaE1
+      APP_URL: https://localhost
+      SIGNUP_MODE: open
+      AI_MODEL: openai:gpt-4o-mini
+      TRANSCRIPTION_MODEL: openai:whisper-1
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_GENERATIVE_AI_API_KEY: ''
+      GROQ_API_KEY: ''
+      DEEPGRAM_API_KEY: ''
+    volumes:
+    - data:/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:17-alpine
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    environment:
+      POSTGRES_USER: reelsaw
+      POSTGRES_PASSWORD: cy7ybtQeEmoaZB2QiRQ75G5ge2tay3S1
+      POSTGRES_DB: reelsaw
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+volumes:
+  data: null
+  pgdata: null
+x-casaos:
+  id: com.dokploy.reelsaw
+  main: reelsaw
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/reelsaw/icon.png
+  title:
+    en_US: Reelsaw
+  tagline:
+    en_US: 'Reelsaw is a self-hosted, AI-powered video clipper: paste a YouTube link or upload a vi...'
+  description:
+    en_US: 'Reelsaw is a self-hosted, AI-powered video clipper: paste a YouTube link or upload a video and it transcribes
+      it, asks a language model for the most clippable moments, reframes the speaker into vertical 9:16 with face tracking,
+      cuts fillers and burns in word-highlight captions. Open source (AGPL-3.0), any model provider (OpenAI, Anthropic, Google,
+      Groq, Deepgram, or a local Ollama and Whisper), and an MCP server so agents can drive it. Deploy it on Dokploy with
+      Docker Compose and a Postgres database in a few clicks.'
+  author: Dokploy Community
+  developer: Reelsaw
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "0.18.2"
+  update_at: "2026-11-22"
+  website: https://reelsaw.com
+  repo: https://github.com/osbytes/reelsaw
+  docs: https://github.com/osbytes/reelsaw#readme

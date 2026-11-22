@@ -1,0 +1,48 @@
+name: obsidian-livesync
+services:
+  couchdb:
+    image: couchdb:latest
+    user: 0:0
+    environment:
+    - COUCHDB_USER=admin
+    - COUCHDB_PASSWORD=XMoCvCAEtdicPt86wn4hkPmP147rT90T
+    volumes:
+    - couchdb-data:/opt/couchdb/data
+    - /DATA/AppData/$AppID/local.ini:/opt/couchdb/etc/local.ini
+    expose:
+    - 5984
+    restart: unless-stopped
+    ports:
+    - target: 5984
+      published: "5984"
+      protocol: tcp
+volumes:
+  couchdb-data: {}
+x-casaos:
+  id: com.dokploy.obsidian-livesync
+  main: couchdb
+  index: /
+  port_map: "5984"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/obsidian-livesync/icon.png
+  title:
+    en_US: Obsidian LiveSync
+  tagline:
+    en_US: Obsidian LiveSync with CouchDB for real-time note synchronization
+  description:
+    en_US: Obsidian LiveSync with CouchDB for real-time note synchronization.
+  author: Dokploy Community
+  developer: Obsidian LiveSync
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://obsidian.md/sync
+  repo: https://github.com/vrtmrz/obsidian-livesync
+  docs: https://docs.couchdb.apache.org/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (local.ini). Review environment
+        variables before starting.

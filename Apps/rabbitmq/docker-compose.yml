@@ -1,0 +1,45 @@
+name: rabbitmq
+services:
+  rabbitmq:
+    image: rabbitmq:4.1-management
+    hostname: rabbitmq
+    restart: unless-stopped
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=5Xfk4Giz
+    - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
+    volumes:
+    - rabbitmq-data:/var/lib/rabbitmq
+    expose:
+    - 15672
+    - 5672
+    ports:
+    - target: 15672
+      published: "15672"
+      protocol: tcp
+volumes:
+  rabbitmq-data: {}
+x-casaos:
+  id: com.dokploy.rabbitmq
+  main: rabbitmq
+  index: /
+  port_map: "15672"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rabbitmq/icon.svg
+  title:
+    en_US: RabbitMQ
+  tagline:
+    en_US: RabbitMQ is an open source multi-protocol messaging broker
+  description:
+    en_US: RabbitMQ is an open source multi-protocol messaging broker.
+  author: Dokploy Community
+  developer: RabbitMQ
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "4.1-management"
+  update_at: "2026-11-22"
+  website: https://www.rabbitmq.com/
+  repo: https://github.com/rabbitmq/rabbitmq-server
+  docs: https://www.rabbitmq.com/documentation.html

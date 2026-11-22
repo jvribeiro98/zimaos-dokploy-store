@@ -1,0 +1,49 @@
+name: cookie-cloud
+services:
+  cookiecloud:
+    image: easychen/cookiecloud:latest
+    restart: unless-stopped
+    expose:
+    - 8088
+    volumes:
+    - cookiecloud-data:/data/api/data
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - -q
+      - http://localhost:8088
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 8088
+      published: "8088"
+      protocol: tcp
+volumes:
+  cookiecloud-data: {}
+x-casaos:
+  id: com.dokploy.cookie-cloud
+  main: cookiecloud
+  index: /
+  port_map: "8088"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cookie-cloud/icon.png
+  title:
+    en_US: CookieCloud
+  tagline:
+    en_US: CookieCloud lets you sync and manage browser cookies across devices securely using a se...
+  description:
+    en_US: CookieCloud lets you sync and manage browser cookies across devices securely using a self-hosted backend.
+  author: Dokploy Community
+  developer: CookieCloud
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/easychen/cookiecloud
+  repo: https://github.com/easychen/cookiecloud
+  docs: https://github.com/easychen/cookiecloud#readme

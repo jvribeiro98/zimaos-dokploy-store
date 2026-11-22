@@ -1,0 +1,76 @@
+name: miniflux
+services:
+  miniflux:
+    image: miniflux/miniflux:2.2.19
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: user=miniflux password=ihz8iuqYGj3h5hMLCBrLcsL3V0GATKCM dbname=miniflux host=db sslmode=disable
+      RUN_MIGRATIONS: '1'
+      CREATE_ADMIN: '1'
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: tZzBJzSmv9Gv1iYulMTHceVWrPPHb3uT
+      BASE_URL: https://localhost
+    expose:
+    - '8080'
+    healthcheck:
+      test:
+      - CMD
+      - /usr/bin/miniflux
+      - -healthcheck
+      - auto
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: miniflux
+      POSTGRES_PASSWORD: ihz8iuqYGj3h5hMLCBrLcsL3V0GATKCM
+      POSTGRES_DB: miniflux
+    expose:
+    - '5432'
+    volumes:
+    - miniflux-db:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U miniflux -d miniflux
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  miniflux-db: null
+x-casaos:
+  id: com.dokploy.miniflux
+  main: miniflux
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/miniflux/icon.svg
+  title:
+    en_US: Miniflux
+  tagline:
+    en_US: Miniflux is a minimalist and opinionated feed reader for self-hosted RSS and Atom subsc...
+  description:
+    en_US: Miniflux is a minimalist and opinionated feed reader for self-hosted RSS and Atom subscriptions.
+  author: Dokploy Community
+  developer: Miniflux
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2.19"
+  update_at: "2026-11-22"
+  website: https://miniflux.app/
+  repo: https://github.com/miniflux/v2
+  docs: https://miniflux.app/docs/

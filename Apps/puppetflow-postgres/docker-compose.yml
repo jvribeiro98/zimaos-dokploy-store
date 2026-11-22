@@ -1,0 +1,383 @@
+name: puppetflow-postgres
+services:
+  puppetflow:
+    image: ghcr.io/puppetflow/puppetflow:v2026.11.7
+    restart: unless-stopped
+    expose:
+    - 8000
+    volumes:
+    - puppetflow-framework:/app/storage
+    - puppetflow-execution:/app/data/execution
+    - puppetflow-uploads:/app/data/storage
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://localhost:8000/up
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      pinokio:
+        condition: service_started
+      stream-server:
+        condition: service_started
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  migrate:
+    image: ghcr.io/puppetflow/puppetflow:v2026.11.7
+    command:
+    - php
+    - artisan
+    - migrate
+    - --force
+    restart: 'no'
+    volumes:
+    - puppetflow-framework:/app/storage
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+  queue-1:
+    image: ghcr.io/puppetflow/puppetflow:v2026.11.7
+    command:
+    - php
+    - artisan
+    - queue:work
+    - --queue=1
+    - --tries=1
+    - --timeout=630
+    - --sleep=3
+    - --max-jobs=500
+    - --max-time=3600
+    restart: unless-stopped
+    volumes:
+    - puppetflow-framework:/app/storage
+    - puppetflow-execution:/app/data/execution
+    - puppetflow-uploads:/app/data/storage
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      stream-server:
+        condition: service_started
+  queue-2:
+    image: ghcr.io/puppetflow/puppetflow:v2026.11.7
+    command:
+    - php
+    - artisan
+    - queue:work
+    - --queue=2
+    - --tries=1
+    - --timeout=630
+    - --sleep=3
+    - --max-jobs=500
+    - --max-time=3600
+    restart: unless-stopped
+    volumes:
+    - puppetflow-framework:/app/storage
+    - puppetflow-execution:/app/data/execution
+    - puppetflow-uploads:/app/data/storage
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      stream-server:
+        condition: service_started
+  scheduler:
+    image: ghcr.io/puppetflow/puppetflow:v2026.11.7
+    command:
+    - php
+    - artisan
+    - schedule:work
+    restart: unless-stopped
+    volumes:
+    - puppetflow-framework:/app/storage
+    - puppetflow-execution:/app/data/execution
+    - puppetflow-uploads:/app/data/storage
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+  stream-server:
+    image: ghcr.io/puppetflow/puppetflow-stream-server:v2026.11.7
+    restart: unless-stopped
+    stop_grace_period: 30s
+    expose:
+    - 6080
+    environment:
+      APP_ENV: production
+      LOG_STACK: single,stderr
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+      CONNECTION_TIMEOUT_MS: '60000000'
+      APP_URL: http://localhost
+      APP_KEY: base64:BNgqsDEf8YLy+lcflr37rQU2ty0ynWUo9yRvEe+/baQ=
+      APP_QUEUES_COUNTER: '2'
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: puppetflow
+      DB_USERNAME: admin
+      DB_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      PINOKIO_HOST: pinokio
+      PINOKIO_PORT: '3000'
+      PINOKIO_TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+      BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+      BROWSER_STREAM_PUBLIC_URL: http://localhost
+      BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
+      BROWSER_STREAM_SECRET: ea65a00c85b381cd4ac3fd9342ff4645f8574b37808d71b71c5dfb593ad14f4a
+    depends_on:
+      redis:
+        condition: service_healthy
+  init-volumes:
+    image: busybox:1.37.0
+    command:
+    - sh
+    - -c
+    - chown -R 33:33 /framework /execution /uploads /browsers
+    restart: 'no'
+    volumes:
+    - puppetflow-framework:/framework
+    - puppetflow-execution:/execution
+    - puppetflow-uploads:/uploads
+    - pinokio-downloads:/browsers
+  pinokio:
+    image: ghcr.io/puppetflow/pinokio:v2026.11.1
+    restart: unless-stopped
+    user: '33:33'
+    shm_size: 1gb
+    volumes:
+    - puppetflow-execution:/app/data/execution
+    - pinokio-downloads:/opt/browsers
+    environment:
+      TOKEN: b2637f615bd22b41db09d184493b6b6abeefefdd20f4105655ce931984d70fc7
+      HOME: /tmp
+      XDG_CONFIG_HOME: /tmp/.config
+      XDG_CACHE_HOME: /tmp/.cache
+      LANG: C.UTF-8
+      LANGUAGE: en-US
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    volumes:
+    - puppetflow-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: puppetflow
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: N7lP9ROzxthvzGdww8eypdYbfeMXST0Z
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:8.2.1-alpine
+    command:
+    - redis-server
+    - --save
+    - ''
+    - --appendonly
+    - 'no'
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 5s
+      timeout: 3s
+      retries: 5
+x-puppetflow-environment:
+  APP_ENV: production
+  LOG_STACK: single,stderr
+  LANG: ${LANG}
+  LANGUAGE: ${LANGUAGE}
+  CONNECTION_TIMEOUT_MS: ${CONNECTION_TIMEOUT_MS}
+  APP_URL: ${APP_URL}
+  APP_KEY: ${APP_KEY}
+  APP_QUEUES_COUNTER: '2'
+  DB_CONNECTION: pgsql
+  DB_HOST: postgres
+  DB_PORT: '5432'
+  DB_DATABASE: ${POSTGRES_DB}
+  DB_USERNAME: ${POSTGRES_USER}
+  DB_PASSWORD: ${POSTGRES_PASSWORD}
+  REDIS_HOST: redis
+  REDIS_PORT: '6379'
+  PINOKIO_HOST: pinokio
+  PINOKIO_PORT: '3000'
+  PINOKIO_TOKEN: ${PINOKIO_TOKEN}
+  RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
+  BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
+  BROWSER_STREAM_PUBLIC_URL: ${BROWSER_STREAM_PUBLIC_URL}
+  BROWSER_STREAM_ALLOWED_ORIGINS: ${APP_URL}
+  BROWSER_STREAM_SECRET: ${BROWSER_STREAM_SECRET}
+volumes:
+  puppetflow-framework: null
+  puppetflow-uploads: null
+  puppetflow-execution: null
+  puppetflow-db: null
+  pinokio-downloads: null
+x-casaos:
+  id: com.dokploy.puppetflow-postgres
+  main: puppetflow
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/puppetflow-postgres/icon.png
+  title:
+    en_US: Puppetflow with Postgres
+  tagline:
+    en_US: A self-hosted browser automation platform for building, running, and monitoring JavaScr...
+  description:
+    en_US: A self-hosted browser automation platform for building, running, and monitoring JavaScript workflows powered by
+      Puppeteer and PostgreSQL.
+  author: Dokploy Community
+  developer: Puppetflow with Postgres
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.11.7"
+  update_at: "2026-11-22"
+  website: https://puppetflow.com/
+  repo: https://github.com/puppetflow/puppetflow
+  docs: https://docs.puppetflow.com/

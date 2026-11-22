@@ -1,0 +1,74 @@
+name: pterodactyl
+services:
+  database:
+    image: mariadb:10.5
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+    - pterodb:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: panel
+      MYSQL_USER: pterodactyl
+      MYSQL_PASSWORD: IUv1wGiSY6tJQhgf9wZQYyG8pnYrMM1k
+      MYSQL_ROOT_PASSWORD: P6YSOZf0oB5p2EVEptY50lgzyK5ajBTe
+  cache:
+    image: redis:alpine
+    restart: always
+  panel:
+    image: ghcr.io/pterodactyl/panel:latest
+    restart: always
+    links:
+    - database
+    - cache
+    volumes:
+    - pterovar:/app/var/
+    - pteronginx:/etc/nginx/http.d/
+    - pterocerts:/etc/letsencrypt/
+    - pterologs:/app/storage/logs
+    environment:
+      APP_ENV: production
+      APP_ENVIRONMENT_ONLY: 'false'
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_DRIVER: redis
+      REDIS_HOST: cache
+      DB_HOST: database
+      DB_PASSWORD: IUv1wGiSY6tJQhgf9wZQYyG8pnYrMM1k
+      DB_PORT: '3306'
+      MYSQL_PASSWORD: IUv1wGiSY6tJQhgf9wZQYyG8pnYrMM1k
+      MYSQL_ROOT_PASSWORD: P6YSOZf0oB5p2EVEptY50lgzyK5ajBTe
+      DB_CONNECTION: mysql
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  pterodb: null
+  pterovar: null
+  pteronginx: null
+  pterocerts: null
+  pterologs: null
+x-casaos:
+  id: com.dokploy.pterodactyl
+  main: panel
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pterodactyl/icon.png
+  title:
+    en_US: Pterodactyl
+  tagline:
+    en_US: A free, open-source game server management panel
+  description:
+    en_US: A free, open-source game server management panel.
+  author: Dokploy Community
+  developer: Pterodactyl
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://pterodactyl.io
+  repo: https://github.com/pterodactyl/panel
+  docs: https://pterodactyl.io/project/introduction.html

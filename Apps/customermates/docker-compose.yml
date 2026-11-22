@@ -1,0 +1,68 @@
+name: customermates
+services:
+  customermates:
+    image: ghcr.io/customermates/customermates:sha-4f4d61c
+    restart: unless-stopped
+    depends_on:
+      customermates-postgres:
+        condition: service_healthy
+    environment:
+      APP_MODE: self-hosted
+      NODE_ENV: production
+      DATABASE_URL: postgresql://customermates:046383440c6fbc5faf2126cf4bbc4e50@customermates-postgres:5432/customermates
+      WORKFLOW_TARGET_WORLD: '@workflow/world-postgres'
+      WORKFLOW_POSTGRES_URL: postgresql://customermates:046383440c6fbc5faf2126cf4bbc4e50@customermates-postgres:5432/customermates
+      BASE_URL: http://localhost
+      BETTER_AUTH_SECRET: dd9e8686c36c3e5d00396f7aeadc359b30e2979a9298fe0e19320a2a59e9bb59
+      CRON_SECRET: 02f3918d45d09bcffd47cdb6d80fa47b87633a56cb67ed8f99b74fc281636bc8
+      RESEND_API_KEY: ''
+      RESEND_OPERATOR_EMAIL: mail@your-company.com
+    expose:
+    - 4000
+    ports:
+    - target: 4000
+      published: "4000"
+      protocol: tcp
+  customermates-postgres:
+    image: postgres:16.15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: customermates
+      POSTGRES_PASSWORD: 046383440c6fbc5faf2126cf4bbc4e50
+      POSTGRES_DB: customermates
+    volumes:
+    - customermates-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  customermates-postgres-data: {}
+x-casaos:
+  id: com.dokploy.customermates
+  main: customermates
+  index: /
+  port_map: "4000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/customermates/icon.svg
+  title:
+    en_US: Customermates
+  tagline:
+    en_US: Customermates is an open-source CRM for contacts, organizations, deals, services and ta...
+  description:
+    en_US: Customermates is an open-source CRM for contacts, organizations, deals, services and tasks, with a REST API, webhooks
+      and an MCP endpoint for external AI clients. Self-hosted, it runs on PostgreSQL 16 and uses the Starter feature set.
+  author: Dokploy Community
+  developer: Customermates
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "sha-4f4d61c"
+  update_at: "2026-11-22"
+  website: https://customermates.com
+  repo: https://github.com/customermates/customermates
+  docs: https://customermates.com/docs/self-hosting

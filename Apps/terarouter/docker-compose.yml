@@ -1,0 +1,76 @@
+name: terarouter
+services:
+  terarouter:
+    image: ghcr.io/montara-project/tera-router:v1.23.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+      ENV: production
+      DEBUG: 'false'
+      MACHINE_ID: '28722'
+      APP_SECRET: NMO0oFvcJcSLBJQjmEe0vMH66M1YHkSHFAZXOzEpoJvERLuvF14bLr9n5aYF11wN
+      APP_NAME: tera-router-server
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASSWORD: yl3uT3DxEEWaqDhFciADSFeqUzSBRpnH
+      TRUSTED_PROXIES: 10.0.1.0/24,173.245.48.0/20,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,141.101.64.0/18,108.162.192.0/18,190.93.240.0/20,188.114.96.0/20,197.234.240.0/22,198.41.128.0/17,162.158.0.0/15,104.16.0.0/13,104.24.0.0/14,172.64.0.0/13,131.0.72.0/22,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32
+      CORS_ALLOWED_ORIGINS: https://localhost
+      API_URL: https://localhost
+      DATABASE_PATH: /app/data/terarouter.db
+      MIGRATE_ON_BOOT: 'true'
+      SEED_ON_BOOT: 'true'
+      HEADROOM_URL: http://headroom:8787
+      HEADROOM_PROXY_TOKEN: BwrSIgoyJboutAIFjOcypnHzgsmeAlPrtlkHc2Hi36s=
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget -qO- http://127.0.0.1:8080/health || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    volumes:
+    - terarouter-data:/app/data
+    depends_on:
+    - headroom
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  headroom:
+    image: ghcr.io/headroomlabs-ai/headroom:0.41.0
+    restart: unless-stopped
+    environment:
+      HEADROOM_HOST: 0.0.0.0
+      HEADROOM_PORT: '8787'
+      HEADROOM_COMPRESS_ALLOW_REMOTE: '1'
+      HEADROOM_PROXY_TOKEN: BwrSIgoyJboutAIFjOcypnHzgsmeAlPrtlkHc2Hi36s=
+      HEADROOM_DISABLE_KOMPRESS: '1'
+      HEADROOM_DISABLE_KOMPRESS_FALLBACK: '1'
+volumes:
+  terarouter-data: null
+x-casaos:
+  id: com.dokploy.terarouter
+  main: terarouter
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/terarouter/icon.png
+  title:
+    en_US: Tera Router
+  tagline:
+    en_US: 'Self-hosted AI router: a single OpenAI/Anthropic-compatible gateway in front of all you...'
+  description:
+    en_US: 'Self-hosted AI router: a single OpenAI/Anthropic-compatible gateway in front of all your providers, with a dashboard
+      for accounts, routing, model catalogs, and cost analytics.'
+  author: Dokploy Community
+  developer: Tera Router
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.23.0"
+  update_at: "2026-11-22"
+  website: https://terarouter.xyz
+  repo: https://github.com/montara-project/tera-router
+  docs: https://docs.terarouter.xyz

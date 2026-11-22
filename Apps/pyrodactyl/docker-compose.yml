@@ -1,0 +1,73 @@
+name: pyrodactyl
+services:
+  database:
+    image: mariadb:11
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+    - pterodb:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: panel
+      MYSQL_USER: pterodactyl
+      MYSQL_PASSWORD: KAiznLjFA4L4BnCwaZjbpwbmc19K8DaC
+      MYSQL_ROOT_PASSWORD: xWBu0ChaZ3ckFMeYJHQtJAgbgI6Vjiz6
+  cache:
+    image: redis:alpine
+    restart: always
+  panel:
+    image: ghcr.io/pyrodactyl-oss/pyrodactyl:latest
+    restart: always
+    links:
+    - database
+    - cache
+    volumes:
+    - pterovar:/app/var/
+    - pteronginx:/etc/nginx/http.d/
+    - pterocerts:/etc/letsencrypt/
+    - pterologs:/app/storage/logs
+    environment:
+      APP_URL: https://localhost
+      APP_ENV: production
+      APP_ENVIRONMENT_ONLY: 'false'
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_DRIVER: redis
+      REDIS_HOST: cache
+      DB_HOST: database
+      DB_PORT: '3306'
+      DB_PASSWORD: KAiznLjFA4L4BnCwaZjbpwbmc19K8DaC
+      DB_CONNECTION: mariadb
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  pterodb: null
+  pterovar: null
+  pteronginx: null
+  pterocerts: null
+  pterologs: null
+x-casaos:
+  id: com.dokploy.pyrodactyl
+  main: panel
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pyrodactyl/icon.png
+  title:
+    en_US: Pyrodactyl
+  tagline:
+    en_US: Pyrodactyl is the Pterodactyl-based game server panel that's faster, smaller, safer, an...
+  description:
+    en_US: Pyrodactyl is the Pterodactyl-based game server panel that's faster, smaller, safer, and more accessible than Pelican.
+  author: Dokploy Community
+  developer: Pyrodactyl
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://pyrodactyl.dev
+  repo: https://github.com/pyrohost/pyrodactyl
+  docs: https://pyrodactyl.dev/docs

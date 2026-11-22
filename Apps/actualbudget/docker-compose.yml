@@ -1,0 +1,39 @@
+name: actualbudget
+services:
+  actualbudget:
+    image: docker.io/actualbudget/actual-server:latest
+    environment:
+    - ACTUAL_PORT=5006
+    volumes:
+    - actual-data:/data
+    restart: unless-stopped
+    ports:
+    - target: 5006
+      published: "5006"
+      protocol: tcp
+volumes:
+  actual-data: null
+x-casaos:
+  id: com.dokploy.actualbudget
+  main: actualbudget
+  index: /
+  port_map: "5006"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/actualbudget/icon.png
+  title:
+    en_US: Actual Budget
+  tagline:
+    en_US: A super fast and privacy-focused app for managing your finances
+  description:
+    en_US: A super fast and privacy-focused app for managing your finances.
+  author: Dokploy Community
+  developer: Actual Budget
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://actualbudget.org
+  repo: https://github.com/actualbudget/actual
+  docs: https://actualbudget.org/docs

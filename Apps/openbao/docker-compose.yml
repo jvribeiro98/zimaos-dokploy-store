@@ -1,0 +1,58 @@
+name: openbao
+services:
+  openbao:
+    image: openbao/openbao:2.7.2
+    restart: unless-stopped
+    command: server
+    environment:
+      BAO_ADDR: http://127.0.0.1:8200
+    expose:
+    - '8200'
+    volumes:
+    - /DATA/AppData/$AppID/config/openbao.hcl:/openbao/config/openbao.hcl:ro
+    - openbao-data:/openbao/file
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - bao status >/dev/null 2>&1; [ $$? -ne 1 ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    ports:
+    - target: 8200
+      published: "8200"
+      protocol: tcp
+volumes:
+  openbao-data: null
+x-casaos:
+  id: com.dokploy.openbao
+  main: openbao
+  index: /
+  port_map: "8200"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openbao/icon.svg
+  title:
+    en_US: OpenBao
+  tagline:
+    en_US: OpenBao is an open-source, community-driven fork of HashiCorp Vault under the Linux Fou...
+  description:
+    en_US: OpenBao is an open-source, community-driven fork of HashiCorp Vault under the Linux Foundation for managing secrets,
+      encryption keys and certificates. This template runs a single node with persistent Raft storage and the web UI. After
+      deploy, open the UI to initialize OpenBao, store the unseal keys and root token safely, then unseal it (unseal again
+      after every restart).
+  author: Dokploy Community
+  developer: OpenBao
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2.7.2"
+  update_at: "2026-11-22"
+  website: https://openbao.org/
+  repo: https://github.com/openbao/openbao
+  docs: https://openbao.org/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./config/openbao.hcl).
+        Review environment variables before starting.

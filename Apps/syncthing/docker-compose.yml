@@ -1,0 +1,48 @@
+name: syncthing
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    restart: unless-stopped
+    expose:
+    - 8384
+    - 22000
+    - 21027/udp
+    volumes:
+    - syncthing_config:/config
+    - syncthing_data:/var/syncthing/Sync
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=${timezone}
+    ports:
+    - target: 8384
+      published: "8384"
+      protocol: tcp
+volumes:
+  syncthing_config: null
+  syncthing_data: null
+x-casaos:
+  id: com.dokploy.syncthing
+  main: syncthing
+  index: /
+  port_map: "8384"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/syncthing/icon.svg
+  title:
+    en_US: Syncthing
+  tagline:
+    en_US: Syncthing keeps your devices and files continuously in sync
+  description:
+    en_US: Syncthing keeps your devices and files continuously in sync. Self-host it on your own server with Dokploy, which
+      deploys Syncthing as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Syncthing
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://syncthing.net/
+  repo: https://github.com/syncthing/syncthing
+  docs: https://docs.syncthing.net/

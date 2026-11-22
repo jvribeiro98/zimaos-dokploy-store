@@ -1,0 +1,104 @@
+name: weblate
+services:
+  weblate:
+    image: weblate/weblate:2026.7.1.1
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    volumes:
+    - weblate-data:/app/data
+    - weblate-cache:/app/cache
+    tmpfs:
+    - /run
+    - /tmp
+    environment:
+      WEBLATE_SITE_DOMAIN: localhost
+      WEBLATE_SITE_TITLE: Weblate
+      WEBLATE_ADMIN_NAME: Weblate Admin
+      WEBLATE_ADMIN_EMAIL: admin@localhost
+      WEBLATE_ADMIN_PASSWORD: dmUnzf7W1URMLEUANoUEYCAtR2eWEtnz
+      WEBLATE_SERVER_EMAIL: weblate@localhost
+      WEBLATE_DEFAULT_FROM_EMAIL: weblate@localhost
+      WEBLATE_ENABLE_HTTPS: '0'
+      WEBLATE_ALLOWED_HOSTS: '*'
+      WEBLATE_REGISTRATION_OPEN: '1'
+      POSTGRES_HOST: database
+      POSTGRES_PORT: '5432'
+      POSTGRES_USER: weblate
+      POSTGRES_PASSWORD: 18AljvmdrhoiwizhrcgooH2NO84e7m4P
+      POSTGRES_DB: weblate
+      REDIS_HOST: cache
+      REDIS_PORT: '6379'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  database:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    volumes:
+    - weblate-postgres-data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: weblate
+      POSTGRES_PASSWORD: 18AljvmdrhoiwizhrcgooH2NO84e7m4P
+      POSTGRES_DB: weblate
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  cache:
+    image: redis:8-alpine
+    restart: unless-stopped
+    command:
+    - redis-server
+    - --save
+    - '60'
+    - '1'
+    - --loglevel
+    - warning
+    volumes:
+    - weblate-redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  weblate-data: null
+  weblate-cache: null
+  weblate-postgres-data: null
+  weblate-redis-data: null
+x-casaos:
+  id: com.dokploy.weblate
+  main: weblate
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/weblate/icon.svg
+  title:
+    en_US: Weblate
+  tagline:
+    en_US: Weblate is a libre web-based continuous localization platform with tight version contro...
+  description:
+    en_US: Weblate is a libre web-based continuous localization platform with tight version control integration, quality checks,
+      and support for over 50 file formats including PO, XLIFF, JSON, and Android resources.
+  author: Dokploy Community
+  developer: Weblate
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.7.1.1"
+  update_at: "2026-11-22"
+  website: https://weblate.org/
+  repo: https://github.com/WeblateOrg/weblate
+  docs: https://docs.weblate.org/en/latest/admin/install/docker.html

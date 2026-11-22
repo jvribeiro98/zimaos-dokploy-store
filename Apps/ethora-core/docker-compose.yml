@@ -1,0 +1,308 @@
+name: ethora-core
+services:
+  config:
+    logging: &id001
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: '5'
+    image: ${ETHORA_XMPP_IMAGE:-docker.io/dappros/ethora-xmpp:2610}
+    user: 0:0
+    entrypoint:
+    - /bin/sh
+    - /ethora/scripts/render-config.sh
+    env_file:
+    - path: .env
+      required: false
+    environment:
+      ROOT_DOMAIN: ${ROOT_DOMAIN:?ROOT_DOMAIN is not set; run ./configure.sh or fill in .env}
+      API_DOMAIN: ${API_DOMAIN:-api.${ROOT_DOMAIN}}
+      WEB_DOMAIN: ${WEB_DOMAIN:-app.${ROOT_DOMAIN}}
+      XMPP_DOMAIN: ${XMPP_DOMAIN:-xmpp.${ROOT_DOMAIN}}
+      FILES_DOMAIN: ${FILES_DOMAIN:-files.${ROOT_DOMAIN}}
+    volumes:
+    - config:/out/config
+    - mysql-initdb:/out/mysql-initdb
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    - /DATA/AppData/$AppID/templates:/ethora/templates:ro
+    restart: 'no'
+  mongo:
+    logging: *id001
+    image: mongo:6.0.8
+    command:
+    - mongod
+    - --replSet
+    - rs0
+    - --bind_ip_all
+    volumes:
+    - mongo:/data/db
+    - mongo-config:/data/configdb
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - bash
+      - -c
+      - exec 3<>/dev/tcp/127.0.0.1/27017
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  mongo-init:
+    logging: *id001
+    image: mongo:6.0.8
+    entrypoint:
+    - bash
+    - /ethora/scripts/mongo-init.sh
+    volumes:
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: 'no'
+  mysql:
+    logging: *id001
+    image: mysql:8.1.0
+    command:
+    - --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD is not set}
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+    - mysql:/var/lib/mysql
+    - mysql-initdb:/docker-entrypoint-initdb.d:ro
+    depends_on:
+      config:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - mysqladmin ping -h 127.0.0.1 -uroot -p"$$MYSQL_ROOT_PASSWORD" --silent
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+  redis:
+    logging: *id001
+    image: redis:7.4-alpine
+    volumes:
+    - redis:/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  minio:
+    logging: *id001
+    image: ${MINIO_IMAGE:-docker.io/dappros/minio:RELEASE.2025-09-07T16-13-09Z}
+    command:
+    - server
+    - /data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?MINIO_ROOT_USER is not set}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?MINIO_ROOT_PASSWORD is not set}
+    volumes:
+    - minio:/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:9000/minio/health/live
+      interval: 15s
+      timeout: 5s
+      retries: 10
+  centrifugo:
+    logging: *id001
+    image: centrifugo/centrifugo:v6
+    command:
+    - centrifugo
+    - -c
+    - /ethora/config/centrifugo/config.json
+    volumes:
+    - config:/ethora/config:ro
+    depends_on:
+      config:
+        condition: service_completed_successfully
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget -q -O /dev/null http://127.0.0.1:8000/health || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+  xmpp:
+    logging: *id001
+    image: ${ETHORA_XMPP_IMAGE:-docker.io/dappros/ethora-xmpp:2610}
+    entrypoint:
+    - /bin/sh
+    - /ethora/scripts/xmpp-start.sh
+    environment:
+      XMPP_DOMAIN: ${XMPP_DOMAIN:-xmpp.${ROOT_DOMAIN}}
+      XMPP_ADMIN_PASSWORD: ${XMPP_ADMIN_PASSWORD:?XMPP_ADMIN_PASSWORD is not set}
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    depends_on:
+      config:
+        condition: service_completed_successfully
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - test -f /tmp/ethora-admin-ready && /opt/ejabberd/bin/ejabberdctl status >/dev/null
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+  api:
+    logging: *id001
+    image: ${ETHORA_API_IMAGE:-docker.io/dappros/ethora-api:2610}
+    entrypoint: &id002
+    - tini
+    - --
+    - bash
+    - /ethora/scripts/api-entrypoint.sh
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    command:
+    - api
+    depends_on:
+      config:
+        condition: service_completed_successfully
+      mongo-init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      xmpp:
+        condition: service_started
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  jobs:
+    logging: *id001
+    image: ${ETHORA_API_IMAGE:-docker.io/dappros/ethora-api:2610}
+    entrypoint: *id002
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    command:
+    - jobs
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+  init:
+    logging: *id001
+    image: ${ETHORA_API_IMAGE:-docker.io/dappros/ethora-api:2610}
+    entrypoint: *id002
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    command:
+    - init
+    depends_on:
+      api:
+        condition: service_healthy
+      xmpp:
+        condition: service_healthy
+    restart: 'no'
+    healthcheck:
+      disable: true
+  verify:
+    logging: *id001
+    image: ${ETHORA_API_IMAGE:-docker.io/dappros/ethora-api:2610}
+    entrypoint: *id002
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    profiles:
+    - verify
+    command:
+    - verify
+    restart: 'no'
+    healthcheck:
+      disable: true
+  frontend:
+    logging: *id001
+    image: ${ETHORA_FRONTEND_IMAGE:-docker.io/dappros/ethora-frontend:2610}
+    entrypoint:
+    - /bin/sh
+    - /ethora/scripts/frontend-start.sh
+    command:
+    - serve
+    volumes:
+    - config:/ethora/config:ro
+    - /DATA/AppData/$AppID/scripts:/ethora/scripts:ro
+    depends_on:
+      config:
+        condition: service_completed_successfully
+    restart: unless-stopped
+x-logging:
+  logging: *id001
+x-api:
+  logging: *id001
+  image: ${ETHORA_API_IMAGE:-docker.io/dappros/ethora-api:2610}
+  entrypoint: *id002
+  volumes:
+  - config:/ethora/config:ro
+  - ../files/scripts:/ethora/scripts:ro
+volumes:
+  mongo: null
+  mysql: null
+  minio: null
+  redis: null
+  mongo-config: null
+  config: null
+  mysql-initdb: null
+x-casaos:
+  id: com.dokploy.ethora-core
+  main: api
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ethora-core/icon.svg
+  title:
+    en_US: Ethora Core
+  tagline:
+    en_US: 'Self-hosted chat and messaging server: API, web chat and admin panel, XMPP server (ejab...'
+  description:
+    en_US: 'Self-hosted chat and messaging server: API, web chat and admin panel, XMPP server (ejabberd) and file storage,
+      with SDKs for web, iOS, Android and React Native.'
+  author: Dokploy Community
+  developer: Ethora Core
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "2610"
+  update_at: "2026-11-22"
+  website: https://ethora.com/
+  repo: https://github.com/dappros/ethora-install
+  docs: https://github.com/dappros/ethora-install/tree/main/deploy/compose
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (scripts/api-entrypoint.sh,
+        scripts/init.sh, scripts/verify.js, scripts/render-config.sh, scripts/mongo-init.sh, scripts/xmpp-start.sh, scripts/frontend-start.sh,
+        templates/backend.env.template, templates/frontend.env.template, templates/centrifugo-config.json.template). Review
+        environment variables before starting.

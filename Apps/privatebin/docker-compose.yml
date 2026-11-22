@@ -1,0 +1,39 @@
+name: privatebin
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:2.0.4
+    restart: unless-stopped
+    volumes:
+    - privatebin_data:/srv/data
+    expose:
+    - '8080'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  privatebin_data: null
+x-casaos:
+  id: com.dokploy.privatebin
+  main: privatebin
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/privatebin/icon.svg
+  title:
+    en_US: PrivateBin
+  tagline:
+    en_US: PrivateBin is a minimalist, open-source online pastebin where the server has zero knowl...
+  description:
+    en_US: PrivateBin is a minimalist, open-source online pastebin where the server has zero knowledge of pasted data.
+  author: Dokploy Community
+  developer: PrivateBin
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.0.4"
+  update_at: "2026-11-22"
+  website: https://privatebin.info/
+  repo: https://github.com/PrivateBin/PrivateBin
+  docs: https://github.com/PrivateBin/docker-nginx-fpm-alpine

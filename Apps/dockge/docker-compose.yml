@@ -1,0 +1,45 @@
+name: dockge
+services:
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - dockge_data:/app/data
+    - dockge_stacks:/opt/stacks
+    environment:
+      DOCKGE_STACKS_DIR: /opt/stacks
+    expose:
+    - '5001'
+    ports:
+    - target: 5001
+      published: "5001"
+      protocol: tcp
+volumes:
+  dockge_data: null
+  dockge_stacks: null
+x-casaos:
+  id: com.dokploy.dockge
+  main: dockge
+  index: /
+  port_map: "5001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dockge/icon.svg
+  title:
+    en_US: Dockge
+  tagline:
+    en_US: Dockge is a web interface for managing Docker Compose stacks
+  description:
+    en_US: Dockge is a web interface for managing Docker Compose stacks. Self-host it on your own server with Dokploy, which
+      deploys Dockge as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Dockge
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1"
+  update_at: "2026-11-22"
+  website: https://dockge.kuma.pet/
+  repo: https://github.com/louislam/dockge
+  docs: https://github.com/louislam/dockge

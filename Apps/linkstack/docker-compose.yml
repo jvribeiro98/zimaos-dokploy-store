@@ -1,0 +1,55 @@
+name: linkstack
+services:
+  linkstack:
+    image: linkstackorg/linkstack:latest
+    environment:
+      TZ: Europe/Berlin
+      SERVER_ADMIN: ${admin_email}
+      HTTP_SERVER_NAME: ${main_domain}
+      HTTPS_SERVER_NAME: ${main_domain}
+      LOG_LEVEL: info
+      PHP_MEMORY_LIMIT: 256M
+      UPLOAD_MAX_FILESIZE: 8M
+    volumes:
+    - linkstack-data:/htdocs
+    restart: unless-stopped
+    depends_on:
+    - mysql
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: ${mysql_root_password}
+    volumes:
+    - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+volumes:
+  linkstack-data: {}
+  mysql-data: {}
+x-casaos:
+  id: com.dokploy.linkstack
+  main: linkstack
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/linkstack/icon.svg
+  title:
+    en_US: LinkStack
+  tagline:
+    en_US: LinkStack is an open-source link-in-bio platform for sharing multiple links using a cus...
+  description:
+    en_US: LinkStack is an open-source link-in-bio platform for sharing multiple links using a customizable landing page.
+  author: Dokploy Community
+  developer: LinkStack
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://linkstack.org/
+  repo: https://github.com/linkstackorg/linkstack
+  docs: https://docs.linkstack.org/

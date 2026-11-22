@@ -1,0 +1,42 @@
+name: jellyseerr
+services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr:2.7.3
+    restart: unless-stopped
+    volumes:
+    - jellyseerr_config:/app/config
+    environment:
+      LOG_LEVEL: info
+    expose:
+    - '5055'
+    ports:
+    - target: 5055
+      published: "5055"
+      protocol: tcp
+volumes:
+  jellyseerr_config: null
+x-casaos:
+  id: com.dokploy.jellyseerr
+  main: jellyseerr
+  index: /
+  port_map: "5055"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/jellyseerr/icon.svg
+  title:
+    en_US: Jellyseerr
+  tagline:
+    en_US: Jellyseerr is a media request manager for Jellyfin, Emby, and Plex
+  description:
+    en_US: Jellyseerr is a media request manager for Jellyfin, Emby, and Plex. Self-host it on your own server with Dokploy,
+      which deploys Jellyseerr as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Jellyseerr
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.7.3"
+  update_at: "2026-11-22"
+  website: https://docs.jellyseerr.dev/
+  repo: https://github.com/Fallenbagel/jellyseerr
+  docs: https://docs.jellyseerr.dev/

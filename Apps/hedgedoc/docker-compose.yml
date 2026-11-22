@@ -1,0 +1,64 @@
+name: hedgedoc
+services:
+  hedgedoc:
+    image: quay.io/hedgedoc/hedgedoc:1.10.8
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+    - CMD_DB_URL=postgres://hedgedoc:RGKRTqS3TEFlfvASDytl24G1Ml03sffa@database:5432/hedgedoc
+    - CMD_DOMAIN=localhost
+    - CMD_PROTOCOL_USESSL=true
+    - CMD_URL_ADDPORT=false
+    volumes:
+    - hedgedoc_uploads:/hedgedoc/public/uploads
+    expose:
+    - '3000'
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  database:
+    image: postgres:17.7-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=hedgedoc
+    - POSTGRES_PASSWORD=RGKRTqS3TEFlfvASDytl24G1Ml03sffa
+    - POSTGRES_DB=hedgedoc
+    volumes:
+    - hedgedoc_database:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U hedgedoc -d hedgedoc
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  hedgedoc_uploads: null
+  hedgedoc_database: null
+x-casaos:
+  id: com.dokploy.hedgedoc
+  main: hedgedoc
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/hedgedoc/icon.svg
+  title:
+    en_US: HedgeDoc
+  tagline:
+    en_US: HedgeDoc is a collaborative Markdown editor for teams that need real-time notes, docume...
+  description:
+    en_US: HedgeDoc is a collaborative Markdown editor for teams that need real-time notes, documentation, and knowledge sharing.
+  author: Dokploy Community
+  developer: HedgeDoc
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.10.8"
+  update_at: "2026-11-22"
+  website: https://hedgedoc.org/
+  repo: https://github.com/hedgedoc/hedgedoc
+  docs: https://docs.hedgedoc.org/

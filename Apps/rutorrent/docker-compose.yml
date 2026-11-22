@@ -1,0 +1,51 @@
+name: rutorrent
+services:
+  rutorrent:
+    image: crazymax/rtorrent-rutorrent:latest
+    restart: unless-stopped
+    environment:
+    - PUID=${PUID:-1000}
+    - PGID=${PGID:-1000}
+    - RUTORRENT_PORT=8080
+    - XMLRPC_PORT=8000
+    - RT_DHT_PORT=${DHT_PORT:-6881}
+    - RT_INC_PORT=${INCOMING_PORT:-50000}
+    volumes:
+    - rutorrent-data:/data
+    - rutorrent-downloads:/downloads
+    - rutorrent-passwd:/passwd
+    ports:
+    - ${INCOMING_PORT:-50000}:50000/tcp
+    - ${DHT_PORT:-6881}:6881/udp
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  rutorrent-data: {}
+  rutorrent-downloads: {}
+  rutorrent-passwd: {}
+x-casaos:
+  id: com.dokploy.rutorrent
+  main: rutorrent
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rutorrent/icon.svg
+  title:
+    en_US: ruTorrent
+  tagline:
+    en_US: ruTorrent + rTorrent BitTorrent client (crazy-max image)
+  description:
+    en_US: ruTorrent + rTorrent BitTorrent client (crazy-max image). Web UI on 8080, XMLRPC on 8000, with P2P ports exposed
+      for seeding.
+  author: Dokploy Community
+  developer: ruTorrent
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://crazymax.dev/
+  repo: https://github.com/crazy-max/docker-rtorrent-rutorrent
+  docs: https://github.com/crazy-max/docker-rtorrent-rutorrent

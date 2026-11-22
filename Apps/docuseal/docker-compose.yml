@@ -1,0 +1,66 @@
+name: docuseal
+services:
+  app:
+    image: docuseal/docuseal:latest
+    volumes:
+    - docuseal:/data/docuseal
+    depends_on:
+      docu-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+    - DATABASE_URL=postgresql://postgres:postgres@docu-postgres:5432/docuseal
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  docu-postgres:
+    image: postgres:18
+    volumes:
+    - docuseal-db:/var/lib/postgresql
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=docuseal
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER:-docuseal} -d ${POSTGRES_DB:-docuseal}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+  docu-redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+    - docuseal-redis-data:/data
+volumes:
+  docuseal: null
+  docuseal-db: null
+  docuseal-redis-data: null
+x-casaos:
+  id: com.dokploy.docuseal
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/docuseal/icon.png
+  title:
+    en_US: Docuseal
+  tagline:
+    en_US: Docuseal is a self-hosted document management system
+  description:
+    en_US: Docuseal is a self-hosted document management system.
+  author: Dokploy Community
+  developer: Docuseal
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.docuseal.com/
+  repo: https://github.com/docusealco/docuseal
+  docs: https://www.docuseal.com/

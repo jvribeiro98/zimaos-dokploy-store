@@ -1,0 +1,42 @@
+name: vaultwarden
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.37.5
+    restart: always
+    environment:
+      DOMAIN: https://localhost
+      SIGNUPS_ALLOWED: 'true'
+    volumes:
+    - vaultwarden:/data
+    expose:
+    - 80
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  vaultwarden: null
+x-casaos:
+  id: com.dokploy.vaultwarden
+  main: vaultwarden
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/vaultwarden/icon.svg
+  title:
+    en_US: Vaultwarden
+  tagline:
+    en_US: Vaultwarden is a lightweight password manager that works with Bitwarden apps
+  description:
+    en_US: Vaultwarden is a lightweight password manager that works with Bitwarden apps. Self-host it on your own server with
+      Dokploy, which deploys Vaultwarden as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Vaultwarden
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.37.5"
+  update_at: "2026-11-22"
+  repo: https://github.com/dani-garcia/vaultwarden
+  docs: https://github.com/dani-garcia/vaultwarden/wiki

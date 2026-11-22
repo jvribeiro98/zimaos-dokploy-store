@@ -1,0 +1,61 @@
+name: kokoro-tts
+services:
+  kokoro-tts:
+    build:
+      context: https://github.com/remsky/Kokoro-FastAPI.git#master
+      dockerfile: docker/cpu/Dockerfile
+    restart: unless-stopped
+    expose:
+    - 8880
+    environment:
+    - MODEL_PATH=/app/models
+    - DEVICE=cpu
+    - HOST=0.0.0.0
+    - PORT=8880
+    volumes:
+    - kokoro-models:/app/models
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8880/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    ports:
+    - target: 8880
+      published: "8880"
+      protocol: tcp
+volumes:
+  kokoro-models: null
+x-casaos:
+  id: com.dokploy.kokoro-tts
+  main: kokoro-tts
+  index: /
+  port_map: "8880"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kokoro-tts/icon.svg
+  title:
+    en_US: Kokoro TTS
+  tagline:
+    en_US: Dockerized FastAPI wrapper for the Kokoro-82M text-to-speech model with multi-language...
+  description:
+    en_US: Dockerized FastAPI wrapper for the Kokoro-82M text-to-speech model with multi-language support and OpenAI-compatible
+      endpoints.
+  author: Dokploy Community
+  developer: Kokoro TTS
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/remsky/Kokoro-FastAPI
+  repo: https://github.com/remsky/Kokoro-FastAPI
+  docs: https://github.com/remsky/Kokoro-FastAPI#readme
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

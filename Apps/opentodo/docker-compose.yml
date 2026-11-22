@@ -1,0 +1,53 @@
+name: opentodo
+services:
+  opentodo:
+    image: ghcr.io/opentodoapp/opentodo:1.4.2
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - OPENTODO_BASE_URL=
+    - OPENTODO_SETUP_TOKEN=ZA5ZgjkQQmN68WTqeNSo0z6RycsWYO0x
+    - OPENTODO_ALLOW_SIGNUP=false
+    - OPENTODO_TRUSTED_PROXIES=
+    volumes:
+    - opentodo-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - /opentodo
+      - healthcheck
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  opentodo-data: null
+x-casaos:
+  id: com.dokploy.opentodo
+  main: opentodo
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/opentodo/icon.svg
+  title:
+    en_US: OpenTodo
+  tagline:
+    en_US: Open-source, local-first task manager
+  description:
+    en_US: Open-source, local-first task manager. Works offline and syncs every device from one small container.
+  author: Dokploy Community
+  developer: OpenTodo
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.4.2"
+  update_at: "2026-11-22"
+  website: https://open-todo.app
+  repo: https://github.com/OpenTodoApp/OpenTodo
+  docs: https://open-todo.app/docs/self-hosting/dokploy/

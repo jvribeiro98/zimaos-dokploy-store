@@ -1,0 +1,95 @@
+name: passbolt
+services:
+  passbolt:
+    image: passbolt/passbolt:latest-ce
+    environment:
+      APP_FULL_BASE_URL: http://localhost
+      DATASOURCES_DEFAULT_HOST: mariadb
+      DATASOURCES_DEFAULT_PORT: '3306'
+      DATASOURCES_DEFAULT_USERNAME: passbolt
+      DATASOURCES_DEFAULT_PASSWORD: 4Bnp9j335ysnKEU3yOcUyGOhmll9Avpz
+      DATASOURCES_DEFAULT_DATABASE: passbolt
+      PASSBOLT_PLUGINS_JWT_AUTHENTICATION_ENABLED: 'true'
+      EMAIL_DEFAULT_FROM: passbolt@localhost
+      EMAIL_TRANSPORT_DEFAULT_HOST: smtp.example.com
+      EMAIL_TRANSPORT_DEFAULT_PORT: '587'
+      EMAIL_TRANSPORT_DEFAULT_USERNAME: noreply@example.com
+      EMAIL_TRANSPORT_DEFAULT_PASSWORD: Tnxa3ZAK7EIKVMZQ
+      EMAIL_TRANSPORT_DEFAULT_TLS: 'true'
+    volumes:
+    - gpg_volume:/etc/passbolt/gpg
+    - jwt_volume:/etc/passbolt/jwt
+    command:
+    - /usr/bin/wait-for.sh
+    - -t
+    - '0'
+    - ${PASSBOLT_DB_HOST}:${PASSBOLT_DB_PORT}
+    - --
+    - /docker-entrypoint.sh
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://127.0.0.1:80
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: D1DKdG7TSQnNS5t6s6AtOyWrsTthuLKK
+      MARIADB_DATABASE: passbolt
+      MARIADB_USER: passbolt
+      MARIADB_PASSWORD: 4Bnp9j335ysnKEU3yOcUyGOhmll9Avpz
+    volumes:
+    - passbolt_mariadb_data:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mariadb-admin
+      - ping
+      - -h
+      - localhost
+      - --silent
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  gpg_volume: {}
+  jwt_volume: {}
+  passbolt_mariadb_data: {}
+x-casaos:
+  id: com.dokploy.passbolt
+  main: passbolt
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/passbolt/icon.svg
+  title:
+    en_US: Passbolt
+  tagline:
+    en_US: Passbolt is an open-source password manager built for teams
+  description:
+    en_US: Passbolt is an open-source password manager built for teams. Self-host it on your own server with Dokploy, which
+      deploys Passbolt as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Passbolt
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "latest-ce"
+  update_at: "2026-11-22"
+  website: https://www.passbolt.com/
+  repo: https://github.com/passbolt/passbolt_api
+  docs: https://www.passbolt.com/docs/

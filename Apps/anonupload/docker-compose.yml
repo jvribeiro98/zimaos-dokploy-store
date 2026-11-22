@@ -1,0 +1,44 @@
+name: anonupload
+services:
+  anonupload:
+    image: ghcr.io/supernova3339/anonfiles:1
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - ADMIN_EMAIL=admin@example.com
+    - ADMIN_PASSWORD=3ZjFzsIN7z4ZOBfS
+    - CONTACT_EMAIL=admin@example.com
+    volumes:
+    - uploads:/var/www/html/uploads
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  uploads: {}
+x-casaos:
+  id: com.dokploy.anonupload
+  main: anonupload
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/anonupload/icon.png
+  title:
+    en_US: AnonUpload
+  tagline:
+    en_US: AnonUpload is a secure, anonymous file sharing application that does not require a data...
+  description:
+    en_US: AnonUpload is a secure, anonymous file sharing application that does not require a database. It is built with privacy
+      as a priority, ensuring that the direct filename used is not displayed.
+  author: Dokploy Community
+  developer: AnonUpload
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1"
+  update_at: "2026-11-22"
+  website: https://anonupload.com/
+  repo: https://github.com/supernova3339/anonupload
+  docs: https://github.com/Supernova3339/anonupload/blob/main/env.md

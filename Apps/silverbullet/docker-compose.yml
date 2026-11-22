@@ -1,0 +1,46 @@
+name: silverbullet
+services:
+  silverbullet:
+    image: ghcr.io/silverbulletmd/silverbullet:v2
+    restart: unless-stopped
+    environment:
+    - SB_USER=admin:KfkW3Mq5MOjwrbVA
+    volumes:
+    - silverbullet-space:/space
+    expose:
+    - 3000
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  silverbullet-space: {}
+x-casaos:
+  id: com.dokploy.silverbullet
+  main: silverbullet
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/silverbullet/icon.png
+  title:
+    en_US: SilverBullet
+  tagline:
+    en_US: SilverBullet is a personal knowledge base and collaborative note-taking platform
+  description:
+    en_US: SilverBullet is a personal knowledge base and collaborative note-taking platform.
+  author: Dokploy Community
+  developer: SilverBullet
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2"
+  update_at: "2026-11-22"
+  website: https://silverbullet.md
+  repo: https://github.com/silverbulletmd/silverbullet
+  docs: https://silverbullet.md/docs

@@ -1,0 +1,68 @@
+name: maybe
+services:
+  app:
+    image: ghcr.io/maybe-finance/maybe:sha-68c570eed8810fd59b5b33cca51bbad5eabb4cb4
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/uploads:/app/uploads
+    environment:
+      DATABASE_URL: postgresql://maybe:maybe@db:5432/maybe
+      SECRET_KEY_BASE: 7kJE0wuinHuBW7yNLHjz9qqmLBB+7LNMyR8I3LymdZnnLsCthQdw5NrHydBJhWCOzvekYHmMz6ZAcRZtQF040A==
+      SELF_HOSTED: 'True'
+      SYNTH_API_KEY: AHoDFyEYfORMz6BdvZ+7KkI9AU278DtaoIF7910NOKc=
+      RAILS_FORCE_SSL: 'false'
+      RAILS_ASSUME_SSL: 'false'
+      GOOD_JOB_EXECUTION_MODE: async
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:16
+    restart: always
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: maybe
+      POSTGRES_USER: maybe
+      POSTGRES_PASSWORD: maybe
+volumes:
+  db-data: null
+x-casaos:
+  id: com.dokploy.maybe
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/maybe/icon.svg
+  title:
+    en_US: Maybe
+  tagline:
+    en_US: Maybe is a self-hosted finance tracking application designed to simplify budgeting and...
+  description:
+    en_US: Maybe is a self-hosted finance tracking application designed to simplify budgeting and expenses.
+  author: Dokploy Community
+  developer: Maybe
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "sha-68c570eed8810fd59b5b33cca51bbad5eabb4cb4"
+  update_at: "2026-11-22"
+  website: https://maybe.finance/
+  repo: https://github.com/maybe-finance/maybe
+  docs: https://github.com/maybe-finance/maybe/blob/main/docs/hosting/docker.md
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./uploads). Review environment
+        variables before starting.

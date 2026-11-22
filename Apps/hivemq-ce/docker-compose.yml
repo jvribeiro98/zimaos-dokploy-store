@@ -1,0 +1,95 @@
+name: hivemq-ce
+services:
+  hivemq-ce-init:
+    image: curlimages/curl:8.22.0
+    restart: 'no'
+    user: 0:0
+    environment:
+    - MQTT_USERNAME=mqtt
+    - MQTT_PASSWORD=rmi0Vr0p1v2uN3hSUB206ZRytBwLoKJF
+    entrypoint:
+    - /bin/sh
+    - /tmp/hivemq-ce-init.sh
+    volumes:
+    - /DATA/AppData/$AppID/hivemq-ce-init.sh:/tmp/hivemq-ce-init.sh:ro
+    - hivemq_extensions:/extensions
+  hivemq-ce:
+    image: hivemq/hivemq-ce:2026.5
+    restart: unless-stopped
+    depends_on:
+      hivemq-ce-init:
+        condition: service_completed_successfully
+    environment:
+    - HIVEMQ_ALLOW_ALL_CLIENTS=false
+    entrypoint:
+    - /bin/bash
+    - -ec
+    - 'test -f /opt/hivemq/extensions/hivemq-file-rbac-extension/hivemq-extension.xml
+
+      test -f /opt/hivemq/extensions/hivemq-file-rbac-extension/hivemq-file-rbac-extension-4.6.17.jar
+
+      test -f /opt/hivemq/extensions/hivemq-file-rbac-extension/conf/credentials.xml
+
+      test ! -e /opt/hivemq/extensions/hivemq-allow-all-extension
+
+      exec /opt/docker-entrypoint.sh /opt/hivemq/bin/run.sh
+
+      '
+    expose:
+    - 1883
+    - 8000
+    volumes:
+    - hivemq_data:/opt/hivemq/data
+    - hivemq_log:/opt/hivemq/log
+    - hivemq_extensions:/opt/hivemq/extensions
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - bash -c 'exec 3<>/dev/tcp/127.0.0.1/1883'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    labels:
+    - traefik.tcp.routers.hivemq-ce-mqtts.entrypoints=mqtts
+    - traefik.tcp.routers.hivemq-ce-mqtts.rule=HostSNI(`${MQTT_DOMAIN}`)
+    - traefik.tcp.routers.hivemq-ce-mqtts.tls=true
+    - traefik.tcp.routers.hivemq-ce-mqtts.tls.certresolver=letsencrypt
+    - traefik.tcp.routers.hivemq-ce-mqtts.service=hivemq-ce-mqtts
+    - traefik.tcp.services.hivemq-ce-mqtts.loadbalancer.server.port=1883
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  hivemq_data: null
+  hivemq_log: null
+  hivemq_extensions: null
+x-casaos:
+  id: com.dokploy.hivemq-ce
+  main: hivemq-ce
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/hivemq-ce/icon.svg
+  title:
+    en_US: HiveMQ Community Edition
+  tagline:
+    en_US: Open-source MQTT 3
+  description:
+    en_US: Open-source MQTT 3.x and MQTT 5 broker with persistent sessions, WebSocket transport, and file-based client authentication.
+  author: Dokploy Community
+  developer: HiveMQ Community Edition
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.5"
+  update_at: "2026-11-22"
+  website: https://www.hivemq.com/
+  repo: https://github.com/hivemq/hivemq-community-edition
+  docs: https://github.com/hivemq/hivemq-community-edition/wiki
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (hivemq-ce-init.sh). Review
+        environment variables before starting.

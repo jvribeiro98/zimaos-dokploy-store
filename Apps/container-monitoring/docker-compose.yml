@@ -1,0 +1,88 @@
+name: container-monitoring
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.55.1
+    restart: unless-stopped
+    privileged: true
+    devices:
+    - /dev/kmsg
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:ro
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
+    command:
+    - --housekeeping_interval=15s
+    - --docker_only=true
+  node-exporter:
+    image: prom/node-exporter:v1.12.1
+    restart: unless-stopped
+    pid: host
+    volumes:
+    - /:/host:ro,rslave
+    command:
+    - --path.rootfs=/host
+  prometheus:
+    image: prom/prometheus:v3.15.1
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    - prometheus-data:/prometheus
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/prometheus
+    - --storage.tsdb.retention.time=30d
+  grafana:
+    image: grafana/grafana:13.2.4
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: pfa5i8FxjeSFW42AgdKy9EJa
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+      GF_AUTH_ANONYMOUS_ENABLED: 'false'
+    volumes:
+    - grafana-data:/var/lib/grafana
+    - /DATA/AppData/$AppID/grafana/datasources.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+    - /DATA/AppData/$AppID/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/provider.yml:ro
+    - /DATA/AppData/$AppID/grafana/cluster-overview.json:/etc/grafana/provisioning/dashboards/cluster-overview.json:ro
+    - /DATA/AppData/$AppID/grafana/container-detail.json:/etc/grafana/provisioning/dashboards/container-detail.json:ro
+    depends_on:
+    - prometheus
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  prometheus-data: {}
+  grafana-data: {}
+x-casaos:
+  id: com.dokploy.container-monitoring
+  main: grafana
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/container-monitoring/icon.svg
+  title:
+    en_US: Container Monitoring
+  tagline:
+    en_US: Per-container and host monitoring with cAdvisor, node-exporter, Prometheus and Grafana
+  description:
+    en_US: 'Per-container and host monitoring with cAdvisor, node-exporter, Prometheus and Grafana. Ships two ready dashboards:
+      a cluster overview and a container detail view with project/container filters.'
+  author: Dokploy Community
+  developer: Container Monitoring
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "13.2.4"
+  update_at: "2026-11-22"
+  website: https://prometheus.io/
+  repo: https://github.com/google/cadvisor
+  docs: https://prometheus.io/docs/introduction/overview/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (prometheus.yml, grafana/datasources.yml,
+        grafana/dashboards.yml, grafana/cluster-overview.json, grafana/container-detail.json). Review environment variables
+        before starting.

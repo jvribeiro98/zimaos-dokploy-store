@@ -1,0 +1,41 @@
+name: lfsx
+services:
+  lfsx:
+    image: ghcr.io/ferrlabs/lfsx:1.14.1
+    restart: unless-stopped
+    environment:
+    - LFSX_AUTH=github
+    volumes:
+    - lfsx-data:/var/lib/lfsx
+    expose:
+    - '8080'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  lfsx-data: {}
+x-casaos:
+  id: com.dokploy.lfsx
+  main: lfsx
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/lfsx/icon.svg
+  title:
+    en_US: LFSX
+  tagline:
+    en_US: Self-hosted Git LFS server that keeps large binaries off your forge's metered storage
+  description:
+    en_US: Self-hosted Git LFS server that keeps large binaries off your forge's metered storage.
+  author: Dokploy Community
+  developer: LFSX
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.14.1"
+  update_at: "2026-11-22"
+  website: https://lfsx.dev
+  repo: https://github.com/FerrLabs/LFSX
+  docs: https://lfsx.dev/docs/quickstart

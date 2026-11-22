@@ -1,0 +1,76 @@
+name: postgres-pgadmin
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=fd0yeIGrFuuRnFCOqQzQPmRN2PFzgGUn
+    - POSTGRES_DB=postgres
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    expose:
+    - '5432'
+  pgadmin:
+    image: dpage/pgadmin4:9.17
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    - -c
+    - cp /pgadmin4/pgpass /var/lib/pgadmin/pgpass && chmod 600 /var/lib/pgadmin/pgpass && exec /entrypoint.sh
+    environment:
+    - PGADMIN_DEFAULT_EMAIL=admin@example.com
+    - PGADMIN_DEFAULT_PASSWORD=X71CegDhCWACsZaf
+    - PGADMIN_CONFIG_SERVER_MODE=False
+    - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    - PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json
+    volumes:
+    - pgadmin-data:/var/lib/pgadmin
+    - /DATA/AppData/$AppID/servers.json:/pgadmin4/servers.json:ro
+    - /DATA/AppData/$AppID/pgpass:/pgadmin4/pgpass:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  postgres-data: null
+  pgadmin-data: null
+x-casaos:
+  id: com.dokploy.postgres-pgadmin
+  main: pgadmin
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/postgres-pgadmin/icon.svg
+  title:
+    en_US: PostgreSQL + pgAdmin
+  tagline:
+    en_US: PostgreSQL 18 Alpine with pgAdmin 4 web UI, persistent volumes and healthchecks for eas...
+  description:
+    en_US: PostgreSQL 18 Alpine with pgAdmin 4 web UI, persistent volumes and healthchecks for easy database administration.
+  author: Dokploy Community
+  developer: PostgreSQL + pgAdmin
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "18-alpine"
+  update_at: "2026-11-22"
+  website: https://www.postgresql.org/
+  repo: https://github.com/postgres/postgres
+  docs: https://www.pgadmin.org/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (servers.json, pgpass).
+        Review environment variables before starting.

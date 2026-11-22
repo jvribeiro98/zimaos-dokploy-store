@@ -1,0 +1,79 @@
+name: shopnex
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: shopnex
+      POSTGRES_PASSWORD: shopnex
+      POSTGRES_DB: shopnex
+    volumes:
+    - db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U shopnex
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  shopnex:
+    image: ghcr.io/shopnex-ai/shopnex:${SHOPNEX_VERSION:-v0.13.1}
+    pull_policy: always
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+    - shopnex_data:/data
+    environment:
+      DATABASE_URL: postgres://shopnex:shopnex@db:5432/shopnex
+      APP_URL: https://localhost
+      BETTER_AUTH_URL: https://localhost
+      BETTER_AUTH_SECRET: zp5cqa/sL7EBVI/8QJjVuQ5Qn+P4B+AClGdn4Va6tWo=
+      SHOPNEX_SECRET: Cqomg0kp6wVul68CrGT5VPacgx5bIMWoKqvDBjQCQIg=
+      TENANCY_MODE: single
+      DEFAULT_SHOP_NAME: ${DEFAULT_SHOP_NAME:-My Shop}
+      SHOPNEX_BUNDLED_APPS: docker
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  stripe:
+    image: ghcr.io/shopnex-ai/shopnex-stripe:${SHOPNEX_VERSION:-v0.13.1}
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+    - stripe_data:/data
+    environment:
+      STRIPE_APP_URL: https://localhost
+      SHOPNEX_INTERNAL_URL: http://shopnex:3000
+      DATA_DIR: /data
+volumes:
+  db: null
+  shopnex_data: null
+  stripe_data: null
+x-casaos:
+  id: com.dokploy.shopnex
+  main: shopnex
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/shopnex/icon.svg
+  title:
+    en_US: ShopNex
+  tagline:
+    en_US: Open-source ecommerce platform with an admin, hosted checkout, storefront and Stripe pa...
+  description:
+    en_US: Open-source ecommerce platform with an admin, hosted checkout, storefront and Stripe payments, all configured from
+      the browser.
+  author: Dokploy Community
+  developer: ShopNex
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "0.13.1"
+  update_at: "2026-11-22"
+  website: https://shopnex.ai
+  repo: https://github.com/shopnex-ai/shopnex
+  docs: https://docs.shopnex.ai/docs/self-hosting/dokploy

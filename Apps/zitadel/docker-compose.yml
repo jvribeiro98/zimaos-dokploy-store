@@ -1,0 +1,91 @@
+name: zitadel
+services:
+  zitadel:
+    restart: always
+    image: ghcr.io/zitadel/zitadel:v4.16.0
+    command: start-from-init --masterkey "${ZITADEL_MASTERKEY}" --tlsMode ${ZITADEL_TLSMODE}
+    environment:
+      ZITADEL_DATABASE_POSTGRES_HOST: db
+      ZITADEL_DATABASE_POSTGRES_PORT: '5432'
+      ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: AHDPwjMJY3PmpzMwoRM33qJeoLIU6xdo
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: postgres
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: AHDPwjMJY3PmpzMwoRM33qJeoLIU6xdo
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
+      ZITADEL_EXTERNALDOMAIN: localhost
+      ZITADEL_EXTERNALPORT: '80'
+      ZITADEL_EXTERNALSECURE: 'false'
+      ZITADEL_TLS_ENABLED: 'False'
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: AdminPassword123!
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_ADDRESS: admin@example.com
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_FIRSTNAME: Admin
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_LASTNAME: User
+      ZITADEL_DEFAULTINSTANCE_FEATURES_LOGINV2_REQUIRED: 'False'
+    healthcheck:
+      test:
+      - CMD
+      - /app/zitadel
+      - ready
+      interval: 10s
+      timeout: 30s
+      retries: 12
+      start_period: 30s
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    restart: always
+    image: postgres:17-alpine
+    environment:
+      PGUSER: postgres
+      POSTGRES_PASSWORD: AHDPwjMJY3PmpzMwoRM33qJeoLIU6xdo
+      POSTGRES_DB: zitadel
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready
+      - -d
+      - zitadel
+      - -U
+      - postgres
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 20s
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.zitadel
+  main: zitadel
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/zitadel/icon.png
+  title:
+    en_US: Zitadel
+  tagline:
+    en_US: Open-source identity and access management platform with multi-tenancy, OpenID Connect,...
+  description:
+    en_US: Open-source identity and access management platform with multi-tenancy, OpenID Connect, SAML, and OAuth 2.0 support.
+  author: Dokploy Community
+  developer: Zitadel
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "4.16.0"
+  update_at: "2026-11-22"
+  website: https://zitadel.com/
+  repo: https://github.com/zitadel/zitadel
+  docs: https://zitadel.com/docs/

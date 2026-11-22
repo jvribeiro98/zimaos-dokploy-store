@@ -1,0 +1,72 @@
+name: stack-auth
+services:
+  stack-auth-db:
+    image: postgres:17
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=4h2qZ4oUARls2Nr0C5Ll3Vw9LA6NDJaH
+    - POSTGRES_DB=stackframe
+    volumes:
+    - stack-auth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready
+      - -d
+      - db_prod
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+    restart: unless-stopped
+  stack-auth:
+    image: stackauth/server:latest
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=4h2qZ4oUARls2Nr0C5Ll3Vw9LA6NDJaH
+    - POSTGRES_DB=stackframe
+    - NEXT_PUBLIC_STACK_API_URL=http://localhost
+    - NEXT_PUBLIC_STACK_DASHBOARD_URL=http://localhost
+    - STACK_DATABASE_CONNECTION_STRING=postgres://postgres:4h2qZ4oUARls2Nr0C5Ll3Vw9LA6NDJaH@stack-auth-db/stackframe
+    - STACK_DIRECT_DATABASE_CONNECTION_STRING=postgres://postgres:4h2qZ4oUARls2Nr0C5Ll3Vw9LA6NDJaH@stack-auth-db/stackframe
+    - STACK_SERVER_SECRET=CMyVZ70tNosPDob7PBjINEK30vZsg8roWFYqGyNVKhfwVl8HifWhF4zVwwx5ODuC
+    - STACK_SEED_INTERNAL_PROJECT_ALLOW_LOCALHOST=True
+    - STACK_SEED_INTERNAL_PROJECT_SIGN_UP_ENABLED=True
+    - STACK_RUN_MIGRATIONS=True
+    - STACK_RUN_SEED_SCRIPT=True
+    - STACK_EMAIL_HOST=${STACK_EMAIL_HOST}
+    depends_on:
+      stack-auth-db:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 8102
+      published: "8102"
+      protocol: tcp
+volumes:
+  stack-auth-db-data: null
+x-casaos:
+  id: com.dokploy.stack-auth
+  main: stack-auth
+  index: /
+  port_map: "8102"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/stack-auth/icon.png
+  title:
+    en_US: Stack Auth
+  tagline:
+    en_US: Open-source Auth0/Clerk alternative
+  description:
+    en_US: Open-source Auth0/Clerk alternative. Stack Auth is a free and open source authentication tool that allows you to
+      authenticate your users.
+  author: Dokploy Community
+  developer: Stack Auth
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://stack-auth.com/
+  repo: https://github.com/stack-auth/stack-auth
+  docs: https://docs.stack-auth.com/next/overview

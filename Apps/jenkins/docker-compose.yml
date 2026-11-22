@@ -1,0 +1,41 @@
+name: jenkins
+services:
+  jenkins:
+    image: jenkins/jenkins:latest
+    volumes:
+    - jenkins-home:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+    - 8080
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  jenkins-home: {}
+x-casaos:
+  id: com.dokploy.jenkins
+  main: jenkins
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/jenkins/icon.svg
+  title:
+    en_US: jenkins
+  tagline:
+    en_US: Jenkins is an open-source automation server for building CI/CD pipelines
+  description:
+    en_US: Jenkins is an open-source automation server for building CI/CD pipelines. Self-host it on your own server with
+      Dokploy, which deploys Jenkins as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: jenkins
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.jenkins.io/
+  repo: https://github.com/jenkinsci/jenkins
+  docs: https://www.jenkins.io/doc/

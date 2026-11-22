@@ -1,0 +1,64 @@
+name: chevereto
+services:
+  chevereto:
+    image: chevereto/chevereto:4
+    restart: unless-stopped
+    environment:
+    - CHEVERETO_DB_HOST=mysql
+    - CHEVERETO_DB_USER=mysql
+    - CHEVERETO_DB_PASS=4rJehVyOKqU0iXvB
+    - CHEVERETO_DB_PORT=3306
+    - CHEVERETO_DB_NAME=chevereto
+    - CHEVERETO_HOSTNAME=localhost
+    - CHEVERETO_HOSTNAME_PATH=/
+    - CHEVERETO_HTTPS=0
+    - CHEVERETO_MAX_POST_SIZE=2G
+    - CHEVERETO_MAX_UPLOAD_SIZE=2G
+    expose:
+    - 80
+    volumes:
+    - storage:/var/www/html/images/
+    depends_on:
+    - mysql
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=4rJehVyOKqU0iXvB
+    - MYSQL_DATABASE=chevereto
+    - MYSQL_USER=mysql
+    - MYSQL_PASSWORD=4rJehVyOKqU0iXvB
+    volumes:
+    - mysql:/var/lib/mysql
+volumes:
+  storage: null
+  mysql: null
+x-casaos:
+  id: com.dokploy.chevereto
+  main: chevereto
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chevereto/icon.png
+  title:
+    en_US: Chevereto
+  tagline:
+    en_US: Chevereto is a powerful, self-hosted image and video hosting platform designed for indi...
+  description:
+    en_US: Chevereto is a powerful, self-hosted image and video hosting platform designed for individuals, communities, and
+      businesses. It allows users to upload, organize, and share media effortlessly.
+  author: Dokploy Community
+  developer: Chevereto
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "4"
+  update_at: "2026-11-22"
+  website: https://chevereto.com/
+  repo: https://github.com/chevereto/chevereto
+  docs: https://v4-docs.chevereto.com/

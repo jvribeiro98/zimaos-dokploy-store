@@ -1,0 +1,60 @@
+name: open_notebook
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:v2
+    expose:
+    - 8000
+    volumes:
+    - /DATA/AppData/$AppID/surreal_data:/mydata
+    command: start --user root --pass root rocksdb:/mydata/mydatabase.db
+    pull_policy: always
+    user: root
+    restart: unless-stopped
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  open_notebook:
+    image: lfnovo/open_notebook:latest
+    expose:
+    - 8502
+    environment:
+    - SURREAL_URL=ws://surrealdb:8000/rpc
+    - SURREAL_USER=root
+    - SURREAL_PASSWORD=root
+    - SURREAL_NAMESPACE=open_notebook
+    - SURREAL_DATABASE=staging
+    depends_on:
+    - surrealdb
+    pull_policy: always
+    volumes:
+    - /DATA/AppData/$AppID/notebook_data:/app/data
+    restart: unless-stopped
+x-casaos:
+  id: com.dokploy.open_notebook
+  main: surrealdb
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/open_notebook/icon.svg
+  title:
+    en_US: Open Notebook
+  tagline:
+    en_US: Open Notebook with SurrealDB for data storage and AI-powered features
+  description:
+    en_US: Open Notebook with SurrealDB for data storage and AI-powered features.
+  author: Dokploy Community
+  developer: Open Notebook
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "2"
+  update_at: "2026-11-22"
+  website: https://www.open-notebook.ai/
+  repo: https://github.com/lfnovo/open_notebook
+  docs: https://www.open-notebook.ai/get-started.html
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/surreal_data, files/notebook_data).
+        Review environment variables before starting.

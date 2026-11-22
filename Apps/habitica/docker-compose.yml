@@ -1,0 +1,85 @@
+name: habitica
+services:
+  server:
+    image: docker.io/awinterstein/habitica-server:latest
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_DB_URI: mongodb://habitica:Y1DWmYEBp9RZ3DTYy3C1gEgorWSdhZTx@mongo/habitica?authSource=habitica
+      INVITE_ONLY: 'false'
+      EMAIL_SERVER_URL: mail.example.com
+      EMAIL_SERVER_PORT: '587'
+      EMAIL_SERVER_AUTH_USER: mail_user
+      EMAIL_SERVER_AUTH_PASSWORD: ECSt72PKdrY9e6IicKhLFNkpZUBxx2Nu
+      ADMIN_EMAIL: no-reply@localhost
+  client:
+    image: docker.io/awinterstein/habitica-client:latest
+    restart: unless-stopped
+    depends_on:
+    - server
+    expose:
+    - '80'
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mongo:
+    image: docker.io/mongo:latest
+    restart: unless-stopped
+    command: "bash -c \"\n  echo \\\"${MONGO_KEYFILE_CONTENT}\\\" > /etc/mongo-keyfile &&\n  chown 999:999 /etc/mongo-keyfile\
+      \ &&\n  chmod 400 /etc/mongo-keyfile &&\n  exec docker-entrypoint.sh mongod --replSet rs --bind_ip_all --port 27017\
+      \ --keyFile /etc/mongo-keyfile\n\"\n"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: oC2wPmkztb3FRY3yiClBMAtnM2WLinxc
+      MONGO_KEYFILE_CONTENT: oluhbrffF/fTqsjOIqWPQOyORVIGgZT6SHOOgHwRZUx+bu1gBS03qXHrM/xJ8lCB3SVbTRvrc5GetLjc4eFc9Co+UzMUKqb8zOnbgr5qAk0thvh2xIkda5TAtkjrPwjNQw7DnCjiGvvq7QfP4c1cSt3jPwdePC+t/JSb1DZzKD//JBnta5J4nMNipw3u7aKVLoaJNSxZAPrxRcBWMh6+GmdymplXqApkcSfU8QXYk8qlfUrdCuc0jwMVVFyDDcq5d1mvtF1AA3CD5tk4bHBOMQwzv8sc2Yjx9jRVqo/+dXFGxyL6boPOY1saU5Q2TzF4FHIQNl5YvGVN1XGuAIFxDmFrgw1ys0VYCzA/5XdPGLyAjBLlv8dsurnP0/qRdqCRiQ3LQTnWSxJCgWeHqfbYeKGScBL1tx0Jh80r7ORdYpb3oXGvFYhd7/DqiY2E8VScyxbdRZIEvyMKsmJoDwi+WR1QKetQp7Y+lJ/rouoRq1yMWcnTdRjffR1kSWS5vzcf0Qxuph/NNKc9JyNLDoNZyCAl+GB9DATpIr2IZpacr4f9bIXjChtkO3ipo7OknmGeJvmwke8qTD/HDOZQ/4FUHewQ1CizOBc2IkmEmZCnP9GQSTOOV1f7pGJbjWBKNbfKlORnwPsDM8hqzquYv4z09C9D2y+l3/WG+DJ9rdKRwu5OpRXWguStTw6UZH/Y3mSh27BfpQpkriGGXoqy8cUGgyeSVnoSNSp1E8BiU3cOqW04T0ZPtPoqvFwMj0ii4jQ3H17onxKV8Xj48cn0EE5W2isIibpjVlQgqkU2C1hIj76cxsAvt+1j0XX5wWOfRePsAz8z8QtQG2eIS51/RVRzjLHlHtCQWYTwYqxMVG4v3NF3332pn0AHKQZNb6Dlt+8nbfWGbwFPYeAav2OENmy9xt3iFZqPL636KrHCKBhihM5skr0F1Bktifw+YUA2pp8O1wWIKJ5HdoKWGilTkFsrb5XEbpIBn95puy2WQIgh23nHtNoK
+      MONGO_HABITICA_USER: habitica
+      MONGO_HABITICA_PASSWORD: Y1DWmYEBp9RZ3DTYy3C1gEgorWSdhZTx
+    healthcheck:
+      test: "mongosh --port 27017 --quiet -u \"${MONGO_ADMIN_USER}\" -p \"${MONGO_ADMIN_PASSWORD}\" --authenticationDatabase\
+        \ admin --eval \"\n  try {\n    // 1. Hostname Fix\n    const config = rs.conf();\n    const currentHost = require('os').hostname()\
+        \ + ':27017';\n    if (config.members[0].host !== currentHost) {\n      config.members[0].host = currentHost;\n  \
+        \    rs.reconfig(config, { force: true });\n    }\n\n    // 2. User Creation Logic\n    const targetDb = db.getSiblingDB('habitica');\n\
+        \    const hUser = process.env.MONGO_HABITICA_USER;\n    const hPass = process.env.MONGO_HABITICA_PASSWORD;\n\n  \
+        \  // We can only check/create users if we are Primary\n    if (rs.isMaster().ismaster) {\n      if (!targetDb.getUser(hUser))\
+        \ {\n        print('Creating missing user ' + hUser + '...');\n        targetDb.createUser({ user: hUser, pwd: hPass,\
+        \ roles: ['readWrite'] });\n      }\n      // SUCCESS: User exists and we are Primary\n      quit(0);\n    } else\
+        \ {\n      // We are not Primary yet (still electing), so we cannot confirm user exists.\n      // Fail the check\
+        \ so the dependent app waits.\n      print('Waiting for Primary state...');\n      quit(1);\n    }\n  } catch (err)\
+        \ {\n    // If not initialized, initiate and FAIL this check so we wait for the next cycle\n    try { \n      rs.initiate({\
+        \ _id: 'rs', members: [{ _id: 0, host: require('os').hostname() + ':27017' }] }); \n    } catch (e) {}\n    quit(1);\n\
+        \  }\n\"\n"
+      interval: 5s
+      timeout: 10s
+      retries: 20
+    volumes:
+    - habitica-mongo-data:/data/db
+volumes:
+  habitica-mongo-data: {}
+x-casaos:
+  id: com.dokploy.habitica
+  main: client
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/habitica/icon.png
+  title:
+    en_US: Habitica
+  tagline:
+    en_US: Habitica is a habit and productivity tracker that works like a role-playing game
+  description:
+    en_US: Habitica is a habit and productivity tracker that works like a role-playing game. Self-host it on your own server
+      with Dokploy, which deploys Habitica as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Habitica
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://habitica.com/
+  repo: https://github.com/HabitRPG/habitica
+  docs: https://habitica.fandom.com/wiki/Setting_up_Habitica_Locally

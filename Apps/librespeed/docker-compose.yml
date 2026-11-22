@@ -1,0 +1,47 @@
+name: librespeed
+services:
+  librespeed:
+    image: lscr.io/linuxserver/librespeed:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    volumes:
+    - librespeed-config:/config
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    - PASSWORD=Yq2lkyZZmy43FppRikXGSvjk8cyADnyT
+    - CUSTOM_RESULTS=false
+    - DB_TYPE=sqlite
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  librespeed-config: null
+x-casaos:
+  id: com.dokploy.librespeed
+  main: librespeed
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/librespeed/icon.svg
+  title:
+    en_US: LibreSpeed
+  tagline:
+    en_US: LibreSpeed is a lightweight, self-hosted HTML5 speed test for measuring download, uploa...
+  description:
+    en_US: LibreSpeed is a lightweight, self-hosted HTML5 speed test for measuring download, upload, ping, and jitter in modern
+      browsers.
+  author: Dokploy Community
+  developer: LibreSpeed
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://librespeed.org
+  repo: https://github.com/librespeed/speedtest
+  docs: https://docs.linuxserver.io/images/docker-librespeed/

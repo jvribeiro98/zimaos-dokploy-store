@@ -1,0 +1,42 @@
+name: arangodb
+services:
+  arangodb:
+    image: arangodb:3.12.4
+    restart: unless-stopped
+    expose:
+    - 8529
+    environment:
+    - ARANGO_ROOT_PASSWORD=d3dxZ5xAit2aNXaH
+    volumes:
+    - data:/var/lib/arangodb3
+    ports:
+    - target: 8529
+      published: "8529"
+      protocol: tcp
+volumes:
+  data: {}
+x-casaos:
+  id: com.dokploy.arangodb
+  main: arangodb
+  index: /
+  port_map: "8529"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/arangodb/icon.png
+  title:
+    en_US: ArangoDB
+  tagline:
+    en_US: ArangoDB is a native multi-model database with flexible data models for documents, grap...
+  description:
+    en_US: ArangoDB is a native multi-model database with flexible data models for documents, graphs, and key-values. Build
+      high performance applications using a convenient SQL-like query language or JavaScript extensions.
+  author: Dokploy Community
+  developer: ArangoDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "3.12.4"
+  update_at: "2026-11-22"
+  website: https://www.arangodb.com/
+  repo: https://github.com/arangodb/arangodb
+  docs: https://www.arangodb.com/docs/

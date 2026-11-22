@@ -1,0 +1,71 @@
+name: windshift
+services:
+  windshift:
+    image: ghcr.io/windshiftapp/windshift:v0.9.3
+    restart: unless-stopped
+    environment:
+    - BASE_URL=https://localhost
+    - PORT=8080
+    - USE_PROXY=true
+    - SSO_SECRET=b61af8109bc17963b0e3c94e3c882ee1a1a9b80496f2454ede40d20d4aac4e946933de856457305d77ba0d303f0f81dabec3857355c78733ba054f4ebb1f6325
+    - ATTACHMENT_PATH=/data/attachments
+    - DB_TYPE=postgres
+    - POSTGRES_HOST=db
+    - POSTGRES_PORT=5432
+    - POSTGRES_USER=windshift
+    - POSTGRES_PASSWORD=3kQCXeAamaZuHQSipOJR1qVvqTzAiUWQ
+    - POSTGRES_DB=windshift
+    - LOG_LEVEL=info
+    - LOG_FORMAT=json
+    volumes:
+    - windshift-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgres:17.4
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=windshift
+    - POSTGRES_PASSWORD=3kQCXeAamaZuHQSipOJR1qVvqTzAiUWQ
+    - POSTGRES_DB=windshift
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  windshift-data: {}
+  postgres-data: {}
+x-casaos:
+  id: com.dokploy.windshift
+  main: windshift
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/windshift/icon.png
+  title:
+    en_US: Windshift
+  tagline:
+    en_US: Self-hosted work management platform with projects, tasks, sprints, and team collaboration
+  description:
+    en_US: Self-hosted work management platform with projects, tasks, sprints, and team collaboration.
+  author: Dokploy Community
+  developer: Windshift
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.9.3"
+  update_at: "2026-11-22"
+  website: https://windshift.sh/
+  repo: https://github.com/Windshiftapp/core
+  docs: https://windshift.sh/docs

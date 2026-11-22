@@ -1,0 +1,39 @@
+name: dumbdrop
+services:
+  dumbdrop:
+    image: dumbwareio/dumbdrop:latest
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - dumbdrop-uploads:/app/uploads
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  dumbdrop-uploads: {}
+x-casaos:
+  id: com.dokploy.dumbdrop
+  main: dumbdrop
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dumbdrop/icon.svg
+  title:
+    en_US: DumbDrop
+  tagline:
+    en_US: DumbDrop is a simple, self-hosted file sharing service with no database or authenticati...
+  description:
+    en_US: DumbDrop is a simple, self-hosted file sharing service with no database or authentication required.
+  author: Dokploy Community
+  developer: DumbDrop
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dumbware.io/DumbDrop/
+  repo: https://github.com/dumbwareio/dumbdrop
+  docs: https://github.com/dumbwareio/dumbdrop

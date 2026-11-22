@@ -1,0 +1,38 @@
+name: homepage
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:v1.13.1
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - /DATA/AppData/$AppID/homepage-config:/app/config
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.homepage
+  main: homepage
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/homepage/icon.png
+  title:
+    en_US: Homepage
+  tagline:
+    en_US: Homepage is a customizable dashboard and start page for your apps and services
+  description:
+    en_US: Homepage is a customizable dashboard and start page for your apps and services. Self-host it on your own server
+      with Dokploy, which deploys Homepage as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Homepage
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.13.1"
+  update_at: "2026-11-22"
+  website: https://gethomepage.dev/
+  repo: https://github.com/gethomepage/homepage
+  docs: https://gethomepage.dev/installation/

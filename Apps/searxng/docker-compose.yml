@@ -1,0 +1,50 @@
+name: searxng
+services:
+  valkey:
+    image: valkey/valkey:8-alpine
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: unless-stopped
+    volumes:
+    - valkey-data:/data
+  searxng:
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/searxng:/etc/searxng
+    - searxng-data:/var/cache/searxng
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  valkey-data: {}
+  searxng-data: {}
+x-casaos:
+  id: com.dokploy.searxng
+  main: searxng
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/searxng/icon.png
+  title:
+    en_US: SearXNG
+  tagline:
+    en_US: SearXNG is a privacy-respecting metasearch engine that combines results from many searc...
+  description:
+    en_US: SearXNG is a privacy-respecting metasearch engine that combines results from many search engines. Self-host it
+      on your own server with Dokploy, which deploys SearXNG as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: SearXNG
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://searxng.github.io/
+  repo: https://github.com/searxng/searxng
+  docs: https://docs.searxng.github.io/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (searxng/settings.yml).
+        Review environment variables before starting.

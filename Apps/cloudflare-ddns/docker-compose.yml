@@ -1,0 +1,45 @@
+name: cloudflare-ddns
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:1
+    network_mode: host
+    restart: unless-stopped
+    user: 1000:1000
+    read_only: true
+    cap_drop:
+    - all
+    security_opt:
+    - no-new-privileges:true
+    environment:
+    - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:?}
+    - DOMAINS=${DOMAINS:?}
+    - PROXIED=false
+    - IP6_PROVIDER=none
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.cloudflare-ddns
+  main: cloudflare-ddns
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cloudflare-ddns/icon.svg
+  title:
+    en_US: Cloudflare DDNS
+  tagline:
+    en_US: A small, feature-rich, and robust Cloudflare DDNS updater
+  description:
+    en_US: A small, feature-rich, and robust Cloudflare DDNS updater.
+  author: Dokploy Community
+  developer: Cloudflare DDNS
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.15.1"
+  update_at: "2026-11-22"
+  website: https://github.com/favonia/cloudflare-ddns
+  repo: https://github.com/favonia/cloudflare-ddns
+  docs: https://github.com/favonia/cloudflare-ddns

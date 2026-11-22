@@ -1,0 +1,59 @@
+name: wg-easy
+services:
+  wg-easy:
+    environment:
+    - INIT_ENABLED=1
+    - INIT_HOST=localhost
+    - INIT_PORT=51820
+    - INIT_USERNAME=admin
+    - INIT_PASSWORD=WM3NK225F642VXu3pZRaVoLTMwCaedma
+    - INIT_DNS=1.1.1.1,8.8.8.8
+    - PORT=51821
+    image: ghcr.io/wg-easy/wg-easy:15
+    volumes:
+    - etc_wireguard:/etc/wireguard
+    - /lib/modules:/lib/modules:ro
+    ports:
+    - 51820:51820/udp
+    - target: 51821
+      published: "51821"
+      protocol: tcp
+    expose:
+    - 51821
+    restart: unless-stopped
+    cap_add:
+    - NET_ADMIN
+    - SYS_MODULE
+    - NET_RAW
+    sysctls:
+    - net.ipv4.ip_forward=1
+    - net.ipv4.conf.all.src_valid_mark=1
+    - net.ipv6.conf.all.disable_ipv6=0
+    - net.ipv6.conf.all.forwarding=1
+    - net.ipv6.conf.default.forwarding=1
+volumes:
+  etc_wireguard: null
+x-casaos:
+  id: com.dokploy.wg-easy
+  main: wg-easy
+  index: /
+  port_map: "51821"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wg-easy/icon.png
+  title:
+    en_US: WG-Easy
+  tagline:
+    en_US: WG-Easy is a simple and user-friendly WireGuard VPN server with a web interface for eas...
+  description:
+    en_US: WG-Easy is a simple and user-friendly WireGuard VPN server with a web interface for easy management.
+  author: Dokploy Community
+  developer: WG-Easy
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "15"
+  update_at: "2026-11-22"
+  website: https://wg-easy.github.io/wg-easy/latest/
+  repo: https://github.com/wg-easy/wg-easy
+  docs: https://wg-easy.github.io/wg-easy/latest/getting-started/

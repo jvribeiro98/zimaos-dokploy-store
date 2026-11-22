@@ -1,0 +1,50 @@
+name: emaki-video-starter
+services:
+  emaki-video-starter:
+    image: san8888/emaki-video-starter:1.0.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - PORT=3000
+    - EMAKI_API_KEY=
+    - ACCESS_PASSWORD=6KSM103TYQjZn9ut
+    - EMAKI_MODEL=seedance_2_5
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.emaki-video-starter
+  main: emaki-video-starter
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/emaki-video-starter/icon.png
+  title:
+    en_US: Seedance 2.5 Video Generator
+  tagline:
+    en_US: One-page text-to-video and image-to-video web app on the Seedance 2
+  description:
+    en_US: One-page text-to-video and image-to-video web app on the Seedance 2.5 API from emaki. Set EMAKI_API_KEY; an access
+      password is generated so only people you share it with can spend your credits.
+  author: Dokploy Community
+  developer: Seedance 2.5 Video Generator
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://emaki.ai/seedance-2-5
+  repo: https://github.com/hanshs474/emaki-video-starter
+  docs: https://emaki.readthedocs.io/

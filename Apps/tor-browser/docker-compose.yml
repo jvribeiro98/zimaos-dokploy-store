@@ -1,0 +1,41 @@
+name: tor-browser
+services:
+  tor:
+    image: domistyle/tor-browser
+    restart: always
+    expose:
+    - 5800
+    - 5900
+    environment:
+      DISPLAY_WIDTH: '1920'
+      DISPLAY_HEIGHT: '1080'
+      KEEP_APP_RUNNING: '1'
+      TZ: Europe/Vienna
+    ports:
+    - target: 5800
+      published: "5800"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.tor-browser
+  main: tor
+  index: /
+  port_map: "5800"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tor-browser/icon.png
+  title:
+    en_US: Tor Browser
+  tagline:
+    en_US: A Dockerized Tor Browser accessible via web VNC (noVNC) and VNC client
+  description:
+    en_US: A Dockerized Tor Browser accessible via web VNC (noVNC) and VNC client.
+  author: Dokploy Community
+  developer: Tor Browser
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.torproject.org/
+  repo: https://github.com/DomiStyle/docker-tor-browser
+  docs: https://hub.docker.com/r/domistyle/tor-browser

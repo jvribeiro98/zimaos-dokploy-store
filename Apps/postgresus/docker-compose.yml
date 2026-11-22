@@ -1,0 +1,55 @@
+name: postgresus
+services:
+  postgresus:
+    image: rostislavdugin/postgresus:v2.15.3
+    expose:
+    - '4005'
+    volumes:
+    - postgresus-data:/postgresus-data
+    restart: unless-stopped
+    environment:
+    - TZ=UTC
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --no-verbose
+      - --tries=1
+      - --spider
+      - http://localhost:4005
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+    - target: 4005
+      published: "4005"
+      protocol: tcp
+volumes:
+  postgresus-data:
+    driver: local
+x-casaos:
+  id: com.dokploy.postgresus
+  main: postgresus
+  index: /
+  port_map: "4005"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/postgresus/icon.svg
+  title:
+    en_US: Postgresus
+  tagline:
+    en_US: 'Deprecated: the project was renamed to Databasus, use the Databasus template instead'
+  description:
+    en_US: 'Deprecated: the project was renamed to Databasus, use the Databasus template instead. Free, open source and self-hosted
+      solution for automated PostgreSQL backups, frozen at its final release'
+  author: Dokploy Community
+  developer: Postgresus
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.15.3"
+  update_at: "2026-11-22"
+  website: https://databasus.com
+  repo: https://github.com/RostislavDugin/postgresus
+  docs: https://databasus.com

@@ -1,0 +1,55 @@
+name: crawl4ai
+services:
+  crawl4ai:
+    image: unclecode/crawl4ai:latest
+    restart: unless-stopped
+    shm_size: 1g
+    expose:
+    - 11235
+    environment:
+    - LLM_PROVIDER=openai/gpt-4o-mini
+    - OPENAI_API_KEY=vzAhJZjzWLnJ1REuLB3oBVA0vTG2JT8UDicJVKHk3Wkxty2W
+    - ANTHROPIC_API_KEY=
+    - DEEPSEEK_API_KEY=
+    - GROQ_API_KEY=
+    - TOGETHER_API_KEY=
+    - MISTRAL_API_KEY=
+    - GEMINI_API_TOKEN=
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:11235/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 11235
+      published: "11235"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.crawl4ai
+  main: crawl4ai
+  index: /
+  port_map: "11235"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/crawl4ai/icon.png
+  title:
+    en_US: Crawl4AI
+  tagline:
+    en_US: Crawl4AI is a modern AI-powered web crawler with support for screenshots, PDFs, JavaScr...
+  description:
+    en_US: Crawl4AI is a modern AI-powered web crawler with support for screenshots, PDFs, JavaScript execution, and LLM-based
+      extraction. Includes an interactive playground and MCP (Model Context Protocol) integration.
+  author: Dokploy Community
+  developer: Crawl4AI
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "0.7.3"
+  update_at: "2026-11-22"
+  website: https://crawl4ai.com
+  repo: https://github.com/unclecode/crawl4ai
+  docs: https://github.com/unclecode/crawl4ai#readme

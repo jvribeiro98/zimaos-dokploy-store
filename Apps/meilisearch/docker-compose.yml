@@ -1,0 +1,41 @@
+name: meilisearch
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.35.1
+    volumes:
+    - meili_data:/meili_data
+    environment:
+      MEILI_MASTER_KEY: OSIpS+m2vyutjEaujF+gZj37c8aSvP3dV3/TVf69xxU=
+    restart: unless-stopped
+    ports:
+    - target: 7700
+      published: "7700"
+      protocol: tcp
+volumes:
+  meili_data:
+    driver: local
+x-casaos:
+  id: com.dokploy.meilisearch
+  main: meilisearch
+  index: /
+  port_map: "7700"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/meilisearch/icon.png
+  title:
+    en_US: Meilisearch
+  tagline:
+    en_US: Meilisearch is a free and open-source search engine that allows you to easily add searc...
+  description:
+    en_US: Meilisearch is a free and open-source search engine that allows you to easily add search functionality to your
+      web applications.
+  author: Dokploy Community
+  developer: Meilisearch
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.35.1"
+  update_at: "2026-11-22"
+  website: https://www.meilisearch.com/
+  repo: https://github.com/meilisearch/meilisearch
+  docs: https://docs.meilisearch.com/

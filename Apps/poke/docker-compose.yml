@@ -1,0 +1,38 @@
+name: poke
+services:
+  poke:
+    image: codeberg.org/poketube/poke:amd64
+    restart: unless-stopped
+    ports:
+    - target: 6003
+      published: "6003"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.poke
+  main: poke
+  index: /
+  port_map: "6003"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/poke/icon.png
+  title:
+    en_US: Poke
+  tagline:
+    en_US: Poke is an open-source, self-hosted alternative to YouTube
+  description:
+    en_US: Poke is an open-source, self-hosted alternative to YouTube. A privacy-focused video platform that allows you to
+      watch and share videos without tracking.
+  author: Dokploy Community
+  developer: Poke
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "amd64"
+  update_at: "2026-11-22"
+  website: https://poketube.fun/
+  repo: https://codeberg.org/ashleyirispuppy/poke
+  docs: https://codeberg.org/ashleyirispuppy/poke
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (poketube/config.json).
+        Review environment variables before starting.

@@ -1,0 +1,56 @@
+name: wikijs
+services:
+  wiki:
+    image: ghcr.io/requarks/wiki:2.5
+    restart: unless-stopped
+    environment:
+    - DB_TYPE=postgres
+    - DB_HOST=db
+    - DB_PORT=5432
+    - DB_USER=wikijs
+    - DB_PASS=wikijsrocks
+    - DB_NAME=wiki
+    depends_on:
+    - db
+    labels:
+    - traefik.enable=true
+    - traefik.constraint-label-stack=wikijs
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=wikijs
+    - POSTGRES_PASSWORD=wikijsrocks
+    - POSTGRES_DB=wiki
+    volumes:
+    - wiki-db-data:/var/lib/postgresql/data
+volumes:
+  wiki-db-data: null
+x-casaos:
+  id: com.dokploy.wikijs
+  main: wiki
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wikijs/icon.svg
+  title:
+    en_US: Wiki.js
+  tagline:
+    en_US: The most powerful and extensible open source Wiki software
+  description:
+    en_US: The most powerful and extensible open source Wiki software.
+  author: Dokploy Community
+  developer: Wiki.js
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.5"
+  update_at: "2026-11-22"
+  website: https://js.wiki/
+  repo: https://github.com/requarks/wiki
+  docs: https://docs.requarks.io/

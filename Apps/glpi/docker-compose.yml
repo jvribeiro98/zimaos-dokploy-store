@@ -1,0 +1,47 @@
+name: glpi
+services:
+  glpi-mysql:
+    image: mysql:9.1.0
+    restart: always
+    volumes:
+    - glpi-mysql-data:/var/lib/mysql
+  glpi-web:
+    image: elestio/glpi:10.0.16
+    restart: always
+    volumes:
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
+    - glpi-www-data:/var/www/html/glpi
+    environment:
+    - TIMEZONE=Europe/Brussels
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  glpi-mysql-data: null
+  glpi-www-data: null
+x-casaos:
+  id: com.dokploy.glpi
+  main: glpi-web
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/glpi/icon.webp
+  title:
+    en_US: GLPI Project
+  tagline:
+    en_US: The most complete open source service management software
+  description:
+    en_US: The most complete open source service management software
+  author: Dokploy Community
+  developer: GLPI Project
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "10.0.16"
+  update_at: "2026-11-22"
+  website: https://glpi-project.org/
+  repo: https://github.com/glpi-project/glpi
+  docs: https://glpi-project.org/documentation/

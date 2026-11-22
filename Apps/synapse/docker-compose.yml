@@ -1,0 +1,85 @@
+name: synapse
+services:
+  synapse:
+    image: matrixdotorg/synapse:v1.156.0
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    - -c
+    - 'python -m synapse.app.homeserver --config-path /config/homeserver.yaml --keys-directory /data --generate-keys
+
+      chown -R 991:991 /data
+
+      exec /start.py
+
+      '
+    environment:
+      SYNAPSE_CONFIG_PATH: /config/homeserver.yaml
+    volumes:
+    - synapse-data:/data
+    - /DATA/AppData/$AppID/homeserver.yaml:/config/homeserver.yaml:ro
+    - /DATA/AppData/$AppID/log.config:/config/log.config:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -fSs http://localhost:8008/health || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 90s
+    ports:
+    - target: 8008
+      published: "8008"
+      protocol: tcp
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: synapse
+      POSTGRES_PASSWORD: 5KDEfAzBuxVsz1vXc1YJ2zdSM76YcQh6
+      POSTGRES_DB: synapse
+      POSTGRES_INITDB_ARGS: --encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U synapse -d synapse
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  synapse-data: null
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.synapse
+  main: synapse
+  index: /
+  port_map: "8008"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/synapse/icon.svg
+  title:
+    en_US: Synapse
+  tagline:
+    en_US: Synapse is the reference homeserver implementation for Matrix, an open standard for sec...
+  description:
+    en_US: Synapse is the reference homeserver implementation for Matrix, an open standard for secure, decentralised, real-time
+      communication.
+  author: Dokploy Community
+  developer: Synapse
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.156.0"
+  update_at: "2026-11-22"
+  website: https://element-hq.github.io/synapse/latest/
+  repo: https://github.com/element-hq/synapse
+  docs: https://element-hq.github.io/synapse/latest/setup/installation.html
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (homeserver.yaml, log.config).
+        Review environment variables before starting.

@@ -1,0 +1,41 @@
+name: shiori
+services:
+  shiori:
+    image: ghcr.io/go-shiori/shiori:v1.8.0-2-g585ea34
+    restart: unless-stopped
+    expose:
+    - '8080'
+    environment:
+    - SHIORI_DIR=/srv/shiori
+    volumes:
+    - shiori-data:/srv/shiori
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  shiori-data: null
+x-casaos:
+  id: com.dokploy.shiori
+  main: shiori
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/shiori/icon.svg
+  title:
+    en_US: Shiori
+  tagline:
+    en_US: Shiori is a simple self-hosted bookmark manager with offline archive support and a web...
+  description:
+    en_US: Shiori is a simple self-hosted bookmark manager with offline archive support and a web interface.
+  author: Dokploy Community
+  developer: Shiori
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.8.0-2-g585ea34"
+  update_at: "2026-11-22"
+  website: https://go-shiori.github.io/shiori/
+  repo: https://github.com/go-shiori/shiori
+  docs: https://go-shiori.github.io/shiori/

@@ -1,0 +1,55 @@
+name: mailcatcher-ng
+services:
+  mailcatcher-ng:
+    image: stpaquet/alpinemailcatcher:latest@sha256:499c0eabca5e82b23d030706ba9d5b8b27bba5a5f34a43154ee5e68b07cba52c
+    restart: unless-stopped
+    command: sh -c "mailcatcher --foreground --smtp-port=1025 --http-port=1080 --ip=0.0.0.0 --messages-limit=$$MAIL_LIMIT
+      --persistence --no-quit"
+    environment:
+    - MAIL_LIMIT=50
+    expose:
+    - 1025
+    - 1080
+    volumes:
+    - mailcatcher-data:/home/mailcatcher/.mailcatcher
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - --spider
+      - http://127.0.0.1:1080
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    ports:
+    - target: 1080
+      published: "1080"
+      protocol: tcp
+volumes:
+  mailcatcher-data: null
+x-casaos:
+  id: com.dokploy.mailcatcher-ng
+  main: mailcatcher-ng
+  index: /
+  port_map: "1080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mailcatcher-ng/icon.svg
+  title:
+    en_US: MailCatcher NG
+  tagline:
+    en_US: MailCatcher NG runs a super simple SMTP server which catches any message sent to it to...
+  description:
+    en_US: MailCatcher NG runs a super simple SMTP server which catches any message sent to it to display in a web interface.
+      Point your app's SMTP settings at mailcatcher-ng:1025 and inspect every captured email in the browser.
+  author: Dokploy Community
+  developer: MailCatcher NG
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.8"
+  update_at: "2026-11-22"
+  website: https://spaquet.github.io/mailcatcher/
+  repo: https://github.com/spaquet/mailcatcher
+  docs: https://spaquet.github.io/docker-alpine-mailcatcher/

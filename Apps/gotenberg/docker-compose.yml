@@ -1,0 +1,40 @@
+name: gotenberg
+services:
+  gotenberg:
+    image: gotenberg/gotenberg:latest
+    environment:
+      GOTENBERG_API_BASIC_AUTH_USERNAME: gotenberg
+      GOTENBERG_API_BASIC_AUTH_PASSWORD: changethis
+    command:
+    - gotenberg
+    - --api-enable-basic-auth
+    - --api-disable-health-check-logging
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.gotenberg
+  main: gotenberg
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gotenberg/icon.png
+  title:
+    en_US: Gotenberg
+  tagline:
+    en_US: Gotenberg is a Docker-powered stateless API for PDF files
+  description:
+    en_US: Gotenberg is a Docker-powered stateless API for PDF files.
+  author: Dokploy Community
+  developer: Gotenberg
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://gotenberg.dev
+  repo: https://github.com/gotenberg/gotenberg
+  docs: https://gotenberg.dev/docs/getting-started/introduction

@@ -1,0 +1,57 @@
+name: matomo
+services:
+  matomo:
+    image: matomo:5.1-apache
+    restart: always
+    environment:
+    - MATOMO_DATABASE_HOST=db
+    - MATOMO_DATABASE_DB=matomo
+    - MATOMO_DATABASE_USER=matomo
+    - MATOMO_DATABASE_PASSWORD=sknpPkYHy5469sgwSbWJgBHdtqTUoxCS
+    volumes:
+    - matomo:/var/www/html
+    depends_on:
+    - db
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: mariadb:10.11
+    restart: always
+    command: --max-allowed-packet=64MB
+    environment:
+    - MYSQL_ROOT_PASSWORD=uL718b5uj9PeuTp5R8TBy2VvYEby7MIz
+    - MYSQL_DATABASE=matomo
+    - MYSQL_USER=matomo
+    - MYSQL_PASSWORD=sknpPkYHy5469sgwSbWJgBHdtqTUoxCS
+    volumes:
+    - db:/var/lib/mysql
+volumes:
+  matomo: null
+  db: null
+x-casaos:
+  id: com.dokploy.matomo
+  main: matomo
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/matomo/icon.png
+  title:
+    en_US: Matomo
+  tagline:
+    en_US: Matomo is an open-source web analytics platform that gives you full ownership of your data
+  description:
+    en_US: Matomo is an open-source web analytics platform that gives you full ownership of your data. Self-host it on your
+      own server with Dokploy, which deploys Matomo as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Matomo
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "5.1-apache"
+  update_at: "2026-11-22"
+  website: https://matomo.org
+  repo: https://github.com/matomo-org/matomo
+  docs: https://matomo.org/docs

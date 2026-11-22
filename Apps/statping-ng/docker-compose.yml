@@ -1,0 +1,41 @@
+name: statping-ng
+services:
+  statping-ng:
+    image: adamboutcher/statping-ng:latest
+    restart: unless-stopped
+    environment:
+    - TZ=UTC
+    - DB_CONN=sqlite
+    volumes:
+    - /DATA/AppData/$AppID/statping-ng:/app
+    expose:
+    - 8080
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.statping-ng
+  main: statping-ng
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/statping-ng/icon.png
+  title:
+    en_US: Statping-NG
+  tagline:
+    en_US: Statping-NG is an easy-to-use status page for monitoring websites and applications with...
+  description:
+    en_US: Statping-NG is an easy-to-use status page for monitoring websites and applications with beautiful metrics, analytics,
+      and health checks.
+  author: Dokploy Community
+  developer: Statping-NG
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://statping-ng.github.io/
+  repo: https://github.com/adamboutcher/statping-ng
+  docs: https://statping-ng.github.io/install.html

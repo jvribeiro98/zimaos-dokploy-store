@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "store_id": "dokploy-templates",
+  "name": {
+    "en_US": "Dokploy Templates for ZimaOS",
+    "pt_BR": "Templates Dokploy para ZimaOS"
+  },
+  "description": {
+    "en_US": "Open-source self-hosted templates automatically converted from Dokploy/templates.",
+    "pt_BR": "Templates open-source convertidos automaticamente de Dokploy/templates."
+  },
+  "maintainer": "jvribeiro98",
+  "url": "https://github.com/jvribeiro98/zimaos-dokploy-store"
+}

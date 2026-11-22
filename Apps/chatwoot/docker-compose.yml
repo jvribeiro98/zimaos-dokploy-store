@@ -1,0 +1,146 @@
+name: chatwoot
+services:
+  chatwoot:
+    image: chatwoot/chatwoot:v4.12.1
+    restart: unless-stopped
+    volumes:
+    - chatwoot-storage:/app/storage
+    environment:
+    - FRONTEND_URL=http://localhost
+    - SECRET_KEY_BASE=3101030f31ae3cbb9adbca2c78feb3b798e277642f11d0fbc063c342b0e58b8ea4761244ae7f362ba6b0145f435e55917541ab5dae439120aea185faf57e8376
+    - FORCE_SSL=false
+    - DEFAULT_LOCALE=en
+    - ACTIVE_STORAGE_SERVICE=local
+    - ENABLE_ACCOUNT_SIGNUP=false
+    - RAILS_ENV=production
+    - NODE_ENV=production
+    - INSTALLATION_ENV=docker
+    - RAILS_LOG_TO_STDOUT=true
+    - LOG_LEVEL=info
+    - POSTGRES_HOST=postgres
+    - POSTGRES_PORT=5432
+    - POSTGRES_DATABASE=chatwoot
+    - POSTGRES_USERNAME=postgres
+    - POSTGRES_PASSWORD=VXAXR8XMBFFfZzXgn5lOUVPwrsaywMWK
+    - REDIS_URL=redis://:rA8ztY4DeiASc6jIKpbDa9NuzaDAE9Mp@redis:6379
+    - REDIS_PASSWORD=rA8ztY4DeiASc6jIKpbDa9NuzaDAE9Mp
+    depends_on:
+    - postgres
+    - redis
+    entrypoint: docker/entrypoints/rails.sh
+    command:
+    - sh
+    - -c
+    - bundle exec rails db:chatwoot_prepare && bundle exec rails s -p 3000 -b 0.0.0.0
+    expose:
+    - '3000'
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  chatwoot-worker:
+    image: chatwoot/chatwoot:v4.12.1
+    restart: unless-stopped
+    volumes:
+    - chatwoot-storage:/app/storage
+    environment:
+    - FRONTEND_URL=http://localhost
+    - SECRET_KEY_BASE=3101030f31ae3cbb9adbca2c78feb3b798e277642f11d0fbc063c342b0e58b8ea4761244ae7f362ba6b0145f435e55917541ab5dae439120aea185faf57e8376
+    - FORCE_SSL=false
+    - DEFAULT_LOCALE=en
+    - ACTIVE_STORAGE_SERVICE=local
+    - ENABLE_ACCOUNT_SIGNUP=false
+    - RAILS_ENV=production
+    - NODE_ENV=production
+    - INSTALLATION_ENV=docker
+    - RAILS_LOG_TO_STDOUT=true
+    - LOG_LEVEL=info
+    - POSTGRES_HOST=postgres
+    - POSTGRES_PORT=5432
+    - POSTGRES_DATABASE=chatwoot
+    - POSTGRES_USERNAME=postgres
+    - POSTGRES_PASSWORD=VXAXR8XMBFFfZzXgn5lOUVPwrsaywMWK
+    - REDIS_URL=redis://:rA8ztY4DeiASc6jIKpbDa9NuzaDAE9Mp@redis:6379
+    - REDIS_PASSWORD=rA8ztY4DeiASc6jIKpbDa9NuzaDAE9Mp
+    depends_on:
+    - postgres
+    - redis
+    command:
+    - bundle
+    - exec
+    - sidekiq
+    - -C
+    - config/sidekiq.yml
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    volumes:
+    - chatwoot-postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_DB=chatwoot
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=VXAXR8XMBFFfZzXgn5lOUVPwrsaywMWK
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command:
+    - sh
+    - -c
+    - redis-server --requirepass "$$REDIS_PASSWORD"
+    environment:
+    - REDIS_PASSWORD=rA8ztY4DeiASc6jIKpbDa9NuzaDAE9Mp
+    volumes:
+    - chatwoot-redis-data:/data
+x-chatwoot-base:
+  image: chatwoot/chatwoot:v4.12.1
+  restart: unless-stopped
+  volumes:
+  - chatwoot-storage:/app/storage
+  environment:
+  - FRONTEND_URL=${FRONTEND_URL}
+  - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+  - FORCE_SSL=${FORCE_SSL}
+  - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+  - ACTIVE_STORAGE_SERVICE=${ACTIVE_STORAGE_SERVICE}
+  - ENABLE_ACCOUNT_SIGNUP=${ENABLE_ACCOUNT_SIGNUP}
+  - RAILS_ENV=${RAILS_ENV}
+  - NODE_ENV=${NODE_ENV}
+  - INSTALLATION_ENV=${INSTALLATION_ENV}
+  - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT}
+  - LOG_LEVEL=${LOG_LEVEL}
+  - POSTGRES_HOST=${POSTGRES_HOST}
+  - POSTGRES_PORT=${POSTGRES_PORT}
+  - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+  - POSTGRES_USERNAME=${POSTGRES_USERNAME}
+  - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  - REDIS_URL=${REDIS_URL}
+  - REDIS_PASSWORD=${REDIS_PASSWORD}
+volumes:
+  chatwoot-storage: null
+  chatwoot-postgres-data: null
+  chatwoot-redis-data: null
+x-casaos:
+  id: com.dokploy.chatwoot
+  main: chatwoot
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chatwoot/icon.svg
+  title:
+    en_US: Chatwoot
+  tagline:
+    en_US: Chatwoot is an open-source customer support and engagement platform with a shared inbox...
+  description:
+    en_US: Chatwoot is an open-source customer support and engagement platform with a shared inbox and live chat. Self-host
+      it on your own server with Dokploy, which deploys Chatwoot as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Chatwoot
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "4.12.1"
+  update_at: "2026-11-22"
+  website: https://www.chatwoot.com
+  repo: https://github.com/chatwoot/chatwoot
+  docs: https://www.chatwoot.com/docs

@@ -1,0 +1,54 @@
+name: focalboard
+services:
+  focalboard:
+    image: mattermost/focalboard:7.11.4
+    restart: unless-stopped
+    volumes:
+    - focalboardData:/opt/focalboard/data
+    environment:
+    - VIRTUAL_HOST=localhost
+    - 'VIRTUAL_PORT=8000 # Do Not Alter'
+    - DB_TYPE=postgres
+    - DB_CONFIG=postgres://focalboard:${POSTGRES_password}@postgres:5432/${postgres_db}?sslmode=disable
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  postgres:
+    image: postgres:17
+    environment:
+    - POSTGRES_USER=focalboard
+    - POSTGRES_PASSWORD=XFvdiy8kffhVQHy2GfACNpp3WDBvTdaH
+    - POSTGRES_DB=focalboard
+    volumes:
+    - /DATA/AppData/$AppID/postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  focalboardData:
+    driver: local
+  focalboardPostgre:
+    driver: local
+x-casaos:
+  id: com.dokploy.focalboard
+  main: focalboard
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/focalboard/icon.png
+  title:
+    en_US: Focalboard
+  tagline:
+    en_US: Open source project management for technical teams
+  description:
+    en_US: Open source project management for technical teams
+  author: Dokploy Community
+  developer: Focalboard
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "8.0.0"
+  update_at: "2026-11-22"
+  website: https://focalboard.com
+  repo: https://github.com/sysblok/focalboard
+  docs: https://www.focalboard.com/docs/

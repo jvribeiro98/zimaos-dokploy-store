@@ -1,0 +1,86 @@
+name: mosquitto
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.1.2-alpine
+    restart: unless-stopped
+    environment:
+    - MQTT_USERNAME=mqtt
+    - MQTT_PASSWORD=aaC1f4OiL9qnqSX9coFys7bIB4AaiAZ2
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - 'umask 077
+
+      password_file=$$(mktemp /mosquitto/data/passwordfile.XXXXXX)
+
+      trap ''rm -f "$$password_file"'' EXIT
+
+      mosquitto_passwd -b -c - "$$MQTT_USERNAME" "$$MQTT_PASSWORD" > "$$password_file"
+
+      chown 1883:1883 "$$password_file"
+
+      chmod 600 "$$password_file"
+
+      mv -f "$$password_file" /mosquitto/data/passwordfile
+
+      trap - EXIT
+
+      exec /docker-entrypoint.sh /usr/sbin/mosquitto -c /mosquitto/config/mosquitto.conf
+
+      '
+    expose:
+    - 1883
+    - 9001
+    volumes:
+    - /DATA/AppData/$AppID/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    - mosquitto_data:/mosquitto/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - mosquitto_pub -h 127.0.0.1 -p 1883 -u "$$MQTT_USERNAME" -P "$$MQTT_PASSWORD" -t __healthcheck -m ok -q 1 >/dev/null
+        2>&1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+    - traefik.tcp.routers.mosquitto-mqtts.entrypoints=mqtts
+    - traefik.tcp.routers.mosquitto-mqtts.rule=HostSNI(`${MQTT_DOMAIN}`)
+    - traefik.tcp.routers.mosquitto-mqtts.tls=true
+    - traefik.tcp.routers.mosquitto-mqtts.tls.certresolver=letsencrypt
+    - traefik.tcp.routers.mosquitto-mqtts.service=mosquitto-mqtts
+    - traefik.tcp.services.mosquitto-mqtts.loadbalancer.server.port=1883
+    ports:
+    - target: 9001
+      published: "9001"
+      protocol: tcp
+volumes:
+  mosquitto_data: null
+x-casaos:
+  id: com.dokploy.mosquitto
+  main: mosquitto
+  index: /
+  port_map: "9001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mosquitto/icon.svg
+  title:
+    en_US: Eclipse Mosquitto
+  tagline:
+    en_US: A lightweight, open-source MQTT broker for IoT and home automation with persistent mess...
+  description:
+    en_US: A lightweight, open-source MQTT broker for IoT and home automation with persistent messaging and WebSocket support.
+  author: Dokploy Community
+  developer: Eclipse Mosquitto
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "2.1.2"
+  update_at: "2026-11-22"
+  website: https://mosquitto.org/
+  repo: https://github.com/eclipse-mosquitto/mosquitto
+  docs: https://mosquitto.org/documentation/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (mosquitto.conf). Review
+        environment variables before starting.

@@ -1,0 +1,64 @@
+name: kitchenowl
+services:
+  web:
+    image: tombursch/kitchenowl:v0.7.1
+    restart: unless-stopped
+    environment:
+    - JWT_SECRET_KEY=Sr8x5XdQeulgz2kPokNPx8PdNZ0UVHxc
+    - DB_DRIVER=postgresql
+    - DB_HOST=db
+    - DB_NAME=kitchenowl
+    - DB_USER=kitchenowl
+    - DB_PASSWORD=Xm1FcnsgAlJQ8q3oTxcHtVIq
+    volumes:
+    - kitchenowl_files:/data
+    depends_on:
+    - db
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+    - POSTGRES_DB=kitchenowl
+    - POSTGRES_USER=kitchenowl
+    - POSTGRES_PASSWORD=Xm1FcnsgAlJQ8q3oTxcHtVIq
+    volumes:
+    - kitchenowl_db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
+volumes:
+  kitchenowl_files: {}
+  kitchenowl_db: {}
+x-casaos:
+  id: com.dokploy.kitchenowl
+  main: web
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kitchenowl/icon.png
+  title:
+    en_US: KitchenOwl
+  tagline:
+    en_US: KitchenOwl is a self-hosted grocery list and recipe manager
+  description:
+    en_US: KitchenOwl is a self-hosted grocery list and recipe manager.
+  author: Dokploy Community
+  developer: KitchenOwl
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "0.7.1"
+  update_at: "2026-11-22"
+  website: https://kitchenowl.org/
+  repo: https://github.com/TomBursch/kitchenowl
+  docs: https://github.com/TomBursch/kitchenowl/wiki

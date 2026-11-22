@@ -1,0 +1,42 @@
+name: homarr
+services:
+  homarr:
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+    - homarr_appdata:/appdata
+    environment:
+    - SECRET_ENCRYPTION_KEY=e80e966f8d0cfb553b7725366a8e91d4938ff436ccb37688dfd8fd7d52dc96e2894d73a4d9bfaf8a4e3b97e3b085a1eca3b09481d0a3eebb86f7b06af39bfe32
+    expose:
+    - 7575
+    ports:
+    - target: 7575
+      published: "7575"
+      protocol: tcp
+volumes:
+  homarr_appdata: null
+x-casaos:
+  id: com.dokploy.homarr
+  main: homarr
+  index: /
+  port_map: "7575"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/homarr/icon.png
+  title:
+    en_US: Homarr
+  tagline:
+    en_US: Homarr is a dashboard for organizing and accessing all your apps from one place
+  description:
+    en_US: Homarr is a dashboard for organizing and accessing all your apps from one place. Self-host it on your own server
+      with Dokploy, which deploys Homarr as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Homarr
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://homarr.dev/
+  repo: https://github.com/homarr-labs/homarr
+  docs: https://homarr.dev/docs/getting-started/installation/docker

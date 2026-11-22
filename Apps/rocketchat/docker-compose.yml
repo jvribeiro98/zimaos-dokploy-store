@@ -1,0 +1,61 @@
+name: rocketchat
+services:
+  rocketchat:
+    image: registry.rocket.chat/rocketchat/rocket.chat:6.9.2
+    restart: always
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/rocketchat?replicaSet=rs0
+      MONGO_OPLOG_URL: mongodb://mongodb:27017/local?replicaSet=rs0
+      ROOT_URL: ${ROOT_URL:-http://${ROCKETCHAT_HOST}:3000}
+      PORT: '3000'
+      DEPLOY_METHOD: docker
+      DEPLOY_PLATFORM: ''
+      REG_TOKEN: ''
+    depends_on:
+    - mongodb
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  mongodb:
+    image: docker.io/bitnami/mongodb:5.0
+    restart: always
+    volumes:
+    - mongodb_data:/bitnami/mongodb
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_REPLICA_SET_NAME: rs0
+      MONGODB_PORT_NUMBER: '27017'
+      MONGODB_INITIAL_PRIMARY_HOST: mongodb
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: '27017'
+      MONGODB_ADVERTISED_HOSTNAME: mongodb
+      MONGODB_ENABLE_JOURNAL: 'True'
+      ALLOW_EMPTY_PASSWORD: 'True'
+volumes:
+  mongodb_data:
+    driver: local
+x-casaos:
+  id: com.dokploy.rocketchat
+  main: rocketchat
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rocketchat/icon.png
+  title:
+    en_US: Rocketchat
+  tagline:
+    en_US: Rocket
+  description:
+    en_US: Rocket.Chat is a team communication platform and an open-source alternative to Slack. Self-host it on your own
+      server with Dokploy, which deploys Rocket.Chat as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Rocketchat
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "6.9.2"
+  update_at: "2026-11-22"
+  website: https://rocket.chat/
+  repo: https://github.com/RocketChat/Rocket.Chat
+  docs: https://rocket.chat/docs/

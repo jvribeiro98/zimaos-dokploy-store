@@ -1,0 +1,63 @@
+name: docktail
+services:
+  docktail:
+    image: ghcr.io/marvinvr/docktail:1.6.0
+    restart: unless-stopped
+    depends_on:
+    - tailscale
+    dns:
+    - 1.1.1.1
+    - 8.8.8.8
+    environment:
+    - TAILSCALE_OAUTH_CLIENT_ID=
+    - TAILSCALE_OAUTH_CLIENT_SECRET=
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - tailscale-socket:/var/run/tailscale
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  tailscale:
+    image: tailscale/tailscale:v1.102.5
+    restart: unless-stopped
+    network_mode: host
+    environment:
+    - TS_AUTHKEY=
+    - TS_HOSTNAME=docktail
+    - TS_EXTRA_ARGS=--advertise-tags=tag:server
+    - TS_USERSPACE=true
+    - TS_AUTH_ONCE=true
+    - TS_STATE_DIR=/var/lib/tailscale
+    - TS_SOCKET=/var/run/tailscale/tailscaled.sock
+    volumes:
+    - tailscale-state:/var/lib/tailscale
+    - tailscale-socket:/var/run/tailscale
+volumes:
+  tailscale-state: null
+  tailscale-socket: null
+x-casaos:
+  id: com.dokploy.docktail
+  main: docktail
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/docktail/icon.png
+  title:
+    en_US: DockTail
+  tagline:
+    en_US: DockTail exposes Docker containers as native Tailscale Services using labels, with no p...
+  description:
+    en_US: DockTail exposes Docker containers as native Tailscale Services using labels, with no published ports and no per-container
+      Tailscale devices.
+  author: Dokploy Community
+  developer: DockTail
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.0"
+  update_at: "2026-11-22"
+  website: https://docktail.org/
+  repo: https://github.com/marvinvr/docktail
+  docs: https://docktail.org/docs/

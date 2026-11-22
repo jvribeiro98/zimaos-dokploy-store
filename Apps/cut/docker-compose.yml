@@ -1,0 +1,67 @@
+name: cut
+services:
+  cut:
+    image: ghcr.io/mendylanda/cut:latest
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+    - ADMIN_PASSWORD=qZryxD5Q0GoyaJA9WHdNTqDU
+    - REDIS_URL=redis://redis:6379
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory-policy noeviction
+    volumes:
+    - redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  redis-data: null
+x-casaos:
+  id: com.dokploy.cut
+  main: cut
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cut/icon.svg
+  title:
+    en_US: Cut
+  tagline:
+    en_US: A tiny, self-hosted URL shortener — short links that are entirely yours, with per-link...
+  description:
+    en_US: A tiny, self-hosted URL shortener — short links that are entirely yours, with per-link passwords, expiries, and
+      click limits.
+  author: Dokploy Community
+  developer: Cut
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.0"
+  update_at: "2026-11-22"
+  website: https://github.com/MendyLanda/cut
+  repo: https://github.com/MendyLanda/cut
+  docs: https://github.com/MendyLanda/cut#readme

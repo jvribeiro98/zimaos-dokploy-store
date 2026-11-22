@@ -1,0 +1,56 @@
+name: navi-music
+services:
+  navi-music:
+    image: ghcr.io/andre-carbajal/navimusic:4.3.0
+    restart: unless-stopped
+    depends_on:
+    - yt-cipher
+    entrypoint:
+    - sh
+    - -c
+    - java $$JAVA_OPTS -jar /app/NaviMusic.jar nogui --spring.profiles.active=prod; code=$$?; if [ "$$code" -eq 0 ]; then
+      echo "NaviMusic is idle. Set DISCORD_TOKEN and required YouTube credentials in the Environment tab, then redeploy.";
+      tail -f /dev/null; fi; exit $$code
+    environment:
+      DISCORD_TOKEN: ''
+      SPOTIFY_CLIENT_ID: ''
+      SPOTIFY_CLIENT_SECRET: ''
+      YOUTUBE_POTOKEN: ''
+      YOUTUBE_VISITOR: ''
+      YOUTUBE_OAUTH2: ''
+      YOUTUBE_CIPHER_URL: http://yt-cipher:8001
+      YOUTUBE_CIPHER_PASSWORD: gSnoPtGurcEyUKk58MuqJoJcFPumtC3l
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  yt-cipher:
+    image: ghcr.io/kikkia/yt-cipher:master@sha256:4c5ec381ff57336cfc24822d2b526a5ad7cd0171f61065a1bbc87bb736842449
+    restart: unless-stopped
+    environment:
+      OVERRIDE_PLAYER_VARIANT: IAS
+      API_TOKEN: gSnoPtGurcEyUKk58MuqJoJcFPumtC3l
+x-casaos:
+  id: com.dokploy.navi-music
+  main: navi-music
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/navi-music/icon.png
+  title:
+    en_US: NaviMusic
+  tagline:
+    en_US: A Discord music bot that plays YouTube and Spotify tracks and playlists in voice channels
+  description:
+    en_US: A Discord music bot that plays YouTube and Spotify tracks and playlists in voice channels.
+  author: Dokploy Community
+  developer: NaviMusic
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "4.3.0"
+  update_at: "2026-11-22"
+  website: https://github.com/andre-carbajal/NaviMusic
+  repo: https://github.com/andre-carbajal/NaviMusic
+  docs: https://github.com/andre-carbajal/NaviMusic#configuration

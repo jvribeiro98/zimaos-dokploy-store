@@ -1,0 +1,72 @@
+name: yourls
+services:
+  yourls-app:
+    image: yourls:1.9.2
+    environment:
+      YOURLS_SITE: https://localhost
+      YOURLS_USER: admin
+      YOURLS_PASS: dgbSSWCEXBkyqgC4kd3Yf8Ew4qJwqJ2b
+      YOURLS_DB_HOST: yourls-mysql
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: 8eyMd7TesaYCjGI0Ixsku2oTBpumWg72
+      YOURLS_DB_NAME: yourls
+    volumes:
+    - yourls-data:/var/www/html
+    depends_on:
+      yourls-mysql:
+        condition: service_healthy
+    restart: always
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  yourls-mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: gsENlqnKjpBW1cTTqJFd9c8z4hxwoyJE
+      MYSQL_DATABASE: yourls
+      MYSQL_USER: yourls
+      MYSQL_PASSWORD: 8eyMd7TesaYCjGI0Ixsku2oTBpumWg72
+    volumes:
+    - yourls-mysql-data:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -h
+      - localhost
+      - -u$$MYSQL_USER
+      - -p$$MYSQL_PASSWORD
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+volumes:
+  yourls-data: null
+  yourls-mysql-data: null
+x-casaos:
+  id: com.dokploy.yourls
+  main: yourls-app
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/yourls/icon.svg
+  title:
+    en_US: YOURLS
+  tagline:
+    en_US: YOURLS (Your Own URL Shortener) is a set of PHP scripts that will allow you to run your...
+  description:
+    en_US: YOURLS (Your Own URL Shortener) is a set of PHP scripts that will allow you to run your own URL shortening service
+      (a la TinyURL or Bitly).
+  author: Dokploy Community
+  developer: YOURLS
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.9.2"
+  update_at: "2026-11-22"
+  website: https://yourls.org/
+  repo: https://github.com/YOURLS/YOURLS
+  docs: https://yourls.org/#documentation

@@ -1,0 +1,40 @@
+name: steedos
+services:
+  steedos:
+    image: steedos/steedos-community:3.0.14
+    restart: always
+    environment:
+    - ROOT_URL=http://localhost
+    volumes:
+    - steedos-data:/steedos-storage
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  steedos-data: null
+x-casaos:
+  id: com.dokploy.steedos
+  main: steedos
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/steedos/icon.png
+  title:
+    en_US: Steedos
+  tagline:
+    en_US: Steedos is an open-source low-code platform and alternative to Salesforce, designed to...
+  description:
+    en_US: Steedos is an open-source low-code platform and alternative to Salesforce, designed to help you build enterprise
+      applications like CRM with clicks, not code.
+  author: Dokploy Community
+  developer: Steedos
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.0.14"
+  update_at: "2026-11-22"
+  website: https://www.steedos.com/
+  repo: https://github.com/steedos/steedos-platform
+  docs: https://docs.steedos.com/

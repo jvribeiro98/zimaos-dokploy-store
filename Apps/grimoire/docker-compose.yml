@@ -1,0 +1,39 @@
+name: grimoire
+services:
+  grimoire:
+    image: goniszewski/grimoire:latest
+    restart: unless-stopped
+    volumes:
+    - grimoire_data:/app/data
+    expose:
+    - '5173'
+    ports:
+    - target: 5173
+      published: "5173"
+      protocol: tcp
+volumes:
+  grimoire_data: {}
+x-casaos:
+  id: com.dokploy.grimoire
+  main: grimoire
+  index: /
+  port_map: "5173"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grimoire/icon.webp
+  title:
+    en_US: Grimoire
+  tagline:
+    en_US: Grimoire is a self-hosted bookmarking app designed for speed and simplicity
+  description:
+    en_US: Grimoire is a self-hosted bookmarking app designed for speed and simplicity.
+  author: Dokploy Community
+  developer: Grimoire
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/goniszewski/grimoire
+  repo: https://github.com/goniszewski/grimoire
+  docs: https://github.com/goniszewski/grimoire

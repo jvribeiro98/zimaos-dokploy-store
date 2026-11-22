@@ -1,0 +1,90 @@
+name: didacta
+services:
+  didacta:
+    image: ghcr.io/va360labs/didacta-community:0.0.1-alpha.107
+    restart: unless-stopped
+    env_file:
+    - .env
+    expose:
+    - 3000
+    volumes:
+    - didacta-data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:4000/healthz
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 120s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    env_file:
+    - .env
+    volumes:
+    - didacta-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+    - didacta-redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  didacta-data:
+    driver: local
+  didacta-postgres-data:
+    driver: local
+  didacta-redis-data:
+    driver: local
+x-casaos:
+  id: com.dokploy.didacta
+  main: didacta
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/didacta/icon.svg
+  title:
+    en_US: Didacta
+  tagline:
+    en_US: Didacta is a fair-code, self-hosted learning platform (LMS) with multi-tenant isolation...
+  description:
+    en_US: Didacta is a fair-code, self-hosted learning platform (LMS) with multi-tenant isolation, a public course catalog,
+      enrollment flows, gamification and a module marketplace.
+  author: Dokploy Community
+  developer: Didacta
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.0.1-alpha.107"
+  update_at: "2026-11-22"
+  website: https://didacta.io
+  repo: https://github.com/va360labs/didacta-io
+  docs: https://docs.didacta.io

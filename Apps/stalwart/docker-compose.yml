@@ -1,0 +1,51 @@
+name: stalwart
+services:
+  stalwart-mail:
+    image: stalwartlabs/stalwart:latest-alpine
+    expose:
+    - '443'
+    - '8080'
+    - '25'
+    - '587'
+    - '465'
+    - '143'
+    - '993'
+    - '4190'
+    - '110'
+    - '995'
+    volumes:
+    - stalwart_etc:/etc/stalwart
+    - stalwart_data:/var/lib/stalwart
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  stalwart_etc: null
+  stalwart_data: null
+x-casaos:
+  id: com.dokploy.stalwart
+  main: stalwart-mail
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/stalwart/icon.svg
+  title:
+    en_US: Stalwart
+  tagline:
+    en_US: Stalwart Mail Server is an open-source mail server solution with JMAP, IMAP4, POP3, and...
+  description:
+    en_US: Stalwart Mail Server is an open-source mail server solution with JMAP, IMAP4, POP3, and SMTP support and a wide
+      range of modern features. It is written in Rust and designed to be secure, fast, robust and scalable.
+  author: Dokploy Community
+  developer: Stalwart
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "latest-alpine"
+  update_at: "2026-11-22"
+  website: https://stalw.art/
+  repo: https://github.com/stalwartlabs/mail-server
+  docs: https://stalw.art/docs/

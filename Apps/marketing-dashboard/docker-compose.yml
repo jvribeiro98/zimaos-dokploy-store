@@ -1,0 +1,79 @@
+name: marketing-dashboard
+services:
+  marketing-dashboard:
+    image: ghcr.io/abel-yelin/marketing-dashboard:latest
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://marketing_dashboard:YjnxrgaB8zBhE082dmx1Bw8jzTdD7RyQ@postgres:5432/marketing_dashboard?schema=public
+      DIRECT_URL: postgresql://marketing_dashboard:YjnxrgaB8zBhE082dmx1Bw8jzTdD7RyQ@postgres:5432/marketing_dashboard?schema=public
+      MARKETING_APP_URL: https://localhost
+      MARKETING_COLLECTOR_UPSTREAM_URL: https://localhost/api/ingest/browser
+      MARKETING_SESSION_TIMEOUT_MINUTES: '30'
+      MARKETING_PROXY_TIMEOUT_MS: '4000'
+      MARKETING_INGEST_MAX_BODY_BYTES: '65536'
+      MARKETING_INGEST_IP_RATE_LIMIT: '300'
+      MARKETING_INGEST_CLIENT_RATE_LIMIT: '1200'
+      MARKETING_INGEST_RATE_LIMIT_WINDOW_MS: '60000'
+      MARKETING_ENABLE_PILOT_API: 'false'
+      MARKETING_DASHBOARD_ADMIN_USER: admin
+      MARKETING_DASHBOARD_ADMIN_PASSWORD: rMbzzsqmIkQ2NL4MOdo4ht6QiMoB93ru
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -fsS http://localhost:3000/api/health > /dev/null || exit 1
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: marketing_dashboard
+      POSTGRES_USER: marketing_dashboard
+      POSTGRES_PASSWORD: YjnxrgaB8zBhE082dmx1Bw8jzTdD7RyQ
+    volumes:
+    - marketing-dashboard-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  marketing-dashboard-postgres: null
+x-casaos:
+  id: com.dokploy.marketing-dashboard
+  main: marketing-dashboard
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/marketing-dashboard/icon.svg
+  title:
+    en_US: Marketing Dashboard
+  tagline:
+    en_US: Self-hosted marketing operations dashboard for product-led growth, checkout analytics,...
+  description:
+    en_US: Self-hosted marketing operations dashboard for product-led growth, checkout analytics, paid media, SEO signals,
+      and Stripe readiness.
+  author: Dokploy Community
+  developer: Marketing Dashboard
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/abel-yelin/marketing-dashboard
+  repo: https://github.com/abel-yelin/marketing-dashboard
+  docs: https://github.com/abel-yelin/marketing-dashboard/blob/main/docs/production-deployment.md

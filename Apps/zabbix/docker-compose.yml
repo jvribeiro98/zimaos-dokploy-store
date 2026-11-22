@@ -1,0 +1,117 @@
+name: zabbix
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zabbix
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: 1nVMjNkcchFuaWuGatJSmMgDxLUv9OwX
+    volumes:
+    - zabbix-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  zabbix-java-gateway:
+    image: zabbix/zabbix-java-gateway:alpine-7.4-latest
+    restart: unless-stopped
+  zabbix-snmptraps:
+    image: zabbix/zabbix-snmptraps:alpine-7.4-latest
+    restart: unless-stopped
+    volumes:
+    - zabbix-snmptraps:/var/lib/zabbix/snmptraps
+    - zabbix-mibs:/var/lib/zabbix/mibs
+  zabbix-server-pgsql:
+    image: zabbix/zabbix-server-pgsql:alpine-7.4-latest
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: postgres
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: 1nVMjNkcchFuaWuGatJSmMgDxLUv9OwX
+      POSTGRES_DB: zabbix
+      ZBX_ENABLE_SNMP_TRAPS: 'true'
+      ZBX_JAVAGATEWAY: zabbix-java-gateway
+    depends_on:
+      postgres:
+        condition: service_healthy
+      zabbix-java-gateway:
+        condition: service_started
+      zabbix-snmptraps:
+        condition: service_started
+    volumes:
+    - zabbix-server-data:/var/lib/zabbix
+    - zabbix-snmptraps:/var/lib/zabbix/snmptraps
+    - zabbix-mibs:/var/lib/zabbix/mibs
+    expose:
+    - 10051
+    healthcheck:
+      test:
+      - CMD
+      - pgrep
+      - zabbix_server
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  zabbix-web-nginx-pgsql:
+    image: zabbix/zabbix-web-nginx-pgsql:alpine-7.4-latest
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: postgres
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: 1nVMjNkcchFuaWuGatJSmMgDxLUv9OwX
+      POSTGRES_DB: zabbix
+      ZBX_SERVER_HOST: zabbix-server-pgsql
+      PHP_TZ: UTC
+      ZBX_SERVER_NAME: Dokploy Zabbix Monitoring
+    depends_on:
+      zabbix-server-pgsql:
+        condition: service_healthy
+    expose:
+    - 8080
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  zabbix-postgres-data: null
+  zabbix-server-data: null
+  zabbix-snmptraps: null
+  zabbix-mibs: null
+x-casaos:
+  id: com.dokploy.zabbix
+  main: zabbix-web-nginx-pgsql
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/zabbix/icon.png
+  title:
+    en_US: Zabbix
+  tagline:
+    en_US: Zabbix is an open-source enterprise-grade monitoring platform for networks, servers, vi...
+  description:
+    en_US: Zabbix is an open-source enterprise-grade monitoring platform for networks, servers, virtual machines, and cloud
+      services. This template includes PostgreSQL, Nginx frontend, SNMP traps, and Java gateway.
+  author: Dokploy Community
+  developer: Zabbix
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "7.4"
+  update_at: "2026-11-22"
+  website: https://www.zabbix.com/
+  repo: https://github.com/zabbix/zabbix-docker
+  docs: https://www.zabbix.com/documentation/current/en/manual/installation/containers

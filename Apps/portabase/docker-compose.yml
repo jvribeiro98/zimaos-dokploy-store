@@ -1,0 +1,89 @@
+name: portabase
+services:
+  portabase:
+    image: portabase/portabase:latest
+    restart: unless-stopped
+    environment:
+    - PROJECT_URL=https://localhost
+    - PROJECT_SECRET=uxQdJC7BYJakQaoVi8pXuX3LCZXaZAegAFNgAmFlg2hekd8vj4ZWP5gFCFaOVSJG
+    - DATABASE_URL=postgresql://portabase:SElGSM0E0vBeaewhlvGEfgAP6dPisQC6@db:5432/portabase?schema=public
+    - PROJECT_NAME=${PROJECT_NAME:-Portabase}
+    - TZ=Europe/Paris
+    - LOG_LEVEL=info
+    - RETENTION_CRON=${RETENTION_CRON:-0 7 * * *}
+    - STALE_BACKUP_THRESHOLD_HOURS=${STALE_BACKUP_THRESHOLD_HOURS:-6}
+    - BACKUP_FOLDER_NAME=${BACKUP_FOLDER_NAME:-backups}
+    - TELEMETRY=${TELEMETRY:-true}
+    - SKIP_ONBOARDING=${SKIP_ONBOARDING:-false}
+    - API_ENABLED=${API_ENABLED:-false}
+    - OPENAPI_ENABLED=${OPENAPI_ENABLED:-false}
+    - MCP_ENABLED=${MCP_ENABLED:-false}
+    - SMTP_HOST=${SMTP_HOST:-}
+    - SMTP_PORT=${SMTP_PORT:-}
+    - SMTP_USER=${SMTP_USER:-}
+    - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+    - SMTP_FROM=${SMTP_FROM:-}
+    - SMTP_SECURE=${SMTP_SECURE:-false}
+    expose:
+    - '80'
+    volumes:
+    - portabase-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - curl -f http://localhost/api/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: postgres:17-alpine
+    restart: always
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_DB=portabase
+    - POSTGRES_USER=portabase
+    - POSTGRES_PASSWORD=SElGSM0E0vBeaewhlvGEfgAP6dPisQC6
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER:-portabase} -d ${POSTGRES_DB:-portabase}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres-data: null
+  portabase-data: null
+x-casaos:
+  id: com.dokploy.portabase
+  main: portabase
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/portabase/icon.svg
+  title:
+    en_US: Portabase
+  tagline:
+    en_US: A free, open-source and self-hosted tool from a non-profit organization that helps you...
+  description:
+    en_US: A free, open-source and self-hosted tool from a non-profit organization that helps you automate backups and restore
+      your databases on demand.
+  author: Dokploy Community
+  developer: Portabase
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://portabase.io
+  repo: https://github.com/portabase/portabase
+  docs: https://portabase.io/docs

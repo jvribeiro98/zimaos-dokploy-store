@@ -1,0 +1,94 @@
+name: bookorbit
+services:
+  app:
+    image: ghcr.io/bookorbit/bookorbit:3.8.0
+    restart: unless-stopped
+    init: true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+    - NODE_ENV=production
+    - PORT=3000
+    - DATABASE_URL=postgresql://bookorbit:q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4@postgres:5432/bookorbit
+    - POSTGRES_HOST=postgres
+    - POSTGRES_PORT=5432
+    - POSTGRES_USER=bookorbit
+    - POSTGRES_PASSWORD=q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4
+    - POSTGRES_DB=bookorbit
+    - JWT_SECRET=5h8YVMX6rbicFI0xErmDhQ8O8kcpNl46
+    - SETUP_BOOTSTRAP_TOKEN=JP010hIo5zmRZyzkDXkRkmQg3h2zx8NY
+    - APP_URL=https://localhost
+    - CLIENT_URL=https://localhost
+    - PUID=1000
+    - PGID=1000
+    expose:
+    - '3000'
+    volumes:
+    - books:/books
+    - app_data:/data
+    read_only: true
+    tmpfs:
+    - /tmp
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - SETGID
+    - SETUID
+    security_opt:
+    - no-new-privileges:true
+    stop_grace_period: 30s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: pgvector/pgvector:pg18
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=bookorbit
+    - POSTGRES_PASSWORD=q4Edp5JMIrnvOeBJnghx1IFYiZwhy2M4
+    - POSTGRES_DB=bookorbit
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U bookorbit -d bookorbit
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+volumes:
+  books: null
+  app_data: null
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.bookorbit
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bookorbit/icon.png
+  title:
+    en_US: BookOrbit
+  tagline:
+    en_US: BookOrbit is a self-hosted reading space to organize, track, and read your personal boo...
+  description:
+    en_US: BookOrbit is a self-hosted reading space to organize, track, and read your personal book library, with OPDS feeds
+      and KOReader and Kobo sync.
+  author: Dokploy Community
+  developer: BookOrbit
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "3.8.0"
+  update_at: "2026-11-22"
+  website: https://bookorbit.app
+  repo: https://github.com/bookorbit/bookorbit
+  docs: https://bookorbit.app/installation

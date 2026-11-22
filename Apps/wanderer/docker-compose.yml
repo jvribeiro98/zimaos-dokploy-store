@@ -1,0 +1,96 @@
+name: wanderer
+services:
+  search:
+    image: getmeili/meilisearch:v1.11.3
+    environment:
+      MEILI_URL: http://search:7700
+      MEILI_MASTER_KEY: gLw6dkRfjVwIWNyXUPsfG6e5qJcLVZmu
+      MEILI_NO_ANALYTICS: 'true'
+    volumes:
+    - search-data:/meili_data/data.ms
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:7700/health || exit 1
+      interval: 15s
+      retries: 10
+      start_period: 20s
+      timeout: 10s
+  db:
+    image: flomp/wanderer-db
+    depends_on:
+      search:
+        condition: service_healthy
+    environment:
+      MEILI_URL: http://search:7700
+      MEILI_MASTER_KEY: gLw6dkRfjVwIWNyXUPsfG6e5qJcLVZmu
+      POCKETBASE_ENCRYPTION_KEY: yz9yHM1Q2JDU2fxne7zPWRN3CTJ65vLX
+      ORIGIN: http://localhost
+    volumes:
+    - db-data:/pb_data
+    restart: unless-stopped
+    healthcheck:
+      test: wget --spider -q http://localhost:8090/health || exit 1
+      interval: 15s
+      retries: 10
+      start_period: 20s
+      timeout: 10s
+  web:
+    image: flomp/wanderer-web
+    depends_on:
+      search:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    environment:
+      MEILI_URL: http://search:7700
+      MEILI_MASTER_KEY: gLw6dkRfjVwIWNyXUPsfG6e5qJcLVZmu
+      ORIGIN: http://localhost
+      BODY_SIZE_LIMIT: Infinity
+      PUBLIC_POCKETBASE_URL: http://db:8090
+      PUBLIC_DISABLE_SIGNUP: 'false'
+      UPLOAD_FOLDER: /app/uploads
+      UPLOAD_USER: admin
+      UPLOAD_PASSWORD: UQYajhru61gqGbyL
+      PUBLIC_VALHALLA_URL: https://valhalla1.openstreetmap.de
+      PUBLIC_NOMINATIM_URL: https://nominatim.openstreetmap.org
+    volumes:
+    - uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:3000/ || exit 1
+      interval: 15s
+      retries: 10
+      start_period: 20s
+      timeout: 10s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  search-data: {}
+  db-data: {}
+  uploads: {}
+x-casaos:
+  id: com.dokploy.wanderer
+  main: web
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/wanderer/icon.png
+  title:
+    en_US: Wanderer
+  tagline:
+    en_US: Wanderer is a self-hosted mapping and geolocation platform powered by Meilisearch, Pock...
+  description:
+    en_US: Wanderer is a self-hosted mapping and geolocation platform powered by Meilisearch, PocketBase, and a web frontend.
+  author: Dokploy Community
+  developer: Wanderer
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://wanderer.to
+  repo: https://github.com/flomp/wanderer
+  docs: https://github.com/flomp/wanderer#readme

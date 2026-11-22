@@ -1,0 +1,54 @@
+name: bytebase
+services:
+  bytebase:
+    image: bytebase/bytebase:3.3.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+    - PG_URL=postgres://postgres:c8VWC2UlyccxpqT6@bytebase-db:5432/bytebase
+    volumes:
+    - data:/var/opt/bytebase
+    depends_on:
+    - bytebase-db
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  bytebase-db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=c8VWC2UlyccxpqT6
+    - POSTGRES_DB=bytebase
+    volumes:
+    - db_data:/var/lib/postgresql/data
+volumes:
+  data: {}
+  db_data: {}
+x-casaos:
+  id: com.dokploy.bytebase
+  main: bytebase
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bytebase/icon.png
+  title:
+    en_US: Bytebase
+  tagline:
+    en_US: Bytebase is a database management tool that allows you to manage your databases with ease
+  description:
+    en_US: Bytebase is a database management tool that allows you to manage your databases with ease. It provides a simple
+      and effective solution for managing your databases from anywhere.
+  author: Dokploy Community
+  developer: Bytebase
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "3.3.0"
+  update_at: "2026-11-22"
+  website: https://www.bytebase.com
+  repo: https://github.com/bytebase/bytebase
+  docs: https://www.bytebase.com/docs

@@ -1,0 +1,39 @@
+name: gotify
+services:
+  gotify:
+    image: gotify/server:2.9.1
+    restart: unless-stopped
+    volumes:
+    - gotify_data:/app/data
+    expose:
+    - '80'
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  gotify_data: null
+x-casaos:
+  id: com.dokploy.gotify
+  main: gotify
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gotify/icon.svg
+  title:
+    en_US: Gotify
+  tagline:
+    en_US: Gotify is a simple server for sending and receiving self-hosted push notifications
+  description:
+    en_US: Gotify is a simple server for sending and receiving self-hosted push notifications.
+  author: Dokploy Community
+  developer: Gotify
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.9.1"
+  update_at: "2026-11-22"
+  website: https://gotify.net/
+  repo: https://github.com/gotify/server
+  docs: https://gotify.net/docs/

@@ -1,0 +1,47 @@
+name: qbittorrent
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    restart: unless-stopped
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - WEBUI_PORT=8080
+    - TORRENTING_PORT=6881
+    volumes:
+    - qb_config:/config
+    - qb_downloads:/downloads
+    ports:
+    - 8080
+    - 6881:6881
+    - 6881:6881/udp
+    labels:
+    - traefik.enable=true
+volumes:
+  qb_config: null
+  qb_downloads: null
+x-casaos:
+  id: com.dokploy.qbittorrent
+  main: qbittorrent
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/qbittorrent/icon.svg
+  title:
+    en_US: qBittorrent
+  tagline:
+    en_US: qBittorrent is an open-source BitTorrent client you can control from a web interface
+  description:
+    en_US: qBittorrent is an open-source BitTorrent client you can control from a web interface. Self-host it on your own
+      server with Dokploy, which deploys qBittorrent as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: qBittorrent
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.qbittorrent.org/
+  repo: https://github.com/qbittorrent/qBittorrent
+  docs: https://github.com/qbittorrent/qBittorrent/wiki

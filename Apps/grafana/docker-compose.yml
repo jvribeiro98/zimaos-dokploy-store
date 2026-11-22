@@ -1,0 +1,38 @@
+name: grafana
+services:
+  grafana:
+    image: grafana/grafana-enterprise:12.4
+    restart: unless-stopped
+    volumes:
+    - grafana-storage:/var/lib/grafana
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  grafana-storage: {}
+x-casaos:
+  id: com.dokploy.grafana
+  main: grafana
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grafana/icon.svg
+  title:
+    en_US: Grafana
+  tagline:
+    en_US: Grafana is an open-source dashboard tool for monitoring and visualizing data
+  description:
+    en_US: Grafana is an open-source dashboard tool for monitoring and visualizing data. Self-host it on your own server with
+      Dokploy, which deploys Grafana as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Grafana
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "12.4"
+  update_at: "2026-11-22"
+  website: https://grafana.com/
+  repo: https://github.com/grafana/grafana
+  docs: https://grafana.com/docs/

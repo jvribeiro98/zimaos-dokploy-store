@@ -1,0 +1,58 @@
+name: timescaledb
+services:
+  timescaledb:
+    image: timescale/timescaledb:2.26.4-pg17
+    restart: unless-stopped
+    expose:
+    - 5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: UZDHheiLEJ6DrI0sUCOt2PK3MT8hTKkc
+      POSTGRES_DB: timescaledb
+      TIMESCALEDB_TELEMETRY: 'off'
+    volumes:
+    - timescaledb-data:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/001_create_timescaledb.sql:/docker-entrypoint-initdb.d/001_create_timescaledb.sql:ro
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    ports:
+    - target: 5432
+      published: "5432"
+      protocol: tcp
+volumes:
+  timescaledb-data: null
+x-casaos:
+  id: com.dokploy.timescaledb
+  main: timescaledb
+  index: /
+  port_map: "5432"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/timescaledb/icon.svg
+  title:
+    en_US: TimescaleDB
+  tagline:
+    en_US: TimescaleDB is an open-source time-series database packaged as a PostgreSQL extension,...
+  description:
+    en_US: TimescaleDB is an open-source time-series database packaged as a PostgreSQL extension, optimized for fast ingest
+      and real-time analytics with standard SQL.
+  author: Dokploy Community
+  developer: TimescaleDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.26.4-pg17"
+  update_at: "2026-11-22"
+  website: https://www.tigerdata.com/
+  repo: https://github.com/timescale/timescaledb
+  docs: https://docs.timescale.com/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (001_create_timescaledb.sql,
+        README.md). Review environment variables before starting.

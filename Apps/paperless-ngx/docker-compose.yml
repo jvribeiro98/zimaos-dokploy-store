@@ -1,0 +1,92 @@
+name: paperless-ngx
+services:
+  paperless-ngx:
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.15
+    restart: unless-stopped
+    depends_on:
+      paperless-ngx-db:
+        condition: service_healthy
+      paperless-ngx-broker:
+        condition: service_healthy
+    expose:
+    - 8000
+    environment:
+      PAPERLESS_REDIS: redis://paperless-ngx-broker:6379
+      PAPERLESS_DBHOST: paperless-ngx-db
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: 7540DgtbzxK7JGtt3pvSzXlOomppTA8b
+      PAPERLESS_SECRET_KEY: 2zf4n0ZVmFS9wFcywlWt6aP1ExdohKjlmExCMimi7OC6yAdTogf8ZAfmMk8T2QJV
+      PAPERLESS_URL: http://localhost
+      PAPERLESS_TIME_ZONE: UTC
+      PAPERLESS_OCR_LANGUAGE: eng
+    volumes:
+    - paperless-data:/usr/src/paperless/data
+    - paperless-media:/usr/src/paperless/media
+    - paperless-export:/usr/src/paperless/export
+    - paperless-consume:/usr/src/paperless/consume
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  paperless-ngx-db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: 7540DgtbzxK7JGtt3pvSzXlOomppTA8b
+    volumes:
+    - paperless-db:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U paperless -d paperless
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  paperless-ngx-broker:
+    image: redis:8-alpine
+    restart: unless-stopped
+    volumes:
+    - paperless-redis:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  paperless-data: {}
+  paperless-media: {}
+  paperless-export: {}
+  paperless-consume: {}
+  paperless-db: {}
+  paperless-redis: {}
+x-casaos:
+  id: com.dokploy.paperless-ngx
+  main: paperless-ngx
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/paperless-ngx/icon.svg
+  title:
+    en_US: Paperless-ngx
+  tagline:
+    en_US: Paperless-ngx is a document management system that turns scanned paperwork into a searc...
+  description:
+    en_US: Paperless-ngx is a document management system that turns scanned paperwork into a searchable archive. Self-host
+      it on your own server with Dokploy, which deploys Paperless-ngx as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Paperless-ngx
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.20.15"
+  update_at: "2026-11-22"
+  website: https://paperless-ngx.com/
+  repo: https://github.com/paperless-ngx/paperless-ngx
+  docs: https://docs.paperless-ngx.com/

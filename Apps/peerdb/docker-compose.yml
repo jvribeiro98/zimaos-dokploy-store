@@ -1,0 +1,285 @@
+name: peerdb
+services:
+  catalog:
+    image: postgres:18-alpine@sha256:eca6fb2d91fda290eb8cfb8ba53dd0dcbf3508a08011e30adb039ea7c8e1e9f2
+    command: -c config_file=/etc/postgresql.conf
+    restart: unless-stopped
+    expose:
+    - 5432
+    environment:
+      PGUSER: postgres
+      POSTGRES_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      POSTGRES_DB: postgres
+      POSTGRES_INITDB_ARGS: --locale=C.UTF-8
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/postgresql.conf:/etc/postgresql.conf
+    - /DATA/AppData/$AppID/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+      - CMD
+      - pg_isready
+      - -d
+      - ${PEERDB_CATALOG_DATABASE}
+      - -U
+      - ${PEERDB_CATALOG_USER}
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 60s
+  temporal:
+    restart: unless-stopped
+    depends_on:
+      catalog:
+        condition: service_healthy
+    environment:
+      DB: postgres12
+      DB_PORT: '5432'
+      POSTGRES_USER: postgres
+      POSTGRES_PWD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      POSTGRES_SEEDS: catalog
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/production-sql.yaml
+    image: temporalio/auto-setup:1.29@sha256:5b3502a3b685f9eff1b925af90c57c9e3dbeccbef367cc28a2a9712c63379312
+    expose:
+    - 7233
+    volumes:
+    - /DATA/AppData/$AppID/temporal-dynamicconfig:/etc/temporal/config/dynamicconfig
+  temporal-admin-tools:
+    restart: unless-stopped
+    depends_on:
+    - temporal
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CLI_ADDRESS: temporal:7233
+      TEMPORAL_CLI_SHOW_STACKS: '1'
+    image: temporalio/admin-tools:1.25.2-tctl-1.18.1-cli-1.1.1@sha256:da0c7a7982b571857173ab8f058e7f139b3054800abb4dcb100445d29a563ee8
+    stdin_open: true
+    tty: true
+    entrypoint:
+    - sh
+    - /etc/temporal/entrypoint.sh
+    healthcheck:
+      test:
+      - CMD
+      - tctl
+      - workflow
+      - list
+      interval: 10s
+      timeout: 30s
+      retries: 5
+    volumes:
+    - /DATA/AppData/$AppID/scripts/mirror-name-search.sh:/etc/temporal/entrypoint.sh
+  temporal-ui:
+    restart: unless-stopped
+    depends_on:
+    - temporal
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: http://localhost:3000
+      TEMPORAL_CSRF_COOKIE_INSECURE: 'true'
+    image: temporalio/ui:2.43.3@sha256:31f0d8c1ed0bfc49c9c20ea9613ee9dd5c52f5f989bacb8a30210f847028e9cd
+    expose:
+    - 8080
+  flow-api:
+    image: ghcr.io/peerdb-io/flow-api:stable-v0.35.5
+    restart: unless-stopped
+    expose:
+    - 8112
+    - 8113
+    environment:
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      TEMPORAL_HOST_PORT: temporal:7233
+      TEMPORAL_CLIENT_CERT: ''
+      TEMPORAL_CLIENT_KEY: ''
+      PEERDB_TEMPORAL_NAMESPACE: default
+      AWS_ACCESS_KEY_ID: ''
+      AWS_SECRET_ACCESS_KEY: ''
+      AWS_REGION: ''
+      AWS_ENDPOINT: ''
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      PEERDB_CATALOG_DATABASE: postgres
+      PEERDB_ALLOWED_TARGETS: ''
+    depends_on:
+      temporal-admin-tools:
+        condition: service_healthy
+  flow-snapshot-worker:
+    image: ghcr.io/peerdb-io/flow-snapshot-worker:stable-v0.35.5
+    restart: unless-stopped
+    environment:
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      TEMPORAL_HOST_PORT: temporal:7233
+      TEMPORAL_CLIENT_CERT: ''
+      TEMPORAL_CLIENT_KEY: ''
+      PEERDB_TEMPORAL_NAMESPACE: default
+      AWS_ACCESS_KEY_ID: ''
+      AWS_SECRET_ACCESS_KEY: ''
+      AWS_REGION: ''
+      AWS_ENDPOINT: ''
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      PEERDB_CATALOG_DATABASE: postgres
+    depends_on:
+      temporal-admin-tools:
+        condition: service_healthy
+  flow-worker:
+    image: ghcr.io/peerdb-io/flow-worker:stable-v0.35.5
+    restart: unless-stopped
+    environment:
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      TEMPORAL_HOST_PORT: temporal:7233
+      TEMPORAL_CLIENT_CERT: ''
+      TEMPORAL_CLIENT_KEY: ''
+      PEERDB_TEMPORAL_NAMESPACE: default
+      AWS_ACCESS_KEY_ID: ''
+      AWS_SECRET_ACCESS_KEY: ''
+      AWS_REGION: ''
+      AWS_ENDPOINT: ''
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      PEERDB_CATALOG_DATABASE: postgres
+    depends_on:
+      temporal-admin-tools:
+        condition: service_healthy
+  peerdb:
+    stop_signal: SIGINT
+    image: ghcr.io/peerdb-io/peerdb-server:stable-v0.35.5
+    restart: unless-stopped
+    environment:
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      PEERDB_CATALOG_DATABASE: postgres
+      PEERDB_PASSWORD: 8zqzsQUsZUsvmoWX4Y3SjFDCrta33bGz
+      PEERDB_FLOW_SERVER_ADDRESS: grpc://flow-api:8112
+      RUST_LOG: info
+      RUST_BACKTRACE: '1'
+    expose:
+    - 9900
+    depends_on:
+      catalog:
+        condition: service_healthy
+  peerdb-ui:
+    image: ghcr.io/peerdb-io/peerdb-ui:stable-v0.35.5
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: uhg3XcpL8bH5eXits3lSakRhzoS8iOse
+      PEERDB_CATALOG_DATABASE: postgres
+      DATABASE_URL: postgres://postgres:uhg3XcpL8bH5eXits3lSakRhzoS8iOse@catalog:5432/postgres
+      PEERDB_FLOW_SERVER_HTTP: http://flow-api:8113
+      NEXTAUTH_SECRET: AeE6i5I4wYzwWrlPnxFvvBK5JALRe6Kb
+      NEXTAUTH_URL: http://localhost:3000
+      PEERDB_ALLOWED_TARGETS: ''
+      PEERDB_CLICKHOUSE_ALLOWED_DOMAINS: ''
+      PEERDB_EXPERIMENTAL_ENABLE_SCRIPTING: 'true'
+    depends_on:
+    - flow-api
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  minio:
+    image: minio/minio:latest@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
+    restart: unless-stopped
+    volumes:
+    - minio-data:/data
+    expose:
+    - 9000
+    - 9001
+    environment:
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: LpaqegT2fhZEWTKTfrOL6vgOHO66MYSR
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+    entrypoint: '/bin/sh -c " minio server /data --console-address=:9001 & sleep 2; mc alias set myminiopeerdb http://minio:9000
+      $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD; mc mb myminiopeerdb/$$PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME; wait "
+
+      '
+x-minio-config:
+  PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+  PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+  MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+  MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+  PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: ${PEERDB_CLICKHOUSE_AWS_REGION}
+  PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: ${PEERDB_CLICKHOUSE_AWS_ENDPOINT_URL_S3}
+  PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: ${PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME}
+x-catalog-config:
+  PEERDB_CATALOG_HOST: ${PEERDB_CATALOG_HOST}
+  PEERDB_CATALOG_PORT: ${PEERDB_CATALOG_PORT}
+  PEERDB_CATALOG_USER: ${PEERDB_CATALOG_USER}
+  PEERDB_CATALOG_PASSWORD: ${PEERDB_CATALOG_PASSWORD}
+  PEERDB_CATALOG_DATABASE: ${PEERDB_CATALOG_DATABASE}
+x-flow-worker-env:
+  TEMPORAL_HOST_PORT: temporal:7233
+  TEMPORAL_CLIENT_CERT: null
+  TEMPORAL_CLIENT_KEY: null
+  PEERDB_TEMPORAL_NAMESPACE: default
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+  AWS_REGION: ${AWS_REGION:-}
+  AWS_ENDPOINT: ${AWS_ENDPOINT:-}
+volumes:
+  pgdata: null
+  minio-data: null
+x-casaos:
+  id: com.dokploy.peerdb
+  main: peerdb-ui
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/peerdb/icon.jpeg
+  title:
+    en_US: PeerDB
+  tagline:
+    en_US: Data integration platform that synchronizes and federates data across databases with a...
+  description:
+    en_US: Data integration platform that synchronizes and federates data across databases with a unified API.
+  author: Dokploy Community
+  developer: PeerDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "0.35.5"
+  update_at: "2026-11-22"
+  website: https://peerdb.io
+  repo: https://github.com/peerdb-io/peerdb
+  docs: https://docs.peerdb.io
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./postgresql.conf, ./docker-entrypoint-initdb.d/pg-hba-replication.sh,
+        ./temporal-dynamicconfig/production-sql.yaml, ./scripts/mirror-name-search.sh). Review environment variables before
+        starting.

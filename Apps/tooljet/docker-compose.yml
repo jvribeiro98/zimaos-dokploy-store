@@ -1,0 +1,68 @@
+name: tooljet
+services:
+  tooljet:
+    tty: true
+    stdin_open: true
+    image: tooljet/tooljet:ee-lts-latest
+    restart: always
+    env_file: .env
+    expose:
+    - 80
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    depends_on:
+    - postgres
+    environment:
+      SERVE_CLIENT: 'true'
+      PORT: '80'
+    command: npm run start:prod
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  postgres:
+    image: postgres:13
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 3G
+    volumes:
+    - /DATA/AppData/$AppID/postgres:/var/lib/postgresql/data
+    env_file: .env
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=aGfemEDJPK8ENPMrb938XLs2mb5yJb0N
+volumes:
+  certs: null
+  logs: null
+  fallbackcerts: null
+x-casaos:
+  id: com.dokploy.tooljet
+  main: tooljet
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tooljet/icon.png
+  title:
+    en_US: Tooljet
+  tagline:
+    en_US: Tooljet is an open-source low-code platform that allows you to build internal tools qui...
+  description:
+    en_US: Tooljet is an open-source low-code platform that allows you to build internal tools quickly and efficiently. It
+      provides a user-friendly interface for creating applications without extensive coding knowledge.
+  author: Dokploy Community
+  developer: Tooljet
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "ee-lts-latest"
+  update_at: "2026-11-22"
+  website: https://tooljet.ai/
+  repo: https://github.com/ToolJet/ToolJet
+  docs: https://docs.tooljet.ai/

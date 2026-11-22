@@ -1,0 +1,86 @@
+name: whatomate
+services:
+  whatomate:
+    image: shridh0r/whatomate:0.1.1-beta-0.16.1
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+    - TZ=Etc/UTC
+    volumes:
+    - /DATA/AppData/$AppID/config.toml:/app/config.toml:ro
+    - whatomate-uploads:/app/uploads
+    command:
+    - server
+    - -migrate
+    - -config
+    - /app/config.toml
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=whatomate
+    - POSTGRES_PASSWORD=whatomate
+    - POSTGRES_DB=whatomate
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U whatomate -d whatomate
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+    - whatomate-postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - whatomate-redis-data:/data
+volumes:
+  whatomate-uploads: null
+  whatomate-postgres-data: null
+  whatomate-redis-data: null
+x-casaos:
+  id: com.dokploy.whatomate
+  main: whatomate
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/whatomate/icon.svg
+  title:
+    en_US: Whatomate
+  tagline:
+    en_US: Modern, open-source WhatsApp Business Platform with real-time chat, chatbot automation,...
+  description:
+    en_US: Modern, open-source WhatsApp Business Platform with real-time chat, chatbot automation, bulk campaigns, template
+      management, and voice calling via Meta's Cloud API.
+  author: Dokploy Community
+  developer: Whatomate
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.1-beta-0.16.1"
+  update_at: "2026-11-22"
+  website: https://whatomate.io/
+  repo: https://github.com/shridarpatil/whatomate
+  docs: https://shridarpatil.github.io/whatomate/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config.toml). Review environment
+        variables before starting.

@@ -1,0 +1,41 @@
+name: kokoro-web
+services:
+  kokoro-web:
+    image: ghcr.io/eduardolat/kokoro-web:latest
+    restart: unless-stopped
+    environment:
+    - KW_SECRET_API_KEY=1aJvp7ZtvDPjg4FtDRjvuGuRE9e3WwYh
+    - KW_PUBLIC_NO_TRACK=false
+    volumes:
+    - kokoro-cache:/kokoro/cache
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  kokoro-cache: {}
+x-casaos:
+  id: com.dokploy.kokoro-web
+  main: kokoro-web
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kokoro-web/icon.png
+  title:
+    en_US: Kokoro Web
+  tagline:
+    en_US: Kokoro Web provides an interface for text-to-speech using advanced AI voice synthesis
+  description:
+    en_US: Kokoro Web provides an interface for text-to-speech using advanced AI voice synthesis. It allows model caching
+      and API integration with authentication.
+  author: Dokploy Community
+  developer: Kokoro Web
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/eduardolat/kokoro-web
+  repo: https://github.com/eduardolat/kokoro-web
+  docs: https://github.com/eduardolat/kokoro-web#readme

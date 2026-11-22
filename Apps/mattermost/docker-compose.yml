@@ -1,0 +1,92 @@
+name: mattermost
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 100
+    read_only: true
+    tmpfs:
+    - /tmp
+    - /var/run/postgresql
+    volumes:
+    - mattermostDbData:/var/lib/postgresql/data
+    environment:
+    - TZ=UTC
+    - POSTGRES_USER=mmuser
+    - POSTGRES_PASSWORD=UwRlCZ0lJHNYqO5zUZYfwSrsJECM33IP
+    - POSTGRES_DB=mattermost
+  mattermost:
+    depends_on:
+    - postgres
+    image: mattermost/mattermost-team-edition:10.6.1
+    restart: unless-stopped
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 200
+    read_only: false
+    tmpfs:
+    - /tmp
+    volumes:
+    - mattermostconf:/mattermost/config:rw
+    - mattermostdata:/mattermost/data:rw
+    - mattermostlogs:/mattermost/logs:rw
+    - mattermostplugsin:/mattermost/plugins:rw
+    - mattermostclientplugins:/mattermost/client/plugins:rw
+    - mattermostBleveIndexes:/mattermost/bleve-indexes:rw
+    environment:
+    - DOMAIN
+    - TZ=UTC
+    - POSTGRES_USER=mmuser
+    - POSTGRES_PASSWORD=UwRlCZ0lJHNYqO5zUZYfwSrsJECM33IP
+    - POSTGRES_DB=mattermost
+    - MM_SQLSETTINGS_DRIVERNAME=postgres
+    - MM_SQLSETTINGS_DATASOURCE=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable&connect_timeout=10
+    - MM_BLEVESETTINGS_INDEXDIR
+    - MM_SERVICESETTINGS_SITEURL
+    - APP_PORT=8065
+    ports:
+    - target: 8065
+      published: "8065"
+      protocol: tcp
+volumes:
+  mattermostDbData:
+    driver: local
+  mattermostconf:
+    driver: local
+  mattermostdata:
+    driver: local
+  mattermostlogs:
+    driver: local
+  mattermostplugsin:
+    driver: local
+  mattermostclientplugins:
+    driver: local
+  mattermostBleveIndexes:
+    driver: local
+x-casaos:
+  id: com.dokploy.mattermost
+  main: mattermost
+  index: /
+  port_map: "8065"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mattermost/icon.png
+  title:
+    en_US: Mattermost
+  tagline:
+    en_US: Mattermost is a team chat platform and an alternative to Slack
+  description:
+    en_US: Mattermost is a team chat platform and an alternative to Slack. Self-host it on your own server with Dokploy, which
+      deploys Mattermost as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Mattermost
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "10.6.1"
+  update_at: "2026-11-22"
+  website: https://mattermost.com/
+  repo: https://github.com/mattermost/mattermost
+  docs: https://docs.mattermost.com/

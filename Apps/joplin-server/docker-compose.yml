@@ -1,0 +1,58 @@
+name: joplin-server
+services:
+  joplin-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: qaMyGcOnPp3WJOXRLPEdrA0DQv46aKIC
+      POSTGRES_USER: joplin
+      POSTGRES_DB: joplin
+    volumes:
+    - joplin_db_data:/var/lib/postgresql/data
+  joplin-server:
+    image: joplin/server:3.7.1
+    restart: unless-stopped
+    depends_on:
+    - joplin-db
+    environment:
+      APP_BASE_URL: http://localhost
+      APP_PORT: '22300'
+      DB_CLIENT: pg
+      POSTGRES_PASSWORD: qaMyGcOnPp3WJOXRLPEdrA0DQv46aKIC
+      POSTGRES_DATABASE: joplin
+      POSTGRES_USER: joplin
+      POSTGRES_PORT: '5432'
+      POSTGRES_HOST: joplin-db
+    expose:
+    - '22300'
+    ports:
+    - target: 22300
+      published: "22300"
+      protocol: tcp
+volumes:
+  joplin_db_data: null
+x-casaos:
+  id: com.dokploy.joplin-server
+  main: joplin-server
+  index: /
+  port_map: "22300"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/joplin-server/icon.svg
+  title:
+    en_US: Joplin Server
+  tagline:
+    en_US: Joplin Server is the sync backend for the Joplin note-taking app
+  description:
+    en_US: Joplin Server is the sync backend for the Joplin note-taking app. Self-host it on your own server with Dokploy,
+      which deploys Joplin Server as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Joplin Server
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.7.1"
+  update_at: "2026-11-22"
+  website: https://joplinapp.org/
+  repo: https://github.com/laurent22/joplin
+  docs: https://github.com/laurent22/joplin/tree/dev/packages/server

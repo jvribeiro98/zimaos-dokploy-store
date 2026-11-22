@@ -1,0 +1,9 @@
+port: 7880
+rtc:
+  udp_port: 7882
+  tcp_port: 7881
+  use_external_ip: true
+redis:
+  address: redis:6379
+keys:
+  # Keys are overridden through LIVEKIT_KEYS, but this section must exist.

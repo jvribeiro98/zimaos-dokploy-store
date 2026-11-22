@@ -1,0 +1,44 @@
+name: surrealdb
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:v2.3.10
+    environment:
+      SURREAL_USER: admin
+      SURREAL_PASS: otOTHUwSTp9uSLlVSqprqMAAewcmAtCY
+    volumes:
+    - db_data:/usr/app/data
+    user: root
+    command: start rocksdb:/db_data/data.db
+    pull_policy: always
+    restart: unless-stopped
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  db_data: {}
+x-casaos:
+  id: com.dokploy.surrealdb
+  main: surrealdb
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/surrealdb/icon.svg
+  title:
+    en_US: SurrealDB
+  tagline:
+    en_US: SurrealDB is a native, open-source, multi-model database that lets you store and manage...
+  description:
+    en_US: SurrealDB is a native, open-source, multi-model database that lets you store and manage data across relational,
+      document, graph, time-series, vector & search, and geospatial modelsâ€”all in one place.
+  author: Dokploy Community
+  developer: SurrealDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.3.10"
+  update_at: "2026-11-22"
+  website: https://surrealdb.com
+  repo: https://github.com/surrealdb/surrealdb
+  docs: https://surrealdb.com/docs/surrealdb

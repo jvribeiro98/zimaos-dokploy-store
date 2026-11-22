@@ -1,0 +1,74 @@
+name: vikunja
+services:
+  vikunja:
+    image: vikunja/vikunja
+    user: 0:0
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: https://localhost
+      VIKUNJA_PUBLIC_PORT: ${VIKUNJA_PUBLIC_PORT}
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_PASSWORD: Qx50VQt7hly56A1RJS2hCQpBLla5y2Zi
+      VIKUNJA_DATABASE_TYPE: postgres
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_SERVICE_JWTSECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkb2twbG95LXppbWFvcyIsImlhdCI6MTc5NTMwNzA1Nn0.o0ax-9exJLpJcvzRQM7iMKeKv_fxafatMeZYxTQfPvE
+    expose:
+    - 3456
+    volumes:
+    - vikunja-files:/app/vikunja/files
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 3456
+      published: "3456"
+      protocol: tcp
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: Qx50VQt7hly56A1RJS2hCQpBLla5y2Zi
+      POSTGRES_USER: vikunja
+      POSTGRES_DB: vikunja
+    volumes:
+    - vikunja-db:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready
+      - -U
+      - ${VIKUNJA_DATABASE_USER}
+      - -d
+      - ${VIKUNJA_DATABASE_DATABASE}
+      interval: 10s
+      timeout: 5s
+      retries: 3
+volumes:
+  vikunja-files: {}
+  vikunja-db: {}
+x-casaos:
+  id: com.dokploy.vikunja
+  main: vikunja
+  index: /
+  port_map: "3456"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/vikunja/icon.png
+  title:
+    en_US: Vikunja
+  tagline:
+    en_US: Vikunja is an open-source to-do list and task management app
+  description:
+    en_US: Vikunja is an open-source to-do list and task management app. Self-host it on your own server with Dokploy, which
+      deploys Vikunja as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Vikunja
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.23.0"
+  update_at: "2026-11-22"
+  website: https://vikunja.io/
+  repo: https://github.com/go-vikunja/vikunja
+  docs: https://vikunja.io/docs/

@@ -1,0 +1,45 @@
+name: nyxiontech-pdf-tools
+services:
+  nyxiontech-pdf-tools:
+    image: ghcr.io/jurecki007/nyxiontech-tools:1.2.0
+    restart: unless-stopped
+    expose:
+    - 80
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - -q
+      - http://127.0.0.1/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.nyxiontech-pdf-tools
+  main: nyxiontech-pdf-tools
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nyxiontech-pdf-tools/icon.svg
+  title:
+    en_US: Nyxiontech PDF Tools
+  tagline:
+    en_US: 25 PDF and image tools that run entirely in the browser
+  description:
+    en_US: 25 PDF and image tools that run entirely in the browser. No backend, so documents are never uploaded to the server.
+  author: Dokploy Community
+  developer: Nyxiontech PDF Tools
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.2.0"
+  update_at: "2026-11-22"
+  website: https://tools.nyxiontech.com
+  repo: https://github.com/jurecki007/nyxiontech-tools
+  docs: https://tools.nyxiontech.com/guides

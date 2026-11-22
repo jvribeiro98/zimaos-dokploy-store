@@ -1,0 +1,43 @@
+name: clickhouse
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    restart: unless-stopped
+    environment:
+    - CLICKHOUSE_USER=default
+    - CLICKHOUSE_PASSWORD=NYXG6vRqXygoBJ3vgZ9EOqaEs12p08Ej
+    volumes:
+    - clickhouse-data:/var/lib/clickhouse
+    - clickhouse-logs:/var/log/clickhouse-server
+    ports:
+    - target: 8123
+      published: "8123"
+      protocol: tcp
+volumes:
+  clickhouse-data: null
+  clickhouse-logs: null
+x-casaos:
+  id: com.dokploy.clickhouse
+  main: clickhouse
+  index: /
+  port_map: "8123"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/clickhouse/icon.png
+  title:
+    en_US: ClickHouse
+  tagline:
+    en_US: ClickHouse is a fast, open-source columnar database built for real-time analytics
+  description:
+    en_US: ClickHouse is a fast, open-source columnar database built for real-time analytics. Self-host it on your own server
+      with Dokploy, which deploys ClickHouse as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: ClickHouse
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://clickhouse.com/
+  repo: https://github.com/ClickHouse/ClickHouse
+  docs: https://clickhouse.com/docs

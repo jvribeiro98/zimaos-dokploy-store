@@ -1,0 +1,38 @@
+name: otterwiki
+services:
+  otterwiki:
+    image: redimp/otterwiki:2
+    restart: unless-stopped
+    volumes:
+    - otterwiki-data:/app-data
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  otterwiki-data: {}
+x-casaos:
+  id: com.dokploy.otterwiki
+  main: otterwiki
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/otterwiki/icon.png
+  title:
+    en_US: Otter Wiki
+  tagline:
+    en_US: An Otter Wiki is a simple, lightweight, and fast wiki engine built with Python and Flask
+  description:
+    en_US: An Otter Wiki is a simple, lightweight, and fast wiki engine built with Python and Flask. It provides a user-friendly
+      interface for creating and managing wiki content with markdown support.
+  author: Dokploy Community
+  developer: Otter Wiki
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2"
+  update_at: "2026-11-22"
+  website: https://otterwiki.com/
+  repo: https://github.com/redimp/otterwiki
+  docs: https://github.com/redimp/otterwiki/wiki

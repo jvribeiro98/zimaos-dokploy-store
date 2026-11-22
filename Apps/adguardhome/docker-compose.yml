@@ -1,0 +1,48 @@
+name: adguardhome
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    restart: unless-stopped
+    ports:
+    - 53:53/tcp
+    - 53:53/udp
+    - 67:67/udp
+    - 68:68/tcp
+    - 853:853/tcp
+    - 853:853/udp
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+    expose:
+    - 6060
+    volumes:
+    - adguardhome-work:/opt/adguardhome/work
+    - adguardhome-conf:/opt/adguardhome/conf
+volumes:
+  adguardhome-work: {}
+  adguardhome-conf: {}
+x-casaos:
+  id: com.dokploy.adguardhome
+  main: adguardhome
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/adguardhome/icon.svg
+  title:
+    en_US: AdGuard Home
+  tagline:
+    en_US: AdGuard Home is a network-wide ad and tracker blocker
+  description:
+    en_US: AdGuard Home is a network-wide ad and tracker blocker. Self-host it on your own server with Dokploy, which deploys
+      AdGuard Home as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: AdGuard Home
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://adguard.com
+  repo: https://github.com/AdguardTeam/AdGuardHome
+  docs: https://github.com/AdguardTeam/AdGuardHome/wiki

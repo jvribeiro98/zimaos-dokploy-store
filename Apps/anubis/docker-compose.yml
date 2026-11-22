@@ -1,0 +1,44 @@
+name: anubis
+services:
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    restart: unless-stopped
+    expose:
+    - '8923'
+    environment:
+    - TARGET=YOURLOCALHOST:PORT
+    - BIND=:8923
+    - COOKIE_DOMAIN=localhost
+    - DIFFICULTY=5
+    - OG_PASSTHROUGH=True
+    - OG_EXPIRY_TIME=1h
+    - OG_CACHE_CONSIDER_HOST=True
+    - SERVE_ROBOTS_TXT=False
+    ports:
+    - target: 8923
+      published: "8923"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.anubis
+  main: anubis
+  index: /
+  port_map: "8923"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/anubis/icon.webp
+  title:
+    en_US: Anubis
+  tagline:
+    en_US: Anubis is a bot protector, It will block bots from accessing your website
+  description:
+    en_US: Anubis is a bot protector, It will block bots from accessing your website.
+  author: Dokploy Community
+  developer: Anubis
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://anubis.techaro.lol
+  repo: https://github.com/TecharoHQ/anubis
+  docs: https://anubis.techaro.lol/docs/

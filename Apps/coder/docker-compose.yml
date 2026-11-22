@@ -1,0 +1,62 @@
+name: coder
+services:
+  coder:
+    image: ghcr.io/coder/coder:v2.15.3
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    group_add:
+    - '988'
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+    - CODER_ACCESS_URL=
+    - CODER_HTTP_ADDRESS=0.0.0.0:7080
+    - CODER_PG_CONNECTION_URL=postgresql://coder:jaJXnF0ViiC5xIPwXguI6ELIWGOuIWg2@db/coder?sslmode=disable
+    restart: unless-stopped
+    ports:
+    - target: 7080
+      published: "7080"
+      protocol: tcp
+  db:
+    image: postgres:17
+    environment:
+    - POSTGRES_PASSWORD=jaJXnF0ViiC5xIPwXguI6ELIWGOuIWg2
+    - POSTGRES_USER=coder
+    - POSTGRES_DB=coder
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+    - db_coder_data:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  db_coder_data: null
+x-casaos:
+  id: com.dokploy.coder
+  main: coder
+  index: /
+  port_map: "7080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/coder/icon.svg
+  title:
+    en_US: Coder
+  tagline:
+    en_US: Coder is an open-source cloud development environment (CDE) that you host in your cloud...
+  description:
+    en_US: Coder is an open-source cloud development environment (CDE) that you host in your cloud or on-premises.
+  author: Dokploy Community
+  developer: Coder
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.15.3"
+  update_at: "2026-11-22"
+  website: https://coder.com/
+  repo: https://github.com/coder/coder
+  docs: https://coder.com/docs

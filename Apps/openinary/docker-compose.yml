@@ -1,0 +1,53 @@
+name: openinary
+services:
+  openinary:
+    image: openinary/openinary:${IMAGE_TAG:-latest}
+    pull_policy: always
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      NODE_ENV: production
+      MODE: fullstack
+      NEXT_PUBLIC_API_BASE_URL: /api
+      BETTER_AUTH_SECRET: rMgJobs6lwdcocUJIESvaIZHc7YkhuIUAeqPCF4cPqagGGQMkAXESu2ErjCvwlgd
+      BETTER_AUTH_URL: http://localhost
+      ALLOWED_ORIGIN: http://localhost}
+      DOCKER_CONTAINER: 'true'
+    volumes:
+    - cache-data:/app/apps/api/cache
+    - public-files:/app/apps/api/public
+    - db-data:/app/data
+    - db-data:/app/web-standalone/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  cache-data: null
+  public-files: null
+  db-data: null
+x-casaos:
+  id: com.dokploy.openinary
+  main: openinary
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openinary/icon.svg
+  title:
+    en_US: Openinary
+  tagline:
+    en_US: Openinary is a self-hosted Cloudinary alternative
+  description:
+    en_US: Openinary is a self-hosted Cloudinary alternative.
+  author: Dokploy Community
+  developer: Openinary
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "-latest}"
+  update_at: "2026-11-22"
+  website: https://openinary.dev
+  repo: https://github.com/openinary/openinary
+  docs: https://docs.openinary.dev

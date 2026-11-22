@@ -1,0 +1,40 @@
+name: solidping
+services:
+  solidping:
+    image: ghcr.io/fclairamb/solidping:0.41.0
+    restart: unless-stopped
+    expose:
+    - 4000
+    volumes:
+    - solidping-data:/data
+    ports:
+    - target: 4000
+      published: "4000"
+      protocol: tcp
+volumes:
+  solidping-data: {}
+x-casaos:
+  id: com.dokploy.solidping
+  main: solidping
+  index: /
+  port_map: "4000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/solidping/icon.svg
+  title:
+    en_US: SolidPing
+  tagline:
+    en_US: 'Distributed, self-hostable uptime monitoring: 40+ check types, multi-region workers, pr...'
+  description:
+    en_US: 'Distributed, self-hostable uptime monitoring: 40+ check types, multi-region workers, private agents, status pages,
+      incidents and on-call escalation, in a single Go binary.'
+  author: Dokploy Community
+  developer: SolidPing
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.41.0"
+  update_at: "2026-11-22"
+  website: https://www.solidping.io
+  repo: https://github.com/fclairamb/solidping
+  docs: https://docs.solidping.io

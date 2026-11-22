@@ -1,0 +1,44 @@
+name: apprise-api
+services:
+  apprise-api:
+    image: linuxserver/apprise-api:latest
+    restart: unless-stopped
+    expose:
+    - 8000
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.apprise-api
+  main: apprise-api
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/apprise-api/icon.png
+  title:
+    en_US: Apprise API
+  tagline:
+    en_US: Apprise API provides a simple interface for sending notifications to almost all of the...
+  description:
+    en_US: Apprise API provides a simple interface for sending notifications to almost all of the most popular notification
+      services available to us today.
+  author: Dokploy Community
+  developer: Apprise API
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/caronc/apprise-api
+  repo: https://github.com/caronc/apprise-api
+  docs: https://github.com/caronc/apprise-api/wiki

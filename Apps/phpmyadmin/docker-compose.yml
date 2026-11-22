@@ -1,0 +1,56 @@
+name: phpmyadmin
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: dHjLONODfh4z8u4wCOdFkWFvedToKjT1
+      MYSQL_DATABASE: phpmyadmin
+      MYSQL_USER: phpmyadmin
+      MYSQL_PASSWORD: l6EL1AmIxo3ZL5IHKdvqHe5vlhm8pjmq
+    volumes:
+    - db_data:/var/lib/mysql
+    restart: unless-stopped
+  phpmyadmin:
+    image: phpmyadmin:5.2.3
+    environment:
+      PMA_HOST: db
+      PMA_USER: phpmyadmin
+      PMA_PASSWORD: l6EL1AmIxo3ZL5IHKdvqHe5vlhm8pjmq
+      PMA_ARBITRARY: '1'
+      UPLOAD_LIMIT: 512M
+      MAX_EXECUTION_TIME: '600'
+    depends_on:
+    - db
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  db_data:
+    driver: local
+x-casaos:
+  id: com.dokploy.phpmyadmin
+  main: phpmyadmin
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/phpmyadmin/icon.png
+  title:
+    en_US: Phpmyadmin
+  tagline:
+    en_US: phpMyAdmin is an open-source web interface for managing MySQL and MariaDB databases
+  description:
+    en_US: phpMyAdmin is an open-source web interface for managing MySQL and MariaDB databases. Self-host it on your own server
+      with Dokploy, which deploys phpMyAdmin as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Phpmyadmin
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "5.2.3"
+  update_at: "2026-11-22"
+  website: https://www.phpmyadmin.net/
+  repo: https://github.com/phpmyadmin/phpmyadmin
+  docs: https://www.phpmyadmin.net/docs/

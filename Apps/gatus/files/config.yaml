@@ -1,0 +1,16 @@
+storage:
+  type: sqlite
+  path: /data/data.db
+
+ui:
+  title: Gatus
+  header: Gatus
+
+endpoints:
+  - name: Example website
+    group: external
+    url: "https://example.org/"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"

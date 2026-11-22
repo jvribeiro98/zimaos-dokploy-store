@@ -1,0 +1,39 @@
+name: lobe-chat
+services:
+  lobe-chat:
+    image: lobehub/lobe-chat:v1.26.1
+    restart: always
+    expose:
+    - 3210
+    environment:
+      OPENAI_API_KEY: sk-xxxx
+      OPENAI_PROXY_URL: https://api-proxy.com/v1
+      ACCESS_CODE: lobe66
+    ports:
+    - target: 3210
+      published: "3210"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.lobe-chat
+  main: lobe-chat
+  index: /
+  port_map: "3210"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/lobe-chat/icon.png
+  title:
+    en_US: Lobe Chat
+  tagline:
+    en_US: Lobe Chat - an open-source, modern-design AI chat framework
+  description:
+    en_US: Lobe Chat - an open-source, modern-design AI chat framework.
+  author: Dokploy Community
+  developer: Lobe Chat
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.26.1"
+  update_at: "2026-11-22"
+  website: https://chat-preview.lobehub.com/
+  repo: https://github.com/lobehub/lobe-chat
+  docs: https://lobehub.com/docs/self-hosting/platform/docker-compose

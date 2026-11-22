@@ -1,0 +1,84 @@
+name: mixpost
+services:
+  mixpost:
+    image: inovector/mixpost:latest
+    environment:
+      APP_NAME: Mixpost
+      APP_KEY: base64:ygtEUxD0fB3vUchihbUYqUzN57rfNi9ER5alJ98dWiA=
+      APP_DEBUG: 'false'
+      APP_DOMAIN: localhost
+      APP_URL: http://${APP_DOMAIN}
+      DB_DATABASE: mixpost_db
+      DB_USERNAME: mixpost_user
+      DB_PASSWORD: qBRAPY8T0X2EVg0bah4KBkF560WoHmbY
+    volumes:
+    - storage:/var/www/html/storage/app
+    - logs:/var/www/html/storage/logs
+    depends_on:
+    - mysql
+    - redis
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_DATABASE: mixpost_db
+      MYSQL_USER: mixpost_user
+      MYSQL_PASSWORD: qBRAPY8T0X2EVg0bah4KBkF560WoHmbY
+    volumes:
+    - mysql:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - mysqladmin
+      - ping
+      - -p ${DB_PASSWORD}
+      retries: 3
+      timeout: 5s
+    restart: unless-stopped
+  redis:
+    image: redis:latest
+    command: redis-server --appendonly yes --replica-read-only no
+    volumes:
+    - redis:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      retries: 3
+      timeout: 5s
+    restart: unless-stopped
+volumes:
+  mysql: {}
+  redis: {}
+  storage: {}
+  logs: {}
+x-casaos:
+  id: com.dokploy.mixpost
+  main: mixpost
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mixpost/icon.png
+  title:
+    en_US: Mixpost
+  tagline:
+    en_US: Mixpost is an open-source social media management tool that allows you to create, sched...
+  description:
+    en_US: Mixpost is an open-source social media management tool that allows you to create, schedule, and publish posts across
+      multiple social media platforms from a single interface.
+  author: Dokploy Community
+  developer: Mixpost
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://mixpost.app/
+  repo: https://github.com/inovector/mixpost
+  docs: https://docs.mixpost.app/

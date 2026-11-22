@@ -1,0 +1,44 @@
+name: windows
+services:
+  windows:
+    image: dockurr/windows:4.00
+    volumes:
+    - win-storage:/storage
+    environment:
+    - VERSION=win11
+    - KVM
+    devices:
+    - /dev/kvm
+    cap_add:
+    - NET_ADMIN
+    stop_grace_period: 2m
+    restart: unless-stopped
+    ports:
+    - target: 8006
+      published: "8006"
+      protocol: tcp
+volumes:
+  win-storage: null
+x-casaos:
+  id: com.dokploy.windows
+  main: windows
+  index: /
+  port_map: "8006"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/windows/icon.png
+  title:
+    en_US: Windows (dockerized)
+  tagline:
+    en_US: Windows inside a Docker container
+  description:
+    en_US: Windows inside a Docker container.
+  author: Dokploy Community
+  developer: Windows (dockerized)
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "4.00"
+  update_at: "2026-11-22"
+  repo: https://github.com/dockur/windows
+  docs: https://github.com/dockur/windows?tab=readme-ov-file#how-do-i-use-it

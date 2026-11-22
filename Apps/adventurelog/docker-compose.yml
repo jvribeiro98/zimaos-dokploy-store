@@ -1,0 +1,71 @@
+name: adventurelog
+services:
+  web:
+    image: ghcr.io/seanmorley15/adventurelog-frontend:latest
+    restart: unless-stopped
+    depends_on:
+    - server
+    environment:
+      PUBLIC_SERVER_URL: localhost
+      ORIGIN: http://localhost
+      BODY_SIZE_LIMIT: Infinity
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgis/postgis:16-3.5
+    restart: unless-stopped
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: adventure
+      POSTGRES_USER: adventure
+      POSTGRES_PASSWORD: EMYdnRA9rFzIo0UI
+  server:
+    image: ghcr.io/seanmorley15/adventurelog-backend:latest
+    restart: unless-stopped
+    depends_on:
+    - db
+    volumes:
+    - adventurelog_media:/code/media/
+    environment:
+      PGHOST: db
+      POSTGRES_DB: adventure
+      POSTGRES_USER: adventure
+      POSTGRES_PASSWORD: EMYdnRA9rFzIo0UI
+      SECRET_KEY: CmSKmpMYi9H2tKcekrFxvGRBzDOdCAU2
+      DJANGO_ADMIN_USERNAME: admin
+      DJANGO_ADMIN_PASSWORD: um9aHcwHwQGq
+      DJANGO_ADMIN_EMAIL: admin@example.com
+      DEBUG: 'False'
+      CSRF_TRUSTED_ORIGINS: http://localhost,http://localhost
+      FRONTEND_URL: http://localhost
+      PUBLIC_URL: http://localhost
+volumes:
+  postgres_data: {}
+  adventurelog_media: {}
+x-casaos:
+  id: com.dokploy.adventurelog
+  main: web
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/adventurelog/icon.svg
+  title:
+    en_US: AdventureLog
+  tagline:
+    en_US: AdventureLog is an open-source activity tracker with maps, journaling, and Strava integ...
+  description:
+    en_US: AdventureLog is an open-source activity tracker with maps, journaling, and Strava integration.
+  author: Dokploy Community
+  developer: AdventureLog
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://adventurelog.app/
+  repo: https://github.com/seanmorley15/adventurelog
+  docs: https://adventurelog.app/docs/intro/adventurelog_overview.html

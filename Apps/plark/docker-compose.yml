@@ -1,0 +1,40 @@
+name: plark
+services:
+  plark:
+    image: plarkinc/plark:latest
+    pull_policy: always
+    restart: unless-stopped
+    expose:
+    - '80'
+    volumes:
+    - plark-data:/var/data
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  plark-data: null
+x-casaos:
+  id: com.dokploy.plark
+  main: plark
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/plark/icon.svg
+  title:
+    en_US: Plark
+  tagline:
+    en_US: Self-hosted Website Builder
+  description:
+    en_US: Self-hosted Website Builder
+  author: Dokploy Community
+  developer: Plark
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://plark.com
+  repo: https://github.com/plark-inc/render
+  docs: https://plark.com/get-started

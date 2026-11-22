@@ -1,0 +1,44 @@
+name: archivebox
+services:
+  archivebox:
+    image: archivebox/archivebox:latest
+    restart: unless-stopped
+    command: server --quick-init 0.0.0.0:8000
+    environment:
+      ALLOWED_HOSTS: '*'
+      PUBLIC_INDEX: 'True'
+      PUBLIC_SNAPSHOTS: 'True'
+    volumes:
+    - archivebox_data:/data
+    expose:
+    - '8000'
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  archivebox_data: null
+x-casaos:
+  id: com.dokploy.archivebox
+  main: archivebox
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/archivebox/icon.svg
+  title:
+    en_US: ArchiveBox
+  tagline:
+    en_US: ArchiveBox is a self-hosted internet archiving solution for saving websites, media, and...
+  description:
+    en_US: ArchiveBox is a self-hosted internet archiving solution for saving websites, media, and documents.
+  author: Dokploy Community
+  developer: ArchiveBox
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://archivebox.io/
+  repo: https://github.com/ArchiveBox/ArchiveBox
+  docs: https://docs.archivebox.io/

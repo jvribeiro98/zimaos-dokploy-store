@@ -1,0 +1,43 @@
+name: enshrouded
+services:
+  enshrouded:
+    image: mornedhels/enshrouded-server:latest
+    hostname: enshrouded
+    restart: unless-stopped
+    stop_grace_period: 90s
+    ports:
+    - 15637:15637/udp
+    - 27015:27015/udp
+    volumes:
+    - enshrouded-persistent-data:/opt/enshrouded
+    environment:
+    - SERVER_NAME=Enshrouded Dokploy
+    - SERVER_PASSWORD=0bmhbhKbPFRihHx
+    - SERVER_SLOT_COUNT=6
+    - UPDATE_CRON=0 3 * * *
+    - PUID=4711
+    - PGID=4711
+volumes:
+  enshrouded-persistent-data: null
+x-casaos:
+  id: com.dokploy.enshrouded
+  main: enshrouded
+  index: /
+  port_map: "15637"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/enshrouded/icon.png
+  title:
+    en_US: Enshrouded
+  tagline:
+    en_US: Enshrouded steam dedicated server
+  description:
+    en_US: Enshrouded steam dedicated server.
+  author: Dokploy Community
+  developer: Enshrouded
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  repo: https://github.com/mornedhels/enshrouded-server

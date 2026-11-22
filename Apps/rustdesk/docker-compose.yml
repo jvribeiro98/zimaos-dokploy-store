@@ -1,0 +1,51 @@
+name: rustdesk
+services:
+  hbbs:
+    image: rustdesk/rustdesk-server:latest
+    command: hbbs
+    restart: unless-stopped
+    volumes:
+    - rustdesk-data:/root
+    ports:
+    - 21115:21115
+    - 21116:21116
+    - 21116:21116/udp
+    depends_on:
+    - hbbr
+  hbbr:
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr
+    restart: unless-stopped
+    volumes:
+    - rustdesk-data:/root
+    ports:
+    - 21117:21117
+    - 21118:21118
+    - 21119:21119
+volumes:
+  rustdesk-data: null
+x-casaos:
+  id: com.dokploy.rustdesk
+  main: hbbs
+  index: /
+  port_map: "21115"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rustdesk/icon.png
+  title:
+    en_US: RustDesk
+  tagline:
+    en_US: RustDesk is a remote desktop tool and an open-source alternative to TeamViewer
+  description:
+    en_US: RustDesk is a remote desktop tool and an open-source alternative to TeamViewer. Self-host it on your own server
+      with Dokploy, which deploys RustDesk as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: RustDesk
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rustdesk.com/
+  repo: https://github.com/rustdesk/rustdesk-server
+  docs: https://rustdesk.com/docs/

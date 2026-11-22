@@ -1,0 +1,64 @@
+name: postgres-pgdog
+services:
+  postgres-pgdog:
+    image: ${PGDOG_IMAGE}
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/pgdog.toml:/pgdog/pgdog.toml
+    - /DATA/AppData/$AppID/users.toml:/pgdog/users.toml
+    environment:
+    - RUST_LOG=info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  postgres:
+    image: ${POSTGRES_IMAGE}
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=8iqaYX4bAtOo1dd3IrT7e0ziNIJerncp
+    - POSTGRES_DB=postgres
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.postgres-pgdog
+  main: postgres-pgdog
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/postgres-pgdog/icon.png
+  title:
+    en_US: PostgreSQL with PgDog
+  tagline:
+    en_US: PostgreSQL database with PgDog connection pooler, load balancer, and horizontal scaling...
+  description:
+    en_US: PostgreSQL database with PgDog connection pooler, load balancer, and horizontal scaling proxy. A modern alternative
+      to PgBouncer with multi-threading support.
+  author: Dokploy Community
+  developer: PostgreSQL with PgDog
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.26"
+  update_at: "2026-11-22"
+  website: https://pgdog.dev
+  repo: https://github.com/pgdogdev/pgdog
+  docs: https://docs.pgdog.dev
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (pgdog.toml, users.toml).
+        Review environment variables before starting.

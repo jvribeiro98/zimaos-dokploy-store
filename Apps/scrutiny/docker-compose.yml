@@ -1,0 +1,43 @@
+name: scrutiny
+services:
+  scrutiny:
+    restart: unless-stopped
+    image: ghcr.io/analogj/scrutiny:v0.8.3-omnibus
+    cap_add:
+    - SYS_RAWIO
+    expose:
+    - 8080
+    - 8086
+    volumes:
+    - /run/udev:/run/udev:ro
+    - /DATA/AppData/$AppID/config:/opt/scrutiny/config
+    - /DATA/AppData/$AppID/influxdb:/opt/scrutiny/influxdb
+    devices:
+    - /dev/sda
+    - /dev/sdb
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.scrutiny
+  main: scrutiny
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/scrutiny/icon.png
+  title:
+    en_US: Scrutiny
+  tagline:
+    en_US: Hard Drive S
+  description:
+    en_US: Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds
+  author: Dokploy Community
+  developer: Scrutiny
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.8.3-omnibus"
+  update_at: "2026-11-22"
+  repo: https://github.com/AnalogJ/scrutiny/

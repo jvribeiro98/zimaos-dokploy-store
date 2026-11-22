@@ -1,0 +1,50 @@
+name: parseable
+services:
+  parseable:
+    image: parseable/parseable:v1.6.0
+    command: parseable local-store
+    restart: unless-stopped
+    volumes:
+    - parseable-staging:/parseable/staging
+    - parseable-data:/parseable/data
+    environment:
+    - P_ADDR=0.0.0.0:8000
+    - P_USERNAME=admin
+    - P_PASSWORD=uvyhuGuWLuojl6Lkp1uqCGvpIv050Rd3
+    - P_STAGING_DIR=/parseable/staging
+    - P_FS_DIR=/parseable/data
+    expose:
+    - 8000
+    - 8001
+    - 8002
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+volumes:
+  parseable-staging: {}
+  parseable-data: {}
+x-casaos:
+  id: com.dokploy.parseable
+  main: parseable
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/parseable/icon.svg
+  title:
+    en_US: Parseable
+  tagline:
+    en_US: Fast observability and log analytics platform on object storage
+  description:
+    en_US: Fast observability and log analytics platform on object storage
+  author: Dokploy Community
+  developer: Parseable
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.5"
+  update_at: "2026-11-22"
+  website: https://www.parseable.com/
+  repo: https://github.com/parseablehq/parseable
+  docs: https://www.parseable.com/docs

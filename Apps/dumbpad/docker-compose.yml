@@ -1,0 +1,39 @@
+name: dumbpad
+services:
+  dumbpad:
+    image: dumbwareio/dumbpad:latest
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - dumbpad-data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  dumbpad-data: {}
+x-casaos:
+  id: com.dokploy.dumbpad
+  main: dumbpad
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dumbpad/icon.svg
+  title:
+    en_US: DumbPad
+  tagline:
+    en_US: DumbPad is a simple, self-hosted notepad service with PIN protection and no database re...
+  description:
+    en_US: DumbPad is a simple, self-hosted notepad service with PIN protection and no database required.
+  author: Dokploy Community
+  developer: DumbPad
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dumbware.io/DumbPad/
+  repo: https://github.com/dumbwareio/dumbpad
+  docs: https://github.com/dumbwareio/dumbpad

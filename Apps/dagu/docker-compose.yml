@@ -1,0 +1,47 @@
+name: dagu
+services:
+  dagu:
+    image: ghcr.io/dagucloud/dagu:2.25.4
+    command: dagu start-all
+    restart: unless-stopped
+    expose:
+    - 8080
+    volumes:
+    - dagu-data:/var/lib/dagu
+    environment:
+    - DAGU_HOST=0.0.0.0
+    - DAGU_PORT=8080
+    - DAGU_AUTH_MODE=basic
+    - DAGU_AUTH_BASIC_USERNAME=admin
+    - DAGU_AUTH_BASIC_PASSWORD=ZpURetVk05TyAgFAq6BRGN5GldBrX1ME
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  dagu-data: {}
+x-casaos:
+  id: com.dokploy.dagu
+  main: dagu
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dagu/icon.png
+  title:
+    en_US: Dagu
+  tagline:
+    en_US: Dagu is a self-contained workflow engine with a Web UI
+  description:
+    en_US: Dagu is a self-contained workflow engine with a Web UI. Schedule and orchestrate jobs as DAGs defined in declarative
+      YAML, with no DBMS required.
+  author: Dokploy Community
+  developer: Dagu
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.25.4"
+  update_at: "2026-11-22"
+  website: https://dagu.sh
+  repo: https://github.com/dagucloud/dagu
+  docs: https://docs.dagu.sh

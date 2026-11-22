@@ -1,0 +1,90 @@
+name: homelable
+services:
+  homelable-backend:
+    image: ghcr.io/pouzor/homelable-backend:3.6.0
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: s1pPrVBBDNbVxf2oBmldjBn/ZkryQ+rON2VOELhDmZ8=
+      SQLITE_PATH: /app/data/homelab.db
+      CORS_ORIGINS: '["https://localhost", "http://localhost"]'
+      AUTH_MODE: local
+      AUTH_USERNAME: admin
+      INITIAL_ADMIN_PASSWORD: SkvUIKXBesVwEjv8yA8sk3Wu4OpKmfkB
+      SCANNER_RANGES: '["192.168.1.0/24"]'
+      STATUS_CHECKER_INTERVAL: '60'
+      STATUS_CHECKER_ENABLED: 'true'
+    entrypoint:
+    - /bin/sh
+    - -c
+    - 'export AUTH_PASSWORD_HASH="$$(python -c ''import bcrypt, os; print(bcrypt.hashpw(os.environ["INITIAL_ADMIN_PASSWORD"].encode(),
+      bcrypt.gensalt()).decode())'')"
+
+      unset INITIAL_ADMIN_PASSWORD
+
+      exec "$$@"
+
+      '
+    - --
+    command:
+    - uvicorn
+    - app.main:app
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8000'
+    expose:
+    - '8000'
+    cap_add:
+    - NET_RAW
+    volumes:
+    - homelable-data:/app/data
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:8000/api/v1/health
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+  homelable:
+    image: ghcr.io/pouzor/homelable-frontend:3.6.0
+    restart: unless-stopped
+    depends_on:
+      homelable-backend:
+        condition: service_healthy
+    environment:
+      BACKEND_UPSTREAM: homelable-backend:8000
+    expose:
+    - '80'
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  homelable-data: null
+x-casaos:
+  id: com.dokploy.homelable
+  main: homelable
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/homelable/icon.svg
+  title:
+    en_US: Homelable
+  tagline:
+    en_US: Self-hosted homelab infrastructure visualisation, documentation, network scanning and l...
+  description:
+    en_US: Self-hosted homelab infrastructure visualisation, documentation, network scanning and live monitoring.
+  author: Dokploy Community
+  developer: Homelable
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "3.6.0"
+  update_at: "2026-11-22"
+  website: https://homelable.net
+  repo: https://github.com/Pouzor/homelable
+  docs: https://github.com/Pouzor/homelable/blob/main/INSTALLATION.md

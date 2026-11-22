@@ -1,0 +1,9 @@
+use_default_settings: true
+
+server:
+  secret_key: "Msh30FDifq2uZW0aTtVLKiFmaRy6bE70JMxFpFNW9xfpD1K88SLHOMscApa2KNK4"
+  limiter: false
+  image_proxy: false
+
+valkey:
+  url: valkey://valkey:6379/0

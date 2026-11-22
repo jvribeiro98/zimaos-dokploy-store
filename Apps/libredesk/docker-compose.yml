@@ -1,0 +1,80 @@
+name: libredesk
+services:
+  libredesk:
+    image: libredesk/libredesk:latest
+    restart: unless-stopped
+    expose:
+    - 9000
+    environment:
+      LIBREDESK_SYSTEM_USER_PASSWORD: G9aMlFXktoXL2peeGE5jjtdsD2/F/qK4VXY7bbTAvfs=
+    depends_on:
+    - db
+    - redis
+    volumes:
+    - /DATA/AppData/$AppID/uploads:/libredesk/uploads:rw
+    - /DATA/AppData/$AppID/config.toml:/libredesk/config.toml
+    command:
+    - sh
+    - -c
+    - ./libredesk --install --idempotent-install --yes --config /libredesk/config.toml && ./libredesk --upgrade --yes --config
+      /libredesk/config.toml && ./libredesk --config /libredesk/config.toml
+    ports:
+    - target: 9000
+      published: "9000"
+      protocol: tcp
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    expose:
+    - 5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: k8EaMPG22tDbYv8V
+      POSTGRES_DB: libredesk
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER:-libredesk} -d ${POSTGRES_DB:-libredesk}
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    expose:
+    - 6379
+    volumes:
+    - redis-data:/data
+volumes:
+  postgres-data: null
+  redis-data: null
+x-casaos:
+  id: com.dokploy.libredesk
+  main: libredesk
+  index: /
+  port_map: "9000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/libredesk/icon.svg
+  title:
+    en_US: Libredesk
+  tagline:
+    en_US: Open source, self-hosted customer support desk
+  description:
+    en_US: Open source, self-hosted customer support desk. Single binary app.
+  author: Dokploy Community
+  developer: Libredesk
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://libredesk.io
+  repo: https://github.com/abhinavxd/libredesk
+  docs: https://docs.libredesk.io/introduction
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (config.toml). Review environment
+        variables before starting.

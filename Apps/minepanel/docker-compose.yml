@@ -1,0 +1,56 @@
+name: minepanel
+services:
+  backend:
+    image: ketbom/minepanel-backend:1.7.1
+    restart: unless-stopped
+    environment:
+    - NODE_ENV=production
+    - FRONTEND_URL=http://localhost
+    - JWT_SECRET=MsrVzoe2Vv8C45lRWIJGLYkw6vDbTloPfeJFHi42lwY=
+    - CLIENT_PASSWORD=loCnVEUclAafk0hI
+    - CLIENT_USERNAME=admin
+    - BASE_DIR=/app
+    volumes:
+    - minepanel-servers:/app/servers
+    - minepanel-data:/app/data
+    - /var/run/docker.sock:/var/run/docker.sock
+  frontend:
+    image: ketbom/minepanel-frontend:1.7.1
+    restart: unless-stopped
+    environment:
+    - NEXT_PUBLIC_BACKEND_URL=http://api-localhost
+    - NEXT_PUBLIC_DEFAULT_LANGUAGE=en
+    depends_on:
+    - backend
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  minepanel-servers: null
+  minepanel-data: null
+x-casaos:
+  id: com.dokploy.minepanel
+  main: frontend
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/minepanel/icon.webp
+  title:
+    en_US: Minepanel
+  tagline:
+    en_US: Web panel for managing Minecraft servers with Docker
+  description:
+    en_US: Web panel for managing Minecraft servers with Docker. Create, configure, start/stop, and monitor multiple instances
+      from a modern UI.
+  author: Dokploy Community
+  developer: Minepanel
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.7.1"
+  update_at: "2026-11-22"
+  website: https://minepanel.ketbome.lat
+  repo: https://github.com/Ketbome/minepanel
+  docs: https://minepanel.ketbome.lat

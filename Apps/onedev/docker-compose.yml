@@ -1,0 +1,38 @@
+name: onedev
+services:
+  onedev:
+    image: 1dev/server:11.6.6
+    restart: always
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - onedev-data:/opt/onedev
+    ports:
+    - target: 6610
+      published: "6610"
+      protocol: tcp
+volumes:
+  onedev-data: null
+x-casaos:
+  id: com.dokploy.onedev
+  main: onedev
+  index: /
+  port_map: "6610"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/onedev/icon.png
+  title:
+    en_US: OneDev
+  tagline:
+    en_US: Git server with CI/CD, kanban, and packages
+  description:
+    en_US: Git server with CI/CD, kanban, and packages. Seamless integration. Unparalleled experience.
+  author: Dokploy Community
+  developer: OneDev
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "11.6.6"
+  update_at: "2026-11-22"
+  website: https://onedev.io/
+  repo: https://github.com/theonedev/onedev/
+  docs: https://docs.onedev.io/

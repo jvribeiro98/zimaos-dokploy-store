@@ -1,0 +1,50 @@
+name: ipfs
+services:
+  ipfs:
+    image: ipfs/kubo:latest
+    restart: unless-stopped
+    environment:
+    - IPFS_PROFILE=server
+    volumes:
+    - ipfs_data:/data/ipfs
+    - ipfs_staging:/export
+    expose:
+    - 4001
+    - 8080
+    - 5001
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  ipfs_data: {}
+  ipfs_staging: {}
+x-casaos:
+  id: com.dokploy.ipfs
+  main: ipfs
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ipfs/icon.svg
+  title:
+    en_US: IPFS (Kubo)
+  tagline:
+    en_US: IPFS (Kubo) is a decentralized peer-to-peer file sharing and storage network node
+  description:
+    en_US: IPFS (Kubo) is a decentralized peer-to-peer file sharing and storage network node. Host your own IPFS gateway and
+      API.
+  author: Dokploy Community
+  developer: IPFS (Kubo)
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://ipfs.tech/
+  repo: https://github.com/ipfs/kubo
+  docs: https://docs.ipfs.tech/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (container-init.d/001-configure-api.sh).
+        Review environment variables before starting.

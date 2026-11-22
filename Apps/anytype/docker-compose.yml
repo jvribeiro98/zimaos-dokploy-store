@@ -1,0 +1,37 @@
+name: anytype
+services:
+  any-sync-bundle:
+    image: ghcr.io/grishy/any-sync-bundle:latest
+    restart: unless-stopped
+    ports:
+    - 33010:33010
+    - 33020:33020/udp
+    volumes:
+    - /DATA/AppData/$AppID/anytype-data:/data
+    environment:
+      ANY_SYNC_BUNDLE_INIT_EXTERNAL_ADDRS: 192.168.100.9
+x-casaos:
+  id: com.dokploy.anytype
+  main: any-sync-bundle
+  index: /
+  port_map: "33010"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/anytype/icon.png
+  title:
+    en_US: Anytype
+  tagline:
+    en_US: Anytype is a private, offline-first app for notes and personal knowledge
+  description:
+    en_US: Anytype is a private, offline-first app for notes and personal knowledge. Self-host it on your own server with
+      Dokploy, which deploys Anytype as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Anytype
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://anytype.io/
+  repo: https://github.com/grishy/any-sync-bundle
+  docs: https://doc.anytype.io/anytype-docs

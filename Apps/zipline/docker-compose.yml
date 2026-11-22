@@ -1,0 +1,65 @@
+name: zipline
+services:
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DATABASE=postgres
+    volumes:
+    - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  zipline:
+    image: ghcr.io/diced/zipline:v4
+    restart: unless-stopped
+    environment:
+    - CORE_RETURN_HTTPS=false
+    - CORE_SECRET=3y3BIc7NXwwanUB/ICA+NoKKL8bEWlm3efmvmZB+5pIfdwOXo64pggSoiwfdzhLEFO7EbwV+wX3XCJ1v0LpTzw==
+    - CORE_HOSTNAME=0.0.0.0
+    - CORE_PORT=3000
+    - DATABASE_URL=postgres://postgres:postgres@postgres/postgres
+    - CORE_LOGGER=true
+    - DATASOURCE_TYPE=local
+    - DATASOURCE_LOCAL_DIRECTORY=./uploads
+    volumes:
+    - /DATA/AppData/$AppID/uploads:/zipline/uploads
+    - /DATA/AppData/$AppID/public:/zipline/public
+    depends_on:
+    - postgres
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  pg_data: null
+x-casaos:
+  id: com.dokploy.zipline
+  main: zipline
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/zipline/icon.png
+  title:
+    en_US: Zipline
+  tagline:
+    en_US: A ShareX/file upload server that is easy to use, packed with features, and with an easy...
+  description:
+    en_US: A ShareX/file upload server that is easy to use, packed with features, and with an easy setup!
+  author: Dokploy Community
+  developer: Zipline
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "3.7.9"
+  update_at: "2026-11-22"
+  website: https://zipline.diced.sh/
+  repo: https://github.com/diced/zipline
+  docs: https://zipline.diced.sh/docs/

@@ -1,0 +1,73 @@
+name: powersync
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    command:
+    - postgres
+    - -c
+    - wal_level=logical
+    environment:
+      POSTGRES_USER: powersync
+      POSTGRES_PASSWORD: CbMBLuXl4mYWWlESNs4A49WdimXC73jO
+      POSTGRES_DB: powersync
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+    - /DATA/AppData/$AppID/init-powersync.sql:/docker-entrypoint-initdb.d/init-powersync.sql:ro
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U powersync -d powersync
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  powersync:
+    image: journeyapps/powersync-service:1.21.0
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POWERSYNC_CONFIG_PATH: /config/powersync.yaml
+      NODE_OPTIONS: --max-old-space-size=1000
+    volumes:
+    - /DATA/AppData/$AppID/powersync.yaml:/config/powersync.yaml:ro
+    command:
+    - start
+    - -r
+    - unified
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  postgres-data: null
+x-casaos:
+  id: com.dokploy.powersync
+  main: powersync
+  index: /probes/liveness
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/powersync/icon.png
+  title:
+    en_US: PowerSync
+  tagline:
+    en_US: PowerSync is a sync engine for local-first apps
+  description:
+    en_US: PowerSync is a sync engine for local-first apps. Syncs PostgreSQL data to mobile devices and browsers with real-time
+      replication.
+  author: Dokploy Community
+  developer: PowerSync
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.21.0"
+  update_at: "2026-11-22"
+  website: https://www.powersync.com/
+  repo: https://github.com/powersync-ja/powersync-service
+  docs: https://docs.powersync.com/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (powersync.yaml, init-powersync.sql).
+        Review environment variables before starting.

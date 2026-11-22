@@ -1,0 +1,60 @@
+name: heyo-docs
+services:
+  heyo-docs:
+    build:
+      context: https://github.com/heyo-sh/heyo-docs.git#0c67d0ec498f9fe3361b7c8fb78b2e822e01f4e9
+      dockerfile_inline: "FROM oven/bun:1.3.1-alpine AS build\n\nWORKDIR /app\n\nARG SITE_URL=http://localhost:3000\n\nRUN\
+        \ bun create @heyo-sh/heyo-docs@3.1.0 docs \\\n  --template astro \\\n  --deployment later \\\n  --theme shade \\\n\
+        \  --package-manager bun\n\nWORKDIR /app/docs\n# The scaffolder declares \"@heyo-sh/heyo-docs\": \"latest\"; pin the\
+        \ runtime\n# package so builds stay reproducible and match the scaffolded config.\nRUN bun add @heyo-sh/heyo-docs@3.4.1\n\
+        RUN bun -e 'const file = \"heyo-docs.config.ts\"; const siteUrl = process.argv.at(-1); const source = await Bun.file(file).text();\
+        \ const updated = source.replace(`// siteUrl: \"https://docs.example.com\",`, `siteUrl: \"` + siteUrl + `\",`); if\
+        \ (updated === source) throw new Error(\"Could not set the generated project site URL.\"); await Bun.write(file, updated);'\
+        \ \"$SITE_URL\" \\\n  && grep -Fq \"siteUrl: \\\"${SITE_URL}\\\",\" heyo-docs.config.ts \\\n  && bun run build\n\n\
+        FROM oven/bun:1.3.1-alpine AS runner\n\nWORKDIR /app\n\nENV NODE_ENV=production \\\n    HOST=0.0.0.0 \\\n    PORT=3000\n\
+        \nCOPY --from=build --chown=bun:bun /app/docs ./\n\nUSER bun\n\nEXPOSE 3000\n\nCMD [\"bun\", \"run\", \"start\"]\n"
+      args:
+        SITE_URL: ${SITE_URL}
+    restart: unless-stopped
+    expose:
+    - 3000
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - --spider
+      - -q
+      - http://127.0.0.1:3000/
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.heyo-docs
+  main: heyo-docs
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/heyo-docs/icon.svg
+  title:
+    en_US: Heyo Docs
+  tagline:
+    en_US: A themeable documentation toolkit for React Router, Next
+  description:
+    en_US: A themeable documentation toolkit for React Router, Next.js, and Astro with MDX content, search, OpenAPI references,
+      and SEO built in.
+  author: Dokploy Community
+  developer: Heyo Docs
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.4.1"
+  update_at: "2026-11-22"
+  website: https://docs.heyo.sh
+  repo: https://github.com/heyo-sh/heyo-docs
+  docs: https://docs.heyo.sh

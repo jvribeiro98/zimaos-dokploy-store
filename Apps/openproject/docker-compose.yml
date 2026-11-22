@@ -1,0 +1,260 @@
+name: openproject
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: openproject
+      POSTGRES_USER: openproject
+      POSTGRES_PASSWORD: qXcVtsv4mMNZVugglrG8Ok8RXuBhHz7s
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+  cache:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+  web:
+    image: openproject/openproject:17-slim
+    restart: unless-stopped
+    command: ./docker/prod/web
+    environment:
+      OPENPROJECT_HOST__NAME: localhost
+      SECRET_KEY_BASE: +XVD+SkhMifQuaum7oixPA8kGMHICgPjEcHg4Z/6V4YNwUlG3+U1e+TZ8TalXzN11dAJs+WLDiViro3pbaJVhQ==
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
+      DATABASE_URL: postgres://openproject:qXcVtsv4mMNZVugglrG8Ok8RXuBhHz7s@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
+      OPENPROJECT_HTTPS: 'true'
+      IMAP_ENABLED: 'false'
+      IMAP_HOST: ''
+      IMAP_USERNAME: ''
+      IMAP_PASSWORD: ''
+      IMAP_PORT: '993'
+      IMAP_SSL: ${IMAP_SSL:-true}
+      IMAP_FOLDER: ${IMAP_FOLDER:-INBOX}
+      IMAP_SSL_VERIFICATION: 'true'
+      IMAP_CHECK_INTERVAL: '600'
+      IMAP_ALLOW_OVERRIDE: type,project,priority,status,responsible,assigned_to,estimated_hours,remaining_hours
+      OPENPROJECT_EMAIL__DELIVERY__METHOD: smtp
+      OPENPROJECT_SMTP__ADDRESS: ''
+      OPENPROJECT_SMTP__PORT: '587'
+      OPENPROJECT_SMTP__DOMAIN: ''
+      OPENPROJECT_SMTP__AUTHENTICATION: login
+      OPENPROJECT_SMTP__USER__NAME: ''
+      OPENPROJECT_SMTP__PASSWORD: ''
+      OPENPROJECT_SMTP__ENABLE__STARTTLS__AUTO: 'true'
+      OPENPROJECT_SMTP__OPENSSL__VERIFY__MODE: peer
+      OPENPROJECT_ATTACHMENTS__STORAGE: file
+      OPENPROJECT_FOG_DIRECTORY: ''
+      OPENPROJECT_FOG_CREDENTIALS_PROVIDER: AWS
+      OPENPROJECT_FOG_CREDENTIALS_AWS__ACCESS__KEY__ID: ''
+      OPENPROJECT_FOG_CREDENTIALS_AWS__SECRET__ACCESS__KEY: ''
+      OPENPROJECT_FOG_CREDENTIALS_REGION: ''
+      OPENPROJECT_FOG_CREDENTIALS_ENDPOINT: ''
+      OPENPROJECT_FOG_CREDENTIALS_PATH__STYLE: 'true'
+      OPENPROJECT_FOG__DOWNLOAD__URL__EXPIRES__IN: '300'
+      OPENPROJECT_DIRECT__UPLOADS: 'true'
+    volumes:
+    - opdata:/var/openproject/assets
+    depends_on:
+    - db
+    - cache
+    - seeder
+    expose:
+    - '8080'
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/health_checks/default
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  seeder:
+    image: openproject/openproject:17-slim
+    restart: on-failure
+    command: ./docker/prod/seeder
+    environment:
+      OPENPROJECT_HOST__NAME: localhost
+      SECRET_KEY_BASE: +XVD+SkhMifQuaum7oixPA8kGMHICgPjEcHg4Z/6V4YNwUlG3+U1e+TZ8TalXzN11dAJs+WLDiViro3pbaJVhQ==
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
+      DATABASE_URL: postgres://openproject:qXcVtsv4mMNZVugglrG8Ok8RXuBhHz7s@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
+      OPENPROJECT_HTTPS: 'true'
+      IMAP_ENABLED: 'false'
+      IMAP_HOST: ''
+      IMAP_USERNAME: ''
+      IMAP_PASSWORD: ''
+      IMAP_PORT: '993'
+      IMAP_SSL: ${IMAP_SSL:-true}
+      IMAP_FOLDER: ${IMAP_FOLDER:-INBOX}
+      IMAP_SSL_VERIFICATION: 'true'
+      IMAP_CHECK_INTERVAL: '600'
+      IMAP_ALLOW_OVERRIDE: type,project,priority,status,responsible,assigned_to,estimated_hours,remaining_hours
+      OPENPROJECT_EMAIL__DELIVERY__METHOD: smtp
+      OPENPROJECT_SMTP__ADDRESS: ''
+      OPENPROJECT_SMTP__PORT: '587'
+      OPENPROJECT_SMTP__DOMAIN: ''
+      OPENPROJECT_SMTP__AUTHENTICATION: login
+      OPENPROJECT_SMTP__USER__NAME: ''
+      OPENPROJECT_SMTP__PASSWORD: ''
+      OPENPROJECT_SMTP__ENABLE__STARTTLS__AUTO: 'true'
+      OPENPROJECT_SMTP__OPENSSL__VERIFY__MODE: peer
+      OPENPROJECT_ATTACHMENTS__STORAGE: file
+      OPENPROJECT_FOG_DIRECTORY: ''
+      OPENPROJECT_FOG_CREDENTIALS_PROVIDER: AWS
+      OPENPROJECT_FOG_CREDENTIALS_AWS__ACCESS__KEY__ID: ''
+      OPENPROJECT_FOG_CREDENTIALS_AWS__SECRET__ACCESS__KEY: ''
+      OPENPROJECT_FOG_CREDENTIALS_REGION: ''
+      OPENPROJECT_FOG_CREDENTIALS_ENDPOINT: ''
+      OPENPROJECT_FOG_CREDENTIALS_PATH__STYLE: 'true'
+      OPENPROJECT_FOG__DOWNLOAD__URL__EXPIRES__IN: '300'
+      OPENPROJECT_DIRECT__UPLOADS: 'true'
+    volumes:
+    - opdata:/var/openproject/assets
+    depends_on:
+    - db
+    - cache
+  worker:
+    image: openproject/openproject:17-slim
+    restart: unless-stopped
+    command: ./docker/prod/worker
+    environment:
+      OPENPROJECT_HOST__NAME: localhost
+      SECRET_KEY_BASE: +XVD+SkhMifQuaum7oixPA8kGMHICgPjEcHg4Z/6V4YNwUlG3+U1e+TZ8TalXzN11dAJs+WLDiViro3pbaJVhQ==
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
+      DATABASE_URL: postgres://openproject:qXcVtsv4mMNZVugglrG8Ok8RXuBhHz7s@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
+      OPENPROJECT_HTTPS: 'true'
+      IMAP_ENABLED: 'false'
+      IMAP_HOST: ''
+      IMAP_USERNAME: ''
+      IMAP_PASSWORD: ''
+      IMAP_PORT: '993'
+      IMAP_SSL: ${IMAP_SSL:-true}
+      IMAP_FOLDER: ${IMAP_FOLDER:-INBOX}
+      IMAP_SSL_VERIFICATION: 'true'
+      IMAP_CHECK_INTERVAL: '600'
+      IMAP_ALLOW_OVERRIDE: type,project,priority,status,responsible,assigned_to,estimated_hours,remaining_hours
+      OPENPROJECT_EMAIL__DELIVERY__METHOD: smtp
+      OPENPROJECT_SMTP__ADDRESS: ''
+      OPENPROJECT_SMTP__PORT: '587'
+      OPENPROJECT_SMTP__DOMAIN: ''
+      OPENPROJECT_SMTP__AUTHENTICATION: login
+      OPENPROJECT_SMTP__USER__NAME: ''
+      OPENPROJECT_SMTP__PASSWORD: ''
+      OPENPROJECT_SMTP__ENABLE__STARTTLS__AUTO: 'true'
+      OPENPROJECT_SMTP__OPENSSL__VERIFY__MODE: peer
+      OPENPROJECT_ATTACHMENTS__STORAGE: file
+      OPENPROJECT_FOG_DIRECTORY: ''
+      OPENPROJECT_FOG_CREDENTIALS_PROVIDER: AWS
+      OPENPROJECT_FOG_CREDENTIALS_AWS__ACCESS__KEY__ID: ''
+      OPENPROJECT_FOG_CREDENTIALS_AWS__SECRET__ACCESS__KEY: ''
+      OPENPROJECT_FOG_CREDENTIALS_REGION: ''
+      OPENPROJECT_FOG_CREDENTIALS_ENDPOINT: ''
+      OPENPROJECT_FOG_CREDENTIALS_PATH__STYLE: 'true'
+      OPENPROJECT_FOG__DOWNLOAD__URL__EXPIRES__IN: '300'
+      OPENPROJECT_DIRECT__UPLOADS: 'true'
+    volumes:
+    - opdata:/var/openproject/assets
+    depends_on:
+    - db
+    - cache
+    - seeder
+  cron:
+    image: openproject/openproject:17-slim
+    restart: unless-stopped
+    command: ./docker/prod/cron
+    environment:
+      OPENPROJECT_HOST__NAME: localhost
+      SECRET_KEY_BASE: +XVD+SkhMifQuaum7oixPA8kGMHICgPjEcHg4Z/6V4YNwUlG3+U1e+TZ8TalXzN11dAJs+WLDiViro3pbaJVhQ==
+      OPENPROJECT_RAILS__CACHE__STORE: memcache
+      OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
+      OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
+      OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
+      DATABASE_URL: postgres://openproject:qXcVtsv4mMNZVugglrG8Ok8RXuBhHz7s@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
+      OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
+      OPENPROJECT_HTTPS: 'true'
+      IMAP_ENABLED: 'false'
+      IMAP_HOST: ''
+      IMAP_USERNAME: ''
+      IMAP_PASSWORD: ''
+      IMAP_PORT: '993'
+      IMAP_SSL: ${IMAP_SSL:-true}
+      IMAP_FOLDER: ${IMAP_FOLDER:-INBOX}
+      IMAP_SSL_VERIFICATION: 'true'
+      IMAP_CHECK_INTERVAL: '600'
+      IMAP_ALLOW_OVERRIDE: type,project,priority,status,responsible,assigned_to,estimated_hours,remaining_hours
+      OPENPROJECT_EMAIL__DELIVERY__METHOD: smtp
+      OPENPROJECT_SMTP__ADDRESS: ''
+      OPENPROJECT_SMTP__PORT: '587'
+      OPENPROJECT_SMTP__DOMAIN: ''
+      OPENPROJECT_SMTP__AUTHENTICATION: login
+      OPENPROJECT_SMTP__USER__NAME: ''
+      OPENPROJECT_SMTP__PASSWORD: ''
+      OPENPROJECT_SMTP__ENABLE__STARTTLS__AUTO: 'true'
+      OPENPROJECT_SMTP__OPENSSL__VERIFY__MODE: peer
+      OPENPROJECT_ATTACHMENTS__STORAGE: file
+      OPENPROJECT_FOG_DIRECTORY: ''
+      OPENPROJECT_FOG_CREDENTIALS_PROVIDER: AWS
+      OPENPROJECT_FOG_CREDENTIALS_AWS__ACCESS__KEY__ID: ''
+      OPENPROJECT_FOG_CREDENTIALS_AWS__SECRET__ACCESS__KEY: ''
+      OPENPROJECT_FOG_CREDENTIALS_REGION: ''
+      OPENPROJECT_FOG_CREDENTIALS_ENDPOINT: ''
+      OPENPROJECT_FOG_CREDENTIALS_PATH__STYLE: 'true'
+      OPENPROJECT_FOG__DOWNLOAD__URL__EXPIRES__IN: '300'
+      OPENPROJECT_DIRECT__UPLOADS: 'true'
+    volumes:
+    - opdata:/var/openproject/assets
+    depends_on:
+    - db
+    - cache
+    - seeder
+volumes:
+  pgdata: null
+  opdata: null
+x-casaos:
+  id: com.dokploy.openproject
+  main: web
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openproject/icon.svg
+  title:
+    en_US: OpenProject
+  tagline:
+    en_US: 'OpenProject 17 slim: web, worker, cron, Postgres 17, memcached'
+  description:
+    en_US: 'OpenProject 17 slim: web, worker, cron, Postgres 17, memcached. Optional IMAP/SMTP and S3.'
+  author: Dokploy Community
+  developer: OpenProject
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "17"
+  update_at: "2026-11-22"
+  website: https://www.openproject.org/
+  repo: https://github.com/opf/openproject
+  docs: https://www.openproject.org/docs/installation-and-operations/installation/docker-compose/

@@ -1,0 +1,67 @@
+name: lavalink
+services:
+  fix-perms:
+    image: busybox:1.36
+    command: "sh -c \"mkdir -p /opt/Lavalink/plugins &&\n       chmod -R 0777 /opt/Lavalink/plugins || true &&\n       chown\
+      \ -R 1000:1000 /opt/Lavalink/plugins || true &&\n       echo perms-fixed && sleep 1\"\n"
+    volumes:
+    - /DATA/AppData/$AppID/plugins/:/opt/Lavalink/plugins/
+    - /DATA/AppData/$AppID/application.yml:/opt/Lavalink/application.yml
+    restart: 'no'
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4
+    depends_on:
+    - fix-perms
+    restart: unless-stopped
+    environment:
+      _JAVA_OPTIONS: -Xmx6G
+      LAVALINK_SERVER_PASSWORD: 0shrZUr50C33rhqVffx6d2rIa2bvhhsx
+      SERVER_PORT: '2333'
+    volumes:
+    - /DATA/AppData/$AppID/application.yml:/opt/Lavalink/application.yml:rw
+    - /DATA/AppData/$AppID/plugins/:/opt/Lavalink/plugins/:rw
+    expose:
+    - ${SERVER_PORT}
+    healthcheck:
+      test: 'sh -c ''wget --header="Authorization: ${LAVALINK_SERVER_PASSWORD}" -qO- http://127.0.0.1:${SERVER_PORT}/v4/info
+        >/dev/null 2>&1 || exit 1''
+
+        '
+      interval: 100s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    entrypoint: "sh -c 'until [ -w /opt/Lavalink/plugins ] ; do\n          echo \"waiting for /opt/Lavalink/plugins to be\
+      \ writable\";\n          sleep 1;\n       done;\n       exec java -jar /opt/Lavalink/Lavalink.jar'\n"
+    ports:
+    - target: 2333
+      published: "2333"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.lavalink
+  main: lavalink
+  index: /
+  port_map: "2333"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/lavalink/icon.svg
+  title:
+    en_US: Lavalink
+  tagline:
+    en_US: Lavalink is an open source standalone audio sending node based on Lavaplayer
+  description:
+    en_US: Lavalink is an open source standalone audio sending node based on Lavaplayer.
+  author: Dokploy Community
+  developer: Lavalink
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "4.1.1"
+  update_at: "2026-11-22"
+  website: https://lavalink.dev/
+  repo: https://github.com/lavalink-devs/Lavalink
+  docs: https://lavalink.dev/getting-started/index.html
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./application.yml). Review
+        environment variables before starting.

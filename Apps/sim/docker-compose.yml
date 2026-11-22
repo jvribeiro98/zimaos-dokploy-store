@@ -1,0 +1,114 @@
+name: sim
+services:
+  simstudio:
+    image: ghcr.io/simstudioai/simstudio:latest
+    restart: unless-stopped
+    environment:
+    - NODE_ENV=production
+    - DATABASE_URL=postgresql://postgres:QHiCXbeZhnrnUebToQgfozetduoVjH4f@db:5432/simstudio
+    - BETTER_AUTH_URL=http://localhost
+    - NEXT_PUBLIC_APP_URL=http://localhost
+    - BETTER_AUTH_SECRET=I14xGSE8RKr6L361eMLtC84gTq4DoaUv
+    - ENCRYPTION_KEY=b0d445456e4348097090061d36f18aaedca9f56353a2b5b5d32135f6f39e667f3666ff1b913ffa7541f12ab34e594d84837bbfcca10ecff97c1d62ca836162f5
+    - API_ENCRYPTION_KEY=610326efc5b9f7a00d95bb74d5549f3c7e8a3702b6e9426507a03a929ca0952bd93e9bc8bf04efaeb110a7e9f6b64a1a4577af986d046b3476be4065a8b5dc13
+    - INTERNAL_API_SECRET=85359b9l3ED1BuGPDkoareZD3FumRKss
+    - SOCKET_SERVER_URL=http://realtime:3002
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      realtime:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:3000
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  realtime:
+    image: ghcr.io/simstudioai/realtime:latest
+    restart: unless-stopped
+    environment:
+    - NODE_ENV=production
+    - DATABASE_URL=postgresql://postgres:QHiCXbeZhnrnUebToQgfozetduoVjH4f@db:5432/simstudio
+    - NEXT_PUBLIC_APP_URL=http://localhost
+    - BETTER_AUTH_URL=http://localhost
+    - BETTER_AUTH_SECRET=I14xGSE8RKr6L361eMLtC84gTq4DoaUv
+    - INTERNAL_API_SECRET=85359b9l3ED1BuGPDkoareZD3FumRKss
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - http://127.0.0.1:3002/health
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+  migrations:
+    image: ghcr.io/simstudioai/migrations:latest
+    working_dir: /app/packages/db
+    environment:
+    - DATABASE_URL=postgresql://postgres:QHiCXbeZhnrnUebToQgfozetduoVjH4f@db:5432/simstudio
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+    - bun
+    - run
+    - db:migrate
+    restart: 'no'
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=QHiCXbeZhnrnUebToQgfozetduoVjH4f
+    - POSTGRES_DB=simstudio
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.sim
+  main: simstudio
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/sim/icon.svg
+  title:
+    en_US: Sim
+  tagline:
+    en_US: Open-source visual workflow builder for building and deploying AI agent workflows
+  description:
+    en_US: Open-source visual workflow builder for building and deploying AI agent workflows.
+  author: Dokploy Community
+  developer: Sim
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://sim.ai
+  repo: https://github.com/simstudioai/sim
+  docs: https://docs.sim.ai

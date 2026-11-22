@@ -1,0 +1,82 @@
+name: systemprompt
+services:
+  systemprompt:
+    image: ghcr.io/systempromptio/systemprompt-template:0
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://systemprompt:Odxg3NyD0zyqtSmQsYAX07FYfLwyZTGs@postgres:5432/systemprompt
+      ANTHROPIC_API_KEY: ''
+      OPENAI_API_KEY: ''
+      GEMINI_API_KEY: ''
+      EXTERNAL_URL: https://localhost
+      HOST: 0.0.0.0
+      PORT: '8080'
+    expose:
+    - 8080
+    volumes:
+    - systemprompt_web:/app/web
+    - systemprompt_storage:/app/storage/data
+    - systemprompt_profiles:/app/services/profiles/docker
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/api/v1/health
+      interval: 30s
+      timeout: 10s
+      start_period: 300s
+      retries: 3
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: systemprompt
+      POSTGRES_PASSWORD: Odxg3NyD0zyqtSmQsYAX07FYfLwyZTGs
+      POSTGRES_DB: systemprompt
+    volumes:
+    - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U systemprompt -d systemprompt
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  systemprompt_web: null
+  systemprompt_storage: null
+  systemprompt_profiles: null
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.systemprompt
+  main: systemprompt
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/systemprompt/icon.svg
+  title:
+    en_US: systemprompt
+  tagline:
+    en_US: 'Self-owned AI control plane: governance gateway for Claude, OpenAI, and Gemini with pol...'
+  description:
+    en_US: 'Self-owned AI control plane: governance gateway for Claude, OpenAI, and Gemini with policy checks, audit trails,
+      rate limits, and MCP orchestration. Requires at least one AI provider API key.'
+  author: Dokploy Community
+  developer: systemprompt
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.21.0"
+  update_at: "2026-11-22"
+  website: https://systemprompt.io
+  repo: https://github.com/systempromptio/systemprompt-template
+  docs: https://systemprompt.io/documentation/

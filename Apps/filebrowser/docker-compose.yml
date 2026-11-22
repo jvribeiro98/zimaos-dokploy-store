@@ -1,0 +1,42 @@
+name: filebrowser
+services:
+  filebrowser:
+    image: hurlenko/filebrowser
+    volumes:
+    - filebrowser-data:/data
+    - filebrowser-config:/config
+    environment:
+    - FB_BASEURL=/filebrowser
+    restart: always
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  filebrowser-data: null
+  filebrowser-config: null
+x-casaos:
+  id: com.dokploy.filebrowser
+  main: filebrowser
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/filebrowser/icon.svg
+  title:
+    en_US: File Browser
+  tagline:
+    en_US: Filebrowser is a standalone file manager for uploading, deleting, previewing, renaming,...
+  description:
+    en_US: Filebrowser is a standalone file manager for uploading, deleting, previewing, renaming, and editing files, with
+      support for multiple users, each with their own directory.
+  author: Dokploy Community
+  developer: File Browser
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.31.2"
+  update_at: "2026-11-22"
+  website: https://filebrowser.org/
+  repo: https://github.com/filebrowser/filebrowser
+  docs: https://filebrowser.org/

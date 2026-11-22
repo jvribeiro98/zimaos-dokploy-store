@@ -1,0 +1,123 @@
+name: windmill
+services:
+  windmill-postgres:
+    image: postgres:16
+    shm_size: 1g
+    restart: unless-stopped
+    volumes:
+    - windmill-postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: c8Ys5rkjYFTgSknBbA1KTiiOfKAG8CFn
+      POSTGRES_DB: windmill
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  windmill-server:
+    image: ghcr.io/windmill-labs/windmill:main
+    restart: unless-stopped
+    environment:
+    - DATABASE_URL=postgres://postgres:c8Ys5rkjYFTgSknBbA1KTiiOfKAG8CFn@windmill-postgres/windmill?sslmode=disable
+    - MODE=server
+    - BASE_URL=http://localhost
+    depends_on:
+      windmill-postgres:
+        condition: service_healthy
+    volumes:
+    - windmill-worker-logs:/tmp/windmill/logs
+  windmill-worker:
+    image: ghcr.io/windmill-labs/windmill:main
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+    restart: unless-stopped
+    environment:
+    - DATABASE_URL=postgres://postgres:c8Ys5rkjYFTgSknBbA1KTiiOfKAG8CFn@windmill-postgres/windmill?sslmode=disable
+    - MODE=worker
+    - WORKER_GROUP=default
+    depends_on:
+      windmill-postgres:
+        condition: service_healthy
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - windmill-worker-cache:/tmp/windmill/cache
+    - windmill-worker-logs:/tmp/windmill/logs
+  windmill-worker-native:
+    image: ghcr.io/windmill-labs/windmill:main
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+    restart: unless-stopped
+    environment:
+    - DATABASE_URL=postgres://postgres:c8Ys5rkjYFTgSknBbA1KTiiOfKAG8CFn@windmill-postgres/windmill?sslmode=disable
+    - MODE=worker
+    - WORKER_GROUP=native
+    - NUM_WORKERS=8
+    - SLEEP_QUEUE=200
+    depends_on:
+      windmill-postgres:
+        condition: service_healthy
+    volumes:
+    - windmill-worker-logs:/tmp/windmill/logs
+  windmill-lsp:
+    image: ghcr.io/windmill-labs/windmill-lsp:latest
+    restart: unless-stopped
+    volumes:
+    - windmill-lsp-cache:/root/.cache
+  windmill-caddy:
+    image: ghcr.io/windmill-labs/caddy-l4:latest
+    restart: unless-stopped
+    volumes:
+    - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+    - BASE_URL=":80"
+    depends_on:
+    - windmill-server
+    - windmill-lsp
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  windmill-postgres-data: null
+  windmill-worker-cache: null
+  windmill-worker-logs: null
+  windmill-lsp-cache: null
+x-casaos:
+  id: com.dokploy.windmill
+  main: windmill-caddy
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/windmill/icon.svg
+  title:
+    en_US: Windmill
+  tagline:
+    en_US: A developer platform to build production-grade workflows and internal apps
+  description:
+    en_US: A developer platform to build production-grade workflows and internal apps. Open-source alternative to Airplane,
+      Retool, and GitHub Actions.
+  author: Dokploy Community
+  developer: Windmill
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.windmill.dev/
+  repo: https://github.com/windmill-labs/windmill
+  docs: https://docs.windmill.dev/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (Caddyfile). Review environment
+        variables before starting.

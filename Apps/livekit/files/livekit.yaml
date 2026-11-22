@@ -1,0 +1,31 @@
+port: 7880
+bind_addresses:
+    - ""
+rtc:
+    tcp_port: 7881
+    udp_port: 7882
+    use_external_ip: true
+    enable_loopback_candidate: false
+redis:
+    address: redis:6379
+    username: ""
+    password: rif1hsJVdXx2cwuxMuNI9I42dKplAIbd
+    db: 0
+    use_tls: false
+    sentinel_master_name: ""
+    sentinel_username: ""
+    sentinel_password: ""
+    sentinel_addresses: []
+    cluster_addresses: []
+    max_redirects: null
+turn:
+    enabled: true
+    domain: livekit-turn.localhost
+    tls_port: 5349
+    udp_port: 3478
+    external_tls: true
+ingress:
+    rtmp_base_url: rtmp://livekit.localhost:1935/x
+    whip_base_url: https://livekit-whip.localhost/w
+keys:
+    APIdWsDX50TOFPG: l8SQ7qUjMLJlFy9oLs4IgAwe3Ec3C3YsLIeTGKPRCepr

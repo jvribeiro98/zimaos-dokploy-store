@@ -1,0 +1,72 @@
+name: formbricks
+services:
+  postgres:
+    restart: always
+    image: pgvector/pgvector:pg17
+    volumes:
+    - postgres:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_PASSWORD=postgres
+  formbricks:
+    environment:
+      WEBAPP_URL: http://localhost
+      NEXTAUTH_URL: http://localhost
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/formbricks?schema=public
+      NEXTAUTH_SECRET: PJQ0p3sJwx9VE/0T6Gx0m4K5orUibVRAb1tAnc2FlkqXcydTZ8K5Vuqv82oS8InoTU3t4FxstRocTZEJqrkogw==
+      ENCRYPTION_KEY: C0OZqv9EXXZtPQ1CJCwstBtNAUV7xnOt
+      CRON_SECRET: iVOhLWC7WRGsTe5gJJyiStx0LJ0EdKrTih3YC6Cc3oM=
+      EMAIL_VERIFICATION_DISABLED: '1'
+      PASSWORD_RESET_DISABLED: '1'
+      S3_FORCE_PATH_STYLE: '0'
+    restart: always
+    image: ghcr.io/formbricks/formbricks:v3.1.5
+    depends_on:
+    - postgres
+    expose:
+    - 3000
+    volumes:
+    - /DATA/AppData/$AppID/uploads:/home/nextjs/apps/web/uploads/
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-environment:
+  environment:
+    WEBAPP_URL: ${WEBAPP_URL}
+    NEXTAUTH_URL: ${NEXTAUTH_URL}
+    DATABASE_URL: postgresql://postgres:postgres@postgres:5432/formbricks?schema=public
+    NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+    ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+    CRON_SECRET: ${CRON_SECRET}
+    EMAIL_VERIFICATION_DISABLED: 1
+    PASSWORD_RESET_DISABLED: 1
+    S3_FORCE_PATH_STYLE: 0
+volumes:
+  postgres:
+    driver: local
+  uploads: null
+x-casaos:
+  id: com.dokploy.formbricks
+  main: formbricks
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/formbricks/icon.png
+  title:
+    en_US: Formbricks
+  tagline:
+    en_US: Formbricks is an open-source survey platform for collecting user and customer feedback
+  description:
+    en_US: Formbricks is an open-source survey platform for collecting user and customer feedback. Self-host it on your own
+      server with Dokploy, which deploys Formbricks as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Formbricks
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "3.1.3"
+  update_at: "2026-11-22"
+  website: https://formbricks.com/
+  repo: https://github.com/formbricks/formbricks
+  docs: https://formbricks.com/docs

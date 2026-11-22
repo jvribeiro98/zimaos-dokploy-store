@@ -1,0 +1,66 @@
+name: convex
+services:
+  backend:
+    image: ghcr.io/convex/convex-backend:72ce13c379fe6dbdfc305bc8ad699c5663c68c2a
+    expose:
+    - '3210'
+    - '3211'
+    volumes:
+    - data:/convex/data
+    environment:
+    - INSTANCE_NAME=${INSTANCE_NAME:-}
+    - INSTANCE_SECRET=${INSTANCE_SECRET:-}
+    - CONVEX_RELEASE_VERSION_DEV=${CONVEX_RELEASE_VERSION_DEV:-}
+    - ACTIONS_USER_TIMEOUT_SECS=${ACTIONS_USER_TIMEOUT_SECS:-}
+    - CONVEX_CLOUD_ORIGIN=http://localhost
+    - CONVEX_SITE_ORIGIN=http://localhost
+    - DATABASE_URL=${DATABASE_URL:-}
+    - DISABLE_BEACON=${DISABLE_BEACON:-FALSE}
+    - REDACT_LOGS_TO_CLIENT=${REDACT_LOGS_TO_CLIENT:-}
+    - RUST_LOG=${RUST_LOG:-info}
+    - RUST_BACKTRACE=${RUST_BACKTRACE:-}
+    healthcheck:
+      test: curl -f http://localhost:3210/version
+      interval: 5s
+      start_period: 5s
+    restart: unless-stopped
+  dashboard:
+    image: ghcr.io/convex/convex-dashboard:72ce13c379fe6dbdfc305bc8ad699c5663c68c2a
+    expose:
+    - '6791'
+    environment:
+    - NEXT_PUBLIC_DEPLOYMENT_URL=http://localhost
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 6791
+      published: "6791"
+      protocol: tcp
+volumes:
+  data: null
+x-casaos:
+  id: com.dokploy.convex
+  main: dashboard
+  index: /
+  port_map: "6791"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/convex/icon.svg
+  title:
+    en_US: Convex
+  tagline:
+    en_US: Convex is an open-source reactive database designed to make life easy for web app devel...
+  description:
+    en_US: Convex is an open-source reactive database designed to make life easy for web app developers.
+  author: Dokploy Community
+  developer: Convex
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "72ce13c"
+  update_at: "2026-11-22"
+  website: https://www.convex.dev/
+  repo: https://github.com/convex/convex-backend
+  docs: https://www.convex.dev/docs

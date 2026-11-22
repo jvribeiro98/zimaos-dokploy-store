@@ -1,0 +1,40 @@
+name: drizzle-gateway
+services:
+  drizzle-gateway:
+    image: ghcr.io/drizzle-team/gateway:latest
+    restart: always
+    environment:
+      PORT: '4983'
+      STORE_PATH: /app
+      MASTERPASS: fXNTPsmz5c6nBvaIWHklG3BJPNLzi4pYwhuXnB/XlHI=
+    volumes:
+    - drizzle-gateway:/app
+    ports:
+    - target: 4983
+      published: "4983"
+      protocol: tcp
+volumes:
+  drizzle-gateway: null
+x-casaos:
+  id: com.dokploy.drizzle-gateway
+  main: drizzle-gateway
+  index: /
+  port_map: "4983"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/drizzle-gateway/icon.svg
+  title:
+    en_US: drizzle gateway
+  tagline:
+    en_US: Drizzle Gateway is a self-hosted database gateway that allows you to connect to your da...
+  description:
+    en_US: Drizzle Gateway is a self-hosted database gateway that allows you to connect to your databases from anywhere.
+  author: Dokploy Community
+  developer: drizzle gateway
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://gateway.drizzle.team/
+  docs: https://gateway.drizzle.team/docs/railway

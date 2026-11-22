@@ -1,0 +1,74 @@
+name: n8n-with-postgres
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=boZ7cqMkMOs4cdMn7pthFIHP
+    - POSTGRES_DB=n8n
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      start_period: 30s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+    - DB_TYPE=postgresdb
+    - DB_POSTGRESDB_HOST=postgres
+    - DB_POSTGRESDB_PORT=5432
+    - DB_POSTGRESDB_DATABASE=n8n
+    - DB_POSTGRESDB_USER=admin
+    - DB_POSTGRESDB_PASSWORD=boZ7cqMkMOs4cdMn7pthFIHP
+    - N8N_ENCRYPTION_KEY=85hqTGiEaldIvJCdB3ZZtQninA0Go6XQoIyStK/wyALWY1Q2xbTh2j+2mSHOHp997qUgCAcKGuF9Jtu5iSAf4w==
+    - N8N_HOST=localhost
+    - N8N_PORT=5678
+    - N8N_PROTOCOL=http
+    - NODE_ENV=production
+    - WEBHOOK_URL=https://localhost/
+    - GENERIC_TIMEZONE=Europe/Berlin
+    - N8N_SECURE_COOKIE=false
+    volumes:
+    - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+    - target: 5678
+      published: "5678"
+      protocol: tcp
+volumes:
+  n8n_data: null
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.n8n-with-postgres
+  main: n8n
+  index: /
+  port_map: "5678"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/n8n-with-postgres/icon.png
+  title:
+    en_US: n8n with Postgres
+  tagline:
+    en_US: n8n is an open source low-code platform for automating workflows and integrations with...
+  description:
+    en_US: n8n is an open source low-code platform for automating workflows and integrations with PostgreSQL database for
+      better performance and scalability.
+  author: Dokploy Community
+  developer: n8n with Postgres
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://n8n.io/
+  repo: https://github.com/n8n-io/n8n
+  docs: https://docs.n8n.io/

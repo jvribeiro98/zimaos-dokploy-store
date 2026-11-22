@@ -1,0 +1,48 @@
+name: naviserver
+services:
+  naviserver:
+    image: ghcr.io/andre-carbajal/naviserver:2.4.5
+    restart: unless-stopped
+    expose:
+    - '23008'
+    ports:
+    - 25565-25600
+    - target: 23008
+      published: "23008"
+      protocol: tcp
+    environment:
+      NAVISERVER_HOST: 0.0.0.0
+      NAVISERVER_PORT: '23008'
+      NAVISERVER_ALLOWED_ORIGINS: ''
+      NAVISERVER_SECRET_KEY: 3JdRXrSwMlv8jX6zLKZGYS8NLZMIx3VT73lhV99iteQoiHNvNGJ0lUVneygwx9Hi
+      NAVISERVER_CLI_TOKEN: tBUeonEWEpXNHePR0HUuJYx3D4wkf9lry5zNGTzL2R5etreQ1t0ICEaDAZ3QJHID
+      CURSEFORGE_API_KEY: ''
+    volumes:
+    - naviserver-data:/data
+volumes:
+  naviserver-data: {}
+x-casaos:
+  id: com.dokploy.naviserver
+  main: naviserver
+  index: /
+  port_map: "23008"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/naviserver/icon.png
+  title:
+    en_US: NaviServer
+  tagline:
+    en_US: A lightweight Minecraft server manager with a web interface, CLI, automatic JVM managem...
+  description:
+    en_US: A lightweight Minecraft server manager with a web interface, CLI, automatic JVM management, monitoring, and support
+      for Vanilla, Paper, Fabric, Forge, and NeoForge.
+  author: Dokploy Community
+  developer: NaviServer
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.4.5"
+  update_at: "2026-11-22"
+  website: https://github.com/andre-carbajal/NaviServer
+  repo: https://github.com/andre-carbajal/NaviServer
+  docs: https://github.com/andre-carbajal/NaviServer/wiki

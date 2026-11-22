@@ -1,0 +1,114 @@
+name: corsfix
+services:
+  corsfix:
+    image: ghcr.io/corsfix/corsfix-app:8899bb15e71c7238285ccefc4c95a0cd47daeaf0
+    platform: linux/amd64
+    restart: unless-stopped
+    expose:
+    - '3000'
+    environment:
+      MONGODB_URI: mongodb://corsfix:487a90b56b3175b099dca0894187d4a4f9944dd29375d4d0107a79e7f842f15e135f3e8707993bdc7bef2667ddc00ebc67b83e935380e5725fe3ab7299994cfe@mongodb:27017/db?authSource=admin
+      REDIS_URI: redis://default:6d6de09d4b4c2e2fe1d3198ae74aa48a11a8c5fee371e4ff2f1b99d45fae265a4b04b7b9427f2aa884987872787a01e98c8a23fcac107a6ad62c8de6a8e94fd3@redis:6379
+      KEK_VERSION: KEK_VERSION_1
+      KEK_VERSION_1: gPfD5xPnuVeEPBAZz9CGniMqYBPBwFrgN9kkZd6K7PI=
+      AUTH_SECRET: GWR/6VdRVuFHILToK6E+p5sSeELyp6Smduv5z7JHcXY=
+      AUTH_TRUST_HOST: 'true'
+      AUTH_URL: http://localhost
+      PROXY_DOMAIN: localhost
+      DISABLE_SIGNUP: 'false'
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  corsfix-proxy:
+    image: ghcr.io/corsfix/corsfix-proxy:8899bb15e71c7238285ccefc4c95a0cd47daeaf0
+    restart: unless-stopped
+    expose:
+    - '80'
+    environment:
+      MONGODB_URI: mongodb://corsfix:487a90b56b3175b099dca0894187d4a4f9944dd29375d4d0107a79e7f842f15e135f3e8707993bdc7bef2667ddc00ebc67b83e935380e5725fe3ab7299994cfe@mongodb:27017/db?authSource=admin
+      REDIS_URI: redis://default:6d6de09d4b4c2e2fe1d3198ae74aa48a11a8c5fee371e4ff2f1b99d45fae265a4b04b7b9427f2aa884987872787a01e98c8a23fcac107a6ad62c8de6a8e94fd3@redis:6379
+      KEK_VERSION_1: gPfD5xPnuVeEPBAZz9CGniMqYBPBwFrgN9kkZd6K7PI=
+      APP_DOMAIN: localhost
+      RPM: '180'
+      ALLOWED_ORIGINS: ''
+      ALLOWED_TARGETS: ''
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  mongodb:
+    image: mongo:8.0.17
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: corsfix
+      MONGO_INITDB_ROOT_PASSWORD: 487a90b56b3175b099dca0894187d4a4f9944dd29375d4d0107a79e7f842f15e135f3e8707993bdc7bef2667ddc00ebc67b83e935380e5725fe3ab7299994cfe
+      MONGO_INITDB_DATABASE: db
+    volumes:
+    - mongodb-data:/data/db
+    - mongodb-config:/data/configdb
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - 'mongosh --quiet --username "$${MONGO_INITDB_ROOT_USERNAME}" --password "$${MONGO_INITDB_ROOT_PASSWORD}" --authenticationDatabase
+        admin --eval ''quit(db.adminCommand({ ping: 1 }).ok ? 0 : 1)'''
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+  redis:
+    image: redis:7.4.11-alpine
+    restart: unless-stopped
+    command:
+    - redis-server
+    - --requirepass
+    - ${REDIS_PASSWORD}
+    - --appendonly
+    - 'yes'
+    environment:
+      REDIS_PASSWORD: 6d6de09d4b4c2e2fe1d3198ae74aa48a11a8c5fee371e4ff2f1b99d45fae265a4b04b7b9427f2aa884987872787a01e98c8a23fcac107a6ad62c8de6a8e94fd3
+    volumes:
+    - redis-data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - REDISCLI_AUTH="$${REDIS_PASSWORD}" redis-cli ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+volumes:
+  mongodb-data: null
+  mongodb-config: null
+  redis-data: null
+x-casaos:
+  id: com.dokploy.corsfix
+  main: corsfix
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/corsfix/icon.svg
+  title:
+    en_US: Corsfix
+  tagline:
+    en_US: Corsfix is an open source CORS proxy platform for fetching APIs from browser applicatio...
+  description:
+    en_US: Corsfix is an open source CORS proxy platform for fetching APIs from browser applications, with origin and target
+      allowlists, encrypted API secrets, response caching, and a management dashboard.
+  author: Dokploy Community
+  developer: Corsfix
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "8899bb15e71c7238285ccefc4c95a0cd47daeaf0"
+  update_at: "2026-11-22"
+  website: https://corsfix.com
+  repo: https://github.com/corsfix/corsfix
+  docs: https://corsfix.com/docs/open-source/self-hosting

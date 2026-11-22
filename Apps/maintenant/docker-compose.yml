@@ -1,0 +1,78 @@
+name: maintenant
+services:
+  maintenant:
+    image: nginxinc/nginx-unprivileged:1.29-alpine
+    restart: unless-stopped
+    read_only: true
+    security_opt:
+    - no-new-privileges:true
+    tmpfs:
+    - /tmp:noexec,nosuid,size=16m
+    entrypoint:
+    - /bin/sh
+    - -c
+    - printf '%s:{PLAIN}%s\n' "$$AUTH_USER" "$$AUTH_PASSWORD" > /tmp/htpasswd && exec nginx -g 'daemon off;'
+    environment:
+      AUTH_USER: admin
+      AUTH_PASSWORD: ENNMtNFK2FtnWQmR3ejHdaC22GMcADGv
+    volumes:
+    - /DATA/AppData/$AppID/default.conf:/etc/nginx/conf.d/default.conf:ro
+    expose:
+    - 8080
+    depends_on:
+    - maintenant-app
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  maintenant-app:
+    image: ghcr.io/kolapsis/maintenant:1.10.1
+    restart: unless-stopped
+    read_only: true
+    security_opt:
+    - no-new-privileges:true
+    tmpfs:
+    - /tmp:noexec,nosuid,size=64m
+    volumes:
+    - maintenant-data:/data
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc:/host/proc:ro
+    - /etc/os-release:/host/etc/os-release:ro
+    environment:
+      MAINTENANT_ADDR: 0.0.0.0:8080
+      MAINTENANT_DB: /data/maintenant.db
+      MAINTENANT_BASE_URL: https://localhost
+      MAINTENANT_TRUSTED_PROXIES: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+volumes:
+  maintenant-data: {}
+x-casaos:
+  id: com.dokploy.maintenant
+  main: maintenant
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/maintenant/icon.svg
+  title:
+    en_US: maintenant
+  tagline:
+    en_US: Self-hosted monitoring for Docker, Swarm and Kubernetes in a single Go binary that uses...
+  description:
+    en_US: 'Self-hosted monitoring for Docker, Swarm and Kubernetes in a single Go binary that uses about 100 MB of RAM. maintenant
+      has no login of its own, so this template puts an nginx basic-auth proxy in front of it: the user is admin and the password
+      is the AUTH_PASSWORD variable in the Environment tab. Heartbeat pings and the public status page stay reachable without
+      auth.'
+  author: Dokploy Community
+  developer: maintenant
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.10.1"
+  update_at: "2026-11-22"
+  website: https://maintenant.dev
+  repo: https://github.com/kolapsis/maintenant
+  docs: https://docs.maintenant.dev/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (default.conf). Review
+        environment variables before starting.

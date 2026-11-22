@@ -1,0 +1,54 @@
+name: ollama-chat-tone
+services:
+  ollama-chat-tone:
+    image: billnice250/chattone:latest
+    expose:
+    - 8080
+    environment:
+      APP_NAME: Ollama Chat Tone
+      ADDR: :8080
+      SESSION_SECRET: change-me......32charsOrMore
+      DB_PATH: /data/app.db
+      OLLAMA_URL: http://your-ollama-host:11434
+      OLLAMA_TIMEOUT: '5'
+      DEFAULT_MODEL: llama3.2
+      OPEN_BROWSER: 'false'
+      BASIC_AUTH_USER: admin
+      BASIC_AUTH_PASSWORD: change-me
+    volumes:
+    - ollama-chat-tone-data:/data
+    restart: unless-stopped
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  ollama-chat-tone-data: {}
+x-casaos:
+  id: com.dokploy.ollama-chat-tone
+  main: ollama-chat-tone
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ollama-chat-tone/icon.svg
+  title:
+    en_US: Ollama Chat Tone
+  tagline:
+    en_US: Self-contained Ollama chat client with local auth, streaming responses, and per-user co...
+  description:
+    en_US: Self-contained Ollama chat client with local auth, streaming responses, and per-user conversations.
+  author: Dokploy Community
+  developer: Ollama Chat Tone
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://hub.docker.com/r/billnice250/chattone
+  repo: https://github.com/billnice250/ollama-chat-client
+  docs: https://hub.docker.com/r/billnice250/chattone
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (data/app.db). Review environment
+        variables before starting.

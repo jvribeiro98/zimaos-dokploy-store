@@ -1,0 +1,39 @@
+name: influxdb
+services:
+  influxdb:
+    image: influxdb:2.7.10
+    restart: unless-stopped
+    volumes:
+    - influxdb2-data:/var/lib/influxdb2
+    - influxdb2-config:/etc/influxdb2
+    ports:
+    - target: 8086
+      published: "8086"
+      protocol: tcp
+volumes:
+  influxdb2-data: null
+  influxdb2-config: null
+x-casaos:
+  id: com.dokploy.influxdb
+  main: influxdb
+  index: /
+  port_map: "8086"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/influxdb/icon.png
+  title:
+    en_US: InfluxDB
+  tagline:
+    en_US: InfluxDB 2
+  description:
+    en_US: InfluxDB 2.7 is the platform purpose-built to collect, store, process and visualize time series data.
+  author: Dokploy Community
+  developer: InfluxDB
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.7.10"
+  update_at: "2026-11-22"
+  website: https://www.influxdata.com/
+  repo: https://github.com/influxdata/influxdb
+  docs: https://docs.influxdata.com/influxdb/v2/

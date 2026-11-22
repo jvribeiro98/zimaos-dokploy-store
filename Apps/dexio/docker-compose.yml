@@ -1,0 +1,45 @@
+name: dexio
+services:
+  dexio:
+    image: ghcr.io/dexio-wiki/dexio:1.0.0
+    restart: unless-stopped
+    environment:
+    - DEXIO_PUBLIC_URL=https://localhost
+    - DEXIO_SECRET_KEY=mgKwBe2soT4WNMsbRvYl3pL2iMt60uOffi9eOQSyfvYWLW5RrcJ8nEjGTqpI88wU
+    - DEXIO_DB=/data/dexio.db
+    - DEXIO_FILES_DIR=/data/files
+    expose:
+    - 8080
+    volumes:
+    - dexio-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  dexio-data: null
+x-casaos:
+  id: com.dokploy.dexio
+  main: dexio
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dexio/icon.svg
+  title:
+    en_US: Dexio
+  tagline:
+    en_US: One wiki for all your agents
+  description:
+    en_US: 'One wiki for all your agents. AI agents read and write linked markdown pages over MCP from any machine, and people
+      see what they know in a web app: the link graph, every page and its history.'
+  author: Dokploy Community
+  developer: Dexio
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://dexio.wiki
+  repo: https://github.com/dexio-wiki/dexio
+  docs: https://github.com/dexio-wiki/dexio/blob/main/deploy/README.md

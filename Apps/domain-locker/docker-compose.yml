@@ -1,0 +1,73 @@
+name: domain-locker
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: domain_locker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: DB52hwZJ3Xm2Gny7tqJEb7vqur77amL8
+    expose:
+    - '5432'
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${DL_PG_USER:-postgres}
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  app:
+    image: lissy93/domain-locker:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DL_ENV_TYPE: selfHosted
+      DL_PG_HOST: postgres
+      DL_PG_PORT: '5432'
+      DL_PG_USER: postgres
+      DL_PG_PASSWORD: DB52hwZJ3Xm2Gny7tqJEb7vqur77amL8
+      DL_PG_NAME: domain_locker
+    expose:
+    - '3000'
+    depends_on:
+    - postgres
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  updater:
+    image: alpine:3.20
+    restart: unless-stopped
+    depends_on:
+    - app
+    command: "/bin/sh -c \"\n  apk add --no-cache curl &&\n  echo '0 3 * * * /usr/bin/curl -s -X POST http://app:3000/api/domain-updater'\
+      \ > /etc/crontabs/root &&\n  echo '0 4 * * * /usr/bin/curl -s -X POST http://app:3000/api/expiration-reminders' >> /etc/crontabs/root\
+      \ &&\n  crond -f -L /dev/stdout\n\"\n"
+volumes:
+  postgres_data: {}
+x-casaos:
+  id: com.dokploy.domain-locker
+  main: app
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/domain-locker/icon.png
+  title:
+    en_US: Domain Locker
+  tagline:
+    en_US: Domain Locker is an open-source tool for tracking domain expirations and sending renewa...
+  description:
+    en_US: Domain Locker is an open-source tool for tracking domain expirations and sending renewal reminders.
+  author: Dokploy Community
+  developer: Domain Locker
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://domain-locker.com/
+  repo: https://github.com/Lissy93/domain-locker
+  docs: https://github.com/Lissy93/domain-locker#readme

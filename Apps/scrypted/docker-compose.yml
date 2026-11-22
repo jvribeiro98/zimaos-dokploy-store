@@ -1,0 +1,45 @@
+name: scrypted
+services:
+  scrypted:
+    image: ghcr.io/koush/scrypted:latest
+    environment:
+    - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=1apD8zdhgW9lDlLiUCfWZv6JtXFSjT1s
+    - SCRYPTED_WEBHOOK_UPDATE=http://${main_domain}:10444/v1/update
+    volumes:
+    - /DATA/AppData/$AppID/scrypted-volume:/server/volume
+    restart: unless-stopped
+    logging:
+      driver: none
+    ports:
+    - target: 11080
+      published: "11080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.scrypted
+  main: scrypted
+  index: /
+  port_map: "11080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/scrypted/icon.png
+  title:
+    en_US: Scrypted
+  tagline:
+    en_US: Scrypted is a home automation platform that integrates with various smart home devices...
+  description:
+    en_US: Scrypted is a home automation platform that integrates with various smart home devices and provides NVR capabilities
+      for video surveillance.
+  author: Dokploy Community
+  developer: Scrypted
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.scrypted.app/
+  repo: https://github.com/koush/scrypted
+  docs: https://docs.scrypted.app/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (files/scrypted-volume).
+        Review environment variables before starting.

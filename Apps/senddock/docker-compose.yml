@@ -1,0 +1,90 @@
+name: senddock
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=senddock
+    - POSTGRES_PASSWORD=2fLOKZIUOgkM0KaBa6IqvGC7sTmaCnaV
+    - POSTGRES_DB=senddock
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U senddock
+      interval: 10s
+      timeout: 5s
+      retries: 6
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+    - redisdata:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  senddock:
+    image: ghcr.io/senddock/senddock:0.8.3
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+    - DATABASE_URL=postgres://senddock:2fLOKZIUOgkM0KaBa6IqvGC7sTmaCnaV@postgres:5432/senddock?sslmode=disable
+    - REDIS_URL=redis://redis:6379
+    - JWT_SECRET=rO6iq9GQw6WjFaF10IcfF2zZqiqtMnc0bVrsFN2fkrjY8UlN1K0BWO6febeMyOGt
+    - PUBLIC_URL=https://localhost
+    - FRONTEND_URL=https://localhost
+    - PORT=8080
+    expose:
+    - 8080
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:8080/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  pgdata: null
+  redisdata: null
+x-casaos:
+  id: com.dokploy.senddock
+  main: senddock
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/senddock/icon.svg
+  title:
+    en_US: SendDock
+  tagline:
+    en_US: Open-source, self-hosted email marketing platform with BYO SMTP
+  description:
+    en_US: Open-source, self-hosted email marketing platform with BYO SMTP. Manage subscribers, templates, broadcasts, and
+      scheduled campaigns from one place.
+  author: Dokploy Community
+  developer: SendDock
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.8.3"
+  update_at: "2026-11-22"
+  website: https://senddock.dev
+  repo: https://github.com/SendDock/senddock
+  docs: https://docs.senddock.dev

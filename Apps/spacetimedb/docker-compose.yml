@@ -1,0 +1,42 @@
+name: spacetimedb
+services:
+  spacetimedb:
+    image: clockworklabs/spacetime:v2.6.1
+    restart: unless-stopped
+    command: start
+    expose:
+    - 3000
+    volumes:
+    - spacetimedb-data:/home/spacetime
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  spacetimedb-data: {}
+x-casaos:
+  id: com.dokploy.spacetimedb
+  main: spacetimedb
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/spacetimedb/icon.png
+  title:
+    en_US: SpacetimeDB
+  tagline:
+    en_US: SpacetimeDB is a relational database with a built-in server runtime
+  description:
+    en_US: SpacetimeDB is a relational database with a built-in server runtime. Clients connect directly to the database and
+      run server-side logic (modules) inside it, making it ideal for real-time multiplayer games, chat and collaborative applications
+      without a separate backend.
+  author: Dokploy Community
+  developer: SpacetimeDB
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.6.1"
+  update_at: "2026-11-22"
+  website: https://spacetimedb.com/
+  repo: https://github.com/clockworklabs/SpacetimeDB
+  docs: https://spacetimedb.com/docs

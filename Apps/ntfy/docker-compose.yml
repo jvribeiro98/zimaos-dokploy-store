@@ -1,0 +1,58 @@
+name: ntfy
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    restart: unless-stopped
+    command:
+    - serve
+    expose:
+    - ${HTTP_PORT}
+    volumes:
+    - ntfy-data:/var/lib/ntfy
+    - ntfy-cache:/var/cache/ntfy
+    - /DATA/AppData/$AppID/server.yml:/etc/ntfy/server.yml:ro
+    - /DATA/AppData/$AppID/templates:/etc/ntfy/templates:ro
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget -q --tries=1 http://localhost:${HTTP_PORT}/v1/health -O - | grep -Eo '"healthy"\s*:\s*true' || exit 1
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  ntfy-data: null
+  ntfy-cache: null
+x-casaos:
+  id: com.dokploy.ntfy
+  main: ntfy
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ntfy/icon.png
+  title:
+    en_US: NTFY
+  tagline:
+    en_US: ntfy lets you send push notifications to your phone or desktop via scripts from any com...
+  description:
+    en_US: ntfy lets you send push notifications to your phone or desktop via scripts from any computer, using simple HTTP
+      PUT or POST requests.
+  author: Dokploy Community
+  developer: NTFY
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://ntfy.sh/
+  repo: https://github.com/binwiederhier/ntfy
+  docs: https://docs.ntfy.sh/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (templates/myapp.yml, server.yml).
+        Review environment variables before starting.

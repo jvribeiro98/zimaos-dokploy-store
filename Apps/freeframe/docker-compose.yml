@@ -1,0 +1,290 @@
+name: freeframe
+services:
+  freeframe-postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: freeframe
+      POSTGRES_PASSWORD: uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz
+      POSTGRES_DB: freeframe
+    volumes:
+    - freeframe-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER:-freeframe}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  freeframe-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: 'sh -c "redis-server --requirepass \"$$REDIS_PASSWORD\" --appendonly yes"
+
+      '
+    environment:
+      REDIS_PASSWORD: cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg
+    volumes:
+    - freeframe-redis-data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - redis-cli -a "$${REDIS_PASSWORD}" --no-auth-warning ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  freeframe-silo:
+    image: pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: freeframe
+      MINIO_ROOT_PASSWORD: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+    volumes:
+    - freeframe-silo-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:9000/minio/health/live
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  freeframe-api:
+    image: ghcr.io/techiebutler/freeframe-api:1.22.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
+      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      FRONTEND_URL: http://localhost
+      S3_STORAGE: minio
+      S3_ENDPOINT: http://freeframe-silo:9000
+      S3_PUBLIC_ENDPOINT: http://localhost
+      S3_ACCESS_KEY: freeframe
+      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_BUCKET: freeframe
+      S3_REGION: us-east-1
+      MAIL_PROVIDER: smtp
+      MAIL_FROM_ADDRESS: noreply@localhost
+      MAIL_FROM_NAME: FreeFrame
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_USE_TLS: 'true'
+      API_WORKERS: '4'
+      TRANSCODING_CONCURRENCY: '2'
+      TRANSCODER_CPU_LIMIT: ''
+      TRANSCODER_QUALITIES: 1080p,720p,360p
+      TRANSCODER_SOURCE_COPY: 'false'
+      DISABLE_DOCS: 'true'
+    depends_on:
+      freeframe-postgres:
+        condition: service_healthy
+      freeframe-redis:
+        condition: service_healthy
+      freeframe-silo:
+        condition: service_healthy
+    command:
+    - sh
+    - -c
+    - cd /workspace/apps/api && alembic upgrade head && cd /workspace && gunicorn apps.api.main:app -w $${API_WORKERS:-4}
+      -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --timeout 120 --graceful-timeout 30 --access-logfile -
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8000/health
+      interval: 30s
+      timeout: 5s
+      start_period: 40s
+      retries: 3
+  freeframe-worker:
+    image: ghcr.io/techiebutler/freeframe-api:1.22.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
+      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      FRONTEND_URL: http://localhost
+      S3_STORAGE: minio
+      S3_ENDPOINT: http://freeframe-silo:9000
+      S3_PUBLIC_ENDPOINT: http://localhost
+      S3_ACCESS_KEY: freeframe
+      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_BUCKET: freeframe
+      S3_REGION: us-east-1
+      MAIL_PROVIDER: smtp
+      MAIL_FROM_ADDRESS: noreply@localhost
+      MAIL_FROM_NAME: FreeFrame
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_USE_TLS: 'true'
+      API_WORKERS: '4'
+      TRANSCODING_CONCURRENCY: '2'
+      TRANSCODER_CPU_LIMIT: ''
+      TRANSCODER_QUALITIES: 1080p,720p,360p
+      TRANSCODER_SOURCE_COPY: 'false'
+    depends_on:
+      freeframe-postgres:
+        condition: service_healthy
+      freeframe-redis:
+        condition: service_healthy
+      freeframe-silo:
+        condition: service_healthy
+    command: sh -c "celery -A apps.api.tasks.celery_app worker -Q transcoding -c $${TRANSCODING_CONCURRENCY:-2} --loglevel=INFO"
+  freeframe-email-worker:
+    image: ghcr.io/techiebutler/freeframe-api:1.22.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
+      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      FRONTEND_URL: http://localhost
+      S3_STORAGE: minio
+      S3_ENDPOINT: http://freeframe-silo:9000
+      S3_PUBLIC_ENDPOINT: http://localhost
+      S3_ACCESS_KEY: freeframe
+      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_BUCKET: freeframe
+      S3_REGION: us-east-1
+      MAIL_PROVIDER: smtp
+      MAIL_FROM_ADDRESS: noreply@localhost
+      MAIL_FROM_NAME: FreeFrame
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_USE_TLS: 'true'
+      API_WORKERS: '4'
+      TRANSCODING_CONCURRENCY: '2'
+      TRANSCODER_CPU_LIMIT: ''
+      TRANSCODER_QUALITIES: 1080p,720p,360p
+      TRANSCODER_SOURCE_COPY: 'false'
+    depends_on:
+      freeframe-redis:
+        condition: service_healthy
+    command: sh -c "celery -A apps.api.tasks.celery_app worker -Q email_high,email_low -c 2 --loglevel=INFO"
+  freeframe-maintenance-worker:
+    image: ghcr.io/techiebutler/freeframe-api:1.22.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
+      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      FRONTEND_URL: http://localhost
+      S3_STORAGE: minio
+      S3_ENDPOINT: http://freeframe-silo:9000
+      S3_PUBLIC_ENDPOINT: http://localhost
+      S3_ACCESS_KEY: freeframe
+      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_BUCKET: freeframe
+      S3_REGION: us-east-1
+      MAIL_PROVIDER: smtp
+      MAIL_FROM_ADDRESS: noreply@localhost
+      MAIL_FROM_NAME: FreeFrame
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_USE_TLS: 'true'
+      API_WORKERS: '4'
+      TRANSCODING_CONCURRENCY: '2'
+      TRANSCODER_CPU_LIMIT: ''
+      TRANSCODER_QUALITIES: 1080p,720p,360p
+      TRANSCODER_SOURCE_COPY: 'false'
+    depends_on:
+      freeframe-postgres:
+        condition: service_healthy
+      freeframe-redis:
+        condition: service_healthy
+      freeframe-silo:
+        condition: service_healthy
+    command: sh -c "celery -A apps.api.tasks.celery_app worker -Q maintenance -c 1 --loglevel=INFO"
+  freeframe-beat:
+    image: ghcr.io/techiebutler/freeframe-api:1.22.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://freeframe:uVdECCkk9m3MsdLgIJoB6YBdl2Clsqvz@freeframe-postgres:5432/freeframe
+      REDIS_URL: redis://:cLCgkNp9eKPrFmRr6L1ZLRmbI8hSXgRg@freeframe-redis:6379/0
+      JWT_SECRET: 939ba5a66d2f9dff4b8ac38f4ef691849d80a31fcd3f399773427153772c205643ee0b2dcc71ab24ca957ae867833f745f891511ef4e176462d4d69c9f55568e
+      FRONTEND_URL: http://localhost
+      S3_STORAGE: minio
+      S3_ENDPOINT: http://freeframe-silo:9000
+      S3_PUBLIC_ENDPOINT: http://localhost
+      S3_ACCESS_KEY: freeframe
+      S3_SECRET_KEY: C4aj4EFu79kODpE4VJHnCZd0cCilRyhm
+      S3_BUCKET: freeframe
+      S3_REGION: us-east-1
+      MAIL_PROVIDER: smtp
+      MAIL_FROM_ADDRESS: noreply@localhost
+      MAIL_FROM_NAME: FreeFrame
+      SMTP_HOST: ''
+      SMTP_PORT: '587'
+      SMTP_USER: ''
+      SMTP_PASSWORD: ''
+      SMTP_USE_TLS: 'true'
+      API_WORKERS: '4'
+      TRANSCODING_CONCURRENCY: '2'
+      TRANSCODER_CPU_LIMIT: ''
+      TRANSCODER_QUALITIES: 1080p,720p,360p
+      TRANSCODER_SOURCE_COPY: 'false'
+    depends_on:
+      freeframe-redis:
+        condition: service_healthy
+    command: sh -c "celery -A apps.api.tasks.celery_app beat --loglevel=INFO -s /tmp/celerybeat-schedule"
+  freeframe:
+    image: ghcr.io/techiebutler/freeframe-web:1.22.0
+    restart: unless-stopped
+    environment:
+      API_INTERNAL_URL: http://freeframe-api:8000
+      UPLOAD_CONCURRENCY: '5'
+    depends_on:
+      freeframe-api:
+        condition: service_started
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget -q --spider http://127.0.0.1:3000/login
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  freeframe-postgres-data: null
+  freeframe-redis-data: null
+  freeframe-silo-data: null
+x-casaos:
+  id: com.dokploy.freeframe
+  main: freeframe
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/freeframe/icon.png
+  title:
+    en_US: FreeFrame
+  tagline:
+    en_US: FreeFrame is an open-source, self-hostable alternative to Frame
+  description:
+    en_US: 'FreeFrame is an open-source, self-hostable alternative to Frame.io: frame-accurate video, image and audio review
+      with annotations, version comparison, share links and approvals.'
+  author: Dokploy Community
+  developer: FreeFrame
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.22.0"
+  update_at: "2026-11-22"
+  website: https://github.com/Techiebutler/freeframe
+  repo: https://github.com/Techiebutler/freeframe
+  docs: https://github.com/Techiebutler/freeframe/blob/main/docs/deployment.md

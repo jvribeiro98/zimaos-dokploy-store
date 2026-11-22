@@ -1,0 +1,46 @@
+name: waxum
+services:
+  waxum:
+    image: fdciabdul/waxum:0.13.5
+    restart: unless-stopped
+    expose:
+    - 3451
+    environment:
+    - SUPERADMIN_TOKEN=2j3cQ7zcNmbOsTlaUkC1w1S7QzToOXzU
+    - WHATSAPP_STORAGE_PATH=/app/whatsapp_sessions
+    - SQLITE_PATH=/app/whatsapp_sessions/waxum.db
+    volumes:
+    - waxum_data:/app/whatsapp_sessions
+    ports:
+    - target: 3451
+      published: "3451"
+      protocol: tcp
+volumes:
+  waxum_data: null
+x-casaos:
+  id: com.dokploy.waxum
+  main: waxum
+  index: /
+  port_map: "3451"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/waxum/icon.png
+  title:
+    en_US: Waxum
+  tagline:
+    en_US: Waxum is a WhatsApp REST API gateway written in Rust, shipped as a single native binary
+  description:
+    en_US: 'Waxum is a WhatsApp REST API gateway written in Rust, shipped as a single native binary. Multi-session, multi-database
+      (SQLite/Postgres/MySQL), 130+ REST endpoints: text/image/video/audio/document/sticker/location/contact/poll messages,
+      reactions, scheduled and bulk (blast) sending, voice/video calls, HMAC-signed webhooks, JWT/Bearer auth, full-text message
+      search, Swagger docs, and Prometheus metrics.'
+  author: Dokploy Community
+  developer: Waxum
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "0.13.5"
+  update_at: "2026-11-22"
+  website: https://waxum.imtaqin.id
+  repo: https://github.com/imtaqin/waxum
+  docs: https://waxum.imtaqin.id

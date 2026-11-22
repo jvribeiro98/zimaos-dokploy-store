@@ -1,0 +1,161 @@
+name: postiz
+services:
+  postiz-app:
+    image: ghcr.io/gitroomhq/postiz-app:latest
+    restart: always
+    environment:
+      MAIN_URL: https://localhost
+      FRONTEND_URL: https://localhost
+      NEXT_PUBLIC_BACKEND_URL: https://localhost/api
+      JWT_SECRET: zUfYxxyxCSgjoaAtH7aHIbGKzVLTM/9O7zvMkt/f5Og=
+      DATABASE_URL: postgresql://postiz:ORtYWUZicZYQqAU6Ce9l3lGOc8UmsDIU@postiz-postgres:5432/postiz
+      REDIS_URL: redis://postiz-redis:6379
+      BACKEND_INTERNAL_URL: http://127.0.0.1:3000
+      TEMPORAL_ADDRESS: temporal:7233
+      IS_GENERAL: 'true'
+      DISABLE_REGISTRATION: ${DISABLE_REGISTRATION:-false}
+      RUN_CRON: 'true'
+      STORAGE_PROVIDER: local
+      UPLOAD_DIRECTORY: /uploads
+      NEXT_PUBLIC_UPLOAD_DIRECTORY: /uploads
+      FACEBOOK_APP_ID: ''
+      FACEBOOK_APP_SECRET: ''
+      INSTAGRAM_APP_ID: ''
+      INSTAGRAM_APP_SECRET: ''
+      LINKEDIN_CLIENT_ID: ''
+      LINKEDIN_CLIENT_SECRET: ''
+      X_API_KEY: ''
+      X_API_SECRET: ''
+      YOUTUBE_CLIENT_ID: ''
+      YOUTUBE_CLIENT_SECRET: ''
+      TIKTOK_CLIENT_ID: ''
+      TIKTOK_CLIENT_SECRET: ''
+    volumes:
+    - postiz-config:/config/
+    - postiz-uploads:/uploads/
+    depends_on:
+      postiz-postgres:
+        condition: service_healthy
+      postiz-redis:
+        condition: service_healthy
+      temporal:
+        condition: service_healthy
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+  postiz-postgres:
+    image: postgres:17-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ORtYWUZicZYQqAU6Ce9l3lGOc8UmsDIU
+      POSTGRES_USER: postiz
+      POSTGRES_DB: postiz
+    volumes:
+    - postgres-volume:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${DB_USER} -d ${DB_NAME}
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+  postiz-redis:
+    image: redis:7.2
+    restart: always
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    volumes:
+    - postiz-redis-data:/data
+  temporal-elasticsearch:
+    image: elasticsearch:7.17.27
+    restart: always
+    environment:
+    - cluster.routing.allocation.disk.threshold_enabled=true
+    - cluster.routing.allocation.disk.watermark.low=512mb
+    - cluster.routing.allocation.disk.watermark.high=256mb
+    - cluster.routing.allocation.disk.watermark.flood_stage=128mb
+    - discovery.type=single-node
+    - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    - xpack.security.enabled=false
+    volumes:
+    - temporal-es-data:/usr/share/elasticsearch/data
+  temporal-postgresql:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: R4fRNQGKJ2pSd1eMk9LWSj3hnBUHRKrB
+      POSTGRES_USER: temporal
+    volumes:
+    - temporal-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${TEMPORAL_USER}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  temporal:
+    image: temporalio/auto-setup:1.28.1
+    restart: always
+    depends_on:
+      temporal-postgresql:
+        condition: service_healthy
+      temporal-elasticsearch:
+        condition: service_started
+    environment:
+    - DB=postgres12
+    - DB_PORT=5432
+    - POSTGRES_USER=temporal
+    - POSTGRES_PWD=R4fRNQGKJ2pSd1eMk9LWSj3hnBUHRKrB
+    - POSTGRES_SEEDS=temporal-postgresql
+    - ENABLE_ES=true
+    - ES_SEEDS=temporal-elasticsearch
+    - ES_VERSION=v7
+    - TEMPORAL_NAMESPACE=default
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - tctl --address $$(hostname -i):7233 --namespace default workflow list > /dev/null 2>&1
+      interval: 15s
+      timeout: 10s
+      retries: 30
+      start_period: 120s
+volumes:
+  postgres-volume: null
+  postiz-redis-data: null
+  postiz-config: null
+  postiz-uploads: null
+  temporal-es-data: null
+  temporal-pg-data: null
+x-casaos:
+  id: com.dokploy.postiz
+  main: postiz-app
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/postiz/icon.png
+  title:
+    en_US: Postiz
+  tagline:
+    en_US: Postiz is a modern, open-source platform for managing and publishing content across mul...
+  description:
+    en_US: Postiz is a modern, open-source platform for managing and publishing content across multiple channels.
+  author: Dokploy Community
+  developer: Postiz
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://postiz.com
+  repo: https://github.com/gitroomhq/postiz
+  docs: https://docs.postiz.com

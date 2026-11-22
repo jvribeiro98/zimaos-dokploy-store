@@ -1,0 +1,52 @@
+name: java
+services:
+  java-app:
+    image: ghcr.io/pterodactyl/yolks:java_${JAVA_VERSION}
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+    - app-data:/home/container
+    working_dir: /home/container
+    environment:
+    - STARTUP=java -Xmx1024M -Xms512M -jar server.jar nogui
+    - SERVER_JARFILE=server.jar
+    - JAVA_VERSION=21
+    expose:
+    - ${SERVER_PORT}
+    user: container
+    ports:
+    - target: 25565
+      published: "25565"
+      protocol: tcp
+volumes:
+  app-data: {}
+x-casaos:
+  id: com.dokploy.java
+  main: java-app
+  index: /
+  port_map: "25565"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/java/icon.png
+  title:
+    en_US: Java Runtime (Multi-Version)
+  tagline:
+    en_US: Configurable Java runtime environment supporting versions 8, 11, 16, 17, and 21
+  description:
+    en_US: Configurable Java runtime environment supporting versions 8, 11, 16, 17, and 21. Perfect for Minecraft servers,
+      Spring Boot apps, and custom Java applications.
+  author: Dokploy Community
+  developer: Java Runtime (Multi-Version)
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "8-21"
+  update_at: "2026-11-22"
+  website: https://java.com/
+  repo: https://github.com/pterodactyl/yolks
+  docs: https://docs.oracle.com/en/java/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (home/container/server.properties).
+        Review environment variables before starting.

@@ -1,0 +1,61 @@
+name: mc-controller
+services:
+  mc-controller:
+    image: tomhorrorza/mc-controller:${IMAGE_TAG:-1.0.2}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NUXT_MC_RUNTIME: docker
+      NUXT_DATABASE_PATH: /data/mc-controller.db
+      NUXT_MC_DATA_PATH: /data/servers
+      NUXT_DOCKER_SOCKET: /var/run/docker.sock
+      NUXT_JWT_SECRET: ${JWT_SECRET:?Dokploy must generate JWT_SECRET}
+      NUXT_CURSEFORGE_API_KEY: ''
+      NUXT_MC_BIND_IP: 0.0.0.0
+      NUXT_PORT_RANGE_START: '25565'
+      NUXT_PORT_RANGE_END: '25600'
+    volumes:
+    - mc-controller-data:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+    - '3000'
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO-
+      - http://127.0.0.1:3000/api/setup/status
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  mc-controller-data: {}
+x-casaos:
+  id: com.dokploy.mc-controller
+  main: mc-controller
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mc-controller/icon.svg
+  title:
+    en_US: MC Controller
+  tagline:
+    en_US: A self-hosted Minecraft control panel for creating and managing multiple Vanilla, Fabri...
+  description:
+    en_US: A self-hosted Minecraft control panel for creating and managing multiple Vanilla, Fabric, Forge, NeoForge, Paper,
+      Spigot, Bukkit, and CurseForge servers.
+  author: Dokploy Community
+  developer: MC Controller
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.2"
+  update_at: "2026-11-22"
+  repo: https://github.com/Nargor/mc-controller
+  docs: https://github.com/Nargor/mc-controller#readme

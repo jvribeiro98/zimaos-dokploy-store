@@ -1,0 +1,59 @@
+name: lowcoder
+services:
+  lowcoder-api-service:
+    image: lowcoderorg/lowcoder-ce:2.6.4
+    environment:
+      REDIS_ENABLED: 'true'
+      MONGODB_ENABLED: 'true'
+      API_SERVICE_ENABLED: 'true'
+      NODE_SERVICE_ENABLED: 'true'
+      FRONTEND_ENABLED: 'true'
+      PUID: '1000'
+      PGID: '1000'
+      DEFAULT_ORGS_PER_USER: '100'
+      DEFAULT_ORG_MEMBER_COUNT: '1000'
+      DEFAULT_ORG_GROUP_COUNT: '100'
+      DEFAULT_ORG_APP_COUNT: '1000'
+      DEFAULT_DEVELOPER_COUNT: '50'
+      MONGODB_URL: mongodb://localhost:27017/lowcoder?authSource=admin
+      REDIS_URL: redis://localhost:6379
+      ENABLE_USER_SIGN_UP: 'False'
+      ENCRYPTION_PASSWORD: s6z74LUgkw8gPxw52KScnL4H1OiY2dUU
+      ENCRYPTION_SALT: nkMAN5IbCI1Fiw8y21594PCJsNZUpqIT
+      CORS_ALLOWED_DOMAINS: '*'
+      LOWCODER_API_KEY_SECRET: l9fmH4NRudjmvCPr355AxEdysnrQ5Uq0
+      LOWCODER_API_SERVICE_URL: http://localhost:8080
+      LOWCODER_NODE_SERVICE_URL: http://localhost:6060
+    volumes:
+    - /DATA/AppData/$AppID/volumes/lowcoder-stacks:/lowcoder-stacks
+    restart: unless-stopped
+    expose:
+    - 3000
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.lowcoder
+  main: lowcoder-api-service
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/lowcoder/icon.png
+  title:
+    en_US: Lowcoder
+  tagline:
+    en_US: Rapid business App Builder for Everyone
+  description:
+    en_US: Rapid business App Builder for Everyone
+  author: Dokploy Community
+  developer: Lowcoder
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2.6.4"
+  update_at: "2026-11-22"
+  website: https://www.lowcoder.cloud/
+  repo: https://github.com/lowcoder-org/lowcoder
+  docs: https://docs.lowcoder.cloud/lowcoder-documentation

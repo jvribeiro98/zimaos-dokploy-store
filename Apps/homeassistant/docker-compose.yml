@@ -1,0 +1,58 @@
+name: homeassistant
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+    expose:
+    - 8123
+    volumes:
+    - /DATA/AppData/$AppID/configuration.yaml:/config/configuration.yaml
+    - /DATA/AppData/$AppID/automations.yaml:/config/automations.yaml
+    - /DATA/AppData/$AppID/scripts.yaml:/config/scripts.yaml
+    - /DATA/AppData/$AppID/scenes.yaml:/config/scenes.yaml
+    - /opt/homeassistant:/config
+    - /etc/localtime:/etc/localtime:ro
+    - /run/dbus:/run/dbus:ro
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://homeassistant:8123/
+      interval: 60s
+      retries: 5
+      start_period: 300s
+      timeout: 2s
+    ports:
+    - target: 8123
+      published: "8123"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.homeassistant
+  main: homeassistant
+  index: /
+  port_map: "8123"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/homeassistant/icon.svg
+  title:
+    en_US: Home Assistant
+  tagline:
+    en_US: Home Assistant is a home automation platform that makes sure you can control your smart...
+  description:
+    en_US: Home Assistant is a home automation platform that makes sure you can control your smart devices locally. Self-host
+      it on your own server with Dokploy, which deploys Home Assistant as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Home Assistant
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "stable"
+  update_at: "2026-11-22"
+  website: https://www.home-assistant.io/
+  repo: https://github.com/home-assistant/core
+  docs: https://www.home-assistant.io/getting-started/onboarding/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (configuration.yaml, automations.yaml,
+        scripts.yaml, scenes.yaml). Review environment variables before starting.

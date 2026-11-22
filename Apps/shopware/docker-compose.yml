@@ -1,0 +1,511 @@
+name: shopware
+services:
+  database:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: shopware
+      MYSQL_USER: shopware
+      MYSQL_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      MYSQL_ROOT_PASSWORD: 0b857d14b91bc514e0f24e3f1eca34d6bf58051c3406c74b6983fe4c700c1ca7
+    command:
+    - --character-set-server=utf8mb4
+    - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} --silent
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    volumes:
+    - database-data:/var/lib/mysql
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+    command:
+    - redis-server
+    - --appendonly
+    - 'yes'
+    - --requirepass
+    - ${REDIS_PASSWORD}
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - redis-cli -a "$${REDIS_PASSWORD}" ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    volumes:
+    - redis-data:/data
+  bootstrap:
+    image: ${SHOPWARE_CLI_IMAGE:-shopware/shopware-cli:0.14.3-php-8.4}
+    restart: 'no'
+    environment:
+      APP_ENV: prod
+      APP_SECRET: a9cf5239ba35b73b903d17ebe38620c47777d2b81b24e4bb75bbc38e42f1d5cb38de18b869d35593bd3acf595f483c28b719950841832bb72fb11d9dc6a22c4a
+      INSTANCE_ID: e89ea868885fe6cc80debcf77c1d89931979df52ab2863c01f304bd550375b9e
+      APP_URL: http://localhost
+      ENABLE_DEMO_DATA: '1'
+      TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix
+      DATABASE_HOST: database
+      DATABASE_PORT: '3306'
+      DATABASE_NAME: shopware
+      DATABASE_USER: shopware
+      DATABASE_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      DATABASE_URL: mysql://shopware:8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315@database:3306/shopware?charset=utf8mb4
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      MAILER_DSN: null://localhost
+      LOCK_DSN: redis://:38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32@redis:6379/1
+      MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
+      MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
+      MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
+      COMPOSER_PLUGIN_LOADER: '1'
+      SHOPWARE_HTTP_CACHE_ENABLED: '1'
+      SHOPWARE_HTTP_DEFAULT_TTL: '7200'
+      INSTALL_LOCALE: en-GB
+      INSTALL_CURRENCY: EUR
+      INSTALL_ADMIN_USERNAME: admin
+      INSTALL_ADMIN_PASSWORD: RhLq9eXX6Z6mrsctPdUf
+      PHP_SESSION_HANDLER: redis
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      PHP_SESSION_COOKIE_LIFETIME: '0'
+      PHP_SESSION_GC_MAXLIFETIME: '1440'
+      PHP_MAX_UPLOAD_SIZE: 128M
+      PHP_MAX_EXECUTION_TIME: '300'
+      PHP_MEMORY_LIMIT: 512M
+      FPM_PM: dynamic
+      FPM_PM_MAX_CHILDREN: '20'
+      FPM_PM_START_SERVERS: '4'
+      FPM_PM_MIN_SPARE_SERVERS: '2'
+      FPM_PM_MAX_SPARE_SERVERS: '6'
+      BLUE_GREEN_DEPLOYMENT: '0'
+      COMPOSER_ALLOW_SUPERUSER: '1'
+      COMPOSER_HOME: /tmp/composer
+      SHOPWARE_VERSION: 6.7.12.1
+      SHOPWARE_DOCKER_VERSION: 0.3.0
+      DEMO_DATA_VERSION: 2.1.0
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - "mkdir -p /run/shopware-secrets /var/www/html\n\nif [ ! -s /run/shopware-secrets/jwt-private.pem ] || [ ! -s /run/shopware-secrets/jwt-public.pem\
+      \ ]; then\n  echo \"Generating JWT keypair.\"\n  openssl genpkey -algorithm RSA -out /run/shopware-secrets/jwt-private.pem\
+      \ -pkeyopt rsa_keygen_bits:2048\n  openssl rsa -pubout -in /run/shopware-secrets/jwt-private.pem -out /run/shopware-secrets/jwt-public.pem\n\
+      \  chmod 600 /run/shopware-secrets/jwt-private.pem\n  chmod 644 /run/shopware-secrets/jwt-public.pem\nfi\n\nexport JWT_PRIVATE_KEY=\"\
+      $$(cat /run/shopware-secrets/jwt-private.pem)\"\nexport JWT_PUBLIC_KEY=\"$$(cat /run/shopware-secrets/jwt-public.pem)\"\
+      \n\nif [ -f /var/www/html/composer.json ] && [ -f /var/www/html/bin/console ] && [ -f /var/www/html/vendor/autoload.php\
+      \ ]; then\n  echo \"Shopware source already exists. Skipping bootstrap.\"\n  exit 0\nfi\n\nif find /var/www/html -mindepth\
+      \ 1 -maxdepth 1 -print -quit | grep -q .; then\n  echo \"Incomplete Shopware source detected. Cleaning bootstrap volume.\"\
+      \n  find /var/www/html -mindepth 1 -maxdepth 1 -exec rm -rf {} +\nfi\n\ntmp_dir=\"$$(mktemp -d)\"\n\n# Composer >=2.9\
+      \ refuses to install pinned versions that are affected by\n# security advisories published later. Keep the pinned bootstrap\
+      \ deterministic.\ncomposer config -g audit.block-insecure false 2>/dev/null || true\n\ncomposer create-project --no-interaction\
+      \ --prefer-dist \"shopware/production:${SHOPWARE_VERSION}\" \"$$tmp_dir\"\ncd \"$$tmp_dir\"\ncomposer require --no-interaction\
+      \ \"shopware/docker:${SHOPWARE_DOCKER_VERSION}\"\n\nif [ \"${ENABLE_DEMO_DATA}\" = \"1\" ]; then\n  composer require\
+      \ --no-interaction --prefer-dist \"swag/demo-data:${DEMO_DATA_VERSION}\"\nfi\n\nshopware-cli project ci \"$$tmp_dir\"\
+      \ncp -a \"$$tmp_dir\"/. /var/www/html/\n"
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+  init-permissions:
+    image: alpine:3.21
+    restart: 'no'
+    command:
+    - sh
+    - -ec
+    - "mkdir -p \\\n  /var/www/html/files \\\n  /var/www/html/public/theme \\\n  /var/www/html/public/media \\\n  /var/www/html/public/thumbnail\
+      \ \\\n  /var/www/html/public/sitemap \\\n  /run/shopware-secrets\nchown -R 82:82 /var/www/html /run/shopware-secrets\n"
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+    - files:/var/www/html/files
+    - theme:/var/www/html/public/theme
+    - media:/var/www/html/public/media
+    - thumbnail:/var/www/html/public/thumbnail
+    - sitemap:/var/www/html/public/sitemap
+  init:
+    image: ${SHOPWARE_BASE_IMAGE:-shopware/docker-base:8.4.19-nginx}
+    restart: 'no'
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - "export JWT_PRIVATE_KEY=\"$(cat /run/shopware-secrets/jwt-private.pem)\"\nexport JWT_PUBLIC_KEY=\"$(cat /run/shopware-secrets/jwt-public.pem)\"\
+      \n\n/setup\n\nif [ \"${ENABLE_DEMO_DATA:-1}\" != \"1\" ]; then\n  exit 0\nfi\n\ncd /var/www/html\n\necho \"Demo data\
+      \ enabled. Refreshing plugin list.\"\nphp bin/console -n plugin:refresh\n\nif [ ! -d /var/www/html/custom/plugins/SwagPlatformDemoData\
+      \ ]; then\n  echo \"SwagPlatformDemoData is not present in the volume.\"\n  echo \"Continuing without demo data activation.\"\
+      \n  exit 0\nfi\n\nif ! plugin_state=\"$$(\n  php bin/console -n plugin:list --json | php -r '\n    $$plugins = json_decode(stream_get_contents(STDIN),\
+      \ true);\n    if (!is_array($$plugins)) {\n      fwrite(STDERR, \"Unable to parse plugin list\\n\");\n      exit(2);\n\
+      \    }\n\n    foreach ($$plugins as $$plugin) {\n      if (($$plugin[\"name\"] ?? null) !== \"SwagPlatformDemoData\"\
+      ) {\n        continue;\n      }\n\n      $$installed = ($$plugin[\"installed\"] ?? false) ? \"1\" : \"0\";\n      $$active\
+      \ = ($$plugin[\"active\"] ?? false) ? \"1\" : \"0\";\n\n      echo $$installed . \":\" . $$active;\n      exit(0);\n\
+      \    }\n\n    fwrite(STDERR, \"SwagPlatformDemoData not found in plugin list\\n\");\n    exit(1);\n  '\n)\"; then\n\
+      \  echo \"Unable to resolve SwagPlatformDemoData state.\"\n  echo \"Continuing without demo data activation.\"\n  exit\
+      \ 0\nfi\n\ncase \"$${plugin_state}\" in\n  \"0:0\")\n    echo \"Installing and activating SwagPlatformDemoData.\"\n\
+      \    php bin/console -n plugin:install --activate SwagPlatformDemoData\n    ;;\n  \"1:0\")\n    echo \"Activating existing\
+      \ SwagPlatformDemoData plugin.\"\n    php bin/console -n plugin:activate SwagPlatformDemoData\n    ;;\n  \"1:1\")\n\
+      \    echo \"SwagPlatformDemoData is already active.\"\n    ;;\n  *)\n    echo \"Unexpected SwagPlatformDemoData state:\
+      \ $${plugin_state}\"\n    echo \"Continuing without demo data activation.\"\n    exit 0\n    ;;\nesac\n"
+    environment:
+      APP_ENV: prod
+      APP_SECRET: a9cf5239ba35b73b903d17ebe38620c47777d2b81b24e4bb75bbc38e42f1d5cb38de18b869d35593bd3acf595f483c28b719950841832bb72fb11d9dc6a22c4a
+      INSTANCE_ID: e89ea868885fe6cc80debcf77c1d89931979df52ab2863c01f304bd550375b9e
+      APP_URL: http://localhost
+      ENABLE_DEMO_DATA: '1'
+      TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix
+      DATABASE_HOST: database
+      DATABASE_PORT: '3306'
+      DATABASE_NAME: shopware
+      DATABASE_USER: shopware
+      DATABASE_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      DATABASE_URL: mysql://shopware:8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315@database:3306/shopware?charset=utf8mb4
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      MAILER_DSN: null://localhost
+      LOCK_DSN: redis://:38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32@redis:6379/1
+      MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
+      MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
+      MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
+      COMPOSER_PLUGIN_LOADER: '1'
+      SHOPWARE_HTTP_CACHE_ENABLED: '1'
+      SHOPWARE_HTTP_DEFAULT_TTL: '7200'
+      INSTALL_LOCALE: en-GB
+      INSTALL_CURRENCY: EUR
+      INSTALL_ADMIN_USERNAME: admin
+      INSTALL_ADMIN_PASSWORD: RhLq9eXX6Z6mrsctPdUf
+      PHP_SESSION_HANDLER: redis
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      PHP_SESSION_COOKIE_LIFETIME: '0'
+      PHP_SESSION_GC_MAXLIFETIME: '1440'
+      PHP_MAX_UPLOAD_SIZE: 128M
+      PHP_MAX_EXECUTION_TIME: '300'
+      PHP_MEMORY_LIMIT: 512M
+      FPM_PM: dynamic
+      FPM_PM_MAX_CHILDREN: '20'
+      FPM_PM_START_SERVERS: '4'
+      FPM_PM_MIN_SPARE_SERVERS: '2'
+      FPM_PM_MAX_SPARE_SERVERS: '6'
+      BLUE_GREEN_DEPLOYMENT: '0'
+    depends_on:
+      init-permissions:
+        condition: service_completed_successfully
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+    - files:/var/www/html/files
+    - theme:/var/www/html/public/theme
+    - media:/var/www/html/public/media
+    - thumbnail:/var/www/html/public/thumbnail
+    - sitemap:/var/www/html/public/sitemap
+  shopware:
+    image: ${SHOPWARE_BASE_IMAGE:-shopware/docker-base:8.4.19-nginx}
+    restart: unless-stopped
+    expose:
+    - '8000'
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - 'export JWT_PRIVATE_KEY="$(cat /run/shopware-secrets/jwt-private.pem)"
+
+      export JWT_PUBLIC_KEY="$(cat /run/shopware-secrets/jwt-public.pem)"
+
+      exec /usr/bin/supervisord -c /etc/supervisord.conf
+
+      '
+    environment:
+      APP_ENV: prod
+      APP_SECRET: a9cf5239ba35b73b903d17ebe38620c47777d2b81b24e4bb75bbc38e42f1d5cb38de18b869d35593bd3acf595f483c28b719950841832bb72fb11d9dc6a22c4a
+      INSTANCE_ID: e89ea868885fe6cc80debcf77c1d89931979df52ab2863c01f304bd550375b9e
+      APP_URL: http://localhost
+      ENABLE_DEMO_DATA: '1'
+      TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix
+      DATABASE_HOST: database
+      DATABASE_PORT: '3306'
+      DATABASE_NAME: shopware
+      DATABASE_USER: shopware
+      DATABASE_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      DATABASE_URL: mysql://shopware:8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315@database:3306/shopware?charset=utf8mb4
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      MAILER_DSN: null://localhost
+      LOCK_DSN: redis://:38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32@redis:6379/1
+      MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
+      MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
+      MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
+      COMPOSER_PLUGIN_LOADER: '1'
+      SHOPWARE_HTTP_CACHE_ENABLED: '1'
+      SHOPWARE_HTTP_DEFAULT_TTL: '7200'
+      INSTALL_LOCALE: en-GB
+      INSTALL_CURRENCY: EUR
+      INSTALL_ADMIN_USERNAME: admin
+      INSTALL_ADMIN_PASSWORD: RhLq9eXX6Z6mrsctPdUf
+      PHP_SESSION_HANDLER: redis
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      PHP_SESSION_COOKIE_LIFETIME: '0'
+      PHP_SESSION_GC_MAXLIFETIME: '1440'
+      PHP_MAX_UPLOAD_SIZE: 128M
+      PHP_MAX_EXECUTION_TIME: '300'
+      PHP_MEMORY_LIMIT: 512M
+      FPM_PM: dynamic
+      FPM_PM_MAX_CHILDREN: '20'
+      FPM_PM_START_SERVERS: '4'
+      FPM_PM_MIN_SPARE_SERVERS: '2'
+      FPM_PM_MAX_SPARE_SERVERS: '6'
+      BLUE_GREEN_DEPLOYMENT: '0'
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+    - files:/var/www/html/files
+    - theme:/var/www/html/public/theme
+    - media:/var/www/html/public/media
+    - thumbnail:/var/www/html/public/thumbnail
+    - sitemap:/var/www/html/public/sitemap
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  worker:
+    image: ${SHOPWARE_BASE_IMAGE:-shopware/docker-base:8.4.19-nginx}
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - 'export JWT_PRIVATE_KEY="$(cat /run/shopware-secrets/jwt-private.pem)"
+
+      export JWT_PUBLIC_KEY="$(cat /run/shopware-secrets/jwt-public.pem)"
+
+      exec php bin/console messenger:consume async low_priority --time-limit=300 --memory-limit=512M
+
+      '
+    environment:
+      APP_ENV: prod
+      APP_SECRET: a9cf5239ba35b73b903d17ebe38620c47777d2b81b24e4bb75bbc38e42f1d5cb38de18b869d35593bd3acf595f483c28b719950841832bb72fb11d9dc6a22c4a
+      INSTANCE_ID: e89ea868885fe6cc80debcf77c1d89931979df52ab2863c01f304bd550375b9e
+      APP_URL: http://localhost
+      ENABLE_DEMO_DATA: '1'
+      TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix
+      DATABASE_HOST: database
+      DATABASE_PORT: '3306'
+      DATABASE_NAME: shopware
+      DATABASE_USER: shopware
+      DATABASE_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      DATABASE_URL: mysql://shopware:8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315@database:3306/shopware?charset=utf8mb4
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      MAILER_DSN: null://localhost
+      LOCK_DSN: redis://:38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32@redis:6379/1
+      MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
+      MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
+      MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
+      COMPOSER_PLUGIN_LOADER: '1'
+      SHOPWARE_HTTP_CACHE_ENABLED: '1'
+      SHOPWARE_HTTP_DEFAULT_TTL: '7200'
+      INSTALL_LOCALE: en-GB
+      INSTALL_CURRENCY: EUR
+      INSTALL_ADMIN_USERNAME: admin
+      INSTALL_ADMIN_PASSWORD: RhLq9eXX6Z6mrsctPdUf
+      PHP_SESSION_HANDLER: redis
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      PHP_SESSION_COOKIE_LIFETIME: '0'
+      PHP_SESSION_GC_MAXLIFETIME: '1440'
+      PHP_MAX_UPLOAD_SIZE: 128M
+      PHP_MAX_EXECUTION_TIME: '300'
+      PHP_MEMORY_LIMIT: 512M
+      FPM_PM: dynamic
+      FPM_PM_MAX_CHILDREN: '20'
+      FPM_PM_START_SERVERS: '4'
+      FPM_PM_MIN_SPARE_SERVERS: '2'
+      FPM_PM_MAX_SPARE_SERVERS: '6'
+      BLUE_GREEN_DEPLOYMENT: '0'
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+    - files:/var/www/html/files
+    - theme:/var/www/html/public/theme
+    - media:/var/www/html/public/media
+    - thumbnail:/var/www/html/public/thumbnail
+    - sitemap:/var/www/html/public/sitemap
+  scheduler:
+    image: ${SHOPWARE_BASE_IMAGE:-shopware/docker-base:8.4.19-nginx}
+    restart: unless-stopped
+    entrypoint:
+    - /bin/sh
+    - -ec
+    - 'export JWT_PRIVATE_KEY="$(cat /run/shopware-secrets/jwt-private.pem)"
+
+      export JWT_PUBLIC_KEY="$(cat /run/shopware-secrets/jwt-public.pem)"
+
+      exec php bin/console scheduled-task:run
+
+      '
+    environment:
+      APP_ENV: prod
+      APP_SECRET: a9cf5239ba35b73b903d17ebe38620c47777d2b81b24e4bb75bbc38e42f1d5cb38de18b869d35593bd3acf595f483c28b719950841832bb72fb11d9dc6a22c4a
+      INSTANCE_ID: e89ea868885fe6cc80debcf77c1d89931979df52ab2863c01f304bd550375b9e
+      APP_URL: http://localhost
+      ENABLE_DEMO_DATA: '1'
+      TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+      SYMFONY_TRUSTED_HEADERS: x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix
+      DATABASE_HOST: database
+      DATABASE_PORT: '3306'
+      DATABASE_NAME: shopware
+      DATABASE_USER: shopware
+      DATABASE_PASSWORD: 8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315
+      DATABASE_URL: mysql://shopware:8af9a9a043bceeb9a905967acad5803fb9725134536356f4149281a0f09e9315@database:3306/shopware?charset=utf8mb4
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      MAILER_DSN: null://localhost
+      LOCK_DSN: redis://:38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32@redis:6379/1
+      MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
+      MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
+      MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
+      COMPOSER_PLUGIN_LOADER: '1'
+      SHOPWARE_HTTP_CACHE_ENABLED: '1'
+      SHOPWARE_HTTP_DEFAULT_TTL: '7200'
+      INSTALL_LOCALE: en-GB
+      INSTALL_CURRENCY: EUR
+      INSTALL_ADMIN_USERNAME: admin
+      INSTALL_ADMIN_PASSWORD: RhLq9eXX6Z6mrsctPdUf
+      PHP_SESSION_HANDLER: redis
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=38a176603766c60c7dad69927ef3729314ae29eebe00361ff7f354c1328a9f32
+      PHP_SESSION_COOKIE_LIFETIME: '0'
+      PHP_SESSION_GC_MAXLIFETIME: '1440'
+      PHP_MAX_UPLOAD_SIZE: 128M
+      PHP_MAX_EXECUTION_TIME: '300'
+      PHP_MEMORY_LIMIT: 512M
+      FPM_PM: dynamic
+      FPM_PM_MAX_CHILDREN: '20'
+      FPM_PM_START_SERVERS: '4'
+      FPM_PM_MIN_SPARE_SERVERS: '2'
+      FPM_PM_MAX_SPARE_SERVERS: '6'
+      BLUE_GREEN_DEPLOYMENT: '0'
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+    - shopware-code:/var/www/html
+    - shopware-secrets:/run/shopware-secrets
+    - files:/var/www/html/files
+    - theme:/var/www/html/public/theme
+    - media:/var/www/html/public/media
+    - thumbnail:/var/www/html/public/thumbnail
+    - sitemap:/var/www/html/public/sitemap
+x-shopware-env:
+  APP_ENV: ${APP_ENV:-prod}
+  APP_SECRET: ${APP_SECRET}
+  INSTANCE_ID: ${INSTANCE_ID}
+  APP_URL: ${APP_URL}
+  ENABLE_DEMO_DATA: ${ENABLE_DEMO_DATA:-1}
+  TRUSTED_PROXIES: ${TRUSTED_PROXIES:-private_ranges}
+  SYMFONY_TRUSTED_PROXIES: ${SYMFONY_TRUSTED_PROXIES:-private_ranges}
+  SYMFONY_TRUSTED_HEADERS: ${SYMFONY_TRUSTED_HEADERS:-x-forwarded-for,x-forwarded-host,x-forwarded-proto,x-forwarded-port,x-forwarded-prefix}
+  DATABASE_HOST: database
+  DATABASE_PORT: '3306'
+  DATABASE_NAME: ${DATABASE_NAME:-shopware}
+  DATABASE_USER: ${DATABASE_USER:-shopware}
+  DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+  DATABASE_URL: ${DATABASE_URL}
+  REDIS_HOST: redis
+  REDIS_PORT: '6379'
+  REDIS_PASSWORD: ${REDIS_PASSWORD}
+  MAILER_DSN: ${MAILER_DSN:-null://localhost}
+  LOCK_DSN: ${LOCK_DSN}
+  MESSENGER_TRANSPORT_DSN: ${MESSENGER_TRANSPORT_DSN:-doctrine://default?queue_name=async}
+  MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: ${MESSENGER_TRANSPORT_LOW_PRIORITY_DSN:-doctrine://default?queue_name=low_priority}
+  MESSENGER_TRANSPORT_FAILURE_DSN: ${MESSENGER_TRANSPORT_FAILURE_DSN:-doctrine://default?queue_name=failed}
+  COMPOSER_PLUGIN_LOADER: ${COMPOSER_PLUGIN_LOADER:-1}
+  SHOPWARE_HTTP_CACHE_ENABLED: ${SHOPWARE_HTTP_CACHE_ENABLED:-1}
+  SHOPWARE_HTTP_DEFAULT_TTL: ${SHOPWARE_HTTP_DEFAULT_TTL:-7200}
+  INSTALL_LOCALE: ${INSTALL_LOCALE:-en-GB}
+  INSTALL_CURRENCY: ${INSTALL_CURRENCY:-EUR}
+  INSTALL_ADMIN_USERNAME: ${INSTALL_ADMIN_USERNAME:-admin}
+  INSTALL_ADMIN_PASSWORD: ${INSTALL_ADMIN_PASSWORD}
+  PHP_SESSION_HANDLER: ${PHP_SESSION_HANDLER:-redis}
+  PHP_SESSION_SAVE_PATH: ${PHP_SESSION_SAVE_PATH}
+  PHP_SESSION_COOKIE_LIFETIME: ${PHP_SESSION_COOKIE_LIFETIME:-0}
+  PHP_SESSION_GC_MAXLIFETIME: ${PHP_SESSION_GC_MAXLIFETIME:-1440}
+  PHP_MAX_UPLOAD_SIZE: ${PHP_MAX_UPLOAD_SIZE:-128M}
+  PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-300}
+  PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
+  FPM_PM: ${FPM_PM:-dynamic}
+  FPM_PM_MAX_CHILDREN: ${FPM_PM_MAX_CHILDREN:-20}
+  FPM_PM_START_SERVERS: ${FPM_PM_START_SERVERS:-4}
+  FPM_PM_MIN_SPARE_SERVERS: ${FPM_PM_MIN_SPARE_SERVERS:-2}
+  FPM_PM_MAX_SPARE_SERVERS: ${FPM_PM_MAX_SPARE_SERVERS:-6}
+  BLUE_GREEN_DEPLOYMENT: ${BLUE_GREEN_DEPLOYMENT:-0}
+x-shopware-runtime-volumes:
+- shopware-code:/var/www/html
+- shopware-secrets:/run/shopware-secrets
+- files:/var/www/html/files
+- theme:/var/www/html/public/theme
+- media:/var/www/html/public/media
+- thumbnail:/var/www/html/public/thumbnail
+- sitemap:/var/www/html/public/sitemap
+volumes:
+  database-data: null
+  redis-data: null
+  shopware-code: null
+  shopware-secrets: null
+  files: null
+  theme: null
+  media: null
+  thumbnail: null
+  sitemap: null
+x-casaos:
+  id: com.dokploy.shopware
+  main: shopware
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/shopware/icon.svg
+  title:
+    en_US: Shopware
+  tagline:
+    en_US: One-click Shopware 6 blueprint with bundled MySQL, Redis, bootstrap, init, worker, and...
+  description:
+    en_US: One-click Shopware 6 blueprint with bundled MySQL, Redis, bootstrap, init, worker, and scheduler services.
+  author: Dokploy Community
+  developer: Shopware
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "6.7.8.2"
+  update_at: "2026-11-22"
+  website: https://www.shopware.com/
+  repo: https://github.com/shopware/shopware
+  docs: https://developer.shopware.com/

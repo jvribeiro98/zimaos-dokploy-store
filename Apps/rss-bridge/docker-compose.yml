@@ -1,0 +1,39 @@
+name: rss-bridge
+services:
+  rss-bridge:
+    image: rssbridge/rss-bridge:latest
+    restart: unless-stopped
+    expose:
+    - 80
+    volumes:
+    - rssbridge-config:/config
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  rssbridge-config: {}
+x-casaos:
+  id: com.dokploy.rss-bridge
+  main: rss-bridge
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rss-bridge/icon.png
+  title:
+    en_US: RSS-Bridge
+  tagline:
+    en_US: RSS-Bridge is a PHP project capable of generating Atom feeds for websites that don't ha...
+  description:
+    en_US: RSS-Bridge is a PHP project capable of generating Atom feeds for websites that don't have one.
+  author: Dokploy Community
+  developer: RSS-Bridge
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rss-bridge.github.io/rss-bridge/
+  repo: https://github.com/RSS-Bridge/rss-bridge
+  docs: https://rss-bridge.github.io/rss-bridge/General/Project_goals.html

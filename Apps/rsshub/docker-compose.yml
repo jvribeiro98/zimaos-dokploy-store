@@ -1,0 +1,86 @@
+name: rsshub
+services:
+  rsshub:
+    image: diygod/rsshub
+    restart: always
+    expose:
+    - 1200
+    environment:
+      NODE_ENV: production
+      CACHE_TYPE: redis
+      REDIS_URL: redis://redis:6379/
+      PUPPETEER_WS_ENDPOINT: ws://browserless:3000
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:1200/healthz
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+    - redis
+    - browserless
+    ports:
+    - target: 1200
+      published: "1200"
+      protocol: tcp
+  browserless:
+    image: browserless/chrome
+    restart: always
+    ulimits:
+      core:
+        hard: 0
+        soft: 0
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:3000/pressure
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+    - redis-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+volumes:
+  redis-data: null
+x-casaos:
+  id: com.dokploy.rsshub
+  main: rsshub
+  index: /
+  port_map: "1200"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rsshub/icon.png
+  title:
+    en_US: RSSHub
+  tagline:
+    en_US: RSSHub is the world's largest RSS network, consisting of over 5,000 global instances
+  description:
+    en_US: RSSHub is the world's largest RSS network, consisting of over 5,000 global instances.RSSHub delivers millions of
+      contents aggregated from all kinds of sources, our vibrant open source community is ensuring the deliver of RSSHub's
+      new routes, new features and bug fixes.
+  author: Dokploy Community
+  developer: RSSHub
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://rsshub.app/
+  repo: https://github.com/DIYgod/RSSHub
+  docs: https://docs.rsshub.app/

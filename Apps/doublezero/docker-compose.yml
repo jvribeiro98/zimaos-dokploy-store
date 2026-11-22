@@ -1,0 +1,46 @@
+name: doublezero
+services:
+  doublezero:
+    restart: always
+    image: liltechnomancer/double-zero:0.2.1
+    volumes:
+    - db-data:/var/lib/doublezero/data
+    environment:
+      AWS_ACCESS_KEY_ID: your-aws-access-key
+      AWS_SECRET_ACCESS_KEY: your-aws-secret-key
+      AWS_REGION: your-aws-region
+      SQS_URL: your-aws-sqs-url
+      SYSTEM_EMAIL: ''
+      SECRET_KEY_BASE: GsY7hXXMZMueOCREmwCcPVMg1Ms6FiUOlMMaXerjoQ0H+AAYhN5xo4tlRw1CF6Jja5rWdQYxCUKdgNN7FTcqjA==
+      PHX_HOST: localhost
+      DATABASE_PATH: ./00.db
+    ports:
+    - target: 4000
+      published: "4000"
+      protocol: tcp
+volumes:
+  db-data:
+    driver: local
+x-casaos:
+  id: com.dokploy.doublezero
+  main: doublezero
+  index: /
+  port_map: "4000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/doublezero/icon.svg
+  title:
+    en_US: Double Zero
+  tagline:
+    en_US: 00 is a self hostable SES dashboard for sending and monitoring emails with AWS
+  description:
+    en_US: 00 is a self hostable SES dashboard for sending and monitoring emails with AWS
+  author: Dokploy Community
+  developer: Double Zero
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.1"
+  update_at: "2026-11-22"
+  repo: https://github.com/technomancy-dev/00
+  docs: https://github.com/technomancy-dev/00

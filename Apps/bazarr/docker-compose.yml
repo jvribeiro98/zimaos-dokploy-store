@@ -1,0 +1,45 @@
+name: bazarr
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:1.5.1
+    restart: unless-stopped
+    expose:
+    - 6767
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    - ${MOVIES_PATH}:/movies
+    - ${TV_PATH}:/tv
+    ports:
+    - target: 6767
+      published: "6767"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.bazarr
+  main: bazarr
+  index: /
+  port_map: "6767"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bazarr/icon.png
+  title:
+    en_US: Bazarr
+  tagline:
+    en_US: Bazarr is a companion application to Sonarr and Radarr that manages and downloads subti...
+  description:
+    en_US: Bazarr is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements.
+  author: Dokploy Community
+  developer: Bazarr
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.5.1"
+  update_at: "2026-11-22"
+  website: https://www.bazarr.media/
+  repo: https://github.com/morpheus65535/bazarr
+  docs: https://wiki.bazarr.media/

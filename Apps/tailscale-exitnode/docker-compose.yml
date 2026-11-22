@@ -1,0 +1,44 @@
+name: tailscale-exitnode
+services:
+  tailscale-exitnode:
+    image: tailscale/tailscale:latest
+    hostname: ${TAILSCALE_HOSTNAME}
+    environment:
+    - TS_AUTHKEY=
+    - TS_EXTRA_ARGS=--advertise-exit-node
+    - TS_STATE_DIR=/var/lib/tailscale
+    - TS_USERSPACE=true
+    volumes:
+    - tailscale_exitnode_data:/var/lib/tailscale
+    restart: always
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  tailscale_exitnode_data: null
+x-casaos:
+  id: com.dokploy.tailscale-exitnode
+  main: tailscale-exitnode
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tailscale-exitnode/icon.svg
+  title:
+    en_US: Tailscale Exit nodes
+  tagline:
+    en_US: Tailscale ExitNode is a feature that lets you route your internet traffic through a spe...
+  description:
+    en_US: Tailscale ExitNode is a feature that lets you route your internet traffic through a specific device in your Tailscale
+      network.
+  author: Dokploy Community
+  developer: Tailscale Exit nodes
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://tailscale.com/
+  repo: https://github.com/tailscale-dev/docker-guide-code-examples
+  docs: https://tailscale.com/kb/1408/quick-guide-exit-nodes

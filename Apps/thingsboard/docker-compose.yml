@@ -1,0 +1,107 @@
+name: thingsboard
+services:
+  thingsboard:
+    image: thingsboard/tb-node:4.3.1.1
+    restart: unless-stopped
+    depends_on:
+      thingsboard-db:
+        condition: service_healthy
+      thingsboard-init:
+        condition: service_completed_successfully
+    expose:
+    - '8080'
+    environment:
+      TB_SERVICE_ID: tb-ce-node
+      TB_QUEUE_TYPE: in-memory
+      JAVA_OPTS: -Xms512m -Xmx2048m
+      SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+      SECURITY_CORS_ALLOWED_ORIGINS: http://localhost,https://localhost
+    volumes:
+    - thingsboard-logs:/var/log/thingsboard
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - timeout 5 bash -c '</dev/tcp/127.0.0.1/8080'
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 300s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  thingsboard-init:
+    image: thingsboard/tb-node:4.3.1.1
+    restart: on-failure
+    user: root
+    depends_on:
+      thingsboard-db:
+        condition: service_healthy
+    command:
+    - bash
+    - -c
+    - "set -e\nif [ -f /data/.thingsboard-installed ]; then\n  echo \"ThingsBoard database already initialized.\"\n  exit\
+      \ 0\nfi\nINSTALL_TB=true LOAD_DEMO=$${LOAD_DEMO:-false} start-tb-node.sh\ntouch /data/.thingsboard-installed\n"
+    environment:
+      TB_SERVICE_ID: tb-ce-node
+      TB_QUEUE_TYPE: in-memory
+      JAVA_OPTS: -Xms512m -Xmx2048m
+      LOAD_DEMO: 'false'
+      SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+    volumes:
+    - thingsboard-install:/data
+    - thingsboard-logs:/var/log/thingsboard
+  thingsboard-db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: thingsboard
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Vz2fRNwZAUnREv5RvQVPe8GZyf6K3ZRI
+    volumes:
+    - thingsboard-db:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+volumes:
+  thingsboard-db: null
+  thingsboard-install: null
+  thingsboard-logs: null
+x-casaos:
+  id: com.dokploy.thingsboard
+  main: thingsboard
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/thingsboard/icon.svg
+  title:
+    en_US: ThingsBoard
+  tagline:
+    en_US: ThingsBoard is an open-source IoT platform for device management, data collection, proc...
+  description:
+    en_US: ThingsBoard is an open-source IoT platform for device management, data collection, processing, visualization, and
+      automation.
+  author: Dokploy Community
+  developer: ThingsBoard
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "4.3.1.1"
+  update_at: "2026-11-22"
+  website: https://thingsboard.io/
+  repo: https://github.com/thingsboard/thingsboard
+  docs: https://thingsboard.io/docs/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

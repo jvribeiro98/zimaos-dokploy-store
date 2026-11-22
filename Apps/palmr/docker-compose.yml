@@ -1,0 +1,43 @@
+name: palmr
+services:
+  palmr:
+    image: kyantech/palmr:latest
+    environment:
+    - ENABLE_S3=false
+    - ENCRYPTION_KEY=
+    expose:
+    - '5487'
+    - '3333'
+    volumes:
+    - palmr_data:/app/server
+    restart: unless-stopped
+    ports:
+    - target: 5487
+      published: "5487"
+      protocol: tcp
+volumes:
+  palmr_data: null
+x-casaos:
+  id: com.dokploy.palmr
+  main: palmr
+  index: /
+  port_map: "5487"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/palmr/icon.png
+  title:
+    en_US: Palmr
+  tagline:
+    en_US: Palmr the open-source, self-hosted alternative to WeTransfer
+  description:
+    en_US: Palmr the open-source, self-hosted alternative to WeTransfer. Share files securely, without tracking or limitations.
+  author: Dokploy Community
+  developer: Palmr
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://palmr.kyantech.com.br/
+  repo: https://github.com/kyantech/Palmr
+  docs: https://palmr.kyantech.com.br/docs/3.0-beta

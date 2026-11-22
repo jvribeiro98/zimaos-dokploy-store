@@ -1,0 +1,48 @@
+name: kavita
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    restart: unless-stopped
+    expose:
+    - '5000'
+    environment:
+    - TZ=Etc/UTC
+    volumes:
+    - kavita-config:/kavita/config
+    - kavita-media:/manga
+    - kavita-books:/books
+    - kavita-comics:/comics
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+volumes:
+  kavita-config: null
+  kavita-media: null
+  kavita-books: null
+  kavita-comics: null
+x-casaos:
+  id: com.dokploy.kavita
+  main: kavita
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kavita/icon.svg
+  title:
+    en_US: Kavita
+  tagline:
+    en_US: Kavita is a digital library server for comics, manga, and ebooks
+  description:
+    en_US: Kavita is a digital library server for comics, manga, and ebooks. Self-host it on your own server with Dokploy,
+      which deploys Kavita as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Kavita
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://www.kavitareader.com/
+  repo: https://github.com/Kareadita/Kavita
+  docs: https://wiki.kavitareader.com/installation/docker/

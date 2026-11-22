@@ -1,0 +1,71 @@
+name: calnode
+services:
+  calnode:
+    image: ghcr.io/calnode/calnode:0.12.0
+    restart: unless-stopped
+    volumes:
+    - calnode_data:/data
+    expose:
+    - '3000'
+    environment:
+      PORT: '3000'
+      BASE_URL: http:localhost
+      PUBLIC_BASE_URL: ''
+      DATABASE_URL: sqlite://./data/calnode.db
+      CALNODE_ENCRYPTION_KEY: RMxGmQeBXDt8ze38gQIzCcFKn4cF1INrpO989TLfkvU=
+      CALNODE_RECOVERY_SECRET: ''
+      GOOGLE_CLIENT_ID: ''
+      GOOGLE_CLIENT_SECRET: ''
+      MICROSOFT_CLIENT_ID: ''
+      MICROSOFT_CLIENT_SECRET: ''
+      MICROSOFT_TENANT: common
+      EMAIL_SMTP_HOST: ''
+      EMAIL_SMTP_PORT: '587'
+      EMAIL_SMTP_CONNECT_HOST: ''
+      EMAIL_SMTP_CONNECT_PORT: ''
+      EMAIL_SMTP_USER: ''
+      EMAIL_SMTP_PASS: ''
+      EMAIL_FROM_ADDRESS: ''
+      EMAIL_FROM_NAME: Calnode
+      EMAIL_SMTP_TLS: ''
+      EMAIL_SMTP_STARTTLS: ''
+      LITESTREAM_REPLICA_URL: ''
+      LITESTREAM_ACCESS_KEY_ID: ''
+      LITESTREAM_SECRET_ACCESS_KEY: ''
+      LITESTREAM_ENDPOINT: ''
+      LITESTREAM_REGION: ''
+      COOKIE_SECURE: ''
+      TRUSTED_PROXY_CIDRS: ''
+      FRAME_ANCESTORS: ''
+      LOG_LEVEL: ''
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  calnode_data: null
+x-casaos:
+  id: com.dokploy.calnode
+  main: calnode
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/calnode/icon.svg
+  title:
+    en_US: Calnode
+  tagline:
+    en_US: Calnode is a Calendly-style booking app — with first-party video meetings, recording, a...
+  description:
+    en_US: Calnode is a Calendly-style booking app — with first-party video meetings, recording, and AI notetaking built in.
+      It's API-first, webhook-native, and built for a world where agents do the booking. Nothing is paywalled.
+  author: Dokploy Community
+  developer: Calnode
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.12.0"
+  update_at: "2026-11-22"
+  website: https://calnode.com/
+  repo: https://github.com/Calnode/calnode
+  docs: https://github.com/Calnode/calnode/tree/main/docs

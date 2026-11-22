@@ -1,0 +1,42 @@
+name: agent-zero
+services:
+  agent-zero:
+    image: agent0ai/agent-zero:v1.9
+    restart: unless-stopped
+    expose:
+    - '80'
+    environment:
+    - AUTH_LOGIN=admin
+    - AUTH_PASSWORD=MDAkvR3qNhsttccuM7Yw1POe7UfBIyME
+    volumes:
+    - agent-zero-data:/a0/usr
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  agent-zero-data: null
+x-casaos:
+  id: com.dokploy.agent-zero
+  main: agent-zero
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/agent-zero/icon.svg
+  title:
+    en_US: Agent Zero
+  tagline:
+    en_US: Agent Zero is an open-source autonomous AI agent framework with memory and tool use cap...
+  description:
+    en_US: Agent Zero is an open-source autonomous AI agent framework with memory and tool use capabilities.
+  author: Dokploy Community
+  developer: Agent Zero
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "1.9"
+  update_at: "2026-11-22"
+  website: https://www.agent-zero.ai
+  repo: https://github.com/agent0ai/agent-zero
+  docs: https://www.agent-zero.ai/p/docs/

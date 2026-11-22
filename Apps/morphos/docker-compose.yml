@@ -1,0 +1,43 @@
+name: morphos
+services:
+  morphos-server:
+    image: ghcr.io/danvergara/morphos-server:latest
+    restart: unless-stopped
+    expose:
+    - 8080
+    volumes:
+    - /DATA/AppData/$AppID/morphos-upload:/upload:rw
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.morphos
+  main: morphos-server
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/morphos/icon.png
+  title:
+    en_US: Morphos
+  tagline:
+    en_US: Morphos is a lightweight service for distributed operations and orchestration
+  description:
+    en_US: Morphos is a lightweight service for distributed operations and orchestration.
+  author: Dokploy Community
+  developer: Morphos
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/danvergara/morphos-server
+  repo: https://github.com/danvergara/morphos-server
+  docs: https://github.com/danvergara/morphos-server#readme

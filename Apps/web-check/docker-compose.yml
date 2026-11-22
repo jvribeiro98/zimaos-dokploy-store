@@ -1,0 +1,36 @@
+name: web-check
+services:
+  web-check:
+    image: lissy93/web-check
+    expose:
+    - 3000
+    restart: unless-stopped
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.web-check
+  main: web-check
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/web-check/icon.png
+  title:
+    en_US: Web-Check
+  tagline:
+    en_US: Web-Check is a powerful all-in-one website analyzer that provides detailed insights int...
+  description:
+    en_US: Web-Check is a powerful all-in-one website analyzer that provides detailed insights into any website's security,
+      performance, and functionality.
+  author: Dokploy Community
+  developer: Web-Check
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/lissy93/web-check
+  repo: https://github.com/lissy93/web-check
+  docs: https://github.com/lissy93/web-check

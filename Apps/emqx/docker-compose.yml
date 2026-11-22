@@ -1,0 +1,60 @@
+name: emqx
+services:
+  emqx:
+    image: emqx/emqx-enterprise:6.0.1
+    hostname: node1.emqx.com
+    environment:
+      EMQX_NODE_NAME: emqx@node1.emqx.com
+    expose:
+    - 1883
+    - 8083
+    - 18083
+    volumes:
+    - emqx_data:/opt/emqx/data
+    - emqx_log:/opt/emqx/log
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD
+      - /opt/emqx/bin/emqx_ctl
+      - status
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+    - traefik.tcp.routers.emqx-mqtts.entrypoints=mqtts
+    - traefik.tcp.routers.emqx-mqtts.rule=HostSNI(`broker.yourdomain.com`)
+    - traefik.tcp.routers.emqx-mqtts.tls.certresolver=letsencrypt
+    - traefik.tcp.routers.emqx-mqtts.service=emqx-service
+    - traefik.tcp.services.emqx-service.loadbalancer.server.port=1883
+    ports:
+    - target: 18083
+      published: "18083"
+      protocol: tcp
+volumes:
+  emqx_data: null
+  emqx_log: null
+x-casaos:
+  id: com.dokploy.emqx
+  main: emqx
+  index: /
+  port_map: "18083"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/emqx/icon.svg
+  title:
+    en_US: EMQX
+  tagline:
+    en_US: A scalable and reliable MQTT broker for AI, IoT, IIoT and connected vehicles
+  description:
+    en_US: A scalable and reliable MQTT broker for AI, IoT, IIoT and connected vehicles
+  author: Dokploy Community
+  developer: EMQX
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "6.0.1"
+  update_at: "2026-11-22"
+  website: https://www.emqx.com
+  repo: https://github.com/emqx/emqx
+  docs: https://docs.emqx.com

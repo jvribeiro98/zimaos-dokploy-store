@@ -1,0 +1,71 @@
+name: misaka-danmu-server
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+    - POSTGRES_PASSWORD=2Zi9jCmxkVkgrMUzabkllvUT
+    - POSTGRES_USER=danmuapi
+    - POSTGRES_DB=danmuapi
+    - TZ=Asia/Shanghai
+    volumes:
+    - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U danmuapi -d danmuapi
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+  danmu-app:
+    image: l429609201/misaka_danmu_server:latest
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - UMASK=0022
+    - TZ=Asia/Shanghai
+    - DANMUAPI_DATABASE__TYPE=postgresql
+    - DANMUAPI_DATABASE__HOST=postgres
+    - DANMUAPI_DATABASE__PORT=5432
+    - DANMUAPI_DATABASE__NAME=danmuapi
+    - DANMUAPI_DATABASE__USER=danmuapi
+    - DANMUAPI_DATABASE__PASSWORD=2Zi9jCmxkVkgrMUzabkllvUT
+    - DANMUAPI_ADMIN__INITIAL_USER=admin
+    volumes:
+    - danmu-config:/app/config
+    ports:
+    - target: 7768
+      published: "7768"
+      protocol: tcp
+volumes:
+  postgres-data: {}
+  danmu-config: {}
+x-casaos:
+  id: com.dokploy.misaka-danmu-server
+  main: danmu-app
+  index: /
+  port_map: "7768"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/misaka-danmu-server/icon.png
+  title:
+    en_US: Misaka Danmu Server
+  tagline:
+    en_US: A self-hosted danmaku (bullet comments) server for live streaming and video platforms
+  description:
+    en_US: A self-hosted danmaku (bullet comments) server for live streaming and video platforms.
+  author: Dokploy Community
+  developer: Misaka Danmu Server
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/l429609201/misaka_danmu_server
+  repo: https://github.com/l429609201/misaka_danmu_server
+  docs: https://github.com/l429609201/misaka_danmu_server#readme

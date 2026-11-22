@@ -1,0 +1,59 @@
+name: flarum
+services:
+  flarum:
+    image: crazymax/flarum:latest
+    restart: unless-stopped
+    expose:
+    - 8000
+    environment:
+    - FLARUM_BASE_URL=https://localhost
+    - DB_HOST=db
+    - DB_NAME=flarum
+    - DB_USER=flarum
+    - DB_PASSWORD=A0wYzOG2dAD7KvwV
+    volumes:
+    - flarum-data:/data
+    depends_on:
+    - db
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+    - MYSQL_ROOT_PASSWORD=j4R3bSgl3hkFM8up
+    - MYSQL_DATABASE=flarum
+    - MYSQL_USER=flarum
+    - MYSQL_PASSWORD=A0wYzOG2dAD7KvwV
+    volumes:
+    - db-data:/var/lib/mysql
+volumes:
+  flarum-data: {}
+  db-data: {}
+x-casaos:
+  id: com.dokploy.flarum
+  main: flarum
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/flarum/icon.png
+  title:
+    en_US: Flarum
+  tagline:
+    en_US: Flarum is a delightfully simple, modern forum software
+  description:
+    en_US: Flarum is a delightfully simple, modern forum software. It is fast, free, and easy to use with a clean and extensible
+      architecture.
+  author: Dokploy Community
+  developer: Flarum
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://flarum.org/
+  repo: https://github.com/flarum/flarum
+  docs: https://docs.flarum.org/

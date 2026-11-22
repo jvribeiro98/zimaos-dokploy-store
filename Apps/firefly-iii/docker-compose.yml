@@ -1,0 +1,98 @@
+name: firefly-iii
+services:
+  firefly-iii:
+    image: fireflyiii/core:version-6.6.3
+    restart: unless-stopped
+    depends_on:
+      firefly-iii-db:
+        condition: service_healthy
+    environment:
+      APP_KEY: base64:qPANK2o9GA9gtcyuMeiokRtRgeVNIeQRNM0bDP6ta3o=
+      APP_URL: https://localhost
+      TRUSTED_PROXIES: '**'
+      TZ: UTC
+      SITE_OWNER: admin@example.com
+      DEFAULT_LANGUAGE: en_US
+      DEFAULT_LOCALE: equal
+      DB_CONNECTION: mysql
+      DB_HOST: firefly-iii-db
+      DB_PORT: '3306'
+      DB_DATABASE: firefly
+      DB_USERNAME: firefly
+      DB_PASSWORD: 5kIm0ZFYQMXVxPDfV9SAiYoytjeeHkzU
+      STATIC_CRON_TOKEN: a3e6a02f7fc49e769624aec9dbf2b4331592579674912bed72dc7cc74cd63188
+    expose:
+    - '8080'
+    volumes:
+    - firefly-iii-upload:/var/www/html/storage/upload
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  firefly-iii-db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: firefly
+      MYSQL_USER: firefly
+      MYSQL_PASSWORD: 5kIm0ZFYQMXVxPDfV9SAiYoytjeeHkzU
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+    - firefly-iii-db:/var/lib/mysql
+    healthcheck:
+      test:
+      - CMD
+      - healthcheck.sh
+      - --connect
+      - --innodb_initialized
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  firefly-iii-cron:
+    image: alpine:3.22
+    restart: unless-stopped
+    depends_on:
+    - firefly-iii
+    environment:
+      TZ: UTC
+      STATIC_CRON_TOKEN: a3e6a02f7fc49e769624aec9dbf2b4331592579674912bed72dc7cc74cd63188
+    command:
+    - sh
+    - -c
+    - 'apk add --no-cache tzdata wget && \
+
+      (ln -snf /usr/share/zoneinfo/$$TZ /etc/localtime || true) && \
+
+      echo "0 3 * * * wget -qO- http://firefly-iii:8080/api/v1/cron/$$STATIC_CRON_TOKEN; echo" | crontab - && \
+
+      crond -f -L /dev/stdout
+
+      '
+volumes:
+  firefly-iii-upload: {}
+  firefly-iii-db: {}
+x-casaos:
+  id: com.dokploy.firefly-iii
+  main: firefly-iii
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/firefly-iii/icon.svg
+  title:
+    en_US: Firefly III
+  tagline:
+    en_US: Firefly III is a personal finance manager for tracking budgets and expenses
+  description:
+    en_US: Firefly III is a personal finance manager for tracking budgets and expenses. Self-host it on your own server with
+      Dokploy, which deploys Firefly III as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Firefly III
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "6.6.3"
+  update_at: "2026-11-22"
+  website: https://www.firefly-iii.org/
+  repo: https://github.com/firefly-iii/firefly-iii
+  docs: https://docs.firefly-iii.org/

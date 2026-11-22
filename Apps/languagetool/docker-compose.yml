@@ -1,0 +1,36 @@
+name: languagetool
+services:
+  languagetool:
+    image: collabora/languagetool:6.6
+    restart: unless-stopped
+    expose:
+    - '8010'
+    ports:
+    - target: 8010
+      published: "8010"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.languagetool
+  main: languagetool
+  index: /v2/languages
+  port_map: "8010"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/languagetool/icon.svg
+  title:
+    en_US: LanguageTool
+  tagline:
+    en_US: LanguageTool is an open-source grammar, spelling, and style checker
+  description:
+    en_US: LanguageTool is an open-source grammar, spelling, and style checker. Self-host it on your own server with Dokploy,
+      which deploys LanguageTool as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: LanguageTool
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "6.6"
+  update_at: "2026-11-22"
+  website: https://languagetool.org/
+  repo: https://github.com/languagetool-org/languagetool
+  docs: https://dev.languagetool.org/http-server

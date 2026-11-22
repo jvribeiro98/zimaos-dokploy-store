@@ -1,0 +1,73 @@
+name: evolutiongo
+services:
+  evolution-go:
+    image: evoapicloud/evolution-go:latest
+    restart: always
+    environment:
+    - SERVER_PORT=8080
+    - CLIENT_NAME=Evolution
+    - GLOBAL_API_KEY=OQHz8wtjXUo9DE4GIMJ+4toSMusFlApCfMtccP9mIty0hn+ywdwcCqik6caS5Dp47Dw49cfZiRV1GADBwGpAGg==
+    - POSTGRES_AUTH_DB=postgres://postgresql:3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE@evolution-postgres:5432/evogo_auth?sslmode=disable
+    - POSTGRES_USERS_DB=postgres://postgresql:3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE@evolution-postgres:5432/evogo_users?sslmode=disable
+    - DATABASE_SAVE_MESSAGES=false
+    - WADEBUG=INFO
+    - LOGTYPE=console
+    volumes:
+    - evolution-go-data:/app/dbdata
+    - evolution-go-logs:/app/logs
+    depends_on:
+    - evolution-postgres
+  evolution-gateway:
+    image: nginx:alpine
+    restart: always
+    volumes:
+    - /DATA/AppData/$AppID/gateway.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+    - evolution-go
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  evolution-postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+    - POSTGRES_DB=evolution
+    - POSTGRES_USER=postgresql
+    - POSTGRES_PASSWORD=3BB9CK6vpBX6BqUCS7npgTNJq9fxi7wE
+    volumes:
+    - evolution-postgres-data:/var/lib/postgresql/data
+volumes:
+  evolution-postgres-data: null
+  evolution-go-data: null
+  evolution-go-logs: null
+x-casaos:
+  id: com.dokploy.evolutiongo
+  main: evolution-gateway
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/evolutiongo/icon.png
+  title:
+    en_US: Evolution GO
+  tagline:
+    en_US: Evolution Go is a high-performance implementation of the WhatsApp API, written in Go
+  description:
+    en_US: Evolution Go is a high-performance implementation of the WhatsApp API, written in Go. Built with Go’s standard
+      library and modern development practices, it provides a robust and efficient solution for WhatsApp integration using
+      the whatsmeow library.
+  author: Dokploy Community
+  developer: Evolution GO
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://docs.evolutionfoundation.com.br/evolution-go
+  repo: https://github.com/evolution-foundation/evolution-go
+  docs: https://docs.evolutionfoundation.com.br/evolution-go
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (gateway.conf). Review
+        environment variables before starting.

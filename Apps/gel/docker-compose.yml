@@ -1,0 +1,46 @@
+name: gel
+services:
+  gel:
+    image: geldata/gel:6
+    restart: unless-stopped
+    expose:
+    - 5656
+    environment:
+    - GEL_SERVER_SECURITY=strict
+    - GEL_SERVER_PASSWORD=GKxI2ym2zpYabQ2hKR7JKFaR
+    - GEL_SERVER_TLS_CERT_MODE=generate_self_signed
+    - GEL_SERVER_HTTP_ENDPOINT_SECURITY=optional
+    - GEL_SERVER_ADMIN_UI=enabled
+    volumes:
+    - gel-data:/var/lib/gel/data
+    ports:
+    - target: 5656
+      published: "5656"
+      protocol: tcp
+volumes:
+  gel-data: {}
+x-casaos:
+  id: com.dokploy.gel
+  main: gel
+  index: /ui
+  port_map: "5656"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gel/icon.png
+  title:
+    en_US: Gel
+  tagline:
+    en_US: Gel is a next-generation graph-relational database (formerly EdgeDB) with a built-in mi...
+  description:
+    en_US: Gel is a next-generation graph-relational database (formerly EdgeDB) with a built-in migration system, expressive
+      query language, and first-class TypeScript/Python support.
+  author: Dokploy Community
+  developer: Gel
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "6"
+  update_at: "2026-11-22"
+  website: https://www.geldata.com/
+  repo: https://github.com/geldata/gel
+  docs: https://docs.geldata.com/

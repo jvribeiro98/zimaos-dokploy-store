@@ -1,0 +1,41 @@
+name: roundcube
+services:
+  roundcubemail:
+    image: roundcube/roundcubemail:1.6.9-apache
+    volumes:
+    - /DATA/AppData/$AppID/www:/var/www/html
+    - /DATA/AppData/$AppID/db/sqlite:/var/roundcube/db
+    environment:
+    - ROUNDCUBEMAIL_DB_TYPE=sqlite
+    - ROUNDCUBEMAIL_SKIN=elastic
+    - ROUNDCUBEMAIL_DEFAULT_HOST=tls://mail.example.com
+    - ROUNDCUBEMAIL_SMTP_SERVER=tls://mail.example.com
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.roundcube
+  main: roundcubemail
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/roundcube/icon.svg
+  title:
+    en_US: Roundcube
+  tagline:
+    en_US: Free and open source webmail software for the masses, written in PHP
+  description:
+    en_US: Free and open source webmail software for the masses, written in PHP.
+  author: Dokploy Community
+  developer: Roundcube
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.6.9"
+  update_at: "2026-11-22"
+  website: https://roundcube.net/
+  repo: https://github.com/roundcube/roundcubemail
+  docs: https://roundcube.net/about/

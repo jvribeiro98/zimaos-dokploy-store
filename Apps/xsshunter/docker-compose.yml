@@ -1,0 +1,106 @@
+name: xsshunter
+services:
+  xsshunterexpress-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: xsshunterexpress
+      POSTGRES_USER: xsshunterexpress
+      POSTGRES_PASSWORD: LIhcwzU605jmOCu9
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${POSTGRES_USER:-xsshunterexpress}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/pgdata
+  xsshunterexpress-service:
+    build: https://github.com/rs-loves-bugs/xsshunter.git
+    restart: unless-stopped
+    environment:
+      SESSION_SECRET_KEY: 0p1XQEWd0/w3RsKK0fdKakU+Jk503kTEN1mXiAE+qQPwB301Uxxd1akW77rGGFlTpUXx+L2BWwhw0oHYjrGGRw==
+      HOSTNAME: localhost
+      XSS_HOSTNAME: xss.localhost
+      PANEL_LOGIN: 'true'
+      PANEL_USERNAME: admin@localhost
+      PANEL_PASSWORD: Wj29fXdAtYldPKYuKIzhqMpJXTJyXkv1
+      ALLOW_EMPTY_USERPATH: 'true'
+      OAUTH_LOGIN: 'false'
+      CLIENT_ID: ''
+      CLIENT_SECRET: ''
+      GMAIL_ACCOUNTS: ''
+      EMAIL_NOTIFICATIONS_ENABLED: 'false'
+      EMAIL_FROM: ''
+      SENDGRID_API_KEY: ''
+      SENDGRID_UNSUBSRIBE_GROUP_ID: ''
+      DATABASE_HOST: xsshunterexpress-db
+      POSTGRES_DB: xsshunterexpress
+      POSTGRES_USER: xsshunterexpress
+      POSTGRES_PASSWORD: LIhcwzU605jmOCu9
+      NODE_ENV: production
+      PORT: '8080'
+      CONTROL_PANEL_ENABLED: 'true'
+      SCREENSHOTS_DIR: /app/payload-fire-images
+      TRUFFLEHOG_URL: http://xsshunterexpress-trufflehog:8000/trufflehog
+      SENTRY_DSN: ''
+      SENTRY_ENABLED: 'false'
+      USE_CLOUD_STORAGE: 'false'
+      BUCKET_NAME: ''
+    expose:
+    - ${PORT:-8080}
+    volumes:
+    - payload_images:/app/payload-fire-images
+    depends_on:
+      xsshunterexpress-db:
+        condition: service_healthy
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+  xsshunterexpress-trufflehog:
+    build:
+      context: https://github.com/rs-loves-bugs/xsshunter.git
+      dockerfile: Dockerfile.trufflehog
+    restart: unless-stopped
+    expose:
+    - ${TRUFFLEHOG_PORT:-8000}
+volumes:
+  postgres_data:
+    driver: local
+  payload_images:
+    driver: local
+x-casaos:
+  id: com.dokploy.xsshunter
+  main: xsshunterexpress-service
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/xsshunter/icon.png
+  title:
+    en_US: XSSHunter
+  tagline:
+    en_US: XSSHunter is an open-source platform designed to identify and exploit blind Cross-Site...
+  description:
+    en_US: XSSHunter is an open-source platform designed to identify and exploit blind Cross-Site Scripting (XSS) vulnerabilities.
+      It provides security researchers, bug bounty hunters, and penetration testers with a comprehensive toolkit for detecting
+      XSS flaws that are otherwise difficult to discover through traditional testing methods.
+  author: Dokploy Community
+  developer: XSSHunter
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/rs-loves-bugs/xsshunter
+  repo: https://github.com/rs-loves-bugs/xsshunter
+  docs: https://github.com/rs-loves-bugs/xsshunter#requirements
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (./payload-fire-images).
+        Review environment variables before starting.

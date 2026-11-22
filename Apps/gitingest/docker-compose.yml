@@ -1,0 +1,37 @@
+name: gitingest
+services:
+  gitingest:
+    image: elestio/gitingest:${SOFTWARE_VERSION_TAG}
+    restart: unless-stopped
+    expose:
+    - 8000
+    environment:
+    - ALLOWED_HOSTS=localhost
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.gitingest
+  main: gitingest
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gitingest/icon.png
+  title:
+    en_US: Gitingest
+  tagline:
+    en_US: Gitingest is an application that supports Prometheus metrics, Sentry integration, and S...
+  description:
+    en_US: Gitingest is an application that supports Prometheus metrics, Sentry integration, and S3-backed storage.
+  author: Dokploy Community
+  developer: Gitingest
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "${SOFTWARE_VERSION_TAG}"
+  update_at: "2026-11-22"
+  website: https://gitingest.com
+  repo: https://github.com/coderamp-labs/gitingest
+  docs: https://github.com/coderamp-labs/gitingest#readme

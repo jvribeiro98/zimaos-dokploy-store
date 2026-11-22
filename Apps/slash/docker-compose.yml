@@ -1,0 +1,61 @@
+name: slash
+services:
+  slash-app:
+    image: yourselfhosted/slash:latest
+    volumes:
+    - slash-app-data:/var/opt/slash
+    environment:
+    - SLASH_DRIVER=postgres
+    - SLASH_DSN=postgresql://slash:FWA7OgFm0rda5B3LvM54mnhEvuqY5jul@slash-postgres:5432/slash?sslmode=disable
+    depends_on:
+      slash-postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 5231
+      published: "5231"
+      protocol: tcp
+  slash-postgres:
+    image: postgres:16-alpine
+    volumes:
+    - slash-postgres-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_USER=slash
+    - POSTGRES_PASSWORD=FWA7OgFm0rda5B3LvM54mnhEvuqY5jul
+    - POSTGRES_DB=slash
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U ${DB_USER} -d ${DB_NAME}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  slash-app-data: null
+  slash-postgres-data: null
+x-casaos:
+  id: com.dokploy.slash
+  main: slash-app
+  index: /
+  port_map: "5231"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/slash/icon.png
+  title:
+    en_US: Slash
+  tagline:
+    en_US: Slash is a modern, self-hosted bookmarking service and link shortener that helps you or...
+  description:
+    en_US: Slash is a modern, self-hosted bookmarking service and link shortener that helps you organize and share your favorite
+      links.
+  author: Dokploy Community
+  developer: Slash
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/yourselfhosted/slash#readme
+  repo: https://github.com/yourselfhosted/slash
+  docs: https://github.com/yourselfhosted/slash/wiki

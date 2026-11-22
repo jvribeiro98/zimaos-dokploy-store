@@ -1,0 +1,61 @@
+name: botpress
+services:
+  botpress:
+    image: botpress/server:12.31.9
+    restart: unless-stopped
+    expose:
+    - 81
+    environment:
+    - BP_HOST=0.0.0.0
+    - NODE_ENV=production
+    - PG_HOST=botpress-db
+    - PG_PORT=5432
+    - PG_USER=postgres
+    - PG_PASSWORD=aITGlDANtoWzmJQ1
+    - PG_SSL=false
+    - PORT=80
+    volumes:
+    - data:/botpress/data
+    depends_on:
+    - botpress-db
+    ports:
+    - target: 81
+      published: "81"
+      protocol: tcp
+  botpress-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=aITGlDANtoWzmJQ1
+    - POSTGRES_DB=botpress
+    volumes:
+    - db_data:/var/lib/postgresql/data
+volumes:
+  data: {}
+  db_data: {}
+x-casaos:
+  id: com.dokploy.botpress
+  main: botpress
+  index: /
+  port_map: "81"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/botpress/icon.png
+  title:
+    en_US: Botpress
+  tagline:
+    en_US: Botpress is a platform for building conversational AI agents
+  description:
+    en_US: Botpress is a platform for building conversational AI agents. It provides a simple and effective solution for building
+      conversational AI agents from anywhere.
+  author: Dokploy Community
+  developer: Botpress
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "12.31.9"
+  update_at: "2026-11-22"
+  website: https://botpress.com
+  repo: https://github.com/botpress/botpress
+  docs: https://botpress.com/docs

@@ -1,0 +1,67 @@
+name: casdoor
+services:
+  casdoor:
+    image: casbin/casdoor:latest
+    environment:
+    - RUNNING_IN_DOCKER=true
+    volumes:
+    - /DATA/AppData/$AppID/app.conf:/conf/app.conf
+    - /DATA/AppData/$AppID/init_data.json:/init_data.json
+    - casdoor-data:/data
+    depends_on:
+      casdoor-db:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  casdoor-db:
+    image: postgres:16
+    environment:
+    - POSTGRES_USER=casdoor
+    - POSTGRES_PASSWORD=dCxW9nhfw4zBLtrcRD3zAcFACwYPu7CM
+    - POSTGRES_DB=casdoor
+    volumes:
+    - casdoor-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U casdoor -d casdoor
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+volumes:
+  casdoor-postgres-data: null
+  casdoor-data: null
+x-casaos:
+  id: com.dokploy.casdoor
+  main: casdoor
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/casdoor/icon.png
+  title:
+    en_US: Casdoor
+  tagline:
+    en_US: An open-source UI-first Identity and Access Management (IAM) / Single-Sign-On (SSO) pla...
+  description:
+    en_US: An open-source UI-first Identity and Access Management (IAM) / Single-Sign-On (SSO) platform with web UI supporting
+      OAuth 2.0, OIDC, SAML, CAS, LDAP, SCIM, WebAuthn, TOTP, MFA, and more.
+  author: Dokploy Community
+  developer: Casdoor
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://casdoor.org/
+  repo: https://github.com/casdoor/casdoor
+  docs: https://casdoor.org/docs/overview
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (app.conf, init_data.json).
+        Review environment variables before starting.

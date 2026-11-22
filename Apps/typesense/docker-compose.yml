@@ -1,0 +1,41 @@
+name: typesense
+services:
+  typesense:
+    image: typesense/typesense:29.0
+    restart: unless-stopped
+    environment:
+    - TYPESENSE_API_KEY=mRT1pqRCclo0MqS5
+    - TYPESENSE_ENABLE_CORS=true
+    - TYPESENSE_DATA_DIR=/data
+    volumes:
+    - typesense-data:/data
+    ports:
+    - target: 8108
+      published: "8108"
+      protocol: tcp
+volumes:
+  typesense-data: null
+x-casaos:
+  id: com.dokploy.typesense
+  main: typesense
+  index: /
+  port_map: "8108"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/typesense/icon.png
+  title:
+    en_US: Typesense
+  tagline:
+    en_US: Typesense is a fast, open-source search engine for building modern search experiences
+  description:
+    en_US: Typesense is a fast, open-source search engine for building modern search experiences.
+  author: Dokploy Community
+  developer: Typesense
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "29.0"
+  update_at: "2026-11-22"
+  website: https://typesense.org/
+  repo: https://github.com/typesense/typesense
+  docs: https://typesense.org/docs

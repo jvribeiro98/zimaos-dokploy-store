@@ -1,0 +1,39 @@
+name: uptime-kuma
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2.5.8
+    restart: always
+    volumes:
+    - uptime-kuma-data:/app/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  uptime-kuma-data: null
+x-casaos:
+  id: com.dokploy.uptime-kuma
+  main: uptime-kuma
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/uptime-kuma/icon.png
+  title:
+    en_US: Uptime Kuma
+  tagline:
+    en_US: Uptime Kuma is an open-source monitoring tool that tracks the uptime of your websites a...
+  description:
+    en_US: Uptime Kuma is an open-source monitoring tool that tracks the uptime of your websites and services. Self-host it
+      on your own server with Dokploy, which deploys Uptime Kuma as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Uptime Kuma
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "2.5.8"
+  update_at: "2026-11-22"
+  website: https://uptime.kuma.pet/
+  repo: https://github.com/louislam/uptime-kuma
+  docs: https://github.com/louislam/uptime-kuma/wiki

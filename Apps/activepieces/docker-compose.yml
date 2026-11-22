@@ -1,0 +1,90 @@
+name: activepieces
+services:
+  activepieces:
+    image: activepieces/activepieces:0.91.2
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
+      AP_API_KEY: IrHO9Ir2y5pf82wIcZFxMNzQaiFh9IOc
+      AP_ENCRYPTION_KEY: kpQBnNmIOu5VbViZMVxr3j1niP6l3Elr
+      AP_JWT_SECRET: dsg4XvAVmNKltuzzy2BKI3DvMJbB6TSu
+      AP_ENVIRONMENT: prod
+      AP_FRONTEND_URL: https://localhost
+      AP_WEBHOOK_TIMEOUT_SECONDS: '30'
+      AP_TRIGGER_DEFAULT_POLL_INTERVAL: '5'
+      AP_POSTGRES_DATABASE: activepieces
+      AP_POSTGRES_HOST: postgres
+      AP_POSTGRES_PORT: '5432'
+      AP_POSTGRES_USERNAME: activepieces
+      AP_POSTGRES_PASSWORD: iKkIdvCRcnzTjPzhfCLDjLsITRBIUWlY
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_REDIS_HOST: redis
+      AP_REDIS_PORT: '6379'
+      AP_SANDBOX_RUN_TIME_SECONDS: '600'
+      AP_TELEMETRY_ENABLED: 'false'
+      AP_TEMPLATES_SOURCE_URL: https://cloud.activepieces.com/api/v1/flow-templates
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: activepieces
+      POSTGRES_PASSWORD: iKkIdvCRcnzTjPzhfCLDjLsITRBIUWlY
+      POSTGRES_USER: activepieces
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U activepieces -d activepieces
+      interval: 30s
+      timeout: 30s
+      retries: 3
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    volumes:
+    - redis_data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+volumes:
+  postgres_data: null
+  redis_data: null
+x-casaos:
+  id: com.dokploy.activepieces
+  main: activepieces
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/activepieces/icon.svg
+  title:
+    en_US: Activepieces
+  tagline:
+    en_US: Open-source no-code business automation tool
+  description:
+    en_US: Open-source no-code business automation tool. An alternative to Zapier, Make.com, and Tray.
+  author: Dokploy Community
+  developer: Activepieces
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "0.91.2"
+  update_at: "2026-11-22"
+  website: https://www.activepieces.com/
+  repo: https://github.com/activepieces/activepieces
+  docs: https://www.activepieces.com/docs

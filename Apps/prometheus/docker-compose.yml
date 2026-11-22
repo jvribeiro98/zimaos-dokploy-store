@@ -1,0 +1,49 @@
+name: prometheus
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/prometheus
+    - --web.console.libraries=/usr/share/prometheus/console_libraries
+    - --web.console.templates=/usr/share/prometheus/consoles
+    - --web.enable-lifecycle
+    volumes:
+    - /DATA/AppData/$AppID/prometheus.yml:/etc/prometheus/prometheus.yml
+    - prometheus-data:/prometheus
+    ports:
+    - target: 9090
+      published: "9090"
+      protocol: tcp
+volumes:
+  prometheus-data: {}
+x-casaos:
+  id: com.dokploy.prometheus
+  main: prometheus
+  index: /
+  port_map: "9090"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/prometheus/icon.svg
+  title:
+    en_US: Prometheus
+  tagline:
+    en_US: Prometheus is an open-source monitoring and alerting toolkit that collects metrics from...
+  description:
+    en_US: Prometheus is an open-source monitoring and alerting toolkit that collects metrics from your systems. Self-host
+      it on your own server with Dokploy, which deploys Prometheus as a Docker Compose service in a few clicks.
+  author: Dokploy Community
+  developer: Prometheus
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://prometheus.io/
+  repo: https://github.com/prometheus/prometheus
+  docs: https://prometheus.io/docs/introduction/overview/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (prometheus.yml). Review
+        environment variables before starting.

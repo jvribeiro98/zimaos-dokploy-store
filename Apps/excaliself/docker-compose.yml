@@ -1,0 +1,71 @@
+name: excaliself
+services:
+  excaliself:
+    image: ghcr.io/maciekzygmunt/excaliself:0.12.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      DATABASE_URL: postgresql://excaliself:mTOV8TrOWgkBskGWkMZeavFoRdcT1wSp@db:5432/excaliself
+      BETTER_AUTH_SECRET: OhSqLHkgzxSuqNdGaEUl5XwHx75pGZ28liLoNEDJlXzofgDFqcvKuype1vLfRmSw
+      BASE_URL: http://localhost
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID:-}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET:-}
+      MICROSOFT_TENANT_ID: ${MICROSOFT_TENANT_ID:-}
+      OIDC_ISSUER: ${OIDC_ISSUER:-}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_NAME: ${OIDC_NAME:-}
+      SSO_ALLOWED_DOMAINS: ${SSO_ALLOWED_DOMAINS:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: excaliself
+      POSTGRES_PASSWORD: mTOV8TrOWgkBskGWkMZeavFoRdcT1wSp
+      POSTGRES_DB: excaliself
+    volumes:
+    - excaliself-db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U excaliself -d excaliself
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  excaliself-db: null
+x-casaos:
+  id: com.dokploy.excaliself
+  main: excaliself
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/excaliself/icon.svg
+  title:
+    en_US: Excaliself
+  tagline:
+    en_US: Self-hosted, open-source alternative to Excalidraw+ for teams
+  description:
+    en_US: Self-hosted, open-source alternative to Excalidraw+ for teams. Shared drawings, folders, live collaboration, comments
+      and SSO, stored in Postgres.
+  author: Dokploy Community
+  developer: Excaliself
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "0.12.0"
+  update_at: "2026-11-22"
+  website: https://excaliself.com/
+  repo: https://github.com/maciekzygmunt/excaliself
+  docs: https://excaliself.com/docs/

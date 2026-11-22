@@ -1,0 +1,57 @@
+name: chatto
+services:
+  chatto:
+    image: ghcr.io/chattocorp/chatto:0.4
+    restart: unless-stopped
+    expose:
+    - '4000'
+    environment:
+      CHATTO_WEBSERVER_URL: https://localhost
+      CHATTO_WEBSERVER_PORT: '4000'
+      CHATTO_WEBSERVER_COOKIE_SIGNING_SECRET: 62520cc9f2c7c22597ab12bcdc9005cdd3a271deb14f722c3151609038d2883eb15176f26d22858c2a656e7992aabaf2c7f688a34810654afff5765ff4a26d7a
+      CHATTO_CORE_SECRET_KEY: 1cb20b129e5fa98e14eaff25420eddfe562ba6a24f9b0adbc0a9b03d5e82b5bbb5fe876aa149c4a5003ed05fbf819162331a2dc6a8093be3bb4ad1fd5db376f1
+      CHATTO_CORE_ASSETS_SIGNING_SECRET: d644edbf549af613aa16ac74eb10d756ac213c8c49b2dd6ae753b9b199fbcd5d1b8e974ad2ff7440d256e813aa34f0f673b9d56eb670c924e6160913fd4809e9
+      CHATTO_NATS_EMBEDDED_ENABLED: 'True'
+      CHATTO_NATS_EMBEDDED_DATA_DIR: /data
+      CHATTO_OWNERS_EMAILS: admin@example.com
+      CHATTO_SMTP_ENABLED: ${CHATTO_SMTP_ENABLED:-false}
+      CHATTO_SMTP_HOST: ${CHATTO_SMTP_HOST:-}
+      CHATTO_SMTP_PORT: ${CHATTO_SMTP_PORT:-587}
+      CHATTO_SMTP_TLS: ${CHATTO_SMTP_TLS:-mandatory}
+      CHATTO_SMTP_USERNAME: ${CHATTO_SMTP_USERNAME:-}
+      CHATTO_SMTP_PASSWORD: ${CHATTO_SMTP_PASSWORD:-}
+      CHATTO_SMTP_FROM: ${CHATTO_SMTP_FROM:-}
+    volumes:
+    - chatto-data:/data
+    ports:
+    - target: 4000
+      published: "4000"
+      protocol: tcp
+volumes:
+  chatto-data: null
+x-casaos:
+  id: com.dokploy.chatto
+  main: chatto
+  index: /
+  port_map: "4000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chatto/icon.png
+  title:
+    en_US: Chatto (single binary)
+  tagline:
+    en_US: A fully-featured real-time chat application for teams and communities
+  description:
+    en_US: 'A fully-featured real-time chat application for teams and communities. This template deploys the single Chatto
+      binary with embedded NATS. Note: email/password registration requires SMTP to be configured after deployment; voice/video
+      calls are not included in the single-binary setup.'
+  author: Dokploy Community
+  developer: Chatto (single binary)
+  category: Social
+  architectures:
+  - amd64
+  - arm64
+  version: "0.4.x"
+  update_at: "2026-11-22"
+  website: https://chatto.run
+  repo: https://github.com/chattocorp/chatto
+  docs: https://docs.chatto.run

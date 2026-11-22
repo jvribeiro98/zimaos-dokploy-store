@@ -1,0 +1,44 @@
+name: speedtest-tracker
+services:
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      APP_KEY: base64:Ghsq23xYljFm4rShlMROmd/lEAK8lJZ7HYcseq4RTgM=
+      DB_CONNECTION: sqlite
+    volumes:
+    - speedtest_config:/config
+    expose:
+    - '80'
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  speedtest_config: null
+x-casaos:
+  id: com.dokploy.speedtest-tracker
+  main: speedtest-tracker
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/speedtest-tracker/icon.svg
+  title:
+    en_US: Speedtest Tracker
+  tagline:
+    en_US: Speedtest Tracker runs scheduled internet speed tests and stores the results in a self-...
+  description:
+    en_US: Speedtest Tracker runs scheduled internet speed tests and stores the results in a self-hosted dashboard.
+  author: Dokploy Community
+  developer: Speedtest Tracker
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://docs.speedtest-tracker.dev/
+  repo: https://github.com/alexjustesen/speedtest-tracker
+  docs: https://docs.speedtest-tracker.dev/

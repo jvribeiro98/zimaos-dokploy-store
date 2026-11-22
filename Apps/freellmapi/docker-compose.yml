@@ -1,0 +1,54 @@
+name: freellmapi
+services:
+  freellmapi:
+    image: ghcr.io/tashfeenahmed/freellmapi:v0.8.4
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: '3001'
+      ENCRYPTION_KEY: 2006fb5263274354bf4d694263460756c417511f1b2804f7c50e4716a4606b875981e11e9bed922480504d14572ca5f62bca9f7079ea3e8a4aeb4baa43331100
+    expose:
+    - 3001
+    volumes:
+    - freellmapi-data:/app/server/data
+    healthcheck:
+      test:
+      - CMD
+      - node
+      - -e
+      - fetch('http://127.0.0.1:3001/api/ping').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1));
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  freellmapi-data: null
+x-casaos:
+  id: com.dokploy.freellmapi
+  main: freellmapi
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/freellmapi/icon.svg
+  title:
+    en_US: FreeLLMAPI
+  tagline:
+    en_US: FreeLLMAPI aggregates free tiers from 29 LLM providers into a single OpenAI-compatible...
+  description:
+    en_US: FreeLLMAPI aggregates free tiers from 29 LLM providers into a single OpenAI-compatible endpoint with smart routing,
+      automatic failover, per-key rate tracking, and encrypted key storage.
+  author: Dokploy Community
+  developer: FreeLLMAPI
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "0.8.4"
+  update_at: "2026-11-22"
+  website: https://freellmapi.co
+  repo: https://github.com/tashfeenahmed/freellmapi
+  docs: https://github.com/tashfeenahmed/freellmapi/blob/main/docs/install.md

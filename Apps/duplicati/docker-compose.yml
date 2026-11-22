@@ -1,0 +1,56 @@
+name: duplicati
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:${APP_RELEASE:-2.3.0}
+    restart: unless-stopped
+    environment:
+    - PUID=0
+    - PGID=0
+    - TZ=Europe/Vienna
+    - SETTINGS_ENCRYPTION_KEY=L1XVbQvwuvqg5LtHW7tjsGOMOIzjD5D6
+    - DUPLICATI__WEBSERVICE_PASSWORD=ioUtbgWVuwnoBkyJ
+    - DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES=*
+    volumes:
+    - duplicati-config:/config
+    - /DATA/AppData/$AppID/backups:/backups
+    - /DATA/AppData/$AppID/source:/source
+    - /DATA/AppData/$AppID/restore:/restore
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://127.0.0.1:8200
+      interval: 2s
+      timeout: 10s
+      retries: 15
+    ports:
+    - target: 8200
+      published: "8200"
+      protocol: tcp
+volumes:
+  duplicati-config: {}
+x-casaos:
+  id: com.dokploy.duplicati
+  main: duplicati
+  index: /
+  port_map: "8200"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/duplicati/icon.png
+  title:
+    en_US: Duplicati
+  tagline:
+    en_US: Duplicati is a free, open-source backup solution that offers zero-trust, fully encrypte...
+  description:
+    en_US: Duplicati is a free, open-source backup solution that offers zero-trust, fully encrypted backups for your data
+  author: Dokploy Community
+  developer: Duplicati
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.3.0"
+  update_at: "2026-11-22"
+  website: https://duplicati.com/
+  repo: https://github.com/duplicati/duplicati
+  docs: https://docs.duplicati.com/

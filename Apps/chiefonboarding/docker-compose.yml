@@ -1,0 +1,52 @@
+name: chiefonboarding
+services:
+  chiefonboarding:
+    image: chiefonboarding/chiefonboarding:v2.2.5
+    restart: unless-stopped
+    environment:
+    - SECRET_KEY=UHDtx3WXBah55zYc
+    - DATABASE_URL=postgres://postgres:joszOzpd7IUDiZK9@db:5432/chiefonboarding
+    - ALLOWED_HOSTS=localhost
+    expose:
+    - 8000
+    depends_on:
+    - db
+    ports:
+    - target: 8000
+      published: "8000"
+      protocol: tcp
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+    - POSTGRES_PASSWORD=joszOzpd7IUDiZK9
+    - POSTGRES_DB=chiefonboarding
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data: null
+x-casaos:
+  id: com.dokploy.chiefonboarding
+  main: chiefonboarding
+  index: /
+  port_map: "8000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/chiefonboarding/icon.png
+  title:
+    en_US: Chief-Onboarding
+  tagline:
+    en_US: Chief-Onboarding is a comprehensive, self-hosted onboarding and employee management pla...
+  description:
+    en_US: Chief-Onboarding is a comprehensive, self-hosted onboarding and employee management platform designed for businesses
+      to streamline their onboarding processes.
+  author: Dokploy Community
+  developer: Chief-Onboarding
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2.5"
+  update_at: "2026-11-22"
+  website: https://chiefonboarding.com/
+  repo: https://github.com/chiefonboarding/chiefonboarding
+  docs: https://docs.chiefonboarding.com/

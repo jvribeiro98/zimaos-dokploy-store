@@ -1,0 +1,33 @@
+name: cyberchef
+services:
+  cyberchef:
+    image: ghcr.io/gchq/cyberchef:latest
+    restart: unless-stopped
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.cyberchef
+  main: cyberchef
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/cyberchef/icon.png
+  title:
+    en_US: CyberChef
+  tagline:
+    en_US: CyberChef is a web application for encryption, encoding, compression, and data analysis...
+  description:
+    en_US: CyberChef is a web application for encryption, encoding, compression, and data analysis, developed by GCHQ.
+  author: Dokploy Community
+  developer: CyberChef
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://gchq.github.io/CyberChef/
+  repo: https://github.com/gchq/CyberChef
+  docs: https://github.com/gchq/CyberChef/wiki

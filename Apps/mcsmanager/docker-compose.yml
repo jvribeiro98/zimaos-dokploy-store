@@ -1,0 +1,57 @@
+name: mcsmanager
+services:
+  web:
+    image: githubyumao/mcsmanager-web:latest
+    restart: unless-stopped
+    expose:
+    - 23333
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - mcsmanager-web-data:/opt/mcsmanager/web/data
+    - mcsmanager-web-logs:/opt/mcsmanager/web/logs
+    ports:
+    - target: 23333
+      published: "23333"
+      protocol: tcp
+  daemon:
+    image: githubyumao/mcsmanager-daemon:latest
+    restart: unless-stopped
+    expose:
+    - 24444
+    environment:
+    - MCSM_DOCKER_WORKSPACE_PATH=/opt/mcsmanager/daemon/data/InstanceData
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - mcsmanager-daemon-data:/opt/mcsmanager/daemon/data
+    - mcsmanager-daemon-logs:/opt/mcsmanager/daemon/logs
+    - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  mcsmanager-web-data: null
+  mcsmanager-web-logs: null
+  mcsmanager-daemon-data: null
+  mcsmanager-daemon-logs: null
+x-casaos:
+  id: com.dokploy.mcsmanager
+  main: web
+  index: /
+  port_map: "23333"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mcsmanager/icon.png
+  title:
+    en_US: MCSManager
+  tagline:
+    en_US: A modern dashboard for managing Minecraft servers
+  description:
+    en_US: A modern dashboard for managing Minecraft servers. Primarily focused on Minecraft, but also supports other games
+      and features a UI that's easy for beginners to use and supports i18n.
+  author: Dokploy Community
+  developer: MCSManager
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/MCSManager/MCSManager
+  repo: https://github.com/MCSManager/MCSManager
+  docs: https://github.com/MCSManager/MCSManager#readme

@@ -1,0 +1,77 @@
+name: creed
+services:
+  creed:
+    build:
+      context: https://github.com/connorhpbrn/creed.git#e9b096d6d68fef6df336338bc9965a94ab62f75e
+      dockerfile_inline: "FROM node:20-alpine AS builder\nWORKDIR /app\nCOPY package.json package-lock.json ./\nRUN npm ci\n\
+        COPY . .\nARG NEXT_PUBLIC_SITE_URL\nARG NEXT_PUBLIC_SUPABASE_URL\nARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY\nARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY\n\
+        ARG NEXT_PUBLIC_CONTACT_EMAIL\nARG NEXT_PUBLIC_GITHUB_URL\nENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \\\n   \
+        \ NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL \\\n    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY\
+        \ \\\n    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY \\\n    NEXT_PUBLIC_CONTACT_EMAIL=$NEXT_PUBLIC_CONTACT_EMAIL\
+        \ \\\n    NEXT_PUBLIC_GITHUB_URL=$NEXT_PUBLIC_GITHUB_URL\nRUN npm run build\n\nFROM node:20-alpine AS runner\nWORKDIR\
+        \ /app\nENV NODE_ENV=production\nCOPY --from=builder /app/public ./public\nCOPY --from=builder /app/.next ./.next\n\
+        COPY --from=builder /app/node_modules ./node_modules\nCOPY --from=builder /app/package.json ./package.json\nCOPY --from=builder\
+        \ /app/next.config.ts ./next.config.ts\nEXPOSE 3000\nCMD [\"npm\", \"start\"]\n"
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+        NEXT_PUBLIC_CONTACT_EMAIL: ${NEXT_PUBLIC_CONTACT_EMAIL}
+        NEXT_PUBLIC_GITHUB_URL: ${NEXT_PUBLIC_GITHUB_URL}
+    restart: unless-stopped
+    environment:
+    - NEXT_PUBLIC_SITE_URL=https://localhost
+    - NEXT_PUBLIC_SUPABASE_URL=
+    - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+    - SUPABASE_SECRET_KEY=
+    - CREED_ENCRYPTION_SECRET=jaESpaD4HTud6wSZJ9kMChMfKmSmxZG7lAwn337r26s=
+    - STRIPE_SECRET_KEY=
+    - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+    - STRIPE_WEBHOOK_SECRET=
+    - OPENROUTER_PLATFORM_KEY=
+    - ANALYSIS_MODEL=
+    - TAB_MODEL=
+    - PANEL_MODEL=
+    - RESEND_API_KEY=
+    - RESEND_FROM_EMAIL=Creed <hello@example.com>
+    - GITHUB_OAUTH_CLIENT_ID=
+    - GITHUB_OAUTH_CLIENT_SECRET=
+    - NEXT_PUBLIC_CONTACT_EMAIL=
+    - NEXT_PUBLIC_GITHUB_URL=https://github.com/connorhpbrn/creed
+    - CREED_CSP_ENFORCE=
+    expose:
+    - 3000
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.creed
+  main: creed
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/creed/icon.svg
+  title:
+    en_US: Creed
+  tagline:
+    en_US: One personal context file every AI agent reads before answering and proposes updates to...
+  description:
+    en_US: One personal context file every AI agent reads before answering and proposes updates to as it learns about you.
+      Requires an external Supabase project (see instructions).
+  author: Dokploy Community
+  developer: Creed
+  category: AI
+  architectures:
+  - amd64
+  - arm64
+  version: "e9b096d"
+  update_at: "2026-11-22"
+  website: https://creed.md
+  repo: https://github.com/hpbrn/creed
+  docs: https://docs.creed.md/
+  tips:
+    before_install:
+      en_US: Imported from Dokploy. Default config files were extracted to the app's files/ folder (README.md). Review environment
+        variables before starting.

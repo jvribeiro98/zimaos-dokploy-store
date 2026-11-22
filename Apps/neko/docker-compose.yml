@@ -1,0 +1,33 @@
+name: neko
+services:
+  neko:
+    image: ghcr.io/m1k1o/neko/firefox:latest
+    restart: unless-stopped
+    shm_size: 2gb
+    ports:
+    - '8080'
+    - 52000-52100:52000-52100/udp
+x-casaos:
+  id: com.dokploy.neko
+  main: neko
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/neko/icon.png
+  title:
+    en_US: Neko
+  tagline:
+    en_US: Neko is a self-hosted virtual browser that runs in Docker and allows you to share brows...
+  description:
+    en_US: Neko is a self-hosted virtual browser that runs in Docker and allows you to share browser sessions with others.
+  author: Dokploy Community
+  developer: Neko
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-22"
+  website: https://github.com/m1k1o/neko
+  repo: https://github.com/m1k1o/neko
+  docs: https://github.com/m1k1o/neko
