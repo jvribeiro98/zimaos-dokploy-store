@@ -7,8 +7,8 @@ services:
     volumes:
     - couchdb-data:/opt/couchdb/data
     environment:
-    - COUCHDB_USER=dIp27L5BwTrglvHW
-    - COUCHDB_PASSWORD=tIZeLHhZsBmIW4nTxh7TqwI7uMQKoueU
+    - COUCHDB_USER=kNl1YAFOuaFmoqKF
+    - COUCHDB_PASSWORD=fiRCiJQdsXk3oXxpjOjJQdfe6hUEaLYl
     restart: unless-stopped
     ports:
     - target: 5984

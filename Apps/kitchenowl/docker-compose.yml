@@ -4,12 +4,12 @@ services:
     image: tombursch/kitchenowl:v0.7.1
     restart: unless-stopped
     environment:
-    - JWT_SECRET_KEY=D4SWlG0TajN7TpIbFfDsqrLZ5gR8W9Yu
+    - JWT_SECRET_KEY=eoksTNYAnXRYdVkmgKfXU81mhJGYTTvE
     - DB_DRIVER=postgresql
     - DB_HOST=db
     - DB_NAME=kitchenowl
     - DB_USER=kitchenowl
-    - DB_PASSWORD=G2oxNKmEEVGNg6DvpinBcUQu
+    - DB_PASSWORD=5qel5LROFZojozObHAUuFEM1
     volumes:
     - kitchenowl_files:/data
     depends_on:
@@ -24,7 +24,7 @@ services:
     environment:
     - POSTGRES_DB=kitchenowl
     - POSTGRES_USER=kitchenowl
-    - POSTGRES_PASSWORD=G2oxNKmEEVGNg6DvpinBcUQu
+    - POSTGRES_PASSWORD=5qel5LROFZojozObHAUuFEM1
     volumes:
     - kitchenowl_db:/var/lib/postgresql/data
     healthcheck:

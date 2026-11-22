@@ -27,7 +27,7 @@ database:
   name: psycopg2
   args:
     user: synapse
-    password: "P5GIRZjx5bmYRJT09eD1awt7oh2uF8Dc"
+    password: "CABiLugzR02EhLDqksUMBsNUlEUjCsXD"
     database: synapse
     host: postgres
     port: 5432
@@ -37,10 +37,10 @@ database:
 # Public registration is disabled. Create users with the
 # register_new_matrix_user tool (see the template instructions).
 enable_registration: false
-registration_shared_secret: "Hei16eQH7HvDOcaybF8RU6r4LWMq1ZyX"
+registration_shared_secret: "lrJKq4lHTNC37ArDf82mBvYGDjj0dcXi"
 
-macaroon_secret_key: "uPBFiOYhJxZE2GSOTWEy48TQG0Dm3A0v"
-form_secret: "hBdF59mGUUqlLBiw8ZICJZdmIfEwLuw2"
+macaroon_secret_key: "vORL33F97Hz9Ourtld9DlBDG11GtUCLN"
+form_secret: "rAwF8EjElX7vQZuAD0nPdTG19UNsVwJK"
 
 trusted_key_servers:
   - server_name: "matrix.org"

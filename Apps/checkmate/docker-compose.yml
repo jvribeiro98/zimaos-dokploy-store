@@ -11,7 +11,7 @@ services:
     - DB_CONNECTION_STRING=mongodb://mongodb:27017/uptime_db?replicaSet=rs0
     - REDIS_URL=redis://redis:6379
     - CLIENT_HOST=http://localhost
-    - JWT_SECRET=705so6rwPf4NspjBiX2MRQXh4JpKOcMo
+    - JWT_SECRET=FJW8kyDT8etQrcsGFbd9IA1VfAQpRKcp
     depends_on:
     - mongodb
     ports:

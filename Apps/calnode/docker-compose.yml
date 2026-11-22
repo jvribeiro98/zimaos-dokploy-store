@@ -12,7 +12,7 @@ services:
       BASE_URL: http:localhost
       PUBLIC_BASE_URL: ''
       DATABASE_URL: sqlite://./data/calnode.db
-      CALNODE_ENCRYPTION_KEY: 9vyJh1w9ZpG4STNQvOnvPVCsYcIoWEjx3HSqzsUJTzI=
+      CALNODE_ENCRYPTION_KEY: xL/2VcSES4y5S4Ag+SIfiXPeT4dwp3thZNAHI/c0qno=
       CALNODE_RECOVERY_SECRET: ''
       GOOGLE_CLIENT_ID: ''
       GOOGLE_CLIENT_SECRET: ''

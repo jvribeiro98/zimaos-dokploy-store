@@ -227,10 +227,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: O5gSkRIPlNVGEWxsoimKkH4Y1rZBAX2t
+      ADMIN_PASSWORD: rHGjwBf9hokjj1VW2ebTZ5CPkLRk1kJT
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: Kh1Uiuzx6ogGv5phjuVbS8qD0GBYYz2S
+      DB_ROOT_PASSWORD: nUtXqJ8kqTMzTKWWO3vUBy22sPuGgKyf
       INSTALL_APP_ARGS: --install-app lms
       ENABLE_SCHEDULER: '1'
     restart: unless-stopped
@@ -277,7 +277,7 @@ services:
     - --collation-server=utf8mb4_unicode_ci
     - --skip-character-set-client-handshake
     environment:
-    - MARIADB_ROOT_PASSWORD=Kh1Uiuzx6ogGv5phjuVbS8qD0GBYYz2S
+    - MARIADB_ROOT_PASSWORD=nUtXqJ8kqTMzTKWWO3vUBy22sPuGgKyf
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

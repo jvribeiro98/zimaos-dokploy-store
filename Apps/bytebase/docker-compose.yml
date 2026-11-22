@@ -6,7 +6,7 @@ services:
     expose:
     - 8080
     environment:
-    - PG_URL=postgres://postgres:y3DBvs1irKUw09CZ@bytebase-db:5432/bytebase
+    - PG_URL=postgres://postgres:3BmHXOckNT75nP22@bytebase-db:5432/bytebase
     volumes:
     - data:/var/opt/bytebase
     depends_on:
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=y3DBvs1irKUw09CZ
+    - POSTGRES_PASSWORD=3BmHXOckNT75nP22
     - POSTGRES_DB=bytebase
     volumes:
     - db_data:/var/lib/postgresql/data

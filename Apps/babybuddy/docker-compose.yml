@@ -11,7 +11,7 @@ services:
     - TZ=UTC
     - CSRF_TRUSTED_ORIGINS=https://localhost
     - TIME_ZONE=America/New_York
-    - SECRET_KEY=3bcGpK52IPYOzSn0q4fLpJQaaFpCAj6E
+    - SECRET_KEY=JcW1qCJ5zPHymkn8vxgEH89kdTlyYMLU
     volumes:
     - config:/config
     ports:

@@ -5,7 +5,7 @@ services:
     volumes:
     - invoiceshelf-postgres-data:/var/lib/postgresql/data
     environment:
-    - POSTGRES_PASSWORD=QciBqFqLgr9G8m9r1c6a2jw1QtIZZtC6
+    - POSTGRES_PASSWORD=qHWpiP5ZZcsDeX5bp781oSwUEZ4zkqlN
     - POSTGRES_USER=invoiceshelf
     - POSTGRES_DB=invoiceshelf
     healthcheck:
@@ -32,7 +32,7 @@ services:
     - DB_PORT=5432
     - DB_DATABASE=invoiceshelf
     - DB_USERNAME=invoiceshelf
-    - DB_PASSWORD=QciBqFqLgr9G8m9r1c6a2jw1QtIZZtC6
+    - DB_PASSWORD=qHWpiP5ZZcsDeX5bp781oSwUEZ4zkqlN
     - CACHE_STORE=file
     - SESSION_DRIVER=file
     - SESSION_LIFETIME=120

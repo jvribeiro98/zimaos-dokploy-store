@@ -15,7 +15,7 @@ services:
     depends_on:
     - typebot-db
     environment:
-      ENCRYPTION_SECRET: 2/kFe5zetlfEnHJM3qeeAPat8zUaKGxp
+      ENCRYPTION_SECRET: gDi4yN1SvEwjbU4UpI843eu9yOWLKnZn
       DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_VIEWER_URL: http://localhost
@@ -34,7 +34,7 @@ services:
     image: baptistearno/typebot-viewer:2.27.0
     restart: always
     environment:
-      ENCRYPTION_SECRET: 2/kFe5zetlfEnHJM3qeeAPat8zUaKGxp
+      ENCRYPTION_SECRET: gDi4yN1SvEwjbU4UpI843eu9yOWLKnZn
       DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_VIEWER_URL: http://localhost

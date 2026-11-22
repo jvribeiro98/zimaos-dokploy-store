@@ -19,7 +19,7 @@ services:
       WEBLATE_SITE_TITLE: Weblate
       WEBLATE_ADMIN_NAME: Weblate Admin
       WEBLATE_ADMIN_EMAIL: admin@localhost
-      WEBLATE_ADMIN_PASSWORD: gaSNY7roWgcuwoBDzATIhu3PA71I1Ow1
+      WEBLATE_ADMIN_PASSWORD: ZTLSh09Cu5FJoCkVqJ9h284t3nIXopm0
       WEBLATE_SERVER_EMAIL: weblate@localhost
       WEBLATE_DEFAULT_FROM_EMAIL: weblate@localhost
       WEBLATE_ENABLE_HTTPS: '0'
@@ -28,7 +28,7 @@ services:
       POSTGRES_HOST: database
       POSTGRES_PORT: '5432'
       POSTGRES_USER: weblate
-      POSTGRES_PASSWORD: nBAUG4Fkljg4jSidhK0x16zulJjpOm9r
+      POSTGRES_PASSWORD: r5wrsCbp0L6qJ0U37FS68GReVdtzZMla
       POSTGRES_DB: weblate
       REDIS_HOST: cache
       REDIS_PORT: '6379'
@@ -43,7 +43,7 @@ services:
     - weblate-postgres-data:/var/lib/postgresql
     environment:
       POSTGRES_USER: weblate
-      POSTGRES_PASSWORD: nBAUG4Fkljg4jSidhK0x16zulJjpOm9r
+      POSTGRES_PASSWORD: r5wrsCbp0L6qJ0U37FS68GReVdtzZMla
       POSTGRES_DB: weblate
     healthcheck:
       test:

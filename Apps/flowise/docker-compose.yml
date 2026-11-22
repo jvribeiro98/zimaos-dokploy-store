@@ -16,9 +16,9 @@ services:
       PORT: '3000'
       DATABASE_PATH: /root/.flowise
       REDIS_URL: redis://redis:6379
-      JWT_AUTH_TOKEN_SECRET: UEzELK5gXHV9T91UmJuSe0Chfdnn5XQR
-      JWT_REFRESH_TOKEN_SECRET: Jn1QXG8vuz5vHXmF5ziaGJDaqofh5GBw
-      EXPRESS_SESSION_SECRET: AtYHkybQFqqnlScEzSX8Na6iLk1hS3lo
+      JWT_AUTH_TOKEN_SECRET: Ana5YvBGUJNrr6BhxDOvYvvtU7WOl9fz
+      JWT_REFRESH_TOKEN_SECRET: vKkdCxVkMRLkgczOnhkRbJy1ZyIpQMIw
+      EXPRESS_SESSION_SECRET: yLKjEjzdv99GJu4WjSPpBjU2ARU152Cw
     healthcheck:
       test:
       - CMD

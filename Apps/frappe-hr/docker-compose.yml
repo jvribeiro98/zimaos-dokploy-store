@@ -220,10 +220,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: TYP95pANlJMkt73io9VTAwGw0zXxSCJn
+      ADMIN_PASSWORD: jYEqRTIe6XkLulLYpvZVPlwTCO6H6qav
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: pwSfSPx4umGVWFbU9TLBO2JzbEyxzOY9
+      DB_ROOT_PASSWORD: d1cTTcKHFtUBaL6Az0lOtFyTbZUPIjeW
       INSTALL_APP_ARGS: --install-app hrms
     restart: unless-stopped
   migration:
@@ -263,8 +263,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=pwSfSPx4umGVWFbU9TLBO2JzbEyxzOY9
-    - MARIADB_ROOT_PASSWORD=pwSfSPx4umGVWFbU9TLBO2JzbEyxzOY9
+    - MYSQL_ROOT_PASSWORD=d1cTTcKHFtUBaL6Az0lOtFyTbZUPIjeW
+    - MARIADB_ROOT_PASSWORD=d1cTTcKHFtUBaL6Az0lOtFyTbZUPIjeW
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

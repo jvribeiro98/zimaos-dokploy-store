@@ -18,7 +18,7 @@ services:
     image: postgres:17
     environment:
     - POSTGRES_USER=focalboard
-    - POSTGRES_PASSWORD=GMpUNbrLY5cHKzhQdlVt7cVAbRegE2pi
+    - POSTGRES_PASSWORD=8ND95V9nIQDWhBQUw58i9wDxcdZrxLm5
     - POSTGRES_DB=focalboard
     volumes:
     - /DATA/AppData/$AppID/postgres_data:/var/lib/postgresql/data

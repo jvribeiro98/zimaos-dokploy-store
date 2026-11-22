@@ -6,10 +6,10 @@ services:
     volumes:
     - db_data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=mE5Q1fndu0WKcKRXWsBZIiIaT1hQhDMd
+    - MYSQL_ROOT_PASSWORD=sTsY3Rb9IBiyzEb90x81kbkgum6RP5Lf
     - MYSQL_DATABASE=limesurvey
     - MYSQL_USER=limesurvey
-    - MYSQL_PASSWORD=gGYmI8ZSydIFiVCW3vEJ5IlSZ0ETm3RD
+    - MYSQL_PASSWORD=M4b48yxM1WRsimD0hrJnGVUCkSF8IED3
   limesurvey:
     image: martialblog/limesurvey:latest
     restart: always
@@ -19,11 +19,11 @@ services:
     - ADMIN_EMAIL=admin@example.com
     - ADMIN_NAME=Admin
     - ADMIN_USER=admin
-    - ADMIN_PASSWORD=LnRBEmQyM9USb4CxbwlJPV8HTqBsaaqv
+    - ADMIN_PASSWORD=1Tb7csxTDAdvyIZjGEWv0MA1n95XmfIV
     - DB_HOST=db
     - DB_MYSQL_ENGINE=InnoDB
     - DB_NAME=limesurvey
-    - DB_PASSWORD=gGYmI8ZSydIFiVCW3vEJ5IlSZ0ETm3RD
+    - DB_PASSWORD=M4b48yxM1WRsimD0hrJnGVUCkSF8IED3
     - DB_USERNAME=limesurvey
     - DEBUG=0
     - DEBUG_SQL=0

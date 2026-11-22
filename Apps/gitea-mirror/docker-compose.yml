@@ -16,7 +16,7 @@ services:
       retries: 5
       start_period: 15s
     environment:
-    - BETTER_AUTH_SECRET=ctXRifvvxJoYfD5SJZaQRI6OS8Ell1JXX+JUgji6ygej4AwK8slvz5O7BoTZiyKw9jONFeAY2C4hLmShSWzfSA==
+    - BETTER_AUTH_SECRET=H/WqAAwH3GQLh8ZxoCEmuacOBpZm+qa9+dCJ54dKAxI6l+4/HLgt7FF44tJcHYms14Q2Vt2+Z+3+arqOms9gnQ==
     - BETTER_AUTH_URL=https://localhost
     - NODE_ENV=production
     - DATABASE_URL=file:data/gitea-mirror.db

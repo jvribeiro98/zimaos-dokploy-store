@@ -29,7 +29,7 @@ services:
       OCIS_INSECURE: 'true'
       PROXY_TLS: 'false'
       PROXY_HTTP_ADDR: 0.0.0.0:9200
-      IDM_ADMIN_PASSWORD: TzJl2pmZr30lLlSzxnZHZxYKPGiGjijo
+      IDM_ADMIN_PASSWORD: H7oYaaNIoCyThxrfKBjAleqOtz4tRTcq
       SETTINGS_GRPC_ADDR: 0.0.0.0:9191
       GATEWAY_GRPC_ADDR: 0.0.0.0:9142
       STORAGE_USERS_DATA_GATEWAY_URL: http://owncloud-infinite-scale:9200/data

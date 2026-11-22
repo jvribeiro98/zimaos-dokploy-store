@@ -4,13 +4,13 @@ services:
     image: ghcr.io/capsoftware/cap-web:latest
     restart: unless-stopped
     environment:
-      DATABASE_URL: mysql://root:p8CeAJsShF9NZhQpH0tWcGjNJAR1GyyR@ps-mysql:3306/planetscale?ssl={"rejectUnauthorized":false}
+      DATABASE_URL: mysql://root:5uhqaODBybi1Upic7nkHR68UytnCDZ4s@ps-mysql:3306/planetscale?ssl={"rejectUnauthorized":false}
       WEB_URL: http://localhost:3000
       NEXTAUTH_URL: http://localhost:3000
-      DATABASE_ENCRYPTION_KEY: 4mKEqzT40yHXNtEoJVZRRrGYljmEpTVu
-      NEXTAUTH_SECRET: DIfxTL3qDXdDvypr9mGM4emUXeolInYx
-      CAP_AWS_ACCESS_KEY: C8IHDcHr6N4XeJqb
-      CAP_AWS_SECRET_KEY: LyN6rBwP6F876FWw
+      DATABASE_ENCRYPTION_KEY: Iy2V2m3RgoqEc981ueMsMtUUnObCjVVL
+      NEXTAUTH_SECRET: 8qVG0gH92aQx2deHY6wyEoTnvbo0GHfK
+      CAP_AWS_ACCESS_KEY: lkyC0jHARMCAdjdS
+      CAP_AWS_SECRET_KEY: hrbmWipSWEffEJA6
       CAP_AWS_BUCKET: capso
       CAP_AWS_REGION: us-east-1
       S3_PUBLIC_ENDPOINT: http://localhost:3902
@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: planetscale
-      MYSQL_ROOT_PASSWORD: pBzgXYF8Gw933wG9LthKDyWSHd6GJ2ub
+      MYSQL_ROOT_PASSWORD: QDCzY2EdAntPfJq3i55W4MRcewK6FNOG
       MYSQL_ROOT_HOST: '%'
     command:
     - --max_connections=1000
@@ -43,8 +43,8 @@ services:
     restart: unless-stopped
     command: server /bitnami/minio/data --address ":3902" --console-address ":3903"
     environment:
-      MINIO_ROOT_USER: sjupCmjW6wmec0c2
-      MINIO_ROOT_PASSWORD: mEahlQSwl5PgZsw9
+      MINIO_ROOT_USER: DQBvbAowYxZ5PA7v
+      MINIO_ROOT_PASSWORD: otD3o4uhGwBIXwMv
     expose:
     - 3902
     - 3903

@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: blogfactory
       POSTGRES_USER: blogfactory
-      POSTGRES_PASSWORD: APyWDo51fg1iJYuWbd76rPCJ2UOKYWzNKCjVD2uhjBIaJ5FD
+      POSTGRES_PASSWORD: 017xnKNwxlfSYlUrorae5PkQQoXTHMEcdfjm1uZcJKG2KqEh
     volumes:
     - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -22,7 +22,7 @@ services:
     command: server /data --console-address :9001
     environment:
       MINIO_ROOT_USER: blogfactory
-      MINIO_ROOT_PASSWORD: 3O9gr8r06ou5XR6qiZ2emEtKbpV3ureioMXu3kecoLXrOXcs
+      MINIO_ROOT_PASSWORD: Sz74gafMPvfqilDRDRkZfWkoj58GDyrQiGp6YrdEkL5DYwOw
     volumes:
     - minio-data:/data
     healthcheck:
@@ -49,18 +49,18 @@ services:
       NODE_ENV: production
       PORT: '3000'
       BLOGFACTORY_SELF_HOSTED: 'true'
-      DATABASE_URL: postgresql://blogfactory:APyWDo51fg1iJYuWbd76rPCJ2UOKYWzNKCjVD2uhjBIaJ5FD@postgres:5432/blogfactory
-      JWT_SECRET: vHhZG6Qa4u0cD4NSGBZbO/tvnlrY2uxvkYu03XesGhaN1R7BYg/3sZb3mSgvJQxZ
-      API_KEY_ENCRYPTION_SECRET: nHox8MLe80QO1ZDs4Ct4X9hbLb8yM+K2W+pTJ1q3tyhSUhQq6/Xlw6lYpOvvHt4K
+      DATABASE_URL: postgresql://blogfactory:017xnKNwxlfSYlUrorae5PkQQoXTHMEcdfjm1uZcJKG2KqEh@postgres:5432/blogfactory
+      JWT_SECRET: 5As+tSaW/4YVwvBQ2sgQAyBvYpg/JDIQOr/ZfMbUJqi7X9/MymnXhDKxtjcApYkD
+      API_KEY_ENCRYPTION_SECRET: Z2onwJHsjCY3pxd6OX1KscAD5RkaZf2ttzcZemOdGfNwDa/fZ3bQWVSsOpQAGLJa
       ADMIN_EMAILS: admin@example.com
       BLOGFACTORY_ALLOW_SIGNUP: 'true'
-      CRON_SECRET: JyPXLA+p17ZPU36SubP2w9FjgQFA6iryPvjJV2KLu0NUQU+bbhPK2acX5CqsEyzb
+      CRON_SECRET: VBzbZd73TvSq7i5HSB1xPenmpAGBf+GextdZr04nvpdQ2c9cfLsppJKdarOAbrhH
       WEB_APP_URL: https://localhost
       MCP_APP_URL: http://web/mcp-review.html
       MCP_ALLOWED_ORIGINS: https://localhost
       S3_ENDPOINT: http://minio:9000
       S3_ACCESS_KEY_ID: blogfactory
-      S3_SECRET_ACCESS_KEY: 3O9gr8r06ou5XR6qiZ2emEtKbpV3ureioMXu3kecoLXrOXcs
+      S3_SECRET_ACCESS_KEY: Sz74gafMPvfqilDRDRkZfWkoj58GDyrQiGp6YrdEkL5DYwOw
       S3_BUCKET: blogfactory
       S3_REGION: us-east-1
     healthcheck:
@@ -100,7 +100,7 @@ services:
       api:
         condition: service_healthy
     environment:
-      CRON_SECRET: JyPXLA+p17ZPU36SubP2w9FjgQFA6iryPvjJV2KLu0NUQU+bbhPK2acX5CqsEyzb
+      CRON_SECRET: VBzbZd73TvSq7i5HSB1xPenmpAGBf+GextdZr04nvpdQ2c9cfLsppJKdarOAbrhH
       CRON_INTERVAL_SECONDS: '21600'
     entrypoint:
     - /bin/sh

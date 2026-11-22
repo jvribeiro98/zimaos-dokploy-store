@@ -19,8 +19,8 @@ services:
     image: wazuh/wazuh-indexer:4.14.8
     restart: 'no'
     environment:
-    - INDEXER_PASSWORD=LvO5l8PnK5EuzwOF17aU4dfDzbT0yvZn
-    - DASHBOARD_PASSWORD=0Gh865m6aSBlHCsGRfE7MnfN2EVNVRPG
+    - INDEXER_PASSWORD=Zib4AQOCHL0GFACdABIZljNJN47N2oUM
+    - DASHBOARD_PASSWORD=ZSrtMjNEt3NVITExZSrRsnKMFM7eE9kp
     entrypoint:
     - /bin/bash
     - -c
@@ -91,13 +91,13 @@ services:
     environment:
     - INDEXER_URL=https://wazuh.indexer:9200
     - INDEXER_USERNAME=admin
-    - INDEXER_PASSWORD=LvO5l8PnK5EuzwOF17aU4dfDzbT0yvZn
+    - INDEXER_PASSWORD=Zib4AQOCHL0GFACdABIZljNJN47N2oUM
     - FILEBEAT_SSL_VERIFICATION_MODE=full
     - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/wazuh/root-ca-manager.pem
     - SSL_CERTIFICATE=/etc/ssl/wazuh/wazuh.manager.pem
     - SSL_KEY=/etc/ssl/wazuh/wazuh.manager-key.pem
     - API_USERNAME=wazuh-wui
-    - API_PASSWORD=4JDV8B0gkckjhWFJfGRdkEty-Aa1.
+    - API_PASSWORD=WbOWb3qhJaltDpeqaAojvyMm-Aa1.
     volumes:
     - wazuh-api-configuration:/var/ossec/api/configuration
     - wazuh-etc:/var/ossec/etc
@@ -128,12 +128,12 @@ services:
     - 5601
     environment:
     - INDEXER_USERNAME=admin
-    - INDEXER_PASSWORD=LvO5l8PnK5EuzwOF17aU4dfDzbT0yvZn
+    - INDEXER_PASSWORD=Zib4AQOCHL0GFACdABIZljNJN47N2oUM
     - WAZUH_API_URL=https://wazuh.manager
     - DASHBOARD_USERNAME=kibanaserver
-    - DASHBOARD_PASSWORD=0Gh865m6aSBlHCsGRfE7MnfN2EVNVRPG
+    - DASHBOARD_PASSWORD=ZSrtMjNEt3NVITExZSrRsnKMFM7eE9kp
     - API_USERNAME=wazuh-wui
-    - API_PASSWORD=4JDV8B0gkckjhWFJfGRdkEty-Aa1.
+    - API_PASSWORD=WbOWb3qhJaltDpeqaAojvyMm-Aa1.
     volumes:
     - type: volume
       source: wazuh-certs

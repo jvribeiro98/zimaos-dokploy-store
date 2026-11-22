@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=Sz1iqMHOcmAjqZWm0OJGa0G4oJJicArG
+    - CLICKHOUSE_PASSWORD=InCux4MxkAhWPq4e51J5JwnJvQTjQsnf
     volumes:
     - clickhouse-data:/var/lib/clickhouse
     - clickhouse-logs:/var/log/clickhouse-server

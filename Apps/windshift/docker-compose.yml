@@ -7,13 +7,13 @@ services:
     - BASE_URL=https://localhost
     - PORT=8080
     - USE_PROXY=true
-    - SSO_SECRET=2e6d8ccb98ec2a6d13b1700ff15651b87e517cbd320c46734f981235095f65dea3479c95934b8d96d38ba3249e0aff6b1491c634344d74c4976c5961fe691b60
+    - SSO_SECRET=e423a1cf62645e7fe987faa0fb4435c4d7f11e43f7dfa8f824a1fdf8b7da395fb2411c086453cdb8c19e56c37aeb369b84b6c0489b4887d419c0480a91697d2b
     - ATTACHMENT_PATH=/data/attachments
     - DB_TYPE=postgres
     - POSTGRES_HOST=db
     - POSTGRES_PORT=5432
     - POSTGRES_USER=windshift
-    - POSTGRES_PASSWORD=v1ha9ufeMUvRMlh9PDpSlJqaZDugu8Vi
+    - POSTGRES_PASSWORD=ms6fTf2LbIMK3I2Hw1GyjsiNIH6T6YcD
     - POSTGRES_DB=windshift
     - LOG_LEVEL=info
     - LOG_FORMAT=json
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=windshift
-    - POSTGRES_PASSWORD=v1ha9ufeMUvRMlh9PDpSlJqaZDugu8Vi
+    - POSTGRES_PASSWORD=ms6fTf2LbIMK3I2Hw1GyjsiNIH6T6YcD
     - POSTGRES_DB=windshift
     volumes:
     - postgres-data:/var/lib/postgresql/data

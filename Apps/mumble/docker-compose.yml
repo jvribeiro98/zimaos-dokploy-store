@@ -9,7 +9,7 @@ services:
     volumes:
     - mumble-data:/data
     environment:
-    - MUMBLE_SUPERUSER_PASSWORD=gS4UDqLBS93aBgnOedBQYlYBAAKuhBae
+    - MUMBLE_SUPERUSER_PASSWORD=xWVa5dGCjj1ttW3CaqQ2qtAVMyZIrZ27
     - MUMBLE_CONFIG_WELCOMETEXT=Welcome to Mumble Server! Low-latency voice chat.
     - MUMBLE_CONFIG_USERS=50
     ports:

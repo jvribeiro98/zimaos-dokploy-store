@@ -9,7 +9,7 @@ services:
     - TZ=UTC
     - NEXT_ENV_IMAGES_ALL_REMOTE=true
     - PUBLIC_ORIGIN=https://localhost
-    - PRISMA_DATABASE_URL=postgresql://teable:YWV7Sw0hVsScdS5wrszJSakHRZcyp4Ut@teable-db:5432/teable
+    - PRISMA_DATABASE_URL=postgresql://teable:gq8gPT62OAIZjwvBHKX1tJDUpUQsM5VK@teable-db:5432/teable
     - PUBLIC_DATABASE_PROXY=${TEABLE_HOST}:${TEABLE_DB_PORT}
     - BACKEND_MAIL_HOST=${BACKEND_MAIL_HOST}
     - BACKEND_MAIL_PORT=${BACKEND_MAIL_PORT}
@@ -36,7 +36,7 @@ services:
     - TZ=UTC
     - POSTGRES_DB=teable
     - POSTGRES_USER=teable
-    - POSTGRES_PASSWORD=YWV7Sw0hVsScdS5wrszJSakHRZcyp4Ut
+    - POSTGRES_PASSWORD=gq8gPT62OAIZjwvBHKX1tJDUpUQsM5VK
     healthcheck:
       test:
       - CMD-SHELL
@@ -48,7 +48,7 @@ services:
     image: ghcr.io/teableio/teable-db-migrate:latest
     environment:
     - TZ=UTC
-    - PRISMA_DATABASE_URL=postgresql://teable:YWV7Sw0hVsScdS5wrszJSakHRZcyp4Ut@teable-db:5432/teable
+    - PRISMA_DATABASE_URL=postgresql://teable:gq8gPT62OAIZjwvBHKX1tJDUpUQsM5VK@teable-db:5432/teable
     depends_on:
       teable-db:
         condition: service_healthy

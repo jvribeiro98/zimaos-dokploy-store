@@ -7,7 +7,7 @@ services:
     - '80'
     environment:
     - AUTH_LOGIN=admin
-    - AUTH_PASSWORD=mKuZacq3t9DCMEFgP0OhMOoK3HS5StfK
+    - AUTH_PASSWORD=LPqQk3IOlnwBYcNmwIrKa4uZEYhiX8Ki
     volumes:
     - agent-zero-data:/a0/usr
     ports:

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       APP_URL: https://localhost
-      ENCRYPTION_KEY: cLtLOolXdJH/UKlov9jqxIJRcG/TX6if1ekp8Q7uHCA=
+      ENCRYPTION_KEY: LCPuBawv1QNpHcS0lUPvrETF83lfXt+S12/e3n0Qzso=
       TRUST_PROXY: 'true'
     volumes:
     - pocket-id-data:/app/data

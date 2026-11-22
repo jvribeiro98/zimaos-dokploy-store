@@ -4,8 +4,8 @@ services:
     image: blinkospace/blinko:1.6.3
     environment:
       NODE_ENV: production
-      NEXTAUTH_SECRET: m44W8ypuGPyhOPPJFsMBB5ZcocNGJ8Yc
-      DATABASE_URL: postgresql://postgres:ACFHw3O4Hi682GUINXqJyqq9oRAKkEED@blinko-postgres:5432/postgres
+      NEXTAUTH_SECRET: HeQ3vVbDf4cNEauiFGUN3J8cLwX2bbAY
+      DATABASE_URL: postgresql://postgres:TPve0JD8f2NMNRmSnCKDEC5jexuIz9Ez@blinko-postgres:5432/postgres
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_BASE_URL: http://localhost
     depends_on:
@@ -28,7 +28,7 @@ services:
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ACFHw3O4Hi682GUINXqJyqq9oRAKkEED
+      POSTGRES_PASSWORD: TPve0JD8f2NMNRmSnCKDEC5jexuIz9Ez
       TZ: Asia/Shanghai
     volumes:
     - blinko-db:/var/lib/postgresql/data

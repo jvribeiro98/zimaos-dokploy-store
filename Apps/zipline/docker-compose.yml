@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     environment:
     - CORE_RETURN_HTTPS=false
-    - CORE_SECRET=aPbBJSUw3bYgso7IVAh9AjuSDDS7CyRxMhovlgueF8B17hzQXDS2ZePqytBOyAMcNXoA66ZRVDGXfO2orJHLug==
+    - CORE_SECRET=CBritZNeNdc1UcY9MdToSutJKoJVXlLpZCnhZTlkySr8a4Aiy/tSxQ6vP7PgoeQN2Wj0L0AlAPH7C+AK6R5plg==
     - CORE_HOSTNAME=0.0.0.0
     - CORE_PORT=3000
     - DATABASE_URL=postgres://postgres:postgres@postgres/postgres

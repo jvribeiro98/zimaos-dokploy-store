@@ -6,7 +6,7 @@ services:
     expose:
     - '8000'
     environment:
-    - LLM_API_KEY=5bcTs14D22yeJIfS7pRaMtSO7ugVuLTQ
+    - LLM_API_KEY=TY48GNwd03KuHyJlfw4sajWZfPs2oEmY
     - LLM_BASE_URL=https://api.openai.com/v1
     - LLM_MODEL=gpt-4o
     ports:

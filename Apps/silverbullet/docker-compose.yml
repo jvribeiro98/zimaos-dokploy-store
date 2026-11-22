@@ -4,7 +4,7 @@ services:
     image: ghcr.io/silverbulletmd/silverbullet:v2
     restart: unless-stopped
     environment:
-    - SB_USER=admin:k6vcyM8WcD3GGzT1
+    - SB_USER=admin:Amk876e5IKfsg6xG
     volumes:
     - silverbullet-space:/space
     expose:

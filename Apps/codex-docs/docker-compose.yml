@@ -6,9 +6,9 @@ services:
     - '3000'
     environment:
     - APP_CONFIG_database_driver=mongodb
-    - APP_CONFIG_database_mongodb_uri=mongodb://mongo:xdAInznvG6P8p4TY@mongo:27017
-    - APP_CONFIG_auth_password=jPuTvIsgXlOfBijF
-    - APP_CONFIG_auth_secret=Eha9RoVd0kwWYzxpVotSQOKaU1ZupnSh
+    - APP_CONFIG_database_mongodb_uri=mongodb://mongo:TvvHZvg1DguyvQki@mongo:27017
+    - APP_CONFIG_auth_password=DbWrR4OthHVISx22
+    - APP_CONFIG_auth_secret=641k9pDTJJv2UZRjahRekIbw1ll0u6Ep
     volumes:
     - uploads:/usr/src/app/uploads
     - db:/usr/src/app/db
@@ -23,7 +23,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=xdAInznvG6P8p4TY
+    - MONGO_INITDB_ROOT_PASSWORD=TvvHZvg1DguyvQki
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db

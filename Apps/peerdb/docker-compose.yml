@@ -8,7 +8,7 @@ services:
     - 5432
     environment:
       PGUSER: postgres
-      POSTGRES_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
+      POSTGRES_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
       POSTGRES_DB: postgres
       POSTGRES_INITDB_ARGS: --locale=C.UTF-8
     volumes:
@@ -36,7 +36,7 @@ services:
       DB: postgres12
       DB_PORT: '5432'
       POSTGRES_USER: postgres
-      POSTGRES_PWD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
+      POSTGRES_PWD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
       POSTGRES_SEEDS: catalog
       DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/production-sql.yaml
     image: temporalio/auto-setup:1.29@sha256:5b3502a3b685f9eff1b925af90c57c9e3dbeccbef367cc28a2a9712c63379312
@@ -87,13 +87,11 @@ services:
     - 8112
     - 8113
     environment:
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      MINIO_ROOT_USER: _peerdb_minioadmin
-      MINIO_ROOT_PASSWORD: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
-      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
+      PEERDB_CATALOG_DATABASE: postgres
       TEMPORAL_HOST_PORT: temporal:7233
       TEMPORAL_CLIENT_CERT: ''
       TEMPORAL_CLIENT_KEY: ''
@@ -102,11 +100,13 @@ services:
       AWS_SECRET_ACCESS_KEY: ''
       AWS_REGION: ''
       AWS_ENDPOINT: ''
-      PEERDB_CATALOG_HOST: catalog
-      PEERDB_CATALOG_PORT: '5432'
-      PEERDB_CATALOG_USER: postgres
-      PEERDB_CATALOG_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
-      PEERDB_CATALOG_DATABASE: postgres
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
       PEERDB_ALLOWED_TARGETS: ''
     depends_on:
       temporal-admin-tools:
@@ -115,13 +115,11 @@ services:
     image: ghcr.io/peerdb-io/flow-snapshot-worker:stable-v0.35.5
     restart: unless-stopped
     environment:
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      MINIO_ROOT_USER: _peerdb_minioadmin
-      MINIO_ROOT_PASSWORD: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
-      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
+      PEERDB_CATALOG_DATABASE: postgres
       TEMPORAL_HOST_PORT: temporal:7233
       TEMPORAL_CLIENT_CERT: ''
       TEMPORAL_CLIENT_KEY: ''
@@ -130,11 +128,13 @@ services:
       AWS_SECRET_ACCESS_KEY: ''
       AWS_REGION: ''
       AWS_ENDPOINT: ''
-      PEERDB_CATALOG_HOST: catalog
-      PEERDB_CATALOG_PORT: '5432'
-      PEERDB_CATALOG_USER: postgres
-      PEERDB_CATALOG_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
-      PEERDB_CATALOG_DATABASE: postgres
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
     depends_on:
       temporal-admin-tools:
         condition: service_healthy
@@ -142,13 +142,11 @@ services:
     image: ghcr.io/peerdb-io/flow-worker:stable-v0.35.5
     restart: unless-stopped
     environment:
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      MINIO_ROOT_USER: _peerdb_minioadmin
-      MINIO_ROOT_PASSWORD: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
-      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
+      PEERDB_CATALOG_HOST: catalog
+      PEERDB_CATALOG_PORT: '5432'
+      PEERDB_CATALOG_USER: postgres
+      PEERDB_CATALOG_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
+      PEERDB_CATALOG_DATABASE: postgres
       TEMPORAL_HOST_PORT: temporal:7233
       TEMPORAL_CLIENT_CERT: ''
       TEMPORAL_CLIENT_KEY: ''
@@ -157,11 +155,13 @@ services:
       AWS_SECRET_ACCESS_KEY: ''
       AWS_REGION: ''
       AWS_ENDPOINT: ''
-      PEERDB_CATALOG_HOST: catalog
-      PEERDB_CATALOG_PORT: '5432'
-      PEERDB_CATALOG_USER: postgres
-      PEERDB_CATALOG_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
-      PEERDB_CATALOG_DATABASE: postgres
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      MINIO_ROOT_USER: _peerdb_minioadmin
+      MINIO_ROOT_PASSWORD: C1VCgcs4nzfpLAZukrJANB602BGZow5t
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
+      PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket
     depends_on:
       temporal-admin-tools:
         condition: service_healthy
@@ -173,9 +173,9 @@ services:
       PEERDB_CATALOG_HOST: catalog
       PEERDB_CATALOG_PORT: '5432'
       PEERDB_CATALOG_USER: postgres
-      PEERDB_CATALOG_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
+      PEERDB_CATALOG_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
       PEERDB_CATALOG_DATABASE: postgres
-      PEERDB_PASSWORD: K90e7s2forKw67T8sjdJPkRwZZTDH6XH
+      PEERDB_PASSWORD: KCuSXJwzoxI28eRLLIFYvzEVEysEZliI
       PEERDB_FLOW_SERVER_ADDRESS: grpc://flow-api:8112
       RUST_LOG: info
       RUST_BACKTRACE: '1'
@@ -193,11 +193,11 @@ services:
       PEERDB_CATALOG_HOST: catalog
       PEERDB_CATALOG_PORT: '5432'
       PEERDB_CATALOG_USER: postgres
-      PEERDB_CATALOG_PASSWORD: XAorIRLDEnzNtHv2MpcYcFnZULueIBre
+      PEERDB_CATALOG_PASSWORD: 3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x
       PEERDB_CATALOG_DATABASE: postgres
-      DATABASE_URL: postgres://postgres:XAorIRLDEnzNtHv2MpcYcFnZULueIBre@catalog:5432/postgres
+      DATABASE_URL: postgres://postgres:3uzuo8NXH3dp8WnKtBAiwVZ3iarwHB4x@catalog:5432/postgres
       PEERDB_FLOW_SERVER_HTTP: http://flow-api:8113
-      NEXTAUTH_SECRET: blgDflgcNX0oTTswfEAuwUmRdAFMTmXK
+      NEXTAUTH_SECRET: cRLgur9x3hUnFbsi8LBp9T6OXqxuVfU1
       NEXTAUTH_URL: http://localhost:3000
       PEERDB_ALLOWED_TARGETS: ''
       PEERDB_CLICKHOUSE_ALLOWED_DOMAINS: ''
@@ -218,9 +218,9 @@ services:
     - 9001
     environment:
       PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ACCESS_KEY_ID: _peerdb_minioadmin
-      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
+      PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_SECRET_ACCESS_KEY: C1VCgcs4nzfpLAZukrJANB602BGZow5t
       MINIO_ROOT_USER: _peerdb_minioadmin
-      MINIO_ROOT_PASSWORD: nFpngaZetdcBVwIR5AON6AwbgOwkr2zR
+      MINIO_ROOT_PASSWORD: C1VCgcs4nzfpLAZukrJANB602BGZow5t
       PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_REGION: us-east-1
       PEERDB_CLICKHOUSE_AWS_CREDENTIALS_AWS_ENDPOINT_URL_S3: http://minio:9000
       PEERDB_CLICKHOUSE_AWS_S3_BUCKET_NAME: peerdbbucket

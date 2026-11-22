@@ -7,9 +7,9 @@ services:
     - /DATA/AppData/$AppID/uploads:/app/uploads
     environment:
       DATABASE_URL: postgresql://maybe:maybe@db:5432/maybe
-      SECRET_KEY_BASE: hGDj4bNUJ0yxInJSqAPNT1g2n7F3Cs/yGu7jb6K3a7w883B0olYwVf7FxZyzKDIUsHTEOGVszXrFWC++xFaYYA==
+      SECRET_KEY_BASE: CVQfP3FbbTMRH09OGZ+eSt+rfykNTVOXXjo8Oc8/zWB6ua2SNgKxSxGfxDodfHMIKT6w6+6Iz8ivZgcjO4QUKg==
       SELF_HOSTED: 'True'
-      SYNTH_API_KEY: SjdjgkVbNx5igY88KrGMvSFGNPGcabZ0nkF5XqY9MIo=
+      SYNTH_API_KEY: 5uZ9+ZFgDcJ5NzUINEkLX6Peht0TD4rM09QKWHxf3YM=
       RAILS_FORCE_SSL: 'false'
       RAILS_ASSUME_SSL: 'false'
       GOOD_JOB_EXECUTION_MODE: async

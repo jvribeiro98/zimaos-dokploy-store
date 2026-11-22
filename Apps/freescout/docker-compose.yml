@@ -5,10 +5,10 @@ services:
     volumes:
     - freescout-db-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 7VuKrst8KgDHlZvw
+      MYSQL_ROOT_PASSWORD: cYYCzloit2hLHrs3
       MYSQL_DATABASE: freescout
       MYSQL_USER: freescout_user
-      MYSQL_PASSWORD: ztTOl2u0c4cEooIu
+      MYSQL_PASSWORD: XgI1NeGWrXeBGhdJ
     healthcheck:
       test:
       - CMD
@@ -34,7 +34,7 @@ services:
         condition: service_healthy
     environment:
     - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASS=dSAUs0JnYiiAj6UE
+    - ADMIN_PASS=PmfiFngl46fRqsPj
     - ADMIN_FIRST_NAME=Admin
     - ADMIN_LAST_NAME=User
     - SITE_URL=http://localhost
@@ -43,7 +43,7 @@ services:
     - DB_TYPE=mysql
     - DB_NAME=freescout
     - DB_USER=freescout_user
-    - DB_PASS=ztTOl2u0c4cEooIu
+    - DB_PASS=XgI1NeGWrXeBGhdJ
     - APPLICATION_NAME=Customer Support
     - SETUP_TYPE=AUTO
     - ENABLE_AUTO_UPDATE=TRUE

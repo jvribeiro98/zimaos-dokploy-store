@@ -7,7 +7,7 @@ services:
     - 5656
     environment:
     - GEL_SERVER_SECURITY=strict
-    - GEL_SERVER_PASSWORD=4GlrgJnhlDByuX8bxvyYACPA
+    - GEL_SERVER_PASSWORD=hdqfG8hlgo4jn65sLwaWv4zg
     - GEL_SERVER_TLS_CERT_MODE=generate_self_signed
     - GEL_SERVER_HTTP_ENDPOINT_SECURITY=optional
     - GEL_SERVER_ADMIN_UI=enabled

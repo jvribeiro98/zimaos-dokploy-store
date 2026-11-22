@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - OLLAMA_BASE_URL=http://ollama:11434
-    - WEBUI_SECRET_KEY=R3QE0SKEeLWJfEUcVpW7p8CqY2TbfDqY
+    - WEBUI_SECRET_KEY=BNgeWE4XbVCEbyqfwqeQWUWa3AQjsBJp
     volumes:
     - open-webui:/app/backend/data
     extra_hosts:

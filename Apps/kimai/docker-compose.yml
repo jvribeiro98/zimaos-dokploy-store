@@ -5,13 +5,13 @@ services:
     restart: unless-stopped
     environment:
       APP_ENV: prod
-      DATABASE_URL: mysql://kimai:82xJ03FJqZ9IgN3c4QyJuGiMoGnp1Yt0@db/kimai
+      DATABASE_URL: mysql://kimai:xog8S48en64eon07g3TK5bYOBlHBvL7s@db/kimai
       TRUSTED_PROXIES: localhost
-      APP_SECRET: 7jcGQj6w6WMD9nbvgpgao7Hud30Uv09C
+      APP_SECRET: UOjgb3l8mJxMEhUcqrE52aScjziS47zX
       MAILER_FROM: ${KI_MAILER_FROM:-admin@kimai.local}
       MAILER_URL: ${KI_MAILER_URL:-null://null}
       ADMINMAIL: admin@kimai.local
-      ADMINPASS: pOIPdOODsghr4qLsaiFLOTgqAfMhrzzE
+      ADMINPASS: wjVOPKJjuWTLyP1rc1KJawCOHcTJTGVI
     volumes:
     - kimai-data:/opt/kimai/var
     depends_on:
@@ -27,8 +27,8 @@ services:
     environment:
     - MYSQL_DATABASE=kimai
     - MYSQL_USER=kimai
-    - MYSQL_PASSWORD=82xJ03FJqZ9IgN3c4QyJuGiMoGnp1Yt0
-    - MYSQL_ROOT_PASSWORD=SHK49DARVoVks78HMsNqX5qsBrHAfzeX
+    - MYSQL_PASSWORD=xog8S48en64eon07g3TK5bYOBlHBvL7s
+    - MYSQL_ROOT_PASSWORD=8up2fQcsUkG5LDaO6MuMCVno6K0oHTnx
     volumes:
     - mysql-data:/var/lib/mysql
     command:

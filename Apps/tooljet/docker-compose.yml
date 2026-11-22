@@ -34,7 +34,7 @@ services:
     - /DATA/AppData/$AppID/postgres:/var/lib/postgresql/data
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=lEmXwa5t4D6ArTrTFT8XFM0f9PDpn2Wm
+    - POSTGRES_PASSWORD=rGtsHWj5rttp8iHJ9tJp0S1JS6rKi2LU
 volumes:
   certs: null
   logs: null

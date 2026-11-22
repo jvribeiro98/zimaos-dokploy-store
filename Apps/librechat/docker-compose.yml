@@ -16,9 +16,9 @@ services:
     - SEARCH=true
     - NO_INDEX=true
     - MEILI_NO_ANALYTICS=true
-    - MEILI_MASTER_KEY=9Ub8bRiJuzwLoln2fJU6KRTd3NsSKxO7
-    - JWT_SECRET=xKWDqfyO0wOPn2HaC52viV0SGDE4RCJ0jsVGNGJHOjQdcHalMzRD6GjB97aXitTQ
-    - JWT_REFRESH_SECRET=nDRiTlMZkNRxoE2JQd4lHnPTEEUHOuxWasHACIxJbptWbIbiR5Mx8XypEaHZa28y
+    - MEILI_MASTER_KEY=IkeQ9cnFLPJB43YFxZfXrDxR1c3vmvOn
+    - JWT_SECRET=rUKyOdVVZPxu0g7qeIgm1DLDaeAAKAE6ZaZlW2ezAuHPrNjEkKjQA6uasGdiTb0x
+    - JWT_REFRESH_SECRET=t32KaKNDG2APvWWqmJ0CRIHVjCdm8ErWs7KZW0mz0DpUmmDzV7slpB6QddhCKhBk
     - CREDS_KEY=f34be427ebb29de8d88c107a71546019685ed8b241d8f2ed00c3df97ad2566f0
     - CREDS_IV=e2341419ec3dd3d19b13a1a87fafcbfb
     - RAG_PORT=${RAG_PORT:-8000}
@@ -56,7 +56,7 @@ services:
     environment:
     - MEILI_HOST=http://meilisearch:7700
     - MEILI_NO_ANALYTICS=true
-    - MEILI_MASTER_KEY=9Ub8bRiJuzwLoln2fJU6KRTd3NsSKxO7
+    - MEILI_MASTER_KEY=IkeQ9cnFLPJB43YFxZfXrDxR1c3vmvOn
     volumes:
     - meili_data:/meili_data
   vectordb:
@@ -64,7 +64,7 @@ services:
     environment:
     - POSTGRES_DB=librechat_db
     - POSTGRES_USER=librechat_user
-    - POSTGRES_PASSWORD=HT3fa84A1ebxba5R
+    - POSTGRES_PASSWORD=wxMl7MDYlHsN3qNX
     restart: always
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -75,13 +75,13 @@ services:
     - VECTOR_DB_TYPE=pgvector
     - POSTGRES_DB=librechat_db
     - POSTGRES_USER=librechat_user
-    - POSTGRES_PASSWORD=HT3fa84A1ebxba5R
+    - POSTGRES_PASSWORD=wxMl7MDYlHsN3qNX
     - RAG_PORT=${RAG_PORT:-8000}
     - OPENAI_API_KEY=
     - RAG_OPENAI_API_KEY=
     - GOOGLE_KEY=
     - RAG_GOOGLE_API_KEY=
-    - JWT_SECRET=xKWDqfyO0wOPn2HaC52viV0SGDE4RCJ0jsVGNGJHOjQdcHalMzRD6GjB97aXitTQ
+    - JWT_SECRET=rUKyOdVVZPxu0g7qeIgm1DLDaeAAKAE6ZaZlW2ezAuHPrNjEkKjQA6uasGdiTb0x
     - COLLECTION_NAME=${COLLECTION_NAME:-librechat_collection}
     - CHUNK_SIZE=1500
     - CHUNK_OVERLAP=100

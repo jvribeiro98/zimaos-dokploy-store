@@ -5,7 +5,7 @@ services:
     cap_add:
     - IPC_LOCK
     environment:
-      VAULT_DEV_ROOT_TOKEN_ID: e1e012dGBXcsfhYcEVICtOiN82ofGyIi
+      VAULT_DEV_ROOT_TOKEN_ID: WgiMDt9NrPWOusPUOdEP2MKzA2XOyT9H
       VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
     expose:
     - '8200'

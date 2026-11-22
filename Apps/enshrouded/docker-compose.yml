@@ -12,7 +12,7 @@ services:
     - enshrouded-persistent-data:/opt/enshrouded
     environment:
     - SERVER_NAME=Enshrouded Dokploy
-    - SERVER_PASSWORD=XpgDNqO2LXuqTZo
+    - SERVER_PASSWORD=zKxVqA3B0zaVsrh
     - SERVER_SLOT_COUNT=6
     - UPDATE_CRON=0 3 * * *
     - PUID=4711

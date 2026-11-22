@@ -10,11 +10,11 @@ services:
     environment:
     - DISABLE_SIGNUPS
     - NEXTAUTH_URL=http://localhost
-    - NEXTAUTH_SECRET=oGocpMWoxuAK3w1pBCMkgxh483czI0Gw+Oo98dN52uQ=
+    - NEXTAUTH_SECRET=nVjv2uw1Dh0SmgK3ogw9TQ5LpOqI+rnPIJn00vQsLb0=
     - MEILI_ADDR=http://meilisearch:7700
     - BROWSER_WEB_URL=http://chrome:9222
     - DATA_DIR=/data
-    - MEILI_MASTER_KEY=7eBusiMr/q/iUyTpbCM98M0okg1HE67GqxCyVEFtINY=
+    - MEILI_MASTER_KEY=cKyGn1VY5kSNed3ozEm+jpxVztAkvjJulAs9cOV3pKA=
     ports:
     - target: 3000
       published: "3000"
@@ -33,7 +33,7 @@ services:
     image: getmeili/meilisearch:v1.6
     restart: unless-stopped
     environment:
-    - MEILI_MASTER_KEY=7eBusiMr/q/iUyTpbCM98M0okg1HE67GqxCyVEFtINY=
+    - MEILI_MASTER_KEY=cKyGn1VY5kSNed3ozEm+jpxVztAkvjJulAs9cOV3pKA=
     - MEILI_NO_ANALYTICS=true
     volumes:
     - meilisearch-data:/meili_data

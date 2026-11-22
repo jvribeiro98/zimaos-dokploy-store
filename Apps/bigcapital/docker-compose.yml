@@ -33,15 +33,15 @@ services:
     - MAIL_FROM_ADDRESS=noreply@localhost
     - DB_HOST=mysql
     - DB_USER=bigcapital
-    - DB_PASSWORD=0oZ55P8nF7AuKj0mo52g864pc9taWhE6
+    - DB_PASSWORD=qlEAzPFzHRUWWWXiKk4rWIO6jHOhImo2
     - DB_CHARSET=utf8mb4
     - SYSTEM_DB_NAME=bigcapital
     - TENANT_DB_NAME_PERFIX=bigcapital_tenant_
-    - JWT_SECRET=b416c6ff3e14923f0673c289dab9d6948f3541db3d0d5273b43e0bf5377bc0999baac6d863bd54f512edd085dab65a336ee4011fda0bf5800a3a67982da844fb
+    - JWT_SECRET=a42d7c6cbf31c4f7a59550869bd49899bd9a42d72e2c4d1204835f199e1c7fe1e72020a80eedd2f9a0da0eafe0fac56532be9723feccfe5b2281a18124fa14f2
     - MONGODB_DATABASE_URL=mongodb://mongo/bigcapital
     - BASE_URL=https://localhost
     - AGENDASH_AUTH_USER=admin
-    - AGENDASH_AUTH_PASSWORD=7MizcGysSLEFSw4y01W0HpuC
+    - AGENDASH_AUTH_PASSWORD=NcoOgJNxJfJ4j9u8O9XVxGDl
     - SIGNUP_DISABLED=false
     - SIGNUP_ALLOWED_DOMAINS=
     - SIGNUP_ALLOWED_EMAILS=
@@ -77,8 +77,8 @@ services:
     environment:
     - MYSQL_DATABASE=bigcapital
     - MYSQL_USER=bigcapital
-    - MYSQL_PASSWORD=0oZ55P8nF7AuKj0mo52g864pc9taWhE6
-    - MYSQL_ROOT_PASSWORD=9pe5jOOEtvqVRwMGJVJy1AdtMwEhZcfN
+    - MYSQL_PASSWORD=qlEAzPFzHRUWWWXiKk4rWIO6jHOhImo2
+    - MYSQL_ROOT_PASSWORD=EcBMO3ydPol4Xz1waxma8IIjBFUGxe7T
     volumes:
     - mysql:/var/lib/mysql
     expose:

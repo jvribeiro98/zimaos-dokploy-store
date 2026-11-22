@@ -16,7 +16,7 @@ services:
     - /DATA/AppData/spliit/data:/var/lib/DBql/data
     environment:
       POSTGRES_USER: spliit-admin
-      POSTGRES_PASSWORD: ff5NtfWD27Q9SOCtnplUPfYv6w3nfFE8
+      POSTGRES_PASSWORD: QQ8sBANKliJCudioYGgzUxqAaOTt5tf4
       POSTGRES_DB: spliit
       POSTGRES_INITDB_ARGS: --data-checksums
       POSTGRES_HOST_AUTH_METHOD: trust

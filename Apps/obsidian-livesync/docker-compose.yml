@@ -5,7 +5,7 @@ services:
     user: 0:0
     environment:
     - COUCHDB_USER=admin
-    - COUCHDB_PASSWORD=4OzVMCd3EP1Bi3bfps37YBAwEXGkwd6H
+    - COUCHDB_PASSWORD=Qf8cPh6bMsH5jLTGoNqnAQ15JvjqdR5V
     volumes:
     - couchdb-data:/opt/couchdb/data
     - /DATA/AppData/$AppID/local.ini:/opt/couchdb/etc/local.ini

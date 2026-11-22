@@ -11,7 +11,7 @@ services:
       DATABASE_MYSQL_HOST: mysql
       DATABASE_MYSQL_NAME: movary
       DATABASE_MYSQL_USER: movary_user
-      DATABASE_MYSQL_PASSWORD: yrhWLprQxsjG3sXHq2aDug1sAkZZCOCu
+      DATABASE_MYSQL_PASSWORD: MhGsnnzecsUMXd2YjfGWevkRMIklDUjh
       APP_URL: http://localhost
       APP_ENV: production
     volumes:
@@ -28,8 +28,8 @@ services:
     environment:
       MYSQL_DATABASE: movary
       MYSQL_USER: movary_user
-      MYSQL_PASSWORD: yrhWLprQxsjG3sXHq2aDug1sAkZZCOCu
-      MYSQL_ROOT_PASSWORD: H7ZwnBekK8zIpnhKNPCc4sSsNjQVU1hD
+      MYSQL_PASSWORD: MhGsnnzecsUMXd2YjfGWevkRMIklDUjh
+      MYSQL_ROOT_PASSWORD: zexlYVMLPLygXg86ssbJPtXqnIHoAhJA
       MYSQL_INNODB_BUFFER_POOL_SIZE: 128M
       MYSQL_INNODB_LOG_FILE_SIZE: 64M
     volumes:

@@ -6,7 +6,7 @@ services:
     environment:
       DATABASE_URL: postgresql://dossier:${POSTGRES_PASSWORD:?Keep the generated database password}@dossier-postgres:5432/dossier
       DOSSIER_PASSWORD: ${DOSSIER_PASSWORD:-}
-      DOSSIER_ADMIN_PASSWORD: aIAw5m2lbrB66oVFrzYXIO8y
+      DOSSIER_ADMIN_PASSWORD: rmPukzXMGFcbc2WvX22EM939
       DOSSIER_SECRET: ${DOSSIER_SECRET:?Keep the generated DOSSIER_SECRET}
       DOSSIER_DATA_DIR: /data
       DOSSIER_TELEMETRY: 'off'

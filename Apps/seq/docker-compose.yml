@@ -6,7 +6,7 @@ services:
     environment:
       ACCEPT_EULA: Y
       SEQ_API_CANONICALURI: https://localhost
-      SEQ_FIRSTRUN_ADMINPASSWORD: 0GaI6t55ly2RXaMQ87uuHY7OdRufn3YD
+      SEQ_FIRSTRUN_ADMINPASSWORD: dMUChzbkrO5DDRag9mf26Ujdq9RZDwQc
     expose:
     - '80'
     volumes:

@@ -6,7 +6,7 @@ services:
     expose:
     - 3451
     environment:
-    - SUPERADMIN_TOKEN=bXL1VktjPp5STfazRePfCsJnccMh7taN
+    - SUPERADMIN_TOKEN=yJ3zYrNZ1RqCfzkKbP7mpCfqRgwPN6jE
     - WHATSAPP_STORAGE_PATH=/app/whatsapp_sessions
     - SQLITE_PATH=/app/whatsapp_sessions/waxum.db
     volumes:

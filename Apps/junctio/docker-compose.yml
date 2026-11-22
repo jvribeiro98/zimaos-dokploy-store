@@ -6,7 +6,7 @@ services:
     expose:
     - 3000
     environment:
-      JUNCTIO_SECRET: d2c4dbc55b944c0d3a95b95a852587ecc2c7c94907188786ebc077b4077e5c2ab8174a713ffb42a03af857a70e5946e4d924b937f744801f1b85e4e6d3e203e5
+      JUNCTIO_SECRET: 4bafb5efd36ea4ab13b58a2ae2635a9c37b0b550fe45071492c23b42f0b2e3ee177f570f1e94e1d3f407f8ef99ece273aea7b715a8c24b83ea95c18c33f473c4
       JUNCTIO_BASE_URL: https://localhost
       JUNCTIO_TRUST_PROXY: 'true'
     volumes:

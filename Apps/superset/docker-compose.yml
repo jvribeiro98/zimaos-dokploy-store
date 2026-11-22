@@ -9,12 +9,12 @@ services:
     volumes:
     - /DATA/AppData/$AppID/superset/superset_config.py:/etc/superset/superset_config.py
     environment:
-      SECRET_KEY: 9alDD2XCBZke8tBeEdiU1vpMcbfY8Q
+      SECRET_KEY: mIKRxwH7YbY26PMWDZ6tIHl8TGgzXh
       MAPBOX_API_KEY: ''
       POSTGRES_USER: superset
-      POSTGRES_PASSWORD: GSDjwo96jJIm6xMiO9iWUwMM1shbKm
+      POSTGRES_PASSWORD: gSBuhTQ4ExpiNYc6sv3OCUbUyDT2Up
       POSTGRES_DB: superset
-      REDIS_PASSWORD: RdetCbUcMbkESeqMzFG9ALTucq4Ztd
+      REDIS_PASSWORD: JSERCTzfDCOdlPIpHmOqp0PYOzvv9Z
       POSTGRES_HOST: superset_postgres
       REDIS_HOST: superset_redis
     ports:
@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: superset
-      POSTGRES_PASSWORD: GSDjwo96jJIm6xMiO9iWUwMM1shbKm
+      POSTGRES_PASSWORD: gSBuhTQ4ExpiNYc6sv3OCUbUyDT2Up
       POSTGRES_DB: superset
     volumes:
     - superset_postgres_data:/var/lib/postgresql

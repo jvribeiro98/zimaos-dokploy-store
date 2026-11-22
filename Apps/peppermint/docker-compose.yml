@@ -7,7 +7,7 @@ services:
     - peppermint-postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: peppermint
-      POSTGRES_PASSWORD: SMVr7GaqZTjEvAzH9GRBqDvApu0wskDz
+      POSTGRES_PASSWORD: aRGbmq0DfXCkbMrh8OzZjfFyLg97d5xM
       POSTGRES_DB: peppermint
     healthcheck:
       test:
@@ -24,9 +24,9 @@ services:
         condition: service_healthy
     environment:
       DB_USERNAME: peppermint
-      DB_PASSWORD: SMVr7GaqZTjEvAzH9GRBqDvApu0wskDz
+      DB_PASSWORD: aRGbmq0DfXCkbMrh8OzZjfFyLg97d5xM
       DB_HOST: peppermint-postgres
-      SECRET: Wyj+w8FBJfwu9nr5Z7YiAmIXHRWra6Z252LjCQk8u2o=
+      SECRET: 6uQVWVc3u2DfV9urz5Ej9VSRaq59G2c+uXwedUv5QDM=
     ports:
     - target: 3000
       published: "3000"

@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     init: true
     environment:
-      OWNER_TOKEN: 4pYv9dICYb9NumMpZGTiH3ceSBTfk77DYOCoqdWxIoiyyzsL
+      OWNER_TOKEN: HhDHXIVHRCszXRngt3VK4viz2ekM0D9XHJ6bvIA3NeT29hjG
       OWNER_ID: opendots-owner
       APP_ORIGIN: https://localhost
       INTELLIGENCE_API_KEY: ''
@@ -20,7 +20,7 @@ services:
       WEB_SEARCH_PROVIDER: parallel
       PARALLEL_API_KEY: ''
       BROWSER_URL: http://opendots-browser:4311
-      BROWSER_SECRET: tLVTGLTRuPDrQ7DcNa2oPQEykTuTsieKKXvDIISxemtdM5d9
+      BROWSER_SECRET: 9xm7nb4nOpJSlo8hdjlRzdh54gmbH4mZdzB0mUfbVnjbxtY6
       VOICE_API_KEY: ''
       VOICE_MODEL: ''
       VOICE_NAME: marin
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
     init: true
     environment:
-      BROWSER_SECRET: tLVTGLTRuPDrQ7DcNa2oPQEykTuTsieKKXvDIISxemtdM5d9
+      BROWSER_SECRET: 9xm7nb4nOpJSlo8hdjlRzdh54gmbH4mZdzB0mUfbVnjbxtY6
     expose:
     - '4311'
     shm_size: 256mb

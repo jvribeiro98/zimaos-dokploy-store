@@ -4,8 +4,8 @@ services:
     image: chiefonboarding/chiefonboarding:v2.2.5
     restart: unless-stopped
     environment:
-    - SECRET_KEY=HLCSELoqz89aNeqc
-    - DATABASE_URL=postgres://postgres:0Jkmuw4DrCvnNztt@db:5432/chiefonboarding
+    - SECRET_KEY=uMkzBzf3bXhkCPNA
+    - DATABASE_URL=postgres://postgres:s5F6I2QPapdqHGV1@db:5432/chiefonboarding
     - ALLOWED_HOSTS=localhost
     expose:
     - 8000
@@ -19,7 +19,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=0Jkmuw4DrCvnNztt
+    - POSTGRES_PASSWORD=s5F6I2QPapdqHGV1
     - POSTGRES_DB=chiefonboarding
     volumes:
     - postgres_data:/var/lib/postgresql/data

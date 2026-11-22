@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=K9nfdqyqtYhLtAcYHEHUuJ21rYq7mPdl
+    - POSTGRES_PASSWORD=qLP9jQHEOER9PJCGSlox1fEFT0wsxvTO
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -28,7 +28,7 @@ services:
     - cp /pgadmin4/pgpass /var/lib/pgadmin/pgpass && chmod 600 /var/lib/pgadmin/pgpass && exec /entrypoint.sh
     environment:
     - PGADMIN_DEFAULT_EMAIL=admin@example.com
-    - PGADMIN_DEFAULT_PASSWORD=l6eGe2MUGPGZLqoC
+    - PGADMIN_DEFAULT_PASSWORD=e6FBGJzNdV0XPcKJ
     - PGADMIN_CONFIG_SERVER_MODE=False
     - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
     - PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json

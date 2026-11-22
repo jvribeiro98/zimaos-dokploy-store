@@ -7,10 +7,10 @@ services:
     - 8080
     environment:
     - LEAN_APP_URL=http://localhost
-    - LEAN_SESSION_PASSWORD=lDLyyBPqpKbwnAdH9goLivUqu2A1AGd6
+    - LEAN_SESSION_PASSWORD=bzKzqHftOrBTreJbjKnhnf62hbx6CFWM
     - LEAN_DB_HOST=db
     - LEAN_DB_USER=leantime
-    - LEAN_DB_PASSWORD=vBeaDD3I8dexlTvf
+    - LEAN_DB_PASSWORD=k3ITF1kGJa1uMFpy
     - LEAN_DB_DATABASE=leantime
     volumes:
     - leantime-files:/var/www/html/userfiles
@@ -25,10 +25,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=5dzvib3dyS4qMzb1
+    - MYSQL_ROOT_PASSWORD=JDbvnOlIIP6a0x89
     - MYSQL_DATABASE=leantime
     - MYSQL_USER=leantime
-    - MYSQL_PASSWORD=vBeaDD3I8dexlTvf
+    - MYSQL_PASSWORD=k3ITF1kGJa1uMFpy
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
     - db-data:/var/lib/mysql

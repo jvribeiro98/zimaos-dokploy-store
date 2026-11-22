@@ -338,10 +338,10 @@ services:
     environment:
       SITE_NAME: frappe.lending
       MAIN_DOMAIN: ${main_domain}
-      ADMIN_PASSWORD: bbyOyZS5DrGboWjh3hk52cPRPXJkqwLn
+      ADMIN_PASSWORD: d3ORvtEULa9vB58dC4Q5WVXV2RbNSXy6
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
+      DB_ROOT_PASSWORD: WZyV2p5OAxWMGJbo3AG1RvGDDD4YZ05c
       INSTALL_APP_ARGS: --install-app erpnext --install-app lending
     restart: unless-stopped
   migration:
@@ -382,8 +382,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
-    - MARIADB_ROOT_PASSWORD=Jqh9snAVrbun7IpYLEtys58PlY0bvfKv
+    - MYSQL_ROOT_PASSWORD=WZyV2p5OAxWMGJbo3AG1RvGDDD4YZ05c
+    - MARIADB_ROOT_PASSWORD=WZyV2p5OAxWMGJbo3AG1RvGDDD4YZ05c
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

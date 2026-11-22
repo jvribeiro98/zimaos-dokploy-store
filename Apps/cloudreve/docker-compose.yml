@@ -12,7 +12,7 @@ services:
     - CR_CONF_Database.Type=postgres
     - CR_CONF_Database.Host=postgresql
     - CR_CONF_Database.User=cloudreve
-    - CR_CONF_Database.Password=e8jbj4IXtYD0mE3uAfT8ujtf8BvdNC19
+    - CR_CONF_Database.Password=d7U1jacf1aSAAUA7eYZC9FD7MC4s5gQ8
     - CR_CONF_Database.Name=cloudreve
     - CR_CONF_Database.Port=5432
     - CR_CONF_Redis.Server=redis:6379
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=cloudreve
-    - POSTGRES_PASSWORD=e8jbj4IXtYD0mE3uAfT8ujtf8BvdNC19
+    - POSTGRES_PASSWORD=d7U1jacf1aSAAUA7eYZC9FD7MC4s5gQ8
     - POSTGRES_DB=cloudreve
     volumes:
     - postgres_data:/var/lib/postgresql/data

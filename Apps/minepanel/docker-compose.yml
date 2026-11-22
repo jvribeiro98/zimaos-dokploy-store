@@ -6,8 +6,8 @@ services:
     environment:
     - NODE_ENV=production
     - FRONTEND_URL=http://localhost
-    - JWT_SECRET=saB3q5fhjCTI25pp4R8p2kzLzK5A/+nhBHbMr1yrBZ0=
-    - CLIENT_PASSWORD=sGdF7NxfPeB8M9sw
+    - JWT_SECRET=l29+3YDKAun3ew5QOYsmAUrVJdj1aS+CfdFl1EXTCLI=
+    - CLIENT_PASSWORD=KJhHvTKamrFy4IJF
     - CLIENT_USERNAME=admin
     - BASE_DIR=/app
     volumes:

@@ -7,8 +7,8 @@ services:
       MAIN_URL: https://localhost
       FRONTEND_URL: https://localhost
       NEXT_PUBLIC_BACKEND_URL: https://localhost/api
-      JWT_SECRET: /6pSDNApiG36Bh5qltAVxC9NX63xqibj6o5QrQK7+JA=
-      DATABASE_URL: postgresql://postiz:1GZh3YCEKNcZTSwhMeWKRLtPm6YmsJlz@postiz-postgres:5432/postiz
+      JWT_SECRET: 7t49QH8BiB6cidCC+ezhnt1cP2OSUXRjMHTQZq/b4dE=
+      DATABASE_URL: postgresql://postiz:Wkev0WRDtv4lLV2Dg9xtuE8EiVa2ogQ3@postiz-postgres:5432/postiz
       REDIS_URL: redis://postiz-redis:6379
       BACKEND_INTERNAL_URL: http://127.0.0.1:3000
       TEMPORAL_ADDRESS: temporal:7233
@@ -48,7 +48,7 @@ services:
     image: postgres:17-alpine
     restart: always
     environment:
-      POSTGRES_PASSWORD: 1GZh3YCEKNcZTSwhMeWKRLtPm6YmsJlz
+      POSTGRES_PASSWORD: Wkev0WRDtv4lLV2Dg9xtuE8EiVa2ogQ3
       POSTGRES_USER: postiz
       POSTGRES_DB: postiz
     volumes:
@@ -91,7 +91,7 @@ services:
     image: postgres:16
     restart: always
     environment:
-      POSTGRES_PASSWORD: 2bw0QAfzBpJ1TQXHwDJxdmn5PvUCFGo2
+      POSTGRES_PASSWORD: rlLGVkbGA15UU8xoysV4sqeuyIP8cMUm
       POSTGRES_USER: temporal
     volumes:
     - temporal-pg-data:/var/lib/postgresql/data
@@ -114,7 +114,7 @@ services:
     - DB=postgres12
     - DB_PORT=5432
     - POSTGRES_USER=temporal
-    - POSTGRES_PWD=2bw0QAfzBpJ1TQXHwDJxdmn5PvUCFGo2
+    - POSTGRES_PWD=rlLGVkbGA15UU8xoysV4sqeuyIP8cMUm
     - POSTGRES_SEEDS=temporal-postgresql
     - ENABLE_ES=true
     - ES_SEEDS=temporal-elasticsearch

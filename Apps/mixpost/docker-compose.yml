@@ -10,7 +10,7 @@ services:
       APP_URL: http://${APP_DOMAIN}
       DB_DATABASE: mixpost_db
       DB_USERNAME: mixpost_user
-      DB_PASSWORD: 7vZD5rSQOsiq03NSGYHrIGfuTg6pbS4d
+      DB_PASSWORD: czO08ibB1r8CgFLWDPEJgxWSROllFl7q
     volumes:
     - storage:/var/www/html/storage/app
     - logs:/var/www/html/storage/logs
@@ -27,7 +27,7 @@ services:
     environment:
       MYSQL_DATABASE: mixpost_db
       MYSQL_USER: mixpost_user
-      MYSQL_PASSWORD: 7vZD5rSQOsiq03NSGYHrIGfuTg6pbS4d
+      MYSQL_PASSWORD: czO08ibB1r8CgFLWDPEJgxWSROllFl7q
     volumes:
     - mysql:/var/lib/mysql
     healthcheck:

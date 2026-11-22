@@ -8,7 +8,7 @@ services:
     environment:
     - SERVER_URL=https://localhost
     - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=L1C/F6/gVKDCmr6Wy7QZSqFB+M/m2HtHnILOJcPj3H2XBUG48v7ByAeOD0mvrMD9mmf9ALEe+uz+yRRyy1fUyA==
+    - AUTHENTICATION_API_KEY=WvtVQJHQey+ddxs1ikVzNOGJDGRxc1D8StelWQltNppQX0zR0DUfBfRGVkxw/VDH0EJW+2N3ZruHBSzzYIvirg==
     - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
     - LANGUAGE=en
     - CONFIG_SESSION_PHONE_CLIENT=Evolution API
@@ -17,7 +17,7 @@ services:
     - TELEMETRY_URL=
     - DATABASE_ENABLED=true
     - DATABASE_PROVIDER=postgresql
-    - DATABASE_CONNECTION_URI=postgres://postgresql:9HYm0BK5TaSSGwsXj3vJwsjN0GGRV6rs@evolution-postgres:5432/evolution
+    - DATABASE_CONNECTION_URI=postgres://postgresql:4ZmHvW9JQFxcb7t8bFJo4rO7bsnusG87@evolution-postgres:5432/evolution
     - DATABASE_SAVE_DATA_INSTANCE=true
     - DATABASE_SAVE_DATA_NEW_MESSAGE=true
     - DATABASE_SAVE_MESSAGE_UPDATE=true
@@ -48,7 +48,7 @@ services:
     environment:
     - POSTGRES_DB=evolution
     - POSTGRES_USER=postgresql
-    - POSTGRES_PASSWORD=9HYm0BK5TaSSGwsXj3vJwsjN0GGRV6rs
+    - POSTGRES_PASSWORD=4ZmHvW9JQFxcb7t8bFJo4rO7bsnusG87
   evolution-redis:
     image: redis:alpine
     restart: always

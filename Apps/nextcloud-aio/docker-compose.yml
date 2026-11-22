@@ -10,7 +10,7 @@ services:
     - MYSQL_HOST=nextcloud_db
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=y1nezEX6BirEbQn3ERVYi8Yc6c8ViDTq
+    - MYSQL_PASSWORD=KgZoPsAb9eBsz3mhpzyIb553AWXy6Y3r
     depends_on:
     - nextcloud_db
     - nextcloud_redis
@@ -27,7 +27,7 @@ services:
     - MYSQL_HOST=nextcloud_db
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=y1nezEX6BirEbQn3ERVYi8Yc6c8ViDTq
+    - MYSQL_PASSWORD=KgZoPsAb9eBsz3mhpzyIb553AWXy6Y3r
     entrypoint: /cron.sh
     depends_on:
     - nextcloud_db
@@ -38,10 +38,10 @@ services:
     volumes:
     - nextcloud_db_data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=SzOMDMlZn6R8cqXgFF81PZtBQk8Bo618
+    - MYSQL_ROOT_PASSWORD=35F6O2X9JCLSZzM3G4SXL61wVq7Z0f0q
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=y1nezEX6BirEbQn3ERVYi8Yc6c8ViDTq
+    - MYSQL_PASSWORD=KgZoPsAb9eBsz3mhpzyIb553AWXy6Y3r
   nextcloud_redis:
     image: redis:alpine
     restart: always

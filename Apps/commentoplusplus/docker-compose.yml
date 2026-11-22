@@ -6,7 +6,7 @@ services:
     - '8080'
     environment:
     - COMMENTO_ORIGIN=http://localhost
-    - COMMENTO_POSTGRES=postgres://postgres:RdXlzB5wwclvCakJ@postgres:5432/postgres?sslmode=disable
+    - COMMENTO_POSTGRES=postgres://postgres:aB00OrcqPFfA03qm@postgres:5432/postgres?sslmode=disable
     - COMMENTO_ENABLE_WILDCARDS=true
     depends_on:
     - postgres
@@ -18,7 +18,7 @@ services:
   postgres:
     image: postgres:11
     environment:
-    - POSTGRES_PASSWORD=RdXlzB5wwclvCakJ
+    - POSTGRES_PASSWORD=aB00OrcqPFfA03qm
     - POSTGRES_DB=postgres
     - POSTGRES_USER=postgres
     volumes:

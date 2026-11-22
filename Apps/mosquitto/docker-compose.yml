@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - MQTT_USERNAME=mqtt
-    - MQTT_PASSWORD=gVi8lqoJhsgIRNU3wg1eImMJCu7WSN8l
+    - MQTT_PASSWORD=WQCgRiJm7dW9DuNjP8r60Em2z6ERNLQp
     entrypoint:
     - /bin/sh
     - -ec

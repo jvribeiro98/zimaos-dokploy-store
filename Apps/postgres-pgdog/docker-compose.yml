@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=WLHASB5DtlND6Jk8rArLbI9Ikz1MAq9l
+    - POSTGRES_PASSWORD=4BMd7ZWoUXzNj00a1nnBVOGhJewd33gC
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql

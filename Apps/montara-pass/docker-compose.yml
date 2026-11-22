@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: montara
-      POSTGRES_PASSWORD: 2lkFWbDNgNqQM8FxMpRJ7JxFoI5uBtwC
+      POSTGRES_PASSWORD: CW8GC8nbaEZ9gjOcUNe1Lfbqrpl5R8SS
       POSTGRES_DB: montara_pass
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -47,12 +47,12 @@ services:
       ENV: production
       PORT: '8080'
       APP_NAME: montara-pass
-      APP_SECRET: Q5BHQZHZhaNDMHF0f6vXbkNad3Rb9T4D5Jfsyyv7g6I=
+      APP_SECRET: l8FJOpNUZfodiE42l2aOEOWQDyn5570eKEU6p++M8fo=
       REDIS_URL: redis://redis:6379/0
-      DB_DSN: postgres://montara:2lkFWbDNgNqQM8FxMpRJ7JxFoI5uBtwC@postgres:5432/montara_pass?sslmode=disable
+      DB_DSN: postgres://montara:CW8GC8nbaEZ9gjOcUNe1Lfbqrpl5R8SS@postgres:5432/montara_pass?sslmode=disable
       MIGRATE_ON_BOOT: 'true'
       SEED_ON_BOOT: 'true'
-      SUPER_USER: admin@example.com:Q2EleO9JB2ZZyEBH76oG1rau
+      SUPER_USER: admin@example.com:w1EpiS3PvJ7kugMty2LvNBP8
       AUTH_BASE_URL: https://localhost
       FROM_ADDRESS: ''
       RESEND_API_KEY: ''

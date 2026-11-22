@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - ADMIN_USERNAME=admin
-    - ADMIN_PASSWORD=886kDQThbapRpbOvjhs2vpeK
+    - ADMIN_PASSWORD=Goqm9uRLWiE6YiwVIgSwpp5B
     volumes:
     - uptimy-agent-data:/data
     ports:

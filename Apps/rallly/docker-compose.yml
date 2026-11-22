@@ -9,20 +9,20 @@ services:
     - minio-init
     environment:
       NEXT_PUBLIC_BASE_URL: https://localhost
-      DATABASE_URL: postgres://postgres:vD73OCXLFkCkrgIJWnDqOXF0qM5ZghdS@db:5432/rallly
-      SECRET_PASSWORD: PeyQY4VICS0baT4eWooA8LZK0ZIP0rVr
+      DATABASE_URL: postgres://postgres:Si479krKhwE5x3qvvXINseOC2DQV11Yo@db:5432/rallly
+      SECRET_PASSWORD: 0tHN9pxwWpoVsRTXk9cAuGge8g2Bwy2y
       SUPPORT_EMAIL: admin@example.com
       NOREPLY_EMAIL: admin@example.com
       SMTP_HOST: smtp.example.com
       SMTP_PORT: '587'
       SMTP_USER: change-me
-      SMTP_PWD: wl2cwnc3zJcf2x0f7neDqMQj2g8szyFl
+      SMTP_PWD: 3uJHvUBcCNl7RhcREGk0MiZUt1b2rj06
       SMTP_SECURE: 'false'
       S3_ENDPOINT: http://minio:9000
       S3_BUCKET_NAME: rallly
       S3_REGION: us-east-1
       S3_ACCESS_KEY_ID: rallly
-      S3_SECRET_ACCESS_KEY: gnHB7nZmtOZVW82AJpsRHUx9ajUx1fAp
+      S3_SECRET_ACCESS_KEY: uRzr3QzozCwGPJ0zwIAoUBYkXvHiHkIe
       INITIAL_ADMIN_EMAIL: admin@example.com
     ports:
     - target: 3000
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: rallly
-      POSTGRES_PASSWORD: vD73OCXLFkCkrgIJWnDqOXF0qM5ZghdS
+      POSTGRES_PASSWORD: Si479krKhwE5x3qvvXINseOC2DQV11Yo
     volumes:
     - rallly-db:/var/lib/postgresql/data
     healthcheck:
@@ -49,7 +49,7 @@ services:
     command: server /data
     environment:
       MINIO_ROOT_USER: rallly
-      MINIO_ROOT_PASSWORD: gnHB7nZmtOZVW82AJpsRHUx9ajUx1fAp
+      MINIO_ROOT_PASSWORD: uRzr3QzozCwGPJ0zwIAoUBYkXvHiHkIe
     volumes:
     - rallly-minio:/data
   minio-init:

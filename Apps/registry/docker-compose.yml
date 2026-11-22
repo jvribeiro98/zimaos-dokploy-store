@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - USERNAME=admin
-    - PASSWORD=ltqg7diyBbxnjZawJjfkfv19RSJGR6UX
+    - PASSWORD=3N8lOA0CJ82OwtWG8rHb20Hw39FKFJQu
     - REGISTRY_AUTH=htpasswd
     - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
     - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password

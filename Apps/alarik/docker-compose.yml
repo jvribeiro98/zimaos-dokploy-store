@@ -9,8 +9,8 @@ services:
     - API_BASE_URL=http://localhost
     - CONSOLE_BASE_URL=http://localhost
     - ADMIN_USERNAME=alarik
-    - ADMIN_PASSWORD=lr9bdDlsOtowpVrl
-    - JWT=q3egUV9AyGvJ8udEwC0k/4IwCdJQpfoAH8ORMkc21yLuSw1XjJWCD6pXieIkfhqqEfjKQdW8VJ/Bly/2hqjomQ==
+    - ADMIN_PASSWORD=eBBcwNK4DPyoxq0C
+    - JWT=yulcrph1Zi6MW0wq55cvPwubwrQfjB7OFV/KSDsrVZKH4bznm3H/6WG2An/NvEtetoqHws1aHUG+E0YxYXq67w==
     - ALLOW_ACCOUNT_CREATION=false
     expose:
     - 8080

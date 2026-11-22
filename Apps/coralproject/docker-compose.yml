@@ -5,9 +5,9 @@ services:
     expose:
     - '3000'
     environment:
-    - MONGODB_URI=mongodb://mongo:kvdYHIaalP76E4Yj@mongo:27017
-    - REDIS_URI=redis://default:DBzQbpxjn7c7349H@redis:6379
-    - SIGNING_SECRET=cdSUmd94U6QRVTZWxY4xxCDnfAxBSW5XWBmwMjilOiPOV
+    - MONGODB_URI=mongodb://mongo:OeNEhjsbeQffrjAr@mongo:27017
+    - REDIS_URI=redis://default:pK99JSNu0kueurlU@redis:6379
+    - SIGNING_SECRET=VF8dE0MjZLaoR2l8c69sLgZJrJ8fWzykGeMbomwCDYu2i
     - NODE_ENV=production
     depends_on:
     - mongo
@@ -20,7 +20,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=kvdYHIaalP76E4Yj
+    - MONGO_INITDB_ROOT_PASSWORD=OeNEhjsbeQffrjAr
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db

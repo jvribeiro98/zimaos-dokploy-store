@@ -7,10 +7,10 @@ services:
       litellm-db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://litellm:WLWGto8xZJ1ZvBebbzISL3DwtwLd3vff@litellm-db:5432/litellm
-      LITELLM_MASTER_KEY: F9xjNEAAPYF06sS8n1fzOcTjZZ8ub3oluKGgrFXsp2McFfl2jWMormTkTQEKHqvQ
+      DATABASE_URL: postgresql://litellm:51jVldWhweOnJp17ELIUZTKNonf1o6AY@litellm-db:5432/litellm
+      LITELLM_MASTER_KEY: OmsxUJI5JRDgZu2m1mtqxuhTsrE0nBGRDGCeCfRfrtrFjlvnm6XJNDhvk1doeWLX
       UI_USERNAME: admin
-      UI_PASSWORD: ynM17gFov3QIvEuWOUAH7eNg8OhOp9m5
+      UI_PASSWORD: TAcLowfRhzGPzJ4DzINWnI0aeidP7Zp4
       STORE_MODEL_IN_DB: 'True'
       OPENAI_API_KEY: ''
       OPENAI_BASE_URL: ''
@@ -48,7 +48,7 @@ services:
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: litellm
-      POSTGRES_PASSWORD: WLWGto8xZJ1ZvBebbzISL3DwtwLd3vff
+      POSTGRES_PASSWORD: 51jVldWhweOnJp17ELIUZTKNonf1o6AY
 volumes:
   litellm-db: {}
 x-casaos:

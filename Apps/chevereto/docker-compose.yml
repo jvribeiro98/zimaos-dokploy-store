@@ -6,7 +6,7 @@ services:
     environment:
     - CHEVERETO_DB_HOST=mysql
     - CHEVERETO_DB_USER=mysql
-    - CHEVERETO_DB_PASS=pR0SXbtW6lkSt9y0
+    - CHEVERETO_DB_PASS=YkMiUkNrWF18F0OX
     - CHEVERETO_DB_PORT=3306
     - CHEVERETO_DB_NAME=chevereto
     - CHEVERETO_HOSTNAME=localhost
@@ -28,10 +28,10 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=pR0SXbtW6lkSt9y0
+    - MYSQL_ROOT_PASSWORD=YkMiUkNrWF18F0OX
     - MYSQL_DATABASE=chevereto
     - MYSQL_USER=mysql
-    - MYSQL_PASSWORD=pR0SXbtW6lkSt9y0
+    - MYSQL_PASSWORD=YkMiUkNrWF18F0OX
     volumes:
     - mysql:/var/lib/mysql
 volumes:

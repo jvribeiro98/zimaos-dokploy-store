@@ -216,10 +216,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: bK7BUFJy6k5ylDX6rwBHipoIey9i71Xy
+      ADMIN_PASSWORD: QyJzVm7BR6kPddZPEjAAMytoW1hIEEe6
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: bxXeYtHBskl7SIBMzEfELQhWuGO18IeB
+      DB_ROOT_PASSWORD: grk5mDDt5NDcz5fYVezah8XOjNsI51Sn
       INSTALL_APP_ARGS: --install-app erpnext
       ENABLE_SCHEDULER: '1'
     restart: unless-stopped
@@ -266,7 +266,7 @@ services:
     - --collation-server=utf8mb4_unicode_ci
     - --skip-character-set-client-handshake
     environment:
-    - MARIADB_ROOT_PASSWORD=bxXeYtHBskl7SIBMzEfELQhWuGO18IeB
+    - MARIADB_ROOT_PASSWORD=grk5mDDt5NDcz5fYVezah8XOjNsI51Sn
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped

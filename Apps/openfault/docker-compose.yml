@@ -6,7 +6,7 @@ services:
     environment:
     - OPENFAULT_BASE_URL=https://localhost
     - OPENFAULT_TRUST_PROXY=1
-    - OPENFAULT_SETUP_TOKEN=S2DilfeonO6w0cn8mb1YXZeRkl7KidMA
+    - OPENFAULT_SETUP_TOKEN=fLGe2IjYmfCfQ7Bs2um4tEVjTOPY2qgU
     volumes:
     - openfault-data:/data
     ports:

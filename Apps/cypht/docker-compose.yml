@@ -12,7 +12,7 @@ services:
     - 80
     environment:
       AUTH_USERNAME: admin
-      AUTH_PASSWORD: kPAHMygRhK5LIoBJ33Wkko1m
+      AUTH_PASSWORD: CphMcuMp92ccUlh2nMovB5S0
       ADMIN_USERS: admin
       AUTH_TYPE: DB
       USER_CONFIG_TYPE: DB
@@ -22,12 +22,12 @@ services:
       DB_PORT: '3306'
       DB_NAME: cypht
       DB_USER: cypht
-      DB_PASS: fgJbU7xGdCXPOefJGRdXMRcwCsZja0sA
+      DB_PASS: AzXgVGjirnoqjA8ocx5VI4sW4ZvHRgsM
       SESSION_TYPE: REDIS
       ENABLE_REDIS: 'true'
       REDIS_SERVER: cypht-redis
       REDIS_PORT: '6379'
-      REDIS_PASS: 1HPXElwjltjsdb0VcdQJWzkXnaFNFxWh
+      REDIS_PASS: PWfjxSplZKXLFnXXTRxKqPhnDTbLV0Wo
       REDIS_SOCKET: ''
       ENABLE_MEMCACHED: 'false'
       ENCRYPT_LOCAL_STORAGE: 'true'
@@ -43,7 +43,7 @@ services:
     environment:
       MARIADB_DATABASE: cypht
       MARIADB_USER: cypht
-      MARIADB_PASSWORD: fgJbU7xGdCXPOefJGRdXMRcwCsZja0sA
+      MARIADB_PASSWORD: AzXgVGjirnoqjA8ocx5VI4sW4ZvHRgsM
       MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - cypht-db:/var/lib/mysql
@@ -60,7 +60,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     environment:
-      REDIS_PASSWORD: 1HPXElwjltjsdb0VcdQJWzkXnaFNFxWh
+      REDIS_PASSWORD: PWfjxSplZKXLFnXXTRxKqPhnDTbLV0Wo
     command:
     - sh
     - -c

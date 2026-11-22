@@ -70,7 +70,7 @@ services:
     image: electricsql/electric:${ELECTRIC_IMAGE_TAG:-latest}
     restart: ${RESTART_POLICY:-unless-stopped}
     environment:
-      DATABASE_URL: postgresql://triggeruser:Bz5v8Hc4JWbPKT+igGJkdWiqUezsh7JE@postgres:5432/triggerdb?sslmode=disable
+      DATABASE_URL: postgresql://triggeruser:TXHiX8N6GhOQyhD0SSp6QXLmpuewTvvd@postgres:5432/triggerdb?sslmode=disable
     depends_on:
     - postgres
     expose:

@@ -8,7 +8,7 @@ services:
     - '8080'
     environment:
     - PG_CONSOLE_API_URL=http://localhost/api/v1
-    - PG_CONSOLE_AUTHORIZATION_TOKEN=UnvJx0IIWXdb75cp452uxdj4BHYt9XtCoVBmh93IvCU=
+    - PG_CONSOLE_AUTHORIZATION_TOKEN=j9txYCBTzi2qPJ6OUaxRdEhqTGkBUpkdp9KEsL0bksQ=
     volumes:
     - console_postgres:/var/lib/postgresql
     - dbdesk_studio_data:/opt/dbdesk-studio

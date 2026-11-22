@@ -6,7 +6,7 @@ services:
     environment:
     - DOKPLOY_URL=http://host.docker.internal:3000
     - DOKPLOY_API_KEY=
-    - BASIC_AUTH=admin:uBMEODjsKG9LeiJjry9S2roa
+    - BASIC_AUTH=admin:I8HtzRn6O3jSTqjctbp2a57V
     extra_hosts:
     - host.docker.internal:host-gateway
     ports:

@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     environment:
       OBSCURA_HOST: localhost
-      OBSCURA_API_TOKEN: jZmn0JuOl5qLNDk4uxlKXJ2qSC42ROKCRixNszejBODgjmDw
+      OBSCURA_API_TOKEN: wOea73l2RuXfPCduItaCxv9xZ2EtD369yAohixoiYayvBeQ9
     volumes:
     - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile:ro
     depends_on:

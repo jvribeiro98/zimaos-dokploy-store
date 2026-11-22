@@ -11,13 +11,13 @@ services:
     - app_migrate:/var/www/html/app/migrations
     environment:
       APP_ADMIN_EMAIL: admin@example.com
-      APP_ADMIN_PASSWORD: dxgpYubrAB8HqHLp
+      APP_ADMIN_PASSWORD: k0uIb8KJN4TgZ0mv
       APP_TIMEZONE: UTC
       DB_HOST: db
       DB_PORT: '3306'
       DB_DATABASE: hortusfox
       DB_USERNAME: hortususer
-      DB_PASSWORD: 3jN2jJviNzQyINtAcWpI
+      DB_PASSWORD: tSBVviOmVR2tVh1cUn9p
       DB_CHARSET: utf8mb4
     depends_on:
     - db
@@ -29,10 +29,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-      MARIADB_ROOT_PASSWORD: nZLOWjot5BnxWJG91ZFEg8bd
+      MARIADB_ROOT_PASSWORD: koZarK8UjaGpqsYEESCZK3QB
       MARIADB_DATABASE: hortusfox
       MARIADB_USER: hortususer
-      MARIADB_PASSWORD: 3jN2jJviNzQyINtAcWpI
+      MARIADB_PASSWORD: tSBVviOmVR2tVh1cUn9p
     volumes:
     - db_data:/var/lib/mysql
 volumes:

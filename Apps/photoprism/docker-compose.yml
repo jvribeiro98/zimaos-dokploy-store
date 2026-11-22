@@ -10,7 +10,7 @@ services:
     - apparmor:unconfined
     environment:
       PHOTOPRISM_ADMIN_USER: admin
-      PHOTOPRISM_ADMIN_PASSWORD: ubi84Asw6xuBRHfhmEEaZ54NruJrHClU
+      PHOTOPRISM_ADMIN_PASSWORD: rYjPUvFaqMnizMqHMOMDxYu8ZlV77ki0
       PHOTOPRISM_AUTH_MODE: password
       PHOTOPRISM_SITE_URL: http://localhost:2342/
       PHOTOPRISM_DISABLE_TLS: 'false'

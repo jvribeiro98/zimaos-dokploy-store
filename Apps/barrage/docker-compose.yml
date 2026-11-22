@@ -6,11 +6,11 @@ services:
     expose:
     - 3000
     environment:
-    - NEXTAUTH_SECRET=vKpcKaPlqTj/saRnKHoHseY4mpAcrhRHiTc99ZhD+hA=
+    - NEXTAUTH_SECRET=UFXlYa4cYFr4tjWgRWjZaaJU3smNoEifzp5N4z1PdwY=
     - NEXTAUTH_URL=http://${DOMAIN}
     - DELUGE_URL=http://your-deluge-ip:8112
-    - DELUGE_PASSWORD=00tKe8LtURWvm7hW
-    - BARRAGE_PASSWORD=IOT9UQvhw5temvPH
+    - DELUGE_PASSWORD=VsU5GIthkPo4RT53
+    - BARRAGE_PASSWORD=P4jtGztghdOukxnh
     ports:
     - target: 3000
       published: "3000"

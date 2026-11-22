@@ -3,10 +3,10 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: H2ObgLI3BECyGHw1XK2HeMbqX2th6Zzi
+      MYSQL_ROOT_PASSWORD: xLGkFJVwvUBapnlusvCMMdehGAPgj3MF
       MYSQL_DATABASE: phpmyadmin
       MYSQL_USER: phpmyadmin
-      MYSQL_PASSWORD: qzjMRXu8NKeGZ1yfbhaVdWx7ZXnpafO0
+      MYSQL_PASSWORD: 047iSWhIn57mLubn3ImkHbmmZ4EIxvdN
     volumes:
     - db_data:/var/lib/mysql
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_USER: phpmyadmin
-      PMA_PASSWORD: qzjMRXu8NKeGZ1yfbhaVdWx7ZXnpafO0
+      PMA_PASSWORD: 047iSWhIn57mLubn3ImkHbmmZ4EIxvdN
       PMA_ARBITRARY: '1'
       UPLOAD_LIMIT: 512M
       MAX_EXECUTION_TIME: '600'

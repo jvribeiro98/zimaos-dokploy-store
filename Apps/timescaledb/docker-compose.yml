@@ -7,7 +7,7 @@ services:
     - 5432
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: D2wmK2Zg9cJ73OoamsWXRznepV0E13Lr
+      POSTGRES_PASSWORD: D2fqyNB46oZOr5laSkje3SquEvNIiBzU
       POSTGRES_DB: timescaledb
       TIMESCALEDB_TELEMETRY: 'off'
     volumes:

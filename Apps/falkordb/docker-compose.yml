@@ -4,14 +4,14 @@ services:
     image: falkordb/falkordb:v4.20.4-alpine
     restart: unless-stopped
     environment:
-    - REDIS_ARGS=--requirepass 27684d82bce2f7f299163e408269f7777287fee0102966a4d65c37626f609d9c --appendonly yes
+    - REDIS_ARGS=--requirepass f08de109de29048a0183c460e8b77db78358d7f19ff0c384cfae7e788a528cd3 --appendonly yes
     - FALKORDB_ARGS=MAX_QUEUED_QUERIES 25 TIMEOUT 1000 RESULTSET_SIZE 10000 IMPORT_FOLDER /app/.data/import
-    - FALKORDB_PASSWORD=27684d82bce2f7f299163e408269f7777287fee0102966a4d65c37626f609d9c
+    - FALKORDB_PASSWORD=f08de109de29048a0183c460e8b77db78358d7f19ff0c384cfae7e788a528cd3
     - AUTH_URL=https://localhost
-    - AUTH_SECRET=Y7FnVHnxmIjD31NegQspwkYdr0Gf6qR14G8ecn3xYH3Y2oWBNn6IJqAoeLMo/15J
+    - AUTH_SECRET=Uyh07N/sX2/kapBeg9TVt2beuKOFHkIgOgmiIdtAkvp6YcEoLhoZdm67abETqFzp
     - NEXTAUTH_URL=https://localhost
-    - NEXTAUTH_SECRET=Y7FnVHnxmIjD31NegQspwkYdr0Gf6qR14G8ecn3xYH3Y2oWBNn6IJqAoeLMo/15J
-    - ENCRYPTION_KEY=9504bd132a7c162ab05e5edb16689c5aabfdb835056644252d4f8ec3e3c9d931
+    - NEXTAUTH_SECRET=Uyh07N/sX2/kapBeg9TVt2beuKOFHkIgOgmiIdtAkvp6YcEoLhoZdm67abETqFzp
+    - ENCRYPTION_KEY=74bc04399b25e5772f441df3c0aea3b2df852ddbd3f587a04a189987ffb70ea7
     - ALLOWED_ORIGINS=https://localhost
     - TRUST_PROXY_HEADERS=true
     - CSV_STORAGE=local

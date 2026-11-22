@@ -4,7 +4,7 @@ services:
     image: unleashorg/unleash-server:7.4.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgres://unleash:FArkkAcevrNU3u0q5nLrlL72Gy59fHIY@db/unleash
+      DATABASE_URL: postgres://unleash:PLsUDXYVh9wC9xBwhNFP0toFYn9AU2Md@db/unleash
       DATABASE_SSL: 'false'
       LOG_LEVEL: warn
     depends_on:
@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_DB: unleash
       POSTGRES_USER: unleash
-      POSTGRES_PASSWORD: FArkkAcevrNU3u0q5nLrlL72Gy59fHIY
+      POSTGRES_PASSWORD: PLsUDXYVh9wC9xBwhNFP0toFYn9AU2Md
     volumes:
     - db_data:/var/lib/postgresql/data
     healthcheck:

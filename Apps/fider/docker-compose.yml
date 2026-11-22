@@ -7,7 +7,7 @@ services:
     - fiderPostgresData:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: fider
-      POSTGRES_PASSWORD: 6WPxCdhCuwyQ5IJW7h5MC7oLcedb7xJN
+      POSTGRES_PASSWORD: QhMBtTYs4d0ZSrvv31JBKF8lZkVDMF4E
       POSTGRES_DB: fider
   fider:
     image: getfider/fider:0.21.1
@@ -17,8 +17,8 @@ services:
     - mailhog
     environment:
       BASE_URL: https://localhost
-      DATABASE_URL: postgres://fider:6WPxCdhCuwyQ5IJW7h5MC7oLcedb7xJN@db:5432/fider?sslmode=disable
-      JWT_SECRET: lRw5Pvn4CrbUAK0QUCTxJSwawHVGL61QoE5rtWf2fTjjN3JJSEoIEn3ZsprvxYB1
+      DATABASE_URL: postgres://fider:QhMBtTYs4d0ZSrvv31JBKF8lZkVDMF4E@db:5432/fider?sslmode=disable
+      JWT_SECRET: tdW3Pslt7NjkuDbUv09W6E0YxKDwFMrSlX91ZozX9QXHXTkqgfnvBFYqakdC7h36
       EMAIL: smtp
       EMAIL_NOREPLY: noreply@localhost
       EMAIL_SMTP_HOST: mailhog

@@ -29,8 +29,8 @@ services:
       DATABASE_URL: postgres://shopnex:shopnex@db:5432/shopnex
       APP_URL: https://localhost
       BETTER_AUTH_URL: https://localhost
-      BETTER_AUTH_SECRET: l3TEMbEc0HSdHNWfIcsRIhI3y2lfkeKVdf3mo+g+uqI=
-      SHOPNEX_SECRET: WEcBMMR/2bIEAJj2fADWsOqIuAMHGYuPDkpx0jxlebA=
+      BETTER_AUTH_SECRET: h+h4FoQq43dv1HaPfCW/3kfBrJI+K8DupFdJW5hYauo=
+      SHOPNEX_SECRET: BGE01pXSaTDk3UbcUsso0jOx/X56IpMrFdW0poxnwXQ=
       TENANCY_MODE: single
       DEFAULT_SHOP_NAME: ${DEFAULT_SHOP_NAME:-My Shop}
       SHOPNEX_BUNDLED_APPS: docker

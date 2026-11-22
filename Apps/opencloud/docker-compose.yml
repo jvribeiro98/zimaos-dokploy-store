@@ -9,8 +9,8 @@ services:
     - opencloud init || true; opencloud server
     environment:
     - OC_URL=https://localhost
-    - INITIAL_ADMIN_PASSWORD=OuVZimtXDhZ36cFosaRyN1PqYk36dRJu
-    - IDM_ADMIN_PASSWORD=OuVZimtXDhZ36cFosaRyN1PqYk36dRJu}
+    - INITIAL_ADMIN_PASSWORD=BcWq2qHRb6E27N8k7ZlGWQuBI4bZxgzd
+    - IDM_ADMIN_PASSWORD=BcWq2qHRb6E27N8k7ZlGWQuBI4bZxgzd}
     - PROXY_HTTP_ADDR=0.0.0.0:9200
     - PROXY_TLS=false
     - OC_INSECURE=false

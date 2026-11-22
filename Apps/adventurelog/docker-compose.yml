@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_DB: adventure
       POSTGRES_USER: adventure
-      POSTGRES_PASSWORD: 7ZCfjAFriRalUyVG
+      POSTGRES_PASSWORD: PblcZKd3stveyG1W
   server:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest
     restart: unless-stopped
@@ -33,10 +33,10 @@ services:
       PGHOST: db
       POSTGRES_DB: adventure
       POSTGRES_USER: adventure
-      POSTGRES_PASSWORD: 7ZCfjAFriRalUyVG
-      SECRET_KEY: Ks9q68R04m795uSJlzihS10ZmECUSWS9
+      POSTGRES_PASSWORD: PblcZKd3stveyG1W
+      SECRET_KEY: xaCitojSh3ST5nARGqqpQnnjBpwKAr1o
       DJANGO_ADMIN_USERNAME: admin
-      DJANGO_ADMIN_PASSWORD: V3TAMMPk2o2H
+      DJANGO_ADMIN_PASSWORD: wtrJvJg1LUon
       DJANGO_ADMIN_EMAIL: admin@example.com
       DEBUG: 'False'
       CSRF_TRUSTED_ORIGINS: http://localhost,http://localhost

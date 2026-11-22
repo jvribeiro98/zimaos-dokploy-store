@@ -12,12 +12,12 @@ services:
     - LOG_CHANNEL=stderr
     - QUEUE_CONNECTION=sync
     - MAIL_MAILER=array
-    - APP_KEY=zmBsrqZDHHomKEjZMsjYSMNS4CkFlx4z
-    - JWT_SECRET=d3gOoFVqlDVulSsTsa0C6CzS0vtvBQPR
+    - APP_KEY=gh7G5KLOajAJT8OGDK76RPIhkmKHktLC
+    - JWT_SECRET=Mib934YJ5lKEmkEI9BbhsOWjgIEIQoat
     - FILESYSTEM_PUBLIC_DISK=public
     - FILESYSTEM_PRIVATE_DISK=local
     - APP_CDN_URL=https://localhost/storage
-    - DATABASE_URL=postgresql://hievents:Dssns5TDvIjtpUmyPGtF7rriLwCUNOIp@postgres:5432/hievents
+    - DATABASE_URL=postgresql://hievents:f2MGgCvMV7kUKiFiP2SN7oVMMFVL0yFh@postgres:5432/hievents
     - MAIL_MAILER=
     - MAIL_HOST=
     - MAIL_PORT=
@@ -37,7 +37,7 @@ services:
     environment:
     - POSTGRES_DB=hievents
     - POSTGRES_USER=hievents
-    - POSTGRES_PASSWORD=Dssns5TDvIjtpUmyPGtF7rriLwCUNOIp
+    - POSTGRES_PASSWORD=f2MGgCvMV7kUKiFiP2SN7oVMMFVL0yFh
     volumes:
     - pg_hi-events_data:/var/lib/postgresql/data
 volumes:

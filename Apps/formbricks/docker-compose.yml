@@ -12,9 +12,9 @@ services:
       WEBAPP_URL: http://localhost
       NEXTAUTH_URL: http://localhost
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/formbricks?schema=public
-      NEXTAUTH_SECRET: iBxVpjWov57ve9JVdTZD5kw2DiO8FTP8O91UXj1jpPadeYnNIUR9ZsltCoi5K8eeICYziXZzCP5462PowFcT0Q==
-      ENCRYPTION_KEY: nso1Ym11kknGKDop83RvUKPLc96Dd8rp
-      CRON_SECRET: we5wUiuDAy969IcnhW29lua32Cpit1QbkNA105CfpcE=
+      NEXTAUTH_SECRET: ZhM1s++4ZjGM0fvw7c4Ntb4lauo8Al3WMpzvTvTjoIsmo5i3ukGRb/b0KZVmFEHTW0Z/xeoxaEalnGnF2NTylw==
+      ENCRYPTION_KEY: ELIsev4nCWYiY1lfWtU6eADcMSiDSz3u
+      CRON_SECRET: l/lWdydrxlRdx0z9dey2OCrBYZpc2bIzBfupMCmKe20=
       EMAIL_VERIFICATION_DISABLED: '1'
       PASSWORD_RESET_DISABLED: '1'
       S3_FORCE_PATH_STYLE: '0'

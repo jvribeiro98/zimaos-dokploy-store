@@ -6,8 +6,8 @@ services:
     - '3000'
     environment:
     - ACKEE_USERNAME=default
-    - ACKEE_PASSWORD=srXaG8ZP73Igrgh1
-    - ACKEE_MONGODB=mongodb://mongo:os3iIIqaM86kuaDv@mongo:27017
+    - ACKEE_PASSWORD=y8MzAQ5FM8LsoCl7
+    - ACKEE_MONGODB=mongodb://mongo:I1DytAEz340otbLC@mongo:27017
     restart: unless-stopped
     ports:
     - target: 3000
@@ -16,7 +16,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=os3iIIqaM86kuaDv
+    - MONGO_INITDB_ROOT_PASSWORD=I1DytAEz340otbLC
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db

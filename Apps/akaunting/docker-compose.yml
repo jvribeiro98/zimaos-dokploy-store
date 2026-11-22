@@ -13,12 +13,12 @@ services:
       DB_PORT: '3306'
       DB_NAME: akaunting
       DB_USERNAME: admin
-      DB_PASSWORD: v3rd6fnpiLAQpGLGfrTW9yPw
-      DB_PREFIX: 32626e3a_
+      DB_PASSWORD: Dxq99EOEed0zigVLGeG9CRDS
+      DB_PREFIX: f4affda9_
       COMPANY_NAME: My Company
       COMPANY_EMAIL: admin@example.com
       ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: uVDXvigJ21b06EyT9gPtVxfE
+      ADMIN_PASSWORD: 3ErCK8zwSp8BpA9aNhuOozSA
     expose:
     - '80'
     volumes:
@@ -33,7 +33,7 @@ services:
     environment:
       MYSQL_DATABASE: akaunting
       MYSQL_USER: admin
-      MYSQL_PASSWORD: v3rd6fnpiLAQpGLGfrTW9yPw
+      MYSQL_PASSWORD: Dxq99EOEed0zigVLGeG9CRDS
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - akaunting-db:/var/lib/mysql

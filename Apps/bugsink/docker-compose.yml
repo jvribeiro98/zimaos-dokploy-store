@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: bugsinkuser
-      POSTGRES_PASSWORD: 2w1EPmt6n0LFdBb1cHbMzfmwZg0IIVfS
+      POSTGRES_PASSWORD: fkyQdm3mAGp7vRh4jJFoGgRlvg0CUTh4
       POSTGRES_DB: bugsink
     volumes:
     - db-data:/var/lib/postgresql/data
@@ -26,10 +26,10 @@ services:
     expose:
     - 8000
     environment:
-      SECRET_KEY: 1osdoqcICLfpeM4SRN3Qw6GYTAbnIGXbbgUtSmP1raVLNyrTnIqnaa5emLrVJaTc
+      SECRET_KEY: kDOZ6F19u70aMj2z2yBXDzQ0c609ccKOcG4uozNXq4gTo1WGhvszR6YTGDZAYgkT
       CREATE_SUPERUSER: admin:admin
       PORT: '8000'
-      DATABASE_URL: postgresql://bugsinkuser:2w1EPmt6n0LFdBb1cHbMzfmwZg0IIVfS@db:5432/bugsink
+      DATABASE_URL: postgresql://bugsinkuser:fkyQdm3mAGp7vRh4jJFoGgRlvg0CUTh4@db:5432/bugsink
       BEHIND_HTTPS_PROXY: 'false'
       BASE_URL: https://localhost
     healthcheck:

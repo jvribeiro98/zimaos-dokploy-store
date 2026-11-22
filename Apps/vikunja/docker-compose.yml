@@ -7,11 +7,11 @@ services:
       VIKUNJA_SERVICE_PUBLICURL: https://localhost
       VIKUNJA_PUBLIC_PORT: ${VIKUNJA_PUBLIC_PORT}
       VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: cnUsRNWcF8YLFMyogq1Cl8kDryXXjIyF
+      VIKUNJA_DATABASE_PASSWORD: PbcwFgHJkuatc2HJQAvETIfOLgHZhP4n
       VIKUNJA_DATABASE_TYPE: postgres
       VIKUNJA_DATABASE_USER: vikunja
       VIKUNJA_DATABASE_DATABASE: vikunja
-      VIKUNJA_SERVICE_JWTSECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkb2twbG95LXppbWFvcyIsImlhdCI6MTc5NTMwODM3Mn0.YIfouaFIySfOYHk0XLqN4mb1fr1eTWk0EqvVzSQZmzI
+      VIKUNJA_SERVICE_JWTSECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkb2twbG95LXppbWFvcyIsImlhdCI6MTc5NTM1NjEwOH0.yR6iCvbSykZbb5dOegil7luUzQTa34XjaKBeXTw02Sk
     expose:
     - 3456
     volumes:
@@ -27,7 +27,7 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_PASSWORD: cnUsRNWcF8YLFMyogq1Cl8kDryXXjIyF
+      POSTGRES_PASSWORD: PbcwFgHJkuatc2HJQAvETIfOLgHZhP4n
       POSTGRES_USER: vikunja
       POSTGRES_DB: vikunja
     volumes:

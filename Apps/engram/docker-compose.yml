@@ -24,9 +24,9 @@ services:
         condition: service_healthy
     environment:
       ENGRAM_DATABASE_URL: postgres://engram:engram@postgres:5432/engram_cloud?sslmode=disable
-      ENGRAM_JWT_SECRET: KBHPoBSdlmCB5Z7mAhHhUUtY7UiEuP2WdiCmGGqr6RmuCQWTu05UjWXvSVtU3pCm
-      ENGRAM_CLOUD_TOKEN: mb9hCrTz7giSLVuhR8LCfMAJyeNcAzd6xtt7S4TyzfcbQYkk
-      ENGRAM_CLOUD_ADMIN: f5ShNEtIaX9PSDlL9cVbVXRSXEI1UMEp5IZSPSOfZzDNPDIn
+      ENGRAM_JWT_SECRET: OsJ5dNIq6a95NwEnAoT2vMlAGci8LlLI9CGXieenOTL4z6wEAwXGfkYCRjj4rG01
+      ENGRAM_CLOUD_TOKEN: UhKpaBL9NEVAGK1oAqlIJzhQUG2msFm6G0DB2nczVXMqwwGe
+      ENGRAM_CLOUD_ADMIN: Xl45fu7BggD9zoanclCX5tB7G1nym5aZZ2QSQ24wVM09iwTt
       ENGRAM_CLOUD_ALLOWED_PROJECTS: '*'
       ENGRAM_CLOUD_HOST: 0.0.0.0
       ENGRAM_PORT: '8080'

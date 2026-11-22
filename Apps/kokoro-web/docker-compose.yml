@@ -4,7 +4,7 @@ services:
     image: ghcr.io/eduardolat/kokoro-web:latest
     restart: unless-stopped
     environment:
-    - KW_SECRET_API_KEY=Ez7uvbQN0a73NOtR3qafqDOLqa7W0n0F
+    - KW_SECRET_API_KEY=XfJkOy6wWgBzs8rLskKVSC2Mra5GxOpj
     - KW_PUBLIC_NO_TRACK=false
     volumes:
     - kokoro-cache:/kokoro/cache

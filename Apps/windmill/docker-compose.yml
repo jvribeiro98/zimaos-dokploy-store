@@ -7,7 +7,7 @@ services:
     volumes:
     - windmill-postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: EyDsANO19okBr9qEjZozrpRtj5QfzeDI
+      POSTGRES_PASSWORD: LSMIRRni70COk7y2eozyvUrRSuzR0W1N
       POSTGRES_DB: windmill
     healthcheck:
       test:
@@ -20,7 +20,7 @@ services:
     image: ghcr.io/windmill-labs/windmill:main
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:EyDsANO19okBr9qEjZozrpRtj5QfzeDI@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:LSMIRRni70COk7y2eozyvUrRSuzR0W1N@windmill-postgres/windmill?sslmode=disable
     - MODE=server
     - BASE_URL=http://localhost
     depends_on:
@@ -38,7 +38,7 @@ services:
           memory: 2048M
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:EyDsANO19okBr9qEjZozrpRtj5QfzeDI@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:LSMIRRni70COk7y2eozyvUrRSuzR0W1N@windmill-postgres/windmill?sslmode=disable
     - MODE=worker
     - WORKER_GROUP=default
     depends_on:
@@ -58,7 +58,7 @@ services:
           memory: 128M
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:EyDsANO19okBr9qEjZozrpRtj5QfzeDI@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:LSMIRRni70COk7y2eozyvUrRSuzR0W1N@windmill-postgres/windmill?sslmode=disable
     - MODE=worker
     - WORKER_GROUP=native
     - NUM_WORKERS=8

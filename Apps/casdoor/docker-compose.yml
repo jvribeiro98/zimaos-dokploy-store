@@ -20,7 +20,7 @@ services:
     image: postgres:16
     environment:
     - POSTGRES_USER=casdoor
-    - POSTGRES_PASSWORD=zoGoqMdXQXvOHP04O1Jt9vTjGPN4TYe6
+    - POSTGRES_PASSWORD=nh6qG8rfzBRgDb6u8yzCj7OhbnfAHBzo
     - POSTGRES_DB=casdoor
     volumes:
     - casdoor-postgres-data:/var/lib/postgresql/data

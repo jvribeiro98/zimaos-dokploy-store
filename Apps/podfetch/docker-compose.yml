@@ -8,7 +8,7 @@ services:
     - POLLING_INTERVAL=300
     - BASIC_AUTH=true
     - USERNAME=admin
-    - PASSWORD=umV8FQmPRLaOrL0bKYyO0qn2
+    - PASSWORD=TBQFaOh37yEgaahbbV1sYONd
     - GPODDER_INTEGRATION_ENABLED=true
     volumes:
     - podfetch-podcasts:/app/podcasts

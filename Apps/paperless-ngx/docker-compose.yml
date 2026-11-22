@@ -15,8 +15,8 @@ services:
       PAPERLESS_DBHOST: paperless-ngx-db
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: paperless
-      PAPERLESS_DBPASS: XOjdYNwq14NG9N0w91V088CV7emuoqif
-      PAPERLESS_SECRET_KEY: cJJEvWhHIrp7QRhcAq367gTI1Fs5PbzCuFLCM65PB4sFjB6Q0fMClmSYjfhJsN6n
+      PAPERLESS_DBPASS: AQkirA66U0ks0BovgN3eQZENfGlVwbX8
+      PAPERLESS_SECRET_KEY: RK9VZcZCJiXNA86yEQWy0eIVIco5lY0hxk5AhMvsp6szqvLsdw3hvaKa0TVWaa4t
       PAPERLESS_URL: http://localhost
       PAPERLESS_TIME_ZONE: UTC
       PAPERLESS_OCR_LANGUAGE: eng
@@ -35,7 +35,7 @@ services:
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: XOjdYNwq14NG9N0w91V088CV7emuoqif
+      POSTGRES_PASSWORD: AQkirA66U0ks0BovgN3eQZENfGlVwbX8
     volumes:
     - paperless-db:/var/lib/postgresql
     healthcheck:

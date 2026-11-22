@@ -7,7 +7,7 @@ services:
     - MATOMO_DATABASE_HOST=db
     - MATOMO_DATABASE_DB=matomo
     - MATOMO_DATABASE_USER=matomo
-    - MATOMO_DATABASE_PASSWORD=XbUYIm5pFClSumhMOkelAgFuEX5qE4Xa
+    - MATOMO_DATABASE_PASSWORD=qTtwjX6V1CNxUdsPPKdev4RK5iVl0Yfx
     volumes:
     - matomo:/var/www/html
     depends_on:
@@ -21,10 +21,10 @@ services:
     restart: always
     command: --max-allowed-packet=64MB
     environment:
-    - MYSQL_ROOT_PASSWORD=I26v6CjtSkQkAc9W6ewbbAHhJJk5241T
+    - MYSQL_ROOT_PASSWORD=OotvdBz3aVxspYADHRYV7wUUbkjLSL7u
     - MYSQL_DATABASE=matomo
     - MYSQL_USER=matomo
-    - MYSQL_PASSWORD=XbUYIm5pFClSumhMOkelAgFuEX5qE4Xa
+    - MYSQL_PASSWORD=qTtwjX6V1CNxUdsPPKdev4RK5iVl0Yfx
     volumes:
     - db:/var/lib/mysql
 volumes:

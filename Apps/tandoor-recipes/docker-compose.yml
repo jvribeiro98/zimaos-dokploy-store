@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: tandoor
-      POSTGRES_PASSWORD: K2OkGJILT5JAHP2eEB409lHQzhGXoLzS
+      POSTGRES_PASSWORD: 8BizLd5bUA8VAJ9rc0ELRW855H7ubIPC
       POSTGRES_DB: tandoor
     volumes:
     - tandoor_db_data:/var/lib/postgresql/data
@@ -15,13 +15,13 @@ services:
     depends_on:
     - tandoor-db
     environment:
-      SECRET_KEY: Ay1ZRC3CmcOtJfwuDiI6x95zpEve3kDeCQD2kV1ZKWpeplMCeDra4ukgb2GmuzyA
+      SECRET_KEY: cFXu7CgIddesYZ1WfZmmUORzqtXEijwoU10iQv6e2PetZjlAPAQzTSvKWEqcDdJk
       TANDOOR_PORT: '8080'
       DB_ENGINE: django.db.backends.postgresql
       POSTGRES_HOST: tandoor-db
       POSTGRES_PORT: '5432'
       POSTGRES_USER: tandoor
-      POSTGRES_PASSWORD: K2OkGJILT5JAHP2eEB409lHQzhGXoLzS
+      POSTGRES_PASSWORD: 8BizLd5bUA8VAJ9rc0ELRW855H7ubIPC
       POSTGRES_DB: tandoor
       ALLOWED_HOSTS: localhost
       CSRF_TRUSTED_ORIGINS: https://localhost

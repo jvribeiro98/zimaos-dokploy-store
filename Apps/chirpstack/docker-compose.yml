@@ -59,7 +59,7 @@ services:
     - /DATA/AppData/$AppID/postgresql/initdb:/docker-entrypoint-initdb.d
     environment:
     - POSTGRES_USER=chirpstack
-    - POSTGRES_PASSWORD=JaSwhPGpVVJmPxNpPGVtXVdBvHlmCnFQ
+    - POSTGRES_PASSWORD=WGWWDTY5a9FDFtQXBKvY33seuqU1eIVz
     - POSTGRES_DB=chirpstack
   redis:
     image: redis:7-alpine

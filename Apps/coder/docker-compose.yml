@@ -12,7 +12,7 @@ services:
     environment:
     - CODER_ACCESS_URL=
     - CODER_HTTP_ADDRESS=0.0.0.0:7080
-    - CODER_PG_CONNECTION_URL=postgresql://coder:crsJW5fEz6l6iBRhZU9xsNqQKVf28odf@db/coder?sslmode=disable
+    - CODER_PG_CONNECTION_URL=postgresql://coder:4jV3zt67NH7Frx2d809wsByZGUlC2n3R@db/coder?sslmode=disable
     restart: unless-stopped
     ports:
     - target: 7080
@@ -21,7 +21,7 @@ services:
   db:
     image: postgres:17
     environment:
-    - POSTGRES_PASSWORD=crsJW5fEz6l6iBRhZU9xsNqQKVf28odf
+    - POSTGRES_PASSWORD=4jV3zt67NH7Frx2d809wsByZGUlC2n3R
     - POSTGRES_USER=coder
     - POSTGRES_DB=coder
     healthcheck:

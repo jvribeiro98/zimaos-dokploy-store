@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
     - PROJECT_URL=https://localhost
-    - PROJECT_SECRET=OWQmJSo5InmukwYzbwENHeJ1LWo9PPgqhNL8QCAWAk0Ld7oRv0JswlvbROH6z9xL
-    - DATABASE_URL=postgresql://portabase:uzNT3WxVqsKknPaNsbYEKpt35vbL6ADl@db:5432/portabase?schema=public
+    - PROJECT_SECRET=kY8gdnR8mvSi7woYmx5OxgfnAMvuAaI5hvGKGtTIooNN1M3x7AQEccVIcTkLIF8m
+    - DATABASE_URL=postgresql://portabase:IIGnq2SNtUJrPeEo8n5U3rPllVEdsu4b@db:5432/portabase?schema=public
     - PROJECT_NAME=${PROJECT_NAME:-Portabase}
     - TZ=Europe/Paris
     - LOG_LEVEL=info
@@ -51,7 +51,7 @@ services:
     environment:
     - POSTGRES_DB=portabase
     - POSTGRES_USER=portabase
-    - POSTGRES_PASSWORD=uzNT3WxVqsKknPaNsbYEKpt35vbL6ADl
+    - POSTGRES_PASSWORD=IIGnq2SNtUJrPeEo8n5U3rPllVEdsu4b
     healthcheck:
       test:
       - CMD-SHELL

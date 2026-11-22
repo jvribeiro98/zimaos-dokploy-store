@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:15.5-alpine
     environment:
-      POSTGRES_PASSWORD: Q0lFmk6w94HuDQ2x
+      POSTGRES_PASSWORD: 3hnIg8k6YnzYB5qn
       POSTGRES_DB: flagsmith
     volumes:
     - pgdata:/var/lib/postgresql/data
@@ -19,12 +19,12 @@ services:
   flagsmith:
     image: docker.flagsmith.com/flagsmith/flagsmith:2.177.1
     environment:
-      DATABASE_URL: postgresql://postgres:Q0lFmk6w94HuDQ2x@postgres:5432/flagsmith
+      DATABASE_URL: postgresql://postgres:3hnIg8k6YnzYB5qn@postgres:5432/flagsmith
       USE_POSTGRES_FOR_ANALYTICS: 'true'
       ENVIRONMENT: production
       DJANGO_ALLOWED_HOSTS: '*'
       FLAGSMITH_DOMAIN: localhost
-      DJANGO_SECRET_KEY: vcPNyQLV
+      DJANGO_SECRET_KEY: BiAjoMVT
       TASK_RUN_METHOD: TASK_PROCESSOR
       PROMETHEUS_ENABLED: 'true'
     expose:
@@ -40,7 +40,7 @@ services:
   flagsmith-task-processor:
     image: docker.flagsmith.com/flagsmith/flagsmith:2.177.1
     environment:
-      DATABASE_URL: postgresql://postgres:Q0lFmk6w94HuDQ2x@postgres:5432/flagsmith
+      DATABASE_URL: postgresql://postgres:3hnIg8k6YnzYB5qn@postgres:5432/flagsmith
       USE_POSTGRES_FOR_ANALYTICS: 'true'
       DJANGO_ALLOWED_HOSTS: '*'
       PROMETHEUS_ENABLED: 'true'

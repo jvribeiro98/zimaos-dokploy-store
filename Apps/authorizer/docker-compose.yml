@@ -7,10 +7,10 @@ services:
     - 8080
     environment:
     - DATABASE_TYPE=postgres
-    - DATABASE_URL=postgres://postgres:LjHsEnbsS9pAC589@authorizer-db:5432/authorizer?sslmode=disable
+    - DATABASE_URL=postgres://postgres:RAsmVAm8kekSmG7Z@authorizer-db:5432/authorizer?sslmode=disable
     - REDIS_URL=redis://authorizer-redis:6379
-    - ADMIN_SECRET=G6iUewjqJZXyAXhEYUCUjXajmPTPfXEF
-    - JWT_SECRET=4DuNIevnSziTbUGyWljLj89YDNxiiU0y
+    - ADMIN_SECRET=u9pt5zex9yJCmo4yHyBqfR2BDBwgzyw4
+    - JWT_SECRET=HWnP79ALY4nc4hSlSDUbOnclfawrrdWo
     - COOKIE_NAME=authorizer
     - ACCESS_TOKEN_EXPIRY_TIME=86400
     - REFRESH_TOKEN_EXPIRY_TIME=86400
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=LjHsEnbsS9pAC589
+    - POSTGRES_PASSWORD=RAsmVAm8kekSmG7Z
     - POSTGRES_DB=authorizer
     volumes:
     - db_data:/var/lib/postgresql/data

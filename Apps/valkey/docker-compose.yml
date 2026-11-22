@@ -8,7 +8,7 @@ services:
     - valkey-data:/data
     command: valkey-server /etc/valkey/valkey.conf
     environment:
-    - VALKEY_PASSWORD=jYang4C2JXSZbnEy3L0TGvkwiBS1mKyP
+    - VALKEY_PASSWORD=XtXR5HGj4e26znj1alYahBLeUBpN8l7p
     healthcheck:
       test:
       - CMD-SHELL

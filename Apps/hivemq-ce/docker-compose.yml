@@ -6,7 +6,7 @@ services:
     user: 0:0
     environment:
     - MQTT_USERNAME=mqtt
-    - MQTT_PASSWORD=3b4UZEOJo7EnWeIXT6il32FUP4aVPZan
+    - MQTT_PASSWORD=vd7rWDgOYF4a2rqiOaxpC0II4MAl6aGn
     entrypoint:
     - /bin/sh
     - /tmp/hivemq-ce-init.sh

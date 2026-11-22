@@ -6,8 +6,8 @@ services:
     environment:
       MYSQL_DATABASE: shopware
       MYSQL_USER: shopware
-      MYSQL_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      MYSQL_ROOT_PASSWORD: 255b4da14a64fe25c6ee0db5abf7d0e6033156990668068fb1b39cacb87a5c18
+      MYSQL_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      MYSQL_ROOT_PASSWORD: f14aeaf5be35cef0bfc6aaa83876051169b62811063a3d49a144bd30247a0647
     command:
     - --character-set-server=utf8mb4
     - --collation-server=utf8mb4_unicode_ci
@@ -25,7 +25,7 @@ services:
     image: redis:7.4-alpine
     restart: unless-stopped
     environment:
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
     command:
     - redis-server
     - --appendonly
@@ -46,8 +46,8 @@ services:
     restart: 'no'
     environment:
       APP_ENV: prod
-      APP_SECRET: 31720f5b83ae70d253f53ce71f453361e562891ad20ed6e297a05558615545efe2bea502eb24028d0ba947a4ca1bfa14de5c8c26b71056b1e51b70742f700ef3
-      INSTANCE_ID: b3857e7f27feda77c6aca58f6408f897ed25a5bdd7964f82c5dbda860a1b3762
+      APP_SECRET: 1faf7a45218694d3a4ac72497fb2eafa04c6264b920bb440f86c6e69249786344fdb52ee5c03f5eb7147b03303fb8663d89b25b4a890395a346e9e3a4028f8ad
+      INSTANCE_ID: 1c01bee26f40477f1e32325049e3ec4a2f7725d4aba4e2894f28af4819e2712f
       APP_URL: http://localhost
       ENABLE_DEMO_DATA: '1'
       TRUSTED_PROXIES: private_ranges
@@ -57,13 +57,13 @@ services:
       DATABASE_PORT: '3306'
       DATABASE_NAME: shopware
       DATABASE_USER: shopware
-      DATABASE_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      DATABASE_URL: mysql://shopware:f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18@database:3306/shopware?charset=utf8mb4
+      DATABASE_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      DATABASE_URL: mysql://shopware:3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3@database:3306/shopware?charset=utf8mb4
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       MAILER_DSN: null://localhost
-      LOCK_DSN: redis://:d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd@redis:6379/1
+      LOCK_DSN: redis://:a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3@redis:6379/1
       MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
       MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
       MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
@@ -73,9 +73,9 @@ services:
       INSTALL_LOCALE: en-GB
       INSTALL_CURRENCY: EUR
       INSTALL_ADMIN_USERNAME: admin
-      INSTALL_ADMIN_PASSWORD: OnYGlj3fv3pHqwn4Cl14
+      INSTALL_ADMIN_PASSWORD: MOyGfess6wONU797c2BO
       PHP_SESSION_HANDLER: redis
-      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       PHP_SESSION_COOKIE_LIFETIME: '0'
       PHP_SESSION_GC_MAXLIFETIME: '1440'
       PHP_MAX_UPLOAD_SIZE: 128M
@@ -161,8 +161,8 @@ services:
       \ $${plugin_state}\"\n    echo \"Continuing without demo data activation.\"\n    exit 0\n    ;;\nesac\n"
     environment:
       APP_ENV: prod
-      APP_SECRET: 31720f5b83ae70d253f53ce71f453361e562891ad20ed6e297a05558615545efe2bea502eb24028d0ba947a4ca1bfa14de5c8c26b71056b1e51b70742f700ef3
-      INSTANCE_ID: b3857e7f27feda77c6aca58f6408f897ed25a5bdd7964f82c5dbda860a1b3762
+      APP_SECRET: 1faf7a45218694d3a4ac72497fb2eafa04c6264b920bb440f86c6e69249786344fdb52ee5c03f5eb7147b03303fb8663d89b25b4a890395a346e9e3a4028f8ad
+      INSTANCE_ID: 1c01bee26f40477f1e32325049e3ec4a2f7725d4aba4e2894f28af4819e2712f
       APP_URL: http://localhost
       ENABLE_DEMO_DATA: '1'
       TRUSTED_PROXIES: private_ranges
@@ -172,13 +172,13 @@ services:
       DATABASE_PORT: '3306'
       DATABASE_NAME: shopware
       DATABASE_USER: shopware
-      DATABASE_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      DATABASE_URL: mysql://shopware:f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18@database:3306/shopware?charset=utf8mb4
+      DATABASE_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      DATABASE_URL: mysql://shopware:3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3@database:3306/shopware?charset=utf8mb4
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       MAILER_DSN: null://localhost
-      LOCK_DSN: redis://:d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd@redis:6379/1
+      LOCK_DSN: redis://:a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3@redis:6379/1
       MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
       MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
       MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
@@ -188,9 +188,9 @@ services:
       INSTALL_LOCALE: en-GB
       INSTALL_CURRENCY: EUR
       INSTALL_ADMIN_USERNAME: admin
-      INSTALL_ADMIN_PASSWORD: OnYGlj3fv3pHqwn4Cl14
+      INSTALL_ADMIN_PASSWORD: MOyGfess6wONU797c2BO
       PHP_SESSION_HANDLER: redis
-      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       PHP_SESSION_COOKIE_LIFETIME: '0'
       PHP_SESSION_GC_MAXLIFETIME: '1440'
       PHP_MAX_UPLOAD_SIZE: 128M
@@ -234,8 +234,8 @@ services:
       '
     environment:
       APP_ENV: prod
-      APP_SECRET: 31720f5b83ae70d253f53ce71f453361e562891ad20ed6e297a05558615545efe2bea502eb24028d0ba947a4ca1bfa14de5c8c26b71056b1e51b70742f700ef3
-      INSTANCE_ID: b3857e7f27feda77c6aca58f6408f897ed25a5bdd7964f82c5dbda860a1b3762
+      APP_SECRET: 1faf7a45218694d3a4ac72497fb2eafa04c6264b920bb440f86c6e69249786344fdb52ee5c03f5eb7147b03303fb8663d89b25b4a890395a346e9e3a4028f8ad
+      INSTANCE_ID: 1c01bee26f40477f1e32325049e3ec4a2f7725d4aba4e2894f28af4819e2712f
       APP_URL: http://localhost
       ENABLE_DEMO_DATA: '1'
       TRUSTED_PROXIES: private_ranges
@@ -245,13 +245,13 @@ services:
       DATABASE_PORT: '3306'
       DATABASE_NAME: shopware
       DATABASE_USER: shopware
-      DATABASE_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      DATABASE_URL: mysql://shopware:f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18@database:3306/shopware?charset=utf8mb4
+      DATABASE_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      DATABASE_URL: mysql://shopware:3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3@database:3306/shopware?charset=utf8mb4
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       MAILER_DSN: null://localhost
-      LOCK_DSN: redis://:d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd@redis:6379/1
+      LOCK_DSN: redis://:a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3@redis:6379/1
       MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
       MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
       MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
@@ -261,9 +261,9 @@ services:
       INSTALL_LOCALE: en-GB
       INSTALL_CURRENCY: EUR
       INSTALL_ADMIN_USERNAME: admin
-      INSTALL_ADMIN_PASSWORD: OnYGlj3fv3pHqwn4Cl14
+      INSTALL_ADMIN_PASSWORD: MOyGfess6wONU797c2BO
       PHP_SESSION_HANDLER: redis
-      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       PHP_SESSION_COOKIE_LIFETIME: '0'
       PHP_SESSION_GC_MAXLIFETIME: '1440'
       PHP_MAX_UPLOAD_SIZE: 128M
@@ -305,8 +305,8 @@ services:
       '
     environment:
       APP_ENV: prod
-      APP_SECRET: 31720f5b83ae70d253f53ce71f453361e562891ad20ed6e297a05558615545efe2bea502eb24028d0ba947a4ca1bfa14de5c8c26b71056b1e51b70742f700ef3
-      INSTANCE_ID: b3857e7f27feda77c6aca58f6408f897ed25a5bdd7964f82c5dbda860a1b3762
+      APP_SECRET: 1faf7a45218694d3a4ac72497fb2eafa04c6264b920bb440f86c6e69249786344fdb52ee5c03f5eb7147b03303fb8663d89b25b4a890395a346e9e3a4028f8ad
+      INSTANCE_ID: 1c01bee26f40477f1e32325049e3ec4a2f7725d4aba4e2894f28af4819e2712f
       APP_URL: http://localhost
       ENABLE_DEMO_DATA: '1'
       TRUSTED_PROXIES: private_ranges
@@ -316,13 +316,13 @@ services:
       DATABASE_PORT: '3306'
       DATABASE_NAME: shopware
       DATABASE_USER: shopware
-      DATABASE_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      DATABASE_URL: mysql://shopware:f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18@database:3306/shopware?charset=utf8mb4
+      DATABASE_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      DATABASE_URL: mysql://shopware:3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3@database:3306/shopware?charset=utf8mb4
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       MAILER_DSN: null://localhost
-      LOCK_DSN: redis://:d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd@redis:6379/1
+      LOCK_DSN: redis://:a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3@redis:6379/1
       MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
       MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
       MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
@@ -332,9 +332,9 @@ services:
       INSTALL_LOCALE: en-GB
       INSTALL_CURRENCY: EUR
       INSTALL_ADMIN_USERNAME: admin
-      INSTALL_ADMIN_PASSWORD: OnYGlj3fv3pHqwn4Cl14
+      INSTALL_ADMIN_PASSWORD: MOyGfess6wONU797c2BO
       PHP_SESSION_HANDLER: redis
-      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       PHP_SESSION_COOKIE_LIFETIME: '0'
       PHP_SESSION_GC_MAXLIFETIME: '1440'
       PHP_MAX_UPLOAD_SIZE: 128M
@@ -372,8 +372,8 @@ services:
       '
     environment:
       APP_ENV: prod
-      APP_SECRET: 31720f5b83ae70d253f53ce71f453361e562891ad20ed6e297a05558615545efe2bea502eb24028d0ba947a4ca1bfa14de5c8c26b71056b1e51b70742f700ef3
-      INSTANCE_ID: b3857e7f27feda77c6aca58f6408f897ed25a5bdd7964f82c5dbda860a1b3762
+      APP_SECRET: 1faf7a45218694d3a4ac72497fb2eafa04c6264b920bb440f86c6e69249786344fdb52ee5c03f5eb7147b03303fb8663d89b25b4a890395a346e9e3a4028f8ad
+      INSTANCE_ID: 1c01bee26f40477f1e32325049e3ec4a2f7725d4aba4e2894f28af4819e2712f
       APP_URL: http://localhost
       ENABLE_DEMO_DATA: '1'
       TRUSTED_PROXIES: private_ranges
@@ -383,13 +383,13 @@ services:
       DATABASE_PORT: '3306'
       DATABASE_NAME: shopware
       DATABASE_USER: shopware
-      DATABASE_PASSWORD: f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18
-      DATABASE_URL: mysql://shopware:f7264cfcf35203d01015401c3cbe30a2033fc55d341dce298ab9796a93d78f18@database:3306/shopware?charset=utf8mb4
+      DATABASE_PASSWORD: 3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3
+      DATABASE_URL: mysql://shopware:3e07b07da171373c9fa6665250721bffa32fc02c5966f00d6c1c79d6d1c578c3@database:3306/shopware?charset=utf8mb4
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      REDIS_PASSWORD: a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       MAILER_DSN: null://localhost
-      LOCK_DSN: redis://:d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd@redis:6379/1
+      LOCK_DSN: redis://:a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3@redis:6379/1
       MESSENGER_TRANSPORT_DSN: doctrine://default?queue_name=async
       MESSENGER_TRANSPORT_LOW_PRIORITY_DSN: doctrine://default?queue_name=low_priority
       MESSENGER_TRANSPORT_FAILURE_DSN: doctrine://default?queue_name=failed
@@ -399,9 +399,9 @@ services:
       INSTALL_LOCALE: en-GB
       INSTALL_CURRENCY: EUR
       INSTALL_ADMIN_USERNAME: admin
-      INSTALL_ADMIN_PASSWORD: OnYGlj3fv3pHqwn4Cl14
+      INSTALL_ADMIN_PASSWORD: MOyGfess6wONU797c2BO
       PHP_SESSION_HANDLER: redis
-      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=d794cdad86e06b598a4f87e3cf3903d768280f4af0cb5caa6db7a1c2781e4bdd
+      PHP_SESSION_SAVE_PATH: tcp://redis:6379?auth=a80c8e8636dc427370223e8a2281864768d7f31f0817b2e9da466d8dfa56f1c3
       PHP_SESSION_COOKIE_LIFETIME: '0'
       PHP_SESSION_GC_MAXLIFETIME: '1440'
       PHP_MAX_UPLOAD_SIZE: 128M

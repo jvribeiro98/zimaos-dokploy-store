@@ -8,10 +8,10 @@ services:
       PORT: '20128'
       HOSTNAME: 0.0.0.0
       NODE_ENV: production
-      JWT_SECRET: liJotEWNV5IkSk4UkPhrDQWiyJvLmdNBvwoSOuayiVSG3qaRJ12horTCC9xMufXt
-      INITIAL_PASSWORD: XHgRfKLwj72pu8zGyVQbGSbpt7tGkpQG
-      API_KEY_SECRET: TEqU6mkBUuykwvdburlemJ7aG2kecLJFq9UWFQdwcetaG0sy9rOIXhlLxiRVnirV
-      MACHINE_ID_SALT: mdhSf81WIalLVbt2yAv9yN7kH5S6SY2U
+      JWT_SECRET: O6mvIFX8YpdTqRTG6Rgi8fdloVmKU3rFqrjtMgdybZR3WYrao2D2mg8AoaNhVUoJ
+      INITIAL_PASSWORD: D9vb4WTstT0cK7xfhjOwKFzH5IU1BYiR
+      API_KEY_SECRET: BAXEE8crTFW3ds2sVdyXMGwz05zwU1UogQa9Xwaj3W8klFmKWPAt10GfQ8PF2sFL
+      MACHINE_ID_SALT: D9Rnu1GemuXrpzhoOnk6w63FvL3OqmB4
       BASE_URL: https://localhost
       NEXT_PUBLIC_BASE_URL: https://localhost
       HEADROOM_URL: http://headroom:8787

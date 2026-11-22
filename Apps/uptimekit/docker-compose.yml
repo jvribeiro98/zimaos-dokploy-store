@@ -3,11 +3,11 @@ services:
   dash:
     image: ghcr.io/uptimekit/dash:5.2.1
     environment:
-    - DATABASE_URL=postgresql://postgres:l13rsnXbc612Z4ykXj1I1c1RTozSyRvN@db:5432/uptimekit
+    - DATABASE_URL=postgresql://postgres:F7GzJeq0tzCVw7lUY4t0JGy4AfHHlaDi@db:5432/uptimekit
     - TIMESERIES_BACKEND=clickhouse
     - CLICKHOUSE_URL=http://clickhouse:8123
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=0OUc2gl7oD5PS4tcPW2ZPDMpfYg4PKlP
+    - CLICKHOUSE_PASSWORD=V4jkI6Bx3UvZuLwU5dImfMVcr14BMsWd
     - REDIS_URL=redis://redis:6379
     depends_on:
       db:
@@ -31,7 +31,7 @@ services:
     image: postgres:18-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: l13rsnXbc612Z4ykXj1I1c1RTozSyRvN
+      POSTGRES_PASSWORD: F7GzJeq0tzCVw7lUY4t0JGy4AfHHlaDi
       POSTGRES_DB: uptimekit
     volumes:
     - db_data:/var/lib/postgresql
@@ -56,7 +56,7 @@ services:
     environment:
       CLICKHOUSE_DB: uptimekit
       CLICKHOUSE_USER: default
-      CLICKHOUSE_PASSWORD: 0OUc2gl7oD5PS4tcPW2ZPDMpfYg4PKlP
+      CLICKHOUSE_PASSWORD: V4jkI6Bx3UvZuLwU5dImfMVcr14BMsWd
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
     user: root
     ulimits:

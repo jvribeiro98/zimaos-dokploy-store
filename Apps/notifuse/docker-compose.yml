@@ -31,7 +31,7 @@ services:
       DB_PREFIX: notifuse
       DB_NAME: postgres
       DB_SSLMODE: disable
-      SECRET_KEY: SrqaduEJ9J7DMNqdA5Gt1kHJeKPse9cCVUqSye9QjN49AmSddXTPC9nKENkteH1uoHeuoAQgwtvU2lKKQYKRxw==
+      SECRET_KEY: ZqqB4i6zUHyc5cUpv6mIHapuAMWIjD1bFx+oql4ZsYkBPaUuBFgMQNSwB5NcO1xN7raDWJZbY6WlWgfY2VurBA==
       SERVER_PORT: '8080'
       SERVER_HOST: 0.0.0.0
       ENVIRONMENT: production

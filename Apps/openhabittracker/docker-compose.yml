@@ -7,8 +7,8 @@ services:
     environment:
       AppSettings__UserName: admin
       AppSettings__Email: admin@example.com
-      AppSettings__Password: c1PZlgaqX1wZstsDrXtRdh0Y
-      AppSettings__JwtSecret: pRhb70cxxyPCQp6SlDxQWPtfXXCZqNcoqekg+EMhKjFUHWTzr+QVgOQEXTXoxumC
+      AppSettings__Password: WguCa4sDa4nwxF8Bm3NHb2Fl
+      AppSettings__JwtSecret: 5E9X+il08FdwCffiLcwIvjORo9jKBOvzqb0KM7b9v5YUAFepbZfRpTUt2CUC7ypT
     volumes:
     - openhabittracker-data:/app/.OpenHabitTracker
     restart: unless-stopped

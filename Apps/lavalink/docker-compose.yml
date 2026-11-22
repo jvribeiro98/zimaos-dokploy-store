@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     environment:
       _JAVA_OPTIONS: -Xmx6G
-      LAVALINK_SERVER_PASSWORD: zq1yqcf5SK352fZHqqMStDeFvO6kQb4e
+      LAVALINK_SERVER_PASSWORD: bJ25KLtwZCjunzFi252fiVHzLWQsRDGQ
       SERVER_PORT: '2333'
     volumes:
     - /DATA/AppData/$AppID/application.yml:/opt/Lavalink/application.yml:rw

@@ -5,7 +5,7 @@ services:
     volumes:
     - meili_data:/meili_data
     environment:
-      MEILI_MASTER_KEY: Cu0qTuhIAe5UwwLRbYMnlXVVdUuxrpROco61BtMo0OE=
+      MEILI_MASTER_KEY: vVarQ9riZCdR9KRJ2gC9bE++Hz/kKX3A75RHKBUV8CA=
     restart: unless-stopped
     ports:
     - target: 7700

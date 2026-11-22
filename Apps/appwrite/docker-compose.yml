@@ -93,11 +93,11 @@ services:
     - _APP_OPTIONS_FORCE_HTTPS=disabled
     - _APP_OPTIONS_ROUTER_FORCE_HTTPS=disabled
     - _APP_ROUTER_AUTO_CERTIFICATES=enabled
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
-    - _APP_NOTIFICATIONS_TRACKING_SECRET=mmL3lVRll9128ZO27Ywm47qINdoifxey
+    - _APP_NOTIFICATIONS_TRACKING_SECRET=cmYjFlotMEO6TcOUoKshei02sHs3LuSU
     - _APP_NOTIFICATIONS_PUSH_APNS=
     - _APP_NOTIFICATIONS_PUSH_APNS_KEY=
     - _APP_DOMAIN=localhost
@@ -123,9 +123,9 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
-    - _APP_DB_ROOT_PASS=oALci1CNqmE0O03HIki9LHkbLSdVBuKW
-    - _APP_DB_USER_PASS=sK7atZcr7AsEqU5sECkpyEBLfYwd4fk1
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
+    - _APP_DB_ROOT_PASS=3we6pWKpP1AHIR7ZcOuviZzWn9VCaUmk
+    - _APP_DB_USER_PASS=fWv7KOSQHiYJ7r5HH76aJs2XrjLfTIht
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_DATABASE_SHARED_NAMESPACE=
     - _APP_LIMIT_DATABASE_BATCH=100
@@ -149,10 +149,10 @@ services:
     - _APP_EMBEDDING=disabled
     - _APP_USAGE_STATS=enabled
     - _APP_ALERTS_USAGE_LAG=120
-    - _APP_USAGE_PASS=M4xGyZ2DN42p7s88sS4McoPIuusKpvKn
-    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_USAGE_PASS=lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF
+    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_USAGE=2
-    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_EXECUTIONS=2
     - _APP_MAINTENANCE_RETENTION_USAGE_TTL=180
     - _APP_STATS_USAGE_QUEUE_NAME=v1-stats-usage
@@ -205,13 +205,13 @@ services:
     - _APP_FUNCTIONS_CREATION_ABUSE_LIMIT=5000
     - _APP_SITES_TIMEOUT=900
     - _APP_SITES_RUNTIMES=static-1,node-22
-    - _APP_EXECUTOR_SECRET=dH2dc2533kQE72dxyoGhD79auNuJpENV
+    - _APP_EXECUTOR_SECRET=Mpzjw7YUIT02T8VBW1L1GUoUvOrQEplp
     - _APP_EXECUTOR_HOST=http://openruntimes-executor/v1
     - _APP_BUILDS_VOLUME=${COMPOSE_PROJECT_NAME:-appwrite}_appwrite-builds
     - _APP_JOBS_HOST=http://orchestrator:8080
-    - _APP_JOBS_SECRET=Y2Lp6bqsyXUsmJVCfQPGFa8TUUQ9Qgox
+    - _APP_JOBS_SECRET=4YfbaCNyEMgE7wgkya8Sj8b4Ko3Mp4gI
     - _APP_JOBS_ENDPOINT=http://appwrite
-    - _APP_GEO_SECRET=niQNQgJ78OqL5WqvuqXdmoPjKe20HPF4
+    - _APP_GEO_SECRET=28Ckf7ST2Ar1I76istGAITZoTO16Oamr
     - _APP_GEO_ENDPOINT=http://appwrite-geo/v1
     - _APP_LOGGING_CONFIG=
     - _APP_LOGGING_FORMAT=pretty
@@ -291,7 +291,7 @@ services:
     - _APP_LIMIT_REALTIME_SUBSCRIPTIONS=100
     - _APP_LIMIT_REALTIME_CHANNELS=100
     - _APP_LIMIT_REALTIME_QUERIES=100
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
@@ -304,7 +304,7 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_LIMIT_DATABASE_BATCH=100
     - _APP_DOCUMENTSDB=enabled
@@ -355,7 +355,7 @@ services:
     - _APP_OPTIONS_ABUSE=enabled
     - _APP_OPTIONS_ROUTER_PROTECTION=disabled
     - _APP_REALTIME_TAIL_RATE
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
@@ -368,7 +368,7 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DB_ADAPTER_VECTORSDB=postgresql
     - _APP_DB_HOST_VECTORSDB=postgresql
     - _APP_DB_PORT_VECTORSDB=5432
@@ -410,11 +410,11 @@ services:
     - _APP_WORKERS_NUM=1
     - _APP_WORKER_MAX_COROUTINES=83
     - _APP_WORKER_PER_CORE=6
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
-    - _APP_NOTIFICATIONS_TRACKING_SECRET=mmL3lVRll9128ZO27Ywm47qINdoifxey
+    - _APP_NOTIFICATIONS_TRACKING_SECRET=cmYjFlotMEO6TcOUoKshei02sHs3LuSU
     - _APP_NOTIFICATIONS_PUSH_APNS=
     - _APP_NOTIFICATIONS_PUSH_APNS_KEY=
     - _APP_EMAIL_SECURITY=
@@ -428,7 +428,7 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_LIMIT_DATABASE_BATCH=100
     - _APP_DOCUMENTSDB=enabled
@@ -450,10 +450,10 @@ services:
     - _APP_EMBEDDING=disabled
     - _APP_USAGE_STATS=enabled
     - _APP_ALERTS_USAGE_LAG=120
-    - _APP_USAGE_PASS=M4xGyZ2DN42p7s88sS4McoPIuusKpvKn
-    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_USAGE_PASS=lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF
+    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_USAGE=2
-    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_EXECUTIONS=2
     - _APP_MAINTENANCE_RETENTION_USAGE_TTL=180
     - _APP_STATS_USAGE_QUEUE_NAME=v1-stats-usage
@@ -500,11 +500,11 @@ services:
     - _APP_STORAGE_WASABI_SECRET=
     - _APP_STORAGE_WASABI_REGION=eu-central-1
     - _APP_STORAGE_WASABI_BUCKET=
-    - _APP_EXECUTOR_SECRET=dH2dc2533kQE72dxyoGhD79auNuJpENV
+    - _APP_EXECUTOR_SECRET=Mpzjw7YUIT02T8VBW1L1GUoUvOrQEplp
     - _APP_EXECUTOR_HOST=http://openruntimes-executor/v1
     - _APP_BUILDS_VOLUME=${COMPOSE_PROJECT_NAME:-appwrite}_appwrite-builds
     - _APP_JOBS_HOST=http://orchestrator:8080
-    - _APP_JOBS_SECRET=Y2Lp6bqsyXUsmJVCfQPGFa8TUUQ9Qgox
+    - _APP_JOBS_SECRET=4YfbaCNyEMgE7wgkya8Sj8b4Ko3Mp4gI
     - _APP_JOBS_ENDPOINT=http://appwrite
     - _APP_BROWSER_HOST=http://appwrite-browser:3000/v1
     - _APP_WORKER_SCREENSHOTS_ROUTER=http://appwrite
@@ -570,7 +570,7 @@ services:
     - _APP_MEMORY_LIMIT=512M
     - _APP_WORKER_MAX_COROUTINES=8
     - _APP_WORKER_PER_CORE=6
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
@@ -590,13 +590,13 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_USAGE_STATS=enabled
-    - _APP_USAGE_PASS=M4xGyZ2DN42p7s88sS4McoPIuusKpvKn
-    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_USAGE_PASS=lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF
+    - _APP_CONNECTIONS_DB_USAGE=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_USAGE=2
-    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:M4xGyZ2DN42p7s88sS4McoPIuusKpvKn@clickhouse:8123/appwrite
+    - _APP_CONNECTIONS_DB_EXECUTIONS=http://appwrite:lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF@clickhouse:8123/appwrite
     - _APP_POOL_SIZE_EXECUTIONS=2
     - _APP_MAINTENANCE_RETENTION_USAGE_TTL=180
     - _APP_STATS_USAGE_QUEUE_NAME=v1-stats-usage
@@ -631,7 +631,7 @@ services:
     - _APP_DNS=8.8.8.8
     - _APP_DOMAIN_FUNCTIONS=functions.localhost
     - _APP_ROUTER_AUTO_CERTIFICATES=enabled
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
@@ -644,7 +644,7 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_MAINTENANCE_INTERVAL=86400
     - _APP_MAINTENANCE_START_TIME=00:00
@@ -678,7 +678,7 @@ services:
     - _APP_DNS=8.8.8.8
     - _APP_DOMAIN_FUNCTIONS=functions.localhost
     - _APP_DOMAIN_SITES=sites.localhost
-    - _APP_OPENSSL_KEY_V1=T1YjCq29hatbBW4xZr8u9vKj7E4EaSdI
+    - _APP_OPENSSL_KEY_V1=HWqhTt4ZSZaw3ifaSDa7BFjHYWzjTsya
     - _APP_OPENSSL_KEY_V2=
     - _APP_OPENSSL_KEY_CURRENT=1
     - _APP_OPENSSL_KEY_OLDEST=1
@@ -691,7 +691,7 @@ services:
     - _APP_DB_PORT=5432
     - _APP_DB_SCHEMA=appwrite
     - _APP_DB_USER=user
-    - _APP_DB_PASS=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - _APP_DB_PASS=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - _APP_DATABASE_SHARED_TABLES=
     - _APP_INTERVAL_DOMAIN_VERIFICATION=120
     - _APP_INTERVAL_CLEANUP_STALE_EXECUTIONS=300
@@ -734,7 +734,7 @@ services:
     environment:
     - CLICKHOUSE_DB=appwrite
     - CLICKHOUSE_USER=appwrite
-    - CLICKHOUSE_PASSWORD=M4xGyZ2DN42p7s88sS4McoPIuusKpvKn
+    - CLICKHOUSE_PASSWORD=lFqIXI6uOLC5GdtZ5g3Cie4cTF5K0TrF
     - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
     - CLICKHOUSE_ALWAYS_RUN_INITDB_SCRIPTS=1
     volumes:
@@ -816,7 +816,7 @@ services:
     environment:
     - POSTGRES_DB=appwrite
     - POSTGRES_USER=user
-    - POSTGRES_PASSWORD=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - POSTGRES_PASSWORD=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     command:
     - postgres
     - -c
@@ -853,10 +853,10 @@ services:
     volumes:
     - appwrite-mariadb:/var/lib/mysql:rw
     environment:
-    - MYSQL_ROOT_PASSWORD=oALci1CNqmE0O03HIki9LHkbLSdVBuKW
+    - MYSQL_ROOT_PASSWORD=3we6pWKpP1AHIR7ZcOuviZzWn9VCaUmk
     - MYSQL_DATABASE=appwrite
     - MYSQL_USER=user
-    - MYSQL_PASSWORD=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - MYSQL_PASSWORD=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     - MARIADB_AUTO_UPGRADE=1
     command:
     - mysqld
@@ -880,10 +880,10 @@ services:
     - /DATA/AppData/$AppID/mongo-entrypoint.sh:/mongo-entrypoint.sh:ro
     environment:
     - MONGO_INITDB_ROOT_USERNAME=root
-    - MONGO_INITDB_ROOT_PASSWORD=oALci1CNqmE0O03HIki9LHkbLSdVBuKW
+    - MONGO_INITDB_ROOT_PASSWORD=3we6pWKpP1AHIR7ZcOuviZzWn9VCaUmk
     - MONGO_INITDB_DATABASE=appwrite
     - MONGO_INITDB_USERNAME=user
-    - MONGO_INITDB_PASSWORD=lWhly1AbGstc5zDTlLVZILTeKkHSn7My
+    - MONGO_INITDB_PASSWORD=uP8Al6EBsze2m3XwtNSgnOIlEgeXKvtQ
     entrypoint:
     - /bin/bash
     - /mongo-entrypoint.sh

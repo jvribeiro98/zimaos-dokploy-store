@@ -7,8 +7,8 @@ services:
     - 3000
     environment:
       NEXT_PUBLIC_BASE_URL: https://localhost
-      BETTER_AUTH_SECRET: uAqo7Sx8ESwK8kHqoM93jHcm1UMwrh6d
-      POSTGRES_URL: postgresql://kan:CSKZUuXm5SQ9ieUl9eLHDvAfzdBnDwLZ@postgres:5432/kan_db
+      BETTER_AUTH_SECRET: ZupfS4kC43XQGHYr4jpo0N5IaY7r0IQW
+      POSTGRES_URL: postgresql://kan:55zqlOBflv0qkebXpTrMG0Oeb0wHScxX@postgres:5432/kan_db
       NEXT_PUBLIC_ALLOW_CREDENTIALS: 'true'
     depends_on:
       migrate:
@@ -21,7 +21,7 @@ services:
     image: ghcr.io/kanbn/kan-migrate:0.6.0
     restart: 'no'
     environment:
-      POSTGRES_URL: postgresql://kan:CSKZUuXm5SQ9ieUl9eLHDvAfzdBnDwLZ@postgres:5432/kan_db
+      POSTGRES_URL: postgresql://kan:55zqlOBflv0qkebXpTrMG0Oeb0wHScxX@postgres:5432/kan_db
     depends_on:
       postgres:
         condition: service_healthy
@@ -31,7 +31,7 @@ services:
     environment:
       POSTGRES_DB: kan_db
       POSTGRES_USER: kan
-      POSTGRES_PASSWORD: CSKZUuXm5SQ9ieUl9eLHDvAfzdBnDwLZ
+      POSTGRES_PASSWORD: 55zqlOBflv0qkebXpTrMG0Oeb0wHScxX
     volumes:
     - kan_postgres_data:/var/lib/postgresql/data
     healthcheck:

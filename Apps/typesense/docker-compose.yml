@@ -4,7 +4,7 @@ services:
     image: typesense/typesense:29.0
     restart: unless-stopped
     environment:
-    - TYPESENSE_API_KEY=nQJdNRhTSPHWMDGP
+    - TYPESENSE_API_KEY=PMi6YLFaCN3KjRfW
     - TYPESENSE_ENABLE_CORS=true
     - TYPESENSE_DATA_DIR=/data
     volumes:

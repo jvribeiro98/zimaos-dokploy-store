@@ -11,7 +11,7 @@ services:
     - PG_HOST=botpress-db
     - PG_PORT=5432
     - PG_USER=postgres
-    - PG_PASSWORD=Sq3RuJaMVz8cjJCi
+    - PG_PASSWORD=5nbErv8LvN2QcERC
     - PG_SSL=false
     - PORT=80
     volumes:
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=Sq3RuJaMVz8cjJCi
+    - POSTGRES_PASSWORD=5nbErv8LvN2QcERC
     - POSTGRES_DB=botpress
     volumes:
     - db_data:/var/lib/postgresql/data

@@ -4,7 +4,7 @@ services:
     image: ghcr.io/instantdb/postgresql:postgresql-16-pg-hint-plan
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: YzIScpL5gN6TlPcYdtV6djM48YbDhyw2
+      POSTGRES_PASSWORD: VCp87ycjviV0JSJ4FxU4w5dhPtepq4S8
       POSTGRES_USER: instant
       POSTGRES_DB: instant
     volumes:
@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
     working_dir: /app
     environment:
-      DATABASE_URL: postgresql://instant:YzIScpL5gN6TlPcYdtV6djM48YbDhyw2@postgres:5432/instant
+      DATABASE_URL: postgresql://instant:VCp87ycjviV0JSJ4FxU4w5dhPtepq4S8@postgres:5432/instant
       NREPL_BIND_ADDRESS: 0.0.0.0
       PORT: '8888'
       HOST: 0.0.0.0

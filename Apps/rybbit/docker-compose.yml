@@ -8,7 +8,7 @@ services:
     environment:
     - CLICKHOUSE_DB=analytics
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=lmAz5nPiVsygTf6jDE2x5XaIU8LaSknJ
+    - CLICKHOUSE_PASSWORD=58nZ4V6AzcImgYDtSyApRPtQBnz6xlWE
     healthcheck:
       test:
       - CMD
@@ -27,7 +27,7 @@ services:
     environment:
     - POSTGRES_DB=analytics
     - POSTGRES_USER=frog
-    - POSTGRES_PASSWORD=vmzmLAIfBxF0fWlG9K0lSSGlIx0AcCbO
+    - POSTGRES_PASSWORD=rdHOxypYDy9wm9SseBH0yklBtyPX8iaj
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -72,16 +72,16 @@ services:
     - CLICKHOUSE_HOST=http://rybbit_clickhouse:8123
     - CLICKHOUSE_DB=analytics
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=lmAz5nPiVsygTf6jDE2x5XaIU8LaSknJ
+    - CLICKHOUSE_PASSWORD=58nZ4V6AzcImgYDtSyApRPtQBnz6xlWE
     - POSTGRES_HOST=rybbit_postgres
     - POSTGRES_PORT=5432
     - POSTGRES_DB=analytics
     - POSTGRES_USER=frog
-    - POSTGRES_PASSWORD=vmzmLAIfBxF0fWlG9K0lSSGlIx0AcCbO
+    - POSTGRES_PASSWORD=rdHOxypYDy9wm9SseBH0yklBtyPX8iaj
     - REDIS_HOST=rybbit_redis
     - REDIS_PORT=6379
-    - REDIS_PASSWORD=HdwqCRMkHugaN8mMfGGXyOntwYO2OADi
-    - BETTER_AUTH_SECRET=x93KAuUVEeR92M9f+0JHznnYL17xlCzhb2r10w2pfY4=
+    - REDIS_PASSWORD=KicsFBvm0jDQYqMEMAgULC8bVTyDT3Xn
+    - BETTER_AUTH_SECRET=Ov5FrYLNplYXLmndLSY208dktcLEHAfv5O8OwDHSmgA=
     - BASE_URL=http://localhost
     - DISABLE_SIGNUP=false
     - DISABLE_TELEMETRY=false
