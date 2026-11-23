@@ -7,7 +7,7 @@ services:
     - '7745'
     environment:
     - TZ=Etc/UTC
-    - HBOX_AUTH_API_KEY_PEPPER=XWY3g5VJazrpN9ISau999JcxNwbZx6cD3vgy99QNmvatcSlSiLLz5Erelvm1JZxx
+    - HBOX_AUTH_API_KEY_PEPPER=i9tic3BjrLRz5I4fEYXduUSOZ0AeOvISK29pqd3kj4xa4v4Jq8lq2AvOaWcRxGGa
     volumes:
     - homebox-data:/data
     ports:
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://homebox.software/
   repo: https://github.com/sysadminsmedia/homebox
   docs: https://homebox.software/en/

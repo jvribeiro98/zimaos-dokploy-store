@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/janeczku/calibre-web
   repo: https://github.com/janeczku/calibre-web
   docs: https://github.com/janeczku/calibre-web/wiki

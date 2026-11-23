@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://dumbware.io/DumbDrop/
   repo: https://github.com/dumbwareio/dumbdrop
   docs: https://github.com/dumbwareio/dumbdrop

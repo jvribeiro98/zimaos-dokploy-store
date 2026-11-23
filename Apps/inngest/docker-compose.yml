@@ -11,9 +11,9 @@ services:
     environment:
     - INNGEST_PORT=8288
     - INNGEST_HOST=0.0.0.0
-    - INNGEST_EVENT_KEY=a9f373231f51b37a632202231ca776a3861fd9804fcfa3e7c3df904a84299ea3
-    - INNGEST_SIGNING_KEY=94d7f6ce2ee9b843fc8952971c57ac7397c9b1709de2ecb9e6212fe7f1eb72fc
-    - INNGEST_POSTGRES_URI=postgresql://inngest:ctA67uuvE1pZ8ceCYcoxsy92@postgres:5432/inngest?sslmode=disable
+    - INNGEST_EVENT_KEY=7f31d3afc4a7a0c9762c308771676ff4afcc2d3346eaad4e0e208301b2ca5082
+    - INNGEST_SIGNING_KEY=7cea60df0198ee7573b277ce961442257e4481309d7bd48143b9dce6b43fd94b
+    - INNGEST_POSTGRES_URI=postgresql://inngest:qwFNUrqxVuDYIbF5OLaB3SPN@postgres:5432/inngest?sslmode=disable
     - INNGEST_REDIS_URI=redis://redis:6379
     - INNGEST_POLL_INTERVAL=60
     - INNGEST_QUEUE_WORKERS=100
@@ -51,7 +51,7 @@ services:
     environment:
     - POSTGRES_DB=inngest
     - POSTGRES_USER=inngest
-    - POSTGRES_PASSWORD=ctA67uuvE1pZ8ceCYcoxsy92
+    - POSTGRES_PASSWORD=qwFNUrqxVuDYIbF5OLaB3SPN
     - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     - PGUSER=inngest
     volumes:
@@ -108,7 +108,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.12.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.inngest.com/
   repo: https://github.com/inngest/inngest
   docs: https://www.inngest.com/docs/self-hosting

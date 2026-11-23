@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: plunk
       POSTGRES_USER: plunk
-      POSTGRES_PASSWORD: BbfLGDo7DyKddMvFCvv7vxRbiFDG3Zoy
+      POSTGRES_PASSWORD: CB2ZzD5FSvHfFPrj22PjzepSKZ2PWRB4
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -36,7 +36,7 @@ services:
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: plunk
-      MINIO_ROOT_PASSWORD: 3vsNk2xIuiVY19vmj6fczhvkIJu74UPB
+      MINIO_ROOT_PASSWORD: wPR5aDr19VnrcZwAMUMVtEueRAiyMDmD
     volumes:
     - minio_data:/data
     expose:
@@ -57,10 +57,10 @@ services:
     environment:
       SERVICE: all
       NODE_ENV: production
-      DATABASE_URL: postgresql://plunk:BbfLGDo7DyKddMvFCvv7vxRbiFDG3Zoy@postgres:5432/plunk
-      DIRECT_DATABASE_URL: postgresql://plunk:BbfLGDo7DyKddMvFCvv7vxRbiFDG3Zoy@postgres:5432/plunk
+      DATABASE_URL: postgresql://plunk:CB2ZzD5FSvHfFPrj22PjzepSKZ2PWRB4@postgres:5432/plunk
+      DIRECT_DATABASE_URL: postgresql://plunk:CB2ZzD5FSvHfFPrj22PjzepSKZ2PWRB4@postgres:5432/plunk
       REDIS_URL: redis://redis:6379
-      JWT_SECRET: nd9JpqXuNzf0ew2VZwwWkjMyO896ltorBuNN13jneguLGFLEjXO0QQrmNvk0096R
+      JWT_SECRET: 88IFx2uH5dYVbtFdh1NXEekHiFgRaLUPFhiCjsgLqUqN0RjpbT5UYa1qcKm442by
       NGINX_PORT: '80'
       API_DOMAIN: localhost
       DASHBOARD_DOMAIN: localhost
@@ -83,7 +83,7 @@ services:
       STRIPE_METER_EVENT_NAME: emails
       S3_ENDPOINT: http://minio:9000
       S3_ACCESS_KEY_ID: plunk
-      S3_ACCESS_KEY_SECRET: 3vsNk2xIuiVY19vmj6fczhvkIJu74UPB
+      S3_ACCESS_KEY_SECRET: wPR5aDr19VnrcZwAMUMVtEueRAiyMDmD
       S3_BUCKET: uploads
       S3_PUBLIC_URL: https://localhost/uploads
       S3_FORCE_PATH_STYLE: 'true'
@@ -149,7 +149,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.useplunk.com/
   repo: https://github.com/useplunk/plunk
   docs: https://docs.useplunk.com

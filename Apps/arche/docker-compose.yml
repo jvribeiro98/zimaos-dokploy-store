@@ -10,19 +10,19 @@ services:
         condition: service_started
     environment:
       ARCHE_DOMAIN: localhost
-      DATABASE_URL: postgresql://postgres:SEqqO3xmiZwNKd7JwqUKIHFzowU4f8hn@postgres:5432/arche?schema=public
-      ARCHE_SESSION_PEPPER: J56KgMGu2qjnR/Ml9mbryC7kxH7oCA+wOxjZhqD0TFg=
-      ARCHE_ENCRYPTION_KEY: DfoFKnuP2X9J4WpmXThzsE7A935zlL3vJh0prR45JJM=
-      ARCHE_INTERNAL_TOKEN: tagHsEVxd2DL7MiwheXtTQVgo0SNq2/tcJyVyAx26EQ=
-      ARCHE_GATEWAY_TOKEN_SECRET: mdDYnJgxGuIP3Qdr76lFrGojLx7SS+S14xXDlCNhPKs=
-      ARCHE_CONNECTOR_OAUTH_STATE_SECRET: srRnXi6QqI+IsrYd5GuKCZHaaQ3gTROIFd5sihtEya8=
+      DATABASE_URL: postgresql://postgres:WGuMuw9pxIBzB21anlV5POhkwyZjTk4p@postgres:5432/arche?schema=public
+      ARCHE_SESSION_PEPPER: LuI9e0gYOWRBPyyJXzhyqJ5o2ku6n7YvROeIlZiZRQU=
+      ARCHE_ENCRYPTION_KEY: Cj0tiKyEIZ1Mgk2q9HaUmIYuk1XwKNoFT5HvqDSPp90=
+      ARCHE_INTERNAL_TOKEN: o9FOoPtQAYrROGx1kP43j7+upR9K6x0S8q2q3WZwOCM=
+      ARCHE_GATEWAY_TOKEN_SECRET: u+BQrNe8CuXQ4FvGuJpriwH8ayKESx6qVI1SlEknxlg=
+      ARCHE_CONNECTOR_OAUTH_STATE_SECRET: X/7Vk2WPZwiCSj0Xhy+sKM5W4/KoU0/pE17Le2i1BPw=
       ARCHE_GATEWAY_TOKEN_TTL_SECONDS: '86400'
       ARCHE_GATEWAY_BASE_URL: http://web:3000
       ARCHE_PUBLIC_BASE_URL: https://localhost
       ARCHE_SESSION_TTL_DAYS: '7'
       ARCHE_COOKIE_SECURE: 'true'
       ARCHE_SEED_ADMIN_EMAIL: admin@example.com
-      ARCHE_SEED_ADMIN_PASSWORD: JtmMp9utwSzciXU2
+      ARCHE_SEED_ADMIN_PASSWORD: VjOwXJXsSZWJKvrF
       ARCHE_SEED_ADMIN_SLUG: admin
       CONTAINER_PROXY_HOST: docker-socket-proxy
       CONTAINER_PROXY_PORT: '2375'
@@ -47,7 +47,7 @@ services:
     environment:
       POSTGRES_DB: arche
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: SEqqO3xmiZwNKd7JwqUKIHFzowU4f8hn
+      POSTGRES_PASSWORD: WGuMuw9pxIBzB21anlV5POhkwyZjTk4p
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -94,7 +94,7 @@ x-casaos:
   - amd64
   - arm64
   version: "latest}"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/peaberry-studio/arche
   repo: https://github.com/peaberry-studio/arche
   docs: https://github.com/peaberry-studio/arche#readme

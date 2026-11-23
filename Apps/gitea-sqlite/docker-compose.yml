@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.24.4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://gitea.io/
   repo: https://github.com/go-gitea/gitea
   docs: https://docs.gitea.com/

@@ -6,13 +6,13 @@ telemetry:
 replication:
   connections:
     - type: postgresql
-      uri: postgresql://powersync:MuQFsvKhhMZcwvnn0GCYcEaovMYBErVK@postgres:5432/powersync
+      uri: postgresql://powersync:fXmUQwze23Zg0KplkzL0CzoBI1ZdjTv1@postgres:5432/powersync
       sslmode: disable
 
 # Bucket storage. Must be a different database than the replication source.
 storage:
   type: postgresql
-  uri: postgresql://powersync:MuQFsvKhhMZcwvnn0GCYcEaovMYBErVK@postgres:5432/powersync_storage
+  uri: postgresql://powersync:fXmUQwze23Zg0KplkzL0CzoBI1ZdjTv1@postgres:5432/powersync_storage
   sslmode: disable
 
 port: 8080
@@ -34,9 +34,9 @@ client_auth:
       - kty: oct
         alg: HS256
         kid: powersync-dev
-        k: S4g2OfZUX2oZEKnew7JTV9LTfSgGqiOBI6gYNA11ehXo5GHE
+        k: XFlNsodQasvVdiApAX9NXCKRxZvOTnlEB9h5PpUEy7pRXhNc
   audience: ["powersync"]
 
 api:
   tokens:
-    - Fy0sSRgrRyhG8kJETfcbzqkIiYli7XQC
+    - PbDQlVLpqe64Cc18CHapYi2loM8ITWYT

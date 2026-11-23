@@ -8,7 +8,7 @@ services:
     environment:
     - SERVER_URL=https://localhost
     - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=WvtVQJHQey+ddxs1ikVzNOGJDGRxc1D8StelWQltNppQX0zR0DUfBfRGVkxw/VDH0EJW+2N3ZruHBSzzYIvirg==
+    - AUTHENTICATION_API_KEY=OhUzTRXVjEaoYMeTyW7bOsJuIwWmDltKqmHOIj3eo0/RatBjTkJo/dN0OiSkZDyz90f4jJEoPhkSSrKa56WWCg==
     - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
     - LANGUAGE=en
     - CONFIG_SESSION_PHONE_CLIENT=Evolution API
@@ -17,7 +17,7 @@ services:
     - TELEMETRY_URL=
     - DATABASE_ENABLED=true
     - DATABASE_PROVIDER=postgresql
-    - DATABASE_CONNECTION_URI=postgres://postgresql:4ZmHvW9JQFxcb7t8bFJo4rO7bsnusG87@evolution-postgres:5432/evolution
+    - DATABASE_CONNECTION_URI=postgres://postgresql:TziHtPabMWPzhOXHmhlEIPkNxirZGwuP@evolution-postgres:5432/evolution
     - DATABASE_SAVE_DATA_INSTANCE=true
     - DATABASE_SAVE_DATA_NEW_MESSAGE=true
     - DATABASE_SAVE_MESSAGE_UPDATE=true
@@ -48,7 +48,7 @@ services:
     environment:
     - POSTGRES_DB=evolution
     - POSTGRES_USER=postgresql
-    - POSTGRES_PASSWORD=4ZmHvW9JQFxcb7t8bFJo4rO7bsnusG87
+    - POSTGRES_PASSWORD=TziHtPabMWPzhOXHmhlEIPkNxirZGwuP
   evolution-redis:
     image: redis:alpine
     restart: always
@@ -79,7 +79,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.3.7"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://evolutionfoundation.com.br/
   repo: https://github.com/evolution-foundation/evolution-api
   docs: https://docs.evolutionfoundation.com.br/en

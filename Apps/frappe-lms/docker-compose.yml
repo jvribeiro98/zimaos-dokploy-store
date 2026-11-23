@@ -227,10 +227,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: rHGjwBf9hokjj1VW2ebTZ5CPkLRk1kJT
+      ADMIN_PASSWORD: Gv8F9K4uIYvHV29HID5ZGRAfubuJkXzs
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: nUtXqJ8kqTMzTKWWO3vUBy22sPuGgKyf
+      DB_ROOT_PASSWORD: 7xT8edmp2ueB8n29sniNXKIgOqNYpEs5
       INSTALL_APP_ARGS: --install-app lms
       ENABLE_SCHEDULER: '1'
     restart: unless-stopped
@@ -277,7 +277,7 @@ services:
     - --collation-server=utf8mb4_unicode_ci
     - --skip-character-set-client-handshake
     environment:
-    - MARIADB_ROOT_PASSWORD=nUtXqJ8kqTMzTKWWO3vUBy22sPuGgKyf
+    - MARIADB_ROOT_PASSWORD=7xT8edmp2ueB8n29sniNXKIgOqNYpEs5
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -364,7 +364,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.52.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://frappe.io/learning
   repo: https://github.com/frappe/lms
   docs: https://docs.frappe.io/learning

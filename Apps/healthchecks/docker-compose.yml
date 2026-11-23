@@ -15,8 +15,8 @@ services:
       DB_PORT: '5432'
       DB_NAME: healthchecks
       DB_USER: healthchecks
-      DB_PASSWORD: VmoTqjm3HS5SBip9YmhGMfGUfxwLhLyb
-      SECRET_KEY: ub4azgfbtu0zwngkVCNjQMjcsRQXzoeLTtf6ubjW5C2P3l5OaHZYIXWnKPvdDuAg
+      DB_PASSWORD: 7d9boSO0S6pYT1JZ77lO1RNE9gdrF1jV
+      SECRET_KEY: vJSjSBaylmCXgf4FmbK9Ernbhum8MYM75NqV7I8jD17ASqZn1qbQMWfOrtp3UQ3G
       SITE_ROOT: https://localhost
       SITE_NAME: Healthchecks
       ALLOWED_HOSTS: localhost
@@ -38,7 +38,7 @@ services:
     environment:
       POSTGRES_DB: healthchecks
       POSTGRES_USER: healthchecks
-      POSTGRES_PASSWORD: VmoTqjm3HS5SBip9YmhGMfGUfxwLhLyb
+      POSTGRES_PASSWORD: 7d9boSO0S6pYT1JZ77lO1RNE9gdrF1jV
     volumes:
     - healthchecks-db:/var/lib/postgresql/data
     healthcheck:
@@ -72,7 +72,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://healthchecks.io/
   repo: https://github.com/healthchecks/healthchecks
   docs: https://healthchecks.io/docs/self_hosted_docker/

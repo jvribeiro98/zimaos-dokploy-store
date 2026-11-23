@@ -16,7 +16,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -24,12 +24,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     healthcheck:
       test:
       - CMD
@@ -68,7 +68,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -76,12 +76,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     depends_on:
       init-volumes:
         condition: service_completed_successfully
@@ -109,7 +109,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -117,12 +117,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -152,7 +152,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -160,12 +160,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -189,7 +189,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -197,12 +197,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -219,7 +219,7 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:iYGI5o1xhw6gfFdPuH2ubWDmVNqxMNX1pso6PLS+3Ao=
+      APP_KEY: base64:6GzS7IpWtiE1ULbf52vXCPLIradfeRnMMae8HIZrN+g=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/storage/database.sqlite
@@ -227,12 +227,12 @@ services:
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      PINOKIO_TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: 2e0ab94e8086a1699fdc0cbd871801f907c4e96a9cd1f0a3bbd616045df0dd48
+      BROWSER_STREAM_SECRET: b4fcbe65bc2318a529a2557643677859f16262d0112ea7f9b2997cdaca152a27
     depends_on:
       redis:
         condition: service_healthy
@@ -257,7 +257,7 @@ services:
     - puppetflow-execution:/app/data/execution
     - pinokio-downloads:/opt/browsers
     environment:
-      TOKEN: d2894e2a9e7a4c747cf98e51a198e2a87171f91272c756eeee3522da3f9d18a7
+      TOKEN: de71dd1d50f79042ed4816470ee130049e8bc15c8287369e12a02c23f233fe9f
       HOME: /tmp
       XDG_CONFIG_HOME: /tmp/.config
       XDG_CACHE_HOME: /tmp/.cache
@@ -330,7 +330,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.11.7"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://puppetflow.com/
   repo: https://github.com/puppetflow/puppetflow
   docs: https://docs.puppetflow.com/

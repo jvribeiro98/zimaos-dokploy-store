@@ -7,8 +7,8 @@ services:
     - mariadb
     environment:
     - DEBUG=false
-    - SECURITY_SALT=rRWsdJEQpDq8s85VJsai5O7iAVyyVI+HFthMjYeoRI4=
-    - DATABASE_URL=mysql://admin:0ytehGjlDwhV75kzIUCFS5v1pDmbZmIA@mariadb:3306/cakephp?encoding=utf8mb4
+    - SECURITY_SALT=zoCbhZPzWaFVxMD405Zkcpjg9OND4hc4dKO3RSEpzmI=
+    - DATABASE_URL=mysql://admin:Vf1KRc5N7zbUPSgUftcpY5ASYI7GNqWh@mariadb:3306/cakephp?encoding=utf8mb4
     expose:
     - 80
     ports:
@@ -19,10 +19,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-    - MARIADB_ROOT_PASSWORD=CXfWkdnI6sqCYEMOpaqw4c00ju5FZpr0
+    - MARIADB_ROOT_PASSWORD=ZpeEJvoVWI1PGGZxf52bQzDeMDCtns8n
     - MARIADB_DATABASE=cakephp
     - MARIADB_USER=admin
-    - MARIADB_PASSWORD=0ytehGjlDwhV75kzIUCFS5v1pDmbZmIA
+    - MARIADB_PASSWORD=Vf1KRc5N7zbUPSgUftcpY5ASYI7GNqWh
     volumes:
     - mariadb-data:/var/lib/mysql
     expose:
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://cakephp.org/
   repo: https://github.com/TheMusicDev/cakephp-hello
   docs: https://book.cakephp.org/5/en/index.html

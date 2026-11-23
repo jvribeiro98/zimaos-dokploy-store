@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.2.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://tools.nyxiontech.com
   repo: https://github.com/jurecki007/nyxiontech-tools
   docs: https://tools.nyxiontech.com/guides

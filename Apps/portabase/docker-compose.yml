@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
     - PROJECT_URL=https://localhost
-    - PROJECT_SECRET=kY8gdnR8mvSi7woYmx5OxgfnAMvuAaI5hvGKGtTIooNN1M3x7AQEccVIcTkLIF8m
-    - DATABASE_URL=postgresql://portabase:IIGnq2SNtUJrPeEo8n5U3rPllVEdsu4b@db:5432/portabase?schema=public
+    - PROJECT_SECRET=HDRLwE41I4YG6V25A4nUsh6uQgBz1JEBDxMGkUkSXFbz4eccyJsribdwQqUMRSDn
+    - DATABASE_URL=postgresql://portabase:lq7cc2pqPHwBYni1kcQBSqhH9iSojez5@db:5432/portabase?schema=public
     - PROJECT_NAME=${PROJECT_NAME:-Portabase}
     - TZ=Europe/Paris
     - LOG_LEVEL=info
@@ -51,7 +51,7 @@ services:
     environment:
     - POSTGRES_DB=portabase
     - POSTGRES_USER=portabase
-    - POSTGRES_PASSWORD=IIGnq2SNtUJrPeEo8n5U3rPllVEdsu4b
+    - POSTGRES_PASSWORD=lq7cc2pqPHwBYni1kcQBSqhH9iSojez5
     healthcheck:
       test:
       - CMD-SHELL
@@ -83,7 +83,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://portabase.io
   repo: https://github.com/portabase/portabase
   docs: https://portabase.io/docs

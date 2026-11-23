@@ -47,7 +47,7 @@ services:
     - PORT=${PORT:-3000}
     - DATABASE_URL=postgresql://postgres:postgres@usesend-db-prod:5432/usesend
     - NEXTAUTH_URL=http://localhost:3000
-    - NEXTAUTH_SECRET=kEm1jNPg0XioAsh9mXRNRJVq9ElCOo5VtcJ+0K4ketigqSACrjWBH1BdQVQKe1SyphEo8lMPJ44ju9F2Zj2GOQ==
+    - NEXTAUTH_SECRET=fpsZdNytSLNAXVv2rOthjUrWeyJtA2Sp6m0bmixbsU9m2ApJBoppELEh8kKAf3Au6G1nv5WgmuI39LTpou47EA==
     - AWS_DEFAULT_REGION=us-east-1
     - AWS_SECRET_KEY='Fill'
     - AWS_ACCESS_KEY='Fill'
@@ -89,7 +89,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://usesend.com/
   repo: https://github.com/usesend/usesend
   docs: https://docs.usesend.com/introduction

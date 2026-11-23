@@ -5,9 +5,9 @@ services:
     expose:
     - '3000'
     environment:
-    - MONGODB_URI=mongodb://mongo:OeNEhjsbeQffrjAr@mongo:27017
-    - REDIS_URI=redis://default:pK99JSNu0kueurlU@redis:6379
-    - SIGNING_SECRET=VF8dE0MjZLaoR2l8c69sLgZJrJ8fWzykGeMbomwCDYu2i
+    - MONGODB_URI=mongodb://mongo:0mbISN6wiekYXid9@mongo:27017
+    - REDIS_URI=redis://default:lIvyzDRG4leftxVd@redis:6379
+    - SIGNING_SECRET=Ef1oK72WYPWC95yXLmcgNor1o1oR9Bp1NrIE15kkluUVm
     - NODE_ENV=production
     depends_on:
     - mongo
@@ -20,7 +20,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=OeNEhjsbeQffrjAr
+    - MONGO_INITDB_ROOT_PASSWORD=0mbISN6wiekYXid9
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "9.7.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://coralproject.net/
   repo: https://github.com/coralproject/talk
   docs: https://docs.coralproject.net/

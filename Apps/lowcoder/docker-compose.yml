@@ -18,10 +18,10 @@ services:
       MONGODB_URL: mongodb://localhost:27017/lowcoder?authSource=admin
       REDIS_URL: redis://localhost:6379
       ENABLE_USER_SIGN_UP: 'False'
-      ENCRYPTION_PASSWORD: Y8mqqD60pTnRfVdB2HzkFQY3hSbBcHoq
-      ENCRYPTION_SALT: MOM0S98dEAeq6yUosUhwE2ULJp2is4xH
+      ENCRYPTION_PASSWORD: iWtVcCtvyjxxtNy3JVDOGtlo36wV2RRR
+      ENCRYPTION_SALT: jkaXE3OufBf08aGjcjKzGQIkqkh3uc2s
       CORS_ALLOWED_DOMAINS: '*'
-      LOWCODER_API_KEY_SECRET: GKH0ODF9X6CLkGHLlcwrMqPVx63pYmSr
+      LOWCODER_API_KEY_SECRET: 4qaIIaoblDRVGWdtm61DRilNNj26SMS2
       LOWCODER_API_SERVICE_URL: http://localhost:8080
       LOWCODER_NODE_SERVICE_URL: http://localhost:6060
     volumes:
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.6.4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.lowcoder.cloud/
   repo: https://github.com/lowcoder-org/lowcoder
   docs: https://docs.lowcoder.cloud/lowcoder-documentation

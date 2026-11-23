@@ -115,7 +115,7 @@ services:
     - TELEMETRY_ENABLED=true
     - DEPLOYMENT_TYPE=docker-standalone-amd
     - DOT_METRICS_ENABLED=true
-    - SIGNOZ_JWT_SECRET=VLTCZYm2UaCYEBGQzwYlIGttP52sa9G7ZYfs1y9XhPIOOAyjrOYKMRDFeLHs7b2U
+    - SIGNOZ_JWT_SECRET=3onDyFGWpBqWYBn4knG3I7PtfEAap1MqGqNAiyhEPWUikwi1i0UcqKuvPLWBKrRk
     healthcheck:
       test:
       - CMD
@@ -217,7 +217,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.97.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://signoz.io/
   repo: https://github.com/SigNoz/signoz
   docs: https://signoz.io/docs/

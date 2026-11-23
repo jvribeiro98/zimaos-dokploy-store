@@ -29,7 +29,7 @@ x-casaos:
   - amd64
   - arm64
   version: "sha-72d20bb"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://bentopdf.com/
   repo: https://github.com/alam00000/bentopdf/
   docs: https://www.bentopdf.com/docs/

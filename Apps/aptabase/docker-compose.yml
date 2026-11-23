@@ -39,7 +39,7 @@ services:
     restart: always
     environment:
       BASE_URL: http://localhost
-      AUTH_SECRET: u/IoPY/4fgtSf2CpI6ERTykYQqheUOY3He/cqJwF7wM=
+      AUTH_SECRET: rBcVanh8nuE4eQZOI+tKNX9KRejkTEVRCkxZIzqkBlM=
       DATABASE_URL: Server=aptabase_db;Port=5432;User Id=aptabase;Password=sTr0NGp4ssw0rd;Database=aptabase
       CLICKHOUSE_URL: Host=aptabase_events_db;Port=8123;Username=aptabase;Password=sTr0NGp4ssw0rd
     ports:
@@ -71,7 +71,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://aptabase.com/
   repo: https://github.com/aptabase/aptabase
   docs: https://github.com/aptabase/aptabase/blob/main/README.md

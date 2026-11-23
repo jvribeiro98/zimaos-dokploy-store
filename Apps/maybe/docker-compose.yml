@@ -7,9 +7,9 @@ services:
     - /DATA/AppData/$AppID/uploads:/app/uploads
     environment:
       DATABASE_URL: postgresql://maybe:maybe@db:5432/maybe
-      SECRET_KEY_BASE: CVQfP3FbbTMRH09OGZ+eSt+rfykNTVOXXjo8Oc8/zWB6ua2SNgKxSxGfxDodfHMIKT6w6+6Iz8ivZgcjO4QUKg==
+      SECRET_KEY_BASE: m4Q4nBNQsPvANoVVrXsuiToCMhhYsAU+zO6OomIdLISNl7IhZCFndQtGlBbArPDdfgTvrG+fCLu7n3d6xY2Tvw==
       SELF_HOSTED: 'True'
-      SYNTH_API_KEY: 5uZ9+ZFgDcJ5NzUINEkLX6Peht0TD4rM09QKWHxf3YM=
+      SYNTH_API_KEY: oer3HYtDzub8LSgdEOKrZF62+b02zzHrelZCsIhZ+Js=
       RAILS_FORCE_SSL: 'false'
       RAILS_ASSUME_SSL: 'false'
       GOOD_JOB_EXECUTION_MODE: async
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "sha-68c570eed8810fd59b5b33cca51bbad5eabb4cb4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://maybe.finance/
   repo: https://github.com/maybe-finance/maybe
   docs: https://github.com/maybe-finance/maybe/blob/main/docs/hosting/docker.md

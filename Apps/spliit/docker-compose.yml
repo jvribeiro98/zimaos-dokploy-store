@@ -16,7 +16,7 @@ services:
     - /DATA/AppData/spliit/data:/var/lib/DBql/data
     environment:
       POSTGRES_USER: spliit-admin
-      POSTGRES_PASSWORD: QQ8sBANKliJCudioYGgzUxqAaOTt5tf4
+      POSTGRES_PASSWORD: j5w56X85Ew6f1wWBli1IjpPpeR3jPlk1
       POSTGRES_DB: spliit
       POSTGRES_INITDB_ARGS: --data-checksums
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -54,7 +54,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.19.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://spliit.app/
   repo: https://github.com/spliit-app/spliit
   docs: https://github.com/spliit-app

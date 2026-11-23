@@ -11,7 +11,7 @@ services:
 
         nginx[''listen_https''] = false
 
-        gitlab_rails[''initial_root_password''] = ''KJSPiajSqDbKE4IjZNHSpflPQW4CXj7o''
+        gitlab_rails[''initial_root_password''] = ''4cCTYfdVTzP9IauuqiWrzxyhXgrQpOpj''
 
         gitlab_rails[''gitlab_email_enabled''] = false
 
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "19.1.2"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://gitlab.com/
   repo: https://gitlab.com/gitlab-org/gitlab-ce
   docs: https://docs.gitlab.com/ee/

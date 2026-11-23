@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.11.4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/ferret-project/ferret
   repo: https://github.com/ferret-project/ferret
   docs: https://github.com/ferret-project/ferret/tree/main/apps/docs/hosting

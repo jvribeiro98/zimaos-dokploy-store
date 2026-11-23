@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 6Z3BhWmPkxvjT4r8I03ADaeaNHaCVvQ1
+      POSTGRES_PASSWORD: TNinFfLDolSFstj8NKmQOHq0vpxgVvXx
     healthcheck:
       test:
       - CMD-SHELL
@@ -23,7 +23,7 @@ services:
     - minio_data:/data
     environment:
       MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: HsjZcKQS4ocd4CpafM80lph8jDvbLeFd
+      MINIO_ROOT_PASSWORD: LzcUPkzDd9cyy8JAI7ibA9mHnVHmUphe
     restart: unless-stopped
   chrome:
     image: ghcr.io/browserless/chromium:v2.18.0
@@ -32,7 +32,7 @@ services:
     environment:
       TIMEOUT: '10000'
       CONCURRENT: '10'
-      TOKEN: idAZadkhxeCzLlI9jEi4vrzO1fBufb8y
+      TOKEN: zPuwV8qkBHr2OHub7uLldIxLfQ6726wT
       EXIT_ON_HEALTH_FAILURE: 'true'
       PRE_REQUEST_HEALTH_CHECK: 'true'
     restart: unless-stopped
@@ -47,18 +47,18 @@ services:
       NODE_ENV: production
       PUBLIC_URL: https://localhost
       STORAGE_URL: https://localhost/default
-      CHROME_TOKEN: idAZadkhxeCzLlI9jEi4vrzO1fBufb8y
+      CHROME_TOKEN: zPuwV8qkBHr2OHub7uLldIxLfQ6726wT
       CHROME_URL: ws://chrome:3000
-      DATABASE_URL: postgresql://postgres:6Z3BhWmPkxvjT4r8I03ADaeaNHaCVvQ1@postgres:5432/postgres
-      ACCESS_TOKEN_SECRET: eY39ilf2tbLjHBuwwj7AtmHuKDR0O6fE3w6YvE6saad1Q4wq15DaZ0ttotsh4Mi4
-      REFRESH_TOKEN_SECRET: EQ9D9iRUYeHYTKJp26Lj981fkPhCS8ko3FkvYM8pXKPql3SaBZMwP5fLg8KxL5PC
+      DATABASE_URL: postgresql://postgres:TNinFfLDolSFstj8NKmQOHq0vpxgVvXx@postgres:5432/postgres
+      ACCESS_TOKEN_SECRET: HYAntpQNGZJS83prymaEaRppcaNTQEfDtvO8ewccSHSQFiEHt4wW8sxAJQHMy4mD
+      REFRESH_TOKEN_SECRET: dyttnZI8nA2Iu7MNTmnMgSNaSauJzc8dPeip5POR55AIUBnLOU3lPdz6d053vDK0
       MAIL_FROM: noreply@localhost
       STORAGE_ENDPOINT: minio
       STORAGE_PORT: '9000'
       STORAGE_REGION: us-east-1
       STORAGE_BUCKET: default
       STORAGE_ACCESS_KEY: minioadmin
-      STORAGE_SECRET_KEY: HsjZcKQS4ocd4CpafM80lph8jDvbLeFd
+      STORAGE_SECRET_KEY: LzcUPkzDd9cyy8JAI7ibA9mHnVHmUphe
       STORAGE_USE_SSL: 'false'
       STORAGE_SKIP_BUCKET_CHECK: 'false'
     restart: unless-stopped
@@ -89,7 +89,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://rxresu.me/
   repo: https://github.com/AmruthPillai/Reactive-Resume
   docs: https://docs.rxresu.me/

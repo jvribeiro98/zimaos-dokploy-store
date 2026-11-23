@@ -8,7 +8,7 @@ services:
     environment:
       NODELINK_SERVER_HOST: 0.0.0.0
       NODELINK_SERVER_PORT: '2333'
-      NODELINK_SERVER_PASSWORD: aKdfxmpKSpl7OU7nKXcCkv6TDZA4bTsC
+      NODELINK_SERVER_PASSWORD: XKQvi05TL83LZVy3qZD8ng4Gxhel8rRp
       NODELINK_LOGGING_LEVEL: info
       NODELINK_LOGGING_FILE_ENABLED: 'false'
       NODELINK_SOURCES_LOCAL_ENABLED: 'false'
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.8.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://nodelink.js.org/
   repo: https://github.com/PerformanC/NodeLink
   docs: https://nodelink.js.org/docs/advanced/docker

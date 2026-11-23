@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
     environment:
       OBSCURA_HOST: localhost
-      OBSCURA_API_TOKEN: wOea73l2RuXfPCduItaCxv9xZ2EtD369yAohixoiYayvBeQ9
+      OBSCURA_API_TOKEN: hnWiSjbPViZVpohd7GmSOegTgTIY7NqkdkssuYdn6b3kE7Fu
     volumes:
     - /DATA/AppData/$AppID/Caddyfile:/etc/caddy/Caddyfile:ro
     depends_on:
@@ -80,7 +80,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/h4ckf0r0day/obscura
   repo: https://github.com/h4ckf0r0day/obscura
   docs: https://github.com/h4ckf0r0day/obscura/blob/master/docs/Use-the-MCP-server.md

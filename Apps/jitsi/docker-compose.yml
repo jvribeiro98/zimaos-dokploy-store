@@ -26,8 +26,8 @@ services:
     - DISABLE_HTTPS=1
     - JICOFO_AUTH_USER=focus
     - JVB_AUTH_USER=jvb
-    - JICOFO_AUTH_PASSWORD=skd80jExMsLoruX5ntjCznOsYFjrarQg
-    - JVB_AUTH_PASSWORD=gqOZ8Vt9fKNzdfoazh9d4tJuN0aIKkmI
+    - JICOFO_AUTH_PASSWORD=Du5jYKBFNDnnnr3US7gwOkniSc9NEbSA
+    - JVB_AUTH_PASSWORD=j9coUqnXeu0AJaLwU2XDspK51NolMnEG
     ports:
     - target: 8000
       published: "8000"
@@ -47,9 +47,9 @@ services:
     - XMPP_RECORDER_DOMAIN=recorder.meet.jitsi
     - JICOFO_AUTH_USER=focus
     - JVB_AUTH_USER=jvb
-    - JICOFO_AUTH_PASSWORD=skd80jExMsLoruX5ntjCznOsYFjrarQg
-    - JVB_AUTH_PASSWORD=gqOZ8Vt9fKNzdfoazh9d4tJuN0aIKkmI
-    - JICOFO_COMPONENT_SECRET=yBRMvrbxaNWyQhnq41lK9cBX6lsZeY0a
+    - JICOFO_AUTH_PASSWORD=Du5jYKBFNDnnnr3US7gwOkniSc9NEbSA
+    - JVB_AUTH_PASSWORD=j9coUqnXeu0AJaLwU2XDspK51NolMnEG
+    - JICOFO_COMPONENT_SECRET=lt7VwnK9WqbXsOHHRYDTfMt1zrPDD0Bz
     - JWT_APP_ID=
     - JWT_APP_SECRET=
     - ENABLE_AUTH=0
@@ -68,8 +68,8 @@ services:
     - XMPP_MUC_DOMAIN=muc.meet.jitsi
     - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
     - JICOFO_AUTH_USER=focus
-    - JICOFO_AUTH_PASSWORD=skd80jExMsLoruX5ntjCznOsYFjrarQg
-    - JICOFO_COMPONENT_SECRET=yBRMvrbxaNWyQhnq41lK9cBX6lsZeY0a
+    - JICOFO_AUTH_PASSWORD=Du5jYKBFNDnnnr3US7gwOkniSc9NEbSA
+    - JICOFO_COMPONENT_SECRET=lt7VwnK9WqbXsOHHRYDTfMt1zrPDD0Bz
     - JVB_BREWERY_MUC=jvbbrewery
   jvb:
     image: jitsi/jvb:${JITSI_IMAGE_VERSION:-unstable}
@@ -85,7 +85,7 @@ services:
     - XMPP_AUTH_DOMAIN=auth.meet.jitsi
     - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
     - JVB_AUTH_USER=jvb
-    - JVB_AUTH_PASSWORD=gqOZ8Vt9fKNzdfoazh9d4tJuN0aIKkmI
+    - JVB_AUTH_PASSWORD=j9coUqnXeu0AJaLwU2XDspK51NolMnEG
     - JVB_BREWERY_MUC=jvbbrewery
     - JVB_PORT=10000
     - JVB_ADVERTISE_IPS=
@@ -123,7 +123,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://jitsi.org/jitsi-meet/
   repo: https://github.com/jitsi/docker-jitsi-meet
   docs: https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker

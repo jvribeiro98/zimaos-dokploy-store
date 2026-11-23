@@ -9,8 +9,8 @@ services:
     - API_BASE_URL=http://localhost
     - CONSOLE_BASE_URL=http://localhost
     - ADMIN_USERNAME=alarik
-    - ADMIN_PASSWORD=eBBcwNK4DPyoxq0C
-    - JWT=yulcrph1Zi6MW0wq55cvPwubwrQfjB7OFV/KSDsrVZKH4bznm3H/6WG2An/NvEtetoqHws1aHUG+E0YxYXq67w==
+    - ADMIN_PASSWORD=G4cI2VZhtS9kS7AJ
+    - JWT=/ESsvA02SCTYFU32SwYWch6UO89eDrBi/Ah5UkyVY1IMD2dROuqxzbHcQjFMCsiHINHCeHpDwtTDQv5g80vyJA==
     - ALLOW_ACCOUNT_CREATION=false
     expose:
     - 8080
@@ -51,7 +51,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://alarik.io/
   repo: https://github.com/achtungsoftware/alarik
   docs: https://alarik.io/docs

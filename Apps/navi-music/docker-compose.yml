@@ -19,7 +19,7 @@ services:
       YOUTUBE_VISITOR: ''
       YOUTUBE_OAUTH2: ''
       YOUTUBE_CIPHER_URL: http://yt-cipher:8001
-      YOUTUBE_CIPHER_PASSWORD: oJCiiAx57TGBJ4Q5vwjmgzRsqIANz2zy
+      YOUTUBE_CIPHER_PASSWORD: rtmXGPb5RjF5etMHUisEA87gZp25i8wB
     ports:
     - target: 8080
       published: "8080"
@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     environment:
       OVERRIDE_PLAYER_VARIANT: IAS
-      API_TOKEN: oJCiiAx57TGBJ4Q5vwjmgzRsqIANz2zy
+      API_TOKEN: rtmXGPb5RjF5etMHUisEA87gZp25i8wB
 x-casaos:
   id: com.dokploy.navi-music
   main: navi-music
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.3.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/andre-carbajal/NaviMusic
   repo: https://github.com/andre-carbajal/NaviMusic
   docs: https://github.com/andre-carbajal/NaviMusic#configuration

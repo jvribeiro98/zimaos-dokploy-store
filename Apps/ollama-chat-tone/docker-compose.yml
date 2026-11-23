@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://hub.docker.com/r/billnice250/chattone
   repo: https://github.com/billnice250/ollama-chat-client
   docs: https://hub.docker.com/r/billnice250/chattone

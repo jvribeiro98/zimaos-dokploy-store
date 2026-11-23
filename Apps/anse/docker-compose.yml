@@ -9,8 +9,8 @@ services:
     - OPENAI_API_KEY=
     - OPENAI_API_BASE_URL=https://api.openai.com
     - HEAD_SCRIPTS=
-    - SECRET_KEY=GDfsq3yuaJ6RrtSfXjAacTDJV9blJtjB
-    - SITE_PASSWORD=d640HLh1bn5pFSHo
+    - SECRET_KEY=oLY8UdEC9XSBHrbmDfuIKwQOorwijfnQ
+    - SITE_PASSWORD=012fi7jKF1OiHAtN
     - OPENAI_API_MODEL=gpt-4o-mini
     ports:
     - target: 3000
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://anse.app/
   repo: https://github.com/ddiu8081/anse
   docs: https://github.com/ddiu8081/anse#readme

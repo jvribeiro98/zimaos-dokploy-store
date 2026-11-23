@@ -10,7 +10,7 @@ services:
     - apparmor:unconfined
     environment:
       PHOTOPRISM_ADMIN_USER: admin
-      PHOTOPRISM_ADMIN_PASSWORD: rYjPUvFaqMnizMqHMOMDxYu8ZlV77ki0
+      PHOTOPRISM_ADMIN_PASSWORD: 1qZLAimDT7Za4GlFxtYFnPzpBAzsOjsk
       PHOTOPRISM_AUTH_MODE: password
       PHOTOPRISM_SITE_URL: http://localhost:2342/
       PHOTOPRISM_DISABLE_TLS: 'false'
@@ -96,7 +96,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.photoprism.app/
   repo: https://github.com/photoprism/photoprism
   docs: https://docs.photoprism.app/

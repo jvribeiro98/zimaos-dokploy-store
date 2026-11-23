@@ -9,7 +9,7 @@ services:
       NAKAMA_CONFIG_DIR: /nakama/data
       NAKAMA_BACKUP_DIR: /nakama/backups
       NAKAMA_UPDATER_DIR: /nakama/updates
-      NAKAMA_SECRETS_KEY: gwFHHKT4rTP8fkTJnv23as2Q+UqFBPl6MdkpbGM+yAI=
+      NAKAMA_SECRETS_KEY: +iPjfP46dgELN15D4i//wdYHmyz1Xqrrccb/8H7MUCY=
       NAKAMA_WEB_PUBLIC_URL: https://localhost
       NAKAMA_TRUST_PROXY: 'true'
     volumes:
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.4.71"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://getnakama.cloud
   repo: https://github.com/ahmadrosid/nakama
   docs: https://ahmadrosid.github.io/nakama/

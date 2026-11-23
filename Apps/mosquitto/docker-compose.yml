@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - MQTT_USERNAME=mqtt
-    - MQTT_PASSWORD=WQCgRiJm7dW9DuNjP8r60Em2z6ERNLQp
+    - MQTT_PASSWORD=RhbGwW31gJTVlsBTjH9BllXPiPAx7qy2
     entrypoint:
     - /bin/sh
     - -ec
@@ -76,7 +76,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.1.2"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://mosquitto.org/
   repo: https://github.com/eclipse-mosquitto/mosquitto
   docs: https://mosquitto.org/documentation/

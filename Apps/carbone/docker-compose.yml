@@ -4,7 +4,7 @@ services:
     image: carbone/carbone-ee:full-4.25.5
     restart: unless-stopped
     environment:
-    - CARBONE_EE_LICENSE=HQXamGtJnDDq4VONiA1gQINbIZRUBEML
+    - CARBONE_EE_LICENSE=zv6aAsmudMeRhfhZGMSU89xpVJji5w4O
     - CARBONE_EE_STUDIO=true
     expose:
     - 4000
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.25.5"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://carbone.io/
   repo: https://github.com/carboneio/carbone
   docs: https://carbone.io/documentation/design/overview/getting-started.html

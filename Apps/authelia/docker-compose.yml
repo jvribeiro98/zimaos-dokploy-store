@@ -83,7 +83,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.authelia.com/
   repo: https://github.com/authelia/authelia
   docs: https://www.authelia.com/overview/prologue/introduction/

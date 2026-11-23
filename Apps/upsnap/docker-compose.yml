@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/seriousm4x/upsnap
   repo: https://github.com/seriousm4x/upsnap
   docs: https://github.com/seriousm4x/upsnap#readme

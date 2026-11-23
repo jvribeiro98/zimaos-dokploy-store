@@ -31,7 +31,7 @@ services:
       DB_PREFIX: notifuse
       DB_NAME: postgres
       DB_SSLMODE: disable
-      SECRET_KEY: ZqqB4i6zUHyc5cUpv6mIHapuAMWIjD1bFx+oql4ZsYkBPaUuBFgMQNSwB5NcO1xN7raDWJZbY6WlWgfY2VurBA==
+      SECRET_KEY: ROa3Lnojrt06NYldSl1Tm90/Q35nMGcQzSP5+GzdGwcn5VS2zmopRNFZzQ9oRcEqxwYcytZyTogSCzyLIY3ssw==
       SERVER_PORT: '8080'
       SERVER_HOST: 0.0.0.0
       ENVIRONMENT: production
@@ -77,7 +77,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://notifuse.com/
   repo: https://github.com/notifuse/notifuse
   docs: https://docs.notifuse.com/

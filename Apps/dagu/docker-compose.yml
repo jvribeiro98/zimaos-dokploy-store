@@ -13,7 +13,7 @@ services:
     - DAGU_PORT=8080
     - DAGU_AUTH_MODE=basic
     - DAGU_AUTH_BASIC_USERNAME=admin
-    - DAGU_AUTH_BASIC_PASSWORD=KmotuJvNBGI6OcPy0cR26TW1PAHRXKAx
+    - DAGU_AUTH_BASIC_PASSWORD=5UGAFSCzanRH54dtexnOhMbGlbia0vku
     ports:
     - target: 8080
       published: "8080"
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.25.4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://dagu.sh
   repo: https://github.com/dagucloud/dagu
   docs: https://docs.dagu.sh

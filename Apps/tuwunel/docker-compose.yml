@@ -6,7 +6,7 @@ services:
     environment:
     - TUWUNEL_SERVER_NAME=localhost
     - TUWUNEL_ALLOW_REGISTRATION=${TUWUNEL_ALLOW_REGISTRATION:-false}
-    - TUWUNEL_REGISTRATION_TOKEN=nuzxHhTc3HaA8DuYqaA6NIurzFzUlPV3
+    - TUWUNEL_REGISTRATION_TOKEN=GXZWjTqhC7bj2u5bCfGFnXbngcErDrIa
     - TUWUNEL_ADDRESS=${TUWUNEL_ADDRESS:-0.0.0.0}
     - TUWUNEL_PORT=${TUWUNEL_PORT:-6167}
     volumes:
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.5.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://tuwunel.chat
   repo: https://github.com/matrix-construct/tuwunel
   docs: https://matrix-construct.github.io/tuwunel/

@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
     - PORT=7575
-    - SESSION_SECRET=XCxQ1Z8TJ4OhaZCPaxPCCZIPKbpxzVt5iVyg5HSvkmLQjvXhY5YWDO39DCWZUSar
+    - SESSION_SECRET=dJrYsEjdkx1c3UVbrp1KioXRMGx3ugJ3s9jRlMjfxYgh9hfQ1oHMQ1ODlBugVrn8
     - NODE_ENV=production
     - TZ=Asia/Jakarta
     volumes:
@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/bangtutorial/streamflow
   repo: https://github.com/bangtutorial/streamflow
   docs: https://github.com/bangtutorial/streamflow#readme

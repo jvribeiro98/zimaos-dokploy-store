@@ -9,7 +9,7 @@ services:
       UPLOAD_DIR: /app/data/uploads
       GIN_MODE: release
       NODE_ENV: production
-      JWT_SECRET: y0q4otiUlIxEAwxfgMNdX2VI0w4EiTcf
+      JWT_SECRET: Grdjm2j9q73PVK350DyCROzsAL3z7K6c
       RECOVERY_MODE: 'false'
     volumes:
     - kuno-data:/app/data
@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://qut.edu.kg/
   repo: https://github.com/xuemian168/kuno
   docs: https://github.com/xuemian168/kuno#readme

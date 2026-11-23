@@ -4,7 +4,7 @@ services:
     image: linuxserver/calibre:7.26.0
     restart: unless-stopped
     environment:
-    - PASSWORD=9BZtqqZHzCGjG2zr
+    - PASSWORD=XBXVyDx0oYXm4kyX
     - TZ=Etc/UTC
     - PUID=1000
     - PGID=1000
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.26.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://calibre-ebook.com/
   repo: https://github.com/kovidgoyal/calibre
   docs: https://manual.calibre-ebook.com/

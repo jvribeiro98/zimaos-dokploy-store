@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.3"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://docs.jellyseerr.dev/
   repo: https://github.com/Fallenbagel/jellyseerr
   docs: https://docs.jellyseerr.dev/

@@ -22,7 +22,7 @@ services:
     environment:
       POSTGRES_DB: openlivery
       POSTGRES_USER: openlivery
-      POSTGRES_PASSWORD: ff7dc82e88e1696445f1e5f0e256f91bd0ea055cac85b3b3341d412939f646f810b63b1b3b2b2baf23340ad57f5123b7
+      POSTGRES_PASSWORD: 63aa19a85025738bcb89118a2e725d2b2d9a01c1f46bc7a7203d3cb83e396811ef0a0870b27150b3348048dca3f8e2a3
     volumes:
     - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -37,10 +37,10 @@ services:
     platform: linux/amd64
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgresql+psycopg://openlivery:ff7dc82e88e1696445f1e5f0e256f91bd0ea055cac85b3b3341d412939f646f810b63b1b3b2b2baf23340ad57f5123b7@db:5432/openlivery
-      SECRET_KEY: 7291ec1722500d5fe65bd2ddd6f6b38f8d6540ecf469f59ad9f31d0e2566b7601f7ce6c1fa510cfda06804b9e87f203c9332671ac399048acdf4cdf981df1f99
-      ENCRYPTION_KEY: 48cfa336302b21c876e553437d3e297f396956aad7307e86e752ecc5541e027c98b6256304359819b5dd9473ceb66790b3edfeaabf7bbfed167f9e834ac6ff89
-      WHATSAPP_BRIDGE_TOKEN: 8cfc4830a317620c38d23b34672d2e22eeff5c08eb1e8fd7dec90a117081cc97ef1139a9f75f2d5215333ce5e36f8b3a0f28b389ae814a5e2c2173d2ec25b4e8
+      DATABASE_URL: postgresql+psycopg://openlivery:63aa19a85025738bcb89118a2e725d2b2d9a01c1f46bc7a7203d3cb83e396811ef0a0870b27150b3348048dca3f8e2a3@db:5432/openlivery
+      SECRET_KEY: 78d8ef774d387be4938b4538bc48a7ee93be18b88d87d68c2a604a78e3bc8a9d790e448332ae35f6896507fed9923570fdca53bc71dedc84df699bed1d0f822a
+      ENCRYPTION_KEY: 70deabd4fc42fd9810ed7f3562aaf1f7ef657ae9eefef01e24ad74bf136716c434ac7638752977fd01ca2fe252249cdb963ceb7adef4e93b7bb593fa74694147
+      WHATSAPP_BRIDGE_TOKEN: 32a5432d86c6b67138466208d0b96a807c9a863ddb01098f359b1184438e34649eaaddcb80a9019d53f6a761979964f7c8f79c307a5586e30ebdbacaa2183d2b
       FRONTEND_URL: http://localhost
       COOKIE_SECURE: 'false'
       COOKIE_SAMESITE: lax
@@ -90,8 +90,8 @@ services:
       BACKEND_URL: http://api:8000
       WHATSAPP_BRIDGE_HOST: 0.0.0.0
       WHATSAPP_BRIDGE_PORT: '3101'
-      WHATSAPP_BRIDGE_TOKEN: 8cfc4830a317620c38d23b34672d2e22eeff5c08eb1e8fd7dec90a117081cc97ef1139a9f75f2d5215333ce5e36f8b3a0f28b389ae814a5e2c2173d2ec25b4e8
-      WHATSAPP_STORE_URL: postgres://openlivery:ff7dc82e88e1696445f1e5f0e256f91bd0ea055cac85b3b3341d412939f646f810b63b1b3b2b2baf23340ad57f5123b7@db:5432/openlivery?sslmode=disable&search_path=whatsmeow
+      WHATSAPP_BRIDGE_TOKEN: 32a5432d86c6b67138466208d0b96a807c9a863ddb01098f359b1184438e34649eaaddcb80a9019d53f6a761979964f7c8f79c307a5586e30ebdbacaa2183d2b
+      WHATSAPP_STORE_URL: postgres://openlivery:63aa19a85025738bcb89118a2e725d2b2d9a01c1f46bc7a7203d3cb83e396811ef0a0870b27150b3348048dca3f8e2a3@db:5432/openlivery?sslmode=disable&search_path=whatsmeow
       WHATSAPP_LOG_LEVEL: silent
     depends_on:
       api:
@@ -129,7 +129,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.4.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.openlivery.com
   repo: https://github.com/sarrazola/openlivery
   docs: https://github.com/sarrazola/openlivery/blob/main/docs/en/self-hosting.md

@@ -2,9 +2,9 @@ name: my-links
 services:
   my-links:
     environment:
-    - APP_KEY=byX9BUHHWv/2YiTrdPkezaVOY/zYyYOciulrvU4J6Ik=
+    - APP_KEY=kmKSVTvSo1RuZ6MaRooEI9Qy4kYeJ/0+6QI1h+OvOdk=
     - APP_URL=http://localhost
-    - DB_PASSWORD=8WAzlkz7JluMfMaqZ6Lp0YaU2qzvf9jg
+    - DB_PASSWORD=MZBzIVtiERMx6mupZvUC8s890toHi83X
     - DB_HOST=postgres
     - DB_PORT=5432
     - DB_USER=mylinks
@@ -39,7 +39,7 @@ services:
     environment:
       POSTGRES_USER: mylinks
       POSTGRES_DB: mylinks
-      POSTGRES_PASSWORD: 8WAzlkz7JluMfMaqZ6Lp0YaU2qzvf9jg
+      POSTGRES_PASSWORD: MZBzIVtiERMx6mupZvUC8s890toHi83X
     volumes:
     - postgres-data:/var/lib/postgresql
     healthcheck:
@@ -71,7 +71,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.3.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.mylinks.app
   repo: https://github.com/my-links/my-links
   docs: https://docs.mylinks.app

@@ -7,7 +7,7 @@ services:
     - fiderPostgresData:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: fider
-      POSTGRES_PASSWORD: QhMBtTYs4d0ZSrvv31JBKF8lZkVDMF4E
+      POSTGRES_PASSWORD: cYkRREN0uJWgRg2RWpnQt2GQ3dCLhoY8
       POSTGRES_DB: fider
   fider:
     image: getfider/fider:0.21.1
@@ -17,8 +17,8 @@ services:
     - mailhog
     environment:
       BASE_URL: https://localhost
-      DATABASE_URL: postgres://fider:QhMBtTYs4d0ZSrvv31JBKF8lZkVDMF4E@db:5432/fider?sslmode=disable
-      JWT_SECRET: tdW3Pslt7NjkuDbUv09W6E0YxKDwFMrSlX91ZozX9QXHXTkqgfnvBFYqakdC7h36
+      DATABASE_URL: postgres://fider:cYkRREN0uJWgRg2RWpnQt2GQ3dCLhoY8@db:5432/fider?sslmode=disable
+      JWT_SECRET: ITagHMBpPKaNF1YC07LtAXVCxn4SQMifAKLd9Nkm13Q2NwIPRrVF1Rz42gutAmVy
       EMAIL: smtp
       EMAIL_NOREPLY: noreply@localhost
       EMAIL_SMTP_HOST: mailhog
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.21.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://fider.io/
   repo: https://github.com/getfider/fider
   docs: https://docs.fider.io/hosting-instance/

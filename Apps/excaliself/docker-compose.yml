@@ -6,8 +6,8 @@ services:
     expose:
     - 3000
     environment:
-      DATABASE_URL: postgresql://excaliself:2sSy2UYbehPoHncBpczRyyLR6VakE6Np@db:5432/excaliself
-      BETTER_AUTH_SECRET: oCpjoJLAJ2KljlTYcbu9g68eTUqQ3JrzCA3TwD2zqPEyVdNrM1czK39Wq2PNaMHg
+      DATABASE_URL: postgresql://excaliself:4hL8MKg2OY4oR1cIUsnX1yfKJkCivp88@db:5432/excaliself
+      BETTER_AUTH_SECRET: Q6gZjYR22XmZzOySohVgDzeWKIpeBAAT4tR8aifZn1alf8DvbwQXqsdIiTio1xW5
       BASE_URL: http://localhost
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: excaliself
-      POSTGRES_PASSWORD: 2sSy2UYbehPoHncBpczRyyLR6VakE6Np
+      POSTGRES_PASSWORD: 4hL8MKg2OY4oR1cIUsnX1yfKJkCivp88
       POSTGRES_DB: excaliself
     volumes:
     - excaliself-db:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.12.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://excaliself.com/
   repo: https://github.com/maciekzygmunt/excaliself
   docs: https://excaliself.com/docs/

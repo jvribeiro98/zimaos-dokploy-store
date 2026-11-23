@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: wPRrCJ9dAtf085JkdQ0RnpQe3qaAmDnv
+      POSTGRES_PASSWORD: tTcpIx3nz5idCR7YTn6X3Peo45eXJzcd
       POSTGRES_DB: postgres
       TZ: UTC
       PGTZ: UTC
@@ -25,7 +25,7 @@ services:
     environment:
       CLICKHOUSE_DB: default
       CLICKHOUSE_USER: clickhouse
-      CLICKHOUSE_PASSWORD: 2cwgzMZ66kIZv9DZUgLUN8cyKrzOic0g
+      CLICKHOUSE_PASSWORD: S9mitViMd37uWnl5Qjw2KPbpggJZoLuA
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
       interval: 5s
@@ -42,7 +42,7 @@ services:
     command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
     environment:
       MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: s7f2iMUvmaR5PJ8BL1TKpLs4TsMiMrle
+      MINIO_ROOT_PASSWORD: hCNtnxUIlyhw6ypcij7enjYtcAvQzIqQ
     healthcheck:
       test:
       - CMD
@@ -85,34 +85,34 @@ services:
         condition: service_healthy
     environment:
       NEXTAUTH_URL: http://localhost
-      DATABASE_URL: postgresql://postgres:wPRrCJ9dAtf085JkdQ0RnpQe3qaAmDnv@postgres:5432/postgres
-      SALT: 4dRGu8A9AyOhY1CVPG8W65yqpl3Rqmwb
-      ENCRYPTION_KEY: 67fc66d9dbe1939e4a9cf74cdd59e86693fab521405f9e89b4d7f611470d4ac7dbd55c7db82a804e50711d2f9f5dbf0a98fc43d7e386f5ad0e5f2cde9054f3e6
+      DATABASE_URL: postgresql://postgres:tTcpIx3nz5idCR7YTn6X3Peo45eXJzcd@postgres:5432/postgres
+      SALT: A4rRzLczlW56qFbZfNqw1sQJC652Ew6V
+      ENCRYPTION_KEY: 7507dbbd0911cc11650a16997786c97b274a07ca3c2b8aa8d8a1b30bca2e834518d2d3f31e39dbb3ade63de2970b65979ea529911e1800a5a2d4c1336a23b052
       TELEMETRY_ENABLED: 'true'
       LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: 'false'
       CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_USER: clickhouse
-      CLICKHOUSE_PASSWORD: 2cwgzMZ66kIZv9DZUgLUN8cyKrzOic0g
+      CLICKHOUSE_PASSWORD: S9mitViMd37uWnl5Qjw2KPbpggJZoLuA
       CLICKHOUSE_CLUSTER_ENABLED: 'false'
       LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
       LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
       LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
-      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: s7f2iMUvmaR5PJ8BL1TKpLs4TsMiMrle
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: hCNtnxUIlyhw6ypcij7enjYtcAvQzIqQ
       LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
       LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: 'true'
       LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
       LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
       LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
       LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
-      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: s7f2iMUvmaR5PJ8BL1TKpLs4TsMiMrle
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: hCNtnxUIlyhw6ypcij7enjYtcAvQzIqQ
       LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
       LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: 'true'
       LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
       LANGFUSE_S3_BATCH_EXPORT_ENABLED: 'false'
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_AUTH: fw9o8Db8pLA8nE2EZvLKbRogMyksItvN
+      REDIS_AUTH: Yy0V0rLanQMBiJX1fymetErBKMk7rImL
       REDIS_TLS_ENABLED: 'false'
   langfuse-web:
     image: docker.io/langfuse/langfuse:4
@@ -120,37 +120,37 @@ services:
     depends_on: *id001
     environment:
       NEXTAUTH_URL: http://localhost
-      DATABASE_URL: postgresql://postgres:wPRrCJ9dAtf085JkdQ0RnpQe3qaAmDnv@postgres:5432/postgres
-      SALT: 4dRGu8A9AyOhY1CVPG8W65yqpl3Rqmwb
-      ENCRYPTION_KEY: 67fc66d9dbe1939e4a9cf74cdd59e86693fab521405f9e89b4d7f611470d4ac7dbd55c7db82a804e50711d2f9f5dbf0a98fc43d7e386f5ad0e5f2cde9054f3e6
+      DATABASE_URL: postgresql://postgres:tTcpIx3nz5idCR7YTn6X3Peo45eXJzcd@postgres:5432/postgres
+      SALT: A4rRzLczlW56qFbZfNqw1sQJC652Ew6V
+      ENCRYPTION_KEY: 7507dbbd0911cc11650a16997786c97b274a07ca3c2b8aa8d8a1b30bca2e834518d2d3f31e39dbb3ade63de2970b65979ea529911e1800a5a2d4c1336a23b052
       TELEMETRY_ENABLED: 'true'
       LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: 'false'
       CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_USER: clickhouse
-      CLICKHOUSE_PASSWORD: 2cwgzMZ66kIZv9DZUgLUN8cyKrzOic0g
+      CLICKHOUSE_PASSWORD: S9mitViMd37uWnl5Qjw2KPbpggJZoLuA
       CLICKHOUSE_CLUSTER_ENABLED: 'false'
       LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
       LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
       LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
-      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: s7f2iMUvmaR5PJ8BL1TKpLs4TsMiMrle
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: hCNtnxUIlyhw6ypcij7enjYtcAvQzIqQ
       LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
       LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: 'true'
       LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
       LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
       LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
       LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
-      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: s7f2iMUvmaR5PJ8BL1TKpLs4TsMiMrle
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: hCNtnxUIlyhw6ypcij7enjYtcAvQzIqQ
       LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost
       LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: 'true'
       LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
       LANGFUSE_S3_BATCH_EXPORT_ENABLED: 'false'
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_AUTH: fw9o8Db8pLA8nE2EZvLKbRogMyksItvN
+      REDIS_AUTH: Yy0V0rLanQMBiJX1fymetErBKMk7rImL
       REDIS_TLS_ENABLED: 'false'
       HOSTNAME: 0.0.0.0
-      NEXTAUTH_SECRET: vHfx3tP6MIJaZtf56Q6vuwlQ6MuHlZQc
+      NEXTAUTH_SECRET: zU92sOGkbKbd0Bp6lQ9XT1eao0kZbEh4
     ports:
     - target: 3000
       published: "3000"
@@ -182,7 +182,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://langfuse.com/
   repo: https://github.com/langfuse/langfuse
   docs: https://langfuse.com/self-hosting

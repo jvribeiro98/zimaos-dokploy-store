@@ -6,7 +6,7 @@ services:
     expose:
     - 3451
     environment:
-    - SUPERADMIN_TOKEN=yJ3zYrNZ1RqCfzkKbP7mpCfqRgwPN6jE
+    - SUPERADMIN_TOKEN=gDrTRRoaCF8eaLbkVfEpscpk9h0lTyH4
     - WHATSAPP_STORAGE_PATH=/app/whatsapp_sessions
     - SQLITE_PATH=/app/whatsapp_sessions/waxum.db
     volumes:
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.13.5"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://waxum.imtaqin.id
   repo: https://github.com/imtaqin/waxum
   docs: https://waxum.imtaqin.id

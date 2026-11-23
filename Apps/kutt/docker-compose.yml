@@ -7,7 +7,7 @@ services:
     - /DATA/AppData/$AppID/kutt/custom:/kutt/custom
     environment:
       DB_FILENAME: /var/lib/kutt/data.sqlite
-      JWT_SECRET: Gs2yUPRQbPbcHQF5tLYQhULpRQvs0tqN
+      JWT_SECRET: uZiudVcoUeNkhK05qyt5hlVvH8rLYuLe
       DEFAULT_DOMAIN: localhost
       TRUST_PROXY: 'false'
       DISALLOW_ANONYMOUS_LINKS: 'true'
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "main"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://kutt.it
   repo: https://github.com/thedevs-network/kutt
   docs: https://github.com/thedevs-network/kutt#kuttit

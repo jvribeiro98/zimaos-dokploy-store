@@ -5,13 +5,13 @@ services:
     restart: unless-stopped
     environment:
       APP_ENV: prod
-      DATABASE_URL: mysql://kimai:xog8S48en64eon07g3TK5bYOBlHBvL7s@db/kimai
+      DATABASE_URL: mysql://kimai:MkHZWQNebanipXQ0Rlxvdp6cJupfK67A@db/kimai
       TRUSTED_PROXIES: localhost
-      APP_SECRET: UOjgb3l8mJxMEhUcqrE52aScjziS47zX
+      APP_SECRET: jWhDIICUvyawHTvrtWqClg1ESSiKVQPy
       MAILER_FROM: ${KI_MAILER_FROM:-admin@kimai.local}
       MAILER_URL: ${KI_MAILER_URL:-null://null}
       ADMINMAIL: admin@kimai.local
-      ADMINPASS: wjVOPKJjuWTLyP1rc1KJawCOHcTJTGVI
+      ADMINPASS: MTIOzt4sAQ1SQ38H31APSOAsS16IbwBi
     volumes:
     - kimai-data:/opt/kimai/var
     depends_on:
@@ -27,8 +27,8 @@ services:
     environment:
     - MYSQL_DATABASE=kimai
     - MYSQL_USER=kimai
-    - MYSQL_PASSWORD=xog8S48en64eon07g3TK5bYOBlHBvL7s
-    - MYSQL_ROOT_PASSWORD=8up2fQcsUkG5LDaO6MuMCVno6K0oHTnx
+    - MYSQL_PASSWORD=MkHZWQNebanipXQ0Rlxvdp6cJupfK67A
+    - MYSQL_ROOT_PASSWORD=R4B6awrbfBRVno0R0f0mj1ee6WV2FPYs
     volumes:
     - mysql-data:/var/lib/mysql
     command:
@@ -74,7 +74,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.31.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.kimai.org
   repo: https://github.com/kimai/kimai
   docs: https://www.kimai.org/documentation

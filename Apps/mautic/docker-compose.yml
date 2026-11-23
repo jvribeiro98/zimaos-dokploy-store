@@ -5,10 +5,10 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ystOtteHUOj4RqiBFfxw17TXSFWpziLc
+      MYSQL_ROOT_PASSWORD: a6eTAV0oXYitLAsmUp40I8OIAnhYRO3q
       MYSQL_DATABASE: mautic
       MYSQL_USER: mautic
-      MYSQL_PASSWORD: KFEzWNpRtxU1oTZl6qGx1Mbkht8GJoyW
+      MYSQL_PASSWORD: u7suXi50rrXLjJf6CXizlcS563FywPx8
     volumes:
     - mysql_data:/var/lib/mysql
     healthcheck:
@@ -36,7 +36,7 @@ services:
     - MAUTIC_DB_PORT=3306
     - MAUTIC_DB_DATABASE=mautic
     - MAUTIC_DB_USER=mautic
-    - MAUTIC_DB_PASSWORD=KFEzWNpRtxU1oTZl6qGx1Mbkht8GJoyW
+    - MAUTIC_DB_PASSWORD=u7suXi50rrXLjJf6CXizlcS563FywPx8
     - MAUTIC_URL=https://localhost
     - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
     - MAUTIC_MESSENGER_DSN_EMAIL=doctrine://default
@@ -73,7 +73,7 @@ services:
     - MAUTIC_DB_PORT=3306
     - MAUTIC_DB_DATABASE=mautic
     - MAUTIC_DB_USER=mautic
-    - MAUTIC_DB_PASSWORD=KFEzWNpRtxU1oTZl6qGx1Mbkht8GJoyW
+    - MAUTIC_DB_PASSWORD=u7suXi50rrXLjJf6CXizlcS563FywPx8
     - MAUTIC_URL=https://localhost
     - PHP_INI_DATE_TIMEZONE=UTC
     volumes:
@@ -97,7 +97,7 @@ services:
     - MAUTIC_DB_PORT=3306
     - MAUTIC_DB_DATABASE=mautic
     - MAUTIC_DB_USER=mautic
-    - MAUTIC_DB_PASSWORD=KFEzWNpRtxU1oTZl6qGx1Mbkht8GJoyW
+    - MAUTIC_DB_PASSWORD=u7suXi50rrXLjJf6CXizlcS563FywPx8
     - MAUTIC_URL=https://localhost
     - MAUTIC_MESSENGER_DSN_EMAIL=doctrine://default
     - MAUTIC_MESSENGER_DSN_HIT=doctrine://default
@@ -141,7 +141,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.1.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.mautic.org/
   repo: https://github.com/mautic/mautic
   docs: https://docs.mautic.org/en

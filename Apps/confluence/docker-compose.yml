@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.6"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://confluence.atlassian.com
   repo: https://confluence.atlassian.com
   docs: https://confluence.atlassian.com/doc/confluence-documentation-135922.html

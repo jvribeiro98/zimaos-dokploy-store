@@ -7,7 +7,7 @@ services:
       root_db:
         condition: service_healthy
     environment:
-      NC_DB: pg://root_db:5432?u=postgres&p=w6bVP0TVMlqJXbuBPv109vlQzEMTB99Z&d=root_db
+      NC_DB: pg://root_db:5432?u=postgres&p=lBK2sflP7qBxtk0tOWXCoVzMuuMy5vOr&d=root_db
     volumes:
     - nc_data:/usr/app/data
     ports:
@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_DB: root_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: w6bVP0TVMlqJXbuBPv109vlQzEMTB99Z
+      POSTGRES_PASSWORD: lBK2sflP7qBxtk0tOWXCoVzMuuMy5vOr
     healthcheck:
       test:
       - CMD-SHELL
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://nocodb.com/
   repo: https://github.com/nocodb/nocodb
   docs: https://docs.nocodb.com/

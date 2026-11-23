@@ -11,7 +11,7 @@ services:
       AWS_REGION: your-aws-region
       SQS_URL: your-aws-sqs-url
       SYSTEM_EMAIL: ''
-      SECRET_KEY_BASE: 5zOP08lxJcANWynj4T8P6uGfUdWUoTSjXXIuLMJabhBQYlBPcRg4swYo26jO0VWD7sMMkV12Ich4Uj1V119NSA==
+      SECRET_KEY_BASE: CjV571xd5SJQwryQMnyPtQKVvUhFx8QWnqR7O+gA8IyWtlMshaYVWZ2g/nlJipFBi0fumWdMgYQAOWAEQrsVmg==
       PHX_HOST: localhost
       DATABASE_PATH: ./00.db
     ports:
@@ -41,6 +41,6 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   repo: https://github.com/technomancy-dev/00
   docs: https://github.com/technomancy-dev/00

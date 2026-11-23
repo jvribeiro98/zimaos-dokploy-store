@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.26.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://chat-preview.lobehub.com/
   repo: https://github.com/lobehub/lobe-chat
   docs: https://lobehub.com/docs/self-hosting/platform/docker-compose

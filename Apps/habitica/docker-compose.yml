@@ -7,12 +7,12 @@ services:
       mongo:
         condition: service_healthy
     environment:
-      NODE_DB_URI: mongodb://habitica:dSqRpiG8q7GSeIQmKwiI9Uo93IyfzeSl@mongo/habitica?authSource=habitica
+      NODE_DB_URI: mongodb://habitica:EiPraZRxto1sQdElOa6LVZSomhqo6gAp@mongo/habitica?authSource=habitica
       INVITE_ONLY: 'false'
       EMAIL_SERVER_URL: mail.example.com
       EMAIL_SERVER_PORT: '587'
       EMAIL_SERVER_AUTH_USER: mail_user
-      EMAIL_SERVER_AUTH_PASSWORD: RunSAWSncpvjnXnh3MMJQ2RXiypeGydm
+      EMAIL_SERVER_AUTH_PASSWORD: yUpWsJIppcwJ7sEtUsyMmwi73CfXJE46
       ADMIN_EMAIL: no-reply@localhost
   client:
     image: docker.io/awinterstein/habitica-client:latest
@@ -33,10 +33,10 @@ services:
       \ --keyFile /etc/mongo-keyfile\n\"\n"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: HTiIMGTJghKh2JtAU3ZAPSubr6W6yTqp
-      MONGO_KEYFILE_CONTENT: pYO9YFnAztHMleBLHlMumO5hJlr0iZRyzUmx4IwyAjWuxzU8ST1xAgZR0n0e4mcpJuQU0WUgrEtMZOtYWuXPp8PetpXbntIWyOABzJEgKGGYCKFXysAEjjmawvDZ4mZxvKjZC70/oWPU4/+igubnHX3dCtqruk0oIedW065DgZsjRPPjxjZRf4d4LvUldcaQLuZhQGb8jdWsu9SJY6MFrvFY2CGElnAdK8jJbEfH61+ZiSaX3PAQGVeaua9ISt7VXYhWi3Sg76P30BI0eFdnuPTLcuIvWUBAx58cPD/r9Y02z1jsZBqn/rvb5g+KbtdTNxPDdAW0jAhwEZor548oaH0ESEL6zU1FanqzeYZsfwBWdQoX5737v/JjnA/7CysQdO+KHdmZVQyCIUdAouapuZKX14bEFRz1KiYuAWwKzvQgbSA+Qn4FADx/5bOozqFVkDq89XCvW5tz/pQv6tpJlseotsSSPsvX9SqH1FUhmfnxM9UP4DxzAVxhcBN7uLaT5AlGIV72Lr6VMTGYsBgs4lQiV/1p/ylj2QmwvGlPNuR4TIBikwD+Q0j0nk41wGWTWT9OY/pJVseWOYE3wy4fYpf98kNdvEO6Ns1zUyoPch5w8bUHFodaQIrU2Gd0ETzEWMpr2Ubjr5n/SZ0ZkrKi5BD5jSE1hcVPk6F2wMt24TguJGWnSf4xDoaAPE/8//NEQhwDXmGmGGTdUFTsl2GjTyS/eDxUwo2G3pheuinNq6nyBUo64Jlt/eSr2qXhp3oX6wIV5lbtpwr46AJbNNKgvWIg3Xo9QZV3UuFdupGYQL8Vo5bq6z8eZk1Irz5r92O7FUo9Au1EL8g7QuQwW1E7oVtBCIcyu51LLKfy4dTUhybXOkZd620c4ES28CLIAIzhM/21T0WYmd1uSJc8AWjOdZiXEvzUiYsQhDwEOWCdhqq3wfJ/09RjA++CDkCv1WEnqrrrB8xKv4Q8lv4K3kIahWe4LqtNTK0lHA7stCcYbSAYJVIv
+      MONGO_INITDB_ROOT_PASSWORD: S5CyzZ7FxoGnaedx92x1C5rKvv88usJZ
+      MONGO_KEYFILE_CONTENT: WL5GkzXYGtu0UIOjGYqRrsCsuFxSgNxHzLYHAdebp+l/XQvfuuBy3WoT4IDC93zKc8Ou9Ik4eWOYy3tSVP8mOND+9G6eOvAakdr2AAfLWGjmLmNAzAZNwk2Mydnj+DJwM+/NuFJdCMYTIeDPlzAQGswad8kkcP2v55EqGon5Rb54viR3nuwxWRu9cEZPMHVt4FvXuV7HIZCUUccmVSEYxH4laAbmDP/NTNTvMnNqXmdfXgNGCedwyC/Eztb1ZTaSBTab0i7gFiVjlugUm5q6U/Mil18fKtv9VpjYEY1Y6MTMfdT1gqQq6QsLjju+GMqc9mp3uJSb2tSDAdM1C8cb844efzbUL4JesdvwjJcW8J4/xKNYViT0Hi3XY2yjX0FfY/+Su7NJAUHC9unW1euUxdxdJ7N64kgkxOdMVlyGO5F5SJGrcEaCUp2YTsAYK7L1/AYzxDBkwuFVpnLyVFD9G9+43cGaYM027wu9tG4sKDydC8Vvllp0pIwWczWrTHNpKPgNKV35e69TCUFZjQqGV3F9EPppjSU7g4nXxilF2rm0fjF69PajI/qBomTnqLQXAvXmWuhUH+jYNbL1XJ/mi+QggtK7fjBjYPr4JoKG+BJaUaC2ByD167UWLkTpvqwGHBvJ642jyQWbpb3lg/Z4Ougjv4BP5mDRVpiMG56Dt69DM7kri4l5WN5d8p7rhT7GO7qzTSSyJrOqtaU46/Kxz/YpmEJh6pM+a83QoeHoF8oNFFbYuoQC/x4+rwmCpvC6GGitTtfG03UwFr82OtD6jVdfwRdig+mrmmwpepkGEVjgXkhMqrR+ew2n+7vxXbpUVgBrZDW7YqpD2YUymng3XpYv9fVx0KZuzMRqnhzU61srK1oN6khsf6AVQWmVEWFNVYuDRnEa9Z9Gb+FP1UEb1E7s/UdF7umK5Fz1hgS1QrNXfIKQJQbuPAvDPZmx6gh9C1mRGcGrkqQrhJhBMR3zOpmXtFZncdC/P2zO5y8cxbAy9Rqu
       MONGO_HABITICA_USER: habitica
-      MONGO_HABITICA_PASSWORD: dSqRpiG8q7GSeIQmKwiI9Uo93IyfzeSl
+      MONGO_HABITICA_PASSWORD: EiPraZRxto1sQdElOa6LVZSomhqo6gAp
     healthcheck:
       test: "mongosh --port 27017 --quiet -u \"${MONGO_ADMIN_USER}\" -p \"${MONGO_ADMIN_PASSWORD}\" --authenticationDatabase\
         \ admin --eval \"\n  try {\n    // 1. Hostname Fix\n    const config = rs.conf();\n    const currentHost = require('os').hostname()\
@@ -79,7 +79,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://habitica.com/
   repo: https://github.com/HabitRPG/habitica
   docs: https://habitica.fandom.com/wiki/Setting_up_Habitica_Locally

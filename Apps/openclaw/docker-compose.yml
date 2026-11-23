@@ -4,8 +4,8 @@ services:
     image: coollabsio/openclaw:2026.2.6
     environment:
     - AUTH_USERNAME=dokploy
-    - AUTH_PASSWORD=xRWop72twZJYwTJx24q0Ia8ZHJsi11b6
-    - OPENCLAW_GATEWAY_TOKEN=S5t6QZsrJSCXEjfC69jpwhETgd43iUHw
+    - AUTH_PASSWORD=g3XBExZGhJzHcQPjBqMJIBx410NdWgDj
+    - OPENCLAW_GATEWAY_TOKEN=8Il5p12ze2lWCL0e8k4Gtp4nWnsLdty2
     - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     - OPENAI_API_KEY=${OPENAI_API_KEY}
     - OPENROUTER_API_KEY=YOUR-API-KEY
@@ -113,7 +113,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.1.29"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://openclaw.ai/
   repo: https://github.com/openclaw/openclaw
   docs: https://docs.openclaw.ai/

@@ -6,10 +6,10 @@ services:
     environment:
     - ADMIN_PASSWORD_RESET=${ADMIN_PASSWORD_RESET:-}
     - ADMIN_EMAIL=admin@libredb.org
-    - ADMIN_PASSWORD=qYzjURHXuJP04h0vi9JtKTgf7OfE94z9
+    - ADMIN_PASSWORD=qY5jFR7aAUN38FtogdKfXWC0AX7qqKbe
     - USER_EMAIL=user@libredb.org
-    - USER_PASSWORD=uMWlZz8tqj10p5C21bsSxkCnM507vVVQ
-    - JWT_SECRET=F6T9ZLerGO2WhECunAj3ZYvw2QEjXP1FpArlOoMyVCsibtZstFFYvG91VajP1rMM
+    - USER_PASSWORD=FyFUynMiQlJ3pvvVWDhB1bNpTMRO0oNA
+    - JWT_SECRET=4xypTt6APK3WBOr2b6Qb4jqllRgjTSkHQ7j5lJWQnCKQZrMiGj8RPL2RYPMaixpz
     - STORAGE_PROVIDER=sqlite
     - STORAGE_SQLITE_PATH=/app/data/libredb-storage.db
     - AUTH_COOKIE_SECURE=false
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.3.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://libredb.org/
   repo: https://github.com/libredb/libredb-studio
   docs: https://libredb.org/

@@ -7,13 +7,13 @@ services:
     - BASE_URL=https://localhost
     - PORT=8080
     - USE_PROXY=true
-    - SSO_SECRET=e423a1cf62645e7fe987faa0fb4435c4d7f11e43f7dfa8f824a1fdf8b7da395fb2411c086453cdb8c19e56c37aeb369b84b6c0489b4887d419c0480a91697d2b
+    - SSO_SECRET=fc72efdcfa726dcc2a40ea18e0ba28cc80a58ec16db27efbc0798181c69d2c8f13a902653740536854a64ccfaf4eef38e1b4e84f4ab59d49cdcce81606c9be6a
     - ATTACHMENT_PATH=/data/attachments
     - DB_TYPE=postgres
     - POSTGRES_HOST=db
     - POSTGRES_PORT=5432
     - POSTGRES_USER=windshift
-    - POSTGRES_PASSWORD=ms6fTf2LbIMK3I2Hw1GyjsiNIH6T6YcD
+    - POSTGRES_PASSWORD=HiprwmrMzbtN9FfFABfQ2pBGH92aHVIf
     - POSTGRES_DB=windshift
     - LOG_LEVEL=info
     - LOG_FORMAT=json
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=windshift
-    - POSTGRES_PASSWORD=ms6fTf2LbIMK3I2Hw1GyjsiNIH6T6YcD
+    - POSTGRES_PASSWORD=HiprwmrMzbtN9FfFABfQ2pBGH92aHVIf
     - POSTGRES_DB=windshift
     volumes:
     - postgres-data:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.9.3"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://windshift.sh/
   repo: https://github.com/Windshiftapp/core
   docs: https://windshift.sh/docs

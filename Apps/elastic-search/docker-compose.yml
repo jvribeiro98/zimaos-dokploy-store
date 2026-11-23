@@ -4,7 +4,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
     restart: unless-stopped
     environment:
-    - ELASTIC_PASSWORD=lNcXAPrTurvnrGrUiWKlAZshJghX3Nhn
+    - ELASTIC_PASSWORD=UlBC6DtszZsssgKLw5ERSMiqzBHqCU36
     - discovery.type=single-node
     - xpack.security.enabled=true
     - xpack.security.http.ssl.enabled=false
@@ -30,13 +30,13 @@ services:
     environment:
     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     - ELASTICSEARCH_USERNAME=kibana_system
-    - ELASTICSEARCH_PASSWORD=TwtffbljCEXVsOjADw3O3onfbFHITfUR
+    - ELASTICSEARCH_PASSWORD=O1cQTpdQoDNWkOMkYfplAadu9gum2ZKm
     - ELASTICSEARCH_PUBLICBASEURL=https://localhost
     - SERVER_PUBLICBASEURL=https://localhost
     - XPACK_SECURITY_SECURECOOKIES=true
-    - XPACK_SECURITY_ENCRYPTIONKEY=B1m6VqHSLmLbTzhjMLVvC6Khw8n738xCS2UIOcrObCUmPbGX7gxgAHW7RiG5pdTm
-    - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=8tcQ7xraKcR4xgKvEE9h9EorjdfgZR6TLeOWCnPMEFE3n1lQ5CupRuLmPx8c8aVd
-    - XPACK_REPORTING_ENCRYPTIONKEY=LszRR37luYEaAK9YXPSbZLEobnARmRC5PK4qgMuS2uwpMfLjAifM6gMqEDQWjHzu
+    - XPACK_SECURITY_ENCRYPTIONKEY=DSmrgvA3qj1Gf5Tg6a6S95aFR0WLsk7wASLODcTHn2fldtngkq6PjnjTpSyWcGSW
+    - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=MSybLBoWvU1J7R00vaX6DvTagPZnxxMPdWtUwgDozzckERKYYUdaWzGRmeJMwDK3
+    - XPACK_REPORTING_ENCRYPTIONKEY=tWW60LP43PNsX8C5Y1OFnjahwZc00wON0VL7jw2pVFwfuqsQpg4OGbIgx94hBm9s
     mem_limit: 2g
     expose:
     - '5601'
@@ -60,8 +60,8 @@ services:
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.3
     environment:
-    - ELASTIC_PASSWORD=lNcXAPrTurvnrGrUiWKlAZshJghX3Nhn
-    - KIBANA_PASSWORD=TwtffbljCEXVsOjADw3O3onfbFHITfUR
+    - ELASTIC_PASSWORD=UlBC6DtszZsssgKLw5ERSMiqzBHqCU36
+    - KIBANA_PASSWORD=O1cQTpdQoDNWkOMkYfplAadu9gum2ZKm
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -98,7 +98,7 @@ x-casaos:
   - amd64
   - arm64
   version: "9.5.3"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.elastic.co/elasticsearch/
   repo: https://github.com/elastic/elasticsearch
   docs: https://www.elastic.co/docs/solutions/search

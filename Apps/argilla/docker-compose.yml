@@ -8,10 +8,10 @@ services:
     environment:
     - ARGILLA_HOME_PATH=/var/lib/argilla
     - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
-    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:08AbOizyp3dA6E9A@argilla-db:5432/argilla
-    - ARGILLA_REDIS_URL=redis://:8ds77BbBJ01KeyDk@argilla-redis:6379/0
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:PVtnmYQycIuEiIXC@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:jl2UH506Oc3vvuBE@argilla-redis:6379/0
     - USERNAME=admin
-    - PASSWORD=5fwW7Ci7
+    - PASSWORD=W17Gzvgi
     - API_KEY=argilla.apikey
     - WORKSPACE=default
     volumes:
@@ -31,8 +31,8 @@ services:
     - BACKGROUND_NUM_WORKERS=2
     - ARGILLA_HOME_PATH=/var/lib/argilla
     - ARGILLA_ELASTICSEARCH=http://argilla-elasticsearch:9200
-    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:08AbOizyp3dA6E9A@argilla-db:5432/argilla
-    - ARGILLA_REDIS_URL=redis://:8ds77BbBJ01KeyDk@argilla-redis:6379/0
+    - ARGILLA_DATABASE_URL=postgresql+asyncpg://postgres:PVtnmYQycIuEiIXC@argilla-db:5432/argilla
+    - ARGILLA_REDIS_URL=redis://:jl2UH506Oc3vvuBE@argilla-redis:6379/0
     volumes:
     - argilladata:/var/lib/argilla
     command: python -m argilla_server worker --num-workers ${BACKGROUND_NUM_WORKERS}
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=08AbOizyp3dA6E9A
+    - POSTGRES_PASSWORD=PVtnmYQycIuEiIXC
     - POSTGRES_DB=argilla
     volumes:
     - dbdata:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     environment:
-    - REDIS_PASSWORD=8ds77BbBJ01KeyDk
+    - REDIS_PASSWORD=jl2UH506Oc3vvuBE
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
     - redisdata:/data
@@ -95,7 +95,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.argilla.io/
   repo: https://github.com/argilla-io/argilla
   docs: https://docs.argilla.io/

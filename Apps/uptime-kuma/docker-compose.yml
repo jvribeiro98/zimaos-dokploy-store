@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.5.8"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://uptime.kuma.pet/
   repo: https://github.com/louislam/uptime-kuma
   docs: https://github.com/louislam/uptime-kuma/wiki

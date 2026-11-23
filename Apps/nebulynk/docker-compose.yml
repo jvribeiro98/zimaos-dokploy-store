@@ -124,7 +124,7 @@ services:
       NODE_ENV: development
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
       AI_SECRET_KEY: ${AI_SECRET_KEY:?AI_SECRET_KEY must be set}
-      AUTH_2FA_SECRET_KEY: iZyaSVV9CYFiFQmcZk1r6aC5GVB9LDr4LpXD2eafKm4ETGkXRxuHypisO1EC1M6d
+      AUTH_2FA_SECRET_KEY: KYW3tZkKrgVXh4MVQkTl7zTYnQZhBg8Uq8Np8VGFcFpS5zgK0wct4ialFYqZtL01
       BACKEND_PORT: ${BACKEND_PORT:-3030}
       LOG_LEVEL: info
       MAX_FILE_SIZE: '26214400'
@@ -288,7 +288,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.7.1"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://nebulynk.net
   repo: https://github.com/sapientorius/Nebulynk
   docs: https://github.com/sapientorius/Nebulynk

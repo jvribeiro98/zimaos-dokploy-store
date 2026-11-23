@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: h1bZsoFLhsZT7TDjp4t0WrFomqgHl7k9
+      POSTGRES_PASSWORD: GzuG5Cwc6DBFVk04VoSptf1dN7DHETCZ
     healthcheck:
       test:
       - CMD-SHELL
@@ -23,9 +23,9 @@ services:
     environment:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: h1bZsoFLhsZT7TDjp4t0WrFomqgHl7k9
+      POSTGRES_PASSWORD: GzuG5Cwc6DBFVk04VoSptf1dN7DHETCZ
       POSTGRES_HOST: taiga-db
-      TAIGA_SECRET_KEY: Zt3CFgEdZCyjhr18g22tUjqGx4JMsBllmFb2mauVgUCTuTiJpKQSZ72RezXOYQvW
+      TAIGA_SECRET_KEY: uf3mkhP5RlOXvb190kyOW3UNNSOvYcuwExTlfPjqkKcIJAJILplLIj4n6hHezAjn
       TAIGA_SITES_SCHEME: https
       TAIGA_SITES_DOMAIN: localhost
       TAIGA_SUBPATH: ''
@@ -38,7 +38,7 @@ services:
       EMAIL_HOST_USER: user
       EMAIL_HOST_PASSWORD: password
       RABBITMQ_USER: taiga
-      RABBITMQ_PASS: kP5Ch8i8YbTCrM4Lu5UFG7mNvK8VWW2o
+      RABBITMQ_PASS: kUs5y5VPtEqAu1F7euA2jxy3l9ZhdJnV
       RABBITMQ_VHOST: taiga
       ENABLE_TELEMETRY: 'False'
       PUBLIC_REGISTER_ENABLED: 'False'
@@ -60,9 +60,9 @@ services:
     environment:
       POSTGRES_DB: taiga
       POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: h1bZsoFLhsZT7TDjp4t0WrFomqgHl7k9
+      POSTGRES_PASSWORD: GzuG5Cwc6DBFVk04VoSptf1dN7DHETCZ
       POSTGRES_HOST: taiga-db
-      TAIGA_SECRET_KEY: Zt3CFgEdZCyjhr18g22tUjqGx4JMsBllmFb2mauVgUCTuTiJpKQSZ72RezXOYQvW
+      TAIGA_SECRET_KEY: uf3mkhP5RlOXvb190kyOW3UNNSOvYcuwExTlfPjqkKcIJAJILplLIj4n6hHezAjn
       TAIGA_SITES_SCHEME: https
       TAIGA_SITES_DOMAIN: localhost
       TAIGA_SUBPATH: ''
@@ -75,7 +75,7 @@ services:
       EMAIL_HOST_USER: user
       EMAIL_HOST_PASSWORD: password
       RABBITMQ_USER: taiga
-      RABBITMQ_PASS: kP5Ch8i8YbTCrM4Lu5UFG7mNvK8VWW2o
+      RABBITMQ_PASS: kUs5y5VPtEqAu1F7euA2jxy3l9ZhdJnV
       RABBITMQ_VHOST: taiga
       ENABLE_TELEMETRY: 'False'
       PUBLIC_REGISTER_ENABLED: 'False'
@@ -94,9 +94,9 @@ services:
     restart: unless-stopped
     hostname: taiga-async-rabbitmq
     environment:
-      RABBITMQ_ERLANG_COOKIE: 0v7VPKcs26cKskEAQqMcUkzAdoLsu2h1
+      RABBITMQ_ERLANG_COOKIE: u5R2MsFz0aqPbECJt4iXWYPmrevjRsST
       RABBITMQ_DEFAULT_USER: taiga
-      RABBITMQ_DEFAULT_PASS: kP5Ch8i8YbTCrM4Lu5UFG7mNvK8VWW2o
+      RABBITMQ_DEFAULT_PASS: kUs5y5VPtEqAu1F7euA2jxy3l9ZhdJnV
       RABBITMQ_DEFAULT_VHOST: taiga
     volumes:
     - taiga-async-rabbitmq-data:/var/lib/rabbitmq
@@ -113,9 +113,9 @@ services:
     restart: unless-stopped
     environment:
       RABBITMQ_USER: taiga
-      RABBITMQ_PASS: kP5Ch8i8YbTCrM4Lu5UFG7mNvK8VWW2o
+      RABBITMQ_PASS: kUs5y5VPtEqAu1F7euA2jxy3l9ZhdJnV
       RABBITMQ_VHOST: taiga
-      TAIGA_SECRET_KEY: Zt3CFgEdZCyjhr18g22tUjqGx4JMsBllmFb2mauVgUCTuTiJpKQSZ72RezXOYQvW
+      TAIGA_SECRET_KEY: uf3mkhP5RlOXvb190kyOW3UNNSOvYcuwExTlfPjqkKcIJAJILplLIj4n6hHezAjn
     depends_on:
       taiga-events-rabbitmq:
         condition: service_started
@@ -124,9 +124,9 @@ services:
     restart: unless-stopped
     hostname: taiga-events-rabbitmq
     environment:
-      RABBITMQ_ERLANG_COOKIE: 0v7VPKcs26cKskEAQqMcUkzAdoLsu2h1
+      RABBITMQ_ERLANG_COOKIE: u5R2MsFz0aqPbECJt4iXWYPmrevjRsST
       RABBITMQ_DEFAULT_USER: taiga
-      RABBITMQ_DEFAULT_PASS: kP5Ch8i8YbTCrM4Lu5UFG7mNvK8VWW2o
+      RABBITMQ_DEFAULT_PASS: kUs5y5VPtEqAu1F7euA2jxy3l9ZhdJnV
       RABBITMQ_DEFAULT_VHOST: taiga
     volumes:
     - taiga-events-rabbitmq-data:/var/lib/rabbitmq
@@ -135,7 +135,7 @@ services:
     restart: unless-stopped
     environment:
       MAX_AGE: '360'
-      SECRET_KEY: Zt3CFgEdZCyjhr18g22tUjqGx4JMsBllmFb2mauVgUCTuTiJpKQSZ72RezXOYQvW
+      SECRET_KEY: uf3mkhP5RlOXvb190kyOW3UNNSOvYcuwExTlfPjqkKcIJAJILplLIj4n6hHezAjn
   taiga-gateway:
     image: nginx:1.19-alpine
     restart: unless-stopped
@@ -204,7 +204,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.19-alpine"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://taiga.io/
   repo: https://github.com/taigaio/taiga-docker
   docs: https://docs.taiga.io/

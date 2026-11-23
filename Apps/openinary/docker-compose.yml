@@ -10,7 +10,7 @@ services:
       NODE_ENV: production
       MODE: fullstack
       NEXT_PUBLIC_API_BASE_URL: /api
-      BETTER_AUTH_SECRET: QwHDF7ZmVcYcdFT1arKsJBXDeamClhwGS675DJfjjNboZQp4ByzCFmKfKwiE14NG
+      BETTER_AUTH_SECRET: Xu4ZcIno0j9G5S3n8rVHI0FjATs1uQyNsCiAcghPmcziCurKBuVzm59MSRvqSERe
       BETTER_AUTH_URL: http://localhost
       ALLOWED_ORIGIN: http://localhost}
       DOCKER_CONTAINER: 'true'
@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-latest}"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://openinary.dev
   repo: https://github.com/openinary/openinary
   docs: https://docs.openinary.dev

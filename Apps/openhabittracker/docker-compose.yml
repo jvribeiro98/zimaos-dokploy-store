@@ -7,8 +7,8 @@ services:
     environment:
       AppSettings__UserName: admin
       AppSettings__Email: admin@example.com
-      AppSettings__Password: WguCa4sDa4nwxF8Bm3NHb2Fl
-      AppSettings__JwtSecret: 5E9X+il08FdwCffiLcwIvjORo9jKBOvzqb0KM7b9v5YUAFepbZfRpTUt2CUC7ypT
+      AppSettings__Password: UoxbnwhaTmtA8Aqf2qbpBMoz
+      AppSettings__JwtSecret: p01zCRCWNT9blN6OL3jvAaScnpDizdwBQITHSyM9kR+Qb3gkNytlDu62ZIkNndlD
     volumes:
     - openhabittracker-data:/app/.OpenHabitTracker
     restart: unless-stopped
@@ -39,6 +39,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://openhabittracker.net
   repo: https://github.com/Jinjinov/OpenHabitTracker

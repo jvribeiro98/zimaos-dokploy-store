@@ -7,14 +7,14 @@ services:
     environment:
     - DATABASE_URL=file:./db.sqlite
     - DATABASE_PROVIDER=sqlite
-    - TOKEN_SECRET=YDSOqZHzWPcsxUvI9erhqC7TOH1MSJ6b
+    - TOKEN_SECRET=usUSpLkFwQghHddhVfxfNoMj2KvBFgr0
     - ORIGIN=http://localhost
     - DISABLED_EMAIL_AND_PASSWORD=false
     - LOG_LEVEL=debug
     - PORT=3000
     - ADMIN_USERNAME=admin
     - ADMIN_EMAIL=info@example.org
-    - ADMIN_PASSWORD=2HAbKLSrEzBfFKS0
+    - ADMIN_PASSWORD=cziDrrSqdndXfV6d
     - ENABLE_SIGNUP=true
     - ENABLED_MFA=false
     - PUBLIC_URL=localhost
@@ -51,7 +51,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.9-rc-020"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/UraniaDev/snapp
   repo: https://github.com/UraniaDev/snapp
   docs: https://github.com/UraniaDev/snapp

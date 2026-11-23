@@ -4,7 +4,7 @@ services:
     image: getmeili/meilisearch:v1.11.3
     environment:
       MEILI_URL: http://search:7700
-      MEILI_MASTER_KEY: C88yIw9EEI8SqCUKuPKmkxRTHr5au15p
+      MEILI_MASTER_KEY: 3pXAJDSBjLkaKCPqcUPVE88SneRc2MTh
       MEILI_NO_ANALYTICS: 'true'
     volumes:
     - search-data:/meili_data/data.ms
@@ -22,8 +22,8 @@ services:
         condition: service_healthy
     environment:
       MEILI_URL: http://search:7700
-      MEILI_MASTER_KEY: C88yIw9EEI8SqCUKuPKmkxRTHr5au15p
-      POCKETBASE_ENCRYPTION_KEY: IRqn4BFI2XwvEXNTiCJ9ui7iFjP4VpuV
+      MEILI_MASTER_KEY: 3pXAJDSBjLkaKCPqcUPVE88SneRc2MTh
+      POCKETBASE_ENCRYPTION_KEY: rJMvsHKRaY46ZYMoCR3JfZn7prJwWKIl
       ORIGIN: http://localhost
     volumes:
     - db-data:/pb_data
@@ -43,14 +43,14 @@ services:
         condition: service_healthy
     environment:
       MEILI_URL: http://search:7700
-      MEILI_MASTER_KEY: C88yIw9EEI8SqCUKuPKmkxRTHr5au15p
+      MEILI_MASTER_KEY: 3pXAJDSBjLkaKCPqcUPVE88SneRc2MTh
       ORIGIN: http://localhost
       BODY_SIZE_LIMIT: Infinity
       PUBLIC_POCKETBASE_URL: http://db:8090
       PUBLIC_DISABLE_SIGNUP: 'false'
       UPLOAD_FOLDER: /app/uploads
       UPLOAD_USER: admin
-      UPLOAD_PASSWORD: p0TKywpVHOtmta4J
+      UPLOAD_PASSWORD: xuYZqqU0sSBnGEDn
       PUBLIC_VALHALLA_URL: https://valhalla1.openstreetmap.de
       PUBLIC_NOMINATIM_URL: https://nominatim.openstreetmap.org
     volumes:
@@ -90,7 +90,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://wanderer.to
   repo: https://github.com/flomp/wanderer
   docs: https://github.com/flomp/wanderer#readme

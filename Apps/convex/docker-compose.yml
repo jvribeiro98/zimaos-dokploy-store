@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "72ce13c"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.convex.dev/
   repo: https://github.com/convex/convex-backend
   docs: https://www.convex.dev/docs

@@ -6,7 +6,7 @@ services:
     environment:
       ACCEPT_EULA: Y
       SEQ_API_CANONICALURI: https://localhost
-      SEQ_FIRSTRUN_ADMINPASSWORD: dMUChzbkrO5DDRag9mf26Ujdq9RZDwQc
+      SEQ_FIRSTRUN_ADMINPASSWORD: 9ZnIeDIrK8mfZIt4S2H33FCmMZl2pAZz
     expose:
     - '80'
     volumes:
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2025.2"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://datalust.co/seq
   repo: https://github.com/datalust/seq-tickets
   docs: https://datalust.co/docs

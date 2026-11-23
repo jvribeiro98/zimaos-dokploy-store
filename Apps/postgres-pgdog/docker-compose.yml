@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=4BMd7ZWoUXzNj00a1nnBVOGhJewd33gC
+    - POSTGRES_PASSWORD=tetvL8elSrmxmgPG58Npzqji9fRYrJPu
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -54,7 +54,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.26"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://pgdog.dev
   repo: https://github.com/pgdogdev/pgdog
   docs: https://docs.pgdog.dev

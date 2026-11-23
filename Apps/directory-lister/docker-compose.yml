@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.directorylister.com/
   repo: https://github.com/DirectoryLister/DirectoryLister
   docs: https://docs.directorylister.com/

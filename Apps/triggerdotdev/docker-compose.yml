@@ -70,7 +70,7 @@ services:
     image: electricsql/electric:${ELECTRIC_IMAGE_TAG:-latest}
     restart: ${RESTART_POLICY:-unless-stopped}
     environment:
-      DATABASE_URL: postgresql://triggeruser:TXHiX8N6GhOQyhD0SSp6QXLmpuewTvvd@postgres:5432/triggerdb?sslmode=disable
+      DATABASE_URL: postgresql://triggeruser:/+rhuZR+b1Md+KjGImhRLbN5J6G0sPgY@postgres:5432/triggerdb?sslmode=disable
     depends_on:
     - postgres
     expose:
@@ -108,7 +108,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://trigger.dev/
   repo: https://github.com/triggerdotdev/trigger.dev
   docs: https://trigger.dev/docs

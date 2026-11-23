@@ -9,7 +9,7 @@ services:
       prefect-redis:
         condition: service_healthy
     environment:
-    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:EebRHBUzE17HJLT2H4CrGYnhYWMGNqhA@prefect-postgres:5432/prefect
+    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:Rs4bq6i6lbQE89E2L4Dq0ykzF4S8bKiY@prefect-postgres:5432/prefect
     - PREFECT_SERVER_API_HOST=0.0.0.0
     - PREFECT_SERVER_UI_API_URL=https://localhost/api
     - PREFECT_MESSAGING_BROKER=prefect_redis.messaging
@@ -19,7 +19,7 @@ services:
     - PREFECT_REDIS_MESSAGING_DB=0
     - USE_AUTH=False
     - PREFECT_AUTH_USER=admin
-    - PREFECT_AUTH_PASSWORD=w6rtwESn4E9EupTI6RnJdOsvE4tGKVH3
+    - PREFECT_AUTH_PASSWORD=QBaakLKsvhhsqA7aen8UgAatyagfOCzG
     command:
     - sh
     - -c
@@ -49,7 +49,7 @@ services:
       prefect:
         condition: service_healthy
     environment:
-    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:EebRHBUzE17HJLT2H4CrGYnhYWMGNqhA@prefect-postgres:5432/prefect
+    - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://prefect:Rs4bq6i6lbQE89E2L4Dq0ykzF4S8bKiY@prefect-postgres:5432/prefect
     - PREFECT_MESSAGING_BROKER=prefect_redis.messaging
     - PREFECT_MESSAGING_CACHE=prefect_redis.messaging
     - PREFECT_REDIS_MESSAGING_HOST=prefect-redis
@@ -57,7 +57,7 @@ services:
     - PREFECT_REDIS_MESSAGING_DB=0
     - USE_AUTH=False
     - PREFECT_AUTH_USER=admin
-    - PREFECT_AUTH_PASSWORD=w6rtwESn4E9EupTI6RnJdOsvE4tGKVH3
+    - PREFECT_AUTH_PASSWORD=QBaakLKsvhhsqA7aen8UgAatyagfOCzG
     command:
     - sh
     - -c
@@ -74,7 +74,7 @@ services:
     - PREFECT_API_URL=http://prefect:4200/api
     - USE_AUTH=False
     - PREFECT_AUTH_USER=admin
-    - PREFECT_AUTH_PASSWORD=w6rtwESn4E9EupTI6RnJdOsvE4tGKVH3
+    - PREFECT_AUTH_PASSWORD=QBaakLKsvhhsqA7aen8UgAatyagfOCzG
     command:
     - sh
     - -c
@@ -85,7 +85,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=prefect
-    - POSTGRES_PASSWORD=EebRHBUzE17HJLT2H4CrGYnhYWMGNqhA
+    - POSTGRES_PASSWORD=Rs4bq6i6lbQE89E2L4Dq0ykzF4S8bKiY
     - POSTGRES_DB=prefect
     volumes:
     - prefect-postgres-data:/var/lib/postgresql/data
@@ -133,7 +133,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.7.5-python3.12"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://www.prefect.io/
   repo: https://github.com/PrefectHQ/prefect
   docs: https://docs.prefect.io/

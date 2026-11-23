@@ -6,7 +6,7 @@ services:
     - slash-app-data:/var/opt/slash
     environment:
     - SLASH_DRIVER=postgres
-    - SLASH_DSN=postgresql://slash:n4JN4mGBlDTstOgKsBtC4m3ffrftaPj3@slash-postgres:5432/slash?sslmode=disable
+    - SLASH_DSN=postgresql://slash:96PF1jkDZ2nohUmjm1ZntSm50VBuea1V@slash-postgres:5432/slash?sslmode=disable
     depends_on:
       slash-postgres:
         condition: service_healthy
@@ -21,7 +21,7 @@ services:
     - slash-postgres-data:/var/lib/postgresql/data
     environment:
     - POSTGRES_USER=slash
-    - POSTGRES_PASSWORD=n4JN4mGBlDTstOgKsBtC4m3ffrftaPj3
+    - POSTGRES_PASSWORD=96PF1jkDZ2nohUmjm1ZntSm50VBuea1V
     - POSTGRES_DB=slash
     healthcheck:
       test:
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://github.com/yourselfhosted/slash#readme
   repo: https://github.com/yourselfhosted/slash
   docs: https://github.com/yourselfhosted/slash/wiki

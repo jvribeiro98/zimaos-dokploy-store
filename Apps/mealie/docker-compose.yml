@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-22"
+  update_at: "2026-11-23"
   website: https://mealie.io/
   repo: https://github.com/mealie-recipes/mealie
   docs: https://docs.mealie.io/
