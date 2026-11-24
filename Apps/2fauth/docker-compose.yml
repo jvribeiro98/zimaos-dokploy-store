@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - APP_URL=https://localhost
-    - APP_KEY=FyU1RXAYTbHoh3WxfqybRdSWmMHeP2is
+    - APP_KEY=m5oPX3I5sS56Ch71JkKPn7wEPmzGuqeL
     volumes:
     - 2fauth_data:/2fauth
     expose:
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "9.0.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://2fauth.app
   repo: https://github.com/Bubka/2FAuth
   docs: https://docs.2fauth.app

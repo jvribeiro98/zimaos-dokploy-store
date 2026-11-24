@@ -7,7 +7,7 @@ services:
     - 5432
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: axFCZlvNawvoVl8RWyf2JGnFo4Lpwk2n
+      POSTGRES_PASSWORD: zvZiNwbNt1r3XTYNgAShID0epQSh13KT
       POSTGRES_DB: timescaledb
       TIMESCALEDB_TELEMETRY: 'off'
     volumes:
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.26.4-pg17"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.tigerdata.com/
   repo: https://github.com/timescale/timescaledb
   docs: https://docs.timescale.com/

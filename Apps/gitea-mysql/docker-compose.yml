@@ -10,7 +10,7 @@ services:
     - GITEA__database__HOST=mysql:3306
     - GITEA__database__NAME=gitea
     - GITEA__database__USER=gitea
-    - GITEA__database__PASSWD=7mxLBMURDhpDJM3RoR4OBRRU
+    - GITEA__database__PASSWD=dTRHVxHARIOYkKiCNhesFg8I
     volumes:
     - gitea-data:/data
     expose:
@@ -36,9 +36,9 @@ services:
     image: docker.io/library/mysql:8
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=0DdfGJgK7E8tGXgR1m5vWfgM
+    - MYSQL_ROOT_PASSWORD=5sN8DsP7T4nDyJlltYQid39r
     - MYSQL_USER=gitea
-    - MYSQL_PASSWORD=7mxLBMURDhpDJM3RoR4OBRRU
+    - MYSQL_PASSWORD=dTRHVxHARIOYkKiCNhesFg8I
     - MYSQL_DATABASE=gitea
     command:
     - --default-authentication-plugin=mysql_native_password
@@ -69,7 +69,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.24.4"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://gitea.io/
   repo: https://github.com/go-gitea/gitea
   docs: https://docs.gitea.com/

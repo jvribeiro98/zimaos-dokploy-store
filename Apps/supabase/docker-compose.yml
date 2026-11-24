@@ -17,9 +17,9 @@ services:
       POSTGRES_PORT: '5432'
       POSTGRES_HOST: db
       POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
+      POSTGRES_PASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
       POSTGRES_USER_READ_WRITE: postgres
-      PG_META_CRYPTO_KEY: f8UAKUOZnZjlkuRhAcFRGnLKjLRtLjsY
+      PG_META_CRYPTO_KEY: iJCulwo6Cej8uoCmi0GqMNLJ29cuNRQK
       PGRST_DB_SCHEMAS: public,storage,graphql_public
       PGRST_DB_MAX_ROWS: '1000'
       PGRST_DB_EXTRA_SEARCH_PATH: public
@@ -28,11 +28,11 @@ services:
       OPENAI_API_KEY: ''
       SUPABASE_URL: http://api-gw:8000
       SUPABASE_PUBLIC_URL: https://localhost
-      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.xvx1KGhhQfzKRjEspBYDDGaHO4X9Yy1pMZujIraH2AA}
-      SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9._U2bBFdNC7MEyWJ2XqC2ZqJ5YuSkANSDA2uKH7Y99x8}
-      AUTH_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
-      SUPABASE_PUBLISHABLE_KEY: sb_publishable_9d7ea70d8c5106d051c5a789a4f6ecc883e92f0cc621_76d3c04f3ed4213f
-      SUPABASE_SECRET_KEY: sb_secret_dffd1ad6f6b80d51e80ed3c56fc6401a53b5941e4db7_a5e5e870f9d2df55
+      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.g-uL_KnAD8TPUrHFFNnGFHrENAJj7TcItG_YMCqCW7M}
+      SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9.s_fyNotz0naEzjlkdJ9WawexJGpiqeG0yrofPwBsqKg}
+      AUTH_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_1f258a80fcf9560f2df6cf0ef3af04a863fc83ac1ea5_20bd8156d3528cd4
+      SUPABASE_SECRET_KEY: sb_secret_5e12b0573e1a6ddb8b4c2e156d81425c390f0d96a57e_e8ca9837cbd0d935
       ENABLED_FEATURES_LOGS_ALL: 'false'
       SNIPPETS_MANAGEMENT_FOLDER: /app/snippets
       EDGE_FUNCTIONS_MANAGEMENT_FOLDER: /app/edge-functions
@@ -60,15 +60,15 @@ services:
     - /DATA/AppData/$AppID/volumes/api/envoy/lds.template.yaml:/etc/envoy/lds.template.yaml:ro,z
     - /DATA/AppData/$AppID/volumes/api/envoy/docker-entrypoint.sh:/docker-entrypoint.sh:ro,z
     environment:
-      ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.xvx1KGhhQfzKRjEspBYDDGaHO4X9Yy1pMZujIraH2AA
-      SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9._U2bBFdNC7MEyWJ2XqC2ZqJ5YuSkANSDA2uKH7Y99x8
-      SUPABASE_PUBLISHABLE_KEY: sb_publishable_9d7ea70d8c5106d051c5a789a4f6ecc883e92f0cc621_76d3c04f3ed4213f
-      SUPABASE_SECRET_KEY: sb_secret_dffd1ad6f6b80d51e80ed3c56fc6401a53b5941e4db7_a5e5e870f9d2df55
-      ANON_KEY_ASYMMETRIC: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.xvx1KGhhQfzKRjEspBYDDGaHO4X9Yy1pMZujIraH2AA
-      SERVICE_ROLE_KEY_ASYMMETRIC: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9._U2bBFdNC7MEyWJ2XqC2ZqJ5YuSkANSDA2uKH7Y99x8
+      ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.g-uL_KnAD8TPUrHFFNnGFHrENAJj7TcItG_YMCqCW7M
+      SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9.s_fyNotz0naEzjlkdJ9WawexJGpiqeG0yrofPwBsqKg
+      SUPABASE_PUBLISHABLE_KEY: sb_publishable_1f258a80fcf9560f2df6cf0ef3af04a863fc83ac1ea5_20bd8156d3528cd4
+      SUPABASE_SECRET_KEY: sb_secret_5e12b0573e1a6ddb8b4c2e156d81425c390f0d96a57e_e8ca9837cbd0d935
+      ANON_KEY_ASYMMETRIC: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.g-uL_KnAD8TPUrHFFNnGFHrENAJj7TcItG_YMCqCW7M
+      SERVICE_ROLE_KEY_ASYMMETRIC: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9.s_fyNotz0naEzjlkdJ9WawexJGpiqeG0yrofPwBsqKg
       SUPABASE_PUBLIC_URL: https://localhost
       DASHBOARD_USERNAME: supabase
-      DASHBOARD_PASSWORD: Jk40JJXpoaPTsyQB2h6xYTFiDM9O7f2q
+      DASHBOARD_PASSWORD: IhRzw7Ss1XsD7MyjIr3wmOSUQbLui1iQ
     entrypoint:
     - /bin/sh
     - /docker-entrypoint.sh
@@ -99,7 +99,7 @@ services:
       GOTRUE_API_PORT: '9999'
       API_EXTERNAL_URL: https://localhost/auth/v1
       GOTRUE_DB_DRIVER: postgres
-      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP@db:5432/postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:xc43quTlhYLSI2qSwR2hbJd7TrfSsutP@db:5432/postgres
       GOTRUE_SITE_URL: http://localhost:3000
       GOTRUE_URI_ALLOW_LIST: https://localhost/*,http://localhost:3000/*
       GOTRUE_DISABLE_SIGNUP: 'false'
@@ -107,7 +107,7 @@ services:
       GOTRUE_JWT_AUD: authenticated
       GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
       GOTRUE_JWT_EXP: '3600'
-      GOTRUE_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      GOTRUE_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       GOTRUE_JWT_KEYS: '[]'
       GOTRUE_JWT_ISSUER: https://localhost/auth/v1
       GOTRUE_EXTERNAL_EMAIL_ENABLED: 'true'
@@ -140,7 +140,7 @@ services:
       timeout: 5s
       retries: 3
     environment:
-      PGRST_DB_URI: postgres://authenticator:pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP@db:5432/postgres
+      PGRST_DB_URI: postgres://authenticator:xc43quTlhYLSI2qSwR2hbJd7TrfSsutP@db:5432/postgres
       PGRST_DB_SCHEMAS: public,storage,graphql_public
       PGRST_DB_MAX_ROWS: '1000'
       PGRST_DB_EXTRA_SEARCH_PATH: public
@@ -149,7 +149,7 @@ services:
       PGRST_ADMIN_SERVER_HOST: localhost
       PGRST_JWT_SECRET: '}'
       PGRST_DB_USE_LEGACY_GUCS: 'false'
-      PGRST_APP_SETTINGS_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      PGRST_APP_SETTINGS_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       PGRST_APP_SETTINGS_JWT_EXP: '3600'
     command:
     - postgrest
@@ -172,14 +172,14 @@ services:
       DB_HOST: db
       DB_PORT: '5432'
       DB_USER: supabase_admin
-      DB_PASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
+      DB_PASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
       DB_NAME: postgres
       DB_AFTER_CONNECT_QUERY: SET search_path TO _realtime
-      DB_ENC_KEY: 68c0d5b6e916387ee7f8616ec7399737
-      API_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      DB_ENC_KEY: b0ace0cc22caea2fd62a52a4c6be3d6e
+      API_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       API_JWT_JWKS: '}'
-      SECRET_KEY_BASE: DmiU3eMKQeGTX1dmpFLMeCLk0CPIO2dqI7FIHwReIB5y748xyefuFmSyeLlXAch9
-      METRICS_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      SECRET_KEY_BASE: coXobAkm9lVOOvfcNx3kU6wblDMXCu9SfQPof0XJrdy6i3sHTMvjQnULydXcz45b
+      METRICS_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       ERL_AFLAGS: -proto_dist inet_tcp
       DNS_NODES: ''''''
       RLIMIT_NOFILE: '10000'
@@ -212,12 +212,12 @@ services:
     volumes:
     - /DATA/AppData/$AppID/volumes/storage:/var/lib/storage:z
     environment:
-      ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.xvx1KGhhQfzKRjEspBYDDGaHO4X9Yy1pMZujIraH2AA}
-      SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9._U2bBFdNC7MEyWJ2XqC2ZqJ5YuSkANSDA2uKH7Y99x8}
+      ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.g-uL_KnAD8TPUrHFFNnGFHrENAJj7TcItG_YMCqCW7M}
+      SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9.s_fyNotz0naEzjlkdJ9WawexJGpiqeG0yrofPwBsqKg}
       POSTGREST_URL: http://rest:3000
-      AUTH_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      AUTH_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       JWT_JWKS: '}'
-      DATABASE_URL: postgres://supabase_storage_admin:pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP@db:5432/postgres
+      DATABASE_URL: postgres://supabase_storage_admin:xc43quTlhYLSI2qSwR2hbJd7TrfSsutP@db:5432/postgres
       STORAGE_PUBLIC_URL: https://localhost
       REQUEST_ALLOW_X_FORWARDED_PATH: 'true'
       FILE_SIZE_LIMIT: '52428800'
@@ -228,8 +228,8 @@ services:
       REGION: stub
       ENABLE_IMAGE_TRANSFORMATION: 'true'
       IMGPROXY_URL: http://imgproxy:5001
-      S3_PROTOCOL_ACCESS_KEY_ID: iWDQBT6UvhnZUgnVtiJthHzM
-      S3_PROTOCOL_ACCESS_KEY_SECRET: UGsvXMvf2y1V9o8sfuAQ7xyWCLuyfRErbzoDf0JqM58M697z
+      S3_PROTOCOL_ACCESS_KEY_ID: U8L18j10QcvKm7ViWPooXPXm
+      S3_PROTOCOL_ACCESS_KEY_SECRET: 0AtOWuEiDdeSkl0XSXsLoWSY10DUWSKW2O1PESgzHZ7jnaDx
   imgproxy:
     image: darthsim/imgproxy:v3.30.1
     restart: unless-stopped
@@ -261,8 +261,8 @@ services:
       PG_META_DB_PORT: '5432'
       PG_META_DB_NAME: postgres
       PG_META_DB_USER: postgres
-      PG_META_DB_PASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
-      CRYPTO_KEY: f8UAKUOZnZjlkuRhAcFRGnLKjLRtLjsY
+      PG_META_DB_PASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
+      CRYPTO_KEY: iJCulwo6Cej8uoCmi0GqMNLJ29cuNRQK
   functions:
     image: supabase/edge-runtime:v1.74.0
     restart: unless-stopped
@@ -280,16 +280,16 @@ services:
       timeout: 5s
       retries: 3
     environment:
-      JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       SUPABASE_JWKS: '}'
       SUPABASE_URL: http://api-gw:8000
       SB_JWT_ISSUER: https://localhost/auth/v1
       SUPABASE_PUBLIC_URL: https://localhost
-      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.xvx1KGhhQfzKRjEspBYDDGaHO4X9Yy1pMZujIraH2AA}
-      SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9._U2bBFdNC7MEyWJ2XqC2ZqJ5YuSkANSDA2uKH7Y99x8}
-      SUPABASE_PUBLISHABLE_KEYS: '{"default":"sb_publishable_9d7ea70d8c5106d051c5a789a4f6ecc883e92f0cc621_76d3c04f3ed4213f"}'
-      SUPABASE_SECRET_KEYS: '{"default":"sb_secret_dffd1ad6f6b80d51e80ed3c56fc6401a53b5941e4db7_a5e5e870f9d2df55"}'
-      SUPABASE_DB_URL: postgresql://postgres:pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP@db:5432/postgres
+      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiZXhwIjoxODkzNDU2MDAwfQ.g-uL_KnAD8TPUrHFFNnGFHrENAJj7TcItG_YMCqCW7M}
+      SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaXNzIjoic3VwYWJhc2UiLCJleHAiOjE4OTM0NTYwMDB9.s_fyNotz0naEzjlkdJ9WawexJGpiqeG0yrofPwBsqKg}
+      SUPABASE_PUBLISHABLE_KEYS: '{"default":"sb_publishable_1f258a80fcf9560f2df6cf0ef3af04a863fc83ac1ea5_20bd8156d3528cd4"}'
+      SUPABASE_SECRET_KEYS: '{"default":"sb_secret_5e12b0573e1a6ddb8b4c2e156d81425c390f0d96a57e_e8ca9837cbd0d935"}'
+      SUPABASE_DB_URL: postgresql://postgres:xc43quTlhYLSI2qSwR2hbJd7TrfSsutP@db:5432/postgres
       VERIFY_JWT: 'false'
     command:
     - start
@@ -324,11 +324,11 @@ services:
       POSTGRES_HOST: /var/run/postgresql
       PGPORT: '5432'
       POSTGRES_PORT: '5432'
-      PGPASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
-      POSTGRES_PASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
+      PGPASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
+      POSTGRES_PASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
       PGDATABASE: postgres
       POSTGRES_DB: postgres
-      JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       JWT_EXP: '3600'
     command:
     - postgres
@@ -365,16 +365,16 @@ services:
       POSTGRES_PORT: '5432'
       POSTGRES_HOST: db
       POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP
-      DATABASE_URL: ecto://supabase_admin:pDESDqCnORWPBRwf4jWRQ2jH8gnLZ1IP@db:5432/_supabase
+      POSTGRES_PASSWORD: xc43quTlhYLSI2qSwR2hbJd7TrfSsutP
+      DATABASE_URL: ecto://supabase_admin:xc43quTlhYLSI2qSwR2hbJd7TrfSsutP@db:5432/_supabase
       CLUSTER_POSTGRES: 'true'
-      SECRET_KEY_BASE: DmiU3eMKQeGTX1dmpFLMeCLk0CPIO2dqI7FIHwReIB5y748xyefuFmSyeLlXAch9
-      VAULT_ENC_KEY: SfJJq9KQxadDG7pQpSdz3jwygWKWjrqy
-      API_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
-      METRICS_JWT_SECRET: OZT2847EMvmUbq0QlDIc1sDOtI7hGVG5
+      SECRET_KEY_BASE: coXobAkm9lVOOvfcNx3kU6wblDMXCu9SfQPof0XJrdy6i3sHTMvjQnULydXcz45b
+      VAULT_ENC_KEY: Zo3Pb2ukFRpY7npigv3aofwzoXaPuFVA
+      API_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
+      METRICS_JWT_SECRET: dTaBr0WBEGupMRMnI5UpGzdY40xReG1l
       REGION: local
       ERL_AFLAGS: -proto_dist inet_tcp
-      POOLER_TENANT_ID: 16101989-f3fd-412f-af52-f06d570298d9
+      POOLER_TENANT_ID: 40131c91-4a64-4ffa-bd68-cb5f423d057b
       POOLER_DEFAULT_POOL_SIZE: '20'
       POOLER_MAX_CLIENT_CONN: '100'
       POOLER_POOL_MODE: transaction
@@ -407,7 +407,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.08.03-3 / dokploy >= 0.22.5"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://supabase.com/
   repo: https://github.com/supabase/supabase
   docs: https://supabase.com/docs/guides/self-hosting

@@ -14,7 +14,7 @@ services:
       DB_HOSTNAME: immich-database
       DB_PORT: '5432'
       DB_USERNAME: immich
-      DB_PASSWORD: 5hBFV7vmjllpaGZv1VgR0CpqOW3AkR8F
+      DB_PASSWORD: AxHzBb89RacTtvxEto0PxjL3RHeLgDgn
       DB_DATABASE_NAME: immich
       REDIS_HOSTNAME: immich-redis
       REDIS_PORT: '6379'
@@ -49,7 +49,7 @@ services:
     volumes:
     - immich-postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: 5hBFV7vmjllpaGZv1VgR0CpqOW3AkR8F
+      POSTGRES_PASSWORD: AxHzBb89RacTtvxEto0PxjL3RHeLgDgn
       POSTGRES_USER: immich
       POSTGRES_DB: immich
       POSTGRES_INITDB_ARGS: --data-checksums
@@ -86,7 +86,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.0.2"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://immich.app/
   repo: https://github.com/immich-app/immich
   docs: https://immich.app/docs/overview/introduction

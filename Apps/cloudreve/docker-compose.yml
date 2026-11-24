@@ -12,7 +12,7 @@ services:
     - CR_CONF_Database.Type=postgres
     - CR_CONF_Database.Host=postgresql
     - CR_CONF_Database.User=cloudreve
-    - CR_CONF_Database.Password=lYavhxzK7eYFUcX2EYlfcGyXWEECcnOt
+    - CR_CONF_Database.Password=bEbJIJTkXwA0c53n8IaErxB682N1JeE4
     - CR_CONF_Database.Name=cloudreve
     - CR_CONF_Database.Port=5432
     - CR_CONF_Redis.Server=redis:6379
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=cloudreve
-    - POSTGRES_PASSWORD=lYavhxzK7eYFUcX2EYlfcGyXWEECcnOt
+    - POSTGRES_PASSWORD=bEbJIJTkXwA0c53n8IaErxB682N1JeE4
     - POSTGRES_DB=cloudreve
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -69,7 +69,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.10.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://cloudreve.org
   repo: https://github.com/cloudreve/Cloudreve
   docs: https://docs.cloudreve.org

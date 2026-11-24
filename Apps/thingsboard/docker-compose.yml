@@ -16,7 +16,7 @@ services:
       JAVA_OPTS: -Xms512m -Xmx2048m
       SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: OJicOgr3wo57o7WhfaAwzPLP1gqGnh0X
+      SPRING_DATASOURCE_PASSWORD: fbpgnk7WtHFQ04VumhrKQER3yjW6teuz
       SECURITY_CORS_ALLOWED_ORIGINS: http://localhost,https://localhost
     volumes:
     - thingsboard-logs:/var/log/thingsboard
@@ -51,7 +51,7 @@ services:
       LOAD_DEMO: 'false'
       SPRING_DATASOURCE_URL: jdbc:postgresql://thingsboard-db:5432/thingsboard
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: OJicOgr3wo57o7WhfaAwzPLP1gqGnh0X
+      SPRING_DATASOURCE_PASSWORD: fbpgnk7WtHFQ04VumhrKQER3yjW6teuz
     volumes:
     - thingsboard-install:/data
     - thingsboard-logs:/var/log/thingsboard
@@ -61,7 +61,7 @@ services:
     environment:
       POSTGRES_DB: thingsboard
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: OJicOgr3wo57o7WhfaAwzPLP1gqGnh0X
+      POSTGRES_PASSWORD: fbpgnk7WtHFQ04VumhrKQER3yjW6teuz
     volumes:
     - thingsboard-db:/var/lib/postgresql
     healthcheck:
@@ -97,7 +97,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.3.1.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://thingsboard.io/
   repo: https://github.com/thingsboard/thingsboard
   docs: https://thingsboard.io/docs/

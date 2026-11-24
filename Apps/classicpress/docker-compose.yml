@@ -7,7 +7,7 @@ services:
     environment:
     - WORDPRESS_DB_HOST=db
     - WORDPRESS_DB_USER=wordpress
-    - WORDPRESS_DB_PASSWORD=s64OvOjifx3YJWKG
+    - WORDPRESS_DB_PASSWORD=POeVF0TfT35Vymve
     - WORDPRESS_DB_NAME=wordpress
     volumes:
     - wordpress-data:/var/www/html
@@ -23,8 +23,8 @@ services:
     environment:
     - MYSQL_DATABASE=wordpress
     - MYSQL_USER=wordpress
-    - MYSQL_PASSWORD=s64OvOjifx3YJWKG
-    - MYSQL_ROOT_PASSWORD=2BmkHj9KjxdFcoul
+    - MYSQL_PASSWORD=POeVF0TfT35Vymve
+    - MYSQL_ROOT_PASSWORD=wbdyMnD8JtDvGCEI
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "php8.3-apache"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.classicpress.net/
   repo: https://github.com/ClassicPress/
   docs: https://docs.classicpress.net/

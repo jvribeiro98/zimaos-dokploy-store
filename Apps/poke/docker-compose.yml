@@ -28,7 +28,7 @@ x-casaos:
   - amd64
   - arm64
   version: "amd64"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://poketube.fun/
   repo: https://codeberg.org/ashleyirispuppy/poke
   docs: https://codeberg.org/ashleyirispuppy/poke

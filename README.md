@@ -1,12 +1,12 @@
 # 🏪 Dokploy Templates para ZimaOS & CasaOS
 
-Catálogo com **629 aplicações auto-hospedadas (self-hosted)** convertidas automaticamente do [Dokploy/templates](https://github.com/Dokploy/templates) para o formato nativo da Loja de Aplicativos do **ZimaOS** e **CasaOS** (suporte aos protocolos v2 e v1 ZIP).
+Catálogo com **658 aplicações auto-hospedadas (self-hosted)** convertidas automaticamente do [Dokploy/templates](https://github.com/Dokploy/templates) para o formato nativo da Loja de Aplicativos do **ZimaOS** e **CasaOS** (suporte aos protocolos v2 e v1 ZIP).
 
 ---
 
 ## 📊 Estatísticas
-- **Total de Apps:** `629`
-- **Categorias:** `Productivity: 158` `Networking: 102` `Others: 99` `Developer: 98` `AI: 60` `Media: 51` `Finance: 25` `Social: 22` `Home: 14`
+- **Total de Apps:** `658`
+- **Categorias:** `Productivity: 165` `Networking: 105` `Developer: 103` `Others: 100` `AI: 60` `Media: 58` `Finance: 30` `Social: 22` `Home: 15`
 - **Sincronização:** Atualizado diariamente via GitHub Actions direto do Dokploy Canary.
 
 ---
@@ -25,7 +25,7 @@ Catálogo com **629 aplicações auto-hospedadas (self-hosted)** convertidas aut
    https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/store.json
    ```
 4. Clique em **Adicionar** / **Confirmar**.
-5. Aguarde alguns segundos até o ZimaOS sincronizar todos os 629 aplicativos no seu catálogo!
+5. Aguarde alguns segundos até o ZimaOS sincronizar todos os 658 aplicativos no seu catálogo!
 
 ---
 
@@ -34,9 +34,9 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 
 ---
 
-## 📦 Lista Completa de Aplicativos (629)
+## 📦 Lista Completa de Aplicativos (658)
 
-### 📁 Media (51 apps)
+### 📁 Media (58 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -50,6 +50,8 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Calibre-Web** | `calibre-web` | Calibre-Web is a web interface for browsing, reading, and downloading ebooks from a Cal... | [Compose](Apps/calibre-web/docker-compose.yml) |
 | **Chibisafe** | `chibisafe` | A beautiful and performant vault to save all your files in the cloud | [Compose](Apps/chibisafe/docker-compose.yml) |
 | **ConvertX** | `convertx` | ConvertX is a service for converting media files, with optional user registration and f... | [Compose](Apps/convertx/docker-compose.yml) |
+| **Deluge** | `deluge` | Deluge is a lightweight, full-featured BitTorrent client with a web UI — daemon-based,... | [Compose](Apps/deluge/docker-compose.yml) |
+| **Embroidery File Converter** | `embroidery-converter` | A browser-only viewer and converter for PES, DST, JEF, EXP and VP3 embroidery files | [Compose](Apps/embroidery-converter/docker-compose.yml) |
 | **Emby** | `emby` | Emby Server is a personal media server with apps on just about every device | [Compose](Apps/emby/docker-compose.yml) |
 | **Frameleaf** | `frameleaf` | Frameleaf is a self-hosted photo and video library with native apps, private face and s... | [Compose](Apps/frameleaf/docker-compose.yml) |
 | **FreeFrame** | `freeframe` | FreeFrame is an open-source, self-hostable alternative to Frame | [Compose](Apps/freeframe/docker-compose.yml) |
@@ -60,6 +62,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Jellyseerr** | `jellyseerr` | Jellyseerr is a media request manager for Jellyfin, Emby, and Plex | [Compose](Apps/jellyseerr/docker-compose.yml) |
 | **Jitsi Meet** | `jitsi` | Jitsi Meet is an open-source video conferencing platform for secure, self-hosted meetings | [Compose](Apps/jitsi/docker-compose.yml) |
 | **Kavita** | `kavita` | Kavita is a digital library server for comics, manga, and ebooks | [Compose](Apps/kavita/docker-compose.yml) |
+| **Komga** | `komga` | Komga is a media server for comics and mangas — it serves CBZ, CBR, EPUB and PDF librar... | [Compose](Apps/komga/docker-compose.yml) |
 | **Legejo** | `legejo` | Legejo is a self-hosted library for your EPUB books, with a web reader, Kobo sync, OPDS... | [Compose](Apps/legejo/docker-compose.yml) |
 | **Livekit** | `livekit` | LiveKit is an open source platform for developers building realtime media applications | [Compose](Apps/livekit/docker-compose.yml) |
 | **MAZANOKE** | `mazanoke` | MAZANOKE is a modern, self-hosted image hosting and sharing platform | [Compose](Apps/mazanoke/docker-compose.yml) |
@@ -82,16 +85,20 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Poke** | `poke` | Poke is an open-source, self-hosted alternative to YouTube | [Compose](Apps/poke/docker-compose.yml) |
 | **qBittorrent Web UI** | `qbitwebui` | A modern web interface for managing multiple qBittorrent instances | [Compose](Apps/qbitwebui/docker-compose.yml) |
 | **qui** | `qui` | A fast, modern web interface for qBittorrent | [Compose](Apps/qui/docker-compose.yml) |
+| **Radarr** | `radarr` | Radarr is a movie collection manager for Usenet and BitTorrent users — it monitors RSS... | [Compose](Apps/radarr/docker-compose.yml) |
 | **Reelsaw** | `reelsaw` | Reelsaw is a self-hosted, AI-powered video clipper: paste a YouTube link or upload a vi... | [Compose](Apps/reelsaw/docker-compose.yml) |
 | **Ryot** | `ryot` | A self-hosted platform for tracking various media types including movies, TV shows, vid... | [Compose](Apps/ryot/docker-compose.yml) |
 | **Seanime** | `seanime` | A self-hosted anime streaming platform | [Compose](Apps/seanime/docker-compose.yml) |
 | **Shoutrrr** | `shoutrrr` | Shoutrrr is an open source social media scheduler for drafting, scheduling, and publish... | [Compose](Apps/shoutrrr/docker-compose.yml) |
+| **Sonarr** | `sonarr` | Sonarr is a PVR for Usenet and BitTorrent users — it monitors RSS feeds for new episode... | [Compose](Apps/sonarr/docker-compose.yml) |
 | **StreamFlow** | `streamflow` | StreamFlow is a multi-platform live streaming web application that enables simultaneous... | [Compose](Apps/streamflow/docker-compose.yml) |
+| **Tautulli** | `tautulli` | Tautulli is a monitoring and tracking tool for Plex Media Server — watch statistics, hi... | [Compose](Apps/tautulli/docker-compose.yml) |
+| **Trackhop** | `trackhop` | Trackhop keeps your playlists in sync between music services (Spotify, YouTube Music, T... | [Compose](Apps/trackhop/docker-compose.yml) |
 | **TryPost** | `trypost` | TryPost is an open source social media scheduler with team workspaces, a post composer,... | [Compose](Apps/trypost/docker-compose.yml) |
 | **Yamtrack** | `yamtrack` | Yamtrack is a self-hosted anime and manga tracker with Redis backend support | [Compose](Apps/yamtrack/docker-compose.yml) |
 | **yt-dlp-webui** | `yt-dlp-webui` | yt-dlp-webui is a web interface for yt-dlp, allowing you to download videos and audio f... | [Compose](Apps/yt-dlp-webui/docker-compose.yml) |
 | **Zipline** | `zipline` | A ShareX/file upload server that is easy to use, packed with features, and with an easy... | [Compose](Apps/zipline/docker-compose.yml) |
-### 📁 Productivity (158 apps)
+### 📁 Productivity (165 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -108,6 +115,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Blinko** | `blinko` | Blinko is a modern web application for managing and organizing your digital content and... | [Compose](Apps/blinko/docker-compose.yml) |
 | **BookStack** | `bookstack` | BookStack is a wiki platform for organizing documentation | [Compose](Apps/bookstack/docker-compose.yml) |
 | **Browserless** | `browserless` | Browserless allows remote clients to connect and execute headless work, all inside of d... | [Compose](Apps/browserless/docker-compose.yml) |
+| **Bulwark Webmail** | `bulwarkmail` | Bulwark is a self-hosted webmail client for JMAP mail servers such as Stalwart: mail, c... | [Compose](Apps/bulwarkmail/docker-compose.yml) |
 | **Calnode** | `calnode` | Calnode is a Calendly-style booking app — with first-party video meetings, recording, a... | [Compose](Apps/calnode/docker-compose.yml) |
 | **Carbone** | `carbone` | Carbone is a high-performance, self-hosted document generation engine | [Compose](Apps/carbone/docker-compose.yml) |
 | **ClassicPress** | `classicpress` | ClassicPress is a community-led open source content management system for creators | [Compose](Apps/classicpress/docker-compose.yml) |
@@ -120,7 +128,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Collabora Office** | `collabora-office` | Collabora Online is a powerful, flexible, and secure online office suite designed to br... | [Compose](Apps/collabora-office/docker-compose.yml) |
 | **CommaFeed** | `commafeed` | CommaFeed is an open-source feed reader and news aggregator, designed to be lightweight... | [Compose](Apps/commafeed/docker-compose.yml) |
 | **Confluence** | `confluence` | Confluence is a powerful team collaboration and knowledge-sharing tool | [Compose](Apps/confluence/docker-compose.yml) |
-| **Customermates** | `customermates` | Customermates is an open-source CRM for contacts, organizations, deals, services and ta... | [Compose](Apps/customermates/docker-compose.yml) |
+| **Customermates** | `customermates` | Customermates is a CRM for contacts, organizations, deals, services and tasks, with a R... | [Compose](Apps/customermates/docker-compose.yml) |
 | **Cypht** | `cypht` | Lightweight open source webmail aggregator | [Compose](Apps/cypht/docker-compose.yml) |
 | **Dagu** | `dagu` | Dagu is a self-contained workflow engine with a Web UI | [Compose](Apps/dagu/docker-compose.yml) |
 | **Dexio** | `dexio` | One wiki for all your agents | [Compose](Apps/dexio/docker-compose.yml) |
@@ -163,6 +171,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Joomla** | `joomla` | Joomla is a flexible open-source content management system for building websites, porta... | [Compose](Apps/joomla/docker-compose.yml) |
 | **Joplin Server** | `joplin-server` | Joplin Server is the sync backend for the Joplin note-taking app | [Compose](Apps/joplin-server/docker-compose.yml) |
 | **Kanbn** | `kanbn` | The open-source project management alternative to Trello | [Compose](Apps/kanbn/docker-compose.yml) |
+| **Kanboard** | `kanboard` | Kanboard is a free and open-source Kanban project management software — visual boards,... | [Compose](Apps/kanboard/docker-compose.yml) |
 | **KaraKeep** | `karakeep` | A self-hostable bookmark-everything app (links, notes and images) with AI-based automat... | [Compose](Apps/karakeep/docker-compose.yml) |
 | **Kestra** | `kestra` | Unified Orchestration Platform to Simplify Business-Critical Workflows and Govern them... | [Compose](Apps/kestra/docker-compose.yml) |
 | **Kotonoba** | `kotonoba` | A high-performance, self-hosted, multi-tenant blog CMS built with Next | [Compose](Apps/kotonoba/docker-compose.yml) |
@@ -184,11 +193,13 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Memos** | `memos` | Memos is a self-hosted, open-source note-taking application that allows you to create,... | [Compose](Apps/memos/docker-compose.yml) |
 | **Miniflux** | `miniflux` | Miniflux is a minimalist and opinionated feed reader for self-hosted RSS and Atom subsc... | [Compose](Apps/miniflux/docker-compose.yml) |
 | **Minio** | `minio` | MinIO is an open-source, S3-compatible object storage server | [Compose](Apps/minio/docker-compose.yml) |
+| **Monica** | `monica` | Monica is an open-source personal CRM to organize your interactions with the people you... | [Compose](Apps/monica/docker-compose.yml) |
 | **Montara Mail** | `montara-mail` | AI mail client for teams: connect Gmail, Outlook, Yahoo, iCloud, Lark, Zoho or any IMAP... | [Compose](Apps/montara-mail/docker-compose.yml) |
 | **MyLinks** | `my-links` | Self-hostable bookmark manager to organize, search and share your favorite links | [Compose](Apps/my-links/docker-compose.yml) |
 | **n8n** | `n8n` | n8n is an open-source, low-code platform for automating workflows and integrations | [Compose](Apps/n8n/docker-compose.yml) |
 | **n8n Queue Mode** | `n8n-queue` | n8n running in queue mode for high-throughput production workloads: the main instance h... | [Compose](Apps/n8n-queue/docker-compose.yml) |
 | **n8n with Postgres** | `n8n-with-postgres` | n8n is an open source low-code platform for automating workflows and integrations with... | [Compose](Apps/n8n-with-postgres/docker-compose.yml) |
+| **Node-RED** | `node-red` | Node-RED is a flow-based programming tool for wiring together hardware devices, APIs an... | [Compose](Apps/node-red/docker-compose.yml) |
 | **Notifuse** | `notifuse` | Open-source newsletter and notification platform that empowers teams to create, send, a... | [Compose](Apps/notifuse/docker-compose.yml) |
 | **Novu** | `novu` | Open-source notification infrastructure for multi-channel workflows — in-app Inbox, ema... | [Compose](Apps/novu/docker-compose.yml) |
 | **Nyxiontech PDF Tools** | `nyxiontech-pdf-tools` | 25 PDF and image tools that run entirely in the browser | [Compose](Apps/nyxiontech-pdf-tools/docker-compose.yml) |
@@ -196,6 +207,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Odoo** | `odoo_18` | Odoo is a free and open source business management software that helps you manage your... | [Compose](Apps/odoo_18/docker-compose.yml) |
 | **Odoo** | `odoo_19` | Odoo is a suite of business management apps, including ERP, CRM, and accounting | [Compose](Apps/odoo_19/docker-compose.yml) |
 | **OpenCloud** | `opencloud` | Open source cloud platform for secure file sync, sharing, and content collaboration | [Compose](Apps/opencloud/docker-compose.yml) |
+| **OpenFamily** | `openfamily` | Self-hosted family organizer with shared calendars, chores, shopping lists, recipes, me... | [Compose](Apps/openfamily/docker-compose.yml) |
 | **OpenHabitTracker** | `openhabittracker` | Take notes, plan tasks and track habits - free, ad-free, open source, with all data on... | [Compose](Apps/openhabittracker/docker-compose.yml) |
 | **OpenProject** | `openproject` | OpenProject 17 slim: web, worker, cron, Postgres 17, memcached | [Compose](Apps/openproject/docker-compose.yml) |
 | **OpenTodo** | `opentodo` | Open-source, local-first task manager | [Compose](Apps/opentodo/docker-compose.yml) |
@@ -205,6 +217,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Outline** | `outline` | Outline is a self-hosted knowledge base for team documentation | [Compose](Apps/outline/docker-compose.yml) |
 | **ownCloud Infinite Scale** | `owncloud-infinite-scale` | ownCloud Infinite Scale is a modern file sync and share platform with WebDAV and ownClo... | [Compose](Apps/owncloud-infinite-scale/docker-compose.yml) |
 | **Paperless-ngx** | `paperless-ngx` | Paperless-ngx is a document management system that turns scanned paperwork into a searc... | [Compose](Apps/paperless-ngx/docker-compose.yml) |
+| **Pingvin Share** | `pingvin-share` | Pingvin Share is a self-hosted file sharing platform — a private WeTransfer alternative... | [Compose](Apps/pingvin-share/docker-compose.yml) |
 | **Plane** | `plane` | Plane is a project management tool and an open-source alternative to Jira and Asana | [Compose](Apps/plane/docker-compose.yml) |
 | **Plark** | `plark` | Self-hosted Website Builder | [Compose](Apps/plark/docker-compose.yml) |
 | **Plunk** | `plunk` | Plunk is the open-source, affordable email platform that brings together marketing, tra... | [Compose](Apps/plunk/docker-compose.yml) |
@@ -217,6 +230,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Puppetflow with Postgres** | `puppetflow-postgres` | A self-hosted browser automation platform for building, running, and monitoring JavaScr... | [Compose](Apps/puppetflow-postgres/docker-compose.yml) |
 | **Quire Ink** | `quireink` | A self-hosted blog in one container: a real editor over Markdown with tables, footnotes... | [Compose](Apps/quireink/docker-compose.yml) |
 | **Reactive Resume** | `reactive-resume` | A free and open-source resume builder that simplifies the process of creating, updating... | [Compose](Apps/reactive-resume/docker-compose.yml) |
+| **Relaticle** | `relaticle` | Open-source CRM your AI agents can read and update: companies, people, opportunities, t... | [Compose](Apps/relaticle/docker-compose.yml) |
 | **Reloop** | `reloop` | Open-source email platform for transactional mail, campaigns and inbound, with its own... | [Compose](Apps/reloop/docker-compose.yml) |
 | **Rote** | `rote` | Rote is an open-source multi-platform personal note system featuring an open API, full... | [Compose](Apps/rote/docker-compose.yml) |
 | **Roundcube** | `roundcube` | Free and open source webmail software for the masses, written in PHP | [Compose](Apps/roundcube/docker-compose.yml) |
@@ -253,7 +267,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Wordpress** | `wordpress` | Wordpress is a free and open source content management system (CMS) for publishing and... | [Compose](Apps/wordpress/docker-compose.yml) |
 | **WupNext** | `wupnext` | WupNext is a self-hosted to-do and task queue app: groups, subtasks, deadlines, a built... | [Compose](Apps/wupnext/docker-compose.yml) |
 | **Yuvomi** | `yuvomi` | Privacy-first, self-hosted family planner: tasks, calendar sync, shopping, meals, budge... | [Compose](Apps/yuvomi/docker-compose.yml) |
-### 📁 Home (14 apps)
+### 📁 Home (15 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -261,6 +275,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Eclipse Mosquitto** | `mosquitto` | A lightweight, open-source MQTT broker for IoT and home automation with persistent mess... | [Compose](Apps/mosquitto/docker-compose.yml) |
 | **EMQX** | `emqx` | A scalable and reliable MQTT broker for AI, IoT, IIoT and connected vehicles | [Compose](Apps/emqx/docker-compose.yml) |
 | **Ferret** | `ferret` | Self-hosted home inventory: find anything you own | [Compose](Apps/ferret/docker-compose.yml) |
+| **Grocy** | `grocy` | Grocy is a web-based self-hosted groceries and household management solution — stock tr... | [Compose](Apps/grocy/docker-compose.yml) |
 | **HiveMQ Community Edition** | `hivemq-ce` | Open-source MQTT 3 | [Compose](Apps/hivemq-ce/docker-compose.yml) |
 | **Home Assistant** | `homeassistant` | Home Assistant is a home automation platform that makes sure you can control your smart... | [Compose](Apps/homeassistant/docker-compose.yml) |
 | **Homebox** | `homebox` | Homebox is a self-hosted home inventory and organization app for tracking belongings, l... | [Compose](Apps/homebox/docker-compose.yml) |
@@ -271,7 +286,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Scrypted** | `scrypted` | Scrypted is a home automation platform that integrates with various smart home devices... | [Compose](Apps/scrypted/docker-compose.yml) |
 | **Tandoor Recipes** | `tandoor-recipes` | Tandoor Recipes is a self-hosted recipe manager, meal planner, and shopping list applic... | [Compose](Apps/tandoor-recipes/docker-compose.yml) |
 | **ThingsBoard** | `thingsboard` | ThingsBoard is an open-source IoT platform for device management, data collection, proc... | [Compose](Apps/thingsboard/docker-compose.yml) |
-### 📁 Networking (102 apps)
+### 📁 Networking (105 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -328,8 +343,11 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **mcpspan** | `mcpspan` | mcpspan is open-source analytics for MCP servers: which tools agents call, how often th... | [Compose](Apps/mcpspan/docker-compose.yml) |
 | **MikroTik RouterOS** | `mikrotik` | MikroTik RouterOS CHR running in a container — routing and firewall managed with WinBox... | [Compose](Apps/mikrotik/docker-compose.yml) |
 | **Montara Pass** | `montara-pass` | Self-hosted password manager with an end-to-end encrypted vault — the server stores cip... | [Compose](Apps/montara-pass/docker-compose.yml) |
+| **NetBird** | `netbird` | NetBird is an open-source, WireGuard-based overlay network that connects devices, serve... | [Compose](Apps/netbird/docker-compose.yml) |
+| **NetBird Client** | `netbird-client` | Companion template to NetBird: runs the NetBird agent as a hardened routing peer (for e... | [Compose](Apps/netbird-client/docker-compose.yml) |
 | **Netdata** | `netdata` | Netdata is a real-time monitoring tool for system and application performance | [Compose](Apps/netdata/docker-compose.yml) |
 | **Networking Toolbox** | `networking-toolbox` | A collection of handy networking utilities by Lissy93, packaged as a self-hostable web app | [Compose](Apps/networking-toolbox/docker-compose.yml) |
+| **OctoPrint** | `octoprint` | OctoPrint is the web interface for your 3D printer — control and monitor prints remotel... | [Compose](Apps/octoprint/docker-compose.yml) |
 | **One Time Secret** | `onetimesecret` | Share sensitive information securely with self-destructing links that are only viewable... | [Compose](Apps/onetimesecret/docker-compose.yml) |
 | **OneUptime** | `oneuptime` | OneUptime is an open-source observability platform: uptime monitoring, status pages, in... | [Compose](Apps/oneuptime/docker-compose.yml) |
 | **Open Analytics** | `openanalytics` | Open Analytics is an open-source, AI-native web analytics platform: realtime dashboards... | [Compose](Apps/openanalytics/docker-compose.yml) |
@@ -441,7 +459,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **useSend** | `usesend` | Open source alternative to Resend, Sendgrid, Postmark etc | [Compose](Apps/usesend/docker-compose.yml) |
 | **Wise MCP (unofficial)** | `wise-mcp` | Self-hosted MCP connector that lets Claude and ChatGPT read your Wise balances, card pa... | [Compose](Apps/wise-mcp/docker-compose.yml) |
 | **Zeqqat** | `zeqqat` | Give AI agents access to your Dokploy without handing them your API key | [Compose](Apps/zeqqat/docker-compose.yml) |
-### 📁 Finance (25 apps)
+### 📁 Finance (30 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -449,21 +467,26 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Akaunting** | `akaunting` | Akaunting is a self-hosted, open-source accounting app for small businesses | [Compose](Apps/akaunting/docker-compose.yml) |
 | **BigCapital** | `bigcapital` | BigCapital is a great open source alternative to QuickBooks | [Compose](Apps/bigcapital/docker-compose.yml) |
 | **Billmora** | `billmora` | Billmora (Billing Management, Operation, and Recurring Automation) is a free, open-sour... | [Compose](Apps/billmora/docker-compose.yml) |
+| **Budgero** | `budgero` | Zero-based budgeting app with end-to-end encryption and offline use | [Compose](Apps/budgero/docker-compose.yml) |
 | **Budget Board** | `budget-board` | Self-hosted budgeting app with a web UI and a server backed by PostgreSQL | [Compose](Apps/budget-board/docker-compose.yml) |
 | **Calibre** | `calibre` | Calibre is a comprehensive e-book management tool designed to organize, convert, and re... | [Compose](Apps/calibre/docker-compose.yml) |
+| **Coinio** | `coinio` | Self-hosted subscription and bill tracker: reminders before every charge, totals in you... | [Compose](Apps/coinio/docker-compose.yml) |
 | **DumbBudget** | `dumbbudget` | DumbBudget is a simple, self-hosted budget tracking service with PIN protection and no... | [Compose](Apps/dumbbudget/docker-compose.yml) |
 | **Evershop** | `evershop` | Your All-in-One open source ecommerce solution | [Compose](Apps/evershop/docker-compose.yml) |
 | **EZBookkeeping** | `ezbookkeeping` | EZBookkeeping is a self-hosted bookkeeping application that helps you manage your perso... | [Compose](Apps/ezbookkeeping/docker-compose.yml) |
 | **Firefly III** | `firefly-iii` | Firefly III is a personal finance manager for tracking budgets and expenses | [Compose](Apps/firefly-iii/docker-compose.yml) |
 | **Frappe Lending** | `frappe-lending` | A comprehensive loan management system built on Frappe Framework | [Compose](Apps/frappe-lending/docker-compose.yml) |
+| **Ghostfolio** | `ghostfolio` | Ghostfolio is an open-source wealth management software that helps you track your asset... | [Compose](Apps/ghostfolio/docker-compose.yml) |
 | **I Hate Money** | `ihatemoney` | I Hate Money is a web application for managing shared expenses among groups of people | [Compose](Apps/ihatemoney/docker-compose.yml) |
 | **Inkvoice** | `inkvoice` | Open-source invoicing for freelancers and small teams: invoices, online payments (Strip... | [Compose](Apps/inkvoice/docker-compose.yml) |
+| **Invoice Ninja** | `invoice-ninja` | Invoice Ninja is open-source software for invoicing, payments, expenses and time tracki... | [Compose](Apps/invoice-ninja/docker-compose.yml) |
 | **InvoiceShelf** | `invoiceshelf` | InvoiceShelf is a self-hosted open source invoicing system for freelancers and small bu... | [Compose](Apps/invoiceshelf/docker-compose.yml) |
 | **Kimai** | `kimai` | Kimai is a time-tracking app for freelancers and teams | [Compose](Apps/kimai/docker-compose.yml) |
 | **Louez** | `louez` | Open-source equipment rental platform: a branded booking storefront with live availabil... | [Compose](Apps/louez/docker-compose.yml) |
 | **Maybe** | `maybe` | Maybe is a self-hosted finance tracking application designed to simplify budgeting and... | [Compose](Apps/maybe/docker-compose.yml) |
 | **OpenAlgo** | `openalgo` | OpenAlgo is an open-source algorithmic trading platform with a unified API layer across... | [Compose](Apps/openalgo/docker-compose.yml) |
 | **OpenLMNP** | `openlmnp` | Self-hosted accounting for French furnished rentals (LMNP): depreciation schedules, rea... | [Compose](Apps/openlmnp/docker-compose.yml) |
+| **OpenPromoter** | `openpromoter` | OpenPromoter is open-source affiliate and referral program software for SaaS | [Compose](Apps/openpromoter/docker-compose.yml) |
 | **Paymenter** | `paymenter` | Paymenter is a modern billing and payment management system for hosting providers, with... | [Compose](Apps/paymenter/docker-compose.yml) |
 | **Pretix** | `pretix` | Ticket shop application for conferences, festivals, concerts, tech events, shows, works... | [Compose](Apps/pretix/docker-compose.yml) |
 | **ShopNex** | `shopnex` | Open-source ecommerce platform with an admin, hosted checkout, storefront and Stripe pa... | [Compose](Apps/shopnex/docker-compose.yml) |
@@ -496,7 +519,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Synapse** | `synapse` | Synapse is the reference homeserver implementation for Matrix, an open standard for sec... | [Compose](Apps/synapse/docker-compose.yml) |
 | **Tuwunel** | `tuwunel` | High performance Matrix homeserver written in Rust | [Compose](Apps/tuwunel/docker-compose.yml) |
 | **Zulip** | `zulip` | Open-source threaded team chat designed to keep team communication organized and produc... | [Compose](Apps/zulip/docker-compose.yml) |
-### 📁 Developer (98 apps)
+### 📁 Developer (103 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -519,18 +542,21 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Crawlab (Worker)** | `crawlab-worker` | Crawlab worker node for distributed web crawling | [Compose](Apps/crawlab-worker/docker-compose.yml) |
 | **Cup** | `cup` | Cup is a self-hosted Docker container management UI | [Compose](Apps/cup/docker-compose.yml) |
 | **Databasement** | `databasement` | Self-hosted database backup manager with a web UI | [Compose](Apps/databasement/docker-compose.yml) |
+| **DbGate** | `dbgate` | DbGate is a modern web-based database manager for MySQL, PostgreSQL, SQL Server, MongoD... | [Compose](Apps/dbgate/docker-compose.yml) |
 | **Docker Registry** | `registry` | Distribution implementation for storing and distributing of Docker container images and... | [Compose](Apps/registry/docker-compose.yml) |
 | **Dockge** | `dockge` | Dockge is a web interface for managing Docker Compose stacks | [Compose](Apps/dockge/docker-compose.yml) |
 | **Docling Serve** | `docling-serve` | Running Docling as an API service for document processing and conversion with AI-powere... | [Compose](Apps/docling-serve/docker-compose.yml) |
 | **Dragonfly** | `dragonfly-db` | Dragonfly is a drop-in Redis replacement that is designed for heavy data workloads runn... | [Compose](Apps/dragonfly-db/docker-compose.yml) |
 | **drizzle gateway** | `drizzle-gateway` | Drizzle Gateway is a self-hosted database gateway that allows you to connect to your da... | [Compose](Apps/drizzle-gateway/docker-compose.yml) |
 | **Elasticsearch** | `elastic-search` | Elasticsearch is an open-source search and analytics engine, used for full-text search... | [Compose](Apps/elastic-search/docker-compose.yml) |
+| **ERD Builder Pro** | `erd-builder-pro` | Design database schemas in an ERD canvas or DBML editor, export SQL DDL, and keep flowc... | [Compose](Apps/erd-builder-pro/docker-compose.yml) |
 | **Evolution API** | `evolutionapi` | Evolution API is a robust platform dedicated to empowering small businesses with limite... | [Compose](Apps/evolutionapi/docker-compose.yml) |
 | **Evolution API (Almog Cohen fork)** | `almog-evolution-api` | Unofficial Evolution API 2 | [Compose](Apps/almog-evolution-api/docker-compose.yml) |
 | **Evolution GO** | `evolutiongo` | Evolution Go is a high-performance implementation of the WhatsApp API, written in Go | [Compose](Apps/evolutiongo/docker-compose.yml) |
 | **FalkorDB** | `falkordb` | A high-performance graph database for knowledge graphs, GraphRAG, agent memory, fraud d... | [Compose](Apps/falkordb/docker-compose.yml) |
 | **Feedbacks** | `feedbacks` | Self-hosted website feedback, browser evidence and MCP handoff for coding assistants | [Compose](Apps/feedbacks/docker-compose.yml) |
 | **Firecrawl** | `firecrawl` | Production-ready, authenticated Firecrawl with persistent queues, browser rendering, a... | [Compose](Apps/firecrawl/docker-compose.yml) |
+| **Gami.Fied** | `gami-fied` | Gami | [Compose](Apps/gami-fied/docker-compose.yml) |
 | **Gel** | `gel` | Gel is a next-generation graph-relational database (formerly EdgeDB) with a built-in mi... | [Compose](Apps/gel/docker-compose.yml) |
 | **Gitea (MySQL)** | `gitea-mysql` | Gitea bundled with MySQL 8 | [Compose](Apps/gitea-mysql/docker-compose.yml) |
 | **Gitea (PostgreSQL)** | `gitea-postgres` | Gitea is a lightweight Git service for hosting code repositories | [Compose](Apps/gitea-postgres/docker-compose.yml) |
@@ -558,6 +584,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **MuleSoft ESB Runtime Community Edition** | `mulesoft-esb` | MuleSoft ESB Runtime  is a lightweight, Java-based integration platform that allows you... | [Compose](Apps/mulesoft-esb/docker-compose.yml) |
 | **NocoDB** | `nocodb` | NocoDB is an open-source alternative to Airtable that turns your database into a smart... | [Compose](Apps/nocodb/docker-compose.yml) |
 | **NTFY** | `ntfy` | ntfy lets you send push notifications to your phone or desktop via scripts from any com... | [Compose](Apps/ntfy/docker-compose.yml) |
+| **Obscreen** | `obscreen` | A self-hosted digital signage platform to manage playlists and display images, videos,... | [Compose](Apps/obscreen/docker-compose.yml) |
 | **Obsidian LiveSync** | `obsidian-livesync` | Obsidian LiveSync with CouchDB for real-time note synchronization | [Compose](Apps/obsidian-livesync/docker-compose.yml) |
 | **Open Journal Systems** | `ojs` | Open Journal Systems (OJS) is a journal management and publishing system that has been... | [Compose](Apps/ojs/docker-compose.yml) |
 | **OpenGist** | `opengist` | OpenGist is a self-hosted pastebin alternative | [Compose](Apps/opengist/docker-compose.yml) |
@@ -566,6 +593,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Parseable** | `parseable` | Fast observability and log analytics platform on object storage | [Compose](Apps/parseable/docker-compose.yml) |
 | **PeerDB** | `peerdb` | Data integration platform that synchronizes and federates data across databases with a... | [Compose](Apps/peerdb/docker-compose.yml) |
 | **Peppermint** | `peppermint` | Peppermint is a modern, open-source API development platform that helps you build, test... | [Compose](Apps/peppermint/docker-compose.yml) |
+| **pg_pinecone** | `pg-pinecone` | PostgreSQL 18 with pg_pinecone | [Compose](Apps/pg-pinecone/docker-compose.yml) |
 | **pgAdmin** | `pgadmin` | pgAdmin is an administration and management tool for PostgreSQL databases | [Compose](Apps/pgadmin/docker-compose.yml) |
 | **Phpmyadmin** | `phpmyadmin` | phpMyAdmin is an open-source web interface for managing MySQL and MariaDB databases | [Compose](Apps/phpmyadmin/docker-compose.yml) |
 | **PocketBase** | `pocketbase` | Open Source backend in 1 file | [Compose](Apps/pocketbase/docker-compose.yml) |
@@ -598,7 +626,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **WhatsApp API Multi Device Version** | `go-whatsapp-web-multidevice` | WhatsApp API Multi Device Version the open-source, self-hosted whatsapp api | [Compose](Apps/go-whatsapp-web-multidevice/docker-compose.yml) |
 | **WuzAPI** | `wuzapi` | A RESTful API service for WhatsApp with multiple device support and concurrent sessions | [Compose](Apps/wuzapi/docker-compose.yml) |
 | **Zitadel** | `zitadel` | Open-source identity and access management platform with multi-tenancy, OpenID Connect,... | [Compose](Apps/zitadel/docker-compose.yml) |
-### 📁 Others (99 apps)
+### 📁 Others (100 apps)
 
 | App | Pasta | Descrição | Compose |
 | :--- | :--- | :--- | :--- |
@@ -692,6 +720,7 @@ Este repositório possui uma GitHub Action (`.github/workflows/sync-dokploy.yml`
 | **Syncthing** | `syncthing` | Syncthing keeps your devices and files continuously in sync | [Compose](Apps/syncthing/docker-compose.yml) |
 | **Tolgee** | `tolgee` | Developer & translator friendly web-based localization platform | [Compose](Apps/tolgee/docker-compose.yml) |
 | **Tooljet** | `tooljet` | Tooljet is an open-source low-code platform that allows you to build internal tools qui... | [Compose](Apps/tooljet/docker-compose.yml) |
+| **Traccar** | `traccar` | Traccar is an open-source GPS tracking platform that supports 2,000+ tracker models — l... | [Compose](Apps/traccar/docker-compose.yml) |
 | **Trigger.dev** | `triggerdotdev` | Trigger is a platform for building event-driven applications | [Compose](Apps/triggerdotdev/docker-compose.yml) |
 | **TRMNL LaraPaper** | `trmnl-larapaper` | LaraPaper is a self-hosted application (BYOS) to manage TRMNL e-ink devices | [Compose](Apps/trmnl-larapaper/docker-compose.yml) |
 | **Unleash** | `unleash` | Open-source feature management platform | [Compose](Apps/unleash/docker-compose.yml) |

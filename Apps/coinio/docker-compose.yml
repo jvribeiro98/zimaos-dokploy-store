@@ -1,0 +1,42 @@
+name: coinio
+services:
+  coinio:
+    image: ghcr.io/yakupemreyerli/coinio:0.2.0
+    restart: unless-stopped
+    expose:
+    - '8080'
+    environment:
+      COINIO_PUBLIC_URL: ''
+    volumes:
+    - coinio-data:/data
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  coinio-data: {}
+x-casaos:
+  id: com.dokploy.coinio
+  main: coinio
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/coinio/icon.svg
+  title:
+    en_US: Coinio
+  tagline:
+    en_US: 'Self-hosted subscription and bill tracker: reminders before every charge, totals in you...'
+  description:
+    en_US: 'Self-hosted subscription and bill tracker: reminders before every charge, totals in your own currency, eight languages
+      and a built-in MCP server for AI assistants.'
+  author: Dokploy Community
+  developer: Coinio
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "0.2.0"
+  update_at: "2026-11-24"
+  website: https://getcoinio.me
+  repo: https://github.com/YakupEmreYerli/Coinio
+  docs: https://docs.getcoinio.me/docs/installation/dokploy

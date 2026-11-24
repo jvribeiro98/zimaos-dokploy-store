@@ -15,7 +15,7 @@ services:
     environment:
     - TZ=UTC
     - POSTGRES_USER=mmuser
-    - POSTGRES_PASSWORD=HPjZFqfA2RISLv28yIpozgBoUjNr82yz
+    - POSTGRES_PASSWORD=mcQlK4xRvMQPdCpQSRw1eWUAt2K0Sexo
     - POSTGRES_DB=mattermost
   mattermost:
     depends_on:
@@ -39,7 +39,7 @@ services:
     - DOMAIN
     - TZ=UTC
     - POSTGRES_USER=mmuser
-    - POSTGRES_PASSWORD=HPjZFqfA2RISLv28yIpozgBoUjNr82yz
+    - POSTGRES_PASSWORD=mcQlK4xRvMQPdCpQSRw1eWUAt2K0Sexo
     - POSTGRES_DB=mattermost
     - MM_SQLSETTINGS_DRIVERNAME=postgres
     - MM_SQLSETTINGS_DATASOURCE=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable&connect_timeout=10
@@ -86,7 +86,7 @@ x-casaos:
   - amd64
   - arm64
   version: "10.6.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://mattermost.com/
   repo: https://github.com/mattermost/mattermost
   docs: https://docs.mattermost.com/

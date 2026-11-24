@@ -7,8 +7,8 @@ services:
     - tickets-mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: tickets
-      MYSQL_PASSWORD: DIxQvXM5aev1kVfcVYJlW4nn6gvllgzl
-      MYSQL_ROOT_PASSWORD: aq1rJWsXybmfLvqCrrqit326wxecjNZI
+      MYSQL_PASSWORD: U5yvC4iAXvRE0hANHnIBUTS8CPggBDl6
+      MYSQL_ROOT_PASSWORD: ioD7x7FV2ml7WOd4KgrrXoSKzp4M5Jla
       MYSQL_USER: tickets
     healthcheck:
       test:
@@ -35,10 +35,10 @@ services:
     tty: true
     stdin_open: true
     environment:
-      DB_CONNECTION_URL: mysql://tickets:DIxQvXM5aev1kVfcVYJlW4nn6gvllgzl@tickets-postgres/tickets
+      DB_CONNECTION_URL: mysql://tickets:U5yvC4iAXvRE0hANHnIBUTS8CPggBDl6@tickets-postgres/tickets
       DISCORD_SECRET: ''
       DISCORD_TOKEN: ''
-      ENCRYPTION_KEY: Jp7m5jtLJmzut4Gt6aYntu1BwfPAH4Rc9QuKVyMcT0fcWF4a
+      ENCRYPTION_KEY: sPsDb1oRaqE6wkKBByy2NeGaOVozivExmRlOO0vzt1qdtw1Z
       DB_PROVIDER: mysql
       HTTP_EXTERNAL: https://localhost
       HTTP_HOST: 0.0.0.0
@@ -74,7 +74,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.0.21"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://discordtickets.app
   repo: https://github.com/discord-tickets/bot
   docs: https://discordtickets.app/self-hosting/installation/docker/

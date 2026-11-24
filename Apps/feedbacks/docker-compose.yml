@@ -133,7 +133,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://feedbacks.softinator.ai
   repo: https://github.com/Softinator-TechLabs/feedbacks-oss
   docs: https://feedbacks.softinator.ai/docs/guide/self-host

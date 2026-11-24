@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://fivem.net/
   repo: https://github.com/spritsail/fivem
   docs: https://docs.fivem.net/docs/server-manual/

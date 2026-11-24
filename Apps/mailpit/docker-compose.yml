@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.22.3"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://mailpit.axllent.org/
   repo: https://github.com/axllent/mailpit
   docs: https://mailpit.axllent.org/docs/

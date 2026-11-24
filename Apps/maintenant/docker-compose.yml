@@ -14,7 +14,7 @@ services:
     - printf '%s:{PLAIN}%s\n' "$$AUTH_USER" "$$AUTH_PASSWORD" > /tmp/htpasswd && exec nginx -g 'daemon off;'
     environment:
       AUTH_USER: admin
-      AUTH_PASSWORD: No06zmbDoQdIQh5WPWlXSYEle5Th3Gub
+      AUTH_PASSWORD: vPNi2wo74rsmeOmccXxsrv3oID00nYH3
     volumes:
     - /DATA/AppData/$AppID/default.conf:/etc/nginx/conf.d/default.conf:ro
     expose:
@@ -68,7 +68,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.10.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://maintenant.dev
   repo: https://github.com/kolapsis/maintenant
   docs: https://docs.maintenant.dev/

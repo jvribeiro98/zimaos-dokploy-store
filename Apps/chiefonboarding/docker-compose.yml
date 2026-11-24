@@ -4,8 +4,8 @@ services:
     image: chiefonboarding/chiefonboarding:v2.2.5
     restart: unless-stopped
     environment:
-    - SECRET_KEY=UEfm2tq2TjDNEIt9
-    - DATABASE_URL=postgres://postgres:OHd87p8itTzwLiyz@db:5432/chiefonboarding
+    - SECRET_KEY=Hs4So1tJyr2EWwix
+    - DATABASE_URL=postgres://postgres:We2aoQJyIGlotOjO@db:5432/chiefonboarding
     - ALLOWED_HOSTS=localhost
     expose:
     - 8000
@@ -19,7 +19,7 @@ services:
     image: postgres:13
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=OHd87p8itTzwLiyz
+    - POSTGRES_PASSWORD=We2aoQJyIGlotOjO
     - POSTGRES_DB=chiefonboarding
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2.5"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://chiefonboarding.com/
   repo: https://github.com/chiefonboarding/chiefonboarding
   docs: https://docs.chiefonboarding.com/

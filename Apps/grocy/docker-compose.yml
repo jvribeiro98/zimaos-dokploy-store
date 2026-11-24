@@ -1,0 +1,44 @@
+name: grocy
+services:
+  grocy:
+    image: linuxserver/grocy:4.7.1
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.grocy
+  main: grocy
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grocy/icon.png
+  title:
+    en_US: Grocy
+  tagline:
+    en_US: Grocy is a web-based self-hosted groceries and household management solution — stock tr...
+  description:
+    en_US: Grocy is a web-based self-hosted groceries and household management solution — stock tracking with barcode scanning,
+      meal planning, recipes, chores and battery tracking for your home.
+  author: Dokploy Community
+  developer: Grocy
+  category: Home
+  architectures:
+  - amd64
+  - arm64
+  version: "4.7.1"
+  update_at: "2026-11-24"
+  website: https://grocy.info
+  repo: https://github.com/grocy/grocy
+  docs: https://grocy.info

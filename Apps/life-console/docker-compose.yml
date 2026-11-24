@@ -1,13 +1,13 @@
 name: life-console
 services:
   app:
-    image: ghcr.io/tj-coding/life-console:0.1.0
+    image: ghcr.io/tj-coding/life-console:0.2.0
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://lifeconsole:wD5xFjV6lQU53XbRwRXnLFhGdhV4bTVA@db:5432/lifeconsole
+      DATABASE_URL: postgres://lifeconsole:BHwA7yDkGLzPYVwSkKPn5RhMV5Yb6mHl@db:5432/lifeconsole
       APP_URL: http://localhost
       TRUST_PROXY: '1'
       SIGNUPS: open
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: lifeconsole
-      POSTGRES_PASSWORD: wD5xFjV6lQU53XbRwRXnLFhGdhV4bTVA
+      POSTGRES_PASSWORD: BHwA7yDkGLzPYVwSkKPn5RhMV5Yb6mHl
       POSTGRES_DB: lifeconsole
     healthcheck:
       test:
@@ -61,8 +61,8 @@ x-casaos:
   architectures:
   - amd64
   - arm64
-  version: "0.1.0"
-  update_at: "2026-11-23"
+  version: "0.2.0"
+  update_at: "2026-11-24"
   website: https://life-console.dev
   repo: https://github.com/TJ-coding/life-console
   docs: https://life-console.dev/docs/self-hosting

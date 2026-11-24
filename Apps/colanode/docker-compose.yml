@@ -105,7 +105,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.6"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://colanode.com
   repo: https://github.com/colanode/colanode
   docs: https://colanode.com/docs/

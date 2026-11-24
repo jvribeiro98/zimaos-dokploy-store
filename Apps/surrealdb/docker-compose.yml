@@ -4,7 +4,7 @@ services:
     image: surrealdb/surrealdb:v2.3.10
     environment:
       SURREAL_USER: admin
-      SURREAL_PASS: pShYikqDhCPIfAmLKuWVOawabk1fTQDv
+      SURREAL_PASS: mKRQOGX0q628jyC0letg1QtqR7bpelGd
     volumes:
     - db_data:/usr/app/data
     user: root
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.3.10"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://surrealdb.com
   repo: https://github.com/surrealdb/surrealdb
   docs: https://surrealdb.com/docs/surrealdb

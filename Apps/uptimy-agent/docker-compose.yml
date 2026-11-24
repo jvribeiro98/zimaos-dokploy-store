@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - ADMIN_USERNAME=admin
-    - ADMIN_PASSWORD=qYUurxCIopDtwWabemZKQDF5
+    - ADMIN_PASSWORD=VygM7kivOD2xpgy5Kn2ly2zX
     volumes:
     - uptimy-agent-data:/data
     ports:
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.2"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.upti.my/agent
   repo: https://github.com/uptimy/agent
   docs: https://www.upti.my/docs/agent

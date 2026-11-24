@@ -4,8 +4,8 @@ services:
     image: blinkospace/blinko:1.6.3
     environment:
       NODE_ENV: production
-      NEXTAUTH_SECRET: YaB98f4OPw05Ho6HrbKKJwgDcpLaUSp5
-      DATABASE_URL: postgresql://postgres:cguwHFRgR5rEsHSbVZsI0UD0of66azvt@blinko-postgres:5432/postgres
+      NEXTAUTH_SECRET: tRDuhWYZovAGyJk2HiyXoQuWnfh9BUxT
+      DATABASE_URL: postgresql://postgres:QkZCRrVpwtfT7Mx5NnRBB2iRFh2IamHJ@blinko-postgres:5432/postgres
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_BASE_URL: http://localhost
     depends_on:
@@ -28,7 +28,7 @@ services:
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: cguwHFRgR5rEsHSbVZsI0UD0of66azvt
+      POSTGRES_PASSWORD: QkZCRrVpwtfT7Mx5NnRBB2iRFh2IamHJ
       TZ: Asia/Shanghai
     volumes:
     - blinko-db:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.6.3"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://blinko.space/
   repo: https://github.com/blinkospace/blinko
   docs: https://docs.blinko.space/

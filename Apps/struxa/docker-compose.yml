@@ -4,10 +4,10 @@ services:
     image: mysql:8.4
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=P2m0x3NUD9b4ckQrU1lgVuTyK1unPPEL
+    - MYSQL_ROOT_PASSWORD=jevdZyMD5I9NcJ7G2jqPk8yJWJ1LFHZL
     - MYSQL_DATABASE=struxa
     - MYSQL_USER=struxa
-    - MYSQL_PASSWORD=8rD7Ji1mhJphfBN23vB9IwZBwK239ULr
+    - MYSQL_PASSWORD=qgM0tY1nBJVIPyUmJs7lNJwEl7Yyi4ZP
     volumes:
     - struxa-mysql:/var/lib/mysql
     healthcheck:
@@ -30,7 +30,7 @@ services:
     command: server /data --console-address ":9001"
     environment:
     - MINIO_ROOT_USER=admin
-    - MINIO_ROOT_PASSWORD=kLZ0hiba5JPdHKRfOXwno95tHvtXTH9o
+    - MINIO_ROOT_PASSWORD=Cs8QqZxdMuMPrSQ0K0mB1WzqLIswGXsS
     volumes:
     - struxa-minio:/data
     healthcheck:
@@ -46,7 +46,7 @@ services:
     image: ghcr.io/struxadotcloud/migrate:${IMAGE_TAG}
     restart: on-failure:5
     environment:
-    - DATABASE_URL=mysql://struxa:8rD7Ji1mhJphfBN23vB9IwZBwK239ULr@mysql:3306/struxa
+    - DATABASE_URL=mysql://struxa:qgM0tY1nBJVIPyUmJs7lNJwEl7Yyi4ZP@mysql:3306/struxa
     depends_on:
       mysql:
         condition: service_healthy
@@ -61,15 +61,15 @@ services:
       ,format:\"pem\"}});\n  console.log(\"export JWT_PRIVATE_KEY=\"+JSON.stringify(privateKey.replace(/\\n/g,\"\\\\n\")));\n\
       \  console.log(\"export JWT_PUBLIC_KEY=\"+JSON.stringify(publicKey.replace(/\\n/g,\"\\\\n\")));\n')\"\nexec node apps/web/server.js\n"
     environment:
-    - DATABASE_URL=mysql://struxa:8rD7Ji1mhJphfBN23vB9IwZBwK239ULr@mysql:3306/struxa
-    - BETTER_AUTH_SECRET=u/ENTozGBLoa+QcjFDlGho1vKGhxqEIquAI4cihsZnY=
+    - DATABASE_URL=mysql://struxa:qgM0tY1nBJVIPyUmJs7lNJwEl7Yyi4ZP@mysql:3306/struxa
+    - BETTER_AUTH_SECRET=JHZfClfUsWGSi6UfJlnRajmE9XlW4LnW0cnHsN3p6IM=
     - BETTER_AUTH_URL=http://localhost
     - CORS_ORIGIN=http://localhost
     - APP_URL=http://localhost
-    - DATABASE_ENCRYPTION_KEY=6f41f1881080188590970c46203eb23924cba747e07c4a35928fbb793c4c25dbc80af2b588b9492eac3499ae8190014f00de4d309251670261fd189c629e5bb5
+    - DATABASE_ENCRYPTION_KEY=3827734d65281772051be9722d048076b3874f7f0cb780b14b0e19dbfa6c03c046697a74b4e384c1d77ac571362facf18645be6d40e1de955d9d6db961cfd48d
     - MINIO_ENDPOINT=http://minio:9000
     - MINIO_ACCESS_KEY=admin
-    - MINIO_SECRET_KEY=kLZ0hiba5JPdHKRfOXwno95tHvtXTH9o
+    - MINIO_SECRET_KEY=Cs8QqZxdMuMPrSQ0K0mB1WzqLIswGXsS
     - MINIO_BUCKET=struxa
     - NODE_ENV=production
     depends_on:
@@ -85,8 +85,8 @@ services:
     image: ghcr.io/struxadotcloud/watchkeeper:${IMAGE_TAG}
     restart: unless-stopped
     environment:
-    - DATABASE_URL=mysql://struxa:8rD7Ji1mhJphfBN23vB9IwZBwK239ULr@mysql:3306/struxa
-    - DATABASE_ENCRYPTION_KEY=6f41f1881080188590970c46203eb23924cba747e07c4a35928fbb793c4c25dbc80af2b588b9492eac3499ae8190014f00de4d309251670261fd189c629e5bb5
+    - DATABASE_URL=mysql://struxa:qgM0tY1nBJVIPyUmJs7lNJwEl7Yyi4ZP@mysql:3306/struxa
+    - DATABASE_ENCRYPTION_KEY=3827734d65281772051be9722d048076b3874f7f0cb780b14b0e19dbfa6c03c046697a74b4e384c1d77ac571362facf18645be6d40e1de955d9d6db961cfd48d
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -113,7 +113,7 @@ x-casaos:
   - amd64
   - arm64
   version: "${IMAGE_TAG}"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://struxa.cloud
   repo: https://github.com/struxadotcloud/struxa
   docs: https://docs.struxa.cloud

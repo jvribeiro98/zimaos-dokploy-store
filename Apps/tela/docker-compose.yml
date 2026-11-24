@@ -22,9 +22,9 @@ services:
     restart: unless-stopped
     environment:
     - TELA_PUBLIC_BASE_URL=https://localhost
-    - TELA_DATABASE_URL=postgres://tela:ozzNdsHchthQmdNFOXoeFyjsr0AJn3ZX@postgres:5432/tela?sslmode=disable
-    - TELA_SHARE_SECRET=o3Q6XwXHpqWxMJGmSN18FYvm9xVJjuNDKLG9B2Babnfz97Myty3NhXnUbverd868
-    - TELA_API_KEY_SECRET=wkJfizA02kFCrGQ3TjtI7Ft887R9SNMWnQl4tbdkcvl0qbmHRODcArmRCN9WTcKR
+    - TELA_DATABASE_URL=postgres://tela:Rj6RKrn0e4r5128KIQw9Z9PuePBwFAmi@postgres:5432/tela?sslmode=disable
+    - TELA_SHARE_SECRET=TYIUtUhx1jtWxKd0IWx1MyEIV4AP2SgrlN1P81iTP5chgmcF0oXFY06A3Lsp4edj
+    - TELA_API_KEY_SECRET=Lj8Cs7KUhJ72hRvl3FMjYG9tYustaZ3YDzk97rx74V1ey6U4qFOXLoqU1ciyh8lm
     - TELA_DECK_URL=http://deck:3344
     - TELA_GOTENBERG_URL=http://gotenberg:3000
     - TELA_PDF_RENDER_BASE_URL=http://proxy
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=tela
-    - POSTGRES_PASSWORD=ozzNdsHchthQmdNFOXoeFyjsr0AJn3ZX
+    - POSTGRES_PASSWORD=Rj6RKrn0e4r5128KIQw9Z9PuePBwFAmi
     - POSTGRES_DB=tela
     healthcheck:
       test:
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.7.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://telawiki.com
   repo: https://github.com/zcag/tela
   docs: https://telawiki.com/public/spaces/16

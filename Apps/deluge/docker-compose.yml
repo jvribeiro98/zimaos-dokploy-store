@@ -1,0 +1,45 @@
+name: deluge
+services:
+  deluge:
+    image: linuxserver/deluge:2.2.0
+    restart: unless-stopped
+    expose:
+    - 8112
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    - /DATA/AppData/deluge/data:/downloads
+    ports:
+    - target: 8112
+      published: "8112"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.deluge
+  main: deluge
+  index: /
+  port_map: "8112"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/deluge/icon.png
+  title:
+    en_US: Deluge
+  tagline:
+    en_US: Deluge is a lightweight, full-featured BitTorrent client with a web UI — daemon-based,...
+  description:
+    en_US: Deluge is a lightweight, full-featured BitTorrent client with a web UI — daemon-based, plugin-driven, and a long-time
+      favourite for seedboxes and download servers.
+  author: Dokploy Community
+  developer: Deluge
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2.0"
+  update_at: "2026-11-24"
+  website: https://deluge-torrent.org
+  repo: https://github.com/deluge-torrent/deluge
+  docs: https://deluge-torrent.org

@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://dumbware.io/DumbBudget
   repo: https://github.com/DumbWareio/DumbBudget
   docs: https://github.com/DumbWareio/DumbBudget/blob/main/README.md

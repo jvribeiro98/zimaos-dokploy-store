@@ -1,0 +1,44 @@
+name: kanboard
+services:
+  kanboard:
+    image: kanboard/kanboard:v1.2.58
+    restart: unless-stopped
+    expose:
+    - 80
+    environment:
+    - TZ=UTC
+    volumes:
+    - data:/var/www/app/data
+    - plugins:/var/www/app/plugins
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+volumes:
+  data: {}
+  plugins: {}
+x-casaos:
+  id: com.dokploy.kanboard
+  main: kanboard
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kanboard/icon.png
+  title:
+    en_US: Kanboard
+  tagline:
+    en_US: Kanboard is a free and open-source Kanban project management software — visual boards,...
+  description:
+    en_US: Kanboard is a free and open-source Kanban project management software — visual boards, swimlanes, task automation
+      and no bloat, focused on simplicity and minimalism.
+  author: Dokploy Community
+  developer: Kanboard
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.2.58"
+  update_at: "2026-11-24"
+  website: https://kanboard.org
+  repo: https://github.com/kanboard/kanboard
+  docs: https://docs.kanboard.org

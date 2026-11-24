@@ -19,7 +19,7 @@ services:
       WEBLATE_SITE_TITLE: Weblate
       WEBLATE_ADMIN_NAME: Weblate Admin
       WEBLATE_ADMIN_EMAIL: admin@localhost
-      WEBLATE_ADMIN_PASSWORD: wZ59uvxcWVxUwXPJqVPlUfEeyg1YXLm5
+      WEBLATE_ADMIN_PASSWORD: czXRXZGEhOT6ZJsBMa8gmGGyPlXnVEO9
       WEBLATE_SERVER_EMAIL: weblate@localhost
       WEBLATE_DEFAULT_FROM_EMAIL: weblate@localhost
       WEBLATE_ENABLE_HTTPS: '0'
@@ -28,7 +28,7 @@ services:
       POSTGRES_HOST: database
       POSTGRES_PORT: '5432'
       POSTGRES_USER: weblate
-      POSTGRES_PASSWORD: wpddEvMz7ZvgH6t7wza1URFk4aYs4czr
+      POSTGRES_PASSWORD: 25GM6pVHlijEuvsVDSVl1iMWwg8dq37o
       POSTGRES_DB: weblate
       REDIS_HOST: cache
       REDIS_PORT: '6379'
@@ -43,7 +43,7 @@ services:
     - weblate-postgres-data:/var/lib/postgresql
     environment:
       POSTGRES_USER: weblate
-      POSTGRES_PASSWORD: wpddEvMz7ZvgH6t7wza1URFk4aYs4czr
+      POSTGRES_PASSWORD: 25GM6pVHlijEuvsVDSVl1iMWwg8dq37o
       POSTGRES_DB: weblate
     healthcheck:
       test:
@@ -98,7 +98,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.7.1.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://weblate.org/
   repo: https://github.com/WeblateOrg/weblate
   docs: https://docs.weblate.org/en/latest/admin/install/docker.html

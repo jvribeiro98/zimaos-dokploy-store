@@ -3,11 +3,11 @@ services:
   dash:
     image: ghcr.io/uptimekit/dash:5.2.1
     environment:
-    - DATABASE_URL=postgresql://postgres:SAZTVts7WDMTGVWmuMPKlF7PQNMXl839@db:5432/uptimekit
+    - DATABASE_URL=postgresql://postgres:5b2luNxAi3DTlrvE7GLcEDReNze1OQ2X@db:5432/uptimekit
     - TIMESERIES_BACKEND=clickhouse
     - CLICKHOUSE_URL=http://clickhouse:8123
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=4JA19koY0aunh4111KsPMIUWCBSeroQZ
+    - CLICKHOUSE_PASSWORD=19GR4EH3jqXBI6T4elqJkXNFuOHi9uYA
     - REDIS_URL=redis://redis:6379
     depends_on:
       db:
@@ -31,7 +31,7 @@ services:
     image: postgres:18-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: SAZTVts7WDMTGVWmuMPKlF7PQNMXl839
+      POSTGRES_PASSWORD: 5b2luNxAi3DTlrvE7GLcEDReNze1OQ2X
       POSTGRES_DB: uptimekit
     volumes:
     - db_data:/var/lib/postgresql
@@ -56,7 +56,7 @@ services:
     environment:
       CLICKHOUSE_DB: uptimekit
       CLICKHOUSE_USER: default
-      CLICKHOUSE_PASSWORD: 4JA19koY0aunh4111KsPMIUWCBSeroQZ
+      CLICKHOUSE_PASSWORD: 19GR4EH3jqXBI6T4elqJkXNFuOHi9uYA
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: '1'
     user: root
     ulimits:
@@ -88,7 +88,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.2.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://uptimekit.dev/
   repo: https://github.com/uptimekit/uptimekit
   docs: https://docs.uptimekit.dev/

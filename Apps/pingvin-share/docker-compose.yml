@@ -1,0 +1,42 @@
+name: pingvin-share
+services:
+  pingvin-share:
+    image: stonith404/pingvin-share:v1.13.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+    - TZ=UTC
+    volumes:
+    - data:/opt/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  data: {}
+x-casaos:
+  id: com.dokploy.pingvin-share
+  main: pingvin-share
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pingvin-share/icon.png
+  title:
+    en_US: Pingvin Share
+  tagline:
+    en_US: Pingvin Share is a self-hosted file sharing platform — a private WeTransfer alternative...
+  description:
+    en_US: 'Pingvin Share is a self-hosted file sharing platform — a private WeTransfer alternative: upload files and share
+      them with a link, optional password, expiry date and download limits.'
+  author: Dokploy Community
+  developer: Pingvin Share
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.13.0"
+  update_at: "2026-11-24"
+  website: https://stonith404.github.io/pingvin-share/
+  repo: https://github.com/stonith404/pingvin-share
+  docs: https://stonith404.github.io/pingvin-share/

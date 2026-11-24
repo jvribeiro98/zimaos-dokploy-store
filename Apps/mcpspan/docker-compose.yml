@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: mcpspan
-      POSTGRES_PASSWORD: K4ScJK4k74psnoXKk7qWMjK5nKmvstfr
+      POSTGRES_PASSWORD: 5vBX6rt38WXDjD0qBvr033wmMaP2GxVm
       POSTGRES_DB: mcpspan
     volumes:
     - db-data:/var/lib/postgresql/data
@@ -17,26 +17,26 @@ services:
       timeout: 5s
       retries: 10
   migrate:
-    image: ghcr.io/mcpspan/core-api:0.15.0
+    image: ghcr.io/mcpspan/core-api:0.16.0
     restart: 'no'
     depends_on:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://mcpspan:K4ScJK4k74psnoXKk7qWMjK5nKmvstfr@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:5vBX6rt38WXDjD0qBvr033wmMaP2GxVm@db:5432/mcpspan
     command:
     - ./node_modules/.bin/node-pg-migrate
     - up
   api:
-    image: ghcr.io/mcpspan/core-api:0.15.0
+    image: ghcr.io/mcpspan/core-api:0.16.0
     restart: unless-stopped
     depends_on:
       migrate:
         condition: service_completed_successfully
     environment:
-      DATABASE_URL: postgres://mcpspan:K4ScJK4k74psnoXKk7qWMjK5nKmvstfr@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:5vBX6rt38WXDjD0qBvr033wmMaP2GxVm@db:5432/mcpspan
       PORT: '6271'
-      API_KEY_SECRET: NACRpqL1LTKz9vkkX1fzUf29nWqGSLdaQVJTl0RsZOuxc9jgdbVxXWI7ntQs6eJg
+      API_KEY_SECRET: Jqv9Mz8C/0hpFL8b5M5z1Q2dNMtzF4JwLrxKbD2e8g0aUO+KVdkeOU/ivYY1SX+Q
       MCPSPAN_DASHBOARD_URL: http://localhost
     expose:
     - 6271
@@ -51,7 +51,7 @@ services:
       retries: 5
       start_period: 10s
   dashboard:
-    image: ghcr.io/mcpspan/core-dashboard:0.15.0
+    image: ghcr.io/mcpspan/core-dashboard:0.16.0
     restart: unless-stopped
     depends_on:
       api:
@@ -88,8 +88,8 @@ x-casaos:
   architectures:
   - amd64
   - arm64
-  version: "0.15.0"
-  update_at: "2026-11-23"
+  version: "0.16.0"
+  update_at: "2026-11-24"
   website: https://mcpspan.com
   repo: https://github.com/mcpspan/mcpspan
   docs: https://mcpspan.com/docs/self-hosting/

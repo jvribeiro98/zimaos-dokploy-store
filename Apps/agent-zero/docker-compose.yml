@@ -7,7 +7,7 @@ services:
     - '80'
     environment:
     - AUTH_LOGIN=admin
-    - AUTH_PASSWORD=Uvt5KRRssZn8Sb6nr6TvQPIA39SyCsSU
+    - AUTH_PASSWORD=cesKeA1Ur0XutVtUTtsPPFS9H8KTqSrH
     volumes:
     - agent-zero-data:/a0/usr
     ports:
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.9"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.agent-zero.ai
   repo: https://github.com/agent0ai/agent-zero
   docs: https://www.agent-zero.ai/p/docs/

@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.goatcounter.com/
   repo: https://github.com/arp242/goatcounter
   docs: https://www.goatcounter.com/help/

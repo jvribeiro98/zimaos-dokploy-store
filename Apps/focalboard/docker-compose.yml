@@ -18,7 +18,7 @@ services:
     image: postgres:17
     environment:
     - POSTGRES_USER=focalboard
-    - POSTGRES_PASSWORD=rvZLGxIZcW2IS2LYF5ibHWc02OpQrqrO
+    - POSTGRES_PASSWORD=eSQaUVQXRuUhQCZyiyzMNc8LoIGvvZIU
     - POSTGRES_DB=focalboard
     volumes:
     - /DATA/AppData/$AppID/postgres_data:/var/lib/postgresql/data
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://focalboard.com
   repo: https://github.com/sysblok/focalboard
   docs: https://www.focalboard.com/docs/

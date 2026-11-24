@@ -1,13 +1,13 @@
 name: imgproxy
 services:
   imgproxy:
-    image: darthsim/imgproxy:v3.30.1
+    image: darthsim/imgproxy:v3.31.4
     restart: unless-stopped
     expose:
     - 8080
     environment:
-      IMGPROXY_KEY: 707eacab0a559d670afe8d620fcf15907a06dc4319cf707768097c294ba9a36c460a6a28b7562787748e33deee65d2253a4d4e2f2358f88f4c17c61502b711d005b4b93ec81113325121660e2876aa07a1d8e1a9af6e20a452b857bf663dd54037b06f394db3e2760127f6186144afeeca852daa741cf4b64003543a94ef7f4a
-      IMGPROXY_SALT: 822812c94a558b1c23baecb267001318216e244d0e6906cf9c9415406c54c338df77879757dc02662b733f02fd22559f4c7c08c3c00ff76f26094ce095effaca6c5b80d3120b79e3f6328b50f9dd3586434161bcf3da630c532942d1be814052cbac309f9efbfdfb4bd776750104bf24ecccf7628f1240c81993e98baed32bcc
+      IMGPROXY_KEY: 75d8c4a4fe341d652b20922d79cf2e637a3494dd5af7ef92e0986ea8c77a93f6a1ecb54709825adeff0b14ff6fd240b8b8ce645e94b50dfaf3e9571557f9e32f4695657093f9a6119d5dcbcb335b573c629a4337cf9000c4d4110fc217058ca0412301c1c6a41eaf20ab41cfb28a9c7df7a9179de6e3f63b79919a5edffdba74
+      IMGPROXY_SALT: 8e95d26add65623ed6d2010222694ae05dec3d39df1f843e3280b47956c49811df048ee49948a16805d25be495d3d865278fb3dde85f0ddcb2f9cd593c482e54207307585e13f2bc73f4d9aa98157b2a6f9ca0766e7516dc1f9ac9e132fe1b6db28d9b2ba44ea17e4536a1ee8d8c4be0447581259ba25e4f917694e0e5c7a49d
       IMGPROXY_ENABLE_WEBP_DETECTION: 'true'
       IMGPROXY_ENFORCE_WEBP: 'true'
       IMGPROXY_TTL: '30600'
@@ -28,7 +28,7 @@ services:
       IMGPROXY_MAX_SRC_RESOLUTION: '50'
       IMGPROXY_LOG_LEVEL: error
   nginx:
-    image: nginx:1.28.2-alpine
+    image: nginx:1.30.7-alpine
     restart: unless-stopped
     expose:
     - 80
@@ -80,8 +80,8 @@ x-casaos:
   architectures:
   - amd64
   - arm64
-  version: "3.30.1"
-  update_at: "2026-11-23"
+  version: "3.31.4"
+  update_at: "2026-11-24"
   website: https://imgproxy.net/
   repo: https://github.com/imgproxy/imgproxy
   docs: https://docs.imgproxy.net/

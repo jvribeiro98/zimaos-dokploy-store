@@ -11,7 +11,7 @@ services:
       DATABASE_MYSQL_HOST: mysql
       DATABASE_MYSQL_NAME: movary
       DATABASE_MYSQL_USER: movary_user
-      DATABASE_MYSQL_PASSWORD: 0vf7mtwJpfWNvWYxKu75kNha3a5Ehjbg
+      DATABASE_MYSQL_PASSWORD: YYugeY8TTjyakdvom4tro6d3m97r3aNR
       APP_URL: http://localhost
       APP_ENV: production
     volumes:
@@ -28,8 +28,8 @@ services:
     environment:
       MYSQL_DATABASE: movary
       MYSQL_USER: movary_user
-      MYSQL_PASSWORD: 0vf7mtwJpfWNvWYxKu75kNha3a5Ehjbg
-      MYSQL_ROOT_PASSWORD: Da8q4ose6UiMjP084VfdGyje9jKiH3LU
+      MYSQL_PASSWORD: YYugeY8TTjyakdvom4tro6d3m97r3aNR
+      MYSQL_ROOT_PASSWORD: 2Nw0MBMLGA3M7JstxrFDrzwCxMFkk9lg
       MYSQL_INNODB_BUFFER_POOL_SIZE: 128M
       MYSQL_INNODB_LOG_FILE_SIZE: 64M
     volumes:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-latest}"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://movary.org/
   repo: https://github.com/leepeuker/movary
   docs: https://docs.movary.org/

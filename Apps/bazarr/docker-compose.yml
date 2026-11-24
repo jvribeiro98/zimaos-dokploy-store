@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.5.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.bazarr.media/
   repo: https://github.com/morpheus65535/bazarr
   docs: https://wiki.bazarr.media/

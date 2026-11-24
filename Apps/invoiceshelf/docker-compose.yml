@@ -5,7 +5,7 @@ services:
     volumes:
     - invoiceshelf-postgres-data:/var/lib/postgresql/data
     environment:
-    - POSTGRES_PASSWORD=DsB0xHGQSTMBhydyz8ZsAUA4ZLw0o2ts
+    - POSTGRES_PASSWORD=BgCbt8abjWnxAXv7TNjs2sJtZmaK7gb1
     - POSTGRES_USER=invoiceshelf
     - POSTGRES_DB=invoiceshelf
     healthcheck:
@@ -32,7 +32,7 @@ services:
     - DB_PORT=5432
     - DB_DATABASE=invoiceshelf
     - DB_USERNAME=invoiceshelf
-    - DB_PASSWORD=DsB0xHGQSTMBhydyz8ZsAUA4ZLw0o2ts
+    - DB_PASSWORD=BgCbt8abjWnxAXv7TNjs2sJtZmaK7gb1
     - CACHE_STORE=file
     - SESSION_DRIVER=file
     - SESSION_LIFETIME=120
@@ -72,7 +72,7 @@ x-casaos:
   - amd64
   - arm64
   version: "nightly"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://invoiceshelf.com
   repo: https://github.com/InvoiceShelf/invoiceshelf
   docs: https://github.com/InvoiceShelf/invoiceshelf#readme

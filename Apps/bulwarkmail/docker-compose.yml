@@ -1,0 +1,43 @@
+name: bulwarkmail
+services:
+  bulwarkmail:
+    image: ghcr.io/bulwarkmail/webmail:1.21.2
+    restart: unless-stopped
+    environment:
+    - HOSTNAME=0.0.0.0
+    - PORT=3000
+    expose:
+    - '3000'
+    volumes:
+    - bulwarkmail_data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  bulwarkmail_data: null
+x-casaos:
+  id: com.dokploy.bulwarkmail
+  main: bulwarkmail
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bulwarkmail/icon.png
+  title:
+    en_US: Bulwark Webmail
+  tagline:
+    en_US: 'Bulwark is a self-hosted webmail client for JMAP mail servers such as Stalwart: mail, c...'
+  description:
+    en_US: 'Bulwark is a self-hosted webmail client for JMAP mail servers such as Stalwart: mail, calendar, contacts, and
+      files behind one login, plus an admin dashboard. You bring your own mail server; Bulwark is the interface.'
+  author: Dokploy Community
+  developer: Bulwark Webmail
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "1.21.2"
+  update_at: "2026-11-24"
+  website: https://bulwarkmail.org
+  repo: https://github.com/bulwarkmail/webmail
+  docs: https://bulwarkmail.org/docs

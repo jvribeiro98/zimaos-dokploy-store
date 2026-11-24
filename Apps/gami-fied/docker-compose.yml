@@ -1,0 +1,149 @@
+name: gami-fied
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gami
+      POSTGRES_USER: gami
+      POSTGRES_PASSWORD: XcQOiV8OpgulPvKjs1MtB5rHhsZXJMnE
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U gami -d gami
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command:
+    - sh
+    - -c
+    - exec redis-server --appendonly yes --maxmemory-policy noeviction --requirepass "$$REDIS_PASSWORD"
+    environment:
+      REDIS_PASSWORD: Pcvm5TYlSNL8lUM1B534Z7kgMe2tPYcd
+    volumes:
+    - redis_data:/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - redis-cli -a "$$REDIS_PASSWORD" ping | grep PONG
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  migration:
+    image: ghcr.io/gami-fied/gami-api:${GAMI_VERSION}
+    command:
+    - node
+    - packages/database/dist/migrate.js
+    restart: 'no'
+    environment:
+      DATABASE_URL: postgres://gami:XcQOiV8OpgulPvKjs1MtB5rHhsZXJMnE@postgres:5432/gami
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+  api:
+    image: ghcr.io/gami-fied/gami-api:${GAMI_VERSION}
+    restart: unless-stopped
+    expose:
+    - 3001
+    environment:
+      DATABASE_URL: postgres://gami:XcQOiV8OpgulPvKjs1MtB5rHhsZXJMnE@postgres:5432/gami
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: Pcvm5TYlSNL8lUM1B534Z7kgMe2tPYcd
+      NODE_ENV: production
+      PORT: '3001'
+      HOST: 0.0.0.0
+      BETTER_AUTH_SECRET: bZkYsGOwmkvq4VfSAKeWzremzQNwtK9G0DL1a76crN3WX5DBAVWOyEshfjAmoll5
+      BETTER_AUTH_URL: https://localhost
+      NEXT_PUBLIC_APP_URL: https://localhost
+      ENCRYPTION_MASTER_KEY: SOZsgnXErAE1D6OEAWWugtLTp3AhOrRwZXHC+OnRdRAXfidx+8oAoEtq6gkF+wVv
+      PLATFORM_BOOTSTRAP_SECRET: 6QAoGFWEZjZCMTyWDDh7wLgB2XcMdVCU8+Or49utoA4zMNEJ5L7eAaM8XWYtB1Lm
+      BACKUP_STORAGE_PATH: /app/storage/backups
+      TRUST_PROXY: 'true'
+    volumes:
+    - backups_data:/app/storage/backups
+    depends_on:
+      redis:
+        condition: service_healthy
+      migration:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - 'node -e "fetch(''http://localhost:3001/ready'').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"'
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+  worker:
+    image: ghcr.io/gami-fied/gami-worker:${GAMI_VERSION}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://gami:XcQOiV8OpgulPvKjs1MtB5rHhsZXJMnE@postgres:5432/gami
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: Pcvm5TYlSNL8lUM1B534Z7kgMe2tPYcd
+      NODE_ENV: production
+      BETTER_AUTH_SECRET: bZkYsGOwmkvq4VfSAKeWzremzQNwtK9G0DL1a76crN3WX5DBAVWOyEshfjAmoll5
+      BETTER_AUTH_URL: https://localhost
+      NEXT_PUBLIC_APP_URL: https://localhost
+      ENCRYPTION_MASTER_KEY: SOZsgnXErAE1D6OEAWWugtLTp3AhOrRwZXHC+OnRdRAXfidx+8oAoEtq6gkF+wVv
+      TRUST_PROXY: 'true'
+      OUTBOX_POLL_INTERVAL_MS: '1000'
+    depends_on:
+      redis:
+        condition: service_healthy
+      migration:
+        condition: service_completed_successfully
+  dashboard:
+    image: ghcr.io/gami-fied/gami-dashboard:${GAMI_VERSION}
+    restart: unless-stopped
+    expose:
+    - 3000
+    environment:
+      PORT: '3000'
+      API_URL: http://api:3001
+      NODE_ENV: production
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  postgres_data: null
+  redis_data: null
+  backups_data: null
+x-casaos:
+  id: com.dokploy.gami-fied
+  main: dashboard
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gami-fied/icon.svg
+  title:
+    en_US: Gami.Fied
+  tagline:
+    en_US: Gami
+  description:
+    en_US: Gami.Fied is a gamification engine for any app. Send events from your app and it handles XP, levels, badges, streaks,
+      challenges, leaderboards and a reward store, with a dashboard to manage it all. Deploy it with Dokploy as a Docker Compose
+      service in a few clicks.
+  author: Dokploy Community
+  developer: Gami.Fied
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "1.3.0"
+  update_at: "2026-11-24"
+  website: https://gami.fied.cc
+  repo: https://github.com/gami-fied/gami.fied
+  docs: https://gami.fied.cc/docs/

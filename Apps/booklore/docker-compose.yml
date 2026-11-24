@@ -5,7 +5,7 @@ services:
     environment:
     - DATABASE_URL=jdbc:mariadb://mariadb:3306/booklore
     - DATABASE_USERNAME=booklore
-    - DATABASE_PASSWORD=RTYl5oe889LYAVn1zRGCtpnruGVC3Vvk
+    - DATABASE_PASSWORD=3UlAVTEdQ2luTxCh0NjsxyfYAaLyjTEF
     depends_on:
       mariadb:
         condition: service_healthy
@@ -25,10 +25,10 @@ services:
     - PUID=1000
     - PGID=1000
     - TZ=Etc/UTC
-    - MYSQL_ROOT_PASSWORD=D6qrsedxbnroHzTby49wblsY8YdtIGKw
+    - MYSQL_ROOT_PASSWORD=pKh2xfwrF6OAFePYqvx7MPrrlE05veC1
     - MYSQL_DATABASE=booklore
     - MYSQL_USER=booklore
-    - MYSQL_PASSWORD=RTYl5oe889LYAVn1zRGCtpnruGVC3Vvk
+    - MYSQL_PASSWORD=3UlAVTEdQ2luTxCh0NjsxyfYAaLyjTEF
     volumes:
     - mariadb-config:/config
     restart: unless-stopped
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "${BOOKLORE_IMAGE_TAG}"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/booklore-app/BookLore
   repo: https://github.com/booklore-app/BookLore
   docs: https://github.com/booklore-app/BookLore/tree/develop/docs

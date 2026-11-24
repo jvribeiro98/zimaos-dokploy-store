@@ -11,7 +11,7 @@
   },
   "maintainer": "jvribeiro98",
   "url": "https://github.com/jvribeiro98/zimaos-dokploy-store",
-  "total_apps": 629,
+  "total_apps": 658,
   "apps": [
     {
       "id": "com.dokploy.2fauth",
@@ -794,6 +794,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/browserless/icon.svg"
     },
     {
+      "id": "com.dokploy.budgero",
+      "folder": "budgero",
+      "name": "Budgero",
+      "tagline": "Zero-based budgeting app with end-to-end encryption and offline use",
+      "description": "Zero-based budgeting app with end-to-end encryption and offline use. The admin password is printed once in the logs on first start.",
+      "category": "Finance",
+      "main": "budgero",
+      "port": 3001,
+      "version": "1.21.5",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/budgero/icon.png"
+    },
+    {
       "id": "com.dokploy.budget-board",
       "folder": "budget-board",
       "name": "Budget Board",
@@ -828,6 +840,18 @@
       "port": 8000,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bugsink/icon.png"
+    },
+    {
+      "id": "com.dokploy.bulwarkmail",
+      "folder": "bulwarkmail",
+      "name": "Bulwark Webmail",
+      "tagline": "Bulwark is a self-hosted webmail client for JMAP mail servers such as Stalwart: mail, c...",
+      "description": "Bulwark is a self-hosted webmail client for JMAP mail servers such as Stalwart: mail, calendar, contacts, and files behind one login, plus an admin dashboard. You bring your own mail server; Bulwark is the interface.",
+      "category": "Productivity",
+      "main": "bulwarkmail",
+      "port": 3000,
+      "version": "1.21.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/bulwarkmail/icon.png"
     },
     {
       "id": "com.dokploy.bytebase",
@@ -1238,6 +1262,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/codex-docs/icon.svg"
     },
     {
+      "id": "com.dokploy.coinio",
+      "folder": "coinio",
+      "name": "Coinio",
+      "tagline": "Self-hosted subscription and bill tracker: reminders before every charge, totals in you...",
+      "description": "Self-hosted subscription and bill tracker: reminders before every charge, totals in your own currency, eight languages and a built-in MCP server for AI assistants.",
+      "category": "Finance",
+      "main": "coinio",
+      "port": 8080,
+      "version": "0.2.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/coinio/icon.svg"
+    },
+    {
       "id": "com.dokploy.colanode",
       "folder": "colanode",
       "name": "Colanode Server",
@@ -1481,8 +1517,8 @@
       "id": "com.dokploy.customermates",
       "folder": "customermates",
       "name": "Customermates",
-      "tagline": "Customermates is an open-source CRM for contacts, organizations, deals, services and ta...",
-      "description": "Customermates is an open-source CRM for contacts, organizations, deals, services and tasks, with a REST API, webhooks and an MCP endpoint for external AI clients. Self-hosted, it runs on PostgreSQL 16 and uses the Starter feature set.",
+      "tagline": "Customermates is a CRM for contacts, organizations, deals, services and tasks, with a R...",
+      "description": "Customermates is a CRM for contacts, organizations, deals, services and tasks, with a REST API, webhooks and an MCP endpoint for external AI clients. Self-hosted, it runs on PostgreSQL 16 and uses the Starter feature set.",
       "category": "Productivity",
       "main": "customermates",
       "port": 4000,
@@ -1584,6 +1620,30 @@
       "port": 8080,
       "version": "1.23.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/datalens/icon.svg"
+    },
+    {
+      "id": "com.dokploy.dbgate",
+      "folder": "dbgate",
+      "name": "DbGate",
+      "tagline": "DbGate is a modern web-based database manager for MySQL, PostgreSQL, SQL Server, MongoD...",
+      "description": "DbGate is a modern web-based database manager for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite and more — browse data, run queries, import and export, all from one interface.",
+      "category": "Developer",
+      "main": "dbgate",
+      "port": 3000,
+      "version": "7.3.6",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dbgate/icon.png"
+    },
+    {
+      "id": "com.dokploy.deluge",
+      "folder": "deluge",
+      "name": "Deluge",
+      "tagline": "Deluge is a lightweight, full-featured BitTorrent client with a web UI — daemon-based,...",
+      "description": "Deluge is a lightweight, full-featured BitTorrent client with a web UI — daemon-based, plugin-driven, and a long-time favourite for seedboxes and download servers.",
+      "category": "Media",
+      "main": "deluge",
+      "port": 8112,
+      "version": "2.2.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/deluge/icon.png"
     },
     {
       "id": "com.dokploy.dexio",
@@ -1762,7 +1822,7 @@
       "category": "Productivity",
       "main": "dokploy-actions-runner",
       "port": 8080,
-      "version": "2.338.2-node24.22.3-ubuntu-noble-r2",
+      "version": "2.338.2-node24.22.3-ubuntu-noble-r3",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dokploy-actions-runner/icon.svg"
     },
     {
@@ -1982,6 +2042,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/emaki-video-starter/icon.png"
     },
     {
+      "id": "com.dokploy.embroidery-converter",
+      "folder": "embroidery-converter",
+      "name": "Embroidery File Converter",
+      "tagline": "A browser-only viewer and converter for PES, DST, JEF, EXP and VP3 embroidery files",
+      "description": "A browser-only viewer and converter for PES, DST, JEF, EXP and VP3 embroidery files. Files never leave the device: the container only serves a static page. A TypeScript port of pystitch (the library Ink/Stitch uses), free and MIT licensed. Made by MavenWright, the team behind StitchKit. SHOW_CREDIT=false removes the footer link.",
+      "category": "Media",
+      "main": "embroidery-converter",
+      "port": 8080,
+      "version": "1.0.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/embroidery-converter/icon.svg"
+    },
+    {
       "id": "com.dokploy.emby",
       "folder": "emby",
       "name": "Emby",
@@ -2040,6 +2112,18 @@
       "port": 15637,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/enshrouded/icon.png"
+    },
+    {
+      "id": "com.dokploy.erd-builder-pro",
+      "folder": "erd-builder-pro",
+      "name": "ERD Builder Pro",
+      "tagline": "Design database schemas in an ERD canvas or DBML editor, export SQL DDL, and keep flowc...",
+      "description": "Design database schemas in an ERD canvas or DBML editor, export SQL DDL, and keep flowcharts, notes, and drawings in the same project. Create the administrator account right after deployment: the first account becomes the SuperAdmin. amd64 only.",
+      "category": "Developer",
+      "main": "erd-builder-pro",
+      "port": 3000,
+      "version": "3.5.6",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/erd-builder-pro/icon.svg"
     },
     {
       "id": "com.dokploy.erpnext",
@@ -2570,6 +2654,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/freshrss/icon.svg"
     },
     {
+      "id": "com.dokploy.gami-fied",
+      "folder": "gami-fied",
+      "name": "Gami.Fied",
+      "tagline": "Gami",
+      "description": "Gami.Fied is a gamification engine for any app. Send events from your app and it handles XP, levels, badges, streaks, challenges, leaderboards and a reward store, with a dashboard to manage it all. Deploy it with Dokploy as a Docker Compose service in a few clicks.",
+      "category": "Developer",
+      "main": "dashboard",
+      "port": 3000,
+      "version": "1.3.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/gami-fied/icon.svg"
+    },
+    {
       "id": "com.dokploy.garage",
       "folder": "garage",
       "name": "Garage S3",
@@ -2640,6 +2736,18 @@
       "port": 2368,
       "version": "6.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ghost/icon.jpeg"
+    },
+    {
+      "id": "com.dokploy.ghostfolio",
+      "folder": "ghostfolio",
+      "name": "Ghostfolio",
+      "tagline": "Ghostfolio is an open-source wealth management software that helps you track your asset...",
+      "description": "Ghostfolio is an open-source wealth management software that helps you track your assets — stocks, ETFs, cryptocurrencies and bank accounts — with performance, allocation and dividend analytics.",
+      "category": "Finance",
+      "main": "ghostfolio",
+      "port": 3333,
+      "version": "3.100.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ghostfolio/icon.png"
     },
     {
       "id": "com.dokploy.gitea-mirror",
@@ -2868,6 +2976,18 @@
       "port": 8484,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grist/icon.png"
+    },
+    {
+      "id": "com.dokploy.grocy",
+      "folder": "grocy",
+      "name": "Grocy",
+      "tagline": "Grocy is a web-based self-hosted groceries and household management solution — stock tr...",
+      "description": "Grocy is a web-based self-hosted groceries and household management solution — stock tracking with barcode scanning, meal planning, recipes, chores and battery tracking for your home.",
+      "category": "Home",
+      "main": "grocy",
+      "port": 80,
+      "version": "4.7.1",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/grocy/icon.png"
     },
     {
       "id": "com.dokploy.grovs",
@@ -3166,7 +3286,7 @@
       "category": "Media",
       "main": "nginx",
       "port": 80,
-      "version": "3.30.1",
+      "version": "3.31.4",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/imgproxy/icon.png"
     },
     {
@@ -3252,6 +3372,18 @@
       "port": 3001,
       "version": "0.0.18",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/instatic/icon.svg"
+    },
+    {
+      "id": "com.dokploy.invoice-ninja",
+      "folder": "invoice-ninja",
+      "name": "Invoice Ninja",
+      "tagline": "Invoice Ninja is open-source software for invoicing, payments, expenses and time tracki...",
+      "description": "Invoice Ninja is open-source software for invoicing, payments, expenses and time tracking: create and send invoices, accept online payments, manage clients and projects, and automate recurring billing.",
+      "category": "Finance",
+      "main": "server",
+      "port": 80,
+      "version": "5.13.56",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/invoice-ninja/icon.svg"
     },
     {
       "id": "com.dokploy.invoiceshelf",
@@ -3408,6 +3540,18 @@
       "port": 3000,
       "version": "0.6.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kanbn/icon.svg"
+    },
+    {
+      "id": "com.dokploy.kanboard",
+      "folder": "kanboard",
+      "name": "Kanboard",
+      "tagline": "Kanboard is a free and open-source Kanban project management software — visual boards,...",
+      "description": "Kanboard is a free and open-source Kanban project management software — visual boards, swimlanes, task automation and no bloat, focused on simplicity and minimalism.",
+      "category": "Productivity",
+      "main": "kanboard",
+      "port": 80,
+      "version": "1.2.58",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/kanboard/icon.png"
     },
     {
       "id": "com.dokploy.kaneo",
@@ -3588,6 +3732,18 @@
       "port": 25774,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/komari-monitor/icon.ico"
+    },
+    {
+      "id": "com.dokploy.komga",
+      "folder": "komga",
+      "name": "Komga",
+      "tagline": "Komga is a media server for comics and mangas — it serves CBZ, CBR, EPUB and PDF librar...",
+      "description": "Komga is a media server for comics and mangas — it serves CBZ, CBR, EPUB and PDF libraries with a web reader, OPDS support and smart collections.",
+      "category": "Media",
+      "main": "komga",
+      "port": 25600,
+      "version": "1.30.1",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/komga/icon.png"
     },
     {
       "id": "com.dokploy.kortix",
@@ -3802,7 +3958,7 @@
       "category": "Productivity",
       "main": "app",
       "port": 8080,
-      "version": "0.1.0",
+      "version": "0.2.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/life-console/icon.png"
     },
     {
@@ -4162,7 +4318,7 @@
       "category": "Networking",
       "main": "dashboard",
       "port": 6270,
-      "version": "0.15.0",
+      "version": "0.16.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/mcpspan/icon.svg"
     },
     {
@@ -4346,6 +4502,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/moltbot/icon.svg"
     },
     {
+      "id": "com.dokploy.monica",
+      "folder": "monica",
+      "name": "Monica",
+      "tagline": "Monica is an open-source personal CRM to organize your interactions with the people you...",
+      "description": "Monica is an open-source personal CRM to organize your interactions with the people you care about: contacts, reminders, notes, activities, gifts and journals, all in one private place.",
+      "category": "Productivity",
+      "main": "app",
+      "port": 80,
+      "version": "4.1.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/monica/icon.svg"
+    },
+    {
       "id": "com.dokploy.montara-mail",
       "folder": "montara-mail",
       "name": "Montara Mail",
@@ -4362,11 +4530,11 @@
       "folder": "montara-pass",
       "name": "Montara Pass",
       "tagline": "Self-hosted password manager with an end-to-end encrypted vault — the server stores cip...",
-      "description": "Self-hosted password manager with an end-to-end encrypted vault — the server stores ciphertext and wrapped keys only — featuring passkeys, item sharing, folders, and a built-in web app.",
+      "description": "Self-hosted password manager with an end-to-end encrypted vault — the server stores ciphertext and wrapped keys only — featuring passkeys, item sharing, folders, a web app and a browser extension.",
       "category": "Networking",
-      "main": "montara-pass",
+      "main": "api",
       "port": 8080,
-      "version": "2.12.2",
+      "version": "2.17.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/montara-pass/icon.png"
     },
     {
@@ -4574,6 +4742,30 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/neko/icon.png"
     },
     {
+      "id": "com.dokploy.netbird",
+      "folder": "netbird",
+      "name": "NetBird",
+      "tagline": "NetBird is an open-source, WireGuard-based overlay network that connects devices, serve...",
+      "description": "NetBird is an open-source, WireGuard-based overlay network that connects devices, servers and containers into one private mesh — this template runs the self-hosted management server (with its embedded Dex identity provider) and the web dashboard on a single domain.",
+      "category": "Networking",
+      "main": "dashboard",
+      "port": 80,
+      "version": "0.83.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/netbird/icon.png"
+    },
+    {
+      "id": "com.dokploy.netbird-client",
+      "folder": "netbird-client",
+      "name": "NetBird Client",
+      "tagline": "Companion template to NetBird: runs the NetBird agent as a hardened routing peer (for e...",
+      "description": "Companion template to NetBird: runs the NetBird agent as a hardened routing peer (for example an exit node) on a Docker host, joining an existing self-hosted NetBird network with a setup key.",
+      "category": "Networking",
+      "main": "netbird-client",
+      "port": 8080,
+      "version": "0.83.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/netbird-client/icon.png"
+    },
+    {
       "id": "com.dokploy.netdata",
       "folder": "netdata",
       "name": "Netdata",
@@ -4632,6 +4824,18 @@
       "port": 8080,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nocodb/icon.png"
+    },
+    {
+      "id": "com.dokploy.node-red",
+      "folder": "node-red",
+      "name": "Node-RED",
+      "tagline": "Node-RED is a flow-based programming tool for wiring together hardware devices, APIs an...",
+      "description": "Node-RED is a flow-based programming tool for wiring together hardware devices, APIs and online services — drag nodes onto a canvas, connect them, and deploy automations for your smart home, MQTT devices and webhooks.",
+      "category": "Productivity",
+      "main": "node-red",
+      "port": 1880,
+      "version": "5.0.10",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/node-red/icon.svg"
     },
     {
       "id": "com.dokploy.nodelink",
@@ -4694,6 +4898,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/nyxiontech-pdf-tools/icon.svg"
     },
     {
+      "id": "com.dokploy.obscreen",
+      "folder": "obscreen",
+      "name": "Obscreen",
+      "tagline": "A self-hosted digital signage platform to manage playlists and display images, videos,...",
+      "description": "A self-hosted digital signage platform to manage playlists and display images, videos, and web pages on TVs, computers, tablets, or any browser.",
+      "category": "Developer",
+      "main": "obscreen",
+      "port": 5000,
+      "version": "2026.11.4",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/obscreen/icon.png"
+    },
+    {
       "id": "com.dokploy.obscura",
       "folder": "obscura",
       "name": "Obscura Browser",
@@ -4716,6 +4932,18 @@
       "port": 5984,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/obsidian-livesync/icon.png"
+    },
+    {
+      "id": "com.dokploy.octoprint",
+      "folder": "octoprint",
+      "name": "OctoPrint",
+      "tagline": "OctoPrint is the web interface for your 3D printer — control and monitor prints remotel...",
+      "description": "OctoPrint is the web interface for your 3D printer — control and monitor prints remotely, upload G-code, watch progress and webcam feeds, and extend it with plugins, all from the browser.",
+      "category": "Networking",
+      "main": "octoprint",
+      "port": 5000,
+      "version": "1.11.8",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/octoprint/icon.png"
     },
     {
       "id": "com.dokploy.odoo_17",
@@ -4982,6 +5210,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/opendots/icon.svg"
     },
     {
+      "id": "com.dokploy.openfamily",
+      "folder": "openfamily",
+      "name": "OpenFamily",
+      "tagline": "Self-hosted family organizer with shared calendars, chores, shopping lists, recipes, me...",
+      "description": "Self-hosted family organizer with shared calendars, chores, shopping lists, recipes, meal planning, pantry and household budget. Web/PWA and Android clients; AGPL-3.0.",
+      "category": "Productivity",
+      "main": "openfamily",
+      "port": 3000,
+      "version": "2.2.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openfamily/icon.png"
+    },
+    {
       "id": "com.dokploy.openfault",
       "folder": "openfault",
       "name": "OpenFault",
@@ -5100,6 +5340,18 @@
       "port": 8080,
       "version": "17",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openproject/icon.svg"
+    },
+    {
+      "id": "com.dokploy.openpromoter",
+      "folder": "openpromoter",
+      "name": "OpenPromoter",
+      "tagline": "OpenPromoter is open-source affiliate and referral program software for SaaS",
+      "description": "OpenPromoter is open-source affiliate and referral program software for SaaS. It tracks referrals from Stripe, Paddle and Lemon Squeezy, checks for fraud and prepares partner payouts with 0% payout fees.",
+      "category": "Finance",
+      "main": "openpromoter",
+      "port": 3000,
+      "version": "0.1.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openpromoter/icon.svg"
     },
     {
       "id": "com.dokploy.openresty-manager",
@@ -5414,6 +5666,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/peppermint/icon.svg"
     },
     {
+      "id": "com.dokploy.pg-pinecone",
+      "folder": "pg-pinecone",
+      "name": "pg_pinecone",
+      "tagline": "PostgreSQL 18 with pg_pinecone",
+      "description": "PostgreSQL 18 with pg_pinecone. Same SQL as pgvector, and the rows stay in Postgres.",
+      "category": "Developer",
+      "main": "pg-pinecone",
+      "port": 5432,
+      "version": "pg18",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pg-pinecone/icon.svg"
+    },
+    {
       "id": "com.dokploy.pgadmin",
       "folder": "pgadmin",
       "name": "pgAdmin",
@@ -5472,6 +5736,18 @@
       "port": 8945,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pinchflat/icon.png"
+    },
+    {
+      "id": "com.dokploy.pingvin-share",
+      "folder": "pingvin-share",
+      "name": "Pingvin Share",
+      "tagline": "Pingvin Share is a self-hosted file sharing platform — a private WeTransfer alternative...",
+      "description": "Pingvin Share is a self-hosted file sharing platform — a private WeTransfer alternative: upload files and share them with a link, optional password, expiry date and download limits.",
+      "category": "Productivity",
+      "main": "pingvin-share",
+      "port": 3000,
+      "version": "1.13.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pingvin-share/icon.png"
     },
     {
       "id": "com.dokploy.plane",
@@ -5930,6 +6206,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/rabbitmq/icon.svg"
     },
     {
+      "id": "com.dokploy.radarr",
+      "folder": "radarr",
+      "name": "Radarr",
+      "tagline": "Radarr is a movie collection manager for Usenet and BitTorrent users — it monitors RSS...",
+      "description": "Radarr is a movie collection manager for Usenet and BitTorrent users — it monitors RSS feeds for new releases of your wanted movies and grabs, sorts and renames them for your media server.",
+      "category": "Media",
+      "main": "radarr",
+      "port": 7878,
+      "version": "7.0.3",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/radarr/icon.png"
+    },
+    {
       "id": "com.dokploy.rallly",
       "folder": "rallly",
       "name": "Rallly",
@@ -6000,6 +6288,18 @@
       "port": 5000,
       "version": "2",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/registry/icon.png"
+    },
+    {
+      "id": "com.dokploy.relaticle",
+      "folder": "relaticle",
+      "name": "Relaticle",
+      "tagline": "Open-source CRM your AI agents can read and update: companies, people, opportunities, t...",
+      "description": "Open-source CRM your AI agents can read and update: companies, people, opportunities, tasks and notes. REST API, self-hosted or cloud.",
+      "category": "Productivity",
+      "main": "relaticle",
+      "port": 8080,
+      "version": "3.12.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/relaticle/icon.svg"
     },
     {
       "id": "com.dokploy.reloop",
@@ -6494,6 +6794,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/solidping/icon.svg"
     },
     {
+      "id": "com.dokploy.sonarr",
+      "folder": "sonarr",
+      "name": "Sonarr",
+      "tagline": "Sonarr is a PVR for Usenet and BitTorrent users — it monitors RSS feeds for new episode...",
+      "description": "Sonarr is a PVR for Usenet and BitTorrent users — it monitors RSS feeds for new episodes of your favourite shows and grabs, sorts and renames them for your media server.",
+      "category": "Media",
+      "main": "sonarr",
+      "port": 8989,
+      "version": "4.0.20",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/sonarr/icon.png"
+    },
+    {
       "id": "com.dokploy.spacedrive",
       "folder": "spacedrive",
       "name": "Spacedrive",
@@ -6758,6 +7070,18 @@
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tandoor-recipes/icon.svg"
     },
     {
+      "id": "com.dokploy.tautulli",
+      "folder": "tautulli",
+      "name": "Tautulli",
+      "tagline": "Tautulli is a monitoring and tracking tool for Plex Media Server — watch statistics, hi...",
+      "description": "Tautulli is a monitoring and tracking tool for Plex Media Server — watch statistics, history, graphs and custom notifications for everything your Plex server streams.",
+      "category": "Media",
+      "main": "tautulli",
+      "port": 8181,
+      "version": "2.19.1",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tautulli/icon.png"
+    },
+    {
       "id": "com.dokploy.teable",
       "folder": "teable",
       "name": "teable",
@@ -6864,6 +7188,30 @@
       "port": 5800,
       "version": "1.0.0",
       "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tor-browser/icon.png"
+    },
+    {
+      "id": "com.dokploy.traccar",
+      "folder": "traccar",
+      "name": "Traccar",
+      "tagline": "Traccar is an open-source GPS tracking platform that supports 2,000+ tracker models — l...",
+      "description": "Traccar is an open-source GPS tracking platform that supports 2,000+ tracker models — live positions, geofences, reports and alerts for vehicles, assets and people on one map.",
+      "category": "Others",
+      "main": "traccar",
+      "port": 8082,
+      "version": "6.17.0",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/traccar/icon.png"
+    },
+    {
+      "id": "com.dokploy.trackhop",
+      "folder": "trackhop",
+      "name": "Trackhop",
+      "tagline": "Trackhop keeps your playlists in sync between music services (Spotify, YouTube Music, T...",
+      "description": "Trackhop keeps your playlists in sync between music services (Spotify, YouTube Music, TIDAL, Navidrome, Jellyfin, Plex, Last.fm and more), one way or both ways, on a schedule, from a web page on your server. Open source, in beta.",
+      "category": "Media",
+      "main": "trackhop",
+      "port": 8080,
+      "version": "2.1.2",
+      "icon": "https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/trackhop/icon.png"
     },
     {
       "id": "com.dokploy.trailbase",

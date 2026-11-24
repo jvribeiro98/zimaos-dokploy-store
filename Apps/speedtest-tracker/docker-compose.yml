@@ -6,7 +6,7 @@ services:
     environment:
       PUID: '1000'
       PGID: '1000'
-      APP_KEY: base64:wjIOlJBwlwwgqcEdQSUVoYRawaqgvJuHo0FEHV/ESrM=
+      APP_KEY: base64:xzbLsAsbqegLBPCZYkRhnk/TN41gsDdHJOS8eqzxLeE=
       DB_CONNECTION: sqlite
     volumes:
     - speedtest_config:/config
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://docs.speedtest-tracker.dev/
   repo: https://github.com/alexjustesen/speedtest-tracker
   docs: https://docs.speedtest-tracker.dev/

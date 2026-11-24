@@ -1,0 +1,63 @@
+name: pg-pinecone
+services:
+  pg-pinecone:
+    image: pineconeteam/pg_pinecone:pg18
+    restart: unless-stopped
+    command:
+    - /bin/sh
+    - -c
+    - 'unset PGHOST PGPORT
+
+      mkdir -p /docker-entrypoint-initdb.d
+
+      printf ''%s\n'' ''CREATE EXTENSION IF NOT EXISTS vector;'' ''CREATE EXTENSION IF NOT EXISTS pg_pinecone;'' > /docker-entrypoint-initdb.d/00-pg-pinecone.sql
+
+      exec docker-entrypoint.sh postgres -c shared_preload_libraries=pg_pinecone
+
+      '
+    environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=Vvwa2n9gE94HS8k85DScECrktP7VihZW
+    - POSTGRES_DB=postgres
+    volumes:
+    - pg-pinecone-data:/var/lib/postgresql
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    expose:
+    - '5432'
+    ports:
+    - target: 5432
+      published: "5432"
+      protocol: tcp
+volumes:
+  pg-pinecone-data: null
+x-casaos:
+  id: com.dokploy.pg-pinecone
+  main: pg-pinecone
+  index: /
+  port_map: "5432"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/pg-pinecone/icon.svg
+  title:
+    en_US: pg_pinecone
+  tagline:
+    en_US: PostgreSQL 18 with pg_pinecone
+  description:
+    en_US: PostgreSQL 18 with pg_pinecone. Same SQL as pgvector, and the rows stay in Postgres.
+  author: Dokploy Community
+  developer: pg_pinecone
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "pg18"
+  update_at: "2026-11-24"
+  website: https://www.pinecone.io/
+  repo: https://github.com/pinecone-io/pg_pinecone
+  docs: https://docs.pinecone.io/guides/pg-pinecone/overview

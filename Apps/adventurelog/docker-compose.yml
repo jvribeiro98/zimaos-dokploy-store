@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_DB: adventure
       POSTGRES_USER: adventure
-      POSTGRES_PASSWORD: IRfPtQuFMBTvptRd
+      POSTGRES_PASSWORD: UNzVqQmoR4FSVtNV
   server:
     image: ghcr.io/seanmorley15/adventurelog-backend:latest
     restart: unless-stopped
@@ -33,10 +33,10 @@ services:
       PGHOST: db
       POSTGRES_DB: adventure
       POSTGRES_USER: adventure
-      POSTGRES_PASSWORD: IRfPtQuFMBTvptRd
-      SECRET_KEY: 7uAyNlATD3YQRkbmdgxE4of7r27NCkpk
+      POSTGRES_PASSWORD: UNzVqQmoR4FSVtNV
+      SECRET_KEY: GrDYFVSHrS48hs7LmWojeoDqxRsIKRLc
       DJANGO_ADMIN_USERNAME: admin
-      DJANGO_ADMIN_PASSWORD: tBKjoB2xwC2h
+      DJANGO_ADMIN_PASSWORD: KkgInh8Znnar
       DJANGO_ADMIN_EMAIL: admin@example.com
       DEBUG: 'False'
       CSRF_TRUSTED_ORIGINS: http://localhost,http://localhost
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://adventurelog.app/
   repo: https://github.com/seanmorley15/adventurelog
   docs: https://adventurelog.app/docs/intro/adventurelog_overview.html

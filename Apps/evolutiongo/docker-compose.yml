@@ -6,9 +6,9 @@ services:
     environment:
     - SERVER_PORT=8080
     - CLIENT_NAME=Evolution
-    - GLOBAL_API_KEY=yoQCfDyPaUCwV7fpZJjqmKnmvpvNS4aVt8LE8ZObR3dBon/oZgHmvAhMbzDY2AH6QkncGm3/lW3vGF/OF26CpA==
-    - POSTGRES_AUTH_DB=postgres://postgresql:eLbOjkitH1YA549TX7HjrYji4xtgzZXj@evolution-postgres:5432/evogo_auth?sslmode=disable
-    - POSTGRES_USERS_DB=postgres://postgresql:eLbOjkitH1YA549TX7HjrYji4xtgzZXj@evolution-postgres:5432/evogo_users?sslmode=disable
+    - GLOBAL_API_KEY=iQ2zDXFdhMsfTNLUQZEECPtSlvfG9tyeFXwjVkgxm2lfX5QCoERRps5OPv7OTk8YXxppmdEt2rMpkXw8OLhBYQ==
+    - POSTGRES_AUTH_DB=postgres://postgresql:H5YcXtVVAkzbVEHu9zlHxi7eZQ1Nj7Aq@evolution-postgres:5432/evogo_auth?sslmode=disable
+    - POSTGRES_USERS_DB=postgres://postgresql:H5YcXtVVAkzbVEHu9zlHxi7eZQ1Nj7Aq@evolution-postgres:5432/evogo_users?sslmode=disable
     - DATABASE_SAVE_MESSAGES=false
     - WADEBUG=INFO
     - LOGTYPE=console
@@ -34,7 +34,7 @@ services:
     environment:
     - POSTGRES_DB=evolution
     - POSTGRES_USER=postgresql
-    - POSTGRES_PASSWORD=eLbOjkitH1YA549TX7HjrYji4xtgzZXj
+    - POSTGRES_PASSWORD=H5YcXtVVAkzbVEHu9zlHxi7eZQ1Nj7Aq
     volumes:
     - evolution-postgres-data:/var/lib/postgresql/data
 volumes:
@@ -63,7 +63,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://docs.evolutionfoundation.com.br/evolution-go
   repo: https://github.com/evolution-foundation/evolution-go
   docs: https://docs.evolutionfoundation.com.br/evolution-go

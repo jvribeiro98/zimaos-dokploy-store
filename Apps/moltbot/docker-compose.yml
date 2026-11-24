@@ -5,7 +5,7 @@ services:
     environment:
       HOME: /home/node
       TERM: xterm-256color
-      CLAWDBOT_GATEWAY_TOKEN: EhTm8vW5bFkpQLYGpR4wDX1CzalCu8tj
+      CLAWDBOT_GATEWAY_TOKEN: eJLG5sU2t2WS7dFf971TcNZHN2TDZx9N
       CLAUDE_AI_SESSION_KEY: ${CLAUDE_AI_SESSION_KEY}
       CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY}
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE}
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.1.25"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://molt.bot
   repo: https://github.com/moltbot/moltbot
   docs: https://docs.molt.bot

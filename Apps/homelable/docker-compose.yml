@@ -4,12 +4,12 @@ services:
     image: ghcr.io/pouzor/homelable-backend:3.6.0
     restart: unless-stopped
     environment:
-      SECRET_KEY: fcLV5Bj307wpb/90KiFHtz+u1TolWqfsj40q6vqh2Y8=
+      SECRET_KEY: bZBc4hpXSALNF97fyJ/sa4AJwl+EunIlKBIwl39vrb4=
       SQLITE_PATH: /app/data/homelab.db
       CORS_ORIGINS: '["https://localhost", "http://localhost"]'
       AUTH_MODE: local
       AUTH_USERNAME: admin
-      INITIAL_ADMIN_PASSWORD: kN8dPfZ5AxCVP9NTacYFgbhA5hLmKUnV
+      INITIAL_ADMIN_PASSWORD: 1kniM1RUULMkFwLnfzt0Z49U8ubs3N4L
       SCANNER_RANGES: '["192.168.1.0/24"]'
       STATUS_CHECKER_INTERVAL: '60'
       STATUS_CHECKER_ENABLED: 'true'
@@ -84,7 +84,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.6.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://homelable.net
   repo: https://github.com/Pouzor/homelable
   docs: https://github.com/Pouzor/homelable/blob/main/INSTALLATION.md

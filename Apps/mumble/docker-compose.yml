@@ -9,7 +9,7 @@ services:
     volumes:
     - mumble-data:/data
     environment:
-    - MUMBLE_SUPERUSER_PASSWORD=PmkCrGFDsiVJ9Zvavdg75xZ9P1wpjjnd
+    - MUMBLE_SUPERUSER_PASSWORD=cA5XKifcaplJXJOa6m3Znldq5cwRIEjm
     - MUMBLE_CONFIG_WELCOMETEXT=Welcome to Mumble Server! Low-latency voice chat.
     - MUMBLE_CONFIG_USERS=50
     ports:
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.mumble.info/
   repo: https://github.com/mumble-voip/mumble
   docs: https://www.mumble.info/documentation/

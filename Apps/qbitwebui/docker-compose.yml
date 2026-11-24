@@ -4,7 +4,7 @@ services:
     image: ghcr.io/maciejonos/qbitwebui:latest
     restart: unless-stopped
     environment:
-    - ENCRYPTION_KEY=eiDdbp0CySuyMi2K5oDUa5LgUTFO2fjN
+    - ENCRYPTION_KEY=Cmxu01A3Gf2aN9pxpr577iqqlLWVopeD
     - PORT=3000
     - DATABASE_PATH=/data/qbitwebui.db
     - SALT_PATH=/data/.salt
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/Maciejonos/qbitwebui
   repo: https://github.com/Maciejonos/qbitwebui
   docs: https://github.com/Maciejonos/qbitwebui#readme

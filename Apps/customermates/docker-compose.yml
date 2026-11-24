@@ -9,12 +9,12 @@ services:
     environment:
       APP_MODE: self-hosted
       NODE_ENV: production
-      DATABASE_URL: postgresql://customermates:686a7a908904a8136957231d827a31e7@customermates-postgres:5432/customermates
+      DATABASE_URL: postgresql://customermates:482bd53fac8e712460937e46dfa9b057@customermates-postgres:5432/customermates
       WORKFLOW_TARGET_WORLD: '@workflow/world-postgres'
-      WORKFLOW_POSTGRES_URL: postgresql://customermates:686a7a908904a8136957231d827a31e7@customermates-postgres:5432/customermates
+      WORKFLOW_POSTGRES_URL: postgresql://customermates:482bd53fac8e712460937e46dfa9b057@customermates-postgres:5432/customermates
       BASE_URL: http://localhost
-      BETTER_AUTH_SECRET: 7d787fd6e1032f367bbadd2a85da34d016fb0cb34a1fe89d8e56b96050c75a58
-      CRON_SECRET: 26ac927fdc42672d6064b0fa1efb4f4cb1c6f85b9edc3b7455c289a03cbef13b
+      BETTER_AUTH_SECRET: b05733ee0590003c72131d37fa00988ba0b4a06a92e10e85720060453ce0d563
+      CRON_SECRET: 004a402a98ac3123d46e3c2cb2dbc7bc31feab488da2c3ab8196343ec5d23f49
       RESEND_API_KEY: ''
       RESEND_OPERATOR_EMAIL: mail@your-company.com
     expose:
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: customermates
-      POSTGRES_PASSWORD: 686a7a908904a8136957231d827a31e7
+      POSTGRES_PASSWORD: 482bd53fac8e712460937e46dfa9b057
       POSTGRES_DB: customermates
     volumes:
     - customermates-postgres-data:/var/lib/postgresql/data
@@ -51,10 +51,10 @@ x-casaos:
   title:
     en_US: Customermates
   tagline:
-    en_US: Customermates is an open-source CRM for contacts, organizations, deals, services and ta...
+    en_US: Customermates is a CRM for contacts, organizations, deals, services and tasks, with a R...
   description:
-    en_US: Customermates is an open-source CRM for contacts, organizations, deals, services and tasks, with a REST API, webhooks
-      and an MCP endpoint for external AI clients. Self-hosted, it runs on PostgreSQL 16 and uses the Starter feature set.
+    en_US: Customermates is a CRM for contacts, organizations, deals, services and tasks, with a REST API, webhooks and an
+      MCP endpoint for external AI clients. Self-hosted, it runs on PostgreSQL 16 and uses the Starter feature set.
   author: Dokploy Community
   developer: Customermates
   category: Productivity
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "sha-4f4d61c"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://customermates.com
   repo: https://github.com/customermates/customermates
   docs: https://customermates.com/docs/self-hosting

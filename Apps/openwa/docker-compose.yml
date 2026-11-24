@@ -63,7 +63,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.25.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.open-wa.org
   repo: https://github.com/rmyndharis/OpenWA
   docs: https://github.com/rmyndharis/OpenWA/tree/main/docs

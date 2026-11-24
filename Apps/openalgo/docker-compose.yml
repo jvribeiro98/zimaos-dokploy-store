@@ -16,9 +16,9 @@ services:
     - BROKER_API_KEY=
     - BROKER_API_SECRET=
     - VALID_BROKERS=fivepaisa,fivepaisaxts,aliceblue,angel,arrow,compositedge,dhan,dhan_sandbox,definedge,deltaexchange,firstock,flattrade,fyers,groww,hdfcsecurities,hdfcsky,ibulls,iifl,iiflcapital,indmoney,jainamxts,kotak,motilal,mstock,nubra,nuvama,paytm,pocketful,rmoney,rupeezy,sahi,samco,shoonya,tradejini,tradesmart,upstox,wisdom,zebu,zerodha
-    - APP_KEY=ZR8QhHfIZtst12W5Z2QEI1XD7Csx30yc
-    - API_KEY_PEPPER=zq98X2YdSyfUNFjOcdeyaQorRmffWVYf
-    - FERNET_SALT=xrGtpNQXMoai35CNlwRUga9njpQZYBVD
+    - APP_KEY=A4pznHakVjf1CSYTB7P7M7jSTLhI7O5O
+    - API_KEY_PEPPER=t1XE15a3wW36Joum39dwxp7F5sD6Htnf
+    - FERNET_SALT=85aaj0CqRfvFYhayqS08BSLHLqnf69AY
     - DATABASE_URL=sqlite:////app/db/openalgo.db
     - LATENCY_DATABASE_URL=sqlite:////app/db/latency.db
     - LOGS_DATABASE_URL=sqlite:////app/db/logs.db
@@ -75,7 +75,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.0.3.3"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://openalgo.in
   repo: https://github.com/marketcalls/openalgo
   docs: https://docs.openalgo.in

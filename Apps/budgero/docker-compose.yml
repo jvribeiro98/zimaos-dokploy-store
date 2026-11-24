@@ -1,0 +1,52 @@
+name: budgero
+services:
+  budgero:
+    image: budgero/budgero:v1.21.5
+    restart: unless-stopped
+    environment:
+      WEBSOCKET_ALLOWED_ORIGINS: https://localhost,http://localhost
+      SELF_HOST_JWT_SECRET: 0JRV8JYIHXyX6cjVU70xyIN5MuxBXGB48JzQstGBiZzgCat0VPmTyy0s4bPPJTC7
+    volumes:
+    - budgero-data:/data
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -q
+      - --spider
+      - http://127.0.0.1:3001/api/v1/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    ports:
+    - target: 3001
+      published: "3001"
+      protocol: tcp
+volumes:
+  budgero-data: null
+x-casaos:
+  id: com.dokploy.budgero
+  main: budgero
+  index: /
+  port_map: "3001"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/budgero/icon.png
+  title:
+    en_US: Budgero
+  tagline:
+    en_US: Zero-based budgeting app with end-to-end encryption and offline use
+  description:
+    en_US: Zero-based budgeting app with end-to-end encryption and offline use. The admin password is printed once in the
+      logs on first start.
+  author: Dokploy Community
+  developer: Budgero
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "1.21.5"
+  update_at: "2026-11-24"
+  website: https://budgero.app
+  repo: https://github.com/tombadilo-bombadilo/budgero
+  docs: https://budgero.app/docs/self-hosting-guide

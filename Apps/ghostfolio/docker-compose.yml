@@ -1,0 +1,63 @@
+name: ghostfolio
+services:
+  ghostfolio:
+    image: ghostfolio/ghostfolio:3.100.0
+    restart: unless-stopped
+    expose:
+    - 3333
+    environment:
+    - DATABASE_URL=postgresql://ghostfolio:0gA3YOX7mTCvDamz1Iu4HEbe@ghostfolio-db:5432/ghostfolio?sslmode=disable
+    - REDIS_HOST=ghostfolio-redis
+    - REDIS_PORT=6379
+    - ACCESS_TOKEN_SALT=qqvPAuaeNDquh/UbPyB0TO9be5dYI6hsZHlxMSdIZi0=
+    - JWT_SECRET_KEY=H9g6s0GJEt2sPoFSs1HEIxApRl3zijdhGGBUdCM0C8I=
+    depends_on:
+    - ghostfolio-db
+    - ghostfolio-redis
+    ports:
+    - target: 3333
+      published: "3333"
+      protocol: tcp
+  ghostfolio-db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+    - POSTGRES_DB=ghostfolio
+    - POSTGRES_USER=ghostfolio
+    - POSTGRES_PASSWORD=0gA3YOX7mTCvDamz1Iu4HEbe
+    volumes:
+    - db_data:/var/lib/postgresql/data
+  ghostfolio-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+    - redis_data:/data
+volumes:
+  db_data: {}
+  redis_data: {}
+x-casaos:
+  id: com.dokploy.ghostfolio
+  main: ghostfolio
+  index: /
+  port_map: "3333"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/ghostfolio/icon.png
+  title:
+    en_US: Ghostfolio
+  tagline:
+    en_US: Ghostfolio is an open-source wealth management software that helps you track your asset...
+  description:
+    en_US: Ghostfolio is an open-source wealth management software that helps you track your assets — stocks, ETFs, cryptocurrencies
+      and bank accounts — with performance, allocation and dividend analytics.
+  author: Dokploy Community
+  developer: Ghostfolio
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "3.100.0"
+  update_at: "2026-11-24"
+  website: https://ghostfol.io
+  repo: https://github.com/ghostfolio/ghostfolio
+  docs: https://ghostfol.io/en/resources

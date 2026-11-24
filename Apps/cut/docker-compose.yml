@@ -7,7 +7,7 @@ services:
       redis:
         condition: service_healthy
     environment:
-    - ADMIN_PASSWORD=NK6Tg0Y0FzH1u6kuPkxphP6v
+    - ADMIN_PASSWORD=yxhUKsT83TGGCaHGJH7rNfp8
     - REDIS_URL=redis://redis:6379
     expose:
     - 3000
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/MendyLanda/cut
   repo: https://github.com/MendyLanda/cut
   docs: https://github.com/MendyLanda/cut#readme

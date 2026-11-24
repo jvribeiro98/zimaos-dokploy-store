@@ -7,7 +7,7 @@ services:
     - chatwoot-storage:/app/storage
     environment:
     - FRONTEND_URL=http://localhost
-    - SECRET_KEY_BASE=0407c4a9be2715b843660a6aa4bf896a697186dc4b42db5de407bea7b6531ff8d72b6917acc5234b91b3e046353b7a4050e577a68220cff0949bd4470360579e
+    - SECRET_KEY_BASE=80f574bae25cd10df167c28e02c8cfc822aa86f5b3b45928db72631901079608cd90f91ab1abbb13efb15ed12357847a4e621f8819357c13486594bd2881169c
     - FORCE_SSL=false
     - DEFAULT_LOCALE=en
     - ACTIVE_STORAGE_SERVICE=local
@@ -21,9 +21,9 @@ services:
     - POSTGRES_PORT=5432
     - POSTGRES_DATABASE=chatwoot
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=MXFZqdFzyExpwq0RIuR3NjxRjq8pHfGA
-    - REDIS_URL=redis://:tWdfqb1GhlKp87vitYEMSfwFR7yWZO5k@redis:6379
-    - REDIS_PASSWORD=tWdfqb1GhlKp87vitYEMSfwFR7yWZO5k
+    - POSTGRES_PASSWORD=hG613EsoDCtVffkmGzov8jiDblBrtqxO
+    - REDIS_URL=redis://:jmAAxDFA86SY7SeU1di4t55RhgQibO56@redis:6379
+    - REDIS_PASSWORD=jmAAxDFA86SY7SeU1di4t55RhgQibO56
     depends_on:
     - postgres
     - redis
@@ -45,7 +45,7 @@ services:
     - chatwoot-storage:/app/storage
     environment:
     - FRONTEND_URL=http://localhost
-    - SECRET_KEY_BASE=0407c4a9be2715b843660a6aa4bf896a697186dc4b42db5de407bea7b6531ff8d72b6917acc5234b91b3e046353b7a4050e577a68220cff0949bd4470360579e
+    - SECRET_KEY_BASE=80f574bae25cd10df167c28e02c8cfc822aa86f5b3b45928db72631901079608cd90f91ab1abbb13efb15ed12357847a4e621f8819357c13486594bd2881169c
     - FORCE_SSL=false
     - DEFAULT_LOCALE=en
     - ACTIVE_STORAGE_SERVICE=local
@@ -59,9 +59,9 @@ services:
     - POSTGRES_PORT=5432
     - POSTGRES_DATABASE=chatwoot
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=MXFZqdFzyExpwq0RIuR3NjxRjq8pHfGA
-    - REDIS_URL=redis://:tWdfqb1GhlKp87vitYEMSfwFR7yWZO5k@redis:6379
-    - REDIS_PASSWORD=tWdfqb1GhlKp87vitYEMSfwFR7yWZO5k
+    - POSTGRES_PASSWORD=hG613EsoDCtVffkmGzov8jiDblBrtqxO
+    - REDIS_URL=redis://:jmAAxDFA86SY7SeU1di4t55RhgQibO56@redis:6379
+    - REDIS_PASSWORD=jmAAxDFA86SY7SeU1di4t55RhgQibO56
     depends_on:
     - postgres
     - redis
@@ -79,7 +79,7 @@ services:
     environment:
     - POSTGRES_DB=chatwoot
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=MXFZqdFzyExpwq0RIuR3NjxRjq8pHfGA
+    - POSTGRES_PASSWORD=hG613EsoDCtVffkmGzov8jiDblBrtqxO
   redis:
     image: redis:alpine
     restart: unless-stopped
@@ -88,7 +88,7 @@ services:
     - -c
     - redis-server --requirepass "$$REDIS_PASSWORD"
     environment:
-    - REDIS_PASSWORD=tWdfqb1GhlKp87vitYEMSfwFR7yWZO5k
+    - REDIS_PASSWORD=jmAAxDFA86SY7SeU1di4t55RhgQibO56
     volumes:
     - chatwoot-redis-data:/data
 x-chatwoot-base:
@@ -140,7 +140,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.12.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.chatwoot.com
   repo: https://github.com/chatwoot/chatwoot
   docs: https://www.chatwoot.com/docs

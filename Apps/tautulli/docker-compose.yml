@@ -1,0 +1,44 @@
+name: tautulli
+services:
+  tautulli:
+    image: tautulli/tautulli:v2.19.1
+    restart: unless-stopped
+    expose:
+    - 8181
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    ports:
+    - target: 8181
+      published: "8181"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.tautulli
+  main: tautulli
+  index: /
+  port_map: "8181"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/tautulli/icon.png
+  title:
+    en_US: Tautulli
+  tagline:
+    en_US: Tautulli is a monitoring and tracking tool for Plex Media Server — watch statistics, hi...
+  description:
+    en_US: Tautulli is a monitoring and tracking tool for Plex Media Server — watch statistics, history, graphs and custom
+      notifications for everything your Plex server streams.
+  author: Dokploy Community
+  developer: Tautulli
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.19.1"
+  update_at: "2026-11-24"
+  website: https://tautulli.com
+  repo: https://github.com/Tautulli/Tautulli
+  docs: https://docs.tautulli.com

@@ -1,0 +1,45 @@
+name: netbird-client
+services:
+  netbird-client:
+    image: netbirdio/netbird:0.83.2
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    environment:
+    - NB_SETUP_KEY=
+    - NB_MANAGEMENT_URL=
+    - NB_HOSTNAME=netbird-client
+    - NB_DISABLE_CUSTOM_ROUTING=true
+    volumes:
+    - client_state:/var/lib/netbird
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  client_state: null
+x-casaos:
+  id: com.dokploy.netbird-client
+  main: netbird-client
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/netbird-client/icon.png
+  title:
+    en_US: NetBird Client
+  tagline:
+    en_US: 'Companion template to NetBird: runs the NetBird agent as a hardened routing peer (for e...'
+  description:
+    en_US: 'Companion template to NetBird: runs the NetBird agent as a hardened routing peer (for example an exit node) on
+      a Docker host, joining an existing self-hosted NetBird network with a setup key.'
+  author: Dokploy Community
+  developer: NetBird Client
+  category: Networking
+  architectures:
+  - amd64
+  - arm64
+  version: "0.83.2"
+  update_at: "2026-11-24"
+  website: https://netbird.io
+  repo: https://github.com/netbirdio/netbird
+  docs: https://docs.netbird.io

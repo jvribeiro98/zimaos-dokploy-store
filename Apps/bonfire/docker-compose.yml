@@ -14,18 +14,18 @@ services:
     - SERVER_PORT=4000
     - APP_NAME=Bonfire
     - LANG=en_US.UTF-8
-    - SECRET_KEY_BASE=httOowSdn0QGxTwRwi2tdnoUVS7Qr1pH1VGjRGDHvbprmfdg3OCiUqMyR1CuUbnx
-    - SIGNING_SALT=jC7O7NdWAOodTvPIzZAdUmvmaZJD8hTQ
-    - ENCRYPTION_SALT=U1mJJ2WE99De9dnPYS4FHnbDYvC35oXI
-    - RELEASE_COOKIE=jMEV1Vz0rkISXr99PnkNvFLHayuzl96N
+    - SECRET_KEY_BASE=jf9r0z6VLK5I0MMjfEqlbmkAk7LCaY9HUh74loMaAkb73MVUye8lDQj3yQRrzGq8
+    - SIGNING_SALT=PdsrdLXf0Z12SzIP1CU6kbnuNZ1TqbkH
+    - ENCRYPTION_SALT=xrh3y4D5JUUrMB9a7qfq3WmlDqNerG23
+    - RELEASE_COOKIE=i5AW1gkzQaJZ59aAJvSMhIEagZ1YGxQI
     - POSTGRES_HOST=db
     - POSTGRES_USER=postgres
     - POSTGRES_DB=bonfire_db
-    - POSTGRES_PASSWORD=DHuBdH8cZe7VuXuhDiV2GN1Xr9XTFC2K
+    - POSTGRES_PASSWORD=QVlrSNz2LaVXVAe1ivQfBEI3n07bPJSl
     - DB_MIGRATE_INDEXES_CONCURRENTLY=${DB_MIGRATE_INDEXES_CONCURRENTLY:-false}
     - SEARCH_ADAPTER=meili
     - SEARCH_MEILI_INSTANCE=http://search:7700
-    - MEILI_MASTER_KEY=UOt7AR9NXB51QcoYXuyY54h77u6S05EO
+    - MEILI_MASTER_KEY=67uGvMok6l2s9EDpxHT3hJyIOaPU0Hnx
     - MAIL_BACKEND=${MAIL_BACKEND:-none}
     - MAIL_SERVER=${MAIL_SERVER:-}
     - MAIL_PORT=${MAIL_PORT:-}
@@ -57,7 +57,7 @@ services:
     environment:
     - POSTGRES_USER=postgres
     - POSTGRES_DB=bonfire_db
-    - POSTGRES_PASSWORD=DHuBdH8cZe7VuXuhDiV2GN1Xr9XTFC2K
+    - POSTGRES_PASSWORD=QVlrSNz2LaVXVAe1ivQfBEI3n07bPJSl
     volumes:
     - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -71,7 +71,7 @@ services:
     image: getmeili/meilisearch:v1.11
     restart: unless-stopped
     environment:
-    - MEILI_MASTER_KEY=UOt7AR9NXB51QcoYXuyY54h77u6S05EO
+    - MEILI_MASTER_KEY=67uGvMok6l2s9EDpxHT3hJyIOaPU0Hnx
     - MEILI_ENV=production
     - MEILI_NO_ANALYTICS=true
     volumes:
@@ -101,7 +101,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.5"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://bonfirenetworks.org
   repo: https://github.com/bonfire-networks/bonfire-app
   docs: https://docs.bonfirenetworks.org

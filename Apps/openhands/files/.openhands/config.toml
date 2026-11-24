@@ -41,7 +41,7 @@
 ##############################################################################
 [llm]
 # API key to use. It is being sourced from the Dokploy template variables.
-api_key = "iHJ9fjei5eZBrVr72Z5ihyfB5umDV05GZp5V0Z5izvha4stvEYPh8geD3bsrjz4b" # API Key
+api_key = "hO4PS4KmxEUKKlJGYD8yxOati2bdXzYNpIuw1GTxG8otXlG1S0Ahj0uXrm0MMexL" # API Key
 # base_url = ""
 # api_version = ""
 # reasoning_effort = "medium"
@@ -72,7 +72,7 @@ model = "gpt-4o"
 # correct_num = 5
 
 [llm.gpt4o-mini]
-api_key = "iHJ9fjei5eZBrVr72Z5ihyfB5umDV05GZp5V0Z5izvha4stvEYPh8geD3bsrjz4b" # API Key
+api_key = "hO4PS4KmxEUKKlJGYD8yxOati2bdXzYNpIuw1GTxG8otXlG1S0Ahj0uXrm0MMexL" # API Key
 model = "gpt-4o"
 
 #################################### Agent ###################################

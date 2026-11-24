@@ -1,0 +1,43 @@
+name: trackhop
+services:
+  trackhop:
+    image: ghcr.io/xlollx/trackhop:2.1.2
+    restart: unless-stopped
+    environment:
+    - SONGPORT_URL=https://localhost
+    - SONGPORT_PASSWORD=TagnkIdlm3EGKKxyVVNTW5YF
+    volumes:
+    - trackhop-data:/data
+    expose:
+    - '8080'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+volumes:
+  trackhop-data: null
+x-casaos:
+  id: com.dokploy.trackhop
+  main: trackhop
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/trackhop/icon.png
+  title:
+    en_US: Trackhop
+  tagline:
+    en_US: Trackhop keeps your playlists in sync between music services (Spotify, YouTube Music, T...
+  description:
+    en_US: Trackhop keeps your playlists in sync between music services (Spotify, YouTube Music, TIDAL, Navidrome, Jellyfin,
+      Plex, Last.fm and more), one way or both ways, on a schedule, from a web page on your server. Open source, in beta.
+  author: Dokploy Community
+  developer: Trackhop
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "2.1.2"
+  update_at: "2026-11-24"
+  website: https://trackhop.org
+  repo: https://github.com/xlollx/Trackhop
+  docs: https://trackhop.org/guide/docker

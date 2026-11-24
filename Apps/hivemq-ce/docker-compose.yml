@@ -6,7 +6,7 @@ services:
     user: 0:0
     environment:
     - MQTT_USERNAME=mqtt
-    - MQTT_PASSWORD=X7WP9YDX6eu8hI7Nrsj2aswPpH5SYqmD
+    - MQTT_PASSWORD=5jN7XWvrUJAiiwF1iv4PrkXJfsDIM0Fg
     entrypoint:
     - /bin/sh
     - /tmp/hivemq-ce-init.sh
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.5"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.hivemq.com/
   repo: https://github.com/hivemq/hivemq-community-edition
   docs: https://github.com/hivemq/hivemq-community-edition/wiki

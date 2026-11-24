@@ -7,8 +7,8 @@ services:
     volumes:
     - maxio-data:/data
     environment:
-    - MAXIO_ACCESS_KEY=QhYn1uLhyb31qnYiadbj
-    - MAXIO_SECRET_KEY=eCT7aCRwipGbw3ZlALPT
+    - MAXIO_ACCESS_KEY=UXLbmexQLkmIWQYO9ykN
+    - MAXIO_SECRET_KEY=1vqmTyFn99CSqlPhTang
     restart: unless-stopped
     ports:
     - target: 9000
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/coollabsio/maxio
   repo: https://github.com/coollabsio/maxio
   docs: https://github.com/coollabsio/maxio/blob/main/README.md

@@ -6,7 +6,7 @@ services:
     expose:
     - 3030
     environment:
-    - SERVER_DASHBOARD_SESSION_SECRET=kwUKOkz0jwJUe7bG0j2e0KkKT2GktUDXwuFfKPTeUhoKjzowJba04gtRQPf9ewEI
+    - SERVER_DASHBOARD_SESSION_SECRET=P5DRCgCuHXcBnjLOfFC07JEJP8GfDI9MHAT9UjRT3LjWbvPEezrrbOzMP9A3HTFl
     ports:
     - target: 3030
       published: "3030"
@@ -20,15 +20,15 @@ services:
     environment:
     - APISERVER_APP_URL=https://localhost
     - APISERVER_ASTERISK_ARI_PROXY_URL=http://asterisk:8088
-    - APISERVER_ASTERISK_ARI_SECRET=MupSyekMdPClhaGlepAf1Lko3yN9Qyix
+    - APISERVER_ASTERISK_ARI_SECRET=N7Vj1DBa7xLkUIat9uJxVAGVaFTnbG6Y
     - APISERVER_ASTERISK_ARI_USERNAME=ari
     - APISERVER_AUTHZ_SERVICE_ENABLED=false
     - APISERVER_AUTHZ_SERVICE_HOST=fnauthz
     - APISERVER_AUTHZ_SERVICE_METHODS=/fonoster.calls.v1beta2.Calls/CreateCall,/fonoster.identity.v1beta2.Identity/CreateWorkspace
     - APISERVER_AUTHZ_SERVICE_PORT=50071
-    - APISERVER_CLOAK_ENCRYPTION_KEY=3g/3mEZ+zC2CYVVMbk9UDzMQIKVU34WV577nCC7dNms=
-    - APISERVER_DATABASE_URL=postgresql://postgres:TNmadDVDTtTpxeOKelvIQeiDVay15v9K@postgres:5432/fonoster
-    - APISERVER_IDENTITY_DATABASE_URL=postgresql://postgres:TNmadDVDTtTpxeOKelvIQeiDVay15v9K@postgres:5432/fnidentity
+    - APISERVER_CLOAK_ENCRYPTION_KEY=WjN+V/ECgt6zpTB0P1XOJsX3DjtUGoARz4WCCHLAUHE=
+    - APISERVER_DATABASE_URL=postgresql://postgres:yoIj8AiIpLKzkFBQKj8TIe7aGZYraBAi@postgres:5432/fonoster
+    - APISERVER_IDENTITY_DATABASE_URL=postgresql://postgres:yoIj8AiIpLKzkFBQKj8TIe7aGZYraBAi@postgres:5432/fnidentity
     - APISERVER_IDENTITY_ISSUER=https://localhost
     - APISERVER_IDENTITY_CONTACT_VERIFICATION_REQUIRED=false
     - APISERVER_IDENTITY_TWO_FACTOR_AUTHENTICATION_REQUIRED=false
@@ -39,8 +39,8 @@ services:
     - APISERVER_IDENTITY_OAUTH2_GITHUB_CLIENT_SECRET=
     - APISERVER_IDENTITY_OAUTH2_GITHUB_ENABLED=false
     - APISERVER_INFLUXDB_INIT_ORG=fonoster
-    - APISERVER_INFLUXDB_INIT_PASSWORD=d0AmR0CK5ZDLR9LXkNiO3rY5ITO45q5b
-    - APISERVER_INFLUXDB_INIT_TOKEN=BobWViHMGJkcPky6RxhOSNwcliqoZaRnzllcIqo452QvijVosN8sUy7WDcCM6xLo
+    - APISERVER_INFLUXDB_INIT_PASSWORD=aGngwA4cwpsw2332EJ0wClyBQhdB78IE
+    - APISERVER_INFLUXDB_INIT_TOKEN=6IXMUFzYC9fiF2bG2nw6q8TALRVafi4CMWOyLIHYC6ni7wDW7VLOhHtfocKlSNwe
     - APISERVER_INFLUXDB_INIT_USERNAME=influxdb
     - APISERVER_INFLUXDB_URL=http://influxdb:8086
     - APISERVER_LOGS_FORMAT=json
@@ -49,7 +49,7 @@ services:
     - APISERVER_NATS_URL=nats://nats:4222
     - APISERVER_OWNER_EMAIL=admin@localhost
     - APISERVER_OWNER_NAME=Admin User
-    - APISERVER_OWNER_PASSWORD=eybLVPMe12FQ7WbyarY0VwMWRdBqYpSm
+    - APISERVER_OWNER_PASSWORD=GbEVzyAVaHwLPRamltGSkjQCZKcbSfQ6
     - APISERVER_ROOT_DOMAIN=localhost
     - APISERVER_SMTP_AUTH_PASS=secret
     - APISERVER_SMTP_AUTH_USER=postmaster@localhost
@@ -93,7 +93,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://postgres:TNmadDVDTtTpxeOKelvIQeiDVay15v9K@postgres:5432/routr
+      DATABASE_URL: postgresql://postgres:yoIj8AiIpLKzkFBQKj8TIe7aGZYraBAi@postgres:5432/routr
       EXTERNAL_ADDRS: CHANGE_ME_TO_HOST_IP
       LOGS_FORMAT: none
       LOGS_LEVEL: verbose
@@ -127,7 +127,7 @@ services:
     restart: unless-stopped
     environment:
       ARI_PROXY_URL: http://asterisk:8088
-      ARI_SECRET: B0CYtprgGvzUTeTO5rVRrJdfFxH2YKMw
+      ARI_SECRET: C2pBf6sD5PMSxd5slauzbs6Oy0N3Vhcj
       ARI_USERNAME: ari
       CODECS: g722,ulaw,alaw
       DTMF_MODE: auto_info
@@ -135,7 +135,7 @@ services:
       RTP_PORT_START: '10000'
       SIPPROXY_HOST: CHANGE_ME_TO_HOST_IP
       SIPPROXY_PORT: '5060'
-      SIPPROXY_SECRET: VyNsdr49UvNULGUHJlJzJMHPYVSUUUw5
+      SIPPROXY_SECRET: BWlToIgEi4ZLmPPgPcSiGt9ycyaRyltl
       SIPPROXY_USERNAME: voice
     expose:
     - 6060
@@ -144,7 +144,7 @@ services:
     restart: unless-stopped
     environment:
       PGTZ: UTC
-      POSTGRES_PASSWORD: TNmadDVDTtTpxeOKelvIQeiDVay15v9K
+      POSTGRES_PASSWORD: yoIj8AiIpLKzkFBQKj8TIe7aGZYraBAi
       POSTGRES_USER: postgres
       POSTGRES_DB: fonoster
       TZ: UTC
@@ -166,11 +166,11 @@ services:
     expose:
     - 8086
     environment:
-      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: BobWViHMGJkcPky6RxhOSNwcliqoZaRnzllcIqo452QvijVosN8sUy7WDcCM6xLo
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: 6IXMUFzYC9fiF2bG2nw6q8TALRVafi4CMWOyLIHYC6ni7wDW7VLOhHtfocKlSNwe
       DOCKER_INFLUXDB_INIT_BUCKET: calls
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_ORG: fonoster
-      DOCKER_INFLUXDB_INIT_PASSWORD: d0AmR0CK5ZDLR9LXkNiO3rY5ITO45q5b
+      DOCKER_INFLUXDB_INIT_PASSWORD: aGngwA4cwpsw2332EJ0wClyBQhdB78IE
       DOCKER_INFLUXDB_INIT_USERNAME: influxdb
     volumes:
     - influxdb:/var/lib/influxdb2
@@ -214,7 +214,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.15.15"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://fonoster.com/
   repo: https://github.com/fonoster/fonoster
   docs: https://docs.fonoster.com/

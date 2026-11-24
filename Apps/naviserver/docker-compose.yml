@@ -14,8 +14,8 @@ services:
       NAVISERVER_HOST: 0.0.0.0
       NAVISERVER_PORT: '23008'
       NAVISERVER_ALLOWED_ORIGINS: ''
-      NAVISERVER_SECRET_KEY: Ii9z23JMmrEc7rlFfroC559SrPEkNjopCRUmAJilYkchBlGryLrIEITAwsEZanPF
-      NAVISERVER_CLI_TOKEN: JQHG7t1cX1DBgibxcFAjzqEtfwguhgcVNQWsbszPoO4wPlnUPY7DAn5FnKymHbNK
+      NAVISERVER_SECRET_KEY: wyh2xkdCAhP4FcxMTKYrOCbFu9t1MXY3fQPpBXmWLzCTEpBCDVF9pbQJVnKS7Krp
+      NAVISERVER_CLI_TOKEN: VHt0OtpM0roaXEzPfpmy6lIT5ffr9FhgNaihtSFwV8VuqYHl5CehJAtdVmBeY7OM
       CURSEFORGE_API_KEY: ''
     volumes:
     - naviserver-data:/data
@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.4.5"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/andre-carbajal/NaviServer
   repo: https://github.com/andre-carbajal/NaviServer
   docs: https://github.com/andre-carbajal/NaviServer/wiki

@@ -16,9 +16,9 @@ services:
       PORT: '3000'
       DATABASE_PATH: /root/.flowise
       REDIS_URL: redis://redis:6379
-      JWT_AUTH_TOKEN_SECRET: gZdtWCKbBnOBILr7ZI4EzIS9IKaJP1zB
-      JWT_REFRESH_TOKEN_SECRET: pROOABRcr9xZQSGbW7xkWK9LJedC1ATk
-      EXPRESS_SESSION_SECRET: 9eMIbeySII0gGD6WlxsoN9HkJZYVo00E
+      JWT_AUTH_TOKEN_SECRET: Yo4mrjU89HVmgAK0ENhLsb5iGWzgMZxm
+      JWT_REFRESH_TOKEN_SECRET: ruLQn5yoDoFsKsBgADYnigaesJFu0jRQ
+      EXPRESS_SESSION_SECRET: sUvYp3FsCglzOn31e9xudYm4pM3CAvjl
     healthcheck:
       test:
       - CMD
@@ -82,7 +82,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://flowiseai.com/
   repo: https://github.com/FlowiseAI/Flowise
   docs: https://docs.flowiseai.com/

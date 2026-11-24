@@ -7,7 +7,7 @@ services:
     - MATOMO_DATABASE_HOST=db
     - MATOMO_DATABASE_DB=matomo
     - MATOMO_DATABASE_USER=matomo
-    - MATOMO_DATABASE_PASSWORD=gSlK7aXG2NYiSdJTXIcqSQpyFImcLwxO
+    - MATOMO_DATABASE_PASSWORD=Yly2h1VNhGxrkbmpfmFNKIZP8fSYGcuB
     volumes:
     - matomo:/var/www/html
     depends_on:
@@ -21,10 +21,10 @@ services:
     restart: always
     command: --max-allowed-packet=64MB
     environment:
-    - MYSQL_ROOT_PASSWORD=OpH9dqQsyTjdOrl0396y9W9hxWSLKJxH
+    - MYSQL_ROOT_PASSWORD=J1vRww15AEO4xPMgyiYq85iGfhp2mM7r
     - MYSQL_DATABASE=matomo
     - MYSQL_USER=matomo
-    - MYSQL_PASSWORD=gSlK7aXG2NYiSdJTXIcqSQpyFImcLwxO
+    - MYSQL_PASSWORD=Yly2h1VNhGxrkbmpfmFNKIZP8fSYGcuB
     volumes:
     - db:/var/lib/mysql
 volumes:
@@ -51,7 +51,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.1-apache"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://matomo.org
   repo: https://github.com/matomo-org/matomo
   docs: https://matomo.org/docs

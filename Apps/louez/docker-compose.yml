@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       LOUEZ_MODE: standalone
-      DATABASE_URL: mysql://louez:mS0MErFI0FYIqRaXcinEHII7jZCYwVOb@mysql:3306/louez
+      DATABASE_URL: mysql://louez:67xQTcNwWnGZJnInPdhpu4L0SMTC9nS9@mysql:3306/louez
       AUTH_URL: https://localhost
       AUTH_TRUST_HOST: 'true'
       NEXT_PUBLIC_APP_URL: https://localhost
@@ -14,7 +14,7 @@ services:
       S3_REGION: us-east-1
       S3_BUCKET: louez
       S3_ACCESS_KEY_ID: louez
-      S3_SECRET_ACCESS_KEY: k5iTKA5gSvMUcSJt2TeHu5voULYerJEL
+      S3_SECRET_ACCESS_KEY: ElicmRUIKaVBeSFaMNNwaHAzey7NH5xR
       S3_PUBLIC_URL: /files
     volumes:
     - louez-data:/app/data
@@ -33,8 +33,8 @@ services:
     environment:
       MYSQL_DATABASE: louez
       MYSQL_USER: louez
-      MYSQL_PASSWORD: mS0MErFI0FYIqRaXcinEHII7jZCYwVOb
-      MYSQL_ROOT_PASSWORD: vr5g36LziLMzWVReiPBT2plXfcyTwS8S
+      MYSQL_PASSWORD: 67xQTcNwWnGZJnInPdhpu4L0SMTC9nS9
+      MYSQL_ROOT_PASSWORD: WRxGngVHV5LW2so3BTGfDPY05cbWM9xQ
     volumes:
     - mysql-data:/var/lib/mysql
     healthcheck:
@@ -57,7 +57,7 @@ services:
     - mkdir -p /data/louez && exec minio server /data
     environment:
       MINIO_ROOT_USER: louez
-      MINIO_ROOT_PASSWORD: k5iTKA5gSvMUcSJt2TeHu5voULYerJEL
+      MINIO_ROOT_PASSWORD: ElicmRUIKaVBeSFaMNNwaHAzey7NH5xR
     volumes:
     - minio-data:/data
     healthcheck:
@@ -93,7 +93,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.1.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://louez.io
   repo: https://github.com/Synapsr/Louez
   docs: https://github.com/Synapsr/Louez#readme

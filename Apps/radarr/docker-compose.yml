@@ -1,0 +1,46 @@
+name: radarr
+services:
+  radarr:
+    image: linuxserver/radarr:7.0.3
+    restart: unless-stopped
+    expose:
+    - 7878
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=UTC
+    volumes:
+    - config:/config
+    - /DATA/AppData/radarr/data:/movies
+    - /DATA/AppData/radarr/data:/downloads
+    ports:
+    - target: 7878
+      published: "7878"
+      protocol: tcp
+volumes:
+  config: {}
+x-casaos:
+  id: com.dokploy.radarr
+  main: radarr
+  index: /
+  port_map: "7878"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/radarr/icon.png
+  title:
+    en_US: Radarr
+  tagline:
+    en_US: Radarr is a movie collection manager for Usenet and BitTorrent users — it monitors RSS...
+  description:
+    en_US: Radarr is a movie collection manager for Usenet and BitTorrent users — it monitors RSS feeds for new releases of
+      your wanted movies and grabs, sorts and renames them for your media server.
+  author: Dokploy Community
+  developer: Radarr
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "7.0.3"
+  update_at: "2026-11-24"
+  website: https://radarr.video
+  repo: https://github.com/Radarr/Radarr
+  docs: https://wiki.servarr.com/radarr

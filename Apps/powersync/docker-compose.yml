@@ -9,7 +9,7 @@ services:
     - wal_level=logical
     environment:
       POSTGRES_USER: powersync
-      POSTGRES_PASSWORD: fXmUQwze23Zg0KplkzL0CzoBI1ZdjTv1
+      POSTGRES_PASSWORD: OhwslZUFEfSQNhyhouIlrgHgqpaizxFi
       POSTGRES_DB: powersync
     volumes:
     - postgres-data:/var/lib/postgresql/data
@@ -63,7 +63,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.21.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://www.powersync.com/
   repo: https://github.com/powersync-ja/powersync-service
   docs: https://docs.powersync.com/

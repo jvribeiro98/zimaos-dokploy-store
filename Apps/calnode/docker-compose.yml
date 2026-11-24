@@ -12,7 +12,7 @@ services:
       BASE_URL: http:localhost
       PUBLIC_BASE_URL: ''
       DATABASE_URL: sqlite://./data/calnode.db
-      CALNODE_ENCRYPTION_KEY: b+9dsJREz1aoMl/MXkv82P1EzUKBpkv4pM+Po26RrV8=
+      CALNODE_ENCRYPTION_KEY: pYzZeD2Nu09VEa+vPM0ZwcFtMJkQPdnG14eyyoVSNM8=
       CALNODE_RECOVERY_SECRET: ''
       GOOGLE_CLIENT_ID: ''
       GOOGLE_CLIENT_SECRET: ''
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.12.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://calnode.com/
   repo: https://github.com/Calnode/calnode
   docs: https://github.com/Calnode/calnode/tree/main/docs

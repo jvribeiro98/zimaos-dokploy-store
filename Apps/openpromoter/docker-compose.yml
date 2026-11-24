@@ -1,0 +1,64 @@
+name: openpromoter
+services:
+  openpromoter:
+    image: ghcr.io/openpromoter/openpromoter:0.1.2
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+    - 3000
+    environment:
+      DATABASE_URL: postgres://openpromoter:JhLIiLaIg5WuZGA6YlypTcA8IUFFbYlP@postgres:5432/openpromoter
+      APP_URL: https://localhost
+      BETTER_AUTH_SECRET: pntQw0wkhyK4l+qT0oQ8E33OgpBHxcXeb2ux/gb3O6A=
+      ENCRYPTION_KEY: DHNrgsmJc35JJ8KND0tMo9MwSoyITl0iB5HuLHeU7cI=
+      EMAIL_FROM: OpenPromoter <hello@localhost>
+      SEED_DEMO: 'false'
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    volumes:
+    - openpromoter-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: openpromoter
+      POSTGRES_PASSWORD: JhLIiLaIg5WuZGA6YlypTcA8IUFFbYlP
+      POSTGRES_DB: openpromoter
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U openpromoter
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  openpromoter-db: {}
+x-casaos:
+  id: com.dokploy.openpromoter
+  main: openpromoter
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openpromoter/icon.svg
+  title:
+    en_US: OpenPromoter
+  tagline:
+    en_US: OpenPromoter is open-source affiliate and referral program software for SaaS
+  description:
+    en_US: OpenPromoter is open-source affiliate and referral program software for SaaS. It tracks referrals from Stripe,
+      Paddle and Lemon Squeezy, checks for fraud and prepares partner payouts with 0% payout fees.
+  author: Dokploy Community
+  developer: OpenPromoter
+  category: Finance
+  architectures:
+  - amd64
+  - arm64
+  version: "0.1.2"
+  update_at: "2026-11-24"
+  website: https://openpromoter.com/
+  repo: https://github.com/openpromoter/openpromoter
+  docs: https://openpromoter.com/docs/self-hosting/

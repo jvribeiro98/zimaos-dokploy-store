@@ -9,7 +9,7 @@ services:
       POSTGRES_HOST: budget-board-db
       POSTGRES_DATABASE: budgetboard
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 5EAxr05mcSjaoiDcZJn6JcpOaHb280fi
+      POSTGRES_PASSWORD: qSyX61LXhaC5bqYdjhhNUc3fY3kPCWop
       AUTO_UPDATE_DB: 'True'
     depends_on:
       budget-board-db:
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 5EAxr05mcSjaoiDcZJn6JcpOaHb280fi
+      POSTGRES_PASSWORD: qSyX61LXhaC5bqYdjhhNUc3fY3kPCWop
       POSTGRES_DB: budgetboard
     volumes:
     - /DATA/AppData/$AppID/db-data:/var/lib/postgresql/data
@@ -64,7 +64,7 @@ x-casaos:
   - amd64
   - arm64
   version: "release"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://budgetboard.net/
   repo: https://github.com/teelur/budget-board
   docs: https://budgetboard.net/

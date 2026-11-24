@@ -7,18 +7,18 @@ services:
       SELF_HOSTED: '1'
       LOG_LEVEL: info
       PORT: '4002'
-      INTERNAL_API_KEY: ylJomsvHqtIPUQ8zU5QF3EegYWhbwrbE
-      API_ENCRYPTION_KEY: KMW05IDFUNwe1cXjInDYjPzMnuluu1Mk
-      JWT_SECRET: SlhSCkHLKBKFUat0hMZUUg0tuC9fGiaI
-      MINIO_ACCESS_KEY: GNuaUTvrrW7aK4wA61HY8qGXkOYQnsE1
-      MINIO_SECRET_KEY: iX8GzrCiUtw8HZ2Oe5CwI4iJ5YCOvgl1
+      INTERNAL_API_KEY: boYuePnWQ2PviWjUbZw9WMwfMauJ4WVK
+      API_ENCRYPTION_KEY: rCJ4O2kOFlOjHeb4DX0pSQr8IDcCkC8p
+      JWT_SECRET: EKxFA0SA4eiqPDrztVe5WWi7gUA3R0Xo
+      MINIO_ACCESS_KEY: Qy4L9yFhmP0d4XaSqlQ3ryV8y7EjXcIA
+      MINIO_SECRET_KEY: Qno4igTL9gNNCW2bjfpCPoC4V76uSJzP
       MINIO_URL: http://minio:9000
       REDIS_URL: redis:6379
-      REDIS_PASSWORD: GqNCgCv4U0u6dQyd5LmRhRq0uB6hEali
+      REDIS_PASSWORD: BloyOMU0V4jPgX0UA9e9lcKcXb1x5nAQ
       WORKER_URL: http://worker:4003
       COUCH_DB_USERNAME: budibase
-      COUCH_DB_PASSWORD: ufKsQ6Bi3vRsFBtAWB2RgCmwIUOXedLr
-      COUCH_DB_URL: http://budibase:ufKsQ6Bi3vRsFBtAWB2RgCmwIUOXedLr@couchdb:5984
+      COUCH_DB_PASSWORD: 2MfWHUDSczZKuRZOa1DkwauxOwrFV1Ww
+      COUCH_DB_URL: http://budibase:2MfWHUDSczZKuRZOa1DkwauxOwrFV1Ww@couchdb:5984
       BUDIBASE_ENVIRONMENT: ${BUDIBASE_ENVIRONMENT:-PRODUCTION}
       ENABLE_ANALYTICS: ${ENABLE_ANALYTICS:-true}
       BB_ADMIN_USER_EMAIL: ''
@@ -47,18 +47,18 @@ services:
       LOG_LEVEL: info
       PORT: '4003'
       CLUSTER_PORT: '10000'
-      INTERNAL_API_KEY: ylJomsvHqtIPUQ8zU5QF3EegYWhbwrbE
-      API_ENCRYPTION_KEY: KMW05IDFUNwe1cXjInDYjPzMnuluu1Mk
-      JWT_SECRET: SlhSCkHLKBKFUat0hMZUUg0tuC9fGiaI
-      MINIO_ACCESS_KEY: GNuaUTvrrW7aK4wA61HY8qGXkOYQnsE1
-      MINIO_SECRET_KEY: iX8GzrCiUtw8HZ2Oe5CwI4iJ5YCOvgl1
+      INTERNAL_API_KEY: boYuePnWQ2PviWjUbZw9WMwfMauJ4WVK
+      API_ENCRYPTION_KEY: rCJ4O2kOFlOjHeb4DX0pSQr8IDcCkC8p
+      JWT_SECRET: EKxFA0SA4eiqPDrztVe5WWi7gUA3R0Xo
+      MINIO_ACCESS_KEY: Qy4L9yFhmP0d4XaSqlQ3ryV8y7EjXcIA
+      MINIO_SECRET_KEY: Qno4igTL9gNNCW2bjfpCPoC4V76uSJzP
       APPS_URL: http://apps:4002
       MINIO_URL: http://minio:9000
       REDIS_URL: redis:6379
-      REDIS_PASSWORD: GqNCgCv4U0u6dQyd5LmRhRq0uB6hEali
+      REDIS_PASSWORD: BloyOMU0V4jPgX0UA9e9lcKcXb1x5nAQ
       COUCH_DB_USERNAME: budibase
-      COUCH_DB_PASSWORD: ufKsQ6Bi3vRsFBtAWB2RgCmwIUOXedLr
-      COUCH_DB_URL: http://budibase:ufKsQ6Bi3vRsFBtAWB2RgCmwIUOXedLr@couchdb:5984
+      COUCH_DB_PASSWORD: 2MfWHUDSczZKuRZOa1DkwauxOwrFV1Ww
+      COUCH_DB_URL: http://budibase:2MfWHUDSczZKuRZOa1DkwauxOwrFV1Ww@couchdb:5984
       BUDIBASE_ENVIRONMENT: ${BUDIBASE_ENVIRONMENT:-PRODUCTION}
       ENABLE_ANALYTICS: ${ENABLE_ANALYTICS:-true}
     depends_on:
@@ -83,8 +83,8 @@ services:
     volumes:
     - minio_data:/data
     environment:
-      MINIO_ROOT_USER: GNuaUTvrrW7aK4wA61HY8qGXkOYQnsE1
-      MINIO_ROOT_PASSWORD: iX8GzrCiUtw8HZ2Oe5CwI4iJ5YCOvgl1
+      MINIO_ROOT_USER: Qy4L9yFhmP0d4XaSqlQ3ryV8y7EjXcIA
+      MINIO_ROOT_PASSWORD: Qno4igTL9gNNCW2bjfpCPoC4V76uSJzP
       MINIO_BROWSER: 'False'
     command: server /data --console-address ":9001"
     healthcheck:
@@ -136,7 +136,7 @@ services:
     restart: unless-stopped
     environment:
       COUCHDB_USER: budibase
-      COUCHDB_PASSWORD: ufKsQ6Bi3vRsFBtAWB2RgCmwIUOXedLr
+      COUCHDB_PASSWORD: 2MfWHUDSczZKuRZOa1DkwauxOwrFV1Ww
       TARGETBUILD: docker-compose
     healthcheck:
       test:
@@ -192,7 +192,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.23.47"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://budibase.com/
   repo: https://github.com/Budibase/budibase
   docs: https://docs.budibase.com/docs/

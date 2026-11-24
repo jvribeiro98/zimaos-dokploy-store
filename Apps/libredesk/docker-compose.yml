@@ -6,7 +6,7 @@ services:
     expose:
     - 9000
     environment:
-      LIBREDESK_SYSTEM_USER_PASSWORD: +0DJIhPPLcuFmqDNNwoXpNUxqmw3PtP+iTkjo3cFIpw=
+      LIBREDESK_SYSTEM_USER_PASSWORD: BgqfXVXaSjbsii2rXRKcnQfPBrhrPkRcI3NZkSvG7gQ=
     depends_on:
     - db
     - redis
@@ -29,7 +29,7 @@ services:
     - 5432
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: X3rxhivwG01iwsuE
+      POSTGRES_PASSWORD: zotwwnym6A0e06Uu
       POSTGRES_DB: libredesk
     healthcheck:
       test:
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://libredesk.io
   repo: https://github.com/abhinavxd/libredesk
   docs: https://docs.libredesk.io/introduction

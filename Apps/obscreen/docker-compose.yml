@@ -1,0 +1,62 @@
+name: obscreen
+services:
+  obscreen:
+    image: obscreen/obscreen:v2026.11.4
+    restart: unless-stopped
+    expose:
+    - 5000
+    volumes:
+    - obscreen-data:/app/data
+    - obscreen-license:/app/license
+    environment:
+      PORT: '5000'
+      NO_ZEROCONF: 'true'
+      BEHIND_REVERSE_PROXY: 'true'
+      SECRET_KEY: ac8ba8285e1168aa041d16545392ba700096ce4f687a5c5667136e47796c7c63
+      FROZEN_VAR_EXTERNAL_URL: http://localhost
+      MALLOC_MMAP_THRESHOLD_: '1048576'
+      MALLOC_TRIM_THRESHOLD_: '1048576'
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -fsS
+      - -o
+      - /dev/null
+      - http://localhost:5000/
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    ports:
+    - target: 5000
+      published: "5000"
+      protocol: tcp
+volumes:
+  obscreen-data: null
+  obscreen-license: null
+x-casaos:
+  id: com.dokploy.obscreen
+  main: obscreen
+  index: /
+  port_map: "5000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/obscreen/icon.png
+  title:
+    en_US: Obscreen
+  tagline:
+    en_US: A self-hosted digital signage platform to manage playlists and display images, videos,...
+  description:
+    en_US: A self-hosted digital signage platform to manage playlists and display images, videos, and web pages on TVs, computers,
+      tablets, or any browser.
+  author: Dokploy Community
+  developer: Obscreen
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "2026.11.4"
+  update_at: "2026-11-24"
+  website: https://obscreen.io/
+  repo: https://github.com/obscreen/obscreen
+  docs: https://docs.obscreen.io/

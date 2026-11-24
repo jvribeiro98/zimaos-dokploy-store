@@ -16,9 +16,9 @@ services:
     - SEARCH=true
     - NO_INDEX=true
     - MEILI_NO_ANALYTICS=true
-    - MEILI_MASTER_KEY=Ce3RRtBv7JXzqWrqYZeo48AQ61HOXm2B
-    - JWT_SECRET=cPLdIEVHSM2CaKKJ5hUt6kpWb4fxUo2WtKTKtwzOqBWw2KusPfPPz0uRefpisdKG
-    - JWT_REFRESH_SECRET=JY3Gn4FlY4FlTMs8X34vAGkgqbWn2lZ6zUOhuuofGZ8YZUU35zgIMXGqiRYo5ax8
+    - MEILI_MASTER_KEY=9bTY0eDd18AGTQMeOcXusmQILbQMo0pd
+    - JWT_SECRET=ARO1kqSqBnbYmqnxLBZeiEaqtLWaCuUdbZyVYc6Hxsepl4ClWjlnwJlSTJNo21Mp
+    - JWT_REFRESH_SECRET=px5ARH1Dbi0IRCd9i9wKhWoZhdJSk4xexwE3VFYvsuZ7WSgk8WRwPbKiXEfXfaoO
     - CREDS_KEY=f34be427ebb29de8d88c107a71546019685ed8b241d8f2ed00c3df97ad2566f0
     - CREDS_IV=e2341419ec3dd3d19b13a1a87fafcbfb
     - RAG_PORT=${RAG_PORT:-8000}
@@ -56,7 +56,7 @@ services:
     environment:
     - MEILI_HOST=http://meilisearch:7700
     - MEILI_NO_ANALYTICS=true
-    - MEILI_MASTER_KEY=Ce3RRtBv7JXzqWrqYZeo48AQ61HOXm2B
+    - MEILI_MASTER_KEY=9bTY0eDd18AGTQMeOcXusmQILbQMo0pd
     volumes:
     - meili_data:/meili_data
   vectordb:
@@ -64,7 +64,7 @@ services:
     environment:
     - POSTGRES_DB=librechat_db
     - POSTGRES_USER=librechat_user
-    - POSTGRES_PASSWORD=VEaorlJktNoC75Gx
+    - POSTGRES_PASSWORD=ObU1uyG3Q4gnqf18
     restart: always
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -75,13 +75,13 @@ services:
     - VECTOR_DB_TYPE=pgvector
     - POSTGRES_DB=librechat_db
     - POSTGRES_USER=librechat_user
-    - POSTGRES_PASSWORD=VEaorlJktNoC75Gx
+    - POSTGRES_PASSWORD=ObU1uyG3Q4gnqf18
     - RAG_PORT=${RAG_PORT:-8000}
     - OPENAI_API_KEY=
     - RAG_OPENAI_API_KEY=
     - GOOGLE_KEY=
     - RAG_GOOGLE_API_KEY=
-    - JWT_SECRET=cPLdIEVHSM2CaKKJ5hUt6kpWb4fxUo2WtKTKtwzOqBWw2KusPfPPz0uRefpisdKG
+    - JWT_SECRET=ARO1kqSqBnbYmqnxLBZeiEaqtLWaCuUdbZyVYc6Hxsepl4ClWjlnwJlSTJNo21Mp
     - COLLECTION_NAME=${COLLECTION_NAME:-librechat_collection}
     - CHUNK_SIZE=1500
     - CHUNK_OVERLAP=100
@@ -119,7 +119,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://librechat.ai
   repo: https://github.com/danny-avila/librechat
   docs: https://docs.librechat.ai

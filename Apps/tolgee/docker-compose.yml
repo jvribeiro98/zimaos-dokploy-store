@@ -12,7 +12,7 @@ services:
       TOLGEE_AUTHENTICATION_ENABLED: 'true'
       TOLGEE_AUTHENTICATION_INITIAL_PASSWORD: admin
       TOLGEE_AUTHENTICATION_INITIAL_USERNAME: admin
-      TOLGEE_AUTHENTICATION_JWT_SECRET: IDmaGZeIR5vyCT0EmL4Epd2rt+b+bjpBSCoSjYZiMnA=
+      TOLGEE_AUTHENTICATION_JWT_SECRET: ESD7p7p6VckNKdaCXI/bgdaw5mpSHQKEaxYqoXxJB0I=
       TOLGEE_MACHINE_TRANSLATION_GOOGLE_API_KEY: my_google_api_key
       TOLGEE_SMTP_AUTH: 'true'
       TOLGEE_SMTP_FROM: Tolgee <no-reply@mydomain.com>
@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://tolgee.io
   repo: https://github.com/tolgee/tolgee-platform
   docs: https://tolgee.io/platform

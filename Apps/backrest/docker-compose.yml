@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.6.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://garethgeorge.github.io/backrest
   repo: https://github.com/garethgeorge/backrest
   docs: https://garethgeorge.github.io/backrest/introduction/getting-started

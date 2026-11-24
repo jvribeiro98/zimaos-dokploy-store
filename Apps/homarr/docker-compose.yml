@@ -6,7 +6,7 @@ services:
     volumes:
     - homarr_appdata:/appdata
     environment:
-    - SECRET_ENCRYPTION_KEY=7656f8fc0f6e98000c7a41015efa81be37b3eee7e773e6aef635a62776a0feda008e81dbf5d9cb4e80820215460c06adb0858db4c1f4263f35a8e85d5927c71d
+    - SECRET_ENCRYPTION_KEY=22abb9cf811a5b43e7ba49f5bab5616e8e1845f0fc33cf50c8b52bd4f3f22c7f7885a420b11972781d579e091234da6b921e39e2d7969bd1bb1896d6bc3ce430
     expose:
     - 7575
     ports:
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://homarr.dev/
   repo: https://github.com/homarr-labs/homarr
   docs: https://homarr.dev/docs/getting-started/installation/docker

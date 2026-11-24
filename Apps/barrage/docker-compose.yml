@@ -6,11 +6,11 @@ services:
     expose:
     - 3000
     environment:
-    - NEXTAUTH_SECRET=ofyfEoQHb2TH4BIxj2Rh5uNy/bjGBk1ER4zT+jYeTTc=
+    - NEXTAUTH_SECRET=zfXh5kVn1kYNMia8oDKvraVyxpW39uwZjndfhrfhP2A=
     - NEXTAUTH_URL=http://${DOMAIN}
     - DELUGE_URL=http://your-deluge-ip:8112
-    - DELUGE_PASSWORD=DKrhyw8R30hbZaPT
-    - BARRAGE_PASSWORD=V44hsk8HInqCR4mY
+    - DELUGE_PASSWORD=AfvcHaDjOC32wTbP
+    - BARRAGE_PASSWORD=XAWnjH4RCkm8blx6
     ports:
     - target: 3000
       published: "3000"
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://github.com/maulik9898/barrage
   repo: https://github.com/maulik9898/barrage
   docs: https://github.com/maulik9898/barrage/blob/main/README.md

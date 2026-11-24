@@ -1,0 +1,42 @@
+name: traccar
+services:
+  traccar:
+    image: traccar/traccar:6.17.0
+    restart: unless-stopped
+    expose:
+    - 8082
+    volumes:
+    - data:/opt/traccar/data
+    - logs:/opt/traccar/logs
+    ports:
+    - target: 8082
+      published: "8082"
+      protocol: tcp
+volumes:
+  data: {}
+  logs: {}
+x-casaos:
+  id: com.dokploy.traccar
+  main: traccar
+  index: /
+  port_map: "8082"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/traccar/icon.png
+  title:
+    en_US: Traccar
+  tagline:
+    en_US: Traccar is an open-source GPS tracking platform that supports 2,000+ tracker models — l...
+  description:
+    en_US: Traccar is an open-source GPS tracking platform that supports 2,000+ tracker models — live positions, geofences,
+      reports and alerts for vehicles, assets and people on one map.
+  author: Dokploy Community
+  developer: Traccar
+  category: Others
+  architectures:
+  - amd64
+  - arm64
+  version: "6.17.0"
+  update_at: "2026-11-24"
+  website: https://www.traccar.org
+  repo: https://github.com/traccar/traccar
+  docs: https://www.traccar.org/documentation/

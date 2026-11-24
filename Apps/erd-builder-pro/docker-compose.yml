@@ -1,0 +1,68 @@
+name: erd-builder-pro
+services:
+  erd-builder-pro:
+    image: bekenweb/erd-builder-pro:3.5.6
+    restart: unless-stopped
+    expose:
+    - 3000
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+    - DATABASE_URL=postgresql://postgres:uD7XHGaDqF0Me3HNhJT1TkX9XL8aUWJ4@db:5432/erd_builder_pro
+    - ERD_ENCRYPTION_KEY=8vWCO1QmQQh4lqDmGXuQpjIr3wMLVoDlgHyW5oqP0mOYa5RF
+    - ERDBPRO_LICENSE_STATE_FILE=/app/data/.erdbpro/license-state.json
+    volumes:
+    - erd-builder-pro-data:/app/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+    - POSTGRES_PASSWORD=uD7XHGaDqF0Me3HNhJT1TkX9XL8aUWJ4
+    - POSTGRES_DB=erd_builder_pro
+    volumes:
+    - erd-builder-pro-db:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD
+      - pg_isready
+      - -U
+      - postgres
+      - -d
+      - erd_builder_pro
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  erd-builder-pro-data: {}
+  erd-builder-pro-db: {}
+x-casaos:
+  id: com.dokploy.erd-builder-pro
+  main: erd-builder-pro
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/erd-builder-pro/icon.svg
+  title:
+    en_US: ERD Builder Pro
+  tagline:
+    en_US: Design database schemas in an ERD canvas or DBML editor, export SQL DDL, and keep flowc...
+  description:
+    en_US: 'Design database schemas in an ERD canvas or DBML editor, export SQL DDL, and keep flowcharts, notes, and drawings
+      in the same project. Create the administrator account right after deployment: the first account becomes the SuperAdmin.
+      amd64 only.'
+  author: Dokploy Community
+  developer: ERD Builder Pro
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "3.5.6"
+  update_at: "2026-11-24"
+  website: https://www.erdbuilderpro.com/
+  repo: https://github.com/hadziqmtqn/erd-builder-pro
+  docs: https://docs.erdbuilderpro.com/

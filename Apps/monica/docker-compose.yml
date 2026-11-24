@@ -1,0 +1,59 @@
+name: monica
+services:
+  app:
+    image: monica:4.1.2
+    restart: unless-stopped
+    depends_on:
+    - db
+    environment:
+    - APP_KEY=ZHvFJXOgftqhzajA1CFcgC6gcHUqBgk8
+    - APP_URL=https://localhost
+    - DB_HOST=db
+    - DB_USERNAME=monica
+    - DB_PASSWORD=b9Qm22GLBLuPTvNJPu3pTYBrGPIZCobu
+    volumes:
+    - monica_data:/var/www/html/storage
+    expose:
+    - '80'
+    ports:
+    - target: 80
+      published: "80"
+      protocol: tcp
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+    - MYSQL_RANDOM_ROOT_PASSWORD=true
+    - MYSQL_DATABASE=monica
+    - MYSQL_USER=monica
+    - MYSQL_PASSWORD=b9Qm22GLBLuPTvNJPu3pTYBrGPIZCobu
+    volumes:
+    - monica_mysql:/var/lib/mysql
+volumes:
+  monica_data: null
+  monica_mysql: null
+x-casaos:
+  id: com.dokploy.monica
+  main: app
+  index: /
+  port_map: "80"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/monica/icon.svg
+  title:
+    en_US: Monica
+  tagline:
+    en_US: Monica is an open-source personal CRM to organize your interactions with the people you...
+  description:
+    en_US: 'Monica is an open-source personal CRM to organize your interactions with the people you care about: contacts,
+      reminders, notes, activities, gifts and journals, all in one private place.'
+  author: Dokploy Community
+  developer: Monica
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "4.1.2"
+  update_at: "2026-11-24"
+  website: https://www.monicahq.com
+  repo: https://github.com/monicahq/monica
+  docs: https://www.monicahq.com/documentation

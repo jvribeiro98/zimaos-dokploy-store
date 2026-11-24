@@ -10,7 +10,7 @@ services:
     - DB_HOST=db
     - DB_NAME=flarum
     - DB_USER=flarum
-    - DB_PASSWORD=Lhy5OFmYIUTW6HtL
+    - DB_PASSWORD=dIrkuX3kw0jR1gtf
     volumes:
     - flarum-data:/data
     depends_on:
@@ -23,10 +23,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=BZMwO9xsNjs7t7Td
+    - MYSQL_ROOT_PASSWORD=4E25Ne2C6SlRqZpD
     - MYSQL_DATABASE=flarum
     - MYSQL_USER=flarum
-    - MYSQL_PASSWORD=Lhy5OFmYIUTW6HtL
+    - MYSQL_PASSWORD=dIrkuX3kw0jR1gtf
     volumes:
     - db-data:/var/lib/mysql
 volumes:
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://flarum.org/
   repo: https://github.com/flarum/flarum
   docs: https://docs.flarum.org/

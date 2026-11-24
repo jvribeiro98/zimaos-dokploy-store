@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://ghost.org/
   repo: https://github.com/TryGhost/Ghost
   docs: https://ghost.org/docs/

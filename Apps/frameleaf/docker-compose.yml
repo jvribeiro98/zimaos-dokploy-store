@@ -11,7 +11,7 @@ services:
     environment:
       DB_HOSTNAME: frameleaf-database
       DB_USERNAME: frameleaf
-      DB_PASSWORD: oqKXQZuny8miqFwxuFcDIa0UxCzdn7xE
+      DB_PASSWORD: bYOWLq1YcOYPO0HL39Oysmyr0SMxn7QC
       DB_DATABASE_NAME: frameleaf
       FRAMELEAF_MACHINE_LEARNING_URL: http://frameleaf-machine-learning:3003
       TZ: Etc/UTC
@@ -41,7 +41,7 @@ services:
     image: ghcr.io/frameleaf/frameleaf-postgres:19beta4-pgvector0.8.7@sha256:7b155ed85302ab66c1022309f1f70f0b79f98f70bd52af8d7d3611a0cbf08cf0
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: oqKXQZuny8miqFwxuFcDIa0UxCzdn7xE
+      POSTGRES_PASSWORD: bYOWLq1YcOYPO0HL39Oysmyr0SMxn7QC
       POSTGRES_USER: frameleaf
       POSTGRES_DB: frameleaf
       POSTGRES_INITDB_ARGS: --data-checksums
@@ -81,7 +81,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.2.3"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://frameleaf.app/
   repo: https://github.com/Frameleaf/frameleaf-app
   docs: https://frameleaf.app/docs/start/introduction/

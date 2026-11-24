@@ -1,0 +1,43 @@
+name: dbgate
+services:
+  dbgate:
+    image: dbgate/dbgate:7.3.6
+    restart: unless-stopped
+    environment:
+    - LOGIN=admin
+    - PASSWORD=gs72cUYom4cF9XHP1wQu55pEPZWXF0eM
+    volumes:
+    - dbgate_data:/root/.dbgate
+    expose:
+    - '3000'
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  dbgate_data: null
+x-casaos:
+  id: com.dokploy.dbgate
+  main: dbgate
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/dbgate/icon.png
+  title:
+    en_US: DbGate
+  tagline:
+    en_US: DbGate is a modern web-based database manager for MySQL, PostgreSQL, SQL Server, MongoD...
+  description:
+    en_US: DbGate is a modern web-based database manager for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite and more
+      — browse data, run queries, import and export, all from one interface.
+  author: Dokploy Community
+  developer: DbGate
+  category: Developer
+  architectures:
+  - amd64
+  - arm64
+  version: "7.3.6"
+  update_at: "2026-11-24"
+  website: https://www.dbgate.io
+  repo: https://github.com/dbgate/dbgate
+  docs: https://docs.dbgate.io

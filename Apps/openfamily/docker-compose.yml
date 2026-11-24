@@ -1,0 +1,40 @@
+name: openfamily
+services:
+  openfamily:
+    image: ghcr.io/nexaflowfrance/openfamily:2.2.0
+    restart: unless-stopped
+    expose:
+    - 3000
+    volumes:
+    - openfamily-data:/data
+    ports:
+    - target: 3000
+      published: "3000"
+      protocol: tcp
+volumes:
+  openfamily-data: {}
+x-casaos:
+  id: com.dokploy.openfamily
+  main: openfamily
+  index: /
+  port_map: "3000"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/openfamily/icon.png
+  title:
+    en_US: OpenFamily
+  tagline:
+    en_US: Self-hosted family organizer with shared calendars, chores, shopping lists, recipes, me...
+  description:
+    en_US: Self-hosted family organizer with shared calendars, chores, shopping lists, recipes, meal planning, pantry and
+      household budget. Web/PWA and Android clients; AGPL-3.0.
+  author: Dokploy Community
+  developer: OpenFamily
+  category: Productivity
+  architectures:
+  - amd64
+  - arm64
+  version: "2.2.0"
+  update_at: "2026-11-24"
+  website: https://openfamily.fr/
+  repo: https://github.com/NexaFlowFrance/OpenFamily
+  docs: https://github.com/NexaFlowFrance/OpenFamily/blob/main/INSTALLATION.md

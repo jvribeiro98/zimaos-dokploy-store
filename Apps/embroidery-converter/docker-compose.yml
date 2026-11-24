@@ -1,0 +1,39 @@
+name: embroidery-converter
+services:
+  embroidery-converter:
+    image: mavenwright/embroidery-converter:1.0.0
+    restart: unless-stopped
+    expose:
+    - 8080
+    environment:
+      SHOW_CREDIT: 'true'
+    ports:
+    - target: 8080
+      published: "8080"
+      protocol: tcp
+x-casaos:
+  id: com.dokploy.embroidery-converter
+  main: embroidery-converter
+  index: /
+  port_map: "8080"
+  scheme: http
+  icon: https://raw.githubusercontent.com/jvribeiro98/zimaos-dokploy-store/main/Apps/embroidery-converter/icon.svg
+  title:
+    en_US: Embroidery File Converter
+  tagline:
+    en_US: A browser-only viewer and converter for PES, DST, JEF, EXP and VP3 embroidery files
+  description:
+    en_US: 'A browser-only viewer and converter for PES, DST, JEF, EXP and VP3 embroidery files. Files never leave the device:
+      the container only serves a static page. A TypeScript port of pystitch (the library Ink/Stitch uses), free and MIT licensed.
+      Made by MavenWright, the team behind StitchKit. SHOW_CREDIT=false removes the footer link.'
+  author: Dokploy Community
+  developer: Embroidery File Converter
+  category: Media
+  architectures:
+  - amd64
+  - arm64
+  version: "1.0.0"
+  update_at: "2026-11-24"
+  website: https://mavenwright.com/en/stitchkit/tools/embroidery-file-converter
+  repo: https://github.com/mavenwright/embroidery-converter
+  docs: https://github.com/mavenwright/embroidery-converter#readme

@@ -11,7 +11,7 @@ services:
     - DB_CONNECTION_STRING=mongodb://mongodb:27017/uptime_db?replicaSet=rs0
     - REDIS_URL=redis://redis:6379
     - CLIENT_HOST=http://localhost
-    - JWT_SECRET=v5s0rNeKGqcMOqOS1wnoGX2FXJJQMgwI
+    - JWT_SECRET=EF5WZmMHamAjOK9hAiJjmPT1S9yXpu3D
     depends_on:
     - mongodb
     ports:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://checkmate.so/
   repo: https://github.com/bluewave-labs/checkmate
   docs: https://checkmate.so/docs

@@ -7,7 +7,7 @@ services:
     - 3000
     environment:
     - PUBLIC_URL=https://localhost
-    - TOKEN_ENCRYPTION_KEY=aU1Ul9dJvdS8eLdxGkTRmafMUqG8TXgvPL8BCamJRXCtT6Z8
+    - TOKEN_ENCRYPTION_KEY=Ueqir2KVeszAVIt1oD9YVJAIf5Xb9qSZ6LP8pmaPkVI0cTc2
     - ALLOWED_WISE_USERS=
     - WRITES_ENABLED=true
     volumes:
@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.1.1"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://blanketbyte.com
   repo: https://github.com/BlanketByte/wise-mcp
   docs: https://github.com/BlanketByte/wise-mcp#readme

@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.49"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://changedetection.io
   repo: https://github.com/dgtlmoon/changedetection.io
   docs: https://github.com/dgtlmoon/changedetection.io/wiki

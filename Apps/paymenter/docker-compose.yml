@@ -7,10 +7,10 @@ services:
     volumes:
     - paymenter-database:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=KSEpnelLfMbYvazuZh7N
+    - MYSQL_ROOT_PASSWORD=fIdSNR58RHxs2s8XXdjr
     - MYSQL_DATABASE=paymenter
     - MYSQL_USER=paymenter
-    - MYSQL_PASSWORD=5cZTpnpYSUHNhrOl
+    - MYSQL_PASSWORD=XGTbby21U7c9CA2i
   cache:
     image: redis:alpine
     restart: unless-stopped
@@ -31,14 +31,14 @@ services:
     environment:
     - APP_ENV=${APP_ENV:-production}
     - APP_DEBUG=false
-    - APP_KEY=base64:9tSkOdALtUsIXox7jjhwJy0pB0AgFG+hgii5X4OlgLU=
+    - APP_KEY=base64:Io9laJ/w82LSq2/Q0S5rzBVJkl89F15ZljBOgTvygKQ=
     - APP_URL=https://localhost
     - DB_CONNECTION=mysql
     - DB_HOST=database
     - DB_PORT=3306
     - DB_DATABASE=paymenter
     - DB_USERNAME=paymenter
-    - DB_PASSWORD=5cZTpnpYSUHNhrOl
+    - DB_PASSWORD=XGTbby21U7c9CA2i
     - CACHE_STORE=redis
     - REDIS_HOST=cache
     - REDIS_PORT=6379
@@ -74,7 +74,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-23"
+  update_at: "2026-11-24"
   website: https://paymenter.org/
   repo: https://github.com/Paymenter/Paymenter
   docs: https://paymenter.org/docs/getting-started/introduction
