@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://quireink.com
   repo: https://github.com/joiha-steven/quireink
   docs: https://github.com/joiha-steven/quireink/blob/main/docs/self-host-docker.md

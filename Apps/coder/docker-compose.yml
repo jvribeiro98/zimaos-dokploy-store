@@ -12,7 +12,7 @@ services:
     environment:
     - CODER_ACCESS_URL=
     - CODER_HTTP_ADDRESS=0.0.0.0:7080
-    - CODER_PG_CONNECTION_URL=postgresql://coder:amHEXxBbe2V7kuMplQTv43iJWUe2Oi48@db/coder?sslmode=disable
+    - CODER_PG_CONNECTION_URL=postgresql://coder:nkIfnUfxgMZviMgbBLTOaGOMbKwyT8Rl@db/coder?sslmode=disable
     restart: unless-stopped
     ports:
     - target: 7080
@@ -21,7 +21,7 @@ services:
   db:
     image: postgres:17
     environment:
-    - POSTGRES_PASSWORD=amHEXxBbe2V7kuMplQTv43iJWUe2Oi48
+    - POSTGRES_PASSWORD=nkIfnUfxgMZviMgbBLTOaGOMbKwyT8Rl
     - POSTGRES_USER=coder
     - POSTGRES_DB=coder
     healthcheck:
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.15.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://coder.com/
   repo: https://github.com/coder/coder
   docs: https://coder.com/docs

@@ -4,12 +4,12 @@ services:
     image: tombursch/kitchenowl:v0.7.1
     restart: unless-stopped
     environment:
-    - JWT_SECRET_KEY=df7yT2fL3BMpkMpADCtE3B4sAWoQV8i5
+    - JWT_SECRET_KEY=3B92SDsMmoPeIRlbyuOfJPckU1WmebL7
     - DB_DRIVER=postgresql
     - DB_HOST=db
     - DB_NAME=kitchenowl
     - DB_USER=kitchenowl
-    - DB_PASSWORD=t29Sb4mtUt7HAnJ69B7RRjnF
+    - DB_PASSWORD=1FnXmYbzwLBnkM5rfrIZl5Ss
     volumes:
     - kitchenowl_files:/data
     depends_on:
@@ -24,7 +24,7 @@ services:
     environment:
     - POSTGRES_DB=kitchenowl
     - POSTGRES_USER=kitchenowl
-    - POSTGRES_PASSWORD=t29Sb4mtUt7HAnJ69B7RRjnF
+    - POSTGRES_PASSWORD=1FnXmYbzwLBnkM5rfrIZl5Ss
     volumes:
     - kitchenowl_db:/var/lib/postgresql/data
     healthcheck:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.7.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://kitchenowl.org/
   repo: https://github.com/TomBursch/kitchenowl
   docs: https://github.com/TomBursch/kitchenowl/wiki

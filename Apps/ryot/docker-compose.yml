@@ -3,8 +3,8 @@ services:
   ryot-app:
     image: ignisda/ryot:v7.10
     environment:
-    - DATABASE_URL=postgres://postgres:FiOtAkynmvJScMJIlqpH7kNibdRRNJAh@ryot-db:5432/postgres
-    - SERVER_ADMIN_ACCESS_TOKEN=D+4q3L2UvghRnUi58H3r9rqpdS0RFN2jMvqa/Mqb3/M=
+    - DATABASE_URL=postgres://postgres:XLkcYDrSFc1NvUcusRjz9Ffh964l7r2j@ryot-db:5432/postgres
+    - SERVER_ADMIN_ACCESS_TOKEN=/MDsGLOxQ1cQ6NF9wEzC8U/Cor0vosQxGapAU4zhZOM=
     - TZ=UTC
     depends_on:
       ryot-db:
@@ -20,7 +20,7 @@ services:
     volumes:
     - ryot-postgres-data:/var/lib/postgresql/data
     environment:
-    - POSTGRES_PASSWORD=FiOtAkynmvJScMJIlqpH7kNibdRRNJAh
+    - POSTGRES_PASSWORD=XLkcYDrSFc1NvUcusRjz9Ffh964l7r2j
     - POSTGRES_USER=postgres
     - POSTGRES_DB=postgres
     - TZ=UTC
@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.10"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://ryot.io/
   repo: https://github.com/IgnisDa/ryot
   docs: https://docs.ryot.io/

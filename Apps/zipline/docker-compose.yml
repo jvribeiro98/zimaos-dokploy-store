@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     environment:
     - CORE_RETURN_HTTPS=false
-    - CORE_SECRET=jsOem30V4VAdzzQSIPhSzd3tL+jyOZpwgKgGMFxNxfCKwkHL/y2O9P85zUObN0P6K4upn2yk49Em6DAH0Kb8og==
+    - CORE_SECRET=vJa2udh0yk5CscXDbi08nnwyeUKmrsamTLbF2CYjjQpru/N9ysJQZ9Vir9NQYd8tPcZtfcUGvR2UVGNDh31R9Q==
     - CORE_HOSTNAME=0.0.0.0
     - CORE_PORT=3000
     - DATABASE_URL=postgres://postgres:postgres@postgres/postgres
@@ -59,7 +59,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.7.9"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://zipline.diced.sh/
   repo: https://github.com/diced/zipline
   docs: https://zipline.diced.sh/docs/

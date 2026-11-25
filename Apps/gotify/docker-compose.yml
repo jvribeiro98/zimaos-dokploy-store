@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.9.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://gotify.net/
   repo: https://github.com/gotify/server
   docs: https://gotify.net/docs/

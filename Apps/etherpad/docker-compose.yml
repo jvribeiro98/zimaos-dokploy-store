@@ -12,11 +12,11 @@ services:
     - postgres
     environment:
       NODE_ENV: production
-      ADMIN_PASSWORD: wn6JmYT8kncgdog0yj4BSoVyI3VXD1qu
+      ADMIN_PASSWORD: L1iGYMP2Kf2KGhv8FAqaDbzaUZQ6Udbp
       DB_CHARSET: utf8mb4
       DB_HOST: postgres
       DB_NAME: etherpad
-      DB_PASS: xTmbtIKNTZgeqV8aAapLjTJIWnTCAcxE
+      DB_PASS: knJK33WAlbk3LSCq3pmQCEgQU2onYRsX
       DB_PORT: '5432'
       DB_TYPE: postgres
       DB_USER: admin
@@ -35,7 +35,7 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_DB: etherpad
-      POSTGRES_PASSWORD: xTmbtIKNTZgeqV8aAapLjTJIWnTCAcxE
+      POSTGRES_PASSWORD: knJK33WAlbk3LSCq3pmQCEgQU2onYRsX
       POSTGRES_USER: admin
       PGDATA: /var/lib/postgresql/data/pgdata
     restart: always
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://etherpad.org/
   repo: https://github.com/ether/etherpad-lite
   docs: https://github.com/ether/etherpad-lite/wiki

@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.9.2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://rocket.chat/
   repo: https://github.com/RocketChat/Rocket.Chat
   docs: https://rocket.chat/docs/

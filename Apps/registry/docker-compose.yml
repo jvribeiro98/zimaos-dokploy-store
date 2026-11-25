@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - USERNAME=admin
-    - PASSWORD=ZBDt2wFPZR9AlH6CltVACPDRQEj0WYW0
+    - PASSWORD=dF9WZ0qMcCiNpi1m9UPEsce1FbmFCROR
     - REGISTRY_AUTH=htpasswd
     - REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm
     - REGISTRY_AUTH_HTPASSWD_PATH=/auth/registry.password
@@ -59,7 +59,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://hub.docker.com/_/registry
   repo: https://github.com/distribution/distribution
   docs: https://distribution.github.io/distribution/

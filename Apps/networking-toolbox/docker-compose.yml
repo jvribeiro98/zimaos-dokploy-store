@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://networkingtoolbox.net
   repo: https://github.com/lissy93/networking-toolbox
   docs: https://github.com/lissy93/networking-toolbox#readme

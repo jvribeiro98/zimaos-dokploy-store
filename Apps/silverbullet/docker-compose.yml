@@ -4,7 +4,7 @@ services:
     image: ghcr.io/silverbulletmd/silverbullet:v2
     restart: unless-stopped
     environment:
-    - SB_USER=admin:rWViGu1vvY1ZM6TO
+    - SB_USER=admin:adLHdJn25vksPnr8
     volumes:
     - silverbullet-space:/space
     expose:
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://silverbullet.md
   repo: https://github.com/silverbulletmd/silverbullet
   docs: https://silverbullet.md/docs

@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.15.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://databasus.com
   repo: https://github.com/RostislavDugin/postgresus
   docs: https://databasus.com

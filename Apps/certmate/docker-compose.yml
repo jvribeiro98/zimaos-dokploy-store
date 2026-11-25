@@ -4,8 +4,8 @@ services:
     image: fabriziosalmi/certmate:2.21.3
     environment:
     - FLASK_ENV=production
-    - SECRET_KEY=L57PZnSFg4nnxySiktG7VvqrdYx9HpXp
-    - API_BEARER_TOKEN=mbILvfxASHjEj96WZBllXp3WbN3XAWsw
+    - SECRET_KEY=ihCv06B8uXWTLTi4Il59NBSwwsuF6zdT
+    - API_BEARER_TOKEN=6ss8nhKeyXEyvcNNUMTKs7ZRTQujfery
     - BEHIND_PROXY=true
     - CLOUDFLARE_TOKEN=
     - LETSENCRYPT_EMAIL=
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.21.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.certmate.org/
   repo: https://github.com/fabriziosalmi/certmate
   docs: https://www.certmate.org/docs/

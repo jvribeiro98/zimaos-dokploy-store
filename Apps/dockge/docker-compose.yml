@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://dockge.kuma.pet/
   repo: https://github.com/louislam/dockge
   docs: https://github.com/louislam/dockge

@@ -56,6 +56,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   repo: https://github.com/Nargor/mc-controller
   docs: https://github.com/Nargor/mc-controller#readme

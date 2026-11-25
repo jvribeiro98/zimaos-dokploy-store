@@ -293,7 +293,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.12.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://relaticle.com
   repo: https://github.com/Relaticle/relaticle
   docs: https://relaticle.com/docs

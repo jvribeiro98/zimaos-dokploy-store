@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: openanalytics
       POSTGRES_DB: openanalytics
-      POSTGRES_PASSWORD: JLGTNgD9HWrr7eKbT8PzmTohzrtnQZgb
+      POSTGRES_PASSWORD: PwwxmRxjNtQiLzBMlOciESOI7wGfHKVC
     volumes:
     - pg-data:/var/lib/postgresql/data
     healthcheck:
@@ -20,10 +20,10 @@ services:
     image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/clickhouse:${OA_IMAGE_TAG:-v0.5.0}
     restart: unless-stopped
     environment:
-      CLICKHOUSE_INGEST_PASSWORD: a4i62TA5NPjS7aqqOCRBioiI5MMhrzgI
-      CLICKHOUSE_READ_PASSWORD: 9rhESy6pnqWuliPHTjN1wkpcNrPYA6mu
-      CLICKHOUSE_MAINTENANCE_PASSWORD: ynefxlGfhe0FILG5HaKiB5QDTmG9qlFi
-      CLICKHOUSE_MIGRATION_PASSWORD: TTbVhBWbrlv4ligAzxKPL4uWxhgXmwFN
+      CLICKHOUSE_INGEST_PASSWORD: nxMLgeYRsdMrOI4fpfxzmYopY5UTh1eX
+      CLICKHOUSE_READ_PASSWORD: 0HHy1w0OUowdbpDXHkDTRYfJRSvyGIwL
+      CLICKHOUSE_MAINTENANCE_PASSWORD: uN3T19jS2RicDD1Ku1Nye3akM72ZlPv1
+      CLICKHOUSE_MIGRATION_PASSWORD: 3UmBIgmtlmszeAqJncAsLw6oeW6KA2gN
     volumes:
     - ch-data:/var/lib/clickhouse
     ulimits:
@@ -44,7 +44,7 @@ services:
     image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/valkey:${OA_IMAGE_TAG:-v0.5.0}
     restart: unless-stopped
     environment:
-      VALKEY_PASSWORD: jLIsEuIGRbvXs7yPxYFwhteJF2mohbpv
+      VALKEY_PASSWORD: w9Vwr7BivhMMEWa2YRRVAy7xsGkV4Xqj
       OA_VALKEY_CONF: /usr/local/etc/valkey/valkey-queue.conf
     volumes:
     - valkey-queue-data:/data
@@ -59,7 +59,7 @@ services:
     image: ${OA_IMAGE_REPO:-ghcr.io/openlabs-so/openanalytics}/valkey:${OA_IMAGE_TAG:-v0.5.0}
     restart: unless-stopped
     environment:
-      VALKEY_PASSWORD: HUZnfTndMwO9V1mVkxy33tbW50ADyf5B
+      VALKEY_PASSWORD: 2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9
       OA_VALKEY_CONF: /usr/local/etc/valkey/valkey-realtime.conf
     volumes:
     - valkey-realtime-data:/data
@@ -129,11 +129,11 @@ services:
     - node packages/postgres/dist/cli.js && node packages/clickhouse/dist/cli.js
     environment:
       ENVIRONMENT: production
-      POSTGRES_MIGRATION_URL: postgres://openanalytics:JLGTNgD9HWrr7eKbT8PzmTohzrtnQZgb@postgres:5432/openanalytics
+      POSTGRES_MIGRATION_URL: postgres://openanalytics:PwwxmRxjNtQiLzBMlOciESOI7wGfHKVC@postgres:5432/openanalytics
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_DATABASE: analytics
       CLICKHOUSE_MIGRATION_USER: oa_migration
-      CLICKHOUSE_MIGRATION_PASSWORD: TTbVhBWbrlv4ligAzxKPL4uWxhgXmwFN
+      CLICKHOUSE_MIGRATION_PASSWORD: 3UmBIgmtlmszeAqJncAsLw6oeW6KA2gN
     depends_on:
       postgres:
         condition: service_healthy
@@ -150,8 +150,8 @@ services:
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_DB: analytics
       CLICKHOUSE_READ_USER: oa_read
-      CLICKHOUSE_READ_PASSWORD: 9rhESy6pnqWuliPHTjN1wkpcNrPYA6mu
-      REALTIME_CACHE_REDIS_URL: redis://:HUZnfTndMwO9V1mVkxy33tbW50ADyf5B@valkey-realtime:6379
+      CLICKHOUSE_READ_PASSWORD: 0HHy1w0OUowdbpDXHkDTRYfJRSvyGIwL
+      REALTIME_CACHE_REDIS_URL: redis://:2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9@valkey-realtime:6379
       QUERY_SIGNING_KEY_ID: oa-selfhost-1
       QUERY_SIGNING_PUBLIC_KEY_FILE: /keys/query.public.pem
     volumes:
@@ -181,17 +181,17 @@ services:
       ENVIRONMENT: production
       LOG_LEVEL: info
       PORT: '8082'
-      DATABASE_URL: postgres://openanalytics:JLGTNgD9HWrr7eKbT8PzmTohzrtnQZgb@postgres:5432/openanalytics
-      REALTIME_CACHE_REDIS_URL: redis://:HUZnfTndMwO9V1mVkxy33tbW50ADyf5B@valkey-realtime:6379
+      DATABASE_URL: postgres://openanalytics:PwwxmRxjNtQiLzBMlOciESOI7wGfHKVC@postgres:5432/openanalytics
+      REALTIME_CACHE_REDIS_URL: redis://:2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9@valkey-realtime:6379
       QUERY_GATEWAY_URL: http://gateway:8081
       AUTH_BASE_URL: https://localhost
       APP_BASE_URL: https://localhost
       COLLECTOR_BASE_URL: https://localhost
       AUTH_TRUSTED_ORIGINS: https://localhost
       PRODUCT_NAME: Open Analytics
-      AUTH_SECRET: ZTOChvFQHkZ7zgJPqw61Sl2Y75RBBo3IWIP92JbUVmlw0yn2D8ihVm8zgOc4zlLd+3e9i26g4u85AcHiT4F4MQ==
-      TRIAL_IDENTITY_SECRET: 54w3Hcxx6KxBw3O2DMv14gKVcSCB6u2TMC/xWcQWH9DmyoAzIyXdRmSr1Fm8k2UXsG94PjZ25GeAsofzyFqWeg==
-      CREDENTIAL_SOURCE_SECRET: qmQg8tUFaLziDdXStiw7dHZMoikoXYQ0oLLPnWBSywpGnBQf+UC9v5y9apZ/FViQ10BDHLD1XCNV6mdrupiKqw==
+      AUTH_SECRET: 3G8ggIy1bJn5T8/f+UE98ow10oJ5vbpZGB68yVHjHp6HuRXTNy/fcRwHRvmrddkcvVx5EK8te0t1nvhH0+T4Dw==
+      TRIAL_IDENTITY_SECRET: ZIr88aZnD1Q1t0bz+1/ZryP4gYwasBwvKEorEEgWxgvz7CayvnyRK1u/sc3tZxFo7uUbO4g0ScRP3yUAPvCHkg==
+      CREDENTIAL_SOURCE_SECRET: 42nCISfgjh2ZKhekQGT7Yl7cmcD1LPc5CFY8bJ6vezsZqJJ48TIQNRxRz/p3BNlK/xIKWp/CdW/4bKPXkkVh3g==
       OA_CREDENTIAL_KEYRING_FILE: /keyring/credential-keyring.json
       QUERY_SIGNING_KEY_ID: oa-selfhost-1
       AUTH_PASSWORD_SIGNIN: enabled
@@ -218,10 +218,10 @@ services:
       ENVIRONMENT: production
       LOG_LEVEL: info
       PORT: '8083'
-      DATABASE_URL: postgres://openanalytics:JLGTNgD9HWrr7eKbT8PzmTohzrtnQZgb@postgres:5432/openanalytics
-      EVENT_STREAM_REDIS_URL: redis://:jLIsEuIGRbvXs7yPxYFwhteJF2mohbpv@valkey-queue:6379
-      REALTIME_CACHE_REDIS_URL: redis://:HUZnfTndMwO9V1mVkxy33tbW50ADyf5B@valkey-realtime:6379
-      ANONYMOUS_IDENTITY_SECRET: u1DAwdaCBayvNbD3ubUmtMQ4qEnP1V532QtoLmj1zUGdsfeNy/RrWdUZzE/PrP83pZpaUSGR6ZJM697W9n/dzw==
+      DATABASE_URL: postgres://openanalytics:PwwxmRxjNtQiLzBMlOciESOI7wGfHKVC@postgres:5432/openanalytics
+      EVENT_STREAM_REDIS_URL: redis://:w9Vwr7BivhMMEWa2YRRVAy7xsGkV4Xqj@valkey-queue:6379
+      REALTIME_CACHE_REDIS_URL: redis://:2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9@valkey-realtime:6379
+      ANONYMOUS_IDENTITY_SECRET: ER0E3j/fIIaOVUvatTXVyejV1MTpx5PbI3Pzr0OrTxT/ddx6DsOqpw2qxePmAHaUpzDqQTVxrQBMhKO/EY39Wg==
       ANONYMOUS_IDENTITY_KEY_VERSION: '1'
       GEOIP_DB_PATH: /geoip/dbip-city-lite.mmdb
     volumes:
@@ -246,7 +246,7 @@ services:
       ENVIRONMENT: production
       LOG_LEVEL: info
       PORT: '8084'
-      REALTIME_CACHE_REDIS_URL: redis://:HUZnfTndMwO9V1mVkxy33tbW50ADyf5B@valkey-realtime:6379
+      REALTIME_CACHE_REDIS_URL: redis://:2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9@valkey-realtime:6379
       REALTIME_TOKEN_VERIFY_KEY_FILE: /keys/realtime.public.pem
     volumes:
     - keys-realtime:/keys:ro
@@ -266,16 +266,16 @@ services:
       ENVIRONMENT: production
       LOG_LEVEL: info
       PORT: '8085'
-      DATABASE_URL: postgres://openanalytics:JLGTNgD9HWrr7eKbT8PzmTohzrtnQZgb@postgres:5432/openanalytics
-      EVENT_STREAM_REDIS_URL: redis://:jLIsEuIGRbvXs7yPxYFwhteJF2mohbpv@valkey-queue:6379
-      REALTIME_CACHE_REDIS_URL: redis://:HUZnfTndMwO9V1mVkxy33tbW50ADyf5B@valkey-realtime:6379
+      DATABASE_URL: postgres://openanalytics:PwwxmRxjNtQiLzBMlOciESOI7wGfHKVC@postgres:5432/openanalytics
+      EVENT_STREAM_REDIS_URL: redis://:w9Vwr7BivhMMEWa2YRRVAy7xsGkV4Xqj@valkey-queue:6379
+      REALTIME_CACHE_REDIS_URL: redis://:2ilqNYYkIiX3z5vM7kM9qXPjrpKnJlr9@valkey-realtime:6379
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_DB: analytics
       CLICKHOUSE_INGEST_USER: oa_ingest
-      CLICKHOUSE_INGEST_PASSWORD: a4i62TA5NPjS7aqqOCRBioiI5MMhrzgI
+      CLICKHOUSE_INGEST_PASSWORD: nxMLgeYRsdMrOI4fpfxzmYopY5UTh1eX
       CLICKHOUSE_MAINTENANCE_USER: oa_maintenance
-      CLICKHOUSE_MAINTENANCE_PASSWORD: ynefxlGfhe0FILG5HaKiB5QDTmG9qlFi
-      ANONYMOUS_IDENTITY_SECRET: u1DAwdaCBayvNbD3ubUmtMQ4qEnP1V532QtoLmj1zUGdsfeNy/RrWdUZzE/PrP83pZpaUSGR6ZJM697W9n/dzw==
+      CLICKHOUSE_MAINTENANCE_PASSWORD: uN3T19jS2RicDD1Ku1Nye3akM72ZlPv1
+      ANONYMOUS_IDENTITY_SECRET: ER0E3j/fIIaOVUvatTXVyejV1MTpx5PbI3Pzr0OrTxT/ddx6DsOqpw2qxePmAHaUpzDqQTVxrQBMhKO/EY39Wg==
       ANONYMOUS_IDENTITY_KEY_VERSION: '1'
       OA_CREDENTIAL_KEYRING_FILE: /keyring/credential-keyring.json
       PRODUCT_NAME: Open Analytics
@@ -371,7 +371,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.5.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://getopen.so
   repo: https://github.com/OpenLabs-so/openanalytics
   docs: https://github.com/OpenLabs-so/openanalytics/blob/main/infra/selfhost/DOKPLOY.md

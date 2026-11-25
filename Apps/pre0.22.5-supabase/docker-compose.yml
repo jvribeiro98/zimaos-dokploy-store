@@ -18,7 +18,7 @@ services:
         condition: service_healthy
     environment:
       STUDIO_PG_META_URL: http://meta:8080
-      POSTGRES_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
+      POSTGRES_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
       DEFAULT_ORGANIZATION_NAME: Default Organization
       DEFAULT_PROJECT_NAME: Default Project
       OPENAI_API_KEY: ''
@@ -27,7 +27,7 @@ services:
       SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
       SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q
       AUTH_JWT_SECRET: your-super-secret-jwt-token-with-at-least-32-characters-long
-      LOGFLARE_API_KEY: D9yIJGIJqwQcje8mSSuG5qKeapcuA72r
+      LOGFLARE_API_KEY: 94s5pvrzAq9ea4UlMDPNRpg8MDIFnA8t
       LOGFLARE_URL: http://analytics:4000
       NEXT_PUBLIC_ENABLE_LOGS: 'True'
       NEXT_ANALYTICS_BACKEND_PROVIDER: postgres
@@ -53,7 +53,7 @@ services:
       SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
       SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q
       DASHBOARD_USERNAME: supabase
-      DASHBOARD_PASSWORD: 9bLa1hLD7YxsBdv3SnXGaDygcHXQOu67
+      DASHBOARD_PASSWORD: weECTj6T2gRMeGoKnVbTIB5mqnUOrSAW
     entrypoint: bash -c 'eval "echo \"$$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
     ports:
     - target: 8000
@@ -85,7 +85,7 @@ services:
       GOTRUE_API_PORT: '9999'
       API_EXTERNAL_URL: http://localhost
       GOTRUE_DB_DRIVER: postgres
-      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/postgres
       GOTRUE_SITE_URL: http://localhost:3000
       GOTRUE_URI_ALLOW_LIST: http://localhost/*,http://localhost:3000/*
       GOTRUE_DISABLE_SIGNUP: 'false'
@@ -119,7 +119,7 @@ services:
       analytics:
         condition: service_healthy
     environment:
-      PGRST_DB_URI: postgres://authenticator:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/postgres
+      PGRST_DB_URI: postgres://authenticator:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/postgres
       PGRST_DB_SCHEMAS: public,storage,graphql_public
       PGRST_DB_ANON_ROLE: anon
       PGRST_JWT_SECRET: your-super-secret-jwt-token-with-at-least-32-characters-long
@@ -156,7 +156,7 @@ services:
       DB_HOST: db
       DB_PORT: '5432'
       DB_USER: supabase_admin
-      DB_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
+      DB_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
       DB_NAME: postgres
       DB_AFTER_CONNECT_QUERY: SET search_path TO _realtime
       DB_ENC_KEY: supabaserealtime
@@ -197,7 +197,7 @@ services:
       SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q
       POSTGREST_URL: http://rest:3000
       PGRST_JWT_SECRET: your-super-secret-jwt-token-with-at-least-32-characters-long
-      DATABASE_URL: postgres://supabase_storage_admin:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/postgres
+      DATABASE_URL: postgres://supabase_storage_admin:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/postgres
       FILE_SIZE_LIMIT: '52428800'
       STORAGE_BACKEND: file
       FILE_STORAGE_BACKEND_PATH: /var/lib/storage
@@ -240,7 +240,7 @@ services:
       PG_META_DB_PORT: '5432'
       PG_META_DB_NAME: postgres
       PG_META_DB_USER: supabase_admin
-      PG_META_DB_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
+      PG_META_DB_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
   functions:
     container_name: ${CONTAINER_PREFIX}-edge-functions
     image: supabase/edge-runtime:v1.67.4
@@ -255,7 +255,7 @@ services:
       SUPABASE_URL: http://kong:8000
       SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
       SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q
-      SUPABASE_DB_URL: postgresql://postgres:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/postgres
+      SUPABASE_DB_URL: postgresql://postgres:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/postgres
       VERIFY_JWT: 'false'
     command:
     - start
@@ -284,13 +284,13 @@ services:
       DB_DATABASE: _supabase
       DB_HOSTNAME: db
       DB_PORT: '5432'
-      DB_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
+      DB_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
       DB_SCHEMA: _analytics
-      LOGFLARE_API_KEY: D9yIJGIJqwQcje8mSSuG5qKeapcuA72r
+      LOGFLARE_API_KEY: 94s5pvrzAq9ea4UlMDPNRpg8MDIFnA8t
       LOGFLARE_SINGLE_TENANT: 'True'
       LOGFLARE_SUPABASE_MODE: 'True'
       LOGFLARE_MIN_CLUSTER_SIZE: '1'
-      POSTGRES_BACKEND_URL: postgresql://supabase_admin:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/_supabase
+      POSTGRES_BACKEND_URL: postgresql://supabase_admin:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/_supabase
       POSTGRES_BACKEND_SCHEMA: _analytics
       LOGFLARE_FEATURE_FLAG_OVERRIDE: multibackend=true
   db:
@@ -325,8 +325,8 @@ services:
       POSTGRES_HOST: /var/run/postgresql
       PGPORT: '5432'
       POSTGRES_PORT: '5432'
-      PGPASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
-      POSTGRES_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
+      PGPASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
+      POSTGRES_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
       PGDATABASE: postgres
       POSTGRES_DB: postgres
       JWT_SECRET: your-super-secret-jwt-token-with-at-least-32-characters-long
@@ -356,7 +356,7 @@ services:
       interval: 5s
       retries: 3
     environment:
-      LOGFLARE_API_KEY: D9yIJGIJqwQcje8mSSuG5qKeapcuA72r
+      LOGFLARE_API_KEY: 94s5pvrzAq9ea4UlMDPNRpg8MDIFnA8t
     command:
     - --config
     - /etc/vector/vector.yml
@@ -392,8 +392,8 @@ services:
       PORT: '4000'
       POSTGRES_PORT: '5432'
       POSTGRES_DB: postgres
-      POSTGRES_PASSWORD: XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to
-      DATABASE_URL: ecto://supabase_admin:XvgYntQc0FX4nSxCN7mhmGeqAwDBI5to@db:5432/_supabase
+      POSTGRES_PASSWORD: MTFWgSkd0bj0OIBRka5RtEqC75yIouZP
+      DATABASE_URL: ecto://supabase_admin:MTFWgSkd0bj0OIBRka5RtEqC75yIouZP@db:5432/_supabase
       CLUSTER_POSTGRES: 'True'
       SECRET_KEY_BASE: UpNVntn3cDxHJpq99YMc1T1AQgQpc8kfYTuRgBiYa15BLrx8etQoXz3gZv1/u2oq
       VAULT_ENC_KEY: your-encryption-key-32-chars-min
@@ -432,7 +432,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.25.04 / dokploy < 0.22.5"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://supabase.com/
   repo: https://github.com/supabase/supabase
   docs: https://supabase.com/docs/guides/self-hosting

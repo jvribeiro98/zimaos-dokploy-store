@@ -10,7 +10,7 @@ services:
       APP_URL: http://${APP_DOMAIN}
       DB_DATABASE: mixpost_db
       DB_USERNAME: mixpost_user
-      DB_PASSWORD: X0wyshp5QO9yZr8D5aGWBPny3n2HndVa
+      DB_PASSWORD: OIFLEWFM8N9dAsWgEZqWcghDCW6kYBbb
     volumes:
     - storage:/var/www/html/storage/app
     - logs:/var/www/html/storage/logs
@@ -27,7 +27,7 @@ services:
     environment:
       MYSQL_DATABASE: mixpost_db
       MYSQL_USER: mixpost_user
-      MYSQL_PASSWORD: X0wyshp5QO9yZr8D5aGWBPny3n2HndVa
+      MYSQL_PASSWORD: OIFLEWFM8N9dAsWgEZqWcghDCW6kYBbb
     volumes:
     - mysql:/var/lib/mysql
     healthcheck:
@@ -78,7 +78,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://mixpost.app/
   repo: https://github.com/inovector/mixpost
   docs: https://docs.mixpost.app/

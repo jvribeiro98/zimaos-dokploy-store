@@ -293,7 +293,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2610"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://ethora.com/
   repo: https://github.com/dappros/ethora-install
   docs: https://github.com/dappros/ethora-install/tree/main/deploy/compose

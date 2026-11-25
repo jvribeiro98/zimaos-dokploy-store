@@ -11,12 +11,12 @@ services:
     environment:
       JOOMLA_DB_HOST: joomla-db
       JOOMLA_DB_USER: joomla
-      JOOMLA_DB_PASSWORD: MDipqY3ZZAV7l76aXhd1CHVrpcEJj9fv
+      JOOMLA_DB_PASSWORD: oU2G8Gsg2As6TLFywDs8zm6XSqV2L8YU
       JOOMLA_DB_NAME: joomla
       JOOMLA_SITE_NAME: Joomla
       JOOMLA_ADMIN_USER: Joomla Administrator
       JOOMLA_ADMIN_USERNAME: admin
-      JOOMLA_ADMIN_PASSWORD: eU2gWpCfRsOkX9rheCgGXfrR
+      JOOMLA_ADMIN_PASSWORD: 5zOynIpeNMy86qLfZxPkrSIh
       JOOMLA_ADMIN_EMAIL: admin@example.com
     volumes:
     - joomla-data:/var/www/html
@@ -30,7 +30,7 @@ services:
     environment:
       MARIADB_DATABASE: joomla
       MARIADB_USER: joomla
-      MARIADB_PASSWORD: MDipqY3ZZAV7l76aXhd1CHVrpcEJj9fv
+      MARIADB_PASSWORD: oU2G8Gsg2As6TLFywDs8zm6XSqV2L8YU
       MARIADB_RANDOM_ROOT_PASSWORD: '1'
     volumes:
     - joomla-db:/var/lib/mysql
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.1.0-apache"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.joomla.org/
   repo: https://github.com/joomla/joomla-cms
   docs: https://manual.joomla.org/

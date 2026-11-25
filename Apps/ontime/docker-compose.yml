@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.8.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://getontime.no
   repo: https://github.com/cpvalente/ontime/
   docs: https://docs.getontime.no

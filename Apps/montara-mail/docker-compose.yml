@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: montara
-      POSTGRES_PASSWORD: P3XGdVAXh1vPK8mzLB6fqexFuh5uFNfr
+      POSTGRES_PASSWORD: 85L2I3hRLHyfeQHn06HviPZ6EsmLdCaW
       POSTGRES_DB: montara_mail_agent
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -28,11 +28,11 @@ services:
       ENV: production
       PORT: '8080'
       APP_NAME: montara-mail-agent
-      APP_SECRET: Q+FLDXjkKlLVvAFJyn9Ty8sh6PzNYtPruLo1HepB+XA=
-      DB_DSN: postgres://montara:P3XGdVAXh1vPK8mzLB6fqexFuh5uFNfr@postgres:5432/montara_mail_agent?sslmode=disable
+      APP_SECRET: ggu6Afs7r9v0888KHoyeqF4laVAw6JF4qLXBmZT6TLc=
+      DB_DSN: postgres://montara:85L2I3hRLHyfeQHn06HviPZ6EsmLdCaW@postgres:5432/montara_mail_agent?sslmode=disable
       MIGRATE_ON_BOOT: 'true'
       SEED_ON_BOOT: 'true'
-      SUPER_USER: admin@example.com:1XvirUJJk9KqxyYXiH1THmtY
+      SUPER_USER: admin@example.com:HaLGfT57Lh272ROIZS9qYcF2
       AUTH_BASE_URL: https://localhost
       FROM_ADDRESS: ''
       RESEND_API_KEY: ''
@@ -91,7 +91,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://montaramail.web.id
   repo: https://github.com/montara-project/montara-mail-agent
   docs: https://docs.montaramail.web.id

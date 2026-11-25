@@ -4,7 +4,7 @@ services:
     image: unleashorg/unleash-server:7.4.0
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgres://unleash:GXOizH5ngJGi9713jh0fEqaEtCirBzpb@db/unleash
+      DATABASE_URL: postgres://unleash:8ERzuQGB3f9FeCXUnldcQUtztnu4Pt5h@db/unleash
       DATABASE_SSL: 'false'
       LOG_LEVEL: warn
     depends_on:
@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_DB: unleash
       POSTGRES_USER: unleash
-      POSTGRES_PASSWORD: GXOizH5ngJGi9713jh0fEqaEtCirBzpb
+      POSTGRES_PASSWORD: 8ERzuQGB3f9FeCXUnldcQUtztnu4Pt5h
     volumes:
     - db_data:/var/lib/postgresql/data
     healthcheck:
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.4.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.getunleash.io/
   repo: https://github.com/unleash/unleash
   docs: https://docs.getunleash.io/

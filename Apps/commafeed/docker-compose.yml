@@ -32,7 +32,7 @@ x-casaos:
   - amd64
   - arm64
   version: "latest-h2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.commafeed.com/
   repo: https://github.com/Athou/commafeed
   docs: https://github.com/Athou/commafeed/wiki

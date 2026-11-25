@@ -12,7 +12,7 @@ services:
     - 80
     environment:
       AUTH_USERNAME: admin
-      AUTH_PASSWORD: ANQigirq7bUjYebVnW2a6UAV
+      AUTH_PASSWORD: xYJIC8puu5525kN03AfvLz3f
       ADMIN_USERS: admin
       AUTH_TYPE: DB
       USER_CONFIG_TYPE: DB
@@ -22,12 +22,12 @@ services:
       DB_PORT: '3306'
       DB_NAME: cypht
       DB_USER: cypht
-      DB_PASS: OwdIdCtA2NrXtmz3gGCaYSDnu5IDKzZO
+      DB_PASS: iquiTm3BpxsGTcKALkkWWVYl9ZXtQ5Az
       SESSION_TYPE: REDIS
       ENABLE_REDIS: 'true'
       REDIS_SERVER: cypht-redis
       REDIS_PORT: '6379'
-      REDIS_PASS: cD0ag94DV3CmVD0Ciw3BNzsZRCWodilp
+      REDIS_PASS: 9PyJJ2hrM2lKfCQCwZSqrgyPnt5wV8eP
       REDIS_SOCKET: ''
       ENABLE_MEMCACHED: 'false'
       ENCRYPT_LOCAL_STORAGE: 'true'
@@ -43,7 +43,7 @@ services:
     environment:
       MARIADB_DATABASE: cypht
       MARIADB_USER: cypht
-      MARIADB_PASSWORD: OwdIdCtA2NrXtmz3gGCaYSDnu5IDKzZO
+      MARIADB_PASSWORD: iquiTm3BpxsGTcKALkkWWVYl9ZXtQ5Az
       MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - cypht-db:/var/lib/mysql
@@ -60,7 +60,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     environment:
-      REDIS_PASSWORD: cD0ag94DV3CmVD0Ciw3BNzsZRCWodilp
+      REDIS_PASSWORD: 9PyJJ2hrM2lKfCQCwZSqrgyPnt5wV8eP
     command:
     - sh
     - -c
@@ -99,7 +99,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.13.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://cypht.org/
   repo: https://github.com/cypht-org/cypht
   docs: https://cypht.org/install.html

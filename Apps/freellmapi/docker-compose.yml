@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: '3001'
-      ENCRYPTION_KEY: 2261405ce6bacd44635b584a5e192388fafdefd000a63d846f397b8563e1c3e672b3addb4b7408df08f3ebf9e80dcfdb1991900fd6f2ec0f49919b65ee7de6a8
+      ENCRYPTION_KEY: dbb0824234836f6c94a528cc9330222b5772ce22e6fbe31450d32ba39f09ba2c18b942dafdc302e319f3300aa600d0aa62c9149df1d30e75574ed70bb2dbc597
     expose:
     - 3001
     volumes:
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.8.4"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://freellmapi.co
   repo: https://github.com/tashfeenahmed/freellmapi
   docs: https://github.com/tashfeenahmed/freellmapi/blob/main/docs/install.md

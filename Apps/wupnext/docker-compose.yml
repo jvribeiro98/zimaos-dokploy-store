@@ -4,7 +4,7 @@ services:
     image: docker.io/javierlnmn/wupnext:0.3.0
     restart: unless-stopped
     environment:
-      SECRET_KEY: DkV9bs2hb1NF8TWVvjpA1ysoNVBGWN46GzUtI75aGCwfTVuF7f
+      SECRET_KEY: 5OIZpIRUs9m5Fp7TQVEo9zz6gUDU0aBxmvKSzt7crFi6fiDZJj
       DEBUG: 'False'
       ALLOWED_HOSTS: localhost
       CSRF_TRUSTED_ORIGINS: https://localhost
@@ -15,7 +15,7 @@ services:
       RESEND_API_KEY: ''
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@example.com
-      DJANGO_SUPERUSER_PASSWORD: 50y62LLkONCqyOiY1kv89fWj
+      DJANGO_SUPERUSER_PASSWORD: pXs6flmioKa8feWvIjIIHiCw
     expose:
     - '8000'
     volumes:
@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     command: python manage.py qcluster
     environment:
-      SECRET_KEY: DkV9bs2hb1NF8TWVvjpA1ysoNVBGWN46GzUtI75aGCwfTVuF7f
+      SECRET_KEY: 5OIZpIRUs9m5Fp7TQVEo9zz6gUDU0aBxmvKSzt7crFi6fiDZJj
       DEBUG: 'False'
       ALLOWED_HOSTS: localhost
       CSRF_TRUSTED_ORIGINS: https://localhost
@@ -67,5 +67,5 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   repo: https://github.com/javierlnmn/wupnext

@@ -7,7 +7,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://systemprompt:KJc7ub61RaDvZQKGF1XDfIlrrR8xEGX2@postgres:5432/systemprompt
+      DATABASE_URL: postgres://systemprompt:89Jp8geLXCNGJ6B7d5fXUZbrF6bYJSyX@postgres:5432/systemprompt
       ANTHROPIC_API_KEY: ''
       OPENAI_API_KEY: ''
       GEMINI_API_KEY: ''
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: systemprompt
-      POSTGRES_PASSWORD: KJc7ub61RaDvZQKGF1XDfIlrrR8xEGX2
+      POSTGRES_PASSWORD: 89Jp8geLXCNGJ6B7d5fXUZbrF6bYJSyX
       POSTGRES_DB: systemprompt
     volumes:
     - postgres_data:/var/lib/postgresql
@@ -76,7 +76,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.21.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://systemprompt.io
   repo: https://github.com/systempromptio/systemprompt-template
   docs: https://systemprompt.io/documentation/

@@ -29,7 +29,7 @@ services:
       OCIS_INSECURE: 'true'
       PROXY_TLS: 'false'
       PROXY_HTTP_ADDR: 0.0.0.0:9200
-      IDM_ADMIN_PASSWORD: OPFHjajvuEaSc4DDxQRC9FAxCc2qTtd2
+      IDM_ADMIN_PASSWORD: vH8pBQaP1HtH4J62ZkUZyDtQAeqTZYzb
       SETTINGS_GRPC_ADDR: 0.0.0.0:9191
       GATEWAY_GRPC_ADDR: 0.0.0.0:9142
       STORAGE_USERS_DATA_GATEWAY_URL: http://owncloud-infinite-scale:9200/data
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.0.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://owncloud.com/infinite-scale/
   repo: https://github.com/owncloud/ocis
   docs: https://doc.owncloud.com/ocis/latest/

@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.6.8"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://spaquet.github.io/mailcatcher/
   repo: https://github.com/spaquet/mailcatcher
   docs: https://spaquet.github.io/docker-alpine-mailcatcher/

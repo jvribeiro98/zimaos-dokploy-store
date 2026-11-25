@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.0.14"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.steedos.com/
   repo: https://github.com/steedos/steedos-platform
   docs: https://docs.steedos.com/

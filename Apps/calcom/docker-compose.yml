@@ -7,7 +7,7 @@ services:
     - calcom-data:/var/lib/postgresql/data
     environment:
     - POSTGRES_USER=calcom
-    - POSTGRES_PASSWORD=3T9YWn41p530O7BopPVzPnuG2IHIeC94
+    - POSTGRES_PASSWORD=OSTXR1bTqIeP7wV9CVbc0TzApX0Z7dkC
     - POSTGRES_DB=calendso
     healthcheck:
       test:
@@ -26,8 +26,8 @@ services:
     expose:
     - 3000
     environment:
-    - DATABASE_URL=postgresql://calcom:3T9YWn41p530O7BopPVzPnuG2IHIeC94@postgres:5432/calendso
-    - DATABASE_DIRECT_URL=postgresql://calcom:3T9YWn41p530O7BopPVzPnuG2IHIeC94@postgres:5432/calendso
+    - DATABASE_URL=postgresql://calcom:OSTXR1bTqIeP7wV9CVbc0TzApX0Z7dkC@postgres:5432/calendso
+    - DATABASE_DIRECT_URL=postgresql://calcom:OSTXR1bTqIeP7wV9CVbc0TzApX0Z7dkC@postgres:5432/calendso
     - INSIGHTS_DATABASE_URL=
     - NEXT_PUBLIC_WEBAPP_URL=http://localhost
     - NEXT_PUBLIC_WEBSITE_URL=http://localhost
@@ -39,12 +39,12 @@ services:
     - NEXT_PUBLIC_HOSTED_CAL_FEATURES=
     - PGSSLMODE=
     - NEXTAUTH_URL=http://localhost
-    - NEXTAUTH_SECRET=YbtSdc4NPhHA1BfbtGW6mbR94+p3LhxodhC2Y3zd8hk=
+    - NEXTAUTH_SECRET=vVnkhcJh47JjkU5q23mq1tbMXyTyIdVEAuJR6jD4zTA=
     - NEXTAUTH_COOKIE_DOMAIN=
     - CALCOM_TELEMETRY_DISABLED=1
-    - CRON_API_KEY=9d308a79354afe905f242220eef79e5b369a9676199d967b4354a8e5475b3aa7
+    - CRON_API_KEY=a916d88738d9a4eeb0748286490975e1ed8dad6927f8d3753cbab544dcc01a31
     - CRON_ENABLE_APP_SYNC=false
-    - CALENDSO_ENCRYPTION_KEY=VnktBu3vDFZO2G0dsjDXUxnXHwUY9U2t
+    - CALENDSO_ENCRYPTION_KEY=/OZxYxEGAajXlRNXsLaYLfbxvsSajrlx
     - NEXT_PUBLIC_INTERCOM_APP_ID=
     - INTERCOM_SECRET=
     - INTERCOM_API_TOKEN=
@@ -157,11 +157,11 @@ services:
     - AUTH_BEARER_TOKEN_CLOUDFLARE=
     - CLOUDFLARE_ZONE_ID=
     - CLOUDFLARE_VERCEL_CNAME=
-    - CALCOM_CREDENTIAL_SYNC_SECRET=wPvvShCe0D7kgYU1PVDt5TsdXS+0w+UgqjnTxzDQehE=
+    - CALCOM_CREDENTIAL_SYNC_SECRET=RlBWHcgVE2XQfFjhPBAKdAv8moRw9i1z26Kc8NANiAE=
     - CALCOM_CREDENTIAL_SYNC_HEADER_NAME=calcom-credential-sync-secret
     - CALCOM_CREDENTIAL_SYNC_ENDPOINT=
-    - CALCOM_APP_CREDENTIAL_ENCRYPTION_KEY=9rE4AYzy+iZVPexrIhGsrHte6CPRbVML
-    - CALCOM_SERVICE_ACCOUNT_ENCRYPTION_KEY=FXBABITfh9nYXqxgvFQxwacO+MeThFjx
+    - CALCOM_APP_CREDENTIAL_ENCRYPTION_KEY=sWxDPivtiSpbMiaVYeKf2GA4EK4BclKw
+    - CALCOM_SERVICE_ACCOUNT_ENCRYPTION_KEY=RasiIwRNan0AVBBwtGOSVy0abqg7IUDx
     - NEXT_PUBLIC_API_V2_URL=
     - TASKER_ENABLE_WEBHOOKS=0
     - TASKER_ENABLE_EMAILS=0
@@ -182,7 +182,7 @@ services:
     - CAL_VIDEO_BUCKET_REGION=
     - CAL_VIDEO_ASSUME_ROLE_ARN=
     - CAL_VIDEO_MEETING_LINK_FOR_TESTING=
-    - CAL_VIDEO_RECORDING_TOKEN_SECRET=Qjt0fmYGO6lUntGBZCagMgOgpxPkRSPn8Q7QIj7g3F8=
+    - CAL_VIDEO_RECORDING_TOKEN_SECRET=FYyMl1wTSRcQGqD9hRpZrU6TkI8/M3FuqdPbUpAYlhA=
     - NEXT_PUBLIC_VAPID_PUBLIC_KEY=
     - VAPID_PRIVATE_KEY=
     - LINGO_DOT_DEV_API_KEY=
@@ -235,7 +235,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.2.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://cal.com/
   repo: https://github.com/calcom/cal.com
   docs: https://cal.com/docs

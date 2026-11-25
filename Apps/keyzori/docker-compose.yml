@@ -101,6 +101,6 @@ x-casaos:
   - amd64
   - arm64
   version: "93b5d75ac8e5a4cd0740bfe1a46b5663674767fb"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   repo: https://github.com/keyzori/keyzori
   docs: https://github.com/keyzori/keyzori/wiki

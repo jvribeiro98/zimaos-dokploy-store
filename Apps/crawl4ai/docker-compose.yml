@@ -8,7 +8,7 @@ services:
     - 11235
     environment:
     - LLM_PROVIDER=openai/gpt-4o-mini
-    - OPENAI_API_KEY=Qyqk4zzE1ImryynhyUrXn0WLIEYm20Cqa2FvTYAF7ZzOrfaJ
+    - OPENAI_API_KEY=WhIWEyHWh2icV3Qr56R80IbqoiA5py0kMAqhnRLndqN48OTB
     - ANTHROPIC_API_KEY=
     - DEEPSEEK_API_KEY=
     - GROQ_API_KEY=
@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.7.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://crawl4ai.com
   repo: https://github.com/unclecode/crawl4ai
   docs: https://github.com/unclecode/crawl4ai#readme

@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_DATABASE: panel
       MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: yC1B1cnFc9cM1hIDaGzAfcsy
-      MYSQL_ROOT_PASSWORD: VGD8d8jGk9g73HBS36Lj46HU
+      MYSQL_PASSWORD: CBOnNVjn9rEUv8G90t9njbh7
+      MYSQL_ROOT_PASSWORD: uEjn63DaZH0qU7nqOHF6fsPK
     healthcheck:
       test:
       - CMD
@@ -42,13 +42,13 @@ services:
       APP_ENV: production
       APP_ENVIRONMENT_ONLY: 'false'
       APP_SERVICE_AUTHOR: admin@localhost
-      APP_SECRET: ubL3tnh9t8KmcwK85CrVHl6MrIUuzQ7DxkQIm3dxcIo=
+      APP_SECRET: 1O8K9mn7Jbtk5paro/kgTNLU86YXxBmFJD2qZAGZ17o=
       DB_CONNECTION: mysql
       DB_HOST: database
       DB_PORT: '3306'
       DB_DATABASE: panel
       DB_USERNAME: pterodactyl
-      DB_PASSWORD: yC1B1cnFc9cM1hIDaGzAfcsy
+      DB_PASSWORD: CBOnNVjn9rEUv8G90t9njbh7
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       QUEUE_DRIVER: redis
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.4.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://hydrodactyl.dev
   repo: https://github.com/blueprintframework/hydrodactyl
   docs: https://hydrodactyl.dev/docs/hydrodactyl

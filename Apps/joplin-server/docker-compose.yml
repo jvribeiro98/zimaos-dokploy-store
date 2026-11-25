@@ -4,7 +4,7 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: 9J0n1H1R9dGKGi7mPhPTHfQ7Ipl3Dxxg
+      POSTGRES_PASSWORD: ndksgk7658HLlLXgQY4wkyjuJ3pb8Wdq
       POSTGRES_USER: joplin
       POSTGRES_DB: joplin
     volumes:
@@ -18,7 +18,7 @@ services:
       APP_BASE_URL: http://localhost
       APP_PORT: '22300'
       DB_CLIENT: pg
-      POSTGRES_PASSWORD: 9J0n1H1R9dGKGi7mPhPTHfQ7Ipl3Dxxg
+      POSTGRES_PASSWORD: ndksgk7658HLlLXgQY4wkyjuJ3pb8Wdq
       POSTGRES_DATABASE: joplin
       POSTGRES_USER: joplin
       POSTGRES_PORT: '5432'
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.7.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://joplinapp.org/
   repo: https://github.com/laurent22/joplin
   docs: https://github.com/laurent22/joplin/tree/dev/packages/server

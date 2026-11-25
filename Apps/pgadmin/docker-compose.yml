@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - PGADMIN_DEFAULT_EMAIL=user@example.com
-    - PGADMIN_DEFAULT_PASSWORD=dOIu3ux7py0vRk6a
+    - PGADMIN_DEFAULT_PASSWORD=vzv6DwZZeqoJMS6d
     - PGADMIN_CONFIG_SERVER_MODE=False
     - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
     volumes:
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.pgadmin.org/
   repo: https://github.com/pgadmin-org/pgadmin4
   docs: https://www.pgadmin.org/docs/

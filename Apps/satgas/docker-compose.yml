@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       SATGAS_PUBLIC_URL: http://localhost
-      SATGAS_TOKEN: GGRbre4kiLonU3kIKxEXX7HQwJ2GQWyp
+      SATGAS_TOKEN: lUzxmyxFqsxoQhKoVdBPLqqIBDtcmRQ9
     volumes:
     - satgas-data:/data
     - satgas-home:/home/node
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.13"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://github.com/zeative/satgas
   repo: https://github.com/zeative/satgas
   docs: https://github.com/zeative/satgas#self-hosting

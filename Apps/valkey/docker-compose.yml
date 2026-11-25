@@ -8,7 +8,7 @@ services:
     - valkey-data:/data
     command: valkey-server /etc/valkey/valkey.conf
     environment:
-    - VALKEY_PASSWORD=bMvfCa9F1VFQKrkQVqzAGFutI9cWZNSE
+    - VALKEY_PASSWORD=hEjPiTccF8vP6vyP9TkQsU3SwiLcfEjS
     healthcheck:
       test:
       - CMD-SHELL
@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.1.4"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://valkey.io/
   repo: https://github.com/valkey-io/valkey
   docs: https://github.com/valkey-io/valkey

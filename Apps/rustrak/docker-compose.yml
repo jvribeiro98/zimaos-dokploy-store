@@ -8,8 +8,8 @@ services:
     - PORT=8080
     - RUST_LOG=info
     - SSL_PROXY=true
-    - SESSION_SECRET_KEY=XDZPUVlnXcJIBZqlHupJMGaaUby2pjQtKZbIB0WvPB6mQdQN4v0r8S0Z1C8T7tPz
-    - CREATE_SUPERUSER=admin@example.com:2lJlaqnMW3s1nynT
+    - SESSION_SECRET_KEY=ne9dMHzbEUPTtzQ9s922JqOdHEsuzJbKkF0ZsluFuDz9S02AHcoNRoXyPavmhmNO
+    - CREATE_SUPERUSER=admin@example.com:8gBA1FGhd79kBMPl
     volumes:
     - rustrak_data:/data
     expose:
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://rustrak.github.io/rustrak/
   repo: https://github.com/rustrak/rustrak
   docs: https://rustrak.github.io/rustrak/getting-started/overview

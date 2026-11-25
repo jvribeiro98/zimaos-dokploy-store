@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     init: true
     environment:
-      OWNER_TOKEN: DHCjJwj8omR7f1e5RxhhgWmV4GAl9ppI9v1xxWToKd8gl7HB
+      OWNER_TOKEN: WV5YoGTNgclHJ4G6qxMLJpgiOtviuEOTwjNXkbl5E7eBFyhW
       OWNER_ID: opendots-owner
       APP_ORIGIN: https://localhost
       INTELLIGENCE_API_KEY: ''
@@ -20,7 +20,7 @@ services:
       WEB_SEARCH_PROVIDER: parallel
       PARALLEL_API_KEY: ''
       BROWSER_URL: http://opendots-browser:4311
-      BROWSER_SECRET: ut0yxcSFAibZ3FcE8YEAyWUlScCMJnavuQ8cdExOLOf3y7VQ
+      BROWSER_SECRET: zSwuOuMXMXgVCAqUavBf6NSdfjdN6RHhxhWNm7rbGwWa2qur
       VOICE_API_KEY: ''
       VOICE_MODEL: ''
       VOICE_NAME: marin
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
     init: true
     environment:
-      BROWSER_SECRET: ut0yxcSFAibZ3FcE8YEAyWUlScCMJnavuQ8cdExOLOf3y7VQ
+      BROWSER_SECRET: zSwuOuMXMXgVCAqUavBf6NSdfjdN6RHhxhWNm7rbGwWa2qur
     expose:
     - '4311'
     shm_size: 256mb
@@ -81,7 +81,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.0-625452e"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.copilotkit.ai/opendots
   repo: https://github.com/CopilotKit/OpenDots
   docs: https://github.com/CopilotKit/OpenDots/blob/main/docs/SETUP.md

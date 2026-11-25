@@ -7,7 +7,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://lifeconsole:BHwA7yDkGLzPYVwSkKPn5RhMV5Yb6mHl@db:5432/lifeconsole
+      DATABASE_URL: postgres://lifeconsole:ZYWUL48pN1oY6aJFuHCiovuAKFqDdG5r@db:5432/lifeconsole
       APP_URL: http://localhost
       TRUST_PROXY: '1'
       SIGNUPS: open
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: lifeconsole
-      POSTGRES_PASSWORD: BHwA7yDkGLzPYVwSkKPn5RhMV5Yb6mHl
+      POSTGRES_PASSWORD: ZYWUL48pN1oY6aJFuHCiovuAKFqDdG5r
       POSTGRES_DB: lifeconsole
     healthcheck:
       test:
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://life-console.dev
   repo: https://github.com/TJ-coding/life-console
   docs: https://life-console.dev/docs/self-hosting

@@ -10,7 +10,7 @@ services:
     - MYSQL_HOST=nextcloud_db
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=rZkToXRjJjc4CBesEYML7UXSWTkS5TXp
+    - MYSQL_PASSWORD=4SOTsRgjhmucJBBK2zsMEODzE0xWEu4k
     depends_on:
     - nextcloud_db
     - nextcloud_redis
@@ -27,7 +27,7 @@ services:
     - MYSQL_HOST=nextcloud_db
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=rZkToXRjJjc4CBesEYML7UXSWTkS5TXp
+    - MYSQL_PASSWORD=4SOTsRgjhmucJBBK2zsMEODzE0xWEu4k
     entrypoint: /cron.sh
     depends_on:
     - nextcloud_db
@@ -38,10 +38,10 @@ services:
     volumes:
     - nextcloud_db_data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=JQPE37JRl9tGsfk8lyngomy0vOhvWHgL
+    - MYSQL_ROOT_PASSWORD=xEnZDWykeJ6DkAbsHspAmDJGmEwClyhT
     - MYSQL_DATABASE=nextcloud
     - MYSQL_USER=nextcloud
-    - MYSQL_PASSWORD=rZkToXRjJjc4CBesEYML7UXSWTkS5TXp
+    - MYSQL_PASSWORD=4SOTsRgjhmucJBBK2zsMEODzE0xWEu4k
   nextcloud_redis:
     image: redis:alpine
     restart: always
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "33.0.6"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://nextcloud.com/
   repo: https://github.com/nextcloud/docker
   docs: https://docs.nextcloud.com/

@@ -7,7 +7,7 @@ services:
       firefly-iii-db:
         condition: service_healthy
     environment:
-      APP_KEY: base64:nY7n92iKorBc9mGZbsHNoLkXd+RCzEP9vrg62tHsrh0=
+      APP_KEY: base64:+zNhujMsij1l6I2vmn12w0s9LsTs+h+ljYATPwrYZuU=
       APP_URL: https://localhost
       TRUSTED_PROXIES: '**'
       TZ: UTC
@@ -19,8 +19,8 @@ services:
       DB_PORT: '3306'
       DB_DATABASE: firefly
       DB_USERNAME: firefly
-      DB_PASSWORD: POpmPeZC5l0sYKAwC7yzUUF5OK8gr8qi
-      STATIC_CRON_TOKEN: ac1be49de50ee717fa6d63944f273c72814864acaedee9e70ead9c9e8a094074
+      DB_PASSWORD: 3qb6HGyYER44O7jxYWqTVWZHsaLMB8Gg
+      STATIC_CRON_TOKEN: eb8b8b95d842f8e2d14ba0512ced140d246b1da08cbd54c92abe1eb581931944
     expose:
     - '8080'
     volumes:
@@ -35,7 +35,7 @@ services:
     environment:
       MYSQL_DATABASE: firefly
       MYSQL_USER: firefly
-      MYSQL_PASSWORD: POpmPeZC5l0sYKAwC7yzUUF5OK8gr8qi
+      MYSQL_PASSWORD: 3qb6HGyYER44O7jxYWqTVWZHsaLMB8Gg
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - firefly-iii-db:/var/lib/mysql
@@ -55,7 +55,7 @@ services:
     - firefly-iii
     environment:
       TZ: UTC
-      STATIC_CRON_TOKEN: ac1be49de50ee717fa6d63944f273c72814864acaedee9e70ead9c9e8a094074
+      STATIC_CRON_TOKEN: eb8b8b95d842f8e2d14ba0512ced140d246b1da08cbd54c92abe1eb581931944
     command:
     - sh
     - -c
@@ -92,7 +92,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.6.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.firefly-iii.org/
   repo: https://github.com/firefly-iii/firefly-iii
   docs: https://docs.firefly-iii.org/

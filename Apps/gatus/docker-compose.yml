@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.36.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://gatus.io/
   repo: https://github.com/TwiN/gatus
   docs: https://github.com/TwiN/gatus#configuration

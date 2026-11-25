@@ -9,12 +9,12 @@ services:
     environment:
       APP_MODE: self-hosted
       NODE_ENV: production
-      DATABASE_URL: postgresql://customermates:482bd53fac8e712460937e46dfa9b057@customermates-postgres:5432/customermates
+      DATABASE_URL: postgresql://customermates:7061d596eb51c8bba6e0773978936610@customermates-postgres:5432/customermates
       WORKFLOW_TARGET_WORLD: '@workflow/world-postgres'
-      WORKFLOW_POSTGRES_URL: postgresql://customermates:482bd53fac8e712460937e46dfa9b057@customermates-postgres:5432/customermates
+      WORKFLOW_POSTGRES_URL: postgresql://customermates:7061d596eb51c8bba6e0773978936610@customermates-postgres:5432/customermates
       BASE_URL: http://localhost
-      BETTER_AUTH_SECRET: b05733ee0590003c72131d37fa00988ba0b4a06a92e10e85720060453ce0d563
-      CRON_SECRET: 004a402a98ac3123d46e3c2cb2dbc7bc31feab488da2c3ab8196343ec5d23f49
+      BETTER_AUTH_SECRET: d38364e6d626140202e77d6459f05520f54c983704847d7979b76d56d4b2961b
+      CRON_SECRET: 20f9ce170389298a386f637c69b279ea17c6a7d64945307117b9d11c45a33337
       RESEND_API_KEY: ''
       RESEND_OPERATOR_EMAIL: mail@your-company.com
     expose:
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: customermates
-      POSTGRES_PASSWORD: 482bd53fac8e712460937e46dfa9b057
+      POSTGRES_PASSWORD: 7061d596eb51c8bba6e0773978936610
       POSTGRES_DB: customermates
     volumes:
     - customermates-postgres-data:/var/lib/postgresql/data
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "sha-4f4d61c"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://customermates.com
   repo: https://github.com/customermates/customermates
   docs: https://customermates.com/docs/self-hosting

@@ -77,7 +77,7 @@ x-casaos:
   - amd64
   - arm64
   version: "24.7.17"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.drawio.com/
   repo: https://github.com/jgraph/drawio
   docs: https://www.drawio.com/docs/

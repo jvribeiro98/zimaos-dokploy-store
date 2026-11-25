@@ -7,7 +7,7 @@ services:
       database:
         condition: service_healthy
     environment:
-    - CMD_DB_URL=postgres://hedgedoc:OT6d8BUWbRXydXMNwr9XgKJdgdy4MItY@database:5432/hedgedoc
+    - CMD_DB_URL=postgres://hedgedoc:yKZKOD5tXoWsOqIV75CQzJFpXGkEaCOp@database:5432/hedgedoc
     - CMD_DOMAIN=localhost
     - CMD_PROTOCOL_USESSL=true
     - CMD_URL_ADDPORT=false
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=hedgedoc
-    - POSTGRES_PASSWORD=OT6d8BUWbRXydXMNwr9XgKJdgdy4MItY
+    - POSTGRES_PASSWORD=yKZKOD5tXoWsOqIV75CQzJFpXGkEaCOp
     - POSTGRES_DB=hedgedoc
     volumes:
     - hedgedoc_database:/var/lib/postgresql/data
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.10.8"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://hedgedoc.org/
   repo: https://github.com/hedgedoc/hedgedoc
   docs: https://docs.hedgedoc.org/

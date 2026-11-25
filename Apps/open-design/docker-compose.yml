@@ -8,7 +8,7 @@ services:
       NODE_OPTIONS: --max-old-space-size=192
       OD_BIND_HOST: 0.0.0.0
       OD_PORT: '7456'
-      OD_API_TOKEN: KXNeso5WtcOfh0kn5dYG3SYhsY8VpIQ3
+      OD_API_TOKEN: q9LqVB7rY3wLUaLrCmve0YK69lTNQ3SH
       OD_ALLOWED_ORIGINS: https://localhost,http://localhost
       OD_DISABLE_API_AUTH: '1'
     volumes:
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.16.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://open-design.ai
   repo: https://github.com/nexu-io/open-design
   docs: https://open-design.ai

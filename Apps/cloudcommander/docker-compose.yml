@@ -8,7 +8,7 @@ services:
     - CLOUDCMD_ROOT=/mnt/fs
     - CLOUDCMD_AUTH=true
     - CLOUDCMD_USERNAME=user
-    - CLOUDCMD_PASSWORD=wKozUMKx109bh8zT
+    - CLOUDCMD_PASSWORD=14x80DAmplBm1id7
     volumes:
     - /root:/root
     - /:/mnt/fs
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "18.5.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://cloudcmd.io
   repo: https://github.com/coderaiser/cloudcmd
   docs: https://cloudcmd.io/#install

@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.101.3"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://triliumnotes.org/
   repo: https://github.com/TriliumNext/Trilium
   docs: https://docs.triliumnotes.org/

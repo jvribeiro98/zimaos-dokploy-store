@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.6.1"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://spacetimedb.com/
   repo: https://github.com/clockworklabs/SpacetimeDB
   docs: https://spacetimedb.com/docs

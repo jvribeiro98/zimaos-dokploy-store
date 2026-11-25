@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=PRN9W5bWa89TgAXirvVDCDbe
+    - POSTGRES_PASSWORD=NXqD0WiIL0ndacfSaaZGNeFU
     - POSTGRES_DB=n8n
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -26,8 +26,8 @@ services:
     - DB_POSTGRESDB_PORT=5432
     - DB_POSTGRESDB_DATABASE=n8n
     - DB_POSTGRESDB_USER=admin
-    - DB_POSTGRESDB_PASSWORD=PRN9W5bWa89TgAXirvVDCDbe
-    - N8N_ENCRYPTION_KEY=+8QAMNcPb3VRh/mbg7cRRQ0iEah9TcoiqLuqgMbxt3/7BvApkItZKtO6Th7W6jOOjaqiUEb0aSbM1R7Teaz1xQ==
+    - DB_POSTGRESDB_PASSWORD=NXqD0WiIL0ndacfSaaZGNeFU
+    - N8N_ENCRYPTION_KEY=5jY9CGyw9ROmT2FYeOOSJD2vXj4KEKZxPc/QmtMrJkDZFlZtWN2YiwWhal+K4xrjyC08rZQJ85atb8mQ7f+FZA==
     - N8N_HOST=localhost
     - N8N_PORT=5678
     - N8N_PROTOCOL=http
@@ -68,7 +68,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://n8n.io/
   repo: https://github.com/n8n-io/n8n
   docs: https://docs.n8n.io/

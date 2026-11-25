@@ -5,10 +5,10 @@ services:
     environment:
       YOURLS_SITE: https://localhost
       YOURLS_USER: admin
-      YOURLS_PASS: wuu4oQAVRBzgnHQKL5fkY96Zp49UJgSA
+      YOURLS_PASS: qlCWSlvTVtRWIT5mm8Su6FcXbyUD8xdh
       YOURLS_DB_HOST: yourls-mysql
       YOURLS_DB_USER: yourls
-      YOURLS_DB_PASS: 3O7nqjlFC80HmRD0oKuFjFcjteDnys9u
+      YOURLS_DB_PASS: 2fIuVIFrg4NdATyba4zG22FMUUrquihN
       YOURLS_DB_NAME: yourls
     volumes:
     - yourls-data:/var/www/html
@@ -23,10 +23,10 @@ services:
   yourls-mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: OsYtlManeY8fFabDNj7RgUhmiCFSAm3M
+      MYSQL_ROOT_PASSWORD: D7WTwyDkX4YVihpTHJy77XZDTaFuwEnI
       MYSQL_DATABASE: yourls
       MYSQL_USER: yourls
-      MYSQL_PASSWORD: 3O7nqjlFC80HmRD0oKuFjFcjteDnys9u
+      MYSQL_PASSWORD: 2fIuVIFrg4NdATyba4zG22FMUUrquihN
     volumes:
     - yourls-mysql-data:/var/lib/mysql
     healthcheck:
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.9.2"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://yourls.org/
   repo: https://github.com/YOURLS/YOURLS
   docs: https://yourls.org/#documentation

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: montara
-      POSTGRES_PASSWORD: wOlFHoPHYtgzHubTbdzB4djPM6mnJfzy
+      POSTGRES_PASSWORD: zVhvgyP05VyoXEBXbDcwPZvYDfjMnN7Q
       POSTGRES_DB: montara_pass
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -47,11 +47,11 @@ services:
       ENV: production
       PORT: '8080'
       APP_NAME: montara-pass
-      APP_SECRET: SAWx8JgGAOKmsyoBpLCYodWGUku1dqZ1KmoGfDIxT8Q=
-      DB_DSN: postgres://montara:wOlFHoPHYtgzHubTbdzB4djPM6mnJfzy@postgres:5432/montara_pass?sslmode=disable
+      APP_SECRET: h4Hsd+52dB0qxBbmDwDgy5zior4A3VJvCbCkjQxddS4=
+      DB_DSN: postgres://montara:zVhvgyP05VyoXEBXbDcwPZvYDfjMnN7Q@postgres:5432/montara_pass?sslmode=disable
       MIGRATE_ON_BOOT: 'true'
       SEED_ON_BOOT: 'true'
-      SUPER_USER: admin@example.com:myXAzakMi6Vshs4eX6LbYjXd
+      SUPER_USER: admin@example.com:Zsjl3m6zcqSdSFqjY8JGBt1r
       API_PUBLIC_URL: https://api.localhost
       AUTH_BASE_URL: https://api.localhost
       CORS_ALLOWED_ORIGINS: https://localhost
@@ -104,7 +104,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.17.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://montarapass.com
   repo: https://github.com/montara-project/montara-pass
   docs: https://docs.montarapass.com

@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://prometheus.io/
   repo: https://github.com/prometheus/prometheus
   docs: https://prometheus.io/docs/introduction/overview/

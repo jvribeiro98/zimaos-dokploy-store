@@ -33,7 +33,7 @@ services:
     environment:
       LOG_LEVEL: INFO
       DEPLOY_ENV: PRODUCTION
-      SECRET_KEY: xAtLQfKpalw9fDahGwcsPgHc3jt04Dj60cOyup1NLOkeGrBfYhiU3JPt
+      SECRET_KEY: qEp3ZP0lENKT6Av71sTlruy+n179+hkvMsDz7UWEHkGDmZPatiBucQkB
       MIGRATION_ENABLED: 'true'
       CONSOLE_API_URL: https://localhost
       CONSOLE_WEB_URL: https://localhost
@@ -48,15 +48,15 @@ services:
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       CONSOLE_CORS_ALLOW_ORIGINS: '*'
       DB_USERNAME: postgres
-      DB_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      DB_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       DB_HOST: db
       DB_PORT: '5432'
       DB_DATABASE: dify
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk
+      REDIS_PASSWORD: SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB
       REDIS_DB: '0'
-      CELERY_BROKER_URL: redis://:TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk@redis:6379/1
+      CELERY_BROKER_URL: redis://:SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB@redis:6379/1
       STORAGE_TYPE: opendal
       OPENDAL_SCHEME: fs
       OPENDAL_FS_ROOT: storage
@@ -64,17 +64,17 @@ services:
       PGVECTOR_HOST: db
       PGVECTOR_PORT: '5432'
       PGVECTOR_USER: postgres
-      PGVECTOR_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      PGVECTOR_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       PGVECTOR_DATABASE: dify
       PGVECTOR_MIN_CONNECTION: '1'
       PGVECTOR_MAX_CONNECTION: '5'
       CODE_EXECUTION_ENDPOINT: http://sandbox:8194
-      CODE_EXECUTION_API_KEY: ysPKONu9oV9ME2MZHzSxGUug9hGbRIM9
+      CODE_EXECUTION_API_KEY: dXwWQPqhqZApdAviLnyimRjJ6VppFHyi
       SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
       SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
       PLUGIN_DAEMON_URL: http://plugin_daemon:5002
-      PLUGIN_DAEMON_KEY: Pg2pht3f1fD4/JN2DDtiiorLWSJONaWBBJmjpI7VvcdROUcTJ4P0jOIy
-      INNER_API_KEY_FOR_PLUGIN: N0et6VNctEpRTUMl07UWyf10jB9x7a6Z9mCH0iCsDQQE04llFhI0UAVZ
+      PLUGIN_DAEMON_KEY: xb1OYOnA9Ib8DEJ+LQdfGrRjE7wQCxwOVrQEr0ggD4WG+Dnhf3WhJx6X
+      INNER_API_KEY_FOR_PLUGIN: qcestBXKNRZl2GZa1w5hN33s3bkS8e2TD4Fv5gyEIjbjsNBYiSP8PWV2
       PLUGIN_MAX_PACKAGE_SIZE: '52428800'
       PLUGIN_REMOTE_INSTALL_HOST: localhost
       PLUGIN_REMOTE_INSTALL_PORT: '5003'
@@ -106,7 +106,7 @@ services:
     environment:
       LOG_LEVEL: INFO
       DEPLOY_ENV: PRODUCTION
-      SECRET_KEY: xAtLQfKpalw9fDahGwcsPgHc3jt04Dj60cOyup1NLOkeGrBfYhiU3JPt
+      SECRET_KEY: qEp3ZP0lENKT6Av71sTlruy+n179+hkvMsDz7UWEHkGDmZPatiBucQkB
       MIGRATION_ENABLED: 'true'
       CONSOLE_API_URL: https://localhost
       CONSOLE_WEB_URL: https://localhost
@@ -121,15 +121,15 @@ services:
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       CONSOLE_CORS_ALLOW_ORIGINS: '*'
       DB_USERNAME: postgres
-      DB_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      DB_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       DB_HOST: db
       DB_PORT: '5432'
       DB_DATABASE: dify
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk
+      REDIS_PASSWORD: SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB
       REDIS_DB: '0'
-      CELERY_BROKER_URL: redis://:TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk@redis:6379/1
+      CELERY_BROKER_URL: redis://:SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB@redis:6379/1
       STORAGE_TYPE: opendal
       OPENDAL_SCHEME: fs
       OPENDAL_FS_ROOT: storage
@@ -137,17 +137,17 @@ services:
       PGVECTOR_HOST: db
       PGVECTOR_PORT: '5432'
       PGVECTOR_USER: postgres
-      PGVECTOR_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      PGVECTOR_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       PGVECTOR_DATABASE: dify
       PGVECTOR_MIN_CONNECTION: '1'
       PGVECTOR_MAX_CONNECTION: '5'
       CODE_EXECUTION_ENDPOINT: http://sandbox:8194
-      CODE_EXECUTION_API_KEY: ysPKONu9oV9ME2MZHzSxGUug9hGbRIM9
+      CODE_EXECUTION_API_KEY: dXwWQPqhqZApdAviLnyimRjJ6VppFHyi
       SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
       SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
       PLUGIN_DAEMON_URL: http://plugin_daemon:5002
-      PLUGIN_DAEMON_KEY: Pg2pht3f1fD4/JN2DDtiiorLWSJONaWBBJmjpI7VvcdROUcTJ4P0jOIy
-      INNER_API_KEY_FOR_PLUGIN: N0et6VNctEpRTUMl07UWyf10jB9x7a6Z9mCH0iCsDQQE04llFhI0UAVZ
+      PLUGIN_DAEMON_KEY: xb1OYOnA9Ib8DEJ+LQdfGrRjE7wQCxwOVrQEr0ggD4WG+Dnhf3WhJx6X
+      INNER_API_KEY_FOR_PLUGIN: qcestBXKNRZl2GZa1w5hN33s3bkS8e2TD4Fv5gyEIjbjsNBYiSP8PWV2
       PLUGIN_MAX_PACKAGE_SIZE: '52428800'
       PLUGIN_REMOTE_INSTALL_HOST: localhost
       PLUGIN_REMOTE_INSTALL_PORT: '5003'
@@ -169,7 +169,7 @@ services:
     environment:
       LOG_LEVEL: INFO
       DEPLOY_ENV: PRODUCTION
-      SECRET_KEY: xAtLQfKpalw9fDahGwcsPgHc3jt04Dj60cOyup1NLOkeGrBfYhiU3JPt
+      SECRET_KEY: qEp3ZP0lENKT6Av71sTlruy+n179+hkvMsDz7UWEHkGDmZPatiBucQkB
       MIGRATION_ENABLED: 'true'
       CONSOLE_API_URL: https://localhost
       CONSOLE_WEB_URL: https://localhost
@@ -184,15 +184,15 @@ services:
       WEB_API_CORS_ALLOW_ORIGINS: '*'
       CONSOLE_CORS_ALLOW_ORIGINS: '*'
       DB_USERNAME: postgres
-      DB_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      DB_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       DB_HOST: db
       DB_PORT: '5432'
       DB_DATABASE: dify
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk
+      REDIS_PASSWORD: SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB
       REDIS_DB: '0'
-      CELERY_BROKER_URL: redis://:TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk@redis:6379/1
+      CELERY_BROKER_URL: redis://:SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB@redis:6379/1
       STORAGE_TYPE: opendal
       OPENDAL_SCHEME: fs
       OPENDAL_FS_ROOT: storage
@@ -200,17 +200,17 @@ services:
       PGVECTOR_HOST: db
       PGVECTOR_PORT: '5432'
       PGVECTOR_USER: postgres
-      PGVECTOR_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      PGVECTOR_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       PGVECTOR_DATABASE: dify
       PGVECTOR_MIN_CONNECTION: '1'
       PGVECTOR_MAX_CONNECTION: '5'
       CODE_EXECUTION_ENDPOINT: http://sandbox:8194
-      CODE_EXECUTION_API_KEY: ysPKONu9oV9ME2MZHzSxGUug9hGbRIM9
+      CODE_EXECUTION_API_KEY: dXwWQPqhqZApdAviLnyimRjJ6VppFHyi
       SSRF_PROXY_HTTP_URL: http://ssrf_proxy:3128
       SSRF_PROXY_HTTPS_URL: http://ssrf_proxy:3128
       PLUGIN_DAEMON_URL: http://plugin_daemon:5002
-      PLUGIN_DAEMON_KEY: Pg2pht3f1fD4/JN2DDtiiorLWSJONaWBBJmjpI7VvcdROUcTJ4P0jOIy
-      INNER_API_KEY_FOR_PLUGIN: N0et6VNctEpRTUMl07UWyf10jB9x7a6Z9mCH0iCsDQQE04llFhI0UAVZ
+      PLUGIN_DAEMON_KEY: xb1OYOnA9Ib8DEJ+LQdfGrRjE7wQCxwOVrQEr0ggD4WG+Dnhf3WhJx6X
+      INNER_API_KEY_FOR_PLUGIN: qcestBXKNRZl2GZa1w5hN33s3bkS8e2TD4Fv5gyEIjbjsNBYiSP8PWV2
       PLUGIN_MAX_PACKAGE_SIZE: '52428800'
       PLUGIN_REMOTE_INSTALL_HOST: localhost
       PLUGIN_REMOTE_INSTALL_PORT: '5003'
@@ -238,7 +238,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      POSTGRES_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       POSTGRES_DB: dify
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
@@ -254,7 +254,7 @@ services:
     image: redis:6-alpine
     restart: always
     environment:
-      REDISCLI_AUTH: TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk
+      REDISCLI_AUTH: SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
     - dify-redis-data:/data
@@ -269,7 +269,7 @@ services:
     image: langgenius/dify-sandbox:0.2.15
     restart: always
     environment:
-      API_KEY: ysPKONu9oV9ME2MZHzSxGUug9hGbRIM9
+      API_KEY: dXwWQPqhqZApdAviLnyimRjJ6VppFHyi
       GIN_MODE: release
       WORKER_TIMEOUT: '15'
       ENABLE_NETWORK: 'true'
@@ -290,17 +290,17 @@ services:
       DB_HOST: db
       DB_PORT: '5432'
       DB_USERNAME: postgres
-      DB_PASSWORD: SFlVMzHO53lHGEnuBfCmZ0qMm17cs3p6
+      DB_PASSWORD: RaunY6nvm8mpwC0jWH93Kz948v501lUm
       DB_DATABASE: dify_plugin
       DB_SSL_MODE: disable
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: TWZdGvYzqnuDgXnwrSFpWPabhMpDxCnk
+      REDIS_PASSWORD: SyLrjIC2BFfVrSWTMREUOeMdC3Pe7wzB
       SERVER_PORT: '5002'
-      SERVER_KEY: Pg2pht3f1fD4/JN2DDtiiorLWSJONaWBBJmjpI7VvcdROUcTJ4P0jOIy
+      SERVER_KEY: xb1OYOnA9Ib8DEJ+LQdfGrRjE7wQCxwOVrQEr0ggD4WG+Dnhf3WhJx6X
       MAX_PLUGIN_PACKAGE_SIZE: '52428800'
       DIFY_INNER_API_URL: http://api:5001
-      DIFY_INNER_API_KEY: N0et6VNctEpRTUMl07UWyf10jB9x7a6Z9mCH0iCsDQQE04llFhI0UAVZ
+      DIFY_INNER_API_KEY: qcestBXKNRZl2GZa1w5hN33s3bkS8e2TD4Fv5gyEIjbjsNBYiSP8PWV2
       PLUGIN_REMOTE_INSTALLING_HOST: 0.0.0.0
       PLUGIN_REMOTE_INSTALLING_PORT: '5003'
       PLUGIN_WORKING_PATH: /app/storage/cwd
@@ -396,7 +396,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.15.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://dify.ai/
   repo: https://github.com/langgenius/dify
   docs: https://docs.dify.ai/

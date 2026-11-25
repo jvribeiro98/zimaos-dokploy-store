@@ -33,15 +33,15 @@ services:
     - MAIL_FROM_ADDRESS=noreply@localhost
     - DB_HOST=mysql
     - DB_USER=bigcapital
-    - DB_PASSWORD=6lvpt8mx0ulkIbi7qke6aP9iGjkYBT7x
+    - DB_PASSWORD=dzY68gH7lwzl7KJSq3SrH5yL3t2VpUL6
     - DB_CHARSET=utf8mb4
     - SYSTEM_DB_NAME=bigcapital
     - TENANT_DB_NAME_PERFIX=bigcapital_tenant_
-    - JWT_SECRET=f4291be343b85cc508ffdd2d3016bb097d83a6bd369358d801b3227c3eb9e71c5814ea4ace84f3adf8ba39d3f9a5a0c308357a16158db043964381687c37e858
+    - JWT_SECRET=681ae7a7265b67082358da98391a1cdfb213aa8b76d45e91a8934fa5f93cd130e60a4e038cd7fc6cf2a7aa1e726dc31ed0358ce1ce7fc1d2d108bfe68a536377
     - MONGODB_DATABASE_URL=mongodb://mongo/bigcapital
     - BASE_URL=https://localhost
     - AGENDASH_AUTH_USER=admin
-    - AGENDASH_AUTH_PASSWORD=6J9oWTvH1lHsfxs48ypAVagM
+    - AGENDASH_AUTH_PASSWORD=ullZZqgbi06oATuadpvioz0p
     - SIGNUP_DISABLED=false
     - SIGNUP_ALLOWED_DOMAINS=
     - SIGNUP_ALLOWED_EMAILS=
@@ -77,8 +77,8 @@ services:
     environment:
     - MYSQL_DATABASE=bigcapital
     - MYSQL_USER=bigcapital
-    - MYSQL_PASSWORD=6lvpt8mx0ulkIbi7qke6aP9iGjkYBT7x
-    - MYSQL_ROOT_PASSWORD=LHIyKVQtncfvjfCDpu4erfYYOQrKteiH
+    - MYSQL_PASSWORD=dzY68gH7lwzl7KJSq3SrH5yL3t2VpUL6
+    - MYSQL_ROOT_PASSWORD=TO9x1vEpXdzZw5EfrKy6hOpP019bt22b
     volumes:
     - mysql:/var/lib/mysql
     expose:
@@ -149,7 +149,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://bigcapital.app/
   repo: https://github.com/bigcapitalhq/bigcapital
   docs: https://github.com/bigcapitalhq/bigcapital

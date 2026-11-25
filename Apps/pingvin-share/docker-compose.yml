@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.13.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://stonith404.github.io/pingvin-share/
   repo: https://github.com/stonith404/pingvin-share
   docs: https://stonith404.github.io/pingvin-share/

@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.ispyconnect.com/
   repo: https://github.com/ispysoftware/AgentDVR
   docs: https://www.ispyconnect.com/userguide-agent-dvr.aspx

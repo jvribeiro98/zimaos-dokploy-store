@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.9.14"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://go2rtc.org/
   repo: https://github.com/AlexxIT/go2rtc
   docs: https://go2rtc.org/

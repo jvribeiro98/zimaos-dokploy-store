@@ -6,7 +6,7 @@ services:
     expose:
     - 8080
     environment:
-    - PG_URL=postgres://postgres:zWYpmjCz3MOztAbv@bytebase-db:5432/bytebase
+    - PG_URL=postgres://postgres:F3tf1VURJtyFH58d@bytebase-db:5432/bytebase
     volumes:
     - data:/var/opt/bytebase
     depends_on:
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=zWYpmjCz3MOztAbv
+    - POSTGRES_PASSWORD=F3tf1VURJtyFH58d
     - POSTGRES_DB=bytebase
     volumes:
     - db_data:/var/lib/postgresql/data
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.3.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.bytebase.com
   repo: https://github.com/bytebase/bytebase
   docs: https://www.bytebase.com/docs

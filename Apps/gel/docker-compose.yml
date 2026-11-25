@@ -7,7 +7,7 @@ services:
     - 5656
     environment:
     - GEL_SERVER_SECURITY=strict
-    - GEL_SERVER_PASSWORD=JnyR4IYa5uZNkjzenRiCv30v
+    - GEL_SERVER_PASSWORD=61Kb2ytlU8oMpCv8tCPwsUJJ
     - GEL_SERVER_TLS_CERT_MODE=generate_self_signed
     - GEL_SERVER_HTTP_ENDPOINT_SECURITY=optional
     - GEL_SERVER_ADMIN_UI=enabled
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.geldata.com/
   repo: https://github.com/geldata/gel
   docs: https://docs.geldata.com/

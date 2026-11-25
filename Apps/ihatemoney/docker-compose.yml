@@ -6,18 +6,18 @@ services:
     - DEBUG=False
     - ACTIVATE_DEMO_PROJECT=True
     - ACTIVATE_ADMIN_DASHBOARD=False
-    - ADMIN_PASSWORD=ZvF8i5g8iNUdbrDvE9mYdWGRBeMtRL3c
+    - ADMIN_PASSWORD=2ABMrTTqQaC5J8FzprwaLH23cnJoXctE
     - ALLOW_PUBLIC_PROJECT_CREATION=True
     - BABEL_DEFAULT_TIMEZONE=UTC
     - GREENLET_TEST_CPP=no
     - MAIL_DEFAULT_SENDER=Budget manager <admin@example.com>
-    - MAIL_PASSWORD=scN5kYbfO1083WBE0HQLxSj9XWaRaUQ6
+    - MAIL_PASSWORD=OZeyzsgvmGUTbCMHbqvnKjozZYNDyar6
     - MAIL_PORT=25
     - MAIL_SERVER=localhost
     - MAIL_USE_SSL=False
     - MAIL_USE_TLS=False
     - MAIL_USERNAME=admin
-    - SECRET_KEY=SON26w3lhV7CWS2FktnAwknajoNBSJI8kGh1BgHp4uiCALAQyi8wKn7NbNTL71nq
+    - SECRET_KEY=ksNttEib4TX0a6YIxZOrJgWpMWQ4sxXtuvSNL0bgiJ5WyHUSkoCA5NlgF8nHungk
     - SESSION_COOKIE_SECURE=True
     - SHOW_ADMIN_EMAIL=True
     - SQLALCHEMY_DATABASE_URI=sqlite:////database/ihatemoney.db
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://ihatemoney.org/
   repo: https://github.com/spiral-project/ihatemoney
   docs: https://ihatemoney.readthedocs.io/

@@ -7,14 +7,14 @@ services:
       STRAPI_TELEMETRY_DISABLED: 'True'
       STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE: en
       FAST_REFRESH: 'True'
-      JWT_SECRET: vcDl1XyTVR8sgL01GSiJVVObjbhMj7s7
-      ADMIN_JWT_SECRET: 2h52oziwfsyXkB1wF5HxdsnND9CAxoA9
+      JWT_SECRET: Vx5L84dxHbnLUjppckN33ZsvOzbiyqAf
+      ADMIN_JWT_SECRET: EmDlMomNmcW3MsNE2dQ82j5QaC4enarp
       DATABASE_CLIENT: postgres
       DATABASE_HOST: strapi_postgres
       DATABASE_PORT: '5432'
       DATABASE_NAME: strapi
       DATABASE_USERNAME: strapi
-      DATABASE_PASSWORD: Uo7Cq7qLVLGdr1KDn4kF0JOMVB8NRu6L
+      DATABASE_PASSWORD: 2adDAhGLs7OnWc5ZYs7NJ0L7fftLJF8u
     volumes:
     - strapi_data:/srv/app
     expose:
@@ -42,7 +42,7 @@ services:
     environment:
       POSTGRES_DB: strapi
       POSTGRES_USER: strapi
-      POSTGRES_PASSWORD: Uo7Cq7qLVLGdr1KDn4kF0JOMVB8NRu6L
+      POSTGRES_PASSWORD: 2adDAhGLs7OnWc5ZYs7NJ0L7fftLJF8u
     volumes:
     - strapi_postgres_data:/var/lib/postgresql
     healthcheck:
@@ -78,7 +78,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.33.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://strapi.io
   repo: https://github.com/strapi/strapi
   docs: https://docs.strapi.io

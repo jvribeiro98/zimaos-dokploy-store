@@ -3,7 +3,7 @@ services:
   scrypted:
     image: ghcr.io/koush/scrypted:latest
     environment:
-    - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=eIpwNMJyNWvoptgjilMSr8u6xYootF8Y
+    - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=esDbmVmXMtmqj2Y5L1oND4NN5dDK8ALW
     - SCRYPTED_WEBHOOK_UPDATE=http://${main_domain}:10444/v1/update
     volumes:
     - /DATA/AppData/$AppID/scrypted-volume:/server/volume
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://www.scrypted.app/
   repo: https://github.com/koush/scrypted
   docs: https://docs.scrypted.app/

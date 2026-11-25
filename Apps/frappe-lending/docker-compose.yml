@@ -338,10 +338,10 @@ services:
     environment:
       SITE_NAME: frappe.lending
       MAIN_DOMAIN: ${main_domain}
-      ADMIN_PASSWORD: sqb1iry1S8yZ8kz40JBONlPWLXsyv7IC
+      ADMIN_PASSWORD: s76CJOE4gce0rFzGHLGLfXERfePZEwmd
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: VxeAalBr7yY2glF4ASqn81zH1mxfuolX
+      DB_ROOT_PASSWORD: AXTOkUmh5MipDB9rGvgvK83avdoxQGdN
       INSTALL_APP_ARGS: --install-app erpnext --install-app lending
     restart: unless-stopped
   migration:
@@ -382,8 +382,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=VxeAalBr7yY2glF4ASqn81zH1mxfuolX
-    - MARIADB_ROOT_PASSWORD=VxeAalBr7yY2glF4ASqn81zH1mxfuolX
+    - MYSQL_ROOT_PASSWORD=AXTOkUmh5MipDB9rGvgvK83avdoxQGdN
+    - MARIADB_ROOT_PASSWORD=AXTOkUmh5MipDB9rGvgvK83avdoxQGdN
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -471,7 +471,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-v15}"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://frappe.io
   repo: https://github.com/frappe/lending
   docs: https://docs.frappe.io/lending

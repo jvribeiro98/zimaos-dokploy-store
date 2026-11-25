@@ -12,23 +12,23 @@ services:
     - DISABLE_TELEMETRY=true
     - HOST=localhost
     - HTTP_PROTOCOL=http
-    - ONEUPTIME_SECRET=n4kIsaUpaf6bVApWrtOIW2uJBU7ZGsPbR4goW1FHjA8DORzcKaxT90tckWyqg1yz
-    - ENCRYPTION_SECRET=KcpJwytkFyybPQoXJhfG66hjiqYB32pOAkKRmxQaeSDMFLvfggOHH37OsUEpVVku
-    - REGISTER_PROBE_KEY=d4VVKbW00VK13TjBEgviw9NtoEdbxBVZ
+    - ONEUPTIME_SECRET=LgxhKl7xw5dVm8jwSxVACJJo0MhfwztQxT7AGVgzOyanR2EL7sy0mNUcwfNB9flt
+    - ENCRYPTION_SECRET=p9svAbRoZO3zLVwlpnrprm80BT7SLYELZW2zBwB4ThDy1RzvAylnD3hK3EXn8QmE
+    - REGISTER_PROBE_KEY=7jXnxN1WYBF90bxnRRju0E5AqlmjvwiN
     - DATABASE_HOST=postgres
     - DATABASE_PORT=5432
     - DATABASE_USERNAME=postgres
-    - DATABASE_PASSWORD=9xKq5A2ZX9UHkNvGPkifGUOuLwrj3KkS
+    - DATABASE_PASSWORD=PaWvEHEjlujGuQFUofVYUMkY2xk7Na3n
     - DATABASE_NAME=oneuptimedb
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_USERNAME=default
-    - REDIS_PASSWORD=4vnECGhXeH90boGKNLeVqmpaypsBmDbg
+    - REDIS_PASSWORD=bSiZmKDw0TiWEmmMM8juQMZ5wcSOGSIy
     - REDIS_DB=0
     - CLICKHOUSE_HOST=clickhouse
     - CLICKHOUSE_PORT=8123
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=XzrycQXsbPsEag7wmFLc4284X0lzN0Eb
+    - CLICKHOUSE_PASSWORD=iUB6f4gJfjOmSynflg8nSE4HbAWmA8Lf
     - CLICKHOUSE_DATABASE=oneuptime
     depends_on:
       postgres:
@@ -54,17 +54,17 @@ services:
     - APP_PORT=3002
     - SERVER_HOME_HOSTNAME=home
     - HOME_PORT=1444
-    - ONEUPTIME_SECRET=n4kIsaUpaf6bVApWrtOIW2uJBU7ZGsPbR4goW1FHjA8DORzcKaxT90tckWyqg1yz
-    - ENCRYPTION_SECRET=KcpJwytkFyybPQoXJhfG66hjiqYB32pOAkKRmxQaeSDMFLvfggOHH37OsUEpVVku
+    - ONEUPTIME_SECRET=LgxhKl7xw5dVm8jwSxVACJJo0MhfwztQxT7AGVgzOyanR2EL7sy0mNUcwfNB9flt
+    - ENCRYPTION_SECRET=p9svAbRoZO3zLVwlpnrprm80BT7SLYELZW2zBwB4ThDy1RzvAylnD3hK3EXn8QmE
     - DATABASE_HOST=postgres
     - DATABASE_PORT=5432
     - DATABASE_USERNAME=postgres
-    - DATABASE_PASSWORD=9xKq5A2ZX9UHkNvGPkifGUOuLwrj3KkS
+    - DATABASE_PASSWORD=PaWvEHEjlujGuQFUofVYUMkY2xk7Na3n
     - DATABASE_NAME=oneuptimedb
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_USERNAME=default
-    - REDIS_PASSWORD=4vnECGhXeH90boGKNLeVqmpaypsBmDbg
+    - REDIS_PASSWORD=bSiZmKDw0TiWEmmMM8juQMZ5wcSOGSIy
     - REDIS_DB=0
     depends_on:
       postgres:
@@ -88,8 +88,8 @@ services:
     - PROBE_DESCRIPTION=Default probe for monitors
     - PROBE_MONITORING_WORKERS=3
     - PROBE_MONITOR_FETCH_LIMIT=10
-    - PROBE_KEY=CwVBziX8DovUN1cgN3ZPM3iKRNNMp7E4
-    - REGISTER_PROBE_KEY=d4VVKbW00VK13TjBEgviw9NtoEdbxBVZ
+    - PROBE_KEY=wFgTaW3lDLqP9d4FeJyfihord04GcXhA
+    - REGISTER_PROBE_KEY=7jXnxN1WYBF90bxnRRju0E5AqlmjvwiN
     depends_on:
       ingress:
         condition: service_started
@@ -98,7 +98,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=9xKq5A2ZX9UHkNvGPkifGUOuLwrj3KkS
+    - POSTGRES_PASSWORD=PaWvEHEjlujGuQFUofVYUMkY2xk7Na3n
     - POSTGRES_DB=oneuptimedb
     volumes:
     - postgres-data:/var/lib/postgresql/data
@@ -123,13 +123,13 @@ services:
       retries: 5
       start_period: 10s
     environment:
-    - REDIS_PASSWORD=4vnECGhXeH90boGKNLeVqmpaypsBmDbg
+    - REDIS_PASSWORD=bSiZmKDw0TiWEmmMM8juQMZ5wcSOGSIy
   clickhouse:
     image: clickhouse/clickhouse-server:25.7
     restart: unless-stopped
     environment:
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=XzrycQXsbPsEag7wmFLc4284X0lzN0Eb
+    - CLICKHOUSE_PASSWORD=iUB6f4gJfjOmSynflg8nSE4HbAWmA8Lf
     - CLICKHOUSE_DB=oneuptime
     - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
     volumes:
@@ -168,7 +168,7 @@ x-casaos:
   - amd64
   - arm64
   version: "11.5.6"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://oneuptime.com/
   repo: https://github.com/OneUptime/oneuptime
   docs: https://oneuptime.com/docs

@@ -9,7 +9,7 @@ services:
     environment:
     - PORT=3000
     - FREEIMAGETOVIDEO_API_KEY=
-    - ACCESS_PASSWORD=zHydyHrAR7tUWBEI
+    - ACCESS_PASSWORD=VoWE8Dnc3H69n2Gs
     healthcheck:
       test:
       - CMD
@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-24"
+  update_at: "2026-11-25"
   website: https://freeimagetovideo.ai/?utm_source=dokploy&utm_medium=template
   repo: https://github.com/hanshs474/fitv-video-starter
   docs: https://freeimagetovideo.readthedocs.io/en/latest/
