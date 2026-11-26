@@ -10,7 +10,7 @@ services:
     - APP_ENV=production
     - APP_DEBUG=false
     - APP_URL=https://localhost
-    - APP_KEY=J0IXWkTcoiJ6YePpsIVPmh6NTnV4ZtXO
+    - APP_KEY=ZE0QDcYBC9MISLzXNbI8V9nFwcMCK8e5
     - REQUIRE_HTTPS=false
     - TRUSTED_PROXIES=*
     - PDF_GENERATOR=snappdf
@@ -25,9 +25,9 @@ services:
     - DB_PORT=3306
     - DB_DATABASE=ninja
     - DB_USERNAME=ninja
-    - DB_PASSWORD=CbTVYdIXECDZdKfqCiIYLLgCOnkkWAEA
+    - DB_PASSWORD=ZrEGzMbUrRa4AVli3o1ofsFEP75fnIql
     - IN_USER_EMAIL=admin@example.com
-    - IN_PASSWORD=nSK46S0bxJKB2Ou1
+    - IN_PASSWORD=fXkEsKmtquaefctZ
     volumes:
     - app_public:/var/www/html/public
     - app_storage:/var/www/html/storage
@@ -60,8 +60,8 @@ services:
     environment:
     - MYSQL_DATABASE=ninja
     - MYSQL_USER=ninja
-    - MYSQL_PASSWORD=CbTVYdIXECDZdKfqCiIYLLgCOnkkWAEA
-    - MYSQL_ROOT_PASSWORD=cWANXQ17NygeaT0HndPnfi6yvli2vMbA
+    - MYSQL_PASSWORD=ZrEGzMbUrRa4AVli3o1ofsFEP75fnIql
+    - MYSQL_ROOT_PASSWORD=kJY8BRWlunOBHGbduZRBd76pEdUoEb8v
     volumes:
     - mysql_data:/var/lib/mysql
   redis:
@@ -95,7 +95,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.13.56"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://invoiceninja.com
   repo: https://github.com/invoiceninja/invoiceninja
   docs: https://invoiceninja.github.io

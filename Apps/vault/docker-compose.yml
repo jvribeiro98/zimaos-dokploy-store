@@ -5,7 +5,7 @@ services:
     cap_add:
     - IPC_LOCK
     environment:
-      VAULT_DEV_ROOT_TOKEN_ID: wqVJm8I9tx5aycyLmnRM08ld7n8cztHh
+      VAULT_DEV_ROOT_TOKEN_ID: m8G5BEtGm4ah8kuql94gPkSlyDle4H9z
       VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
     expose:
     - '8200'
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.0.3"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.vaultproject.io/
   repo: https://github.com/hashicorp/vault
   docs: https://developer.hashicorp.com/vault/docs

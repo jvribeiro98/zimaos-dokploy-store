@@ -59,7 +59,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.0.18"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://instatic.com
   repo: https://github.com/corebunch/instatic
   docs: https://github.com/corebunch/instatic/tree/main/docs

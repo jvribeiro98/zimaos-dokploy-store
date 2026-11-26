@@ -4,14 +4,14 @@ services:
     image: falkordb/falkordb:v4.20.4-alpine
     restart: unless-stopped
     environment:
-    - REDIS_ARGS=--requirepass cf8c04d06b0581eca028e4a7af38afd1fc9ff65c3ce95036a00660c29e4ccfb4 --appendonly yes
+    - REDIS_ARGS=--requirepass 0eaac57a472296ee6b669c8286b691aff5f296efa14db52b694273bfd3903572 --appendonly yes
     - FALKORDB_ARGS=MAX_QUEUED_QUERIES 25 TIMEOUT 1000 RESULTSET_SIZE 10000 IMPORT_FOLDER /app/.data/import
-    - FALKORDB_PASSWORD=cf8c04d06b0581eca028e4a7af38afd1fc9ff65c3ce95036a00660c29e4ccfb4
+    - FALKORDB_PASSWORD=0eaac57a472296ee6b669c8286b691aff5f296efa14db52b694273bfd3903572
     - AUTH_URL=https://localhost
-    - AUTH_SECRET=NhFRnLr7k0cQA133Hk+9IuTViwSlYJi9J9ynKmtLR9pHEAhgSqxN0SOKWIp8fYvD
+    - AUTH_SECRET=NkEN6/veempvNXfLHjjy+9TnXVON52Xss+8FiEHG+v9be8O6hojLYwvAyw9F/geu
     - NEXTAUTH_URL=https://localhost
-    - NEXTAUTH_SECRET=NhFRnLr7k0cQA133Hk+9IuTViwSlYJi9J9ynKmtLR9pHEAhgSqxN0SOKWIp8fYvD
-    - ENCRYPTION_KEY=c7857296afafe4cd6f13d9f2a44d05eda6e69fca9cb9417ad28d460c8086e624
+    - NEXTAUTH_SECRET=NkEN6/veempvNXfLHjjy+9TnXVON52Xss+8FiEHG+v9be8O6hojLYwvAyw9F/geu
+    - ENCRYPTION_KEY=6b05bf55a5d6f1b95041a6317596bc1ddfb37eb70a581a31eb1b856d4096c3be
     - ALLOWED_ORIGINS=https://localhost
     - TRUST_PROXY_HEADERS=true
     - CSV_STORAGE=local
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.20.4"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.falkordb.com/
   repo: https://github.com/FalkorDB/FalkorDB
   docs: https://docs.falkordb.com/

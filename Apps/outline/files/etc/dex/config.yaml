@@ -32,4 +32,4 @@ staticClients:
     redirectURIs:
       - https://localhost/auth/oidc.callback
     name: "Outline"
-    secret: "JFRKQj1Ws9cpCvnLY4Idaj7aR1EZDT4z73yF0+KlOk8=" 
+    secret: "B/RdIQdi3ao7BBdrDBA/WO8FCUNQpDPbiT7FJFtSHIs=" 

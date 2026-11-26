@@ -6,7 +6,7 @@ services:
     expose:
     - '3000'
     environment:
-    - WAKAPI_PASSWORD_SALT=yvS08Zbp9tbiY8Iaj5E6Iw1pEztz2WGnBKP99Co4ysRUq0aDf6baI0etktj6od6W
+    - WAKAPI_PASSWORD_SALT=hHd8bNNJwNzaVqDUxGqcSlgG6DHz5hUuFaBAZmo7J38Cszr5SVJrbxCAt70is6TE
     - WAKAPI_DB_TYPE=sqlite3
     - WAKAPI_DB_NAME=/data/wakapi.db
     - WAKAPI_LISTEN_IPV4=0.0.0.0
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://wakapi.dev/
   repo: https://github.com/muety/wakapi
   docs: https://github.com/muety/wakapi#-installation

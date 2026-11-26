@@ -82,7 +82,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.338.2-node24.22.3-ubuntu-noble-r3"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://docs.github.com/en/actions/concepts/runners/self-hosted-runners
   repo: https://github.com/Simplarix/dokploy-actions-runner
   docs: https://github.com/Simplarix/dokploy-actions-runner#readme

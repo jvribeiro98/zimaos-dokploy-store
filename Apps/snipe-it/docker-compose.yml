@@ -10,7 +10,7 @@ services:
     environment:
     - APP_ENV=production
     - APP_DEBUG=false
-    - APP_KEY=base64:Kd0vZgp2iEYd8KMyx7Kf0CGJ/cRYbT08ovFNxJyr4n0=
+    - APP_KEY=base64:7J7D0WA7oP9mNDaV0VXIHQJg7ZpieeQgNRVF42IDH7U=
     - APP_URL=https://localhost
     - APP_TIMEZONE=UTC
     - APP_LOCALE=en-US
@@ -24,7 +24,7 @@ services:
     - DB_PORT=3306
     - DB_DATABASE=snipeit
     - DB_USERNAME=snipeit
-    - DB_PASSWORD=S3P0RD8Ayh2F36hi5dM3G4Ac
+    - DB_PASSWORD=LI1WxD8fhXqNZrVo7A6dg1m0
     - DB_PREFIX=null
     - DB_DUMP_PATH=/usr/bin
     - DB_DUMP_SKIP_SSL=true
@@ -57,8 +57,8 @@ services:
     environment:
     - MYSQL_DATABASE=snipeit
     - MYSQL_USER=snipeit
-    - MYSQL_PASSWORD=S3P0RD8Ayh2F36hi5dM3G4Ac
-    - MYSQL_ROOT_PASSWORD=ZI7Es5UgM4jOT0ItSmabMQel
+    - MYSQL_PASSWORD=LI1WxD8fhXqNZrVo7A6dg1m0
+    - MYSQL_ROOT_PASSWORD=yMFpIaK5NfBmnYNvh5Oigxap
     healthcheck:
       test:
       - CMD
@@ -92,7 +92,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8.5.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://snipeitapp.com/
   repo: https://github.com/grokability/snipe-it
   docs: https://snipe-it.readme.io/docs

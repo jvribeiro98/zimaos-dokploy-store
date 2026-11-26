@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "stable"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.home-assistant.io/
   repo: https://github.com/home-assistant/core
   docs: https://www.home-assistant.io/getting-started/onboarding/

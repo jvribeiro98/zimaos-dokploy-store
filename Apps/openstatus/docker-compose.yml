@@ -42,7 +42,7 @@ services:
     - PORT=3000
     - DATABASE_URL=http://libsql:8080
     - DATABASE_AUTH_TOKEN=
-    - CRON_SECRET=uKUuZXocIfuX1Nd3E7t40UHvWsKoZxun
+    - CRON_SECRET=q9Ia5AHNghTTEPxJGujc32ePkLSgFCRR
     - RESEND_API_KEY=
     - SITE_URL=https://localhost
     - TINYBIRD_NOOP=true
@@ -71,9 +71,9 @@ services:
     - PORT=3000
     - DATABASE_URL=http://libsql:8080
     - DATABASE_AUTH_TOKEN=
-    - CRON_SECRET=uKUuZXocIfuX1Nd3E7t40UHvWsKoZxun
+    - CRON_SECRET=q9Ia5AHNghTTEPxJGujc32ePkLSgFCRR
     - RESEND_API_KEY=
-    - SUPER_ADMIN_TOKEN=jj7iJCHUVFz6mS6gy7F0NPehudw9UfNJ
+    - SUPER_ADMIN_TOKEN=ILvIhWBQRoholyC2bU2hQkFWnrUVBixw
     - SELF_HOST=true
     - FLY_REGION=self-hosted
     - TINYBIRD_NOOP=true
@@ -108,10 +108,10 @@ services:
     - AUTH_TRUST_HOST=true
     - DATABASE_URL=http://libsql:8080
     - DATABASE_AUTH_TOKEN=
-    - AUTH_SECRET=djVcdMhyaPKH8zGrrqo5B+mcnY0GbQzisVpWOQhOWSw=
+    - AUTH_SECRET=NO6s9VfeG8YUvm5kMDg364jMQEQwBc8aGItVbllP9VM=
     - SELF_HOST=true
     - NEXT_PUBLIC_URL=https://localhost
-    - CRON_SECRET=uKUuZXocIfuX1Nd3E7t40UHvWsKoZxun
+    - CRON_SECRET=q9Ia5AHNghTTEPxJGujc32ePkLSgFCRR
     - RESEND_API_KEY=
     - TINYBIRD_NOOP=true
     - UPSTASH_REDIS_REST_URL=http://localhost:6379
@@ -151,10 +151,10 @@ services:
     - AUTH_TRUST_HOST=true
     - DATABASE_URL=http://libsql:8080
     - DATABASE_AUTH_TOKEN=
-    - AUTH_SECRET=djVcdMhyaPKH8zGrrqo5B+mcnY0GbQzisVpWOQhOWSw=
+    - AUTH_SECRET=NO6s9VfeG8YUvm5kMDg364jMQEQwBc8aGItVbllP9VM=
     - SELF_HOST=true
     - NEXT_PUBLIC_URL=https://localhost
-    - CRON_SECRET=uKUuZXocIfuX1Nd3E7t40UHvWsKoZxun
+    - CRON_SECRET=q9Ia5AHNghTTEPxJGujc32ePkLSgFCRR
     - RESEND_API_KEY=
     - TINYBIRD_NOOP=true
     depends_on:
@@ -186,7 +186,7 @@ services:
     - GIN_MODE=release
     - DB_URL=http://libsql:8080
     - WORKFLOWS_URL=http://workflows:3000
-    - CRON_SECRET=uKUuZXocIfuX1Nd3E7t40UHvWsKoZxun
+    - CRON_SECRET=q9Ia5AHNghTTEPxJGujc32ePkLSgFCRR
     - TINYBIRD_URL=
     - TINYBIRD_TOKEN=
     depends_on:
@@ -227,7 +227,7 @@ x-casaos:
   - amd64
   - arm64
   version: "e1a9825"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.openstatus.dev
   repo: https://github.com/openstatusHQ/openstatus
   docs: https://www.openstatus.dev/docs

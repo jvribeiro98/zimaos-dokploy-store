@@ -34,7 +34,7 @@ services:
     - /DATA/AppData/$AppID/postgres:/var/lib/postgresql/data
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=R7mFoCs5IoO1XiYKKjql1jltRTcMP8G5
+    - POSTGRES_PASSWORD=tgtu57e2qEdQu3noW0vL0e6qFq4keG6d
 volumes:
   certs: null
   logs: null
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "ee-lts-latest"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://tooljet.ai/
   repo: https://github.com/ToolJet/ToolJet
   docs: https://docs.tooljet.ai/

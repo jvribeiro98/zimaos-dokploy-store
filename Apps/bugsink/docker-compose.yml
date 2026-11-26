@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: bugsinkuser
-      POSTGRES_PASSWORD: oGb14Bu8aX5iJp3dw2IQHw7UDlbHj6Wl
+      POSTGRES_PASSWORD: lM0YJ6nPzJp7wKSpyvHjh38J3sBmjGnW
       POSTGRES_DB: bugsink
     volumes:
     - db-data:/var/lib/postgresql/data
@@ -26,10 +26,10 @@ services:
     expose:
     - 8000
     environment:
-      SECRET_KEY: t6dAtDy6Athyeh9xFlezCwki1Lr74Ftwd619wXFSOhgH35SdeK0mEjPMptgWRt4Z
+      SECRET_KEY: 7Q3EMLn6BCXoTAG9Sxibvs7ywbrCAzbmodh3Gctzp5nTmgA6saZIncv2eYtyweC6
       CREATE_SUPERUSER: admin:admin
       PORT: '8000'
-      DATABASE_URL: postgresql://bugsinkuser:oGb14Bu8aX5iJp3dw2IQHw7UDlbHj6Wl@db:5432/bugsink
+      DATABASE_URL: postgresql://bugsinkuser:lM0YJ6nPzJp7wKSpyvHjh38J3sBmjGnW@db:5432/bugsink
       BEHIND_HTTPS_PROXY: 'false'
       BASE_URL: https://localhost
     healthcheck:
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.bugsink.com/
   repo: https://github.com/bugsink/bugsink/
   docs: https://www.bugsink.com/docs/

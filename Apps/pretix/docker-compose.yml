@@ -97,7 +97,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.8.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://pretix.eu/
   repo: https://github.com/pretix/pretix/
   docs: https://docs.pretix.eu/

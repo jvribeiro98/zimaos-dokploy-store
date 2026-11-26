@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.0.4"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://privatebin.info/
   repo: https://github.com/PrivateBin/PrivateBin
   docs: https://github.com/PrivateBin/docker-nginx-fpm-alpine

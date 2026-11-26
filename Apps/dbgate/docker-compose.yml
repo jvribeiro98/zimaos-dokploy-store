@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - LOGIN=admin
-    - PASSWORD=k9ai4Hx2PTVRxhj3cbvXlztu965TabGp
+    - PASSWORD=ZhEcc7Ij4bwa2RD1UJOdmfAK9vLhnvfo
     volumes:
     - dbgate_data:/root/.dbgate
     expose:
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.3.6"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.dbgate.io
   repo: https://github.com/dbgate/dbgate
   docs: https://docs.dbgate.io

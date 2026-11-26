@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.2.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://om.uusec.com/
   repo: https://github.com/Safe3/openresty-manager
   docs: https://github.com/Safe3/openresty-manager

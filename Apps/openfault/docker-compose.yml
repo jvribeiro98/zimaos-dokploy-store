@@ -6,7 +6,7 @@ services:
     environment:
     - OPENFAULT_BASE_URL=https://localhost
     - OPENFAULT_TRUST_PROXY=1
-    - OPENFAULT_SETUP_TOKEN=NpA7k9hLA8iaJKZpYdt3yryH4xmb5N5l
+    - OPENFAULT_SETUP_TOKEN=GuDaDNemeVIM0ZoPMcPCuevYJgMiEWqk
     volumes:
     - openfault-data:/data
     ports:
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://openfault.dev
   repo: https://github.com/OpenFault/openfault
   docs: https://openfault.dev/docs/install

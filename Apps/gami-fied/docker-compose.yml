@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: gami
       POSTGRES_USER: gami
-      POSTGRES_PASSWORD: 1HCKhgDEm6a1TNVp00gRa8gRI2vDiPnm
+      POSTGRES_PASSWORD: 0LV4Ko3ri09PFOwBlW0jtHP3AdLsewqS
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -24,7 +24,7 @@ services:
     - -c
     - exec redis-server --appendonly yes --maxmemory-policy noeviction --requirepass "$$REDIS_PASSWORD"
     environment:
-      REDIS_PASSWORD: 0JhiyeCi3CELj5Fn9GNL9sIErEq0z6RO
+      REDIS_PASSWORD: 5bLhqID3cM4adL8rRdJb30ZHydud0yI7
     volumes:
     - redis_data:/data
     healthcheck:
@@ -41,7 +41,7 @@ services:
     - packages/database/dist/migrate.js
     restart: 'no'
     environment:
-      DATABASE_URL: postgres://gami:1HCKhgDEm6a1TNVp00gRa8gRI2vDiPnm@postgres:5432/gami
+      DATABASE_URL: postgres://gami:0LV4Ko3ri09PFOwBlW0jtHP3AdLsewqS@postgres:5432/gami
       NODE_ENV: production
     depends_on:
       postgres:
@@ -52,18 +52,18 @@ services:
     expose:
     - 3001
     environment:
-      DATABASE_URL: postgres://gami:1HCKhgDEm6a1TNVp00gRa8gRI2vDiPnm@postgres:5432/gami
+      DATABASE_URL: postgres://gami:0LV4Ko3ri09PFOwBlW0jtHP3AdLsewqS@postgres:5432/gami
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: 0JhiyeCi3CELj5Fn9GNL9sIErEq0z6RO
+      REDIS_PASSWORD: 5bLhqID3cM4adL8rRdJb30ZHydud0yI7
       NODE_ENV: production
       PORT: '3001'
       HOST: 0.0.0.0
-      BETTER_AUTH_SECRET: 6euLvzAtfxJLfu29wo9vidxwjfNsvSq/qds1ci9x2x7+VUHCN2Wusmo0VX254ucJ
+      BETTER_AUTH_SECRET: G0JF85tJXFo5TdJxHeXvmbbCBCkknmuEua+cD4XUvNj5keuacbEsuFJUF1i7r8jA
       BETTER_AUTH_URL: https://localhost
       NEXT_PUBLIC_APP_URL: https://localhost
-      ENCRYPTION_MASTER_KEY: knMdPPOO7/K2hGJlZIS/i7sBwnTDN7cZrJW9LcZn7w+X9pWIGyvw9brECsG31ya9
-      PLATFORM_BOOTSTRAP_SECRET: Nt/iAW71TOOOZnKmSr/F66ecLhuH85W4TmpgRwVXrZGw0AITPzzjKiNDe7KpvL2k
+      ENCRYPTION_MASTER_KEY: 0gGwpyenrU0dmzjQHveovWbvI952QC8onTwV/8L5fA4jcSC2pnGzWRsOj67rXXz7
+      PLATFORM_BOOTSTRAP_SECRET: Y3n8QXWKyZeymkCcrOFci3hjgbcTRVWomofujjA2PfM0/uT6rWfW2dZtp7wZQVJC
       BACKUP_STORAGE_PATH: /app/storage/backups
       TRUST_PROXY: 'true'
     volumes:
@@ -85,15 +85,15 @@ services:
     image: ghcr.io/gami-fied/gami-worker:${GAMI_VERSION}
     restart: unless-stopped
     environment:
-      DATABASE_URL: postgres://gami:1HCKhgDEm6a1TNVp00gRa8gRI2vDiPnm@postgres:5432/gami
+      DATABASE_URL: postgres://gami:0LV4Ko3ri09PFOwBlW0jtHP3AdLsewqS@postgres:5432/gami
       REDIS_HOST: redis
       REDIS_PORT: '6379'
-      REDIS_PASSWORD: 0JhiyeCi3CELj5Fn9GNL9sIErEq0z6RO
+      REDIS_PASSWORD: 5bLhqID3cM4adL8rRdJb30ZHydud0yI7
       NODE_ENV: production
-      BETTER_AUTH_SECRET: 6euLvzAtfxJLfu29wo9vidxwjfNsvSq/qds1ci9x2x7+VUHCN2Wusmo0VX254ucJ
+      BETTER_AUTH_SECRET: G0JF85tJXFo5TdJxHeXvmbbCBCkknmuEua+cD4XUvNj5keuacbEsuFJUF1i7r8jA
       BETTER_AUTH_URL: https://localhost
       NEXT_PUBLIC_APP_URL: https://localhost
-      ENCRYPTION_MASTER_KEY: knMdPPOO7/K2hGJlZIS/i7sBwnTDN7cZrJW9LcZn7w+X9pWIGyvw9brECsG31ya9
+      ENCRYPTION_MASTER_KEY: 0gGwpyenrU0dmzjQHveovWbvI952QC8onTwV/8L5fA4jcSC2pnGzWRsOj67rXXz7
       TRUST_PROXY: 'true'
       OUTBOX_POLL_INTERVAL_MS: '1000'
     depends_on:
@@ -143,7 +143,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.3.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://gami.fied.cc
   repo: https://github.com/gami-fied/gami.fied
   docs: https://gami.fied.cc/docs/

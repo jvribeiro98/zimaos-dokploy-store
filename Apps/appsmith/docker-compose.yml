@@ -31,7 +31,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.94"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://appsmith.com/
   repo: https://github.com/appsmithorg/appsmith
   docs: https://docs.appsmith.com/

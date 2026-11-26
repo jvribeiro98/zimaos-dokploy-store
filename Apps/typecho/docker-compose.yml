@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "stable"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://typecho.org/
   repo: https://github.com/typecho/typecho
   docs: http://docs.typecho.org

@@ -8,11 +8,11 @@ services:
     environment:
       ENV: production
       DEBUG: 'false'
-      MACHINE_ID: '35829'
-      APP_SECRET: f6IBcIDaW3zccYClwENxXa+xRfeGFL6DGUe1fQO0n11etjCZUjN0+eINEzcGk4aa
+      MACHINE_ID: '39393'
+      APP_SECRET: cDZaiL/wEHb/95ycv0KhqngPodtGC/2LzqrNeSWqNqvluGhGbivJ9YSbD5sD3551
       APP_NAME: tera-router-server
       ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: xy4QlYfQrreWUg6X2YXp7WdmJbCu6LZ5
+      ADMIN_PASSWORD: GHINqb1s4EIBdF8ucZWsjmXUMYSZ8PGn
       TRUSTED_PROXIES: 10.0.1.0/24,173.245.48.0/20,103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,141.101.64.0/18,108.162.192.0/18,190.93.240.0/20,188.114.96.0/20,197.234.240.0/22,198.41.128.0/17,162.158.0.0/15,104.16.0.0/13,104.24.0.0/14,172.64.0.0/13,131.0.72.0/22,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32
       CORS_ALLOWED_ORIGINS: https://localhost
       API_URL: https://localhost
@@ -20,7 +20,7 @@ services:
       MIGRATE_ON_BOOT: 'true'
       SEED_ON_BOOT: 'true'
       HEADROOM_URL: http://headroom:8787
-      HEADROOM_PROXY_TOKEN: pnRH/LebqsPaSjF73JKRJ/I+iI94yFXAkFDRhl7ZasQ=
+      HEADROOM_PROXY_TOKEN: QWcgDqA61VkQU5wbIDi315MrtdW+VipBLle1V3drRSE=
     healthcheck:
       test:
       - CMD-SHELL
@@ -44,7 +44,7 @@ services:
       HEADROOM_HOST: 0.0.0.0
       HEADROOM_PORT: '8787'
       HEADROOM_COMPRESS_ALLOW_REMOTE: '1'
-      HEADROOM_PROXY_TOKEN: pnRH/LebqsPaSjF73JKRJ/I+iI94yFXAkFDRhl7ZasQ=
+      HEADROOM_PROXY_TOKEN: QWcgDqA61VkQU5wbIDi315MrtdW+VipBLle1V3drRSE=
       HEADROOM_DISABLE_KOMPRESS: '1'
       HEADROOM_DISABLE_KOMPRESS_FALLBACK: '1'
 volumes:
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.23.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://terarouter.xyz
   repo: https://github.com/montara-project/tera-router
   docs: https://docs.terarouter.xyz

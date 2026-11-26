@@ -55,7 +55,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.25.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://karakeep.app/
   repo: https://github.com/karakeep-app/karakeep
   docs: https://github.com/karakeep-app/karakeep/tree/main/docs

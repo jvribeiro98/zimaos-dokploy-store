@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://databasus.com
   repo: https://github.com/databasus/databasus
   docs: https://databasus.com/installation

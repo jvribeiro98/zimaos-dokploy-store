@@ -114,7 +114,7 @@ x-casaos:
   - amd64
   - arm64
   version: "9.5.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://getwud.app/
   repo: https://github.com/getwud/wud
   docs: https://getwud.app/docs/quickstart/

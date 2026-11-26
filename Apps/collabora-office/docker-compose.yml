@@ -7,7 +7,7 @@ services:
     environment:
     - domain=localhost
     - username=user
-    - password=X5FfblB9pdotEQpS
+    - password=OelI6iau692sGdMO
     - extra_params=--o:ssl.enable=false
     restart: unless-stopped
     ports:
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://collaboraonline.com
   repo: https://github.com/CollaboraOnline
   docs: https://sdk.collaboraonline.com/docs

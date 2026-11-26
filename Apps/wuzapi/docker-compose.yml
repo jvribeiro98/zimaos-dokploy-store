@@ -6,10 +6,10 @@ services:
     expose:
     - 8080
     environment:
-    - WUZAPI_ADMIN_TOKEN=S60r5bWex9QpqmfGROBpWBbzR72UaZ1M
-    - WUZAPI_GLOBAL_ENCRYPTION_KEY=KJboK45rx1pHzaNlVVvB4lLFEq6QyCFb
+    - WUZAPI_ADMIN_TOKEN=q0cCtzxlATDRybudPA50M8AWerMjBiQA
+    - WUZAPI_GLOBAL_ENCRYPTION_KEY=oc2KisGJv8tqJEooqHy5lxlgYy34A7gj
     - DB_USER=wuzapi
-    - DB_PASSWORD=XeqaYA34gRga51hH2Sn5BpyJzPdYBMuh
+    - DB_PASSWORD=RaNoLtc1e3pK4xS1XyWv528DmqxqtoEL
     - DB_NAME=wuzapi
     - DB_HOST=db
     - DB_PORT=5432
@@ -25,7 +25,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: wuzapi
-      POSTGRES_PASSWORD: XeqaYA34gRga51hH2Sn5BpyJzPdYBMuh
+      POSTGRES_PASSWORD: RaNoLtc1e3pK4xS1XyWv528DmqxqtoEL
       POSTGRES_DB: wuzapi
     volumes:
     - db_data:/var/lib/postgresql/data
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.wuzapi.app/
   repo: https://github.com/asternic/wuzapi
   docs: https://github.com/asternic/wuzapi/blob/main/README.md

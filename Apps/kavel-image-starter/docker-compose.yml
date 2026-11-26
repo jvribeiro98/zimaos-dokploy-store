@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.1"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.kavel.ai
   repo: https://github.com/hanshs474/kavel-image-starter
   docs: https://kavel.readthedocs.io/

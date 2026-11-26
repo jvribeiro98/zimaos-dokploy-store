@@ -8,7 +8,7 @@ services:
     - POLLING_INTERVAL=300
     - BASIC_AUTH=true
     - USERNAME=admin
-    - PASSWORD=UiBs4OuDub64ukiEX6yAbDDi
+    - PASSWORD=tAOBMD4QYQ80oDf5pO73T3Gf
     - GPODDER_INTEGRATION_ENABLED=true
     volumes:
     - podfetch-podcasts:/app/podcasts
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.2.2"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://samtv12345.github.io/PodFetch/
   repo: https://github.com/SamTV12345/PodFetch
   docs: https://samtv12345.github.io/PodFetch/

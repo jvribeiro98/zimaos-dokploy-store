@@ -6,7 +6,7 @@ services:
     - rustfs-data:/data
     environment:
     - RUSTFS_ACCESS_KEY=rustfsadmin
-    - RUSTFS_SECRET_KEY=nl73zebQpFReVgGT
+    - RUSTFS_SECRET_KEY=X06JrJLUPDCh30ig
     - RUSTFS_ADDRESS=0.0.0.0:9000
     - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
     - RUSTFS_CONSOLE_ENABLE=true
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://rustfs.com/
   repo: https://github.com/rustfs/rustfs
   docs: https://docs.rustfs.com/

@@ -14,9 +14,9 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://umami:kDyGGeVIFberc9LxaJISlEcLO5s7ciTZ@db:5432/umami
+      DATABASE_URL: postgresql://umami:gcMIjbRVvlgnMEoAtLCx85rbuAt6NOmG@db:5432/umami
       DATABASE_TYPE: postgresql
-      APP_SECRET: QqLI5mSnoWUhINQdMyDZtC3o1rwgIuZcaDRPE8UQghVwtXDuKK/MWQcOz5khv1K5Fn9jY3aCjNiVcPUiZR4G6w==
+      APP_SECRET: s8OXaNQWX1LKzOOMOI4YmU+wCs7LyVnLavp7vnmyB4wQawELYt3KrTot9v25e4lOl7T9jlyh5/QVgdTqawqXug==
     ports:
     - target: 3000
       published: "3000"
@@ -36,7 +36,7 @@ services:
     environment:
       POSTGRES_DB: umami
       POSTGRES_USER: umami
-      POSTGRES_PASSWORD: kDyGGeVIFberc9LxaJISlEcLO5s7ciTZ
+      POSTGRES_PASSWORD: gcMIjbRVvlgnMEoAtLCx85rbuAt6NOmG
 volumes:
   db-data: null
 x-casaos:
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.4.1"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://umami.is
   repo: https://github.com/umami-software/umami
   docs: https://umami.is/docs

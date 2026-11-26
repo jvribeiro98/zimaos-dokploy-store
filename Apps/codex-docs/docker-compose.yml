@@ -6,9 +6,9 @@ services:
     - '3000'
     environment:
     - APP_CONFIG_database_driver=mongodb
-    - APP_CONFIG_database_mongodb_uri=mongodb://mongo:Bh0su0PihopylhRx@mongo:27017
-    - APP_CONFIG_auth_password=zddy9gvsSy0hdzd7
-    - APP_CONFIG_auth_secret=PLTXf906L7bWCnh7WEvMWSACcnY3KCWu
+    - APP_CONFIG_database_mongodb_uri=mongodb://mongo:4lS3hrHWSUvpptH5@mongo:27017
+    - APP_CONFIG_auth_password=D3bUTu9xM0IFF3LD
+    - APP_CONFIG_auth_secret=8ZsRzqhYUOr0Ywt74GwoYCXhyyJsYpok
     volumes:
     - uploads:/usr/src/app/uploads
     - db:/usr/src/app/db
@@ -23,7 +23,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=Bh0su0PihopylhRx
+    - MONGO_INITDB_ROOT_PASSWORD=4lS3hrHWSUvpptH5
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://codex.so
   repo: https://github.com/codex-team/codex.docs
   docs: https://docs.codex.so

@@ -19,7 +19,7 @@ services:
     image: rajnandan1/kener:4.1.1
     environment:
     - TZ=Etc/UTC
-    - KENER_SECRET_KEY=9bAzloKrOlY024obe22VOYYmn9pXB83fxWifhBNDbCxOv6jt0j9wT7MgUmLwDXos
+    - KENER_SECRET_KEY=TrCy6MaypqWFmR25sRNP82dX9W7zPsOIAXWk4l87dDyVMTvHMMVJGyIYBiAIlbWQ
     - ORIGIN=http://localhost:3000
     - REDIS_URL=redis://redis:6379
     - DATABASE_URL=sqlite://./database/kener.sqlite.db
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.1.1"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://kener.ing/
   repo: https://github.com/rajnandan1/kener
   docs: https://kener.ing/docs/

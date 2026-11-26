@@ -7,10 +7,10 @@ services:
       litellm-db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://litellm:pP2TN5gyi6F2C2LvmkEhSBZSWhYm1edA@litellm-db:5432/litellm
-      LITELLM_MASTER_KEY: 1L3XlqFsgJcgxeQ69AMEwbtAMPnpZMZz8wauX5juX1T9UoZ3hOAyjcnCATt3u9ku
+      DATABASE_URL: postgresql://litellm:ob5bHH166DvCRpjwLdhvMRAq69QjQsci@litellm-db:5432/litellm
+      LITELLM_MASTER_KEY: 3wpM1LWnE9OTRs3kLf92aPvyiim3uwOPikjbej6verXuwLm4FUzCvBaSiuVaHPn8
       UI_USERNAME: admin
-      UI_PASSWORD: DBtJmTLeviSGysng2068cMP2REytqHTK
+      UI_PASSWORD: pOAP5QFGhqeyMgngHc5Fn7RjNbEY1EFJ
       STORE_MODEL_IN_DB: 'True'
       OPENAI_API_KEY: ''
       OPENAI_BASE_URL: ''
@@ -48,7 +48,7 @@ services:
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: litellm
-      POSTGRES_PASSWORD: pP2TN5gyi6F2C2LvmkEhSBZSWhYm1edA
+      POSTGRES_PASSWORD: ob5bHH166DvCRpjwLdhvMRAq69QjQsci
 volumes:
   litellm-db: {}
 x-casaos:
@@ -71,7 +71,7 @@ x-casaos:
   - amd64
   - arm64
   version: "main-stable"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://docs.litellm.ai
   repo: https://github.com/BerriAI/litellm
   docs: https://docs.litellm.ai/docs/proxy/quick_start

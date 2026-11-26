@@ -11,8 +11,8 @@ services:
       DOCUMENT_STORAGE_LOCAL_PATH: /documents
       SESSION_SECURE: 'true'
       TRUST_PROXY: '1'
-      SESSION_SECRET: PA4fLMtvM6z6OCzlr0t9anh9Ivh0p1jwYDI5R5cxhkBypVSwTKn8qlZLkz7wR1mU
-      DB_ENCRYPTION_KEY: 6o9fhnA5OMcAgg3VMtdOfdW6jTsNW363A6fsw4xahmANx7VJwu6zIemRE0m3uoWd
+      SESSION_SECRET: aiA2GUbhmxOJ9Rmos8xjLLKOu3h8FL6OEYt1rDtpvqbFkbXWu60YT55SjownxuIo
+      DB_ENCRYPTION_KEY: OGuR9h6u5BRdRkZAfyOcjYo7g4JxkotSDJn7CyAtW0cFrclf8cGyAe631UixXE8m
     volumes:
     - yuvomi-data:/data
     - yuvomi-backups:/backups
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.80.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://yuvomi.cloud/
   repo: https://github.com/ulsklyc/yuvomi
   docs: https://github.com/ulsklyc/yuvomi#readme

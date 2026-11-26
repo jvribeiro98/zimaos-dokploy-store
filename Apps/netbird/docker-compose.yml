@@ -4,9 +4,9 @@ services:
     image: alpine:3.20
     environment:
     - NETBIRD_DOMAIN=localhost
-    - NB_AUTH_SECRET=NdKcAutT++mHyp1iCbeFbh9/xxCdJoWJ1hNIGmZlVGM=
-    - NB_SESSION_KEY=HCtFD4fOUuiCZ+IStNzFl19RHVFS6ep9YsFYVJvZejw=
-    - NB_STORE_KEY=eGNYpLGMZmwz2wO7QlnrLctpL5a6bFcha2stioe2m5M=
+    - NB_AUTH_SECRET=DGBSM3VfrDD9Q8gwl+g82pCbKv0WcNs9FAhb3rRvIbY=
+    - NB_SESSION_KEY=Y9kZM7+N7dJZFZ/Bqe0FING4cAJRVcKlRcRDvq27A7w=
+    - NB_STORE_KEY=Buizlsj9LcRDz/AhPNp6tkVE23VNJ3My38ovTvwPpB4=
     command:
     - sh
     - -c
@@ -101,7 +101,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.83.2"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://netbird.io
   repo: https://github.com/netbirdio/netbird
   docs: https://docs.netbird.io

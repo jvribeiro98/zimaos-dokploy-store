@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: kaneo
       POSTGRES_USER: kaneo
-      POSTGRES_PASSWORD: xycjfFtZWgXik0Xxtsw9o7LeVf1W7k5a
+      POSTGRES_PASSWORD: McStidjRaq8zif550fUCOkQ9ubVIj0pU
     volumes:
     - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -20,8 +20,8 @@ services:
     image: ghcr.io/usekaneo/kaneo:2.35.0
     environment:
       KANEO_CLIENT_URL: http://localhost
-      AUTH_SECRET: c16526c7d6274193fb12be167a9bdbd5ffc90a9bd5969b1fbe631a33e11e5baf24de01cfac16d06a696ac3f0c3f2be84f98d2cd5c482baefe3c2e3880de2dc79
-      DATABASE_URL: postgresql://kaneo:xycjfFtZWgXik0Xxtsw9o7LeVf1W7k5a@postgres:5432/kaneo
+      AUTH_SECRET: 8e3a9db2dfad19d9f73f9f039176440e3041a24db52619a2f85ca2532cd950be2a6f92837512d6088c4e407e6f19d0dc81e7e71e2a7998be92e1950bbcf1c18e
+      DATABASE_URL: postgresql://kaneo:McStidjRaq8zif550fUCOkQ9ubVIj0pU@postgres:5432/kaneo
     expose:
     - 5173
     depends_on:
@@ -69,7 +69,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.35.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://kaneo.app/
   repo: https://github.com/usekaneo/kaneo
   docs: https://kaneo.app/docs/

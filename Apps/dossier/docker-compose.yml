@@ -6,7 +6,7 @@ services:
     environment:
       DATABASE_URL: postgresql://dossier:${POSTGRES_PASSWORD:?Keep the generated database password}@dossier-postgres:5432/dossier
       DOSSIER_PASSWORD: ${DOSSIER_PASSWORD:-}
-      DOSSIER_ADMIN_PASSWORD: LuBw7RAVzHsVlwIXV8yOE5tc
+      DOSSIER_ADMIN_PASSWORD: m76XvPo241Q4xUEuO8gYrX4Y
       DOSSIER_SECRET: ${DOSSIER_SECRET:?Keep the generated DOSSIER_SECRET}
       DOSSIER_DATA_DIR: /data
       DOSSIER_TELEMETRY: 'off'
@@ -92,7 +92,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.9.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://github.com/AienTech/dossier
   repo: https://github.com/AienTech/dossier
   docs: https://github.com/AienTech/dossier#self-hosting

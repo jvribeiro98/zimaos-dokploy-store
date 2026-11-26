@@ -9,12 +9,12 @@ services:
     volumes:
     - /DATA/AppData/$AppID/superset/superset_config.py:/etc/superset/superset_config.py
     environment:
-      SECRET_KEY: nxVmi3JhJwrFS316LF7DaYZgx41mzU
+      SECRET_KEY: XQF63AUXMdjZ36r8cmLKoWOz2vH4R8
       MAPBOX_API_KEY: ''
       POSTGRES_USER: superset
-      POSTGRES_PASSWORD: ImAIdlQTQXFF9mxcVLpXKx2PPstEnX
+      POSTGRES_PASSWORD: WUESpSIIKizDVS3Oa36euzbAT9Ygy5
       POSTGRES_DB: superset
-      REDIS_PASSWORD: GVjbOB6zncgW7PhWkSVIuXUN7EGUe2
+      REDIS_PASSWORD: sbY0kGpdBjTl6kDCVBqpBgMthlmKKW
       POSTGRES_HOST: superset_postgres
       REDIS_HOST: superset_redis
     ports:
@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: superset
-      POSTGRES_PASSWORD: ImAIdlQTQXFF9mxcVLpXKx2PPstEnX
+      POSTGRES_PASSWORD: WUESpSIIKizDVS3Oa36euzbAT9Ygy5
       POSTGRES_DB: superset
     volumes:
     - superset_postgres_data:/var/lib/postgresql
@@ -73,7 +73,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://superset.apache.org
   repo: https://github.com/amancevice/docker-superset
   docs: https://superset.apache.org/docs/intro

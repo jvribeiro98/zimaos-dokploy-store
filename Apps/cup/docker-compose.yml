@@ -32,7 +32,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://cup.sergi0g.dev/
   repo: https://github.com/sergi0g/cup
   docs: https://cup.sergi0g.dev/docs

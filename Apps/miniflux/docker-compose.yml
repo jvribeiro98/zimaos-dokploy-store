@@ -7,11 +7,11 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: user=miniflux password=PICbLzNrvPh9TlWwNHQlUQr86OxRAGvp dbname=miniflux host=db sslmode=disable
+      DATABASE_URL: user=miniflux password=YSeEfMeEvNe16yFNFQnwwrI3pYYrQwqK dbname=miniflux host=db sslmode=disable
       RUN_MIGRATIONS: '1'
       CREATE_ADMIN: '1'
       ADMIN_USERNAME: admin
-      ADMIN_PASSWORD: nh8rnPYuYPfBF5zXkzCGPhCQ1n8Ty48h
+      ADMIN_PASSWORD: IfPwUTWNZdhb9aAN9TomBZoN0Q8My5xv
       BASE_URL: https://localhost
     expose:
     - '8080'
@@ -34,7 +34,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: miniflux
-      POSTGRES_PASSWORD: PICbLzNrvPh9TlWwNHQlUQr86OxRAGvp
+      POSTGRES_PASSWORD: YSeEfMeEvNe16yFNFQnwwrI3pYYrQwqK
       POSTGRES_DB: miniflux
     expose:
     - '5432'
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2.19"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://miniflux.app/
   repo: https://github.com/miniflux/v2
   docs: https://miniflux.app/docs/

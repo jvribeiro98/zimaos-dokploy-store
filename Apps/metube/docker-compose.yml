@@ -31,7 +31,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://github.com/alexta69/metube
   repo: https://github.com/alexta69/metube
   docs: https://github.com/alexta69/metube/wiki

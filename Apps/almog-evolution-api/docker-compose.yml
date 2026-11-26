@@ -20,7 +20,7 @@ services:
       CORS_METHODS: GET,POST,PUT,DELETE
       CORS_CREDENTIALS: 'true'
       DATABASE_PROVIDER: postgresql
-      DATABASE_CONNECTION_URI: postgresql://evolution:piddxbSInxk47HkjlbfikrB6srHW6Oc9@postgres:5432/evolution_api?schema=evolution_api
+      DATABASE_CONNECTION_URI: postgresql://evolution:rAwf3noP6mk36kNP0ATq67v5viEar3Bm@postgres:5432/evolution_api?schema=evolution_api
       DATABASE_CONNECTION_CLIENT_NAME: almog-evolution-api
       DATABASE_SAVE_DATA_INSTANCE: 'true'
       DATABASE_SAVE_DATA_NEW_MESSAGE: 'true'
@@ -39,7 +39,7 @@ services:
       CACHE_REDIS_SAVE_INSTANCES: 'true'
       CACHE_LOCAL_ENABLED: 'true'
       CACHE_LOCAL_TTL: '86400'
-      AUTHENTICATION_API_KEY: 70xySzJLPMbrxUgU55oPWPswInKxwhZBNa0Y5xuHvISmz7Rs
+      AUTHENTICATION_API_KEY: 1PsGqh6PytecRDKuU4RNhqcgcMZf2ffyRxV2L1ssFcitYi2F
       AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES: 'false'
       LANGUAGE: en
       CONFIG_SESSION_PHONE_CLIENT: Evolution API
@@ -69,7 +69,7 @@ services:
     environment:
       POSTGRES_DB: evolution_api
       POSTGRES_USER: evolution
-      POSTGRES_PASSWORD: piddxbSInxk47HkjlbfikrB6srHW6Oc9
+      POSTGRES_PASSWORD: rAwf3noP6mk36kNP0ATq67v5viEar3Bm
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -121,7 +121,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.3.7-fork.316448a"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://evolutionfoundation.com.br/
   repo: https://github.com/AlmogCohen/evolution-api
   docs: https://docs.evolutionfoundation.com.br/en

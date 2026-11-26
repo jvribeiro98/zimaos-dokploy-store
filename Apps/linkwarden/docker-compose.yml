@@ -2,9 +2,9 @@ name: linkwarden
 services:
   linkwarden:
     environment:
-    - NEXTAUTH_SECRET=TEX0Sd+qUWQvTDulmOlDvu/sWtvzkYEGZPCIR/ENT94=
+    - NEXTAUTH_SECRET=ZljPtPDv9MZOUxytoqP6xN4SL/3CRag19fbb+Sy8mqA=
     - NEXTAUTH_URL=http://localhost/api/v1/auth
-    - DATABASE_URL=postgresql://linkwarden:LwhOzEVVJQXja8ZqckVnABrTPGxkAE5S@postgres:5432/linkwarden
+    - DATABASE_URL=postgresql://linkwarden:25ZiJKLXSZ1yY3PcfVFqVRjAq9ToEXTo@postgres:5432/linkwarden
     restart: unless-stopped
     image: ghcr.io/linkwarden/linkwarden:v2.9.3
     expose:
@@ -30,7 +30,7 @@ services:
     environment:
       POSTGRES_USER: linkwarden
       POSTGRES_DB: linkwarden
-      POSTGRES_PASSWORD: LwhOzEVVJQXja8ZqckVnABrTPGxkAE5S
+      POSTGRES_PASSWORD: 25ZiJKLXSZ1yY3PcfVFqVRjAq9ToEXTo
     volumes:
     - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -64,7 +64,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.9.3"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://linkwarden.app/
   repo: https://github.com/linkwarden/linkwarden
   docs: https://docs.linkwarden.app/

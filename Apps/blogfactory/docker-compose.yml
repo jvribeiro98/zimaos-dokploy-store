@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: blogfactory
       POSTGRES_USER: blogfactory
-      POSTGRES_PASSWORD: StrM0AZZvw8foIT2hgKU9om8m5oDVdUbAubjv6ZuddmDfOgf
+      POSTGRES_PASSWORD: ydj8K3f6yFE2Z3g2n1gXr4BBPeucUsSmLk5HGCAD9gto3A8C
     volumes:
     - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -22,7 +22,7 @@ services:
     command: server /data --console-address :9001
     environment:
       MINIO_ROOT_USER: blogfactory
-      MINIO_ROOT_PASSWORD: RMGKLEH9H6yk9hAFEMwjKndWyselREyN2Mocy9gRDOwzf2F3
+      MINIO_ROOT_PASSWORD: Eje6qv4CoNg7vqGrz568tHLkq8vepJczPpe9eQPdyjMWJuTP
     volumes:
     - minio-data:/data
     healthcheck:
@@ -49,18 +49,18 @@ services:
       NODE_ENV: production
       PORT: '3000'
       BLOGFACTORY_SELF_HOSTED: 'true'
-      DATABASE_URL: postgresql://blogfactory:StrM0AZZvw8foIT2hgKU9om8m5oDVdUbAubjv6ZuddmDfOgf@postgres:5432/blogfactory
-      JWT_SECRET: TgtQ1q8Kx9uq0o4a5h1/ZrVITCLRggh+1Hp12GLP1GMt/eAyzJlnT3pJ1IWQ8tX0
-      API_KEY_ENCRYPTION_SECRET: CXVmt1KlJk/wR60fCEW9VARmX7r/hq9Mcb6lGKdbhFGEaSRGucjGzYMYHhicRNVz
+      DATABASE_URL: postgresql://blogfactory:ydj8K3f6yFE2Z3g2n1gXr4BBPeucUsSmLk5HGCAD9gto3A8C@postgres:5432/blogfactory
+      JWT_SECRET: SHO5WzwGrgfVxmcFPGZRSxK1o9J7eB1WTjKE+qqGMA+ekx9EpOd5GRJ5ereRUtAj
+      API_KEY_ENCRYPTION_SECRET: 0VtkUEwFPKcjBD7VqcWLC5Qple2PyLX/ScQj2MQMmBnnqVBvd0v8wqzWYf3Iw06n
       ADMIN_EMAILS: admin@example.com
       BLOGFACTORY_ALLOW_SIGNUP: 'true'
-      CRON_SECRET: IRN6U89fZ6JxLXUCXCnUAk33ZoK/FYigQL4rKvTOiJJ+ObO7/BRpDP7YbqnpD1tJ
+      CRON_SECRET: EquXtg7hMjOXXCmVQXri35zIGShTaUNxXcK+EcHzCWg68kbw3reUMNmaQncOi3kg
       WEB_APP_URL: https://localhost
       MCP_APP_URL: http://web/mcp-review.html
       MCP_ALLOWED_ORIGINS: https://localhost
       S3_ENDPOINT: http://minio:9000
       S3_ACCESS_KEY_ID: blogfactory
-      S3_SECRET_ACCESS_KEY: RMGKLEH9H6yk9hAFEMwjKndWyselREyN2Mocy9gRDOwzf2F3
+      S3_SECRET_ACCESS_KEY: Eje6qv4CoNg7vqGrz568tHLkq8vepJczPpe9eQPdyjMWJuTP
       S3_BUCKET: blogfactory
       S3_REGION: us-east-1
     healthcheck:
@@ -100,7 +100,7 @@ services:
       api:
         condition: service_healthy
     environment:
-      CRON_SECRET: IRN6U89fZ6JxLXUCXCnUAk33ZoK/FYigQL4rKvTOiJJ+ObO7/BRpDP7YbqnpD1tJ
+      CRON_SECRET: EquXtg7hMjOXXCmVQXri35zIGShTaUNxXcK+EcHzCWg68kbw3reUMNmaQncOi3kg
       CRON_INTERVAL_SECONDS: '21600'
     entrypoint:
     - /bin/sh
@@ -131,7 +131,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://blogfactory.io/
   repo: https://github.com/BlogFactoryHQ/blogfactory
   docs: https://github.com/BlogFactoryHQ/blogfactory/blob/main/docs/self-hosting.md

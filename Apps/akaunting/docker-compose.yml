@@ -13,12 +13,12 @@ services:
       DB_PORT: '3306'
       DB_NAME: akaunting
       DB_USERNAME: admin
-      DB_PASSWORD: 37yVZjnRG8fnmhLhCkzQ3mA2
-      DB_PREFIX: 6363249f_
+      DB_PASSWORD: spdFCbnk5CtijaHCB7oDka4I
+      DB_PREFIX: 258c0bd5_
       COMPANY_NAME: My Company
       COMPANY_EMAIL: admin@example.com
       ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: Txe3qDCqanfuBUdorzI6pdee
+      ADMIN_PASSWORD: b4oahF7HYtyB3puwEfHNvnho
     expose:
     - '80'
     volumes:
@@ -33,7 +33,7 @@ services:
     environment:
       MYSQL_DATABASE: akaunting
       MYSQL_USER: admin
-      MYSQL_PASSWORD: 37yVZjnRG8fnmhLhCkzQ3mA2
+      MYSQL_PASSWORD: spdFCbnk5CtijaHCB7oDka4I
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - akaunting-db:/var/lib/mysql
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://akaunting.com
   repo: https://github.com/akaunting/akaunting
   docs: https://akaunting.com/docs

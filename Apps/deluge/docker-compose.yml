@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://deluge-torrent.org
   repo: https://github.com/deluge-torrent/deluge
   docs: https://deluge-torrent.org

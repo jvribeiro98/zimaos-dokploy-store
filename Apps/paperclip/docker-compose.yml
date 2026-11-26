@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: paperclip
-      POSTGRES_PASSWORD: Q7G7oDiFwzQYwjGpJzCJYNRalrs41C5x
+      POSTGRES_PASSWORD: OYIn0nIB9ZNel8xsBKLBrQcEM8RutgX4
       POSTGRES_DB: paperclip
     healthcheck:
       test:
@@ -26,8 +26,8 @@ services:
       HOST: 0.0.0.0
       PORT: '3100'
       SERVE_UI: 'true'
-      DATABASE_URL: postgres://paperclip:Q7G7oDiFwzQYwjGpJzCJYNRalrs41C5x@postgres:5432/paperclip
-      BETTER_AUTH_SECRET: AlsoqnxFL9LNCKoYsUoi8NnabG02CbMcO45RdR0CCMSJzSc0k1eYszmj6ndz8xbc
+      DATABASE_URL: postgres://paperclip:OYIn0nIB9ZNel8xsBKLBrQcEM8RutgX4@postgres:5432/paperclip
+      BETTER_AUTH_SECRET: 0wO6VZDl9hymDippxiDeRMYvGcEIHDv8z2RgDonIiTQ31T2IutAQ0G1cjEWWeHyr
       PAPERCLIP_HOME: /paperclip
       PAPERCLIP_INSTANCE_ID: default
       PAPERCLIP_CONFIG: /paperclip/instances/default/config.json
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://paperclip.ing/
   repo: https://github.com/paperclipai/paperclip
   docs: https://docs.paperclip.ing/

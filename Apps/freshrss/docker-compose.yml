@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-latest}"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://freshrss.org/
   repo: https://github.com/FreshRSS/FreshRSS
   docs: https://freshrss.github.io/FreshRSS/

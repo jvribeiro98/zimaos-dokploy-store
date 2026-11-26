@@ -20,20 +20,20 @@ services:
     environment:
     - RAILS_ENV=production
     - RAILS_MAX_THREADS=5
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - JWT_SECRET_KEY=pl0dK9+P+BR4TL4i7y0hYDXzXsZFZCC+i0PsegKga9WmYbShmQF12z65gMInOqpU56YbJXVzMazepLfjSkqdTA==
-    - EVOAI_CRM_API_TOKEN=e3Ef9EDqFQGJa9euKqe3xN6z3P7GnbFL0O/U5oCxRDDZ2+ooN9lRLkYeEPEJi4lfKJdkC05Ocj/is6QSlaDivQ==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - JWT_SECRET_KEY=NX4b8OHxV8xKie+PNf49sjJS9OIIc2qIzF/KNH44xETCcGFLxKow0Z2LdLj/PNQpy+bWK16uRTaSz2J1vTzHKg==
+    - EVOAI_CRM_API_TOKEN=bPhwX0PjAWp6WJk6UGab8577dAp0XZyNBwja92scPrgBEJLNSbXW5ZmY+TwBRGPYyXQ7sLAmahBRmdICZV7vSA==
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - POSTGRES_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     - POSTGRES_DATABASE=evo_crm_production
     - POSTGRES_SSLMODE=disable
     - REDIS_URL=redis://redis:6379/3
     - FRONTEND_URL="http://localhost"
     - BACKEND_URL="http://localhost"
     - CORS_ORIGINS="http://localhost","http://localhost"
-    - DOORKEEPER_JWT_SECRET_KEY=YP9tOnulK5nTCjUi4eH6El089oyCT447XMmEsSrQMn7WBTakwlA4Rkr0xL6fUQ4nIGxxKeb+YEAnvmwSf9UnPQ==
+    - DOORKEEPER_JWT_SECRET_KEY=vTuTQlHVTVnVJHnRARsu0ow+ZkzpN59Wli/fC+1DzVDfwReshvOrh1t7IEBTm7wNl0cxRadJmm24jKIi+KZDHw==
     - DOORKEEPER_JWT_ALGORITHM=hs256
     - DOORKEEPER_JWT_ISS=evo-auth-service
     - MFA_ISSUER=EvoCRM
@@ -57,17 +57,17 @@ services:
         condition: service_healthy
     environment:
     - RAILS_ENV=production
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - JWT_SECRET_KEY=pl0dK9+P+BR4TL4i7y0hYDXzXsZFZCC+i0PsegKga9WmYbShmQF12z65gMInOqpU56YbJXVzMazepLfjSkqdTA==
-    - EVOAI_CRM_API_TOKEN=e3Ef9EDqFQGJa9euKqe3xN6z3P7GnbFL0O/U5oCxRDDZ2+ooN9lRLkYeEPEJi4lfKJdkC05Ocj/is6QSlaDivQ==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - JWT_SECRET_KEY=NX4b8OHxV8xKie+PNf49sjJS9OIIc2qIzF/KNH44xETCcGFLxKow0Z2LdLj/PNQpy+bWK16uRTaSz2J1vTzHKg==
+    - EVOAI_CRM_API_TOKEN=bPhwX0PjAWp6WJk6UGab8577dAp0XZyNBwja92scPrgBEJLNSbXW5ZmY+TwBRGPYyXQ7sLAmahBRmdICZV7vSA==
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - POSTGRES_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     - POSTGRES_DATABASE=evo_crm_production
     - POSTGRES_SSLMODE=disable
     - REDIS_URL=redis://redis:6379/3
-    - DOORKEEPER_JWT_SECRET_KEY=YP9tOnulK5nTCjUi4eH6El089oyCT447XMmEsSrQMn7WBTakwlA4Rkr0xL6fUQ4nIGxxKeb+YEAnvmwSf9UnPQ==
+    - DOORKEEPER_JWT_SECRET_KEY=vTuTQlHVTVnVJHnRARsu0ow+ZkzpN59Wli/fC+1DzVDfwReshvOrh1t7IEBTm7wNl0cxRadJmm24jKIi+KZDHw==
     - DOORKEEPER_JWT_ALGORITHM=hs256
     - DOORKEEPER_JWT_ISS=evo-auth-service
     - MFA_ISSUER=EvoCRM
@@ -89,13 +89,13 @@ services:
         condition: service_healthy
     environment:
     - RAILS_ENV=production
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - JWT_SECRET_KEY=pl0dK9+P+BR4TL4i7y0hYDXzXsZFZCC+i0PsegKga9WmYbShmQF12z65gMInOqpU56YbJXVzMazepLfjSkqdTA==
-    - EVOAI_CRM_API_TOKEN=e3Ef9EDqFQGJa9euKqe3xN6z3P7GnbFL0O/U5oCxRDDZ2+ooN9lRLkYeEPEJi4lfKJdkC05Ocj/is6QSlaDivQ==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - JWT_SECRET_KEY=NX4b8OHxV8xKie+PNf49sjJS9OIIc2qIzF/KNH44xETCcGFLxKow0Z2LdLj/PNQpy+bWK16uRTaSz2J1vTzHKg==
+    - EVOAI_CRM_API_TOKEN=bPhwX0PjAWp6WJk6UGab8577dAp0XZyNBwja92scPrgBEJLNSbXW5ZmY+TwBRGPYyXQ7sLAmahBRmdICZV7vSA==
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - POSTGRES_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     - POSTGRES_DATABASE=evo_crm_production
     - POSTGRES_SSLMODE=disable
     - REDIS_URL=redis://redis:6379/3
@@ -111,7 +111,7 @@ services:
     - ENABLE_PUSH_RELAY_SERVER=true
     - ENABLE_INBOX_EVENTS=true
     - BOT_RUNTIME_URL=http://evo-bot-runtime:8080
-    - BOT_RUNTIME_SECRET=xZwTKbwl3Xdi/Q7z4EzED9b3xZkdlW0S6x4CKV/xvobAgP4qT9+BESFVLSqUvIiEhvg6LidICWoXZkIm06vJfQ==
+    - BOT_RUNTIME_SECRET=WS3mdo2NmkPZSHDQioGguyX+xV1TJROVmzqyF9u9mOHta3+OekT6eyHo6fGvZBHk+USkFwNeWLq+qbdLW5/QOw==
     - BOT_RUNTIME_POSTBACK_BASE_URL="http://localhost"
     volumes:
     - evo-crm-data:/app/storage
@@ -130,13 +130,13 @@ services:
         condition: service_healthy
     environment:
     - RAILS_ENV=production
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - JWT_SECRET_KEY=pl0dK9+P+BR4TL4i7y0hYDXzXsZFZCC+i0PsegKga9WmYbShmQF12z65gMInOqpU56YbJXVzMazepLfjSkqdTA==
-    - EVOAI_CRM_API_TOKEN=e3Ef9EDqFQGJa9euKqe3xN6z3P7GnbFL0O/U5oCxRDDZ2+ooN9lRLkYeEPEJi4lfKJdkC05Ocj/is6QSlaDivQ==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - JWT_SECRET_KEY=NX4b8OHxV8xKie+PNf49sjJS9OIIc2qIzF/KNH44xETCcGFLxKow0Z2LdLj/PNQpy+bWK16uRTaSz2J1vTzHKg==
+    - EVOAI_CRM_API_TOKEN=bPhwX0PjAWp6WJk6UGab8577dAp0XZyNBwja92scPrgBEJLNSbXW5ZmY+TwBRGPYyXQ7sLAmahBRmdICZV7vSA==
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - POSTGRES_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     - POSTGRES_DATABASE=evo_crm_production
     - POSTGRES_SSLMODE=disable
     - REDIS_URL=redis://redis:6379/3
@@ -151,7 +151,7 @@ services:
     - ENABLE_PUSH_RELAY_SERVER=true
     - ENABLE_INBOX_EVENTS=true
     - BOT_RUNTIME_URL=http://evo-bot-runtime:8080
-    - BOT_RUNTIME_SECRET=xZwTKbwl3Xdi/Q7z4EzED9b3xZkdlW0S6x4CKV/xvobAgP4qT9+BESFVLSqUvIiEhvg6LidICWoXZkIm06vJfQ==
+    - BOT_RUNTIME_SECRET=WS3mdo2NmkPZSHDQioGguyX+xV1TJROVmzqyF9u9mOHta3+OekT6eyHo6fGvZBHk+USkFwNeWLq+qbdLW5/QOw==
     - BOT_RUNTIME_POSTBACK_BASE_URL="http://localhost"
     - SIDEKIQ_CONCURRENCY=10
     restart: unless-stopped
@@ -165,7 +165,7 @@ services:
     - DB_HOST=postgres
     - DB_PORT=5432
     - DB_USER=postgres
-    - DB_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - DB_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     - DB_NAME=evo_crm_production
     - DB_SSLMODE=disable
     - DB_MAX_IDLE_CONNS=10
@@ -173,10 +173,10 @@ services:
     - DB_CONN_MAX_LIFETIME=1h
     - DB_CONN_MAX_IDLE_TIME=30m
     - PORT=5555
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - JWT_SECRET_KEY=pl0dK9+P+BR4TL4i7y0hYDXzXsZFZCC+i0PsegKga9WmYbShmQF12z65gMInOqpU56YbJXVzMazepLfjSkqdTA==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - JWT_SECRET_KEY=NX4b8OHxV8xKie+PNf49sjJS9OIIc2qIzF/KNH44xETCcGFLxKow0Z2LdLj/PNQpy+bWK16uRTaSz2J1vTzHKg==
     - JWT_ALGORITHM=HS256
-    - ENCRYPTION_KEY=An+cN7cnP3wZ/SEEoz/OugkA5yugshogKeGeBh4kDwc=
+    - ENCRYPTION_KEY=nkAgaTFLGVY1aBg6SbdwqOiOY6arAeugN7NDUY8IFug=
     - EVOLUTION_BASE_URL=http://evo-crm:3000
     - EVO_AUTH_BASE_URL=http://evo-auth:3001
     - AI_PROCESSOR_URL=http://evo-processor:8000
@@ -187,7 +187,7 @@ services:
       evo-crm:
         condition: service_healthy
     environment:
-    - POSTGRES_CONNECTION_STRING=postgresql://postgres:fUge6vvfOCyojjqcAzrYQMZ1VA868liW@postgres:5432/evo_crm_production
+    - POSTGRES_CONNECTION_STRING=postgresql://postgres:kQQvMBhRaGUabBJgbj4pr96kSl6BKEed@postgres:5432/evo_crm_production
     - REDIS_HOST=redis
     - REDIS_PORT=6379
     - REDIS_SSL=false
@@ -197,9 +197,9 @@ services:
     - HOST=0.0.0.0
     - PORT=8000
     - DEBUG=false
-    - SECRET_KEY_BASE=nDIp6HrUwLin0tvx64lzOvUjB3k0c+IxiF5wXwwSPOCkrn6xu3oPm0gBFidUIvdxlF6Tjd5PXRuqCbcJbJ3sNQ==
-    - ENCRYPTION_KEY=An+cN7cnP3wZ/SEEoz/OugkA5yugshogKeGeBh4kDwc=
-    - EVOAI_CRM_API_TOKEN=e3Ef9EDqFQGJa9euKqe3xN6z3P7GnbFL0O/U5oCxRDDZ2+ooN9lRLkYeEPEJi4lfKJdkC05Ocj/is6QSlaDivQ==
+    - SECRET_KEY_BASE=A+2LBHpyn6+dUiFl2JAyGKS7HsPyDwYV1oWqtrBfzhwDFZKt/PxWcv1Os/imdOmoOLurCO0FKd5Wo8ypunH7BA==
+    - ENCRYPTION_KEY=nkAgaTFLGVY1aBg6SbdwqOiOY6arAeugN7NDUY8IFug=
+    - EVOAI_CRM_API_TOKEN=bPhwX0PjAWp6WJk6UGab8577dAp0XZyNBwja92scPrgBEJLNSbXW5ZmY+TwBRGPYyXQ7sLAmahBRmdICZV7vSA==
     - EVO_AI_CRM_URL=http://evo-crm:3000
     - CORE_SERVICE_URL=http://evo-core:5555/api/v1
     - EVO_AUTH_BASE_URL=http://evo-auth:3001
@@ -218,7 +218,7 @@ services:
     - LISTEN_ADDR=0.0.0.0:8080
     - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/3
     - AI_PROCESSOR_URL=http://evo-processor:8000
-    - BOT_RUNTIME_SECRET=xZwTKbwl3Xdi/Q7z4EzED9b3xZkdlW0S6x4CKV/xvobAgP4qT9+BESFVLSqUvIiEhvg6LidICWoXZkIm06vJfQ==
+    - BOT_RUNTIME_SECRET=WS3mdo2NmkPZSHDQioGguyX+xV1TJROVmzqyF9u9mOHta3+OekT6eyHo6fGvZBHk+USkFwNeWLq+qbdLW5/QOw==
     - AI_CALL_TIMEOUT_SECONDS=30
     restart: unless-stopped
   evo-crm-frontend:
@@ -240,7 +240,7 @@ services:
     environment:
     - POSTGRES_DB=evo_crm_community
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=fUge6vvfOCyojjqcAzrYQMZ1VA868liW
+    - POSTGRES_PASSWORD=kQQvMBhRaGUabBJgbj4pr96kSl6BKEed
     healthcheck:
       test:
       - CMD-SHELL
@@ -288,7 +288,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://evolutionfoundation.com.br
   repo: https://github.com/evolution-foundation/evo-crm-community
   docs: https://docs.evolutionfoundation.com.br

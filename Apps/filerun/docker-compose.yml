@@ -20,7 +20,7 @@ services:
       FR_DB_PORT: '3306'
       FR_DB_NAME: filerun
       FR_DB_USER: filerun
-      FR_DB_PASS: B07rUHTvrMO9X7nC8zdKi6Z7VoCIbhAm
+      FR_DB_PASS: pbmuRQ3YWpagbypDnICCcVuyDXIaO6np
     volumes:
     - filerun-html:/var/www/html
     - filerun-user-files:/user-files
@@ -33,9 +33,9 @@ services:
     restart: unless-stopped
     command: --old-mode=NO_PROGRESS_INFO
     environment:
-      MARIADB_ROOT_PASSWORD: LaxhGslx70uDlLEqo02OO5Tl53VfDiFN
+      MARIADB_ROOT_PASSWORD: wvoQXKGoIdko9D3OsCAm5NJQTuQZBEC9
       MYSQL_USER: filerun
-      MYSQL_PASSWORD: B07rUHTvrMO9X7nC8zdKi6Z7VoCIbhAm
+      MYSQL_PASSWORD: pbmuRQ3YWpagbypDnICCcVuyDXIaO6np
       MYSQL_DATABASE: filerun
       MARIADB_AUTO_UPGRADE: '1'
     volumes:
@@ -64,7 +64,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://filerun.com/
   repo: https://github.com/filerun/docker
   docs: https://docs.filerun.com/docker

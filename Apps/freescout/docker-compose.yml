@@ -5,10 +5,10 @@ services:
     volumes:
     - freescout-db-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: e3FobLWV96O7nYRn
+      MYSQL_ROOT_PASSWORD: EX1Mx8YnIKd3ZMje
       MYSQL_DATABASE: freescout
       MYSQL_USER: freescout_user
-      MYSQL_PASSWORD: DJS9pF34WBFYmpda
+      MYSQL_PASSWORD: Dz478om7qxMZTpo7
     healthcheck:
       test:
       - CMD
@@ -34,7 +34,7 @@ services:
         condition: service_healthy
     environment:
     - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASS=LTQxCycK12xIA2ky
+    - ADMIN_PASS=EMo5HONKZyuxWYEe
     - ADMIN_FIRST_NAME=Admin
     - ADMIN_LAST_NAME=User
     - SITE_URL=http://localhost
@@ -43,7 +43,7 @@ services:
     - DB_TYPE=mysql
     - DB_NAME=freescout
     - DB_USER=freescout_user
-    - DB_PASS=DJS9pF34WBFYmpda
+    - DB_PASS=Dz478om7qxMZTpo7
     - APPLICATION_NAME=Customer Support
     - SETUP_TYPE=AUTO
     - ENABLE_AUTO_UPDATE=TRUE
@@ -82,7 +82,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://freescout.net/
   repo: https://github.com/freescout-helpdesk/freescout
   docs: https://github.com/freescout-helpdesk/freescout/wiki/Installation-Guide

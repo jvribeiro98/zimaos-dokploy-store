@@ -38,7 +38,7 @@ services:
     restart: unless-stopped
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: TYZoONHr71oRnT6UrkIFVt7K
+      GF_SECURITY_ADMIN_PASSWORD: gGX3HrZC1Ij0Dx2FbX97jOzR
       GF_USERS_ALLOW_SIGN_UP: 'false'
       GF_AUTH_ANONYMOUS_ENABLED: 'false'
     volumes:
@@ -77,7 +77,7 @@ x-casaos:
   - amd64
   - arm64
   version: "13.2.4"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://prometheus.io/
   repo: https://github.com/google/cadvisor
   docs: https://prometheus.io/docs/introduction/overview/

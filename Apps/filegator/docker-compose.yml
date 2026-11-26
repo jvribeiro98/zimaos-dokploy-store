@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.14.3"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://filegator.io/
   repo: https://github.com/filegator/filegator
   docs: https://docs.filegator.io/

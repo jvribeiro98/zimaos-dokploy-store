@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: domain_locker
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: l4UlML1NJQeTkNzMZFFhHDJQaOD2X7bb
+      POSTGRES_PASSWORD: 4thhvUR81Edbjg1i8D9JFwHCeW13bPFP
     expose:
     - '5432'
     volumes:
@@ -27,7 +27,7 @@ services:
       DL_PG_HOST: postgres
       DL_PG_PORT: '5432'
       DL_PG_USER: postgres
-      DL_PG_PASSWORD: l4UlML1NJQeTkNzMZFFhHDJQaOD2X7bb
+      DL_PG_PASSWORD: 4thhvUR81Edbjg1i8D9JFwHCeW13bPFP
       DL_PG_NAME: domain_locker
     expose:
     - '3000'
@@ -67,7 +67,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://domain-locker.com/
   repo: https://github.com/Lissy93/domain-locker
   docs: https://github.com/Lissy93/domain-locker#readme

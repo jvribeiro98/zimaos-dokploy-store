@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://wallosapp.com
   repo: https://github.com/ellite/wallos
   docs: https://github.com/ellite/wallos?tab=readme-ov-file#getting-started

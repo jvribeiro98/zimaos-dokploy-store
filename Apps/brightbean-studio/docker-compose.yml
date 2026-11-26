@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: brightbean
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: IjPDoBptZOl46prtg7Y7e2PfgWF3Akku
+      POSTGRES_PASSWORD: 5OS6Xr3sbiEm538oindJAoG1YL45d13k
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -23,9 +23,9 @@ services:
     restart: 'no'
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
-      SECRET_KEY: TBcpwa6tHyB95FcNjqxfyOPONBWdRkrGEibKSkLh0kKxrsBP7Q
-      ENCRYPTION_KEY_SALT: gia5erVqBVt2fiLSk9Dteg0xlgTNGBTX
-      DATABASE_URL: postgres://postgres:IjPDoBptZOl46prtg7Y7e2PfgWF3Akku@postgres:5432/brightbean
+      SECRET_KEY: 8PoryoAHWiMM57rWhCP4OFOTkjra94PGdPkmEABx60fl5ki3qb
+      ENCRYPTION_KEY_SALT: 1c9f7huEbGOzS61bICZeWti1Hhce9tEs
+      DATABASE_URL: postgres://postgres:5OS6Xr3sbiEm538oindJAoG1YL45d13k@postgres:5432/brightbean
       ALLOWED_HOSTS: localhost
       APP_URL: https://localhost
       STORAGE_BACKEND: local
@@ -43,9 +43,9 @@ services:
     - '8000'
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
-      SECRET_KEY: TBcpwa6tHyB95FcNjqxfyOPONBWdRkrGEibKSkLh0kKxrsBP7Q
-      ENCRYPTION_KEY_SALT: gia5erVqBVt2fiLSk9Dteg0xlgTNGBTX
-      DATABASE_URL: postgres://postgres:IjPDoBptZOl46prtg7Y7e2PfgWF3Akku@postgres:5432/brightbean
+      SECRET_KEY: 8PoryoAHWiMM57rWhCP4OFOTkjra94PGdPkmEABx60fl5ki3qb
+      ENCRYPTION_KEY_SALT: 1c9f7huEbGOzS61bICZeWti1Hhce9tEs
+      DATABASE_URL: postgres://postgres:5OS6Xr3sbiEm538oindJAoG1YL45d13k@postgres:5432/brightbean
       ALLOWED_HOSTS: localhost
       APP_URL: https://localhost
       STORAGE_BACKEND: local
@@ -67,9 +67,9 @@ services:
     restart: unless-stopped
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
-      SECRET_KEY: TBcpwa6tHyB95FcNjqxfyOPONBWdRkrGEibKSkLh0kKxrsBP7Q
-      ENCRYPTION_KEY_SALT: gia5erVqBVt2fiLSk9Dteg0xlgTNGBTX
-      DATABASE_URL: postgres://postgres:IjPDoBptZOl46prtg7Y7e2PfgWF3Akku@postgres:5432/brightbean
+      SECRET_KEY: 8PoryoAHWiMM57rWhCP4OFOTkjra94PGdPkmEABx60fl5ki3qb
+      ENCRYPTION_KEY_SALT: 1c9f7huEbGOzS61bICZeWti1Hhce9tEs
+      DATABASE_URL: postgres://postgres:5OS6Xr3sbiEm538oindJAoG1YL45d13k@postgres:5432/brightbean
       ALLOWED_HOSTS: localhost
       APP_URL: https://localhost
       STORAGE_BACKEND: local
@@ -106,7 +106,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://brightbean.xyz/studio/
   repo: https://github.com/brightbeanxyz/brightbean-studio
   docs: https://github.com/brightbeanxyz/brightbean-studio#readme

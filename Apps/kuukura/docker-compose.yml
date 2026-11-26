@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.10.13"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://kuukura-main-landing.neodev-f72.workers.dev
   repo: https://github.com/victorlunam/kuukura
   docs: https://github.com/victorlunam/kuukura/blob/main/docs/deploy.md

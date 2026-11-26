@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.25.2"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://baserow.io/
   repo: https://github.com/Baserow/baserow
   docs: https://baserow.io/docs/index

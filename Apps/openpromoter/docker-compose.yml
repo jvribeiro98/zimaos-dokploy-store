@@ -9,10 +9,10 @@ services:
     expose:
     - 3000
     environment:
-      DATABASE_URL: postgres://openpromoter:3yaaAuD7O5tP4Mr6rjiSwhVipHpF0Wi7@postgres:5432/openpromoter
+      DATABASE_URL: postgres://openpromoter:h7oidjFDb59RJoeJMWcp84IGckCtR3kA@postgres:5432/openpromoter
       APP_URL: https://localhost
-      BETTER_AUTH_SECRET: wqzGX4PFsvt/gt+y4iN2AuUK58mDxjvBH7QV3i8cQBs=
-      ENCRYPTION_KEY: CQ6Y9xXNUQi00HmUDkkcWxWWuT3W+nySi6I8WTH8cfg=
+      BETTER_AUTH_SECRET: 1/Wav43GyqEc76H0NTXAAc0RUqGJ/YCHWk55Danudf8=
+      ENCRYPTION_KEY: fQgwsZbHlgxRCq04UrBXgbmT2rcj4DNuG+gxQ6bIncY=
       EMAIL_FROM: OpenPromoter <hello@localhost>
       SEED_DEMO: 'false'
     ports:
@@ -26,7 +26,7 @@ services:
     - openpromoter-db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: openpromoter
-      POSTGRES_PASSWORD: 3yaaAuD7O5tP4Mr6rjiSwhVipHpF0Wi7
+      POSTGRES_PASSWORD: h7oidjFDb59RJoeJMWcp84IGckCtR3kA
       POSTGRES_DB: openpromoter
     healthcheck:
       test:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.2"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://openpromoter.com/
   repo: https://github.com/openpromoter/openpromoter
   docs: https://openpromoter.com/docs/self-hosting/

@@ -7,7 +7,7 @@ services:
     - peppermint-postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: peppermint
-      POSTGRES_PASSWORD: TUVdhUzniUGe7ocjPyRxKVoQ2F7WCRw2
+      POSTGRES_PASSWORD: exrnR6g20vLi1Idy2b5hJoFpwXsUzzQR
       POSTGRES_DB: peppermint
     healthcheck:
       test:
@@ -24,9 +24,9 @@ services:
         condition: service_healthy
     environment:
       DB_USERNAME: peppermint
-      DB_PASSWORD: TUVdhUzniUGe7ocjPyRxKVoQ2F7WCRw2
+      DB_PASSWORD: exrnR6g20vLi1Idy2b5hJoFpwXsUzzQR
       DB_HOST: peppermint-postgres
-      SECRET: 0REZG40/coYH1Vz6BlK0xmo5f5Yh9ZXduI0dsaN+Nd0=
+      SECRET: v8ijeG9Crg4SXeB/3elsCGGKGrNlcZ6FjViMsVdY2qo=
     ports:
     - target: 3000
       published: "3000"
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://peppermint.sh/
   repo: https://github.com/Peppermint-Lab/peppermint
   docs: https://docs.peppermint.sh/

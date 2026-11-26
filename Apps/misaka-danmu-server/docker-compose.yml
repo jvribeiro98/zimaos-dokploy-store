@@ -4,7 +4,7 @@ services:
     image: postgres:18
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=D33sBmvCD8dOXh1b4i3hVFVg
+    - POSTGRES_PASSWORD=NYdF5MOHMKj3gQqFI6KmyaKi
     - POSTGRES_USER=danmuapi
     - POSTGRES_DB=danmuapi
     - TZ=Asia/Shanghai
@@ -34,7 +34,7 @@ services:
     - DANMUAPI_DATABASE__PORT=5432
     - DANMUAPI_DATABASE__NAME=danmuapi
     - DANMUAPI_DATABASE__USER=danmuapi
-    - DANMUAPI_DATABASE__PASSWORD=D33sBmvCD8dOXh1b4i3hVFVg
+    - DANMUAPI_DATABASE__PASSWORD=NYdF5MOHMKj3gQqFI6KmyaKi
     - DANMUAPI_ADMIN__INITIAL_USER=admin
     volumes:
     - danmu-config:/app/config
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://github.com/l429609201/misaka_danmu_server
   repo: https://github.com/l429609201/misaka_danmu_server
   docs: https://github.com/l429609201/misaka_danmu_server#readme

@@ -8,7 +8,7 @@ services:
     - '8080'
     environment:
     - PG_CONSOLE_API_URL=http://localhost/api/v1
-    - PG_CONSOLE_AUTHORIZATION_TOKEN=7wlHYMMBPaWKqrCBVQrwe1QLnmETjQHMNWL5QKIcagg=
+    - PG_CONSOLE_AUTHORIZATION_TOKEN=u9TJFnJqnl39BMSJlDx4Qwjb41wV1huA0F0Sy4KoSk4=
     volumes:
     - console_postgres:/var/lib/postgresql
     - dbdesk_studio_data:/opt/dbdesk-studio
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.11.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://autobase.tech/
   repo: https://github.com/vitabaks/autobase
   docs: https://autobase.tech/docs

@@ -7,8 +7,8 @@ services:
     volumes:
     - couchdb-data:/opt/couchdb/data
     environment:
-    - COUCHDB_USER=5GYXOAuhAyYzOqnV
-    - COUCHDB_PASSWORD=ezF2OzcXA2HcT5nBOtGsYpq4g0IiBmNz
+    - COUCHDB_USER=RRX9opopqJyF9bH3
+    - COUCHDB_PASSWORD=73dV2XkvVsQs8lYwr05yc7ZQrn7F0oCz
     restart: unless-stopped
     ports:
     - target: 5984
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://couchdb.apache.org/
   repo: https://github.com/apache/couchdb
   docs: https://docs.couchdb.org/en/stable/

@@ -7,8 +7,8 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://marketing_dashboard:rMtlAvPmJvCHs3t7YkJl5eibXpWoYSgq@postgres:5432/marketing_dashboard?schema=public
-      DIRECT_URL: postgresql://marketing_dashboard:rMtlAvPmJvCHs3t7YkJl5eibXpWoYSgq@postgres:5432/marketing_dashboard?schema=public
+      DATABASE_URL: postgresql://marketing_dashboard:AO5cTsnG2mtE6X61pw7rcPnyKX5SM0Im@postgres:5432/marketing_dashboard?schema=public
+      DIRECT_URL: postgresql://marketing_dashboard:AO5cTsnG2mtE6X61pw7rcPnyKX5SM0Im@postgres:5432/marketing_dashboard?schema=public
       MARKETING_APP_URL: https://localhost
       MARKETING_COLLECTOR_UPSTREAM_URL: https://localhost/api/ingest/browser
       MARKETING_SESSION_TIMEOUT_MINUTES: '30'
@@ -19,7 +19,7 @@ services:
       MARKETING_INGEST_RATE_LIMIT_WINDOW_MS: '60000'
       MARKETING_ENABLE_PILOT_API: 'false'
       MARKETING_DASHBOARD_ADMIN_USER: admin
-      MARKETING_DASHBOARD_ADMIN_PASSWORD: 9hayuAlS2a25wwb5EpKg15PpwPFYbJRH
+      MARKETING_DASHBOARD_ADMIN_PASSWORD: vPP2mTjDsfiytYZfbvYpDZkTqjzfWaR1
     expose:
     - 3000
     healthcheck:
@@ -40,7 +40,7 @@ services:
     environment:
       POSTGRES_DB: marketing_dashboard
       POSTGRES_USER: marketing_dashboard
-      POSTGRES_PASSWORD: rMtlAvPmJvCHs3t7YkJl5eibXpWoYSgq
+      POSTGRES_PASSWORD: AO5cTsnG2mtE6X61pw7rcPnyKX5SM0Im
     volumes:
     - marketing-dashboard-postgres:/var/lib/postgresql/data
     healthcheck:
@@ -73,7 +73,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://github.com/abel-yelin/marketing-dashboard
   repo: https://github.com/abel-yelin/marketing-dashboard
   docs: https://github.com/abel-yelin/marketing-dashboard/blob/main/docs/production-deployment.md

@@ -6,7 +6,7 @@ services:
     expose:
     - 3000
     environment:
-      JUNCTIO_SECRET: e44e171e47bdc2290441b4dacd9d1b2bade49d3a0d6c091f372ed583cd4bdbe5969ab00e83059a9e821b191f821c54b00bdfb81a60452979b3e0a4205d009ecc
+      JUNCTIO_SECRET: 1fc6d5f33bcea931f12f3867b704e80b9ca3b15db7d4c8f41590eace051092f3ea542c5e95731b60ec2f8169a1b126edb063c3aef9a03db7942be5455a560531
       JUNCTIO_BASE_URL: https://localhost
       JUNCTIO_TRUST_PROXY: 'true'
     volumes:
@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.6"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://junctio.org
   repo: https://github.com/k2so-dev/junctio
   docs: https://junctio.org/docs/

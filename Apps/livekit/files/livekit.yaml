@@ -9,7 +9,7 @@ rtc:
 redis:
     address: redis:6379
     username: ""
-    password: E7HZ7f4LxwPrxfDNjpMoL7Lt7O8iEke7
+    password: CibQuwIGU6HTw95cFZl2zhDdtckCFk0Z
     db: 0
     use_tls: false
     sentinel_master_name: ""
@@ -28,4 +28,4 @@ ingress:
     rtmp_base_url: rtmp://livekit.localhost:1935/x
     whip_base_url: https://livekit-whip.localhost/w
 keys:
-    APIMJGpgNf6tDAV: 2FVPZYf7vXCv18ZgznxBlj10P06MZrrNKzLeGFJMmUqi
+    API161glWMpE6R7: iFloExlm3cmYls3A8gjlM3WQ701ChgaYU3ErAz0UvEYO

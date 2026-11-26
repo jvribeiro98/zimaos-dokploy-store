@@ -7,8 +7,8 @@ services:
     - redis
     environment:
     - APP_URL=http://localhost:3000
-    - APP_SECRET=d2jmwBky6h2k2jlLfoyJxiTGMD8oQsm5
-    - DATABASE_URL=postgresql://docmost:p74UkFXRAvVfs1TQ10u7dnQI3tJ2yPft@db:5432/docmost?schema=public
+    - APP_SECRET=AJhmqUzV2neOGUWiC0OKOgCzANKnpPY6
+    - DATABASE_URL=postgresql://docmost:uZxdBlMRE3lXQGZNhJwjwvBx0Yn33W7L@db:5432/docmost?schema=public
     - REDIS_URL=redis://redis:6379
     restart: unless-stopped
     volumes:
@@ -22,7 +22,7 @@ services:
     environment:
     - POSTGRES_DB=docmost
     - POSTGRES_USER=docmost
-    - POSTGRES_PASSWORD=p74UkFXRAvVfs1TQ10u7dnQI3tJ2yPft
+    - POSTGRES_PASSWORD=uZxdBlMRE3lXQGZNhJwjwvBx0Yn33W7L
     restart: unless-stopped
     volumes:
     - db_docmost_data:/var/lib/postgresql/data
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.4.1"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://docmost.com/
   repo: https://github.com/docmost/docmost
   docs: https://docmost.com/docs/

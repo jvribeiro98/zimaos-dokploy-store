@@ -126,7 +126,7 @@ services:
       SLACK_CLIENT_SECRET: ${SLACK_CLIENT_SECRET:-}
       SLACK_SIGNING_SECRET: ${SLACK_SIGNING_SECRET:-}
       SLACK_APP_ID: ${SLACK_APP_ID:-}
-      CRON_SECRET: iVInjW9z8A7dOAsHzCy2uTl45M6KOhYNX2uQQciHZaHWcbsP3vTrVEiBALm1WNRt
+      CRON_SECRET: 8u8NJtI9owU95UmZMBnIZg3EMiEkvVAS6VRQRmLAUnY64nP6gBvtRvnjESHn2xCb
       ORBIT_SELF_HOSTED: 'true'
       S3_ENDPOINT: ${ORBIT_STORAGE_URL:?required}
       S3_REGION: us-east-1
@@ -184,7 +184,7 @@ services:
       SLACK_CLIENT_SECRET: ${SLACK_CLIENT_SECRET:-}
       SLACK_SIGNING_SECRET: ${SLACK_SIGNING_SECRET:-}
       SLACK_APP_ID: ${SLACK_APP_ID:-}
-      CRON_SECRET: iVInjW9z8A7dOAsHzCy2uTl45M6KOhYNX2uQQciHZaHWcbsP3vTrVEiBALm1WNRt
+      CRON_SECRET: 8u8NJtI9owU95UmZMBnIZg3EMiEkvVAS6VRQRmLAUnY64nP6gBvtRvnjESHn2xCb
       ORBIT_SELF_HOSTED: 'true'
       S3_ENDPOINT: ${ORBIT_STORAGE_URL:?required}
       S3_REGION: us-east-1
@@ -263,7 +263,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.09.24"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://orbit.noveum.ai
   repo: https://github.com/Noveum/orbit
   docs: https://github.com/Noveum/orbit/blob/containers-2026.09.24/docs/container-catalogs.md

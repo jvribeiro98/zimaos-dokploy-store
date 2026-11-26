@@ -38,9 +38,9 @@ services:
     - QUX_MONGO_TABLE_PREFIX=quantux
     - QUX_MONGO_CONNECTION_STRING=mongodb://quant-ux-mongo:27017
     - QUX_MAIL_USER=admin@example.com
-    - QUX_MAIL_PASSWORD=28FvPf3oT6WUXAE53dRMQcyLly7OWhN9
+    - QUX_MAIL_PASSWORD=qljVvWh9lRDTlz8SgJFlgMxXL2Lgwl33
     - QUX_MAIL_HOST=mail.example.com
-    - QUX_JWT_PASSWORD=FHS7S0PxWTSt1Y0KIFzGDzbYFC4d18Vxd22FHGiH0ngHHFjPxnv9vtMSeCHzAb6L
+    - QUX_JWT_PASSWORD=tHvGd9E4jww8hai36tbx64YPbcQdkqkcPogboTHzHPpHJ597bliTAKbxniY8Fklz
     - QUX_IMAGE_FOLDER_USER=/app-data/qux-images
     - QUX_IMAGE_FOLDER_APPS=/app-data/qux-image-apps
     - TZ=America/Chicago
@@ -87,7 +87,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.quant-ux.com/
   repo: https://github.com/KlausSchaefers/quant-ux
   docs: https://www.quant-ux.com/

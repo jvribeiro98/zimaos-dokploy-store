@@ -8,7 +8,7 @@ services:
     - DB_HOST=mysql
     - DB_NAME=easyappointments
     - DB_USERNAME=root
-    - DB_PASSWORD=6KYfOTdeQFIFOjbTzLNacQ9muXuoLl4R
+    - DB_PASSWORD=pWV39Tic2KJC3b5GXKManwayBAOgwYmI
     volumes:
     - easyappointments:/var/www/html
     depends_on:
@@ -21,7 +21,7 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=6KYfOTdeQFIFOjbTzLNacQ9muXuoLl4R
+    - MYSQL_ROOT_PASSWORD=pWV39Tic2KJC3b5GXKManwayBAOgwYmI
     - MYSQL_DATABASE=easyappointments
     volumes:
     - mysql:/var/lib/mysql
@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.5.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://easyappointments.org
   repo: https://github.com/alextselegidis/easyappointments
   docs: https://easyappointments.org/docs

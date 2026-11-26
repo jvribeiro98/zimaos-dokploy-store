@@ -16,24 +16,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     healthcheck:
       test:
       - CMD
@@ -72,24 +72,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     depends_on:
       init-volumes:
         condition: service_completed_successfully
@@ -119,24 +119,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -166,24 +166,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -207,24 +207,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -241,24 +241,24 @@ services:
       LANGUAGE: en-US
       CONNECTION_TIMEOUT_MS: '60000000'
       APP_URL: http://localhost
-      APP_KEY: base64:4LR0Bz9PMlBwFTKu6OC305vO5w+ZVoplBUsBKC7Rfv4=
+      APP_KEY: base64:9dCNi7j1YcUiEXSHefWsyxT2wdcUi3YLUwjGWepXGAo=
       APP_QUEUES_COUNTER: '2'
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: '5432'
       DB_DATABASE: puppetflow
       DB_USERNAME: admin
-      DB_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      DB_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       PINOKIO_HOST: pinokio
       PINOKIO_PORT: '3000'
-      PINOKIO_TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      PINOKIO_TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       RUNNER_API_INTERNAL_URL: http://puppetflow:8000/api/internal/runner
       BROWSER_STREAM_INTERNAL_URL: http://stream-server:6080
       BROWSER_STREAM_PUBLIC_URL: http://localhost
       BROWSER_STREAM_ALLOWED_ORIGINS: http://localhost
-      BROWSER_STREAM_SECRET: eefa75222c65c5dba4f37a2e166fe613ebdf07b6983f54f0caade1d97b2e09ad
+      BROWSER_STREAM_SECRET: dd4288bc0f7e803626215753b5f5ba86a5679c18ab058b41b936f98142077d61
     depends_on:
       redis:
         condition: service_healthy
@@ -283,7 +283,7 @@ services:
     - puppetflow-execution:/app/data/execution
     - pinokio-downloads:/opt/browsers
     environment:
-      TOKEN: 5f1290ec1b93aa0b5cffc08eb38db144d451ed13024efbe2c346cb9e3cbe179c
+      TOKEN: bcc04d92011ba767ed39adfd0998c76bf9efbbad8e0a3a6af3bdd6615d44a797
       HOME: /tmp
       XDG_CONFIG_HOME: /tmp/.config
       XDG_CACHE_HOME: /tmp/.cache
@@ -300,7 +300,7 @@ services:
     environment:
       POSTGRES_DB: puppetflow
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: aQND2200SpwoE9YGFtxODHrjS38b5bM7
+      POSTGRES_PASSWORD: 1eqDz6GJQGz05RLczA11lkCKKNKjYMVk
     healthcheck:
       test:
       - CMD-SHELL
@@ -377,7 +377,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.11.7"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://puppetflow.com/
   repo: https://github.com/puppetflow/puppetflow
   docs: https://docs.puppetflow.com/

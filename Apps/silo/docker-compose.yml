@@ -8,7 +8,7 @@ services:
     - 9001
     environment:
     - MINIO_ROOT_USER=silo_usr
-    - MINIO_ROOT_PASSWORD=WGoF1a4IgWTdj214vEkFzITMzwMxM23C
+    - MINIO_ROOT_PASSWORD=2WgBm8sW612sQPVkVFkMxf9k23QUZM53
     volumes:
     - silo:/data
     command: server /data --console-address ":9001"
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "RELEASE.2026-08-06T00-00-00Z"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://silo.pgsty.com
   repo: https://github.com/pgsty/silo
   docs: https://silo.pgsty.com/docs/

@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.docuseal.com/
   repo: https://github.com/docusealco/docuseal
   docs: https://www.docuseal.com/

@@ -5,13 +5,13 @@ services:
     restart: unless-stopped
     environment:
     - NODE_ENV=production
-    - DATABASE_URL=postgresql://postgres:M0YoIsiCV4G4EQMNamLxb9YUI1FAvf9v@db:5432/simstudio
+    - DATABASE_URL=postgresql://postgres:WNm2YF1XBadDMhmGh4qGmgeqne90GJxx@db:5432/simstudio
     - BETTER_AUTH_URL=http://localhost
     - NEXT_PUBLIC_APP_URL=http://localhost
-    - BETTER_AUTH_SECRET=a0Ud7eBKjXK87kJy5tXC1e8jSNdi4IPy
-    - ENCRYPTION_KEY=7570de2f0498f424f88ed954f1b3cf8651de9f6bccdc488df3b201966875070cac762f30051337a7776be25507f85a2b96ec7f183587384c31e5045f80db4aef
-    - API_ENCRYPTION_KEY=377a82235ab1df03cdeb290ea933393af6373b8400d3a7c96c7ca1eacc9a4111ffb2a32740d0f149f3e6cb95379c4684c1f1f93f35d02a14b12515507a4711d6
-    - INTERNAL_API_SECRET=XPg4OD0JE5VS1uWeW4UgPxHcKVPTCxOp
+    - BETTER_AUTH_SECRET=FyA2wfPYz48M8Ny5q1yrQSyd9zFiUg9W
+    - ENCRYPTION_KEY=75319cf2ef7ec917698c5d80716f6a148fe7e64152672551fc51e6f137c2f3d70e545f3c0b7e1f2048484dee012ede33eda5f57f242dda36280e35c63574ff65
+    - API_ENCRYPTION_KEY=e6235338eed3bb0e40ed6f334162617e324da14f6e5be3b213eeb106e16b2fad5a67cb5d255efbc3de8ff3479d7cf5a83ecaad7c73c64656fad4d0aae80ae5fb
+    - INTERNAL_API_SECRET=f0YaswyvMfeI48BC6bcGgQ76mmAqSHjZ
     - SOCKET_SERVER_URL=http://realtime:3002
     depends_on:
       db:
@@ -39,11 +39,11 @@ services:
     restart: unless-stopped
     environment:
     - NODE_ENV=production
-    - DATABASE_URL=postgresql://postgres:M0YoIsiCV4G4EQMNamLxb9YUI1FAvf9v@db:5432/simstudio
+    - DATABASE_URL=postgresql://postgres:WNm2YF1XBadDMhmGh4qGmgeqne90GJxx@db:5432/simstudio
     - NEXT_PUBLIC_APP_URL=http://localhost
     - BETTER_AUTH_URL=http://localhost
-    - BETTER_AUTH_SECRET=a0Ud7eBKjXK87kJy5tXC1e8jSNdi4IPy
-    - INTERNAL_API_SECRET=XPg4OD0JE5VS1uWeW4UgPxHcKVPTCxOp
+    - BETTER_AUTH_SECRET=FyA2wfPYz48M8Ny5q1yrQSyd9zFiUg9W
+    - INTERNAL_API_SECRET=f0YaswyvMfeI48BC6bcGgQ76mmAqSHjZ
     depends_on:
       db:
         condition: service_healthy
@@ -61,7 +61,7 @@ services:
     image: ghcr.io/simstudioai/migrations:latest
     working_dir: /app/packages/db
     environment:
-    - DATABASE_URL=postgresql://postgres:M0YoIsiCV4G4EQMNamLxb9YUI1FAvf9v@db:5432/simstudio
+    - DATABASE_URL=postgresql://postgres:WNm2YF1XBadDMhmGh4qGmgeqne90GJxx@db:5432/simstudio
     depends_on:
       db:
         condition: service_healthy
@@ -75,7 +75,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=M0YoIsiCV4G4EQMNamLxb9YUI1FAvf9v
+    - POSTGRES_PASSWORD=WNm2YF1XBadDMhmGh4qGmgeqne90GJxx
     - POSTGRES_DB=simstudio
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -108,7 +108,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://sim.ai
   repo: https://github.com/simstudioai/sim
   docs: https://docs.sim.ai

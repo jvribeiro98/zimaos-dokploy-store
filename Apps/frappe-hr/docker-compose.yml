@@ -220,10 +220,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: Td7b8nT75JxJoFxBRRcWb1O2xYkew81e
+      ADMIN_PASSWORD: NESkJ4OUiOMIveThKgfRUzDyj39ws7vs
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: ZtjM2uG6ebOJ2JeHCXSPl22JUN2JHeAo
+      DB_ROOT_PASSWORD: zdXfb4139KPPVTGqeRlqrTkLe3PC94SL
       INSTALL_APP_ARGS: --install-app hrms
     restart: unless-stopped
   migration:
@@ -263,8 +263,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=ZtjM2uG6ebOJ2JeHCXSPl22JUN2JHeAo
-    - MARIADB_ROOT_PASSWORD=ZtjM2uG6ebOJ2JeHCXSPl22JUN2JHeAo
+    - MYSQL_ROOT_PASSWORD=zdXfb4139KPPVTGqeRlqrTkLe3PC94SL
+    - MARIADB_ROOT_PASSWORD=zdXfb4139KPPVTGqeRlqrTkLe3PC94SL
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -350,7 +350,7 @@ x-casaos:
   - amd64
   - arm64
   version: "ersion-15"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://frappe.io/hr
   repo: https://github.com/frappe/hrms
   docs: https://docs.frappe.io/hr

@@ -6,11 +6,11 @@ services:
     expose:
     - 3333
     environment:
-    - DATABASE_URL=postgresql://ghostfolio:72WmRBBg9cGv5UEk0Bhg7QXc@ghostfolio-db:5432/ghostfolio?sslmode=disable
+    - DATABASE_URL=postgresql://ghostfolio:tnHnq5xCs8YkaVnVVMxwIkGg@ghostfolio-db:5432/ghostfolio?sslmode=disable
     - REDIS_HOST=ghostfolio-redis
     - REDIS_PORT=6379
-    - ACCESS_TOKEN_SALT=irqPIgOdQUNpttYquqaSfD77Apd56PZmOBJjYGaT2Nk=
-    - JWT_SECRET_KEY=sVwI6huYnLp74c1FwERGGWOHwgP08ndH6Zlxg7z527g=
+    - ACCESS_TOKEN_SALT=KfKwFn8nl2tpMiBwIpFMrIGMsO4Ke0+sHMDFkc7iC7A=
+    - JWT_SECRET_KEY=uAsvijEkQad5M4kmeZiXXWJhGATy0M3UljULARwRM4k=
     depends_on:
     - ghostfolio-db
     - ghostfolio-redis
@@ -24,7 +24,7 @@ services:
     environment:
     - POSTGRES_DB=ghostfolio
     - POSTGRES_USER=ghostfolio
-    - POSTGRES_PASSWORD=72WmRBBg9cGv5UEk0Bhg7QXc
+    - POSTGRES_PASSWORD=tnHnq5xCs8YkaVnVVMxwIkGg
     volumes:
     - db_data:/var/lib/postgresql/data
   ghostfolio-redis:
@@ -57,7 +57,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.100.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://ghostfol.io
   repo: https://github.com/ghostfolio/ghostfolio
   docs: https://ghostfol.io/en/resources

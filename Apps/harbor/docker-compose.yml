@@ -812,7 +812,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.15.4"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://goharbor.io/
   repo: https://github.com/goharbor/harbor
   docs: https://goharbor.io/docs/

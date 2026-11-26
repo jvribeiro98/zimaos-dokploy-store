@@ -9,7 +9,7 @@ services:
     - TZ=UTC
     - NEXT_ENV_IMAGES_ALL_REMOTE=true
     - PUBLIC_ORIGIN=https://localhost
-    - PRISMA_DATABASE_URL=postgresql://teable:dk7hZiTB5pmx16TsxstO4WWxPPcfm5lk@teable-db:5432/teable
+    - PRISMA_DATABASE_URL=postgresql://teable:aqyRFtfy9cFzzcEQR6BSBqDRvciyiuxe@teable-db:5432/teable
     - PUBLIC_DATABASE_PROXY=${TEABLE_HOST}:${TEABLE_DB_PORT}
     - BACKEND_MAIL_HOST=${BACKEND_MAIL_HOST}
     - BACKEND_MAIL_PORT=${BACKEND_MAIL_PORT}
@@ -36,7 +36,7 @@ services:
     - TZ=UTC
     - POSTGRES_DB=teable
     - POSTGRES_USER=teable
-    - POSTGRES_PASSWORD=dk7hZiTB5pmx16TsxstO4WWxPPcfm5lk
+    - POSTGRES_PASSWORD=aqyRFtfy9cFzzcEQR6BSBqDRvciyiuxe
     healthcheck:
       test:
       - CMD-SHELL
@@ -48,7 +48,7 @@ services:
     image: ghcr.io/teableio/teable-db-migrate:latest
     environment:
     - TZ=UTC
-    - PRISMA_DATABASE_URL=postgresql://teable:dk7hZiTB5pmx16TsxstO4WWxPPcfm5lk@teable-db:5432/teable
+    - PRISMA_DATABASE_URL=postgresql://teable:aqyRFtfy9cFzzcEQR6BSBqDRvciyiuxe@teable-db:5432/teable
     depends_on:
       teable-db:
         condition: service_healthy
@@ -78,7 +78,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.3.1-alpha-build.460"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://teable.io/
   repo: https://github.com/teableio/teable
   docs: https://help.teable.io/

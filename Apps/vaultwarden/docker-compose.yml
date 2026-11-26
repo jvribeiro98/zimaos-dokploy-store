@@ -37,6 +37,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.37.5"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   repo: https://github.com/dani-garcia/vaultwarden
   docs: https://github.com/dani-garcia/vaultwarden/wiki

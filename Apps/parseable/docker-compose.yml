@@ -10,7 +10,7 @@ services:
     environment:
     - P_ADDR=0.0.0.0:8000
     - P_USERNAME=admin
-    - P_PASSWORD=u24Qj3reAc5UAXUnlgFtDLnzXpUcqTvs
+    - P_PASSWORD=NSIPZwRvDH51dqzi5cYhUEDW2kyYNXlc
     - P_STAGING_DIR=/parseable/staging
     - P_FS_DIR=/parseable/data
     expose:
@@ -44,7 +44,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.6.5"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.parseable.com/
   repo: https://github.com/parseablehq/parseable
   docs: https://www.parseable.com/docs

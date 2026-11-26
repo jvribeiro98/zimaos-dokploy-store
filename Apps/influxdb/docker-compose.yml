@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.10"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://www.influxdata.com/
   repo: https://github.com/influxdata/influxdb
   docs: https://docs.influxdata.com/influxdb/v2/

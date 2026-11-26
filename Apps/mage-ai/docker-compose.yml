@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.9.78"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://mage.ai
   repo: https://github.com/mage-ai/mage-ai
   docs: https://docs.mage.ai

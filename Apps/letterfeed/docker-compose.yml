@@ -15,9 +15,9 @@ services:
       LETTERFEED_MARK_AS_READ: 'true'
       LETTERFEED_EMAIL_CHECK_INTERVAL: '15'
       LETTERFEED_AUTO_ADD_NEW_SENDERS: 'false'
-      LETTERFEED_SECRET_KEY: wjRWegLFVCRvVuZjxDbmbe9DKHvCzjCHi9BUPga0HJC0TzgK2qRzjG2vbDk0vQw8
+      LETTERFEED_SECRET_KEY: FBlPbTHz4GPY0ZrLwoOIRADiUeF4peKqR3VsxbScNVHWQvB5cPwtwNAcHgwz9oRP
       LETTERFEED_AUTH_USERNAME: admin
-      LETTERFEED_AUTH_PASSWORD: KofilH1bAUHka16Nwuzy2zhM4KpupQKf
+      LETTERFEED_AUTH_PASSWORD: hr738DVHXM1oM6aJqqeJPVd2Mv7EnxFf
     volumes:
     - letterfeed_data:/data
   frontend:
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://github.com/leonmuscoden/letterfeed
   repo: https://github.com/leonmuscoden/letterfeed
   docs: https://github.com/leonmuscoden/letterfeed

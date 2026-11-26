@@ -7,11 +7,11 @@ services:
     expose:
     - '3000'
     environment:
-      MONGODB_URI: mongodb://corsfix:58e0cc3ab0f09fee4217d6d105369b227e60a6f7bf5b9d8b16f17afa6e0964ee023c1af8775bd831c99e5f674847f93f2d6e65964d718e8907a740090bf6fae7@mongodb:27017/db?authSource=admin
-      REDIS_URI: redis://default:e664c9f78c73402e8093d5165f72054ea29e4105d87b9e3d8e9b6460bdeb40006cd3c0fcedb47e6b66801603e3d5dccb1032b7bc2ca8e852544dcdcbcb22e771@redis:6379
+      MONGODB_URI: mongodb://corsfix:41a9c95a9f0f502e27074c5fc790310c2c3523da2fcd0c10c5c9e56c40103f83af6f408bc62a864f807ce679cecd0f9a0cafda6f81cfbd20c8fbc346b1ee5a82@mongodb:27017/db?authSource=admin
+      REDIS_URI: redis://default:ec688014aa6081dced854c4949bd0fb40bf17a96a39ddd9380e3522eaa14cb29fae5658a8e273dd3083002844bfdae58c2ec21684f1e892ad4cb57dad959c239@redis:6379
       KEK_VERSION: KEK_VERSION_1
-      KEK_VERSION_1: 4kRL6/TgdMXtjhesb0sxW9YrGOR/0SvCwryJarqc670=
-      AUTH_SECRET: pfcwHUFUw7VA2UkcuvlBXOe1Sm7MT44NpMrvvbGApwY=
+      KEK_VERSION_1: KXBdRVqoa6OEQoSOlzqgkDu7vx9ZUiN575ZqGcafYpo=
+      AUTH_SECRET: cn/PT5h0SuHjtYorRj1S/nir32hdp59vfZOg1xFcXyw=
       AUTH_TRUST_HOST: 'true'
       AUTH_URL: http://localhost
       PROXY_DOMAIN: localhost
@@ -31,9 +31,9 @@ services:
     expose:
     - '80'
     environment:
-      MONGODB_URI: mongodb://corsfix:58e0cc3ab0f09fee4217d6d105369b227e60a6f7bf5b9d8b16f17afa6e0964ee023c1af8775bd831c99e5f674847f93f2d6e65964d718e8907a740090bf6fae7@mongodb:27017/db?authSource=admin
-      REDIS_URI: redis://default:e664c9f78c73402e8093d5165f72054ea29e4105d87b9e3d8e9b6460bdeb40006cd3c0fcedb47e6b66801603e3d5dccb1032b7bc2ca8e852544dcdcbcb22e771@redis:6379
-      KEK_VERSION_1: 4kRL6/TgdMXtjhesb0sxW9YrGOR/0SvCwryJarqc670=
+      MONGODB_URI: mongodb://corsfix:41a9c95a9f0f502e27074c5fc790310c2c3523da2fcd0c10c5c9e56c40103f83af6f408bc62a864f807ce679cecd0f9a0cafda6f81cfbd20c8fbc346b1ee5a82@mongodb:27017/db?authSource=admin
+      REDIS_URI: redis://default:ec688014aa6081dced854c4949bd0fb40bf17a96a39ddd9380e3522eaa14cb29fae5658a8e273dd3083002844bfdae58c2ec21684f1e892ad4cb57dad959c239@redis:6379
+      KEK_VERSION_1: KXBdRVqoa6OEQoSOlzqgkDu7vx9ZUiN575ZqGcafYpo=
       APP_DOMAIN: localhost
       RPM: '180'
       ALLOWED_ORIGINS: ''
@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: corsfix
-      MONGO_INITDB_ROOT_PASSWORD: 58e0cc3ab0f09fee4217d6d105369b227e60a6f7bf5b9d8b16f17afa6e0964ee023c1af8775bd831c99e5f674847f93f2d6e65964d718e8907a740090bf6fae7
+      MONGO_INITDB_ROOT_PASSWORD: 41a9c95a9f0f502e27074c5fc790310c2c3523da2fcd0c10c5c9e56c40103f83af6f408bc62a864f807ce679cecd0f9a0cafda6f81cfbd20c8fbc346b1ee5a82
       MONGO_INITDB_DATABASE: db
     volumes:
     - mongodb-data:/data/db
@@ -72,7 +72,7 @@ services:
     - --appendonly
     - 'yes'
     environment:
-      REDIS_PASSWORD: e664c9f78c73402e8093d5165f72054ea29e4105d87b9e3d8e9b6460bdeb40006cd3c0fcedb47e6b66801603e3d5dccb1032b7bc2ca8e852544dcdcbcb22e771
+      REDIS_PASSWORD: ec688014aa6081dced854c4949bd0fb40bf17a96a39ddd9380e3522eaa14cb29fae5658a8e273dd3083002844bfdae58c2ec21684f1e892ad4cb57dad959c239
     volumes:
     - redis-data:/data
     healthcheck:
@@ -108,7 +108,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8899bb15e71c7238285ccefc4c95a0cd47daeaf0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://corsfix.com
   repo: https://github.com/corsfix/corsfix
   docs: https://corsfix.com/docs/open-source/self-hosting

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       WEBSOCKET_ALLOWED_ORIGINS: https://localhost,http://localhost
-      SELF_HOST_JWT_SECRET: d5W16Y3BSXxitDRIaJkSPWvEFsINJaz2bv3BTrTliSsGdfZiwSwotYQ8KDH2gKCu
+      SELF_HOST_JWT_SECRET: Fz4BmQUF3iZPNZp1Qn97A1P4SAxj8bzji8pQh0geoVGRnXsq9XKTcw2OtiCT9Ltd
     volumes:
     - budgero-data:/data
     healthcheck:
@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.21.5"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://budgero.app
   repo: https://github.com/tombadilo-bombadilo/budgero
   docs: https://budgero.app/docs/self-hosting-guide

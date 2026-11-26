@@ -9,8 +9,8 @@ services:
     environment:
       MYSQL_DATABASE: panel
       MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: fajH5MCgjqBamLoBK319oXflMkKwZA6R
-      MYSQL_ROOT_PASSWORD: JYltrkDVWs4PPwRZ5EYNLAXBfOQPjdW5
+      MYSQL_PASSWORD: lvYu80RoY8BeK7kMMMeUu3xnA0SHaqMZ
+      MYSQL_ROOT_PASSWORD: jo6JshHnU6wo9U4Zs533ScnTy8OHhJBL
   cache:
     image: redis:alpine
     restart: always
@@ -35,7 +35,7 @@ services:
       REDIS_HOST: cache
       DB_HOST: database
       DB_PORT: '3306'
-      DB_PASSWORD: fajH5MCgjqBamLoBK319oXflMkKwZA6R
+      DB_PASSWORD: lvYu80RoY8BeK7kMMMeUu3xnA0SHaqMZ
       DB_CONNECTION: mariadb
     ports:
     - target: 80
@@ -67,7 +67,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://pyrodactyl.dev
   repo: https://github.com/pyrohost/pyrodactyl
   docs: https://pyrodactyl.dev/docs

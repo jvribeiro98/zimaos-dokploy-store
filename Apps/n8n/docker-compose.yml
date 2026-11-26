@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.104.0"
-  update_at: "2026-11-25"
+  update_at: "2026-11-26"
   website: https://n8n.io/
   repo: https://github.com/n8n-io/n8n
   docs: https://docs.n8n.io/
