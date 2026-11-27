@@ -6,8 +6,8 @@ services:
     - '80'
     environment:
     - COCKPIT_SESSION_NAME=cockpit
-    - COCKPIT_SALT=bvIMhmE9FMD2cuchmu8eNSrZcV8wVtXI
-    - COCKPIT_DATABASE_SERVER=mongodb://mongo:1xsVBq6EcRCUhZ1b@mongo:27017
+    - COCKPIT_SALT=DYZV5AGIe2THA2aUpaQt4UKe8qwdq9W9
+    - COCKPIT_DATABASE_SERVER=mongodb://mongo:FDFXy6JTyyBkAATr@mongo:27017
     - COCKPIT_DATABASE_NAME=cockpit
     volumes:
     - config:/var/www/html/config
@@ -22,7 +22,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=1xsVBq6EcRCUhZ1b
+    - MONGO_INITDB_ROOT_PASSWORD=FDFXy6JTyyBkAATr
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "core-2.11.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://getcockpit.com
   repo: https://github.com/Cockpit-HQ
   docs: https://getcockpit.com/documentation

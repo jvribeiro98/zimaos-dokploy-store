@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://stackblitz-labs.github.io/bolt.diy/
   repo: https://github.com/stackblitz-labs/bolt.diy
   docs: https://stackblitz-labs.github.io/bolt.diy/

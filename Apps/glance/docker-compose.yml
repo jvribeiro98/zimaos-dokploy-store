@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://glance.app/
   repo: https://github.com/glanceapp/glance
   docs: https://github.com/glanceapp/glance/blob/main/docs/configuration.md

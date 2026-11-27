@@ -7,7 +7,7 @@ services:
     - minio-data:/data
     environment:
     - MINIO_ROOT_USER=minioadmin
-    - MINIO_ROOT_PASSWORD=8pWSwSxt6IRI0WFt
+    - MINIO_ROOT_PASSWORD=CuNnIjUrBAndGCAp
     - MINIO_BROWSER_REDIRECT_URL=http://localhost
     command: server /data --console-address ":9001"
     expose:
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "RELEASE.2026-06-18T00-00-00Z"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://silo.pigsty.io/
   repo: https://github.com/pgsty/minio
   docs: https://silo.pigsty.io/docs/

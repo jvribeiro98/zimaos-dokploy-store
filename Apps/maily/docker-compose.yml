@@ -7,7 +7,7 @@ services:
     - 8477
     environment:
       MAILY_PORT: '8477'
-      MAILY_API_KEY: EAvmTumHUIqRF52tx5Gvi7OF5iK3joAJ
+      MAILY_API_KEY: 7QM5tzZPhL5bGZg20tT3fhrDMj1RCDqO
       MAILY_SECRET_KEY: ''
     volumes:
     - maily_data:/data
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.9.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/stormsia/maily
   repo: https://github.com/stormsia/maily
   docs: https://github.com/stormsia/maily#readme

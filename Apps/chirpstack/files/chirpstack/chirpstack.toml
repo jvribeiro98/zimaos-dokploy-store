@@ -18,7 +18,7 @@
   #  * disable - Do not use TLS
   #  * prefer - Attempt to connect with TLS but allow sessions without
   #  * require - Require the use of TLS
-  dsn="postgres://chirpstack:heeXQH1FkkYkkvGe0epbQUIhG99UsDFY@postgres/chirpstack?sslmode=disable"
+  dsn="postgres://chirpstack:rg7T7AWytDVmDnPiBfc0TJvjKmCojzk5@postgres/chirpstack?sslmode=disable"
 
   # Max open connections.
   #
@@ -94,7 +94,7 @@
   # is never exposed. Changing this secret will invalidate all login and API
   # tokens. The following command can be used to generate a random secret:
   #   openssl rand -base64 32
-  secret="/Xp3GpTXKsAJdkbWGVgRNgkOTpf0JQ2a/KL6Q7v3n54="
+  secret="XZk6iv0B9+SSYl9NAyp8kTw4CFKkymmg6YqVq3COx04="
 
 
 [integration]

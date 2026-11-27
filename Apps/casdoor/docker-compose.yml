@@ -20,7 +20,7 @@ services:
     image: postgres:16
     environment:
     - POSTGRES_USER=casdoor
-    - POSTGRES_PASSWORD=XSrKFB2H3o0926YCdWuf6xRpyH5Mto8w
+    - POSTGRES_PASSWORD=ofRFDyabiahq1BLw5q2EpqOZ7oGXP5YT
     - POSTGRES_DB=casdoor
     volumes:
     - casdoor-postgres-data:/var/lib/postgresql/data
@@ -57,7 +57,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://casdoor.org/
   repo: https://github.com/casdoor/casdoor
   docs: https://casdoor.org/docs/overview

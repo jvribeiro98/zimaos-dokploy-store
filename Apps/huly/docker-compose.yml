@@ -50,7 +50,7 @@ services:
   rekoni:
     image: hardcoreeng/rekoni-service:${HULY_VERSION}
     environment:
-    - SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     deploy:
       resources:
         limits:
@@ -60,7 +60,7 @@ services:
     image: hardcoreeng/transactor:${HULY_VERSION}
     environment:
     - SERVER_PORT=3333
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - SERVER_CURSOR_MAXTIMEMS=30000
     - DB_URL=mongodb://mongodb:27017
     - MONGO_URL=mongodb://mongodb:27017
@@ -75,7 +75,7 @@ services:
     image: hardcoreeng/collaborator:${HULY_VERSION}
     environment:
     - COLLABORATOR_PORT=3078
-    - SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - ACCOUNTS_URL=http://account:3000
     - DB_URL=mongodb://mongodb:27017
     - STATS_URL=http://stats:4900
@@ -85,7 +85,7 @@ services:
     image: hardcoreeng/account:${HULY_VERSION}
     environment:
     - SERVER_PORT=3000
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - DB_URL=mongodb://mongodb:27017
     - MONGO_URL=mongodb://mongodb:27017
     - TRANSACTOR_URL=ws://transactor:3333;ws${SECURE:+s}://localhost/_transactor
@@ -99,7 +99,7 @@ services:
   workspace:
     image: hardcoreeng/workspace:${HULY_VERSION}
     environment:
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - DB_URL=mongodb://mongodb:27017
     - MONGO_URL=mongodb://mongodb:27017
     - TRANSACTOR_URL=ws://transactor:3333;ws${SECURE:+s}://localhost/_transactor
@@ -112,7 +112,7 @@ services:
     image: hardcoreeng/front:${HULY_VERSION}
     environment:
     - SERVER_PORT=8080
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - LOVE_ENDPOINT=http${SECURE:+s}://localhost/_love
     - ACCOUNTS_URL=http${SECURE:+s}://localhost/_accounts
     - REKONI_URL=http${SECURE:+s}://localhost/_rekoni
@@ -134,7 +134,7 @@ services:
   fulltext:
     image: hardcoreeng/fulltext:${HULY_VERSION}
     environment:
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     - DB_URL=mongodb://mongodb:27017
     - FULLTEXT_DB_URL=http://elastic:9200
     - ELASTIC_INDEX_NAME=huly_storage_index
@@ -147,7 +147,7 @@ services:
     image: hardcoreeng/stats:${HULY_VERSION}
     environment:
     - PORT=4900
-    - SERVER_SECRET=8OKwTmNmtSHGX07DYp+27n9dxypSq97HLumSCD2lA4Ek3ExLAohAVVPyAuppeUAvX7fosp6r1gp4ASmoBc/dvQ==
+    - SERVER_SECRET=t4TVhNQILnDwOI5RCHYhT1R+eXE/5weLDRaSILWvpiAyo8XlL7tNNHVCeepgs1SwZRVDKoXl6Ox7jLJUkujJAA==
     restart: unless-stopped
 volumes:
   db: null
@@ -174,7 +174,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.6.377"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://huly.io/
   repo: https://github.com/hcengineering/huly-selfhost
   docs: https://docs.huly.io/

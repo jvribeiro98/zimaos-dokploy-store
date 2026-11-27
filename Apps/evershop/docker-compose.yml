@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://evershop.io/
   repo: https://github.com/evershopcommerce/evershop
   docs: https://evershop.io/docs/development/getting-started/introduction

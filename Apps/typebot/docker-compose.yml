@@ -15,7 +15,7 @@ services:
     depends_on:
     - typebot-db
     environment:
-      ENCRYPTION_SECRET: snCcsIVVUtJHoOBwgAHJqmWjxha3bjGe
+      ENCRYPTION_SECRET: 46JILh6PglieI/JrFC0+fJD9Ez6cqxJh
       DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_VIEWER_URL: http://localhost
@@ -34,7 +34,7 @@ services:
     image: baptistearno/typebot-viewer:2.27.0
     restart: always
     environment:
-      ENCRYPTION_SECRET: snCcsIVVUtJHoOBwgAHJqmWjxha3bjGe
+      ENCRYPTION_SECRET: 46JILh6PglieI/JrFC0+fJD9Ez6cqxJh
       DATABASE_URL: postgresql://typebot:typebot@typebot-db:5432/typebot
       NEXTAUTH_URL: http://localhost
       NEXT_PUBLIC_VIEWER_URL: http://localhost
@@ -67,7 +67,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.27.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://typebot.io/
   repo: https://github.com/baptisteArno/typebot.io
   docs: https://docs.typebot.io/get-started/introduction

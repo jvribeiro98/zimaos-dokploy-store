@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: mcpspan
-      POSTGRES_PASSWORD: dBt3r93pGkaXSmrEXpMc0YuYqMaJCKpH
+      POSTGRES_PASSWORD: dpTvzBUxZaNL7Lw76S6KjR9cqff13H1j
       POSTGRES_DB: mcpspan
     volumes:
     - db-data:/var/lib/postgresql/data
@@ -23,7 +23,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://mcpspan:dBt3r93pGkaXSmrEXpMc0YuYqMaJCKpH@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:dpTvzBUxZaNL7Lw76S6KjR9cqff13H1j@db:5432/mcpspan
     command:
     - ./node_modules/.bin/node-pg-migrate
     - up
@@ -34,9 +34,9 @@ services:
       migrate:
         condition: service_completed_successfully
     environment:
-      DATABASE_URL: postgres://mcpspan:dBt3r93pGkaXSmrEXpMc0YuYqMaJCKpH@db:5432/mcpspan
+      DATABASE_URL: postgres://mcpspan:dpTvzBUxZaNL7Lw76S6KjR9cqff13H1j@db:5432/mcpspan
       PORT: '6271'
-      API_KEY_SECRET: dR/5M0JwYO4ni5YSGJPYXD31/QwSHsrS45bgtCqxaHZC6CimM6Yms4Xd1ul4Ds33
+      API_KEY_SECRET: TI0533gGVANvMJd4Cp5vki/pzchI7TzcBLzOKtZKBZ3GLobUDTySR4846b9ufSXV
       MCPSPAN_DASHBOARD_URL: http://localhost
     expose:
     - 6271
@@ -89,7 +89,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.16.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://mcpspan.com
   repo: https://github.com/mcpspan/mcpspan
   docs: https://mcpspan.com/docs/self-hosting/

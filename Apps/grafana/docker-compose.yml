@@ -32,7 +32,7 @@ x-casaos:
   - amd64
   - arm64
   version: "12.4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://grafana.com/
   repo: https://github.com/grafana/grafana
   docs: https://grafana.com/docs/

@@ -5,7 +5,7 @@ services:
     expose:
     - 8080
     environment:
-    - FMD_REGISTRATIONTOKEN=qbgOeboUwHRiyBgd9Wsse71p9yn0mV84
+    - FMD_REGISTRATIONTOKEN=IWaVmi4gDTiyyp90xYQqQ6MQptBycXsx
     - FMD_USERIDLENGTH=5
     - FMD_MAXSAVEDLOC=1000
     - FMD_MAXSAVEDPIC=10
@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.16.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://fmd-foss.org
   repo: https://gitlab.com/fmd-foss/fmd-server
   docs: https://fmd-foss.org/docs/fmd-server/overview

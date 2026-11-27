@@ -51,7 +51,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.6.1-rootless"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://seanime.app/
   repo: https://github.com/5rahim/seanime
   docs: https://seanime.app/docs

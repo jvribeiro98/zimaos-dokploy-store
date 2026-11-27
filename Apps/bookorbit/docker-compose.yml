@@ -10,14 +10,14 @@ services:
     environment:
     - NODE_ENV=production
     - PORT=3000
-    - DATABASE_URL=postgresql://bookorbit:MiUVRJVA4zyfyS29KXvw46YIUBEiBooZ@postgres:5432/bookorbit
+    - DATABASE_URL=postgresql://bookorbit:Z0hLzPsQlyA2WNz9nyQ4G9RNxQ4uBgmJ@postgres:5432/bookorbit
     - POSTGRES_HOST=postgres
     - POSTGRES_PORT=5432
     - POSTGRES_USER=bookorbit
-    - POSTGRES_PASSWORD=MiUVRJVA4zyfyS29KXvw46YIUBEiBooZ
+    - POSTGRES_PASSWORD=Z0hLzPsQlyA2WNz9nyQ4G9RNxQ4uBgmJ
     - POSTGRES_DB=bookorbit
-    - JWT_SECRET=UtKKs61MCyKYT9dePn7qru115WX5A2pX
-    - SETUP_BOOTSTRAP_TOKEN=fVpBhwlh805ZKks3sLu2aei3dmaerm63
+    - JWT_SECRET=VinKeEvZQL9VZejctQDmRMD6VfjbsL8P
+    - SETUP_BOOTSTRAP_TOKEN=NggF4FrOZRyC3fhcHS2ONgghWohORYQZ
     - APP_URL=https://localhost
     - CLIENT_URL=https://localhost
     - PUID=1000
@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=bookorbit
-    - POSTGRES_PASSWORD=MiUVRJVA4zyfyS29KXvw46YIUBEiBooZ
+    - POSTGRES_PASSWORD=Z0hLzPsQlyA2WNz9nyQ4G9RNxQ4uBgmJ
     - POSTGRES_DB=bookorbit
     - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
@@ -88,7 +88,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.8.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://bookorbit.app
   repo: https://github.com/bookorbit/bookorbit
   docs: https://bookorbit.app/installation

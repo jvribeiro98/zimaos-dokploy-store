@@ -3,5 +3,5 @@ hosts:
       url: "https://wazuh.manager"
       port: 55000
       username: wazuh-wui
-      password: "NPkEiFI1kLoGvFWFWzs4U8mW-Aa1."
+      password: "qCCFx01RZNsYRlf9crjqqGBy-Aa1."
       run_as: true

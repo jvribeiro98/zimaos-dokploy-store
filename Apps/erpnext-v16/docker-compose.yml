@@ -216,10 +216,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: uLd5S31L2pEW2TuwmucsQ9HjTKIS70WL
+      ADMIN_PASSWORD: TSaHOovM0DQx8WhVyAKYNwlpze9WD3wV
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: VnGkNWeD2JjAtI1OIxmkQDArk38D6jXJ
+      DB_ROOT_PASSWORD: llzBDMJUwgZY9I3pN33mVtXomXPQXKcU
       INSTALL_APP_ARGS: --install-app erpnext
       ENABLE_SCHEDULER: '1'
     restart: unless-stopped
@@ -266,7 +266,7 @@ services:
     - --collation-server=utf8mb4_unicode_ci
     - --skip-character-set-client-handshake
     environment:
-    - MARIADB_ROOT_PASSWORD=VnGkNWeD2JjAtI1OIxmkQDArk38D6jXJ
+    - MARIADB_ROOT_PASSWORD=llzBDMJUwgZY9I3pN33mVtXomXPQXKcU
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -352,7 +352,7 @@ x-casaos:
   - amd64
   - arm64
   version: "ersion-16"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://frappe.io/erpnext
   repo: https://github.com/frappe/erpnext
   docs: https://docs.frappe.io/erpnext

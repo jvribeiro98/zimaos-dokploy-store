@@ -4,7 +4,7 @@ services:
     image: postgres:17
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=ynVAGdJWZANNoecxfnd7vdU0LpUkPTjN
+    - POSTGRES_PASSWORD=OXqAiQ4l9H9QOdVy3uD5u45aSsvROhbH
     - POSTGRES_DB=stackframe
     volumes:
     - stack-auth-db-data:/var/lib/postgresql/data
@@ -23,13 +23,13 @@ services:
     image: stackauth/server:latest
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=ynVAGdJWZANNoecxfnd7vdU0LpUkPTjN
+    - POSTGRES_PASSWORD=OXqAiQ4l9H9QOdVy3uD5u45aSsvROhbH
     - POSTGRES_DB=stackframe
     - NEXT_PUBLIC_STACK_API_URL=http://localhost
     - NEXT_PUBLIC_STACK_DASHBOARD_URL=http://localhost
-    - STACK_DATABASE_CONNECTION_STRING=postgres://postgres:ynVAGdJWZANNoecxfnd7vdU0LpUkPTjN@stack-auth-db/stackframe
-    - STACK_DIRECT_DATABASE_CONNECTION_STRING=postgres://postgres:ynVAGdJWZANNoecxfnd7vdU0LpUkPTjN@stack-auth-db/stackframe
-    - STACK_SERVER_SECRET=19dcTrReYhMxzQtf04vZwl5GaY3alUp3HJt4OLxBJ7IoU5Tmz1mGMokncCQxAda0
+    - STACK_DATABASE_CONNECTION_STRING=postgres://postgres:OXqAiQ4l9H9QOdVy3uD5u45aSsvROhbH@stack-auth-db/stackframe
+    - STACK_DIRECT_DATABASE_CONNECTION_STRING=postgres://postgres:OXqAiQ4l9H9QOdVy3uD5u45aSsvROhbH@stack-auth-db/stackframe
+    - STACK_SERVER_SECRET=c3ww9b3evMn5x8bQ8rwuaJQDKcIo2bmtHfFVdT29GsbsVr2xni6Uq5FAJ1xE0byf
     - STACK_SEED_INTERNAL_PROJECT_ALLOW_LOCALHOST=True
     - STACK_SEED_INTERNAL_PROJECT_SIGN_UP_ENABLED=True
     - STACK_RUN_MIGRATIONS=True
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://stack-auth.com/
   repo: https://github.com/stack-auth/stack-auth
   docs: https://docs.stack-auth.com/next/overview

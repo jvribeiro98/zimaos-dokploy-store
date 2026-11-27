@@ -92,28 +92,28 @@ session:
   name: authelia_session
   domain: localhost
   same_site: lax
-  secret: uPhakpWmeU19Fofy9K4G7lzXfOOX3P0y97GrFx0jRqzm1XDs6oyZo8JoxDNpr4T2
+  secret: ZAwGz9rPjT06l6ddOTym9UjEKrMe0kAbGEFMmpx52l8QfHLpD7GXn3rmct2RUpwu
   expiration: 1h
   inactivity: 5m
   remember_me_duration: 1M
   redis:
     host: redis
     port: 6379
-    password: YdgBkNB8sh9DlUtEmw3zoO7CkpXmZiTN
+    password: HCs1zjiAvRHYtI8RZBx7MVoJMSnaxTlO
     database_index: 0
     maximum_active_connections: 8
     minimum_idle_connections: 0
 
 # Storage Configuration
 storage:
-  encryption_key: MqKM07QVSVSU0RoXCVoDJdbiUJZW8zTqLpeP2jUmHJVRqibyJgoCEdJNXTWenqzP
+  encryption_key: ov7CYaszGPOnGGI12stQwxOuFLI2D3IyO2FlrIGEKb8on4NkUyHbNVkfbKDuEsgM
   postgres:
     host: postgres
     port: 5432
     database: authelia
     schema: public
     username: authelia
-    password: s4e61QCIZt2ToUr27l83pFfZerw9jK5y
+    password: OVXYrVe9P3t8qeoLNWcVt9tghcg0TQKZ
     timeout: 5s
 
 # Notifier Configuration

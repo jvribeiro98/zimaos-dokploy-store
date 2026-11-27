@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: openproject
       POSTGRES_USER: openproject
-      POSTGRES_PASSWORD: 2shHrIDUlhjR8zkuFmpoyRWULiN5it7R
+      POSTGRES_PASSWORD: 76D7ZN0zkFOIZk34BnAGWqHhaaZWebul
     volumes:
     - pgdata:/var/lib/postgresql/data
   cache:
@@ -18,12 +18,12 @@ services:
     command: ./docker/prod/web
     environment:
       OPENPROJECT_HOST__NAME: localhost
-      SECRET_KEY_BASE: ll1F6Eejviy+nSOAm7G78jnI0F2ofISKr4dlCLbAAhU9HNvVIxbEt5y6q0JAt802fsrnzb6B7BImaL8BMqEUhg==
+      SECRET_KEY_BASE: Y/V+Ri/WroOH2wjaIvDwUhW5sjRrf4oW0HFsvscw3dwEr8f9P6n1uOAicn7hFeoLDYH8Whq1BOgMjUHpx4M66w==
       OPENPROJECT_RAILS__CACHE__STORE: memcache
       OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
       OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
       OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
-      DATABASE_URL: postgres://openproject:2shHrIDUlhjR8zkuFmpoyRWULiN5it7R@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      DATABASE_URL: postgres://openproject:76D7ZN0zkFOIZk34BnAGWqHhaaZWebul@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
       RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
       OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
@@ -85,12 +85,12 @@ services:
     command: ./docker/prod/seeder
     environment:
       OPENPROJECT_HOST__NAME: localhost
-      SECRET_KEY_BASE: ll1F6Eejviy+nSOAm7G78jnI0F2ofISKr4dlCLbAAhU9HNvVIxbEt5y6q0JAt802fsrnzb6B7BImaL8BMqEUhg==
+      SECRET_KEY_BASE: Y/V+Ri/WroOH2wjaIvDwUhW5sjRrf4oW0HFsvscw3dwEr8f9P6n1uOAicn7hFeoLDYH8Whq1BOgMjUHpx4M66w==
       OPENPROJECT_RAILS__CACHE__STORE: memcache
       OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
       OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
       OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
-      DATABASE_URL: postgres://openproject:2shHrIDUlhjR8zkuFmpoyRWULiN5it7R@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      DATABASE_URL: postgres://openproject:76D7ZN0zkFOIZk34BnAGWqHhaaZWebul@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
       RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
       OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
@@ -135,12 +135,12 @@ services:
     command: ./docker/prod/worker
     environment:
       OPENPROJECT_HOST__NAME: localhost
-      SECRET_KEY_BASE: ll1F6Eejviy+nSOAm7G78jnI0F2ofISKr4dlCLbAAhU9HNvVIxbEt5y6q0JAt802fsrnzb6B7BImaL8BMqEUhg==
+      SECRET_KEY_BASE: Y/V+Ri/WroOH2wjaIvDwUhW5sjRrf4oW0HFsvscw3dwEr8f9P6n1uOAicn7hFeoLDYH8Whq1BOgMjUHpx4M66w==
       OPENPROJECT_RAILS__CACHE__STORE: memcache
       OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
       OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
       OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
-      DATABASE_URL: postgres://openproject:2shHrIDUlhjR8zkuFmpoyRWULiN5it7R@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      DATABASE_URL: postgres://openproject:76D7ZN0zkFOIZk34BnAGWqHhaaZWebul@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
       RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
       OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
@@ -186,12 +186,12 @@ services:
     command: ./docker/prod/cron
     environment:
       OPENPROJECT_HOST__NAME: localhost
-      SECRET_KEY_BASE: ll1F6Eejviy+nSOAm7G78jnI0F2ofISKr4dlCLbAAhU9HNvVIxbEt5y6q0JAt802fsrnzb6B7BImaL8BMqEUhg==
+      SECRET_KEY_BASE: Y/V+Ri/WroOH2wjaIvDwUhW5sjRrf4oW0HFsvscw3dwEr8f9P6n1uOAicn7hFeoLDYH8Whq1BOgMjUHpx4M66w==
       OPENPROJECT_RAILS__CACHE__STORE: memcache
       OPENPROJECT_CACHE__EXPIRES__IN__SECONDS: '3600'
       OPENPROJECT_CACHE__MEMCACHE__SERVER: cache:11211
       OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ''
-      DATABASE_URL: postgres://openproject:2shHrIDUlhjR8zkuFmpoyRWULiN5it7R@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
+      DATABASE_URL: postgres://openproject:76D7ZN0zkFOIZk34BnAGWqHhaaZWebul@db:5432/openproject?pool=20&encoding=unicode&reconnect=true
       RAILS_MIN_THREADS: ${RAILS_MIN_THREADS:-4}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-16}
       OPENPROJECT_COLLABORATIVE__EDITING__HOCUSPOCUS__URL: ''
@@ -254,7 +254,7 @@ x-casaos:
   - amd64
   - arm64
   version: "17"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.openproject.org/
   repo: https://github.com/opf/openproject
   docs: https://www.openproject.org/docs/installation-and-operations/installation/docker-compose/

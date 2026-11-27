@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.9.1.17"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://emby.media/
   repo: https://github.com/MediaBrowser/Emby
   docs: https://emby.media/support/articles/Home.html

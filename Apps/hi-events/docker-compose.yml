@@ -12,12 +12,12 @@ services:
     - LOG_CHANNEL=stderr
     - QUEUE_CONNECTION=sync
     - MAIL_MAILER=array
-    - APP_KEY=lDagxSiM4gzFlXGGvB03uhGBNuT8863w
-    - JWT_SECRET=xbPTE5tqzXtIYLTzXuleTqaUAOBpB39b
+    - APP_KEY=DcQgxfFYJgjnHXzYOcCTPhpLU4cEy2k3
+    - JWT_SECRET=AO7gPFyIufCc6QKCDFxI3M219560bGzA
     - FILESYSTEM_PUBLIC_DISK=public
     - FILESYSTEM_PRIVATE_DISK=local
     - APP_CDN_URL=https://localhost/storage
-    - DATABASE_URL=postgresql://hievents:1cPWcOLfGkSrVjOEdRSfbBnD7FBSM3z5@postgres:5432/hievents
+    - DATABASE_URL=postgresql://hievents:v339kG26zfDUiBduDm8Kxr7K1JAF7axl@postgres:5432/hievents
     - MAIL_MAILER=
     - MAIL_HOST=
     - MAIL_PORT=
@@ -37,7 +37,7 @@ services:
     environment:
     - POSTGRES_DB=hievents
     - POSTGRES_USER=hievents
-    - POSTGRES_PASSWORD=1cPWcOLfGkSrVjOEdRSfbBnD7FBSM3z5
+    - POSTGRES_PASSWORD=v339kG26zfDUiBduDm8Kxr7K1JAF7axl
     volumes:
     - pg_hi-events_data:/var/lib/postgresql/data
 volumes:
@@ -63,7 +63,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.9.0-beta"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://hi.events/
   repo: https://github.com/HiEventsDev/hi.events
   docs: https://hi.events/docs

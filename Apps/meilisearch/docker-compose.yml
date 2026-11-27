@@ -5,7 +5,7 @@ services:
     volumes:
     - meili_data:/meili_data
     environment:
-      MEILI_MASTER_KEY: vd2huc0aSluQ5uPvxpBdVpXhuxuJNVPYuu6aF91u1Fg=
+      MEILI_MASTER_KEY: 7V7c5Y1ddaJMx63uG4UZUgEYfCTEmCn3TVowl68sbxQ=
     restart: unless-stopped
     ports:
     - target: 7700
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.35.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.meilisearch.com/
   repo: https://github.com/meilisearch/meilisearch
   docs: https://docs.meilisearch.com/

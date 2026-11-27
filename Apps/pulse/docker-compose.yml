@@ -10,7 +10,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     environment:
     - PULSE_AUTH_USER=admin
-    - PULSE_AUTH_PASS=M2TwywjeFOlR3udkiEapgRzOvPXE2Zjy
+    - PULSE_AUTH_PASS=9bdCMASnAYhaYM7o5MtBdnUSK7oHAgid
     healthcheck:
       test:
       - CMD
@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://pulserelay.pro/
   repo: https://github.com/rcourtman/Pulse
   docs: https://github.com/rcourtman/Pulse/blob/main/docs/README.md

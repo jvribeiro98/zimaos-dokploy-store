@@ -6,7 +6,7 @@ services:
     - discourse-postgresql-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: discourse
-      POSTGRES_PASSWORD: kLJL3zbHO0Rlf6dWNjJL5DiTZSoMxrQH
+      POSTGRES_PASSWORD: i6ykK7YDMidt8LdNQK6jhAyPpr2lc3Hh
       POSTGRES_DB: discourse
     healthcheck:
       test:
@@ -46,11 +46,11 @@ services:
       DISCOURSE_DB_HOST: discourse-db
       DISCOURSE_DB_PORT: '5432'
       DISCOURSE_DB_USERNAME: discourse
-      DISCOURSE_DB_PASSWORD: kLJL3zbHO0Rlf6dWNjJL5DiTZSoMxrQH
+      DISCOURSE_DB_PASSWORD: i6ykK7YDMidt8LdNQK6jhAyPpr2lc3Hh
       DISCOURSE_DB_NAME: discourse
       DISCOURSE_REDIS_HOST: discourse-redis
       DISCOURSE_REDIS_PORT: '6379'
-      DISCOURSE_REDIS_PASSWORD: K6aj17z1hQrjqmApsV9bPDFDRt0LzJhm
+      DISCOURSE_REDIS_PASSWORD: hGqguKbt6Sh4Z80xsTgZjF5XUw71kfF2
       DISCOURSE_DEVELOPER_EMAILS: admin@example.com
     expose:
     - 80
@@ -84,7 +84,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.1.4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.discourse.org/
   repo: https://github.com/discourse/discourse
   docs: https://meta.discourse.org/

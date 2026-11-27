@@ -10,9 +10,9 @@ services:
         condition: service_healthy
     environment:
       AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
-      AP_API_KEY: PUg54x40oH3XRAAQ06pRURGLmcmEV2VX
-      AP_ENCRYPTION_KEY: sAC6FyRrRrdXKosGuECKqS84D2ITYx5t
-      AP_JWT_SECRET: 5sHFzE3jV5KlyjLC2MjashLgKcmrWiFC
+      AP_API_KEY: 5wtBopQAGdYvsLiDNBeE4YCpvrrBdJUd
+      AP_ENCRYPTION_KEY: M1wTLCh4X29CIv6LCBdjYjCOUjD3h9MT
+      AP_JWT_SECRET: 1oSvYGK3PW5xgLW122eT0Odj42xcrIVC
       AP_ENVIRONMENT: prod
       AP_FRONTEND_URL: https://localhost
       AP_WEBHOOK_TIMEOUT_SECONDS: '30'
@@ -21,7 +21,7 @@ services:
       AP_POSTGRES_HOST: postgres
       AP_POSTGRES_PORT: '5432'
       AP_POSTGRES_USERNAME: activepieces
-      AP_POSTGRES_PASSWORD: 0izpWQ3OoIBfph6jZPohm4pnCWryxApE
+      AP_POSTGRES_PASSWORD: ux5OkVhySj684z3rZNMyTZLh90AkCtZe
       AP_EXECUTION_MODE: UNSANDBOXED
       AP_REDIS_HOST: redis
       AP_REDIS_PORT: '6379'
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: activepieces
-      POSTGRES_PASSWORD: 0izpWQ3OoIBfph6jZPohm4pnCWryxApE
+      POSTGRES_PASSWORD: ux5OkVhySj684z3rZNMyTZLh90AkCtZe
       POSTGRES_USER: activepieces
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -84,7 +84,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.91.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.activepieces.com/
   repo: https://github.com/activepieces/activepieces
   docs: https://www.activepieces.com/docs

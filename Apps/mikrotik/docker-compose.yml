@@ -45,7 +45,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.20.4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://mikrotik.com
   repo: https://github.com/RamezHany/Mikrotik-CHR-Containerized
   docs: https://help.mikrotik.com/docs/

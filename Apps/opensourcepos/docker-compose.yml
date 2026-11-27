@@ -14,7 +14,7 @@ services:
       FORCE_HTTPS: 'false'
       PHP_TIMEZONE: UTC
       MYSQL_USERNAME: admin
-      MYSQL_PASSWORD: 6SIEAOm3dx0Yb3vq4P3GKpmwHMYk1fH8
+      MYSQL_PASSWORD: Ms5q83AvdmmLMaWGg7z8w7k0aoza2jRW
       MYSQL_DB_NAME: ospos
       MYSQL_HOST_NAME: opensourcepos-db
     volumes:
@@ -28,10 +28,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: A25lw3pRWQTD9KoN1ghTm32cGwGV6z4s
+      MYSQL_ROOT_PASSWORD: Dho0RUGkTy9R1jzyJEPhneHY78hjtZgu
       MYSQL_DATABASE: ospos
       MYSQL_USER: admin
-      MYSQL_PASSWORD: 6SIEAOm3dx0Yb3vq4P3GKpmwHMYk1fH8
+      MYSQL_PASSWORD: Ms5q83AvdmmLMaWGg7z8w7k0aoza2jRW
     volumes:
     - opensourcepos-db:/var/lib/mysql
     healthcheck:
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "master"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://opensourcepos.org/
   repo: https://github.com/opensourcepos/opensourcepos
   docs: https://github.com/opensourcepos/opensourcepos/blob/master/README.md

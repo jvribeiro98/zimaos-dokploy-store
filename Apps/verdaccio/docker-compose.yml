@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.verdaccio.org/
   repo: https://github.com/verdaccio/verdaccio
   docs: https://www.verdaccio.org/docs/what-is-verdaccio

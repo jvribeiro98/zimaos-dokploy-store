@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     stop_grace_period: 15s
     environment:
-      PP_DB_KEY: fYPb46m/hwntMfmV7Sf3IHCwieQf+4/lRFoL8+CrqF0=
-      PP_PASSWORD: V0LIj2XHGZ1w0nKji2yoE1bA
+      PP_DB_KEY: CBFARM1v0N9SSRWDRkoakub+MJ5QA2cz5zxO6bMrFzY=
+      PP_PASSWORD: FtGnMT6l4t71EMqukF68kPzk
       PP_MAX_IMAGE_MB: '20'
       PP_MAX_FILE_MB: '25'
       PP_MAX_TEXT_KB: '1024'
@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.5.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/DynamicsNinja/privatepaste
   repo: https://github.com/DynamicsNinja/privatepaste
   docs: https://github.com/DynamicsNinja/privatepaste/blob/main/docs/self-hosting.md

@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: xsshunterexpress
       POSTGRES_USER: xsshunterexpress
-      POSTGRES_PASSWORD: aco8BTlR56a2pPXG
+      POSTGRES_PASSWORD: aesb16gNeI1Mu71Q
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
@@ -23,12 +23,12 @@ services:
     build: https://github.com/rs-loves-bugs/xsshunter.git
     restart: unless-stopped
     environment:
-      SESSION_SECRET_KEY: cqlzV+aNNJrUPU7OvQK9ujG2AFbVrrTEtx4WahiG8/DYNDKALTIpay7um5OPKPy+cAH3ctVN8ZqN3H8ZOwpS+w==
+      SESSION_SECRET_KEY: fnykWju/Ll8sgT9WTxJ1KuWAOPVfN0gv/szgAwY9vngoOf7XARca+9kctXPYdjeQhs1zBIh8D/5vt0CM9o/2Ag==
       HOSTNAME: localhost
       XSS_HOSTNAME: xss.localhost
       PANEL_LOGIN: 'true'
       PANEL_USERNAME: admin@localhost
-      PANEL_PASSWORD: juwoYm7H3OaHgNHJNtdW9XRKyHT8XMxs
+      PANEL_PASSWORD: 43cWe5YsFllUb1G3EEwNxbfbPIlja3XM
       ALLOW_EMPTY_USERPATH: 'true'
       OAUTH_LOGIN: 'false'
       CLIENT_ID: ''
@@ -41,7 +41,7 @@ services:
       DATABASE_HOST: xsshunterexpress-db
       POSTGRES_DB: xsshunterexpress
       POSTGRES_USER: xsshunterexpress
-      POSTGRES_PASSWORD: aco8BTlR56a2pPXG
+      POSTGRES_PASSWORD: aesb16gNeI1Mu71Q
       NODE_ENV: production
       PORT: '8080'
       CONTROL_PANEL_ENABLED: 'true'
@@ -96,7 +96,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/rs-loves-bugs/xsshunter
   repo: https://github.com/rs-loves-bugs/xsshunter
   docs: https://github.com/rs-loves-bugs/xsshunter#requirements

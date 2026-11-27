@@ -14,8 +14,8 @@ services:
     image: minio/minio
     environment:
     - MINIO_BROWSER_REDIRECT_URL=https://localhost/minio
-    - MINIO_ROOT_USER=LhOQqED1G14fiVYY
-    - MINIO_ROOT_PASSWORD=qrqn95Yk8j5iICjmGDcDVVjuRXltvHg0
+    - MINIO_ROOT_USER=DvKtbYGirk9G79iD
+    - MINIO_ROOT_PASSWORD=TDOCDiSzsXTfIV8DTpEcuVSDzTntnbNy
     command: server /data --console-address ":9001"
     volumes:
     - minio_data:/data
@@ -25,7 +25,7 @@ services:
     environment:
     - POSTGRES_USER=appflowy
     - POSTGRES_DB=appflowy
-    - POSTGRES_PASSWORD=LlbfGyne1DEv5vS9VRCtaSWiiXvG9EmzBtT29feFhlsMqzg8DzibGCfPQqrhpIg3
+    - POSTGRES_PASSWORD=pdax0teb91WNSvOTVY1axFfEgSbCHQhtX9KUqSqcjxNw45zPp9Nfd4n3TpPjCyNF
     - POSTGRES_HOST=postgres
     healthcheck:
       test:
@@ -61,12 +61,12 @@ services:
       retries: 12
     environment:
     - GOTRUE_ADMIN_EMAIL=admin@example.com
-    - GOTRUE_ADMIN_PASSWORD=0TImpNVygZzu8ZzP
+    - GOTRUE_ADMIN_PASSWORD=dADXI8KZTXYbmmDL
     - GOTRUE_DISABLE_SIGNUP=false
     - GOTRUE_SITE_URL=appflowy-flutter://
     - GOTRUE_URI_ALLOW_LIST=**
     - API_EXTERNAL_URL=https://localhost/gotrue
-    - GOTRUE_JWT_SECRET=SzfHKOhHIMfzdPCv0t1ZBJimtilg6Ua7NqTSFpTogg37wY8aZoDKzrC0KCYiTLtd
+    - GOTRUE_JWT_SECRET=eIl98qcKU8cSjpxeuDdIPzpulcq1zLaJEjQx5lrNIK1CUXzHk5QFG0WEYv7MlPAR
     - GOTRUE_JWT_EXP=7200
     - GOTRUE_JWT_ADMIN_GROUP_NAME=supabase_admin
     - GOTRUE_DB_DRIVER=postgres
@@ -111,14 +111,14 @@ services:
     - APPFLOWY_DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy
     - APPFLOWY_REDIS_URI=redis://redis:6379
     - APPFLOWY_WEB_URL=https://localhost
-    - APPFLOWY_GOTRUE_JWT_SECRET=SzfHKOhHIMfzdPCv0t1ZBJimtilg6Ua7NqTSFpTogg37wY8aZoDKzrC0KCYiTLtd
+    - APPFLOWY_GOTRUE_JWT_SECRET=eIl98qcKU8cSjpxeuDdIPzpulcq1zLaJEjQx5lrNIK1CUXzHk5QFG0WEYv7MlPAR
     - APPFLOWY_GOTRUE_JWT_EXP=7200
     - APPFLOWY_GOTRUE_BASE_URL=http://gotrue:9999
     - APPFLOWY_S3_CREATE_BUCKET=true
     - APPFLOWY_S3_USE_MINIO=true
     - APPFLOWY_S3_MINIO_URL=http://minio:9000
-    - APPFLOWY_S3_ACCESS_KEY=LhOQqED1G14fiVYY
-    - APPFLOWY_S3_SECRET_KEY=qrqn95Yk8j5iICjmGDcDVVjuRXltvHg0
+    - APPFLOWY_S3_ACCESS_KEY=DvKtbYGirk9G79iD
+    - APPFLOWY_S3_SECRET_KEY=TDOCDiSzsXTfIV8DTpEcuVSDzTntnbNy
     - APPFLOWY_S3_BUCKET=appflowy
     - APPFLOWY_S3_REGION=us-east-1
     - APPFLOWY_S3_PRESIGNED_URL_ENDPOINT=https://localhost/minio-api
@@ -176,14 +176,14 @@ services:
     - AZURE_OPENAI_API_VERSION=
     - AI_DATABASE_URL=postgres://appflowy:${POSTGRES_PASSWORD}@postgres:5432/appflowy
     - AI_REDIS_URL=redis://redis:6379
-    - APPFLOWY_S3_ACCESS_KEY=LhOQqED1G14fiVYY
-    - APPFLOWY_S3_SECRET_KEY=qrqn95Yk8j5iICjmGDcDVVjuRXltvHg0
+    - APPFLOWY_S3_ACCESS_KEY=DvKtbYGirk9G79iD
+    - APPFLOWY_S3_SECRET_KEY=TDOCDiSzsXTfIV8DTpEcuVSDzTntnbNy
     - APPFLOWY_S3_BUCKET=appflowy
     - APPFLOWY_S3_REGION=us-east-1
     - AI_USE_MINIO=true
     - AI_MINIO_URL=http://minio:9000
     - AI_APPFLOWY_HOST=https://localhost
-    - APPFLOWY_GOTRUE_JWT_SECRET=SzfHKOhHIMfzdPCv0t1ZBJimtilg6Ua7NqTSFpTogg37wY8aZoDKzrC0KCYiTLtd
+    - APPFLOWY_GOTRUE_JWT_SECRET=eIl98qcKU8cSjpxeuDdIPzpulcq1zLaJEjQx5lrNIK1CUXzHk5QFG0WEYv7MlPAR
   appflowy_worker:
     restart: on-failure
     image: appflowyinc/appflowy_worker:${APPFLOWY_WORKER_VERSION:-latest}
@@ -200,8 +200,8 @@ services:
     - APPFLOWY_WORKER_IMPORT_TICK_INTERVAL=30
     - APPFLOWY_S3_USE_MINIO=true
     - APPFLOWY_S3_MINIO_URL=http://minio:9000
-    - APPFLOWY_S3_ACCESS_KEY=LhOQqED1G14fiVYY
-    - APPFLOWY_S3_SECRET_KEY=qrqn95Yk8j5iICjmGDcDVVjuRXltvHg0
+    - APPFLOWY_S3_ACCESS_KEY=DvKtbYGirk9G79iD
+    - APPFLOWY_S3_SECRET_KEY=TDOCDiSzsXTfIV8DTpEcuVSDzTntnbNy
     - APPFLOWY_S3_BUCKET=appflowy
     - APPFLOWY_S3_REGION=us-east-1
     - APPFLOWY_MAILER_SMTP_HOST=
@@ -243,7 +243,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.9.3"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://appflowy.io/
   repo: https://github.com/AppFlowy-IO/AppFlowy
   docs: https://docs.appflowy.io/docs

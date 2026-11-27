@@ -7,10 +7,10 @@ services:
     - 8080
     environment:
     - LEAN_APP_URL=http://localhost
-    - LEAN_SESSION_PASSWORD=lJPIYKJ2mLwUbVQimm9SwoudPhSfE3QG
+    - LEAN_SESSION_PASSWORD=nhngDfS03Q0FkqqepdhJqGicL6FMrPRG
     - LEAN_DB_HOST=db
     - LEAN_DB_USER=leantime
-    - LEAN_DB_PASSWORD=T7U4fLs5Xqbb139v
+    - LEAN_DB_PASSWORD=5vQIEcRbvEJR38hO
     - LEAN_DB_DATABASE=leantime
     volumes:
     - leantime-files:/var/www/html/userfiles
@@ -25,10 +25,10 @@ services:
     image: mariadb:11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=Dj9f9nhr7hKnDWYP
+    - MYSQL_ROOT_PASSWORD=WRW6v6pmE4uRzTKe
     - MYSQL_DATABASE=leantime
     - MYSQL_USER=leantime
-    - MYSQL_PASSWORD=T7U4fLs5Xqbb139v
+    - MYSQL_PASSWORD=5vQIEcRbvEJR38hO
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
     - db-data:/var/lib/mysql
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://leantime.io/
   repo: https://github.com/Leantime/leantime
   docs: https://docs.leantime.io/

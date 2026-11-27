@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - OPENTODO_BASE_URL=
-    - OPENTODO_SETUP_TOKEN=gMI79lSdHEdXWbROPIpgqX1QMspiyBuh
+    - OPENTODO_SETUP_TOKEN=vktJdqCIYraIgh8mJCFAgtPopI0MjU68
     - OPENTODO_ALLOW_SIGNUP=false
     - OPENTODO_TRUSTED_PROXIES=
     volumes:
@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.4.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://open-todo.app
   repo: https://github.com/OpenTodoApp/OpenTodo
   docs: https://open-todo.app/docs/self-hosting/dokploy/

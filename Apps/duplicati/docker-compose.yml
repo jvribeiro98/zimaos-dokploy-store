@@ -7,8 +7,8 @@ services:
     - PUID=0
     - PGID=0
     - TZ=Europe/Vienna
-    - SETTINGS_ENCRYPTION_KEY=SzSMwY1d0NAKAdYLp5B9HXB3x7tGdfPi
-    - DUPLICATI__WEBSERVICE_PASSWORD=ugbS5OZhn5fFwufu
+    - SETTINGS_ENCRYPTION_KEY=voUhfydNoaGApN0WHhi4lacQwStFaW67
+    - DUPLICATI__WEBSERVICE_PASSWORD=B0Lq7DQzY1HAxVLJ
     - DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES=*
     volumes:
     - duplicati-config:/config
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.3.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://duplicati.com/
   repo: https://github.com/duplicati/duplicati
   docs: https://docs.duplicati.com/

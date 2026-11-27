@@ -54,7 +54,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.4.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://docs.heyo.sh
   repo: https://github.com/heyo-sh/heyo-docs
   docs: https://docs.heyo.sh

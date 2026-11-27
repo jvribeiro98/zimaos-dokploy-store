@@ -6,7 +6,7 @@ services:
     environment:
     - CHEVERETO_DB_HOST=mysql
     - CHEVERETO_DB_USER=mysql
-    - CHEVERETO_DB_PASS=tok2jRHPIGUo2nxj
+    - CHEVERETO_DB_PASS=dPLWX7eo3Zj0FrAo
     - CHEVERETO_DB_PORT=3306
     - CHEVERETO_DB_NAME=chevereto
     - CHEVERETO_HOSTNAME=localhost
@@ -28,10 +28,10 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=tok2jRHPIGUo2nxj
+    - MYSQL_ROOT_PASSWORD=dPLWX7eo3Zj0FrAo
     - MYSQL_DATABASE=chevereto
     - MYSQL_USER=mysql
-    - MYSQL_PASSWORD=tok2jRHPIGUo2nxj
+    - MYSQL_PASSWORD=dPLWX7eo3Zj0FrAo
     volumes:
     - mysql:/var/lib/mysql
 volumes:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://chevereto.com/
   repo: https://github.com/chevereto/chevereto
   docs: https://v4-docs.chevereto.com/

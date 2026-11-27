@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.19.4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.audiobookshelf.org
   repo: https://github.com/advplyr/audiobookshelf
   docs: https://www.audiobookshelf.org/docs

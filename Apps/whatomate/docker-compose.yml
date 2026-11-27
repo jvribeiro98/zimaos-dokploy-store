@@ -76,7 +76,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.1-beta-0.16.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://whatomate.io/
   repo: https://github.com/shridarpatil/whatomate
   docs: https://shridarpatil.github.io/whatomate/

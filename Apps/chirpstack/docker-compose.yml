@@ -59,7 +59,7 @@ services:
     - /DATA/AppData/$AppID/postgresql/initdb:/docker-entrypoint-initdb.d
     environment:
     - POSTGRES_USER=chirpstack
-    - POSTGRES_PASSWORD=heeXQH1FkkYkkvGe0epbQUIhG99UsDFY
+    - POSTGRES_PASSWORD=rg7T7AWytDVmDnPiBfc0TJvjKmCojzk5
     - POSTGRES_DB=chirpstack
   redis:
     image: redis:7-alpine
@@ -98,7 +98,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.chirpstack.io/
   repo: https://github.com/chirpstack/chirpstack
   docs: https://www.chirpstack.io/docs/

@@ -24,9 +24,9 @@ services:
         condition: service_healthy
     environment:
       ENGRAM_DATABASE_URL: postgres://engram:engram@postgres:5432/engram_cloud?sslmode=disable
-      ENGRAM_JWT_SECRET: gxQh0bgATfjw8CLXE5GnJnADFdBeFTFnAULgjbONCgz7eW5GEvnmLKSQuhNvzXJm
-      ENGRAM_CLOUD_TOKEN: USIGZLCHcL54gC5FOelgCFmPJmMNbd1jGWL1SdF0mOThvsx3
-      ENGRAM_CLOUD_ADMIN: oCzvZb05Vvn8IPZR2wnN3W2XYxzM5yrNfHm1ECzPShoeAOlq
+      ENGRAM_JWT_SECRET: Sqdl3XT0Z1C49RQIE8ZGeqrEgzct2N8yNsZs07QBRgSeazC39El7sQpuccsFI2S9
+      ENGRAM_CLOUD_TOKEN: SHq122lfrDECTigKxeid21SiDCGkhnlGDxfWfh2CVtUGYwRb
+      ENGRAM_CLOUD_ADMIN: qUUYJ3uSCHS8KJRTMwNWxc3cQn1tHaMZeXIEdvD542M9XfUf
       ENGRAM_CLOUD_ALLOWED_PROJECTS: '*'
       ENGRAM_CLOUD_HOST: 0.0.0.0
       ENGRAM_PORT: '8080'
@@ -61,6 +61,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.16.3"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   repo: https://github.com/Gentleman-Programming/engram
   docs: https://github.com/Gentleman-Programming/engram/blob/main/docs/engram-cloud/README.md

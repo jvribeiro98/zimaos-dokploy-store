@@ -4,10 +4,10 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=JdCf5FrYd96h56RgUlpWTJQGFMnsAXSq
+    - MYSQL_ROOT_PASSWORD=7ndYh0dF1EL4RQKi3T4HN9MAbySAuouY
     - MYSQL_DATABASE=ezbookkeeping
     - MYSQL_USER=ezbookkeeping
-    - MYSQL_PASSWORD=s7mptQF4ApEPP1uozqKHSgyJpOhnluHB
+    - MYSQL_PASSWORD=5mhwfKcz5TT2mcMTvLTxkg9QrdClAlsy
     volumes:
     - mysql-data:/var/lib/mysql
   ezbookkeeping:
@@ -22,9 +22,9 @@ services:
     - EBK_DATABASE_HOST=mysql:3306
     - EBK_DATABASE_NAME=ezbookkeeping
     - EBK_DATABASE_USER=ezbookkeeping
-    - EBK_DATABASE_PASSWD=s7mptQF4ApEPP1uozqKHSgyJpOhnluHB
+    - EBK_DATABASE_PASSWD=5mhwfKcz5TT2mcMTvLTxkg9QrdClAlsy
     - EBK_LOG_MODE=file
-    - EBK_SECURITY_SECRET_KEY=Ky9VHTveJX6Q1e1etwOrSc3FS6JDvvWXo8M87jrh4dPkxFIGt0GVA0ZRwsp4Eu8Q
+    - EBK_SECURITY_SECRET_KEY=zWzL7QIgyPIczolCXZtAehNyUBompT4gNEgijeCuMth6N9OSNj0I3zGH3tyjbdyo
     volumes:
     - /etc/localtime:/etc/localtime:ro
     - storage:/ezbookkeeping/storage
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/mayswind/ezbookkeeping
   repo: https://github.com/mayswind/ezbookkeeping
   docs: https://github.com/mayswind/ezbookkeeping

@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://openbao.org/
   repo: https://github.com/openbao/openbao
   docs: https://openbao.org/docs/

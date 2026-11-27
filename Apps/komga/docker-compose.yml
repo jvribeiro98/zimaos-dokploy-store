@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.30.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://komga.org
   repo: https://github.com/gotson/komga
   docs: https://komga.org/docs/introduction/

@@ -64,7 +64,7 @@ x-casaos:
   - amd64
   - arm64
   version: "21.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.dolibarr.org/
   repo: https://github.com/Dolibarr/dolibarr
   docs: https://wiki.dolibarr.org/

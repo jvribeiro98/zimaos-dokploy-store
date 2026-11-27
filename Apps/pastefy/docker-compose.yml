@@ -6,10 +6,10 @@ services:
     volumes:
     - /DATA/AppData/$AppID/db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: yNbuYFkOWCQFR92Qz7ksQKG76KNFjxJH
+      MYSQL_ROOT_PASSWORD: ar7tc7ZgXPaV99PHTTAHxknh1DsOayEn
       MYSQL_DATABASE: pastefy
       MYSQL_USER: pastefy
-      MYSQL_PASSWORD: UvHXrSuqKSlDoHyNXeu70RBSR7xCzdL9
+      MYSQL_PASSWORD: zGPJd2eRgreG5oSiRM64DSVtov1CG6vj
   pastefy:
     image: interaapps/pastefy:latest
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
       DATABASE_DRIVER: mysql
       DATABASE_NAME: pastefy
       DATABASE_USER: pastefy
-      DATABASE_PASSWORD: UvHXrSuqKSlDoHyNXeu70RBSR7xCzdL9
+      DATABASE_PASSWORD: zGPJd2eRgreG5oSiRM64DSVtov1CG6vj
       DATABASE_HOST: db
       DATABASE_PORT: '3306'
       SERVER_NAME: https://localhost
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://pastefy.app
   repo: https://github.com/interaapps/pastefy
   docs: https://github.com/interaapps/pastefy/wiki

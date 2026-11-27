@@ -6,7 +6,7 @@ services:
     - '8080'
     environment:
     - COMMENTO_ORIGIN=http://localhost
-    - COMMENTO_POSTGRES=postgres://postgres:aGCGj8DBS0ebzmKx@postgres:5432/postgres?sslmode=disable
+    - COMMENTO_POSTGRES=postgres://postgres:etLBAa51RyOYD0RP@postgres:5432/postgres?sslmode=disable
     depends_on:
     - postgres
     restart: unless-stopped
@@ -17,7 +17,7 @@ services:
   postgres:
     image: postgres:11
     environment:
-    - POSTGRES_PASSWORD=aGCGj8DBS0ebzmKx
+    - POSTGRES_PASSWORD=etLBAa51RyOYD0RP
     volumes:
     - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -45,7 +45,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://commento.io/
   repo: https://github.com/souramoo/commentoplusplus
   docs: https://commento.io/

@@ -8,10 +8,10 @@ services:
       PORT: '20128'
       HOSTNAME: 0.0.0.0
       NODE_ENV: production
-      JWT_SECRET: FhybWy6NQDOoQNbKGsyo6lIcQE2GuFJUb6cDiFJdbN4KGKSScaEvfZQKUEIBYe9g
-      INITIAL_PASSWORD: IRt4dkJZb3NOgC1eMkDeyCMsrliyeVuC
-      API_KEY_SECRET: lrsiO3JPwiH8eMtYFJwOi2mjhk9TIY1nPKdKq6fg1O61oP30ENOq81DX5CmqVNw6
-      MACHINE_ID_SALT: xBqkWAk7nOOAiod6k3Q84m68qZUjFcCH
+      JWT_SECRET: I4CIu7CRZCLoSpgqO9LfXCiGJ5uhbOm6GwGGEN9MEntoNyx0KYdttx00X6H7slPP
+      INITIAL_PASSWORD: 2a7uGx6ZgOht8VdQ521Ij3N2N1ms9tjc
+      API_KEY_SECRET: gASfZOwdJ6bKtr9yrvy2dL1YybeZSC3IECmTbYGJtRUyWJiQ1nloJCXckRmXaTUg
+      MACHINE_ID_SALT: Ox1gqTiRjYpchxJhSqOyxvBDTALujq1s
       BASE_URL: https://localhost
       NEXT_PUBLIC_BASE_URL: https://localhost
       HEADROOM_URL: http://headroom:8787
@@ -73,7 +73,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.5.59"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://9router.com
   repo: https://github.com/decolua/9router
   docs: https://github.com/decolua/9router/blob/master/DOCKER.md

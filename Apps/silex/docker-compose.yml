@@ -7,7 +7,7 @@ services:
     - 6805
     environment:
     - SILEX_URL=http://localhost
-    - SILEX_SESSION_SECRET=XZba2ayvjHz65pFHQa4MCvrMNDkT8ODP
+    - SILEX_SESSION_SECRET=fKCy4wpu0CBWzWczzjAntcK0XDfyPY62
     - STORAGE_CONNECTORS=fs
     - HOSTING_CONNECTORS=fs,download
     - SILEX_FS_ROOT=/silex/silex/storage
@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.7.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.silex.me
   repo: https://github.com/silexlabs/Silex
   docs: https://docs.silex.me

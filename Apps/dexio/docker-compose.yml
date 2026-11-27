@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - DEXIO_PUBLIC_URL=https://localhost
-    - DEXIO_SECRET_KEY=62cOSQb5YNR2vQoHA2yDIiyOaFVUnjBScW2QJBFsJ9MuP3ZD68RSpz50QnLLju9A
+    - DEXIO_SECRET_KEY=1VtTRR8UnZvPwGbkkTMRan7bDnOFnDrRKfW2qLrK1IVR95eqi3ygDo8PPOZSccDY
     - DEXIO_DB=/data/dexio.db
     - DEXIO_FILES_DIR=/data/files
     expose:
@@ -39,7 +39,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://dexio.wiki
   repo: https://github.com/dexio-wiki/dexio
   docs: https://github.com/dexio-wiki/dexio/blob/main/deploy/README.md

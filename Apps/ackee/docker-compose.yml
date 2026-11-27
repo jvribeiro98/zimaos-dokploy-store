@@ -6,8 +6,8 @@ services:
     - '3000'
     environment:
     - ACKEE_USERNAME=default
-    - ACKEE_PASSWORD=cCNLdq4IWTjfPpYM
-    - ACKEE_MONGODB=mongodb://mongo:d8JXLqZeIB1xndwA@mongo:27017
+    - ACKEE_PASSWORD=wCIrYkSef6Ho1pZ0
+    - ACKEE_MONGODB=mongodb://mongo:VQAbeWzGItxfwgX0@mongo:27017
     restart: unless-stopped
     ports:
     - target: 3000
@@ -16,7 +16,7 @@ services:
   mongo:
     image: mongo:4
     environment:
-    - MONGO_INITDB_ROOT_PASSWORD=d8JXLqZeIB1xndwA
+    - MONGO_INITDB_ROOT_PASSWORD=VQAbeWzGItxfwgX0
     - MONGO_INITDB_ROOT_USERNAME=mongo
     volumes:
     - mongo-data:/data/db
@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.4.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://ackee.electerious.com/
   repo: https://github.com/electerious/Ackee
   docs: https://docs.ackee.electerious.com/

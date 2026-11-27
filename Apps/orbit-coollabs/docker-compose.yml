@@ -15,7 +15,7 @@ services:
     - ORBIT_ENV=production
     - ORBIT_PUBLIC_ORIGIN=https://localhost
     - ORBIT_TRUSTED_PROXIES=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
-    - ORBIT_APP_KEY=vpJ4ZYL9feechZUGE/0JhUaREJfNYLyAjx1fnCCGEj4=
+    - ORBIT_APP_KEY=iHIo/Pu0sHOoq6shop9ifglEvRRIXJm7qL/xRAmy9O4=
     expose:
     - '8080'
     volumes:
@@ -49,6 +49,6 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   repo: https://github.com/coollabsio/orbit
   docs: https://github.com/coollabsio/orbit/blob/main/docs/operations.md

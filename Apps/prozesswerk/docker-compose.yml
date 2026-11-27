@@ -6,7 +6,7 @@ services:
     expose:
     - '8000'
     environment:
-    - LLM_API_KEY=Nfc25CUg81AzBr25Qbz49sTJDVjKWB0G
+    - LLM_API_KEY=YyEsETS76ZXXDc9XDKx7aL9sMKJim9UM
     - LLM_BASE_URL=https://api.openai.com/v1
     - LLM_MODEL=gpt-4o
     ports:
@@ -34,6 +34,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   repo: https://github.com/guidoesser/prozesswerk
   docs: https://github.com/guidoesser/prozesswerk#readme

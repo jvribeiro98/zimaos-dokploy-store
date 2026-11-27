@@ -6,7 +6,7 @@ services:
     environment:
     - DOKPLOY_URL=http://host.docker.internal:3000
     - DOKPLOY_API_KEY=
-    - BASIC_AUTH=admin:lM4XMie2peESBB5n4rKeUI0R
+    - BASIC_AUTH=admin:ZLjUJZPO4H4shTE1dZ4IDA23
     extra_hosts:
     - host.docker.internal:host-gateway
     ports:
@@ -34,6 +34,6 @@ x-casaos:
   - amd64
   - arm64
   version: "0.1.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   repo: https://github.com/suleyman/3dokploy
   docs: https://github.com/suleyman/3dokploy#readme

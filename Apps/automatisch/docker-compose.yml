@@ -11,14 +11,14 @@ services:
     - WEB_APP_URL=http://localhost
     - APP_ENV=production
     - REDIS_HOST=automatisch-redis
-    - REDIS_PASSWORD=f2f4LklbpNs8qbCV
+    - REDIS_PASSWORD=ewl4WN5O25NcfLq5
     - POSTGRES_HOST=automatisch-postgres
     - POSTGRES_DATABASE=automatisch
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=cqGl2naWOs8bcFoQ
-    - ENCRYPTION_KEY=66wBXiCr4l1y1vrPW73FYypfnTp7HQ2n
-    - WEBHOOK_SECRET_KEY=QnaDdIN9P3K4dpV7CbE0SOWdy55cf7CZ
-    - APP_SECRET_KEY=UkiPu455vg2K6f7rtM5blXhkmDSy6lnK
+    - POSTGRES_PASSWORD=XVqpJHHoyTFLM3D7
+    - ENCRYPTION_KEY=Uxxd0UKjl8hCamSFfafmb7zXQhJEmDR1
+    - WEBHOOK_SECRET_KEY=b2DaLsmGKjR58ofwUBRdi1dUgiBPMi71
+    - APP_SECRET_KEY=TRiGbNFY5jLrxKaUArGKp4argUqPU4nh
     volumes:
     - storage:/automatisch/storage
     depends_on:
@@ -36,14 +36,14 @@ services:
     environment:
     - APP_ENV=production
     - REDIS_HOST=automatisch-redis
-    - REDIS_PASSWORD=f2f4LklbpNs8qbCV
+    - REDIS_PASSWORD=ewl4WN5O25NcfLq5
     - POSTGRES_HOST=automatisch-postgres
     - POSTGRES_DATABASE=automatisch
     - POSTGRES_USERNAME=postgres
-    - POSTGRES_PASSWORD=cqGl2naWOs8bcFoQ
-    - ENCRYPTION_KEY=66wBXiCr4l1y1vrPW73FYypfnTp7HQ2n
-    - WEBHOOK_SECRET_KEY=QnaDdIN9P3K4dpV7CbE0SOWdy55cf7CZ
-    - APP_SECRET_KEY=UkiPu455vg2K6f7rtM5blXhkmDSy6lnK
+    - POSTGRES_PASSWORD=XVqpJHHoyTFLM3D7
+    - ENCRYPTION_KEY=Uxxd0UKjl8hCamSFfafmb7zXQhJEmDR1
+    - WEBHOOK_SECRET_KEY=b2DaLsmGKjR58ofwUBRdi1dUgiBPMi71
+    - APP_SECRET_KEY=TRiGbNFY5jLrxKaUArGKp4argUqPU4nh
     - WORKER=true
     volumes:
     - storage:/automatisch/storage
@@ -54,7 +54,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=cqGl2naWOs8bcFoQ
+    - POSTGRES_PASSWORD=XVqpJHHoyTFLM3D7
     - POSTGRES_DB=automatisch
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -97,7 +97,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.15.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://automatisch.io/docs
   repo: https://github.com/automatisch/automatisch
   docs: https://automatisch.io/docs

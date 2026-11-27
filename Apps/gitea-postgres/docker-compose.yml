@@ -10,7 +10,7 @@ services:
     - GITEA__database__HOST=postgres:5432
     - GITEA__database__NAME=gitea
     - GITEA__database__USER=admin
-    - GITEA__database__PASSWD=c5QFDjn6cwPU5XpojP4EW7VU
+    - GITEA__database__PASSWD=aOc88rTbIdIV7Hc3ViFPBiPQ
     - GITEA__server__DOMAIN=localhost
     - GITEA__server__SSH_DOMAIN=localhost}
     - GITEA__server__ROOT_URL=https://localhost/
@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=c5QFDjn6cwPU5XpojP4EW7VU
+    - POSTGRES_PASSWORD=aOc88rTbIdIV7Hc3ViFPBiPQ
     - POSTGRES_DB=gitea
     volumes:
     - pg-data:/var/lib/postgresql/data
@@ -83,7 +83,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.27.3"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://gitea.io/
   repo: https://github.com/go-gitea/gitea
   docs: https://docs.gitea.com/

@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:15.5-alpine
     environment:
-      POSTGRES_PASSWORD: Ivelj1jiVa0PI56I
+      POSTGRES_PASSWORD: YYNIO0yWOpkKlSgB
       POSTGRES_DB: flagsmith
     volumes:
     - pgdata:/var/lib/postgresql/data
@@ -19,12 +19,12 @@ services:
   flagsmith:
     image: docker.flagsmith.com/flagsmith/flagsmith:2.177.1
     environment:
-      DATABASE_URL: postgresql://postgres:Ivelj1jiVa0PI56I@postgres:5432/flagsmith
+      DATABASE_URL: postgresql://postgres:YYNIO0yWOpkKlSgB@postgres:5432/flagsmith
       USE_POSTGRES_FOR_ANALYTICS: 'true'
       ENVIRONMENT: production
       DJANGO_ALLOWED_HOSTS: '*'
       FLAGSMITH_DOMAIN: localhost
-      DJANGO_SECRET_KEY: 0GCLAmpE
+      DJANGO_SECRET_KEY: b9PhGgn3
       TASK_RUN_METHOD: TASK_PROCESSOR
       PROMETHEUS_ENABLED: 'true'
     expose:
@@ -40,7 +40,7 @@ services:
   flagsmith-task-processor:
     image: docker.flagsmith.com/flagsmith/flagsmith:2.177.1
     environment:
-      DATABASE_URL: postgresql://postgres:Ivelj1jiVa0PI56I@postgres:5432/flagsmith
+      DATABASE_URL: postgresql://postgres:YYNIO0yWOpkKlSgB@postgres:5432/flagsmith
       USE_POSTGRES_FOR_ANALYTICS: 'true'
       DJANGO_ALLOWED_HOSTS: '*'
       PROMETHEUS_ENABLED: 'true'
@@ -72,7 +72,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.177.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.flagsmith.com/
   repo: https://github.com/Flagsmith/flagsmith
   docs: https://docs.flagsmith.com/

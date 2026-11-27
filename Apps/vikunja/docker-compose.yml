@@ -7,11 +7,11 @@ services:
       VIKUNJA_SERVICE_PUBLICURL: https://localhost
       VIKUNJA_PUBLIC_PORT: ${VIKUNJA_PUBLIC_PORT}
       VIKUNJA_DATABASE_HOST: db
-      VIKUNJA_DATABASE_PASSWORD: I5EqwlxWWAZlwKCVjmxLuU4H9y8dJ6Xu
+      VIKUNJA_DATABASE_PASSWORD: hMKBTkbyx5Ead1bApi7WzPqpyoQ1l7kt
       VIKUNJA_DATABASE_TYPE: postgres
       VIKUNJA_DATABASE_USER: vikunja
       VIKUNJA_DATABASE_DATABASE: vikunja
-      VIKUNJA_SERVICE_JWTSECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkb2twbG95LXppbWFvcyIsImlhdCI6MTc5NTcxMDEzNn0.9K9K3Pw-FTUFXdie6Dha25ldphWviXfk8L2Nu5zBalw
+      VIKUNJA_SERVICE_JWTSECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkb2twbG95LXppbWFvcyIsImlhdCI6MTc5NTc5NTYyM30.VTTn8NeqJVqZejxLyH0CqCr1adFLY9DaW-dLptoX0l0
     expose:
     - 3456
     volumes:
@@ -27,7 +27,7 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_PASSWORD: I5EqwlxWWAZlwKCVjmxLuU4H9y8dJ6Xu
+      POSTGRES_PASSWORD: hMKBTkbyx5Ead1bApi7WzPqpyoQ1l7kt
       POSTGRES_USER: vikunja
       POSTGRES_DB: vikunja
     volumes:
@@ -68,7 +68,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.23.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://vikunja.io/
   repo: https://github.com/go-vikunja/vikunja
   docs: https://vikunja.io/docs/

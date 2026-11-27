@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=IvJ3S83MOoTRK5IhWpo0BpZ8Vwjm5deS
+    - CLICKHOUSE_PASSWORD=jk5CDLZbXVZobkUJVOgknEGpV5NgNFyn
     volumes:
     - clickhouse-data:/var/lib/clickhouse
     - clickhouse-logs:/var/log/clickhouse-server
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://clickhouse.com/
   repo: https://github.com/ClickHouse/ClickHouse
   docs: https://clickhouse.com/docs

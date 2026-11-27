@@ -77,7 +77,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-latest}"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://zeqqat.com
   repo: https://github.com/zeqqat/zeqqat
   docs: https://zeqqat.com/docs/self-host

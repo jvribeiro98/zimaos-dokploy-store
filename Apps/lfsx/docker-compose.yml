@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.14.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://lfsx.dev
   repo: https://github.com/FerrLabs/LFSX
   docs: https://lfsx.dev/docs/quickstart

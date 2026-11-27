@@ -22,9 +22,9 @@ services:
     - 3001
     environment:
       APP_URL: http://localhost
-      DATABASE_URL: postgresql://cachkey:f806402da9bbf12be23c6309027939bf25e1df0cda5d842697d15d46e45db4ba@postgres:5432/cachkey
-      BETTER_AUTH_SECRET: AfKZuybH4svffvXPYcaiK+EWLXWu84zcZ0JIChbvwumHyRLTwir5lRVWOYUd3gFd
-      ENCRYPTION_KEY: zcHYTZQWxtzK/7D7Tzvas/sjRnqHWPRP5sZO8kBAwcI=
+      DATABASE_URL: postgresql://cachkey:c3352890687de5a2de6229ac0d62dd145546d51756470218889c97603780a0cd@postgres:5432/cachkey
+      BETTER_AUTH_SECRET: DzI6jp9w8zBHpN5UuQUrH0sK+1CGghlZs7E4snj7AvObSZoH92Tn8DOTjFjQ6dFU
+      ENCRYPTION_KEY: ux2CDldh7u6/mwKGvgj1hdZqhHdpVcUN4VQxNlLrkks=
       EMAIL_PROVIDER: smtp
       EMAIL_FROM: Cachkey <no-reply@example.com>
       SMTP_HOST: ''
@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: cachkey
-      POSTGRES_PASSWORD: f806402da9bbf12be23c6309027939bf25e1df0cda5d842697d15d46e45db4ba
+      POSTGRES_PASSWORD: c3352890687de5a2de6229ac0d62dd145546d51756470218889c97603780a0cd
       POSTGRES_DB: cachkey
     volumes:
     - postgres-data:/var/lib/postgresql/data
@@ -75,7 +75,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/Joyboy-dy/cachkey
   repo: https://github.com/Joyboy-dy/cachkey
   docs: https://github.com/Joyboy-dy/cachkey/tree/main/docs

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - SONGPORT_URL=https://localhost
-    - SONGPORT_PASSWORD=y384ItN8b4r0h09Tfgt9TTZn
+    - SONGPORT_PASSWORD=DHzu7EjbFAtnrGgujpvtZocI
     volumes:
     - trackhop-data:/data
     expose:
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.1.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://trackhop.org
   repo: https://github.com/xlollx/Trackhop
   docs: https://trackhop.org/guide/docker

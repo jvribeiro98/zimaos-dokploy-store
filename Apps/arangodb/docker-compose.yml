@@ -6,7 +6,7 @@ services:
     expose:
     - 8529
     environment:
-    - ARANGO_ROOT_PASSWORD=gB1NmRffb9jPuaQB
+    - ARANGO_ROOT_PASSWORD=eFkCCFuosPuBSTM2
     volumes:
     - data:/var/lib/arangodb3
     ports:
@@ -36,7 +36,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.12.4"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.arangodb.com/
   repo: https://github.com/arangodb/arangodb
   docs: https://www.arangodb.com/docs/

@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.4.205"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.onorca.dev
   repo: https://github.com/stablyai/orca
   docs: https://github.com/stablyai/orca/blob/main/docs/reference/headless-linux-server.md

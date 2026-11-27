@@ -6,8 +6,8 @@ services:
     environment:
     - NODE_ENV=production
     - FRONTEND_URL=http://localhost
-    - JWT_SECRET=my1xi4/0De/4S+8R0cXHxszspHY751YZxBqpDd8L36M=
-    - CLIENT_PASSWORD=X6XX2N9Y4xWUOx4m
+    - JWT_SECRET=GWr83d+eudaRZJlKQc9X4XiBbFNKx0ZbdBe03F5XBQs=
+    - CLIENT_PASSWORD=f9mgQeUHAp4woTs9
     - CLIENT_USERNAME=admin
     - BASE_DIR=/app
     volumes:
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.7.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://minepanel.ketbome.lat
   repo: https://github.com/Ketbome/minepanel
   docs: https://minepanel.ketbome.lat

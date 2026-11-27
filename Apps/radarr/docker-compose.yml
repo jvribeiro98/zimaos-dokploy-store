@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.0.3"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://radarr.video
   repo: https://github.com/Radarr/Radarr
   docs: https://wiki.servarr.com/radarr

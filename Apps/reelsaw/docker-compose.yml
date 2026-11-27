@@ -25,8 +25,8 @@ services:
       RUN_HTTP: 'true'
       RUN_WORKERS: 'true'
       TRUST_PROXY: 'true'
-      DATABASE_URL: postgres://reelsaw:xLkIahGjNK3rTuPPMqQUq0B13ychCyh7@db:5432/reelsaw
-      BETTER_AUTH_SECRET: xnXBWU/B9DrSbrpF+GQXhOI9j76nX6+po997ON+uazJWXZfS4BACZsMFDDB6Q/80
+      DATABASE_URL: postgres://reelsaw:x94OTqMlJN662m3abZqBBsIYd5nAm7L9@db:5432/reelsaw
+      BETTER_AUTH_SECRET: 8lBf5Z7JMMnK0PZFl0otNFD8EKehyH0JWZGk3tJrNr1KJ7KxP1aWfX26u1owuK14
       APP_URL: https://localhost
       SIGNUP_MODE: open
       AI_MODEL: openai:gpt-4o-mini
@@ -54,7 +54,7 @@ services:
       retries: 20
     environment:
       POSTGRES_USER: reelsaw
-      POSTGRES_PASSWORD: xLkIahGjNK3rTuPPMqQUq0B13ychCyh7
+      POSTGRES_PASSWORD: x94OTqMlJN662m3abZqBBsIYd5nAm7L9
       POSTGRES_DB: reelsaw
     volumes:
     - pgdata:/var/lib/postgresql/data
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.18.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://reelsaw.com
   repo: https://github.com/osbytes/reelsaw
   docs: https://github.com/osbytes/reelsaw#readme

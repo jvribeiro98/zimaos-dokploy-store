@@ -12,7 +12,7 @@ services:
     - 80
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-      DATA_ENCRYPTION_KEY: aCeC6MLn89T2efJWLXaTcIav6uHYPNlz
+      DATA_ENCRYPTION_KEY: ZRpbpsSPebz0hSx9pSe5SimUOHwQjAVU
       HOPP_AIO_ALTERNATE_PORT: '80'
       WHITELISTED_ORIGINS: https://localhost,http://localhost,app://hoppscotch
       VITE_BASE_URL: https://localhost
@@ -38,7 +38,7 @@ services:
     environment:
       POSTGRES_DB: hoppscotch
       POSTGRES_USER: hoppscotch
-      POSTGRES_PASSWORD: 3zIH5XGlhGiuzKq7DFiq5ZJuZNfpe8d3
+      POSTGRES_PASSWORD: TvwhsYCsx7C4k4vIz8UTpA7EjR28DDuB
     volumes:
     - hoppscotch-postgres:/var/lib/postgresql/data
     healthcheck:
@@ -89,7 +89,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://hoppscotch.io/
   repo: https://github.com/hoppscotch/hoppscotch
   docs: https://docs.hoppscotch.io/documentation/self-host/community-edition/install-and-build

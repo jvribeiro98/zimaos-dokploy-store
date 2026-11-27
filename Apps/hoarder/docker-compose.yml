@@ -10,11 +10,11 @@ services:
     environment:
     - DISABLE_SIGNUPS
     - NEXTAUTH_URL=http://localhost
-    - NEXTAUTH_SECRET=C9rzWm2faIrYhQDrY3G1Q8IPNnC+vzEktVbPS/PPjHo=
+    - NEXTAUTH_SECRET=ZPDuCtLyHTK68G/sWlHaBLZXsUTTvKVg1Dba3yipgcA=
     - MEILI_ADDR=http://meilisearch:7700
     - BROWSER_WEB_URL=http://chrome:9222
     - DATA_DIR=/data
-    - MEILI_MASTER_KEY=ZKlMABzC1zOWQZDyPYjhzTKefAjxYBSmMPugDpZ2x7o=
+    - MEILI_MASTER_KEY=kex6/4miZGvJtTfMeZeNt3JTNGK7ShtVOQNqOTZ+PPQ=
     ports:
     - target: 3000
       published: "3000"
@@ -33,7 +33,7 @@ services:
     image: getmeili/meilisearch:v1.6
     restart: unless-stopped
     environment:
-    - MEILI_MASTER_KEY=ZKlMABzC1zOWQZDyPYjhzTKefAjxYBSmMPugDpZ2x7o=
+    - MEILI_MASTER_KEY=kex6/4miZGvJtTfMeZeNt3JTNGK7ShtVOQNqOTZ+PPQ=
     - MEILI_NO_ANALYTICS=true
     volumes:
     - meilisearch-data:/meili_data
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.22.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://hoarder.app/
   repo: https://github.com/hoarder/hoarder
   docs: https://docs.hoarder.app/

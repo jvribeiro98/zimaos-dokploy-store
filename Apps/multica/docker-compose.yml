@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: multica
       POSTGRES_USER: multica
-      POSTGRES_PASSWORD: q1W3WG6nkcsKhgcbZMCGs20x2AeyNStQ
+      POSTGRES_PASSWORD: RmjPsi34LB6M4xYEL6hZa7q7XpbcNPwY
     volumes:
     - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -27,9 +27,9 @@ services:
     volumes:
     - backend_uploads:/app/data/uploads
     environment:
-      DATABASE_URL: postgres://multica:q1W3WG6nkcsKhgcbZMCGs20x2AeyNStQ@postgres:5432/multica?sslmode=disable
+      DATABASE_URL: postgres://multica:RmjPsi34LB6M4xYEL6hZa7q7XpbcNPwY@postgres:5432/multica?sslmode=disable
       PORT: '8080'
-      JWT_SECRET: cZcefqdn1XEpo4447TwzRaqK3zwrv37HAgI7huQivLdr7b3E7vyrMcbFrRYeJSfx
+      JWT_SECRET: RjZJc970tKLbtemCcqp5YYNnUhLzvnbm7k6MdFpgWlZBE3bm4kCWeerpIhjs1tZ6
       FRONTEND_ORIGIN: https://localhost
       ALLOWED_ORIGINS: https://localhost
       MULTICA_APP_URL: https://localhost
@@ -84,7 +84,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://multica.ai
   repo: https://github.com/multica-ai/multica
   docs: https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md

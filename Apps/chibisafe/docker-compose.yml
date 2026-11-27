@@ -81,7 +81,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2-alpine"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://chibisafe.app
   repo: https://github.com/chibisafe/chibisafe
   docs: https://chibisafe.app/docs/intro

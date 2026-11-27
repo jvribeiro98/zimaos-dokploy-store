@@ -6,11 +6,11 @@ services:
     depends_on:
     - db
     environment:
-    - APP_KEY=EgRe53UwpODOf2Iy3xTm92zjnzcMOBBw
+    - APP_KEY=28mNhPfBhXqdXGYUVJZGYdqAGntdv8Uu
     - APP_URL=https://localhost
     - DB_HOST=db
     - DB_USERNAME=monica
-    - DB_PASSWORD=3N8QiVnPSQ2SJBrb1AiIKjNWXJBxtkvb
+    - DB_PASSWORD=3bX0pd4b8UWoMSjPlD6jiyHQ7YL7qH4z
     volumes:
     - monica_data:/var/www/html/storage
     expose:
@@ -26,7 +26,7 @@ services:
     - MYSQL_RANDOM_ROOT_PASSWORD=true
     - MYSQL_DATABASE=monica
     - MYSQL_USER=monica
-    - MYSQL_PASSWORD=3N8QiVnPSQ2SJBrb1AiIKjNWXJBxtkvb
+    - MYSQL_PASSWORD=3bX0pd4b8UWoMSjPlD6jiyHQ7YL7qH4z
     volumes:
     - monica_mysql:/var/lib/mysql
 volumes:
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.1.2"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.monicahq.com
   repo: https://github.com/monicahq/monica
   docs: https://www.monicahq.com/documentation

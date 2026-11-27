@@ -5,7 +5,7 @@ services:
     user: 0:0
     environment:
     - COUCHDB_USER=admin
-    - COUCHDB_PASSWORD=kaYsJqTsUAGTGiAEgQMmWg29CxR60w51
+    - COUCHDB_PASSWORD=VMYUXoeXKkx9g3JgoKHgyRHbT3v5SszV
     volumes:
     - couchdb-data:/opt/couchdb/data
     - /DATA/AppData/$AppID/local.ini:/opt/couchdb/etc/local.ini
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://obsidian.md/sync
   repo: https://github.com/vrtmrz/obsidian-livesync
   docs: https://docs.couchdb.apache.org/

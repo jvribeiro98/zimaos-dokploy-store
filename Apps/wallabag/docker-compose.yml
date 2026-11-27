@@ -11,20 +11,20 @@ services:
       wallabag-redis:
         condition: service_healthy
     environment:
-    - MYSQL_ROOT_PASSWORD=LvvdeNGp6ayzNfz4yZkodtAJRw5GHk4E
+    - MYSQL_ROOT_PASSWORD=IdSV7fhuFGLGjWWiI6D2lysL7ZHetYzF
     - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql
     - SYMFONY__ENV__DATABASE_HOST=wallabag-db
     - SYMFONY__ENV__DATABASE_PORT=3306
     - SYMFONY__ENV__DATABASE_NAME=wallabag
     - SYMFONY__ENV__DATABASE_USER=wallabag
-    - SYMFONY__ENV__DATABASE_PASSWORD=RN6P2zttcvDeeGeJfic6zHRBpdFYpyGI
+    - SYMFONY__ENV__DATABASE_PASSWORD=hHE0q8PXGFrZQSvcBFA452FmbRnU96MZ
     - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4
     - SYMFONY__ENV__DATABASE_TABLE_PREFIX=wallabag_
     - SYMFONY__ENV__MAILER_DSN=smtp://127.0.0.1
     - SYMFONY__ENV__FROM_EMAIL=wallabag@example.com
     - SYMFONY__ENV__DOMAIN_NAME=http://localhost
     - SYMFONY__ENV__SERVER_NAME=wallabag
-    - SYMFONY__ENV__SECRET=U1YUT0euzmJaJRuIrbe0CTZXnPX6reGU
+    - SYMFONY__ENV__SECRET=Je2BaS5ERbn81yT3WLCtTdCZII1PMnHw
     - SYMFONY__ENV__REDIS_HOST=wallabag-redis
     volumes:
     - wallabag-images:/var/www/wallabag/web/assets/images
@@ -36,7 +36,7 @@ services:
     image: mariadb:11.4
     restart: unless-stopped
     environment:
-    - MARIADB_ROOT_PASSWORD=LvvdeNGp6ayzNfz4yZkodtAJRw5GHk4E
+    - MARIADB_ROOT_PASSWORD=IdSV7fhuFGLGjWWiI6D2lysL7ZHetYzF
     volumes:
     - wallabag-db-data:/var/lib/mysql
     healthcheck:
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.6.14"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://wallabag.org/
   repo: https://github.com/wallabag/wallabag
   docs: https://doc.wallabag.org/

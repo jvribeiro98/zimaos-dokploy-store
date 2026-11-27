@@ -6,7 +6,7 @@ services:
     expose:
     - 3000
     environment:
-    - JWT_SECRET=d05449220cc60fcbc9beb5830b52cdc841a229e9831cb634d85ef49ea3d40bc8
+    - JWT_SECRET=d36acda064962df44a6ebcfc83629a2992771b2b38a8c981df535d9e654415fd
     - ACCOUNT_REGISTRATION=false
     - HTTP_ALLOWED=true
     - ALLOW_UNAUTHENTICATED=false
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://github.com/c4illin/ConvertX
   repo: https://github.com/c4illin/ConvertX
   docs: https://github.com/c4illin/ConvertX#environment-variables

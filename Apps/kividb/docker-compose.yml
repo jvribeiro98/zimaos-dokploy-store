@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.2.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://kividb.io/
   repo: https://github.com/kividbio/kividb
   docs: https://kividb.io/docs

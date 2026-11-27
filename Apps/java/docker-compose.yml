@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "8-21"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://java.com/
   repo: https://github.com/pterodactyl/yolks
   docs: https://docs.oracle.com/en/java/

@@ -54,7 +54,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.0.1"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.emqx.com
   repo: https://github.com/emqx/emqx
   docs: https://docs.emqx.com

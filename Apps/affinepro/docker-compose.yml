@@ -10,8 +10,8 @@ services:
     - affine-config:/root/.affine/config
     environment:
     - REDIS_SERVER_HOST=redis
-    - REDIS_SERVER_PASSWORD=Ngu6A8k5Zdfb4IcI
-    - DATABASE_URL=postgresql://postgres:bbHLDLysBLeQ6r4R@db:5432/affinepro
+    - REDIS_SERVER_PASSWORD=ZRVXtK0cCYGfcsOc
+    - DATABASE_URL=postgresql://postgres:kn6jnB8Ul2JBefBj@db:5432/affinepro
     - AFFINE_INDEXER_ENABLED=false
     - AFFINE_SERVER_HOST=localhost
     - MAILER_HOST=
@@ -38,8 +38,8 @@ services:
     - node ./scripts/self-host-predeploy.js
     environment:
     - REDIS_SERVER_HOST=redis
-    - REDIS_SERVER_PASSWORD=Ngu6A8k5Zdfb4IcI
-    - DATABASE_URL=postgresql://postgres:bbHLDLysBLeQ6r4R@db:5432/affinepro
+    - REDIS_SERVER_PASSWORD=ZRVXtK0cCYGfcsOc
+    - DATABASE_URL=postgresql://postgres:kn6jnB8Ul2JBefBj@db:5432/affinepro
     - AFFINE_INDEXER_ENABLED=false
     - AFFINE_SERVER_HOST=localhost
     - MAILER_HOST=
@@ -60,7 +60,7 @@ services:
     image: pgvector/pgvector:pg16
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=bbHLDLysBLeQ6r4R
+    - POSTGRES_PASSWORD=kn6jnB8Ul2JBefBj
     - POSTGRES_DB=affinepro
     - POSTGRES_INITDB_ARGS=--data-checksums
     volumes:
@@ -115,7 +115,7 @@ x-casaos:
   - amd64
   - arm64
   version: "stable"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://affine.pro/
   repo: https://github.com/toeverything/Affine
   docs: https://docs.affine.pro/

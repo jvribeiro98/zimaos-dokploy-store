@@ -39,5 +39,5 @@ x-casaos:
   - amd64
   - arm64
   version: "0.8.3-omnibus"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   repo: https://github.com/AnalogJ/scrutiny/

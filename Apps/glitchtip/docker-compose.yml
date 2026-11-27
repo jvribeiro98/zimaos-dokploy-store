@@ -20,7 +20,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: nJwbAfgHxbG+38F8asMj5oDiBp45yOYS6ofvmR/XLew=
+      SECRET_KEY: VWUNESPyOxkFdZeW+CIjx5jVyiELq/fHYNzzOSOUh9g=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost
@@ -39,7 +39,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: nJwbAfgHxbG+38F8asMj5oDiBp45yOYS6ofvmR/XLew=
+      SECRET_KEY: VWUNESPyOxkFdZeW+CIjx5jVyiELq/fHYNzzOSOUh9g=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost
@@ -54,7 +54,7 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       VALKEY_URL: redis://valkey:6379
-      SECRET_KEY: nJwbAfgHxbG+38F8asMj5oDiBp45yOYS6ofvmR/XLew=
+      SECRET_KEY: VWUNESPyOxkFdZeW+CIjx5jVyiELq/fHYNzzOSOUh9g=
       PORT: '8000'
       EMAIL_URL: consolemail://
       GLITCHTIP_DOMAIN: https://localhost
@@ -92,7 +92,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.1.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://glitchtip.com/
   repo: https://gitlab.com/glitchtip/
   docs: https://glitchtip.com/documentation

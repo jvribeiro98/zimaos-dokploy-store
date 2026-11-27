@@ -8,8 +8,8 @@ services:
     - '8787'
     environment:
       PONOS_WEB_EMAIL: admin@localhost
-      PONOS_WEB_PASSWORD: BxEECxVMIIAHBsCvod1YVCmgUn6ehBn9
-      PONOS_WEB_TOKEN: 6ExoQGa9jVpXFpU53BFxuJNk7cdOonOXbXrwTaB6kUSR0rnS
+      PONOS_WEB_PASSWORD: Yr1dOEr7IU5142bFNgSsftxBg6ZHTIzN
+      PONOS_WEB_TOKEN: VliUNCL9yeQoGTpEjWQnVfAHWmoskstKIcuh0FedFb0wbwGJ
       PONOS_LANGUAGE: en
       TZ: UTC
       CLAUDE_CODE_OAUTH_TOKEN: ''
@@ -69,7 +69,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.2.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://the-ponos.app/
   repo: https://github.com/hermez-agency/ponos
   docs: https://github.com/hermez-agency/ponos/blob/main/guide/server.md#install-with-dokploy

@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=senddock
-    - POSTGRES_PASSWORD=rOOlu8yyEtwQSIumdjPfOOJtB4Xpp4Pu
+    - POSTGRES_PASSWORD=bYMafFswtRTlcQ4J9xbie2ig8eyTMhd1
     - POSTGRES_DB=senddock
     volumes:
     - pgdata:/var/lib/postgresql/data
@@ -38,9 +38,9 @@ services:
       redis:
         condition: service_healthy
     environment:
-    - DATABASE_URL=postgres://senddock:rOOlu8yyEtwQSIumdjPfOOJtB4Xpp4Pu@postgres:5432/senddock?sslmode=disable
+    - DATABASE_URL=postgres://senddock:bYMafFswtRTlcQ4J9xbie2ig8eyTMhd1@postgres:5432/senddock?sslmode=disable
     - REDIS_URL=redis://redis:6379
-    - JWT_SECRET=QaoO52i8NYTCgtY8NOc7ntnte9Ljx8cI5ametjatW5KksTqkbMm14la5NBgcsg0s
+    - JWT_SECRET=JGm1Z40q3gOwXGBTqefwevy9nb2og6SOduaH4HrDoTC0wPb16FObjPh9AEqxPb8f
     - PUBLIC_URL=https://localhost
     - FRONTEND_URL=https://localhost
     - PORT=8080
@@ -84,7 +84,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.8.3"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://senddock.dev
   repo: https://github.com/SendDock/senddock
   docs: https://docs.senddock.dev

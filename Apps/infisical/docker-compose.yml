@@ -10,10 +10,10 @@ services:
         condition: service_started
     environment:
     - NODE_ENV=production
-    - ENCRYPTION_KEY=4a47d5c532ad45851088880e3ce97b13c26d4a907a9d3065e1f970bde2aa933f
-    - AUTH_SECRET=DulJjl5iFPkHghVRQUqRLPlGVnuzWaTPyB4XWMrWGp4=
+    - ENCRYPTION_KEY=a68e5c3ef74836bf673ef87b3401d094d8fcf2ca6d95d1b578a2db91003cde57
+    - AUTH_SECRET=99WCXiWKI241/NQm9H0eYvVIsI3flYN1oGVxtReVrtA=
     - SITE_URL=http://localhost
-    - DB_CONNECTION_URI=postgres://infisical:h88Zzeynzuv1T1UzUrZBSl7DGYHhJuEx@db:5432/infisical
+    - DB_CONNECTION_URI=postgres://infisical:Re1lWho3PUXpAUjsQUtBKcPj8eLgCpwk@db:5432/infisical
     - REDIS_URL=redis://redis:6379
     - SMTP_HOST=
     - SMTP_PORT=587
@@ -34,7 +34,7 @@ services:
     image: postgres:14-alpine
     restart: always
     environment:
-    - POSTGRES_PASSWORD=h88Zzeynzuv1T1UzUrZBSl7DGYHhJuEx
+    - POSTGRES_PASSWORD=Re1lWho3PUXpAUjsQUtBKcPj8eLgCpwk
     - POSTGRES_USER=infisical
     - POSTGRES_DB=infisical
     volumes:
@@ -67,7 +67,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.162.6"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://infisical.com/
   repo: https://github.com/Infisical/infisical
   docs: https://infisical.com/docs/documentation/getting-started/introduction

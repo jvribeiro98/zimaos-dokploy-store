@@ -7,10 +7,10 @@ services:
     environment:
     - SERVICE_URL_PDS_3000
     - PDS_HOSTNAME=localhost
-    - PDS_JWT_SECRET=ce8ab44421162f1fbdebc8449a59f496bfad6c9d5e4d6132409c23d79eeb9cc0
-    - PDS_ADMIN_PASSWORD=RkCUYBUs6qKFuBgVZDskHyGwOx10ejdg
+    - PDS_JWT_SECRET=cd74fd92ad51e15010582429a5fb51eabebcd8e359de68c93974b8d1cb702704
+    - PDS_ADMIN_PASSWORD=CwHJKBsAYMqOOfPSmAHpu251kkkk4vi2
     - PDS_ADMIN_EMAIL=
-    - PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX=f1c4c25b494e0bbb1fb8aff5dfe7bf0ee9929785ccd3aab88a81216335fe9210
+    - PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX=260e3837bfe6bfa9ddee90bd96778aa040c3835d273883cc4621ce072ccf8e64
     - PDS_DATA_DIRECTORY=/pds
     - PDS_BLOBSTORE_DISK_LOCATION=/pds/blocks
     - PDS_BLOB_UPLOAD_LIMIT=104857600
@@ -64,7 +64,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.4.182"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://bsky.social/about
   repo: https://github.com/bluesky-social/pds
   docs: https://github.com/bluesky-social/pds

@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "10.9.7"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://jellyfin.org/
   repo: https://github.com/jellyfin/jellyfin
   docs: https://jellyfin.org/docs/

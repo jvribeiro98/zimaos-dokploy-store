@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://pairdrop.net/
   repo: https://github.com/schlagmichdoch/PairDrop
   docs: https://github.com/schlagmichdoch/PairDrop/blob/master/docs/host-your-own.md

@@ -7,7 +7,7 @@ services:
     volumes:
     - windmill-postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: m2N2d39g0auBlZSOzNTutUmA4s7UM01B
+      POSTGRES_PASSWORD: tSS55tImbytQbLXn1fyycczW0tJqfoDn
       POSTGRES_DB: windmill
     healthcheck:
       test:
@@ -20,7 +20,7 @@ services:
     image: ghcr.io/windmill-labs/windmill:main
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:m2N2d39g0auBlZSOzNTutUmA4s7UM01B@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:tSS55tImbytQbLXn1fyycczW0tJqfoDn@windmill-postgres/windmill?sslmode=disable
     - MODE=server
     - BASE_URL=http://localhost
     depends_on:
@@ -38,7 +38,7 @@ services:
           memory: 2048M
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:m2N2d39g0auBlZSOzNTutUmA4s7UM01B@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:tSS55tImbytQbLXn1fyycczW0tJqfoDn@windmill-postgres/windmill?sslmode=disable
     - MODE=worker
     - WORKER_GROUP=default
     depends_on:
@@ -58,7 +58,7 @@ services:
           memory: 128M
     restart: unless-stopped
     environment:
-    - DATABASE_URL=postgres://postgres:m2N2d39g0auBlZSOzNTutUmA4s7UM01B@windmill-postgres/windmill?sslmode=disable
+    - DATABASE_URL=postgres://postgres:tSS55tImbytQbLXn1fyycczW0tJqfoDn@windmill-postgres/windmill?sslmode=disable
     - MODE=worker
     - WORKER_GROUP=native
     - NUM_WORKERS=8
@@ -113,7 +113,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-26"
+  update_at: "2026-11-27"
   website: https://www.windmill.dev/
   repo: https://github.com/windmill-labs/windmill
   docs: https://docs.windmill.dev/
