@@ -4,7 +4,7 @@ services:
     image: ghcr.io/mailu/nginx:2024.06
     restart: unless-stopped
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -28,7 +28,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: &id001
     - 1.1.1.1
@@ -57,7 +57,7 @@ services:
     image: ghcr.io/mailu/admin:2024.06
     restart: unless-stopped
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -81,7 +81,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: *id001
     volumes:
@@ -93,7 +93,7 @@ services:
     image: ghcr.io/mailu/dovecot:2024.06
     restart: unless-stopped
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -117,7 +117,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: *id001
     volumes:
@@ -128,7 +128,7 @@ services:
     image: ghcr.io/mailu/postfix:2024.06
     restart: unless-stopped
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -152,7 +152,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: *id001
     volumes:
@@ -164,7 +164,7 @@ services:
     restart: unless-stopped
     hostname: antispam
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -188,7 +188,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: *id001
     volumes:
@@ -200,7 +200,7 @@ services:
     image: ghcr.io/mailu/webmail:2024.06
     restart: unless-stopped
     environment:
-    - SECRET_KEY=8arDS17DMOWzWwhW
+    - SECRET_KEY=SQ67mLBKvAQJgBUF
     - DOMAIN=localhost
     - HOSTNAMES=localhost
     - POSTMASTER=admin
@@ -224,7 +224,7 @@ services:
     - REAL_IP_HEADER=X-Forwarded-For
     - INITIAL_ADMIN_ACCOUNT=admin
     - INITIAL_ADMIN_DOMAIN=localhost
-    - INITIAL_ADMIN_PW=HfMBVogDcBaqEx3SYIGyMDkZxvKflX1q
+    - INITIAL_ADMIN_PW=Wk6Cf2cidAPYIzIVhaxgQbGUq0rnDuoo
     - INITIAL_ADMIN_MODE=ifmissing
     dns: *id001
     volumes:
@@ -295,7 +295,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2024.06"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://mailu.io/
   repo: https://github.com/Mailu/Mailu
   docs: https://mailu.io/2024.06/

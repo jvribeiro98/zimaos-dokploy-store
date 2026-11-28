@@ -11,9 +11,9 @@ services:
     - APP_URL=http://localhost
     - DB_HOST=bookstack-db
     - DB_USERNAME=mariadb
-    - DB_PASSWORD=TiiJzglLMdgQaYcq
+    - DB_PASSWORD=kpa7W9yPijUuhbGh
     - DB_DATABASE=bookstack
-    - APP_KEY=maV8Me1h9gOzjGT2LZutdOlxr4fAvguL
+    - APP_KEY=fN57qEq5cClhsJTWAaFttrvBqy0p93L4
     volumes:
     - config:/config
     depends_on:
@@ -26,10 +26,10 @@ services:
     image: mariadb:10.11
     restart: unless-stopped
     environment:
-    - MYSQL_ROOT_PASSWORD=TiiJzglLMdgQaYcq
+    - MYSQL_ROOT_PASSWORD=kpa7W9yPijUuhbGh
     - MYSQL_DATABASE=bookstack
     - MYSQL_USER=mariadb
-    - MYSQL_PASSWORD=TiiJzglLMdgQaYcq
+    - MYSQL_PASSWORD=kpa7W9yPijUuhbGh
     volumes:
     - db_data:/var/lib/mysql
 volumes:
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "24.12.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.bookstackapp.com
   repo: https://github.com/BookStackApp/BookStack
   docs: https://www.bookstackapp.com/docs

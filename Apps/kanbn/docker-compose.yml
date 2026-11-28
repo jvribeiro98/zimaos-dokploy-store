@@ -7,8 +7,8 @@ services:
     - 3000
     environment:
       NEXT_PUBLIC_BASE_URL: https://localhost
-      BETTER_AUTH_SECRET: 4GpB6VcBc1fCOmCLYTmWTACv4nGANISR
-      POSTGRES_URL: postgresql://kan:2yzVfoJ53AtvjjddQrF9sB0nW8bXHyhq@postgres:5432/kan_db
+      BETTER_AUTH_SECRET: T2drfOSMCsiYNw72iHbP7PoyOp8Pfmlm
+      POSTGRES_URL: postgresql://kan:f3uS5AEiCAoMpS3UbztYdlXSyaHVWZAR@postgres:5432/kan_db
       NEXT_PUBLIC_ALLOW_CREDENTIALS: 'true'
     depends_on:
       migrate:
@@ -21,7 +21,7 @@ services:
     image: ghcr.io/kanbn/kan-migrate:0.6.0
     restart: 'no'
     environment:
-      POSTGRES_URL: postgresql://kan:2yzVfoJ53AtvjjddQrF9sB0nW8bXHyhq@postgres:5432/kan_db
+      POSTGRES_URL: postgresql://kan:f3uS5AEiCAoMpS3UbztYdlXSyaHVWZAR@postgres:5432/kan_db
     depends_on:
       postgres:
         condition: service_healthy
@@ -31,7 +31,7 @@ services:
     environment:
       POSTGRES_DB: kan_db
       POSTGRES_USER: kan
-      POSTGRES_PASSWORD: 2yzVfoJ53AtvjjddQrF9sB0nW8bXHyhq
+      POSTGRES_PASSWORD: f3uS5AEiCAoMpS3UbztYdlXSyaHVWZAR
     volumes:
     - kan_postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -63,7 +63,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.6.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://kan.bn/
   repo: https://github.com/kanbn/kan
   docs: https://docs.kan.bn/

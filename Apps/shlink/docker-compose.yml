@@ -3,7 +3,7 @@ services:
   shlink:
     image: shlinkio/shlink:stable
     environment:
-    - INITIAL_API_KEY=W88yleRxIUMjv09thRhSKCsPouzWNv
+    - INITIAL_API_KEY=Qm96yVjYPzu1wsaDt3xSonvMzTmB7S
     - DEFAULT_DOMAIN=localhost
     - IS_HTTPS_ENABLED=false
     volumes:
@@ -21,7 +21,7 @@ services:
   shlink-web:
     image: shlinkio/shlink-web-client
     environment:
-    - SHLINK_SERVER_API_KEY=W88yleRxIUMjv09thRhSKCsPouzWNv
+    - SHLINK_SERVER_API_KEY=Qm96yVjYPzu1wsaDt3xSonvMzTmB7S
     - SHLINK_SERVER_URL=http://localhost
     healthcheck:
       test:
@@ -59,7 +59,7 @@ x-casaos:
   - amd64
   - arm64
   version: "stable"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://shlink.io
   repo: https://github.com/shlinkio/shlink
   docs: https://shlink.io/documentation

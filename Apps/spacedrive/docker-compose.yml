@@ -5,7 +5,7 @@ services:
     expose:
     - 8080
     environment:
-    - SD_AUTH=admin:GaT1WP6lGnNpM7IA8MBJwGst7UgJf73p
+    - SD_AUTH=admin:Nzw7QL9cCvNymoEJJI0jrXQQt2TAmDAI
     volumes:
     - /var/spacedrive:/var/spacedrive
     restart: unless-stopped
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://spacedrive.com/
   repo: https://github.com/spacedriveapp/spacedrive
   docs: https://www.spacedrive.com/docs/product/getting-started/introduction

@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     environment:
       _JAVA_OPTIONS: -Xmx6G
-      LAVALINK_SERVER_PASSWORD: vwuEUpN7ITnGdn0ZdmS47sjY2VxUoVaU
+      LAVALINK_SERVER_PASSWORD: r0pUnYN3ZV7xgEuN82lHYRHK4bS4lMvQ
       SERVER_PORT: '2333'
     volumes:
     - /DATA/AppData/$AppID/application.yml:/opt/Lavalink/application.yml:rw
@@ -57,7 +57,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.1.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://lavalink.dev/
   repo: https://github.com/lavalink-devs/Lavalink
   docs: https://lavalink.dev/getting-started/index.html

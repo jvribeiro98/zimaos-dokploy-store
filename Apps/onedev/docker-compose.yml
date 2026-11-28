@@ -32,7 +32,7 @@ x-casaos:
   - amd64
   - arm64
   version: "11.6.6"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://onedev.io/
   repo: https://github.com/theonedev/onedev/
   docs: https://docs.onedev.io/

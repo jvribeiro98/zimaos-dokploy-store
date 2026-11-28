@@ -220,10 +220,10 @@ services:
     - sites:/home/frappe/frappe-bench/sites
     environment:
       SITE_NAME: localhost
-      ADMIN_PASSWORD: 2c19aRTBg0B6AziQg8Uouaz2sBvR3jUS
+      ADMIN_PASSWORD: Phkd797GGBtuXbpPoZPLg1X1Dl0TlPps
       DB_HOST: db
       DB_PORT: ${DB_PORT:-3306}
-      DB_ROOT_PASSWORD: XcCsvD1ToZzxQvN4jmoG8ba2biY8QfUZ
+      DB_ROOT_PASSWORD: pRNfZEKAn4Z7ysDk6ropw6l2bwJ5Ntod
       INSTALL_APP_ARGS: --install-app erpnext
     restart: unless-stopped
   migration:
@@ -263,8 +263,8 @@ services:
     - --skip-character-set-client-handshake
     - --skip-innodb-read-only-compressed
     environment:
-    - MYSQL_ROOT_PASSWORD=XcCsvD1ToZzxQvN4jmoG8ba2biY8QfUZ
-    - MARIADB_ROOT_PASSWORD=XcCsvD1ToZzxQvN4jmoG8ba2biY8QfUZ
+    - MYSQL_ROOT_PASSWORD=pRNfZEKAn4Z7ysDk6ropw6l2bwJ5Ntod
+    - MARIADB_ROOT_PASSWORD=pRNfZEKAn4Z7ysDk6ropw6l2bwJ5Ntod
     volumes:
     - db-data:/var/lib/mysql
     restart: unless-stopped
@@ -351,7 +351,7 @@ x-casaos:
   - amd64
   - arm64
   version: "ersion-15"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://erpnext.com
   repo: https://github.com/frappe/erpnext
   docs: https://docs.frappe.io/erpnext

@@ -3,7 +3,7 @@ services:
   browserless:
     image: ghcr.io/browserless/chromium:latest
     environment:
-      TOKEN: ONFzdiUEZMSHyaoc
+      TOKEN: mtEbeNB1kOIY3Xq1
     expose:
     - 3000
     healthcheck:
@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.23.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.browserless.io/
   repo: https://github.com/browserless/browserless
   docs: https://docs.browserless.io/

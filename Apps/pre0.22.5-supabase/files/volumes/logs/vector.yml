@@ -6,7 +6,7 @@ sources:
   docker_host:
     type: docker_logs
     exclude_containers:
-      - supabase-8449308b-vector
+      - supabase-952b204c-vector
 
 transforms:
   project_logs:
@@ -16,7 +16,7 @@ transforms:
     source: |-
       .project = "default"
       .event_message = del(.message)
-      .appname = replace!(del(.container_name), "supabase-8449308b", "supabase")
+      .appname = replace!(del(.container_name), "supabase-952b204c", "supabase")
       del(.container_created_at)
       del(.container_id)
       del(.source_type)

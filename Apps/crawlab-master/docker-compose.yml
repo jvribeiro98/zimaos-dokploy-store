@@ -9,7 +9,7 @@ services:
     - CRAWLAB_MONGO_PORT=27017
     - CRAWLAB_MONGO_DB=crawlab
     - CRAWLAB_MONGO_USERNAME=crawlab
-    - CRAWLAB_MONGO_PASSWORD=UUWumjIXzsBBTRj2itHEuR6v
+    - CRAWLAB_MONGO_PASSWORD=toImSlkeD9zhLrEWtUEmGrTr
     - CRAWLAB_MONGO_AUTHSOURCE=admin
     volumes:
     - crawlab-master-data:/root/.crawlab
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     environment:
     - MONGO_INITDB_ROOT_USERNAME=crawlab
-    - MONGO_INITDB_ROOT_PASSWORD=UUWumjIXzsBBTRj2itHEuR6v
+    - MONGO_INITDB_ROOT_PASSWORD=toImSlkeD9zhLrEWtUEmGrTr
     volumes:
     - mongo-data:/data/db
 volumes:
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://crawlab.cn
   repo: https://github.com/crawlab-team/crawlab
   docs: https://docs.crawlab.cn

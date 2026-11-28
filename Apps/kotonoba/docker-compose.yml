@@ -7,7 +7,7 @@ services:
       NODE_ENV: production
       DB_PATH: /app/data/kotonoba.db
       UPLOAD_DIR: /app/data/uploads
-      JWT_SECRET: tH2NLcpy556UdCh5FGKPjY4ZuPdvXwx4
+      JWT_SECRET: VmfWnSL2W15ftuhXN18jd7cK8nHeLhd6
       SITE_URL: https://localhost
       ADMIN_DOMAIN: localhost
     volumes:
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.19"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/trixtylab/kotonoba
   repo: https://github.com/trixtylab/kotonoba
   docs: https://github.com/TrixtyLab/kotonoba/tree/master/docs

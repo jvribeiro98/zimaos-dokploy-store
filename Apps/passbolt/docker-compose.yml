@@ -7,14 +7,14 @@ services:
       DATASOURCES_DEFAULT_HOST: mariadb
       DATASOURCES_DEFAULT_PORT: '3306'
       DATASOURCES_DEFAULT_USERNAME: passbolt
-      DATASOURCES_DEFAULT_PASSWORD: CfMyDUrAlZDXlz6m96F2PixyUWTRr3rv
+      DATASOURCES_DEFAULT_PASSWORD: 1atYZrVMhqG8gvZ8vMftrrsgaW9QAmWV
       DATASOURCES_DEFAULT_DATABASE: passbolt
       PASSBOLT_PLUGINS_JWT_AUTHENTICATION_ENABLED: 'true'
       EMAIL_DEFAULT_FROM: passbolt@localhost
       EMAIL_TRANSPORT_DEFAULT_HOST: smtp.example.com
       EMAIL_TRANSPORT_DEFAULT_PORT: '587'
       EMAIL_TRANSPORT_DEFAULT_USERNAME: noreply@example.com
-      EMAIL_TRANSPORT_DEFAULT_PASSWORD: CepixxEW3d3DnKCL
+      EMAIL_TRANSPORT_DEFAULT_PASSWORD: LUkXkbQ71vpha1wA
       EMAIL_TRANSPORT_DEFAULT_TLS: 'true'
     volumes:
     - gpg_volume:/etc/passbolt/gpg
@@ -46,10 +46,10 @@ services:
   mariadb:
     image: mariadb:11
     environment:
-      MARIADB_ROOT_PASSWORD: 9Amz1C2EZ8iDm2N65zZNlws8gHigD9wl
+      MARIADB_ROOT_PASSWORD: 4WxRCiYH9rzQF0ksH2DZon7fCLOuphL9
       MARIADB_DATABASE: passbolt
       MARIADB_USER: passbolt
-      MARIADB_PASSWORD: CfMyDUrAlZDXlz6m96F2PixyUWTRr3rv
+      MARIADB_PASSWORD: 1atYZrVMhqG8gvZ8vMftrrsgaW9QAmWV
     volumes:
     - passbolt_mariadb_data:/var/lib/mysql
     healthcheck:
@@ -89,7 +89,7 @@ x-casaos:
   - amd64
   - arm64
   version: "latest-ce"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.passbolt.com/
   repo: https://github.com/passbolt/passbolt_api
   docs: https://www.passbolt.com/docs/

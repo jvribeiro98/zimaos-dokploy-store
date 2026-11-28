@@ -9,8 +9,8 @@ services:
     environment:
       MYSQL_DATABASE: panel
       MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: yzONNz12cVUlRKKoPSnjRHnQoHxLSHXH
-      MYSQL_ROOT_PASSWORD: hNtGN9Q83IJN7QrTTe8lEp0U7DKgc4gT
+      MYSQL_PASSWORD: T7ileVf41z3IahVQBkudUHmb3MxPERMz
+      MYSQL_ROOT_PASSWORD: 8D2WfntnKmxGHSqmJr8Nq54F0rYbwha5
   cache:
     image: redis:alpine
     restart: always
@@ -33,10 +33,10 @@ services:
       QUEUE_DRIVER: redis
       REDIS_HOST: cache
       DB_HOST: database
-      DB_PASSWORD: yzONNz12cVUlRKKoPSnjRHnQoHxLSHXH
+      DB_PASSWORD: T7ileVf41z3IahVQBkudUHmb3MxPERMz
       DB_PORT: '3306'
-      MYSQL_PASSWORD: yzONNz12cVUlRKKoPSnjRHnQoHxLSHXH
-      MYSQL_ROOT_PASSWORD: hNtGN9Q83IJN7QrTTe8lEp0U7DKgc4gT
+      MYSQL_PASSWORD: T7ileVf41z3IahVQBkudUHmb3MxPERMz
+      MYSQL_ROOT_PASSWORD: 8D2WfntnKmxGHSqmJr8Nq54F0rYbwha5
       DB_CONNECTION: mysql
     ports:
     - target: 80
@@ -68,7 +68,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://pterodactyl.io
   repo: https://github.com/pterodactyl/panel
   docs: https://pterodactyl.io/project/introduction.html

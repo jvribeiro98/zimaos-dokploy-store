@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://getqui.com
   repo: https://github.com/autobrr/qui
   docs: https://getqui.com

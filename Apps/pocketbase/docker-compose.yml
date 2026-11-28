@@ -9,7 +9,7 @@ services:
     - pocketbase-data:/pocketbase
     environment:
     - POCKETBASE_ADMIN_EMAIL=admin@example.com
-    - POCKETBASE_ADMIN_PASSWORD=mwiTRAsFuvWpAVvb84bfwrJtu1SuATPR
+    - POCKETBASE_ADMIN_PASSWORD=FlasyCF9XdRJiGnXPVKlSTA3FCXlZdV1
     - POCKETBASE_ADMIN_UPSERT=true
     - POCKETBASE_PORT_NUMBER=8090
     healthcheck:
@@ -47,7 +47,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://pocketbase.io/
   repo: https://github.com/pocketbase/pocketbase
   docs: https://pocketbase.io/docs/

@@ -19,14 +19,14 @@ services:
       PORT: '3000'
       SERVER_URL: http://localhost
       FRONT_BASE_URL: http://localhost
-      PG_DATABASE_URL: postgres://twenty:J5sIQweOrk35dSGswQXIDYEtxrF8QjXE@twenty-postgres:5432/twenty
+      PG_DATABASE_URL: postgres://twenty:DGsy8m5sxgDVzaa3ZUxlQKXsghh1Ptf6@twenty-postgres:5432/twenty
       ENABLE_DB_MIGRATIONS: 'true'
       REDIS_URL: redis://twenty-redis:6379
       IS_SIGN_UP_DISABLED: 'false'
       SIGN_IN_PREFILLED: 'false'
       IS_CONFIG_VARIABLES_IN_DB_ENABLED: 'true'
       STORAGE_TYPE: local
-      APP_SECRET: 6tuKTyBLggrtx3NMaiZfVR/eB5tVvmluw8lSY58QXHI=
+      APP_SECRET: 3Juw2M5EeCzve4MOcCnP+Y1OOr42ntfvnYaAO7y16E0=
     depends_on:
       twenty-change-vol-ownership:
         condition: service_completed_successfully
@@ -53,13 +53,13 @@ services:
     - yarn
     - worker:prod
     environment:
-      PG_DATABASE_URL: postgres://twenty:J5sIQweOrk35dSGswQXIDYEtxrF8QjXE@twenty-postgres:5432/twenty
+      PG_DATABASE_URL: postgres://twenty:DGsy8m5sxgDVzaa3ZUxlQKXsghh1Ptf6@twenty-postgres:5432/twenty
       SERVER_URL: http://localhost
       FRONT_BASE_URL: http://localhost
       REDIS_URL: redis://twenty-redis:6379
       ENABLE_DB_MIGRATIONS: 'false'
       STORAGE_TYPE: local
-      APP_SECRET: 6tuKTyBLggrtx3NMaiZfVR/eB5tVvmluw8lSY58QXHI=
+      APP_SECRET: 3Juw2M5EeCzve4MOcCnP+Y1OOr42ntfvnYaAO7y16E0=
     depends_on:
       twenty-postgres:
         condition: service_healthy
@@ -72,7 +72,7 @@ services:
     - twenty-postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: twenty
-      POSTGRES_PASSWORD: J5sIQweOrk35dSGswQXIDYEtxrF8QjXE
+      POSTGRES_PASSWORD: DGsy8m5sxgDVzaa3ZUxlQKXsghh1Ptf6
       POSTGRES_DB: twenty
     healthcheck:
       test:
@@ -121,7 +121,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://twenty.com
   repo: https://github.com/twentyhq/twenty
   docs: https://docs.twenty.com

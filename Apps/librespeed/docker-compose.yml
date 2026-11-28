@@ -11,7 +11,7 @@ services:
     - PUID=1000
     - PGID=1000
     - TZ=UTC
-    - PASSWORD=scYTKG7ZnnJiGxxxHixG6ZhrAkm8DrNr
+    - PASSWORD=xwAscTKWLOFPszY4gSdnRVOQgGdqeSaE
     - CUSTOM_RESULTS=false
     - DB_TYPE=sqlite
     ports:
@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://librespeed.org
   repo: https://github.com/librespeed/speedtest
   docs: https://docs.linuxserver.io/images/docker-librespeed/

@@ -80,7 +80,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.0.1-alpha.107"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://didacta.io
   repo: https://github.com/va360labs/didacta-io
   docs: https://docs.didacta.io

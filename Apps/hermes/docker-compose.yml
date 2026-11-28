@@ -10,11 +10,11 @@ services:
     environment:
     - HERMES_DASHBOARD=1
     - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
-    - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=TBQcT1LF/TdDFy8OzWKAT9D+OUvOtntJdvkpViffOHx7tHkAwe92rybbIx8hNhPVpRj9wkHs2CHBacBqaLB9dvmQU7N1pPwEsZbyH1/Zyfad4YMT1NCT94j25Lwn5wDQ
-    - HERMES_DASHBOARD_BASIC_AUTH_SECRET=CJ8eTdEXWocB4MzgRpQ5JbUDXP1XnDlhzw4PYJzyBDI=
+    - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=FresN5d86hGiEaDW4fkMvKljL64CHOWFVM59bYaMGoe1A2r5FOKBLXw5KtT/fKfeyEVBEkUjzacedDZHjAWoK8v5CdvCtuRihWmey1GJW/kEfYPSZxfx/fYwtDE2cRkl
+    - HERMES_DASHBOARD_BASIC_AUTH_SECRET=6uKSFFjoBnSnlmwtHEzpu2A1QQ/+1TLtqezXTS+ULmg=
     - API_SERVER_ENABLED=true
     - API_SERVER_HOST=0.0.0.0
-    - API_SERVER_KEY=CQQKVRqju6KepAzNFppaDg92UyD3ffGR
+    - API_SERVER_KEY=gtXTHgkWfkPbrnIjl0Bt8yzl0opfx1U5
     volumes:
     - hermes_data:/opt/data
     deploy:
@@ -49,7 +49,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.6.19"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://hermes-agent.nousresearch.com/
   repo: https://github.com/NousResearch/hermes-agent
   docs: https://hermes-agent.nousresearch.com/docs/user-guide/docker

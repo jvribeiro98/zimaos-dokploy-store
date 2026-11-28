@@ -4,8 +4,8 @@ services:
     image: versity/versitygw:v1.8.0
     restart: unless-stopped
     environment:
-    - ROOT_ACCESS_KEY=fc157d70654b3a0102cb0f2bde8af77a
-    - ROOT_SECRET_KEY=mhwz6xNfblG7pjqxTfvfDF1AJktKLCmG
+    - ROOT_ACCESS_KEY=b11f2ad49262894db450d7e3d64666f5
+    - ROOT_SECRET_KEY=g9GhIGMB7Dl2GoSfptwhILt33ZlG4qyC
     - VGW_BACKEND=posix
     - VGW_PORT=:7070
     - VGW_BACKEND_ARGS=/data/s3
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.versity.com/
   repo: https://github.com/versity/versitygw
   docs: https://github.com/versity/versitygw/wiki

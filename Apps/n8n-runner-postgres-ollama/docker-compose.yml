@@ -11,10 +11,10 @@ services:
     - DB_TYPE=postgresdb
     - DB_POSTGRESDB_HOST=postgres
     - DB_POSTGRESDB_USER=admin
-    - DB_POSTGRESDB_PASSWORD=dagZbezcPqHqeobOr5bdqiSe
+    - DB_POSTGRESDB_PASSWORD=2Isvz7Q0VWSOjOVH1sG1BOw4
     - N8N_DIAGNOSTICS_ENABLED=false
     - N8N_PERSONALIZATION_ENABLED=true
-    - N8N_ENCRYPTION_KEY=ftKflCtnv3u6/K5vCRXu6Emt+FRXSevz7GDpmCBQwd9Hjy6IeJJygbnQIE8Jmc9L8J9VWGCffk3z0jT/wGTz9w==
+    - N8N_ENCRYPTION_KEY=f2Lr7v6ic0wRgC/BIqpd+tOrKytdVv1IGnsLGnoGxcebJy11NvIRau0tMgcDqwxezIKBF0P2RaUndb5xxpHPAA==
     - N8N_USER_MANAGEMENT_JWT_SECRET
     - N8N_SECURE_COOKIE=true
     - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
@@ -29,7 +29,7 @@ services:
     - N8N_RUNNERS_ENABLED=true
     - N8N_RUNNERS_MODE=external
     - N8N_RUNNERS_BROKER_LISTEN_ADDRESS=0.0.0.0
-    - N8N_RUNNERS_AUTH_TOKEN=vhzy2+L2tBknDe+0MTKWa9GUuKysfX4qZv+PwOu2ntx6GDEGVfNs8AX30QUgF1jKWY5sRtjoA3LkWAfhqwSRZg==
+    - N8N_RUNNERS_AUTH_TOKEN=gql0YemZtaScjXmZn3OJBFbKs9DZxt3zQkzIlqnrMksAxOjsH7Cyqo/QTYiKaMDn8i/7re63bOi8bS/nAYDXLA==
     - N8N_NATIVE_PYTHON_RUNNER=true
     - N8N_RUNNERS_MAX_CONCURRENCY=50
     - EXECUTIONS_DATA_PRUNE=true
@@ -61,8 +61,8 @@ services:
     - DB_TYPE=postgresdb
     - DB_POSTGRESDB_HOST=postgres
     - DB_POSTGRESDB_USER=admin
-    - DB_POSTGRESDB_PASSWORD=dagZbezcPqHqeobOr5bdqiSe
-    - N8N_ENCRYPTION_KEY=ftKflCtnv3u6/K5vCRXu6Emt+FRXSevz7GDpmCBQwd9Hjy6IeJJygbnQIE8Jmc9L8J9VWGCffk3z0jT/wGTz9w==
+    - DB_POSTGRESDB_PASSWORD=2Isvz7Q0VWSOjOVH1sG1BOw4
+    - N8N_ENCRYPTION_KEY=f2Lr7v6ic0wRgC/BIqpd+tOrKytdVv1IGnsLGnoGxcebJy11NvIRau0tMgcDqwxezIKBF0P2RaUndb5xxpHPAA==
     - N8N_SECURE_COOKIE=true
     - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
     - N8N_BLOCK_ENV_ACCESS_IN_NODE=true
@@ -79,8 +79,8 @@ services:
     restart: always
     environment:
     - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
-    - N8N_RUNNERS_AUTH_TOKEN=vhzy2+L2tBknDe+0MTKWa9GUuKysfX4qZv+PwOu2ntx6GDEGVfNs8AX30QUgF1jKWY5sRtjoA3LkWAfhqwSRZg==
-    - N8N_ENCRYPTION_KEY=ftKflCtnv3u6/K5vCRXu6Emt+FRXSevz7GDpmCBQwd9Hjy6IeJJygbnQIE8Jmc9L8J9VWGCffk3z0jT/wGTz9w==
+    - N8N_RUNNERS_AUTH_TOKEN=gql0YemZtaScjXmZn3OJBFbKs9DZxt3zQkzIlqnrMksAxOjsH7Cyqo/QTYiKaMDn8i/7re63bOi8bS/nAYDXLA==
+    - N8N_ENCRYPTION_KEY=f2Lr7v6ic0wRgC/BIqpd+tOrKytdVv1IGnsLGnoGxcebJy11NvIRau0tMgcDqwxezIKBF0P2RaUndb5xxpHPAA==
     - GENERIC_TIMEZONE=Europe/Berlin
     - N8N_RUNNERS_MAX_CONCURRENCY=50
     depends_on:
@@ -121,7 +121,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=dagZbezcPqHqeobOr5bdqiSe
+    - POSTGRES_PASSWORD=2Isvz7Q0VWSOjOVH1sG1BOw4
     - POSTGRES_DB=n8n
     volumes:
     - postgres_storage:/var/lib/postgresql/data
@@ -158,7 +158,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://n8n.io/
   repo: https://github.com/n8n-io/n8n
   docs: https://docs.n8n.io/

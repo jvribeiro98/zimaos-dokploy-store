@@ -4,7 +4,7 @@ services:
     image: ghcr.io/eduardolat/kokoro-web:latest
     restart: unless-stopped
     environment:
-    - KW_SECRET_API_KEY=1JgyNfwXhgbMBsNwse0ObctZChKDblOP
+    - KW_SECRET_API_KEY=5kMnHt3lj1tb8wFs7Sl0Vajw7RJKoB9n
     - KW_PUBLIC_NO_TRACK=false
     volumes:
     - kokoro-cache:/kokoro/cache
@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/eduardolat/kokoro-web
   repo: https://github.com/eduardolat/kokoro-web
   docs: https://github.com/eduardolat/kokoro-web#readme

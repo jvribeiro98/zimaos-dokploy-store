@@ -6,13 +6,13 @@ services:
     environment:
     - NODE_ENV=production
     - PORT=3000
-    - ENCRYPTION_KEY=8h2dTHrLeOYjaHQdrwSuS0fs2sjX4gVOPdJjASLBt7Y4syWf08ptdFTLnA6UKiqh
+    - ENCRYPTION_KEY=I56MWzrMu2lhJc9iNHGSAwPxkrqDcuxYv6CVp0YNwZbl72UcG32KBw9b5fH2essi
     - TZ=UTC
     - LOG_LEVEL=info
     - APP_URL=http://localhost
     - ALLOWED_ORIGINS=http://localhost
     - ADMIN_EMAIL=admin@example.com
-    - ADMIN_PASSWORD=DKO9zrcfCwi15mfu
+    - ADMIN_PASSWORD=lxIX458cNDqvYc2c
     volumes:
     - trek-data:/app/data
     - trek-uploads:/app/uploads
@@ -54,7 +54,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.3.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/mauriceboe/TREK
   repo: https://github.com/mauriceboe/TREK
   docs: https://github.com/mauriceboe/TREK/wiki

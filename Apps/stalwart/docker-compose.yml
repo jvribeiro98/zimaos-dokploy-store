@@ -45,7 +45,7 @@ x-casaos:
   - amd64
   - arm64
   version: "latest-alpine"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://stalw.art/
   repo: https://github.com/stalwartlabs/mail-server
   docs: https://stalw.art/docs/

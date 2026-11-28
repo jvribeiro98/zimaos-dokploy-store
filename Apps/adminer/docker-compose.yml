@@ -30,7 +30,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.8.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.adminer.org/
   repo: https://github.com/vrana/adminer
   docs: https://www.adminer.org/en/plugins/

@@ -14,15 +14,15 @@ services:
       URL: https://localhost
       FORCE_HTTPS: 'false'
       PROXY_HEADERS_TRUSTED: 'true'
-      SECRET_KEY: 2dbd9e9c192f9e503e7bee9a63e725137d10c0814d56fa4da65a5ebad987a9a1610aff9e1b64433315b02cb26dcaeaaaeaf3bddaf2ae195ded7ef485511bc322
-      UTILS_SECRET: 78jg2m5G1GTWrhXKlwkn2O/+5BFmeyy0aNvYEffKDpE=
-      DATABASE_URL: postgres://outline:MpOQgTiDlocVjAoxMzyIdI9jpT51ugeS@postgres:5432/outline
+      SECRET_KEY: ad8c78f1305b4b240a76fa77737126d41a92d98d5c3a9235fc02242c6fd18802651ce08bdd35dbdd05dfb3fba153716d404a8b4307584912ace11e7ebcca3134
+      UTILS_SECRET: bauIauv4VTlkEsBxZC1FlL28/P1d8hHv/RVVFzFMLBg=
+      DATABASE_URL: postgres://outline:Uit1YDSm6Bel6LtaSFGK0TgoeFM7zATg@postgres:5432/outline
       PGSSLMODE: disable
       REDIS_URL: redis://redis:6379
       FILE_STORAGE: local
       FILE_STORAGE_LOCAL_ROOT_DIR: /var/lib/outline/data
       OIDC_CLIENT_ID: outline
-      OIDC_CLIENT_SECRET: sg0PjY7jF2cObcdvtqP8Ms72LiOFpYNH5nx62jBkhzY=
+      OIDC_CLIENT_SECRET: DqGxgm12dtU4Tg7muJkVhHC402LxQVEa1qla8AljQU0=
       OIDC_AUTH_URI: https://dex-localhost/auth
       OIDC_TOKEN_URI: https://dex-localhost/token
       OIDC_USERINFO_URI: https://dex-localhost/userinfo
@@ -59,7 +59,7 @@ services:
     environment:
       POSTGRES_DB: outline
       POSTGRES_USER: outline
-      POSTGRES_PASSWORD: MpOQgTiDlocVjAoxMzyIdI9jpT51ugeS
+      POSTGRES_PASSWORD: Uit1YDSm6Bel6LtaSFGK0TgoeFM7zATg
     volumes:
     - postgres_data-test-outline-khufpx:/var/lib/postgresql/data
   redis:
@@ -93,7 +93,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.82.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://getoutline.com/
   repo: https://github.com/outline/outline
   docs: https://docs.getoutline.com/s/guide

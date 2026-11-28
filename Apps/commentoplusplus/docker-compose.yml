@@ -6,7 +6,7 @@ services:
     - '8080'
     environment:
     - COMMENTO_ORIGIN=http://localhost
-    - COMMENTO_POSTGRES=postgres://postgres:Is4u83EiwjvtZ4WA@postgres:5432/postgres?sslmode=disable
+    - COMMENTO_POSTGRES=postgres://postgres:UgM1A3Hm2Gmtdbop@postgres:5432/postgres?sslmode=disable
     - COMMENTO_ENABLE_WILDCARDS=true
     depends_on:
     - postgres
@@ -18,7 +18,7 @@ services:
   postgres:
     image: postgres:11
     environment:
-    - POSTGRES_PASSWORD=Is4u83EiwjvtZ4WA
+    - POSTGRES_PASSWORD=UgM1A3Hm2Gmtdbop
     - POSTGRES_DB=postgres
     - POSTGRES_USER=postgres
     volumes:
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.7"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://commento.io/
   repo: https://github.com/souramoo/commentoplusplus
   docs: https://commento.io/

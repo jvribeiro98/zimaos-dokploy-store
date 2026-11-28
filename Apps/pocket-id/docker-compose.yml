@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       APP_URL: https://localhost
-      ENCRYPTION_KEY: D0FqYhPqo97CYilIAbbsyWHm60HMd2BYV1uRoqnW81Y=
+      ENCRYPTION_KEY: 4D1ptLjx3L8ZrN+zFqBwdoT8z88PeCCQD2lI9lxMdhQ=
       TRUST_PROXY: 'true'
     volumes:
     - pocket-id-data:/app/data
@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.14.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://pocket-id.org/
   repo: https://github.com/pocket-id/pocket-id
   docs: https://pocket-id.org/docs/

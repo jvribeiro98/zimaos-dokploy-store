@@ -8,9 +8,9 @@ services:
     - PORT=8080
     - RUST_LOG=info
     - SSL_PROXY=true
-    - DATABASE_URL=postgres://rustrak:TzpFfJyqIgAFb2Rg5fw9NboLmOmIu4ql@postgres:5432/rustrak
-    - SESSION_SECRET_KEY=Kw7s1S1NLyYBwlOOThzKIAkQUyGcJ1lx3LxmmyyUKQIzp1qZYuFsu50rgQsGIOFz
-    - CREATE_SUPERUSER=admin@example.com:h1jHG3kK3pLqBsqy
+    - DATABASE_URL=postgres://rustrak:vdonFWeev53jWxzHJC0Be7YmOxvAtWj2@postgres:5432/rustrak
+    - SESSION_SECRET_KEY=K1NjYCPqjNDA59aPlE4JR5tLLl7atjMjzO8jZtodWkIK4s5oOpmMpj8UtLClhalr
+    - CREATE_SUPERUSER=admin@example.com:QAYIYVNOnIHVY2OP
     expose:
     - 8080
     depends_on:
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=rustrak
-    - POSTGRES_PASSWORD=TzpFfJyqIgAFb2Rg5fw9NboLmOmIu4ql
+    - POSTGRES_PASSWORD=vdonFWeev53jWxzHJC0Be7YmOxvAtWj2
     - POSTGRES_DB=rustrak
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -70,7 +70,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://rustrak.github.io/rustrak/
   repo: https://github.com/rustrak/rustrak
   docs: https://rustrak.github.io/rustrak/getting-started/overview

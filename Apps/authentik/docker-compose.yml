@@ -14,7 +14,7 @@ services:
     volumes:
     - database:/var/lib/postgresql
     environment:
-      POSTGRES_PASSWORD: b865uAE3PAP9wgwRZDn6P2se7wjSTGP7
+      POSTGRES_PASSWORD: wixIzxrVKKzgDmElYRVaWwFaG3u32OxM
       POSTGRES_USER: authentik
       POSTGRES_DB: authentik
     expose:
@@ -25,12 +25,12 @@ services:
     command: server
     shm_size: 512mb
     environment:
-      AUTHENTIK_SECRET_KEY: 9mlQxat7BCmJn8MzBC4iHEEFPyxeX2hnOBhgo4xZl4NFoGUoCmVi8nDzusHK9PR2
+      AUTHENTIK_SECRET_KEY: xJjhXKZj2jYK4SUiCAgjFjoqu4WkdNJYgIvw68wQ3xYPGblRwbMGT0ovdiBBLv3X
       AUTHENTIK_WEB__BASE_URL: https://localhost
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: b865uAE3PAP9wgwRZDn6P2se7wjSTGP7
+      AUTHENTIK_POSTGRESQL__PASSWORD: wixIzxrVKKzgDmElYRVaWwFaG3u32OxM
     volumes:
     - data:/data
     - custom-templates:/templates
@@ -50,12 +50,12 @@ services:
     command: worker
     shm_size: 512mb
     environment:
-      AUTHENTIK_SECRET_KEY: 9mlQxat7BCmJn8MzBC4iHEEFPyxeX2hnOBhgo4xZl4NFoGUoCmVi8nDzusHK9PR2
+      AUTHENTIK_SECRET_KEY: xJjhXKZj2jYK4SUiCAgjFjoqu4WkdNJYgIvw68wQ3xYPGblRwbMGT0ovdiBBLv3X
       AUTHENTIK_WEB__BASE_URL: https://localhost
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: b865uAE3PAP9wgwRZDn6P2se7wjSTGP7
+      AUTHENTIK_POSTGRESQL__PASSWORD: wixIzxrVKKzgDmElYRVaWwFaG3u32OxM
     user: root
     volumes:
     - data:/data
@@ -97,7 +97,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.8.2"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://goauthentik.io/
   repo: https://github.com/goauthentik/authentik
   docs: https://goauthentik.io/docs/

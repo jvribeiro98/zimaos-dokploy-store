@@ -21,8 +21,8 @@ services:
     - COLONEL=admin@example.com
     - HOST=localhost
     - RACK_ENV=production
-    - REDIS_URL=redis://:PL4b3BwdsEGlSyy4JGw4q1WfeUzaUm@onetimesecret-redis:6379/0
-    - SECRET=fdWxrhc3XXAxDvoWi4zhjtxv3zpD3S
+    - REDIS_URL=redis://:hmU7N1YdUKp62QuHOP9FH1qhafUAu2@onetimesecret-redis:6379/0
+    - SECRET=gtA2tTJNFQ8fN09T8djjH0uzUYhLr7
     - SSL=true
     depends_on:
     - onetimesecret-redis
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://onetimesecret.com
   repo: https://github.com/onetimesecret/onetimesecret
   docs: https://docs.onetimesecret.com

@@ -11,7 +11,7 @@ services:
     - TZ=UTC
     - CSRF_TRUSTED_ORIGINS=https://localhost
     - TIME_ZONE=America/New_York
-    - SECRET_KEY=fiBAFOAiSdU3Kwa1xopv4PjopatEAvKz
+    - SECRET_KEY=8IGN9pgd1ubaOtcJm1pdL2UYOvz3qogy
     volumes:
     - config:/config
     ports:
@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://babybuddy.app
   repo: https://github.com/babybuddy/babybuddy
   docs: https://docs.baby-buddy.net/

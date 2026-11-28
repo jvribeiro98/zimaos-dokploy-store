@@ -4,7 +4,7 @@ services:
     image: rabithua/rote-backend:${IMAGE_TAG:-latest}
     pull_policy: always
     environment:
-      POSTGRESQL_URL: postgresql://rote:oguWNHraMEExrmzMFzDsdRi3YRKxH9MD@rote-postgres:5432/rote
+      POSTGRESQL_URL: postgresql://rote:6jz6MhBVXXW0WUiMjMZqpKUJfiDVy9af@rote-postgres:5432/rote
     depends_on:
       rote-postgres:
         condition: service_healthy
@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: rote
-      POSTGRES_PASSWORD: oguWNHraMEExrmzMFzDsdRi3YRKxH9MD
+      POSTGRES_PASSWORD: 6jz6MhBVXXW0WUiMjMZqpKUJfiDVy9af
       POSTGRES_DB: rote
     volumes:
     - rote-postgres-data:/var/lib/postgresql/data
@@ -65,7 +65,7 @@ x-casaos:
   - amd64
   - arm64
   version: "-latest}"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://rote.ink
   repo: https://github.com/Rabithua/Rote
   docs: https://github.com/Rabithua/Rote/tree/main/doc/userguide

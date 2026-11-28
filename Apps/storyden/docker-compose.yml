@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.storyden.org/
   repo: https://github.com/Southclaws/storyden
   docs: https://www.storyden.org/docs/introduction

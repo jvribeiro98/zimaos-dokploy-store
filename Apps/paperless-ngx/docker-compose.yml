@@ -15,8 +15,8 @@ services:
       PAPERLESS_DBHOST: paperless-ngx-db
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: paperless
-      PAPERLESS_DBPASS: IjQ5U3KwRrdLG5q3ucNcYXV2jsiphS2X
-      PAPERLESS_SECRET_KEY: j0eExCbU51pND8BwjwxzzcbKzOgF7SyZtBoFUJOVrxJmBjwHQ9uTrKaq44cVjoq9
+      PAPERLESS_DBPASS: XjwrCi11OY7AjCK1yqnNXjtcOoWjfuNN
+      PAPERLESS_SECRET_KEY: HpZfsZ7kAzoJSsvsEUvlLoZzotsNJy8QBX4bjZ167UA7MQh9n7C04KwBqWPPy50J
       PAPERLESS_URL: http://localhost
       PAPERLESS_TIME_ZONE: UTC
       PAPERLESS_OCR_LANGUAGE: eng
@@ -35,7 +35,7 @@ services:
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: IjQ5U3KwRrdLG5q3ucNcYXV2jsiphS2X
+      POSTGRES_PASSWORD: XjwrCi11OY7AjCK1yqnNXjtcOoWjfuNN
     volumes:
     - paperless-db:/var/lib/postgresql
     healthcheck:
@@ -86,7 +86,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.20.15"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://paperless-ngx.com/
   repo: https://github.com/paperless-ngx/paperless-ngx
   docs: https://docs.paperless-ngx.com/

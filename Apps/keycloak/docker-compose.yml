@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloakuser
-      POSTGRES_PASSWORD: OKJbaJhfp5dmdJ5RRzt6vjWc9jRLR4Tn
+      POSTGRES_PASSWORD: sLdkqAkYDEU7R2xRl3vVKEhXHuXdKyLu
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -25,9 +25,9 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
       KC_DB_USERNAME: keycloakuser
-      KC_DB_PASSWORD: OKJbaJhfp5dmdJ5RRzt6vjWc9jRLR4Tn
+      KC_DB_PASSWORD: sLdkqAkYDEU7R2xRl3vVKEhXHuXdKyLu
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: h4hh9nvSe2aQKbN4D6XlLcCGAa4R6I0n
+      KC_BOOTSTRAP_ADMIN_PASSWORD: XOobTdLjnqfqKnmg9JRA9zs9AiR3gUqD
       KC_HOSTNAME: localhost
       KC_HTTP_ENABLED: 'true'
       KC_HEALTH_ENABLED: 'true'
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "26.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.keycloak.org/
   repo: https://github.com/keycloak/keycloak
   docs: https://www.keycloak.org/documentation

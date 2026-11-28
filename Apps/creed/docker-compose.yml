@@ -25,7 +25,7 @@ services:
     - NEXT_PUBLIC_SUPABASE_URL=
     - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
     - SUPABASE_SECRET_KEY=
-    - CREED_ENCRYPTION_SECRET=4Ckpw732t9BUopkf3ll85ZrAoauiNSMhTrZc2oSfBF4=
+    - CREED_ENCRYPTION_SECRET=2Vp1lsDwIY7XhzWBGYEn5xJ0R9s2nwnsc/cy4cO1hUU=
     - STRIPE_SECRET_KEY=
     - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
     - STRIPE_WEBHOOK_SECRET=
@@ -67,7 +67,7 @@ x-casaos:
   - amd64
   - arm64
   version: "e9b096d"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://creed.md
   repo: https://github.com/hpbrn/creed
   docs: https://docs.creed.md/

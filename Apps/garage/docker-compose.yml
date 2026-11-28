@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://garagehq.deuxfleurs.fr
   repo: https://git.deuxfleurs.fr/Deuxfleurs/garage
   docs: https://garagehq.deuxfleurs.fr/documentation/quick-start/

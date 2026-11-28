@@ -41,7 +41,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.46.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://docs.usetrmnl.com/go/diy/byos
   repo: https://github.com/usetrmnl/larapaper
   docs: https://github.com/usetrmnl/larapaper/blob/main/README.md

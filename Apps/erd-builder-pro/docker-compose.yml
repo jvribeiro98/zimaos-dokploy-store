@@ -9,8 +9,8 @@ services:
       db:
         condition: service_healthy
     environment:
-    - DATABASE_URL=postgresql://postgres:mytZLvmcJhDl99GvHeI6L6DEWuv0Or48@db:5432/erd_builder_pro
-    - ERD_ENCRYPTION_KEY=ysZLMo5llUTS3m32Jw15TBt6Zg7eVKeiYo54lG0frOCC3yq1
+    - DATABASE_URL=postgresql://postgres:rp5QYNfafW7oEluFN8CMVLIb99viUvur@db:5432/erd_builder_pro
+    - ERD_ENCRYPTION_KEY=6YUqTwlP6YhqZ11ZxC2SgiN8L5nPdCgxq8CPJ0mCAcrfZrXt
     - ERDBPRO_LICENSE_STATE_FILE=/app/data/.erdbpro/license-state.json
     volumes:
     - erd-builder-pro-data:/app/data
@@ -22,7 +22,7 @@ services:
     image: postgres:17
     restart: unless-stopped
     environment:
-    - POSTGRES_PASSWORD=mytZLvmcJhDl99GvHeI6L6DEWuv0Or48
+    - POSTGRES_PASSWORD=rp5QYNfafW7oEluFN8CMVLIb99viUvur
     - POSTGRES_DB=erd_builder_pro
     volumes:
     - erd-builder-pro-db:/var/lib/postgresql/data
@@ -62,7 +62,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.5.6"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.erdbuilderpro.com/
   repo: https://github.com/hadziqmtqn/erd-builder-pro
   docs: https://docs.erdbuilderpro.com/

@@ -34,7 +34,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.2.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://openfamily.fr/
   repo: https://github.com/NexaFlowFrance/OpenFamily
   docs: https://github.com/NexaFlowFrance/OpenFamily/blob/main/INSTALLATION.md

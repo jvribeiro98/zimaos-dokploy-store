@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     environment:
     - ADMIN_USER=admin
-    - ADMIN_PASS=qlS56g2mcYymYA4i
-    - JWT_SECRET=tXp7BT3fAKPaeKr6W5KKNeo7LEt2aKr45YvTruzumRS0AGqx
+    - ADMIN_PASS=AxngKspid4qUwZlq
+    - JWT_SECRET=0qWMWGOnAMc4bmDUkA3rNVv58KzqsTQL8AUw0rEKwerU6AEt
     - DATABASE_PATH=/app/data/invoice.db
     - PORT=3000
     - HOST=0.0.0.0
@@ -46,7 +46,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://inkvoice.app
   repo: https://github.com/pigontech/inkvoice
   docs: https://docs.inkvoice.app

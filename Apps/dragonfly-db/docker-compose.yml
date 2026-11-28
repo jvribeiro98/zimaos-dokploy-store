@@ -9,7 +9,7 @@ services:
     volumes:
     - dragonflydata:/data
     environment:
-    - DFLY_requirepass=GIIvCntCTPTu2MhNjEr38iJpqix5LDXF
+    - DFLY_requirepass=e5FhWFFXxmtzP1MCzOKszSvzua0QUKpi
     restart: unless-stopped
     ports:
     - target: 6379
@@ -37,7 +37,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.28.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.dragonflydb.io/
   repo: https://github.com/dragonflydb/dragonfly
   docs: https://www.dragonflydb.io/docs

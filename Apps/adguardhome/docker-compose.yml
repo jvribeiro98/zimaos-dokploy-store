@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://adguard.com
   repo: https://github.com/AdguardTeam/AdGuardHome
   docs: https://github.com/AdguardTeam/AdGuardHome/wiki

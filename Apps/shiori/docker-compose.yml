@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.0-2-g585ea34"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://go-shiori.github.io/shiori/
   repo: https://github.com/go-shiori/shiori
   docs: https://go-shiori.github.io/shiori/

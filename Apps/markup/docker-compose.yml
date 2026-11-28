@@ -7,7 +7,7 @@ services:
     - markup-postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: markup
-      POSTGRES_PASSWORD: k4B2CoiPkzTmW2VoSjBp1tME4QxRk25a
+      POSTGRES_PASSWORD: M5gpT1QkgdC0iVAIufqcQXgRlLyHpN1F
       POSTGRES_DB: markup
     healthcheck:
       test:
@@ -23,12 +23,12 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://markup:k4B2CoiPkzTmW2VoSjBp1tME4QxRk25a@db:5432/markup
+      DATABASE_URL: postgresql://markup:M5gpT1QkgdC0iVAIufqcQXgRlLyHpN1F@db:5432/markup
       NEXT_PUBLIC_DB_PROVIDER: postgres
       NEXT_PUBLIC_SITE_URL: https://localhost
       WORKOS_CLIENT_ID: client_id_change_me
       WORKOS_API_KEY: sk_change_me
-      WORKOS_COOKIE_PASSWORD: qgcJuy1d6vm6271LIU0IKco1qvwT7JLF
+      WORKOS_COOKIE_PASSWORD: rRnZ4qsipbzqljXyU1beAteJSNlrwUXD
       NEXT_PUBLIC_WORKOS_REDIRECT_URI: https://localhost/callback
       NODE_ENV: production
     ports:
@@ -58,7 +58,7 @@ x-casaos:
   - amd64
   - arm64
   version: "main"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://home.markup.freddiephilpot.dev/
   repo: https://github.com/pphilfre/markup
   docs: https://docs.markup.freddiephilpot.dev/

@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.5.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://lodestone.cc
   repo: https://github.com/Lodestone-Team/lodestone
   docs: https://github.com/Lodestone-Team/lodestone/wiki

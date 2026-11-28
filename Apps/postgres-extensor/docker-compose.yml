@@ -13,7 +13,7 @@ services:
     - max_worker_processes=32
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=R2Yg4zKStmhYSQMQONgcj7eIz7TIWYdk
+    - POSTGRES_PASSWORD=1iT26M6g8lkepr1tUKpBBpfrvCLzrpe4
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "18-v1.1.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://hub.docker.com/r/ruxwez/postgres
   repo: https://github.com/ruxwez/postgres
   docs: https://github.com/ruxwez/postgres/blob/main/.docs/included-extensions.md

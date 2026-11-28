@@ -6,10 +6,10 @@ services:
     volumes:
     - db_data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=tpKv3BhBAy5cFUGyudS3lwl8kowCtVbD
+    - MYSQL_ROOT_PASSWORD=7VFWW0hsvl0aaeZxZpAjJi1c8cKnG7AY
     - MYSQL_DATABASE=limesurvey
     - MYSQL_USER=limesurvey
-    - MYSQL_PASSWORD=kHna1Zc9svfZqwAZbgqXKVjHN1Z28pNE
+    - MYSQL_PASSWORD=M5qhJ6WRbUZGCfNet5wvzuHfQk00s2JE
   limesurvey:
     image: martialblog/limesurvey:latest
     restart: always
@@ -19,11 +19,11 @@ services:
     - ADMIN_EMAIL=admin@example.com
     - ADMIN_NAME=Admin
     - ADMIN_USER=admin
-    - ADMIN_PASSWORD=sIvbTM6uPhpAUx4SWgqxjRGLJ8TY9ZXq
+    - ADMIN_PASSWORD=HDw3Na00CbDszoVezcFVuqXUvYZoCoB4
     - DB_HOST=db
     - DB_MYSQL_ENGINE=InnoDB
     - DB_NAME=limesurvey
-    - DB_PASSWORD=kHna1Zc9svfZqwAZbgqXKVjHN1Z28pNE
+    - DB_PASSWORD=M5qhJ6WRbUZGCfNet5wvzuHfQk00s2JE
     - DB_USERNAME=limesurvey
     - DEBUG=0
     - DEBUG_SQL=0
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "6.17.2+260507"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.limesurvey.org
   repo: https://github.com/LimeSurvey/LimeSurvey
   docs: https://www.limesurvey.org/manual/

@@ -9,10 +9,10 @@ services:
       ZITADEL_DATABASE_POSTGRES_PORT: '5432'
       ZITADEL_DATABASE_POSTGRES_DATABASE: zitadel
       ZITADEL_DATABASE_POSTGRES_USER_USERNAME: zitadel
-      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: rtPTXNV5saJhyblmlPq3QrLKy5lhEhwx
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: HHq556eqKLq0gKwl1RPvaiBK3RVImA9k
       ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
       ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: postgres
-      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: rtPTXNV5saJhyblmlPq3QrLKy5lhEhwx
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: HHq556eqKLq0gKwl1RPvaiBK3RVImA9k
       ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
       ZITADEL_EXTERNALDOMAIN: localhost
       ZITADEL_EXTERNALPORT: '80'
@@ -47,7 +47,7 @@ services:
     image: postgres:17-alpine
     environment:
       PGUSER: postgres
-      POSTGRES_PASSWORD: rtPTXNV5saJhyblmlPq3QrLKy5lhEhwx
+      POSTGRES_PASSWORD: HHq556eqKLq0gKwl1RPvaiBK3RVImA9k
       POSTGRES_DB: zitadel
     volumes:
     - postgres_data:/var/lib/postgresql/data
@@ -85,7 +85,7 @@ x-casaos:
   - amd64
   - arm64
   version: "4.16.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://zitadel.com/
   repo: https://github.com/zitadel/zitadel
   docs: https://zitadel.com/docs/

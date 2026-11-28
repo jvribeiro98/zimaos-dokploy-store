@@ -10,7 +10,7 @@ services:
     - TZ=Europe/London
     - GITURL=https://github.com/linuxserver/docker-cloud9.git
     - USERNAME=user
-    - PASSWORD=Cufy3Q1PE353njcP
+    - PASSWORD=4S9oH5gYPGKcUDeH
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - code:/code
@@ -42,7 +42,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.29.2"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://aws.amazon.com/cloud9/
   repo: https://github.com/c9
   docs: https://docs.aws.amazon.com/cloud9/

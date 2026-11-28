@@ -2,7 +2,7 @@
 name = "Whatomate"
 environment = "staging"
 debug = false
-encryption_key = "7pPphXpSGqxWsFS4RG2soBSPRmwYdEOV"
+encryption_key = "eyzQlC6zJobTV1Xc1pL2Sa4kh64zoofD"
 
 [server]
 host = "0.0.0.0"
@@ -32,7 +32,7 @@ db = 0
 tls = false
 
 [jwt]
-secret = "SYva1tvoUIQPyUNpfDLMZk34zVqXR4miDVxZ2WMwioo3KqKTN4UVOHxRPpRkAxMZ"
+secret = "53zWxcCSUjkSzWKqA3J7HM2wEar4WaVWBSj82WjvWPHxXh0QkH2lFtNVqMMB4zg7"
 access_expiry_mins = 15
 refresh_expiry_days = 1
 
@@ -41,7 +41,7 @@ type = "local"
 local_path = "./uploads"
 
 [whatsapp]
-webhook_verify_token = "EfbPIvUMmF0fGkRazNzj869YKZF3kmyP"
+webhook_verify_token = "sFBN4klMlYWzDBURB54S4idLgJu3EAaf"
 api_version = "v24.0"
 base_url = "https://graph.facebook.com"
 

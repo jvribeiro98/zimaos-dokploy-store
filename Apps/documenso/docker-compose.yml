@@ -25,9 +25,9 @@ services:
     environment:
     - PORT=3000
     - NEXTAUTH_URL=http://localhost
-    - NEXTAUTH_SECRET=Oik+IBgCyCrAf0T5b0BYjApmlZjf5CItSOGLCw3ea24=
-    - NEXT_PRIVATE_ENCRYPTION_KEY=LpvxyJ7WLcaVoKFxQt8x996kX1LVPOfQ
-    - NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=op9HMArkdrEniaN9fXsUyN0FUFe3DGnHNCK4v5qANrg8bgjOnhRtonIZEB5tkWuP
+    - NEXTAUTH_SECRET=BFBvBVhbEGC83BkD9bvX9DX35BcsQi6xU8/tnzG7dCU=
+    - NEXT_PRIVATE_ENCRYPTION_KEY=Q5WgVWtD599mwJSdQgwEbM4X9ha47Pcy
+    - NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=CGEXiFnf1lf7V9xPMRcZXpjEUnbON2jDUM9IP2Ctz7CngYTHIGEqnDipmehoP8B8
     - NEXT_PUBLIC_WEBAPP_URL=http://localhost
     - NEXT_PRIVATE_DATABASE_URL=postgres://documenso:password@postgres:5432/documenso
     - NEXT_PRIVATE_DIRECT_DATABASE_URL=postgres://documenso:password@postgres:5432/documenso
@@ -94,7 +94,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.5.6"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://documenso.com/
   repo: https://github.com/documenso/documenso
   docs: https://docs.documenso.com/

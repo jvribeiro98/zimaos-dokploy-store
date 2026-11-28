@@ -8,7 +8,7 @@ services:
     environment:
     - CLICKHOUSE_DB=analytics
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=uKGR3m5U8PbSTxNm5ckpyv2wF9tIPvgF
+    - CLICKHOUSE_PASSWORD=sH28lMcIl1SxKEOhhhiGjy1i63p0OYjX
     healthcheck:
       test:
       - CMD
@@ -27,7 +27,7 @@ services:
     environment:
     - POSTGRES_DB=analytics
     - POSTGRES_USER=frog
-    - POSTGRES_PASSWORD=RG4OFoufncrU6X9wvXDyW9nnGtodYQzf
+    - POSTGRES_PASSWORD=WkHzOGpGtsGxKhB9KpJNBRIfBQ0WY80G
     volumes:
     - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -72,16 +72,16 @@ services:
     - CLICKHOUSE_HOST=http://rybbit_clickhouse:8123
     - CLICKHOUSE_DB=analytics
     - CLICKHOUSE_USER=default
-    - CLICKHOUSE_PASSWORD=uKGR3m5U8PbSTxNm5ckpyv2wF9tIPvgF
+    - CLICKHOUSE_PASSWORD=sH28lMcIl1SxKEOhhhiGjy1i63p0OYjX
     - POSTGRES_HOST=rybbit_postgres
     - POSTGRES_PORT=5432
     - POSTGRES_DB=analytics
     - POSTGRES_USER=frog
-    - POSTGRES_PASSWORD=RG4OFoufncrU6X9wvXDyW9nnGtodYQzf
+    - POSTGRES_PASSWORD=WkHzOGpGtsGxKhB9KpJNBRIfBQ0WY80G
     - REDIS_HOST=rybbit_redis
     - REDIS_PORT=6379
-    - REDIS_PASSWORD=ohykYDz10BxB8iXVelcCBL3AYX0avcot
-    - BETTER_AUTH_SECRET=PKDtf8L7LOCvIJXSiGqwGhp58dixMOAiCVLa2f79e4s=
+    - REDIS_PASSWORD=KoRuDoXWHG2nkYSiRDRUQPwoFl36nsIp
+    - BETTER_AUTH_SECRET=jcQTuzYkQHcneOmKmwXCFcMsI9lgUe2H9yGVef7D8U4=
     - BASE_URL=http://localhost
     - DISABLE_SIGNUP=false
     - DISABLE_TELEMETRY=false
@@ -142,7 +142,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.7.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://rybbit.io
   repo: https://github.com/rybbit-io/rybbit
   docs: https://www.rybbit.io/docs

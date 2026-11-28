@@ -22,13 +22,13 @@ services:
       start_interval: 5s
       start_period: 30s
     environment:
-      SECRET: JxswXy6BbnexZnEE+Ufw+mlpvtD0BnWISFOMN3iIgG6a0HiLK8GzBCIdd67X64H0yL18btuybiudKpFWt2I8rA==
+      SECRET: EByn0h8FrH5RmbR+Qt+0HcR3go+hPCuPz3FrbWkOge7y/Yniav6t3TBWvMIidQy25qDC1qqeaGxGBMoudrtPTA==
       DB_CLIENT: pg
       DB_HOST: database
       DB_PORT: '5432'
       DB_DATABASE: directus
       DB_USER: directus
-      DB_PASSWORD: CYNquIeM0I7PEyK9Zirtyv2wZQITmedD
+      DB_PASSWORD: XkNq72hf8FkgcBPHyedzae8ic6oDBgH8
       CACHE_ENABLED: 'true'
       CACHE_AUTO_PURGE: 'true'
       CACHE_STORE: redis
@@ -37,7 +37,7 @@ services:
       PUBLIC_URL: https://localhost
       LICENSE_KEY: ''
       ADMIN_EMAIL: admin@example.com
-      ADMIN_PASSWORD: VvQu8ZVawNEc6aTEeevVZS0p
+      ADMIN_PASSWORD: XLcdJfZnbvma59Gh6duqoSfj
       STORAGE_LOCATIONS: local
       STORAGE_LOCAL_DRIVER: local
       STORAGE_LOCAL_ROOT: /directus/uploads
@@ -52,7 +52,7 @@ services:
     - directus_database:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: directus
-      POSTGRES_PASSWORD: CYNquIeM0I7PEyK9Zirtyv2wZQITmedD
+      POSTGRES_PASSWORD: XkNq72hf8FkgcBPHyedzae8ic6oDBgH8
       POSTGRES_DB: directus
     healthcheck:
       test:
@@ -101,7 +101,7 @@ x-casaos:
   - amd64
   - arm64
   version: "12.1.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://directus.io/
   repo: https://github.com/directus/directus
   docs: https://directus.com/docs/

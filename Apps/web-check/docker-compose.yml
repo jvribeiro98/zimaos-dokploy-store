@@ -30,7 +30,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/lissy93/web-check
   repo: https://github.com/lissy93/web-check
   docs: https://github.com/lissy93/web-check

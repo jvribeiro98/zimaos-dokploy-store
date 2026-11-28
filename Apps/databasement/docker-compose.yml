@@ -6,7 +6,7 @@ services:
     expose:
     - 2226
     environment:
-    - APP_KEY=base64:zUqC6A2FpNO2Ukp23zthgt1YBEgRx4GIvVFR3fQVOI4=
+    - APP_KEY=base64:Xny3eH+BOIBmkJMRQseaBCrDCM101F697AXouxpiPkU=
     - APP_URL=https://localhost
     - DB_CONNECTION=sqlite
     - DB_DATABASE=/data/database.sqlite
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.8.4"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://david-crty.github.io/databasement/
   repo: https://github.com/David-Crty/databasement
   docs: https://david-crty.github.io/databasement/self-hosting/docker

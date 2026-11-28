@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=UNkry6PC48F4rGqhmThZi0diPMZJnnol
+    - POSTGRES_PASSWORD=BOzpzUSbP7v1dsBTr6DipapvKJvwvQYc
     - POSTGRES_DB=postgres
     volumes:
     - postgres-data:/var/lib/postgresql
@@ -28,7 +28,7 @@ services:
     - cp /pgadmin4/pgpass /var/lib/pgadmin/pgpass && chmod 600 /var/lib/pgadmin/pgpass && exec /entrypoint.sh
     environment:
     - PGADMIN_DEFAULT_EMAIL=admin@example.com
-    - PGADMIN_DEFAULT_PASSWORD=fFrsfWo981mHVppc
+    - PGADMIN_DEFAULT_PASSWORD=wPm97f0bt5eymqEP
     - PGADMIN_CONFIG_SERVER_MODE=False
     - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
     - PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json
@@ -66,7 +66,7 @@ x-casaos:
   - amd64
   - arm64
   version: "18-alpine"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.postgresql.org/
   repo: https://github.com/postgres/postgres
   docs: https://www.pgadmin.org/docs/

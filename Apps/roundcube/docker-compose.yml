@@ -35,7 +35,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.6.9"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://roundcube.net/
   repo: https://github.com/roundcube/roundcubemail
   docs: https://roundcube.net/about/

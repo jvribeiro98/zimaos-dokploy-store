@@ -7,7 +7,7 @@ services:
     - 8080
     environment:
     - OLLAMA_BASE_URL=http://ollama:11434
-    - WEBUI_SECRET_KEY=ul1JLL4NWGGxiTQlJhXu4VF3r18PfP9S
+    - WEBUI_SECRET_KEY=Mogwq3adDzJ2MK5WdMiJvYdK6TWwV5Fc
     volumes:
     - open-webui:/app/backend/data
     extra_hosts:
@@ -40,7 +40,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.3.7"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://openwebui.com/
   repo: https://github.com/open-webui/open-webui
   docs: https://docs.openwebui.com/

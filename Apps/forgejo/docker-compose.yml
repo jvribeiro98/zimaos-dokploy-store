@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "16"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://forgejo.org/
   repo: https://codeberg.org/forgejo/forgejo
   docs: https://forgejo.org/docs/latest/

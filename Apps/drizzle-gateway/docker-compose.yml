@@ -6,7 +6,7 @@ services:
     environment:
       PORT: '4983'
       STORE_PATH: /app
-      MASTERPASS: 0jpGgEUC7FBsjXYyIMqX+DsSxK0g7GTrb4CVhZ0aPkY=
+      MASTERPASS: ncDvTx86sIgaByKixMZouhLYrWsN8GtJMEeli20Sp54=
     volumes:
     - drizzle-gateway:/app
     ports:
@@ -35,6 +35,6 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://gateway.drizzle.team/
   docs: https://gateway.drizzle.team/docs/railway

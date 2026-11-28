@@ -3,10 +3,10 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: LslnEmxYDdLLg514Yj3TtRc9IvmsdZzI
+      MYSQL_ROOT_PASSWORD: HiseZ02teYvba1ZE9qx1ZXg3qgnK9P6A
       MYSQL_DATABASE: phpmyadmin
       MYSQL_USER: phpmyadmin
-      MYSQL_PASSWORD: zcrjlmQiz5hvybIaWh4z7JWLJz8WYMoP
+      MYSQL_PASSWORD: XsZfcH1UqT2ULLY7Mbl2TVOQeOwFxopq
     volumes:
     - db_data:/var/lib/mysql
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_USER: phpmyadmin
-      PMA_PASSWORD: zcrjlmQiz5hvybIaWh4z7JWLJz8WYMoP
+      PMA_PASSWORD: XsZfcH1UqT2ULLY7Mbl2TVOQeOwFxopq
       PMA_ARBITRARY: '1'
       UPLOAD_LIMIT: 512M
       MAX_EXECUTION_TIME: '600'
@@ -50,7 +50,7 @@ x-casaos:
   - amd64
   - arm64
   version: "5.2.3"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.phpmyadmin.net/
   repo: https://github.com/phpmyadmin/phpmyadmin
   docs: https://www.phpmyadmin.net/docs/

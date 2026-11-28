@@ -7,7 +7,7 @@ services:
     - redis
     environment:
     - TZ=Europe/Berlin
-    - SECRET=JZ576C35Q6pvkMAgVRPak67uXMUw3984iA71fkmL1QJVJWc4RBG9upZ6D1G84KcK
+    - SECRET=zYyJhoAzgJZEMIZDWrBIkBPESvtRlaNFZFHvuZLzl8lWdqNktfTjXTi9nJl6iAtK
     - REDIS_URL=redis://redis:6379
     volumes:
     - yamtrack-db:/yamtrack/db
@@ -45,7 +45,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/fuzzygrim/yamtrack
   repo: https://github.com/fuzzygrim/yamtrack
   docs: https://github.com/fuzzygrim/yamtrack

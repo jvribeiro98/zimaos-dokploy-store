@@ -16,7 +16,7 @@ services:
     - MYSQL_HOST=mariadb
     - MYSQL_PORT=3306
     - MYSQL_USER=azuracast
-    - MYSQL_PASSWORD=D51KsGNxYUlyAQep
+    - MYSQL_PASSWORD=I4WVFjK1fDPQf76A
     - MYSQL_DATABASE=azuracast
     depends_on:
     - mariadb
@@ -30,10 +30,10 @@ services:
     volumes:
     - mariadb-data:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=Q51Ffr0fPOo2dyRo3WkOHtNnkst8xZkR
+    - MYSQL_ROOT_PASSWORD=Hm0OxV720acYv0CBqlxIRhJPe6dlkrZR
     - MYSQL_DATABASE=azuracast
     - MYSQL_USER=azuracast
-    - MYSQL_PASSWORD=D51KsGNxYUlyAQep
+    - MYSQL_PASSWORD=I4WVFjK1fDPQf76A
 volumes:
   azuracast-station-data: {}
   azuracast-data: {}
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.azuracast.com/
   repo: https://github.com/AzuraCast/AzuraCast
   docs: https://docs.azuracast.com/

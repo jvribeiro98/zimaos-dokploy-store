@@ -32,7 +32,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://docs.keydb.dev/
   repo: https://github.com/Snapchat/KeyDB
   docs: https://docs.keydb.dev/docs/

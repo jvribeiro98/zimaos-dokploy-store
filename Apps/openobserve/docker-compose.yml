@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       ZO_ROOT_USER_EMAIL: admin@example.com
-      ZO_ROOT_USER_PASSWORD: tef7cpQ5GLLrqVlRRU1fQ6F66ldFqKZw
+      ZO_ROOT_USER_PASSWORD: exH1SkODelPwNarTkDanZCrmp8cwSPot
       ZO_DATA_DIR: /data
     expose:
     - 5080
@@ -38,7 +38,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.70.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://openobserve.ai/
   repo: https://github.com/openobserve/openobserve
   docs: https://openobserve.ai/docs/

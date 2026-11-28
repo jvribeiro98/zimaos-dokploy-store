@@ -4,9 +4,9 @@ services:
     image: ghcr.io/paulolinder/velix-api:1.1.0
     restart: always
     environment:
-    - DATABASE_URL=postgres://postgres:q4imoXHjJtyoISVRwC0zq14atECnVHui@postgres:5432/velix?sslmode=disable
+    - DATABASE_URL=postgres://postgres:tYLOIohkWpP6Gbgb4QaJe5G6iWYjGyUG@postgres:5432/velix?sslmode=disable
     - REDIS_URL=redis://redis:6379
-    - JWT_SECRET=E8dHgvlIB1HIL5LIVrSjdcq9VAxmBAG5jUS1wZEJ5k6uQtHrlDz9UJ82mrpnafda
+    - JWT_SECRET=PLLKkyxJKsEoSV5ucTmJXmk98Sbwp2pIE5mdUCnk2MqxJENWsvUFlgqMSua3xpOv
     - HTTP_PORT=8080
     - APP_ENV=production
     - LOG_LEVEL=info
@@ -29,7 +29,7 @@ services:
     restart: always
     environment:
     - POSTGRES_DB=velix
-    - POSTGRES_PASSWORD=q4imoXHjJtyoISVRwC0zq14atECnVHui
+    - POSTGRES_PASSWORD=tYLOIohkWpP6Gbgb4QaJe5G6iWYjGyUG
     volumes:
     - postgres-data:/var/lib/postgresql/data
   redis:
@@ -61,7 +61,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.1.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://velix.dev
   repo: https://github.com/paulolinder/velix-api
   docs: https://github.com/paulolinder/velix-api#readme

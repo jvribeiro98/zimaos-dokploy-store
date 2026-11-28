@@ -136,7 +136,7 @@ x-casaos:
   - amd64
   - arm64
   version: "12.1-0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://zulip.com/
   repo: https://github.com/zulip/docker-zulip
   docs: https://zulip.readthedocs.io/projects/docker/

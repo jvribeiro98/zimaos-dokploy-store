@@ -20,7 +20,7 @@ services:
       HYPERDX_LOG_LEVEL: info
       USAGE_STATS_ENABLED: 'false'
       NEXT_TELEMETRY_DISABLED: '1'
-      DEFAULT_CONNECTIONS: '[{"name":"Local ClickHouse","host":"http://clickhouse:8123","username":"hyperdx","password":"zFcr1itbcBUxMz7Ox6B72U2itJh2Ru5o"}]'
+      DEFAULT_CONNECTIONS: '[{"name":"Local ClickHouse","host":"http://clickhouse:8123","username":"hyperdx","password":"pvye1ypGlg0KPF8iYeJOjnlC39poGZfb"}]'
       DEFAULT_SOURCES: '[{"from":{"databaseName":"default","tableName":"otel_logs"},"kind":"log","timestampValueExpression":"Timestamp","name":"Logs","displayedTimestampValueExpression":"Timestamp","implicitColumnExpression":"Body","serviceNameExpression":"ServiceName","bodyExpression":"Body","eventAttributesExpression":"LogAttributes","resourceAttributesExpression":"ResourceAttributes","defaultTableSelectExpression":"Timestamp,ServiceName,SeverityText,Body","severityTextExpression":"SeverityText","traceIdExpression":"TraceId","spanIdExpression":"SpanId","metadataMaterializedViews":{"keyRollupTable":"otel_logs_key_rollup_15m","kvRollupTable":"otel_logs_kv_rollup_15m","granularity":"15
         minute"},"connection":"Local ClickHouse","traceSourceId":"Traces","sessionSourceId":"Sessions","metricSourceId":"Metrics"},{"from":{"databaseName":"default","tableName":"otel_traces"},"kind":"trace","timestampValueExpression":"Timestamp","name":"Traces","displayedTimestampValueExpression":"Timestamp","implicitColumnExpression":"SpanName","serviceNameExpression":"ServiceName","eventAttributesExpression":"SpanAttributes","resourceAttributesExpression":"ResourceAttributes","defaultTableSelectExpression":"Timestamp,ServiceName,StatusCode,round(Duration/1e6),SpanName","traceIdExpression":"TraceId","spanIdExpression":"SpanId","durationExpression":"Duration","durationPrecision":9,"parentSpanIdExpression":"ParentSpanId","spanNameExpression":"SpanName","spanKindExpression":"SpanKind","statusCodeExpression":"StatusCode","statusMessageExpression":"StatusMessage","metadataMaterializedViews":{"keyRollupTable":"otel_traces_key_rollup_15m","kvRollupTable":"otel_traces_kv_rollup_15m","granularity":"15
         minute"},"connection":"Local ClickHouse","logSourceId":"Logs","sessionSourceId":"Sessions","metricSourceId":"Metrics"},{"from":{"databaseName":"default","tableName":""},"kind":"metric","timestampValueExpression":"TimeUnix","name":"Metrics","resourceAttributesExpression":"ResourceAttributes","metricTables":{"gauge":"otel_metrics_gauge","histogram":"otel_metrics_histogram","sum":"otel_metrics_sum","exponential
@@ -138,7 +138,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.38.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://hyperdx.io/
   repo: https://github.com/hyperdxio/hyperdx
   docs: https://clickhouse.com/docs/use-cases/observability/clickstack

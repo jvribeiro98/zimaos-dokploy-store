@@ -3,10 +3,10 @@ services:
   db:
     image: mariadb:11.4
     environment:
-      MYSQL_ROOT_PASSWORD: Qpz77WrIy2tC5o4X
+      MYSQL_ROOT_PASSWORD: ji9TRkqK0BL31tAR
       MYSQL_DATABASE: ojs
       MYSQL_USER: ojs
-      MYSQL_PASSWORD: RQg5LATqx7hB3R7c
+      MYSQL_PASSWORD: JZOkksqNpgYQNLSq
     volumes:
     - ojs-db-data:/var/lib/mysql
     restart: unless-stopped
@@ -52,7 +52,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.3.0-21"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://pkp.sfu.ca/ojs/
   repo: https://github.com/pkp/docker-ojs
   docs: https://pkp.sfu.ca/ojs/docs/

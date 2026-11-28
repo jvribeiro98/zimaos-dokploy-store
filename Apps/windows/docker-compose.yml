@@ -39,6 +39,6 @@ x-casaos:
   - amd64
   - arm64
   version: "4.00"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   repo: https://github.com/dockur/windows
   docs: https://github.com/dockur/windows?tab=readme-ov-file#how-do-i-use-it

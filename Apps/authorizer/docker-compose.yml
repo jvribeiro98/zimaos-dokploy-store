@@ -7,10 +7,10 @@ services:
     - 8080
     environment:
     - DATABASE_TYPE=postgres
-    - DATABASE_URL=postgres://postgres:0tVMhoe4WPBqduv3@authorizer-db:5432/authorizer?sslmode=disable
+    - DATABASE_URL=postgres://postgres:eALJYyRz5nxHghh8@authorizer-db:5432/authorizer?sslmode=disable
     - REDIS_URL=redis://authorizer-redis:6379
-    - ADMIN_SECRET=gzi8Z92f6FeSIpUk9caJVQIsEJvB8Ocg
-    - JWT_SECRET=wBr7BCSwKxUWibcF8GC07RukPonD3WuF
+    - ADMIN_SECRET=8pmTa7MiXqHj2yNIw1wTB2GM7QtMqJbO
+    - JWT_SECRET=fsYGSdlpEhKd5HTRQU9bJeE72fShAuEI
     - COOKIE_NAME=authorizer
     - ACCESS_TOKEN_EXPIRY_TIME=86400
     - REFRESH_TOKEN_EXPIRY_TIME=86400
@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
     - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=0tVMhoe4WPBqduv3
+    - POSTGRES_PASSWORD=eALJYyRz5nxHghh8
     - POSTGRES_DB=authorizer
     volumes:
     - db_data:/var/lib/postgresql/data
@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.4.4"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://authorizer.dev
   repo: https://github.com/authorizerdev/authorizer
   docs: https://docs.authorizer.dev/

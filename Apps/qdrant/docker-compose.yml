@@ -4,7 +4,7 @@ services:
     image: qdrant/qdrant:latest
     environment:
     - SERVICE_FQDN_QDRANT_6333
-    - QDRANT__SERVICE__API_KEY=gzf1yOHXJDVIhK2YxwvZEt4903ZnbSMa
+    - QDRANT__SERVICE__API_KEY=W962XARdcQIwQheVaa97872Bdix6Bfz9
     expose:
     - '6333'
     volumes:
@@ -43,7 +43,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://qdrant.tech/
   repo: https://github.com/qdrant/qdrant
   docs: https://qdrant.tech/documentation/

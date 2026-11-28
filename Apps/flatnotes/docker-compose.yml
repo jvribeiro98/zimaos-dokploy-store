@@ -8,8 +8,8 @@ services:
       PGID: '1000'
       FLATNOTES_AUTH_TYPE: password
       FLATNOTES_USERNAME: admin
-      FLATNOTES_PASSWORD: zIoCacalquVMnejp
-      FLATNOTES_SECRET_KEY: fu6bGHS8RhqzMiNb6k38L3k1GF8yCPbd
+      FLATNOTES_PASSWORD: u98h7PsEiDBg68kU
+      FLATNOTES_SECRET_KEY: 7Div4vx2XLCtHg5F6zHUf6AKkE52CbSZ
       FLATNOTES_SESSION_EXPIRY_DAYS: '30'
       FLATNOTES_TOTP_KEY: ''
       FLATNOTES_PATH_PREFIX: ''
@@ -48,7 +48,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://flatnotes.io
   repo: https://github.com/dullage/flatnotes
   docs: https://github.com/dullage/flatnotes

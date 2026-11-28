@@ -9,8 +9,8 @@ services:
     - opencloud init || true; opencloud server
     environment:
     - OC_URL=https://localhost
-    - INITIAL_ADMIN_PASSWORD=lgDzSwmdwdAyY7b1dYIcEWfJkmB10EAz
-    - IDM_ADMIN_PASSWORD=lgDzSwmdwdAyY7b1dYIcEWfJkmB10EAz}
+    - INITIAL_ADMIN_PASSWORD=RPRWjo8Fj9VT4SRvhmK5qJjCXRX972RJ
+    - IDM_ADMIN_PASSWORD=RPRWjo8Fj9VT4SRvhmK5qJjCXRX972RJ}
     - PROXY_HTTP_ADDR=0.0.0.0:9200
     - PROXY_TLS=false
     - OC_INSECURE=false
@@ -53,7 +53,7 @@ x-casaos:
   - amd64
   - arm64
   version: "7.2"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://opencloud.eu
   repo: https://github.com/opencloud-eu/opencloud
   docs: https://docs.opencloud.eu

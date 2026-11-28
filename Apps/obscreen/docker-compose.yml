@@ -12,7 +12,7 @@ services:
       PORT: '5000'
       NO_ZEROCONF: 'true'
       BEHIND_REVERSE_PROXY: 'true'
-      SECRET_KEY: 500173f667aa604033b83868f902029913a621a59f69a7bd8fc2c3f5444788b7
+      SECRET_KEY: f48889b78abcdc1d8a0d8ab07ba6248f0e66d0d6b54a69dfa340d092dce6c6eb
       FROZEN_VAR_EXTERNAL_URL: http://localhost
       MALLOC_MMAP_THRESHOLD_: '1048576'
       MALLOC_TRIM_THRESHOLD_: '1048576'
@@ -56,7 +56,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2026.11.4"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://obscreen.io/
   repo: https://github.com/obscreen/obscreen
   docs: https://docs.obscreen.io/

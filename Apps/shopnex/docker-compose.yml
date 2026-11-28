@@ -29,8 +29,8 @@ services:
       DATABASE_URL: postgres://shopnex:shopnex@db:5432/shopnex
       APP_URL: https://localhost
       BETTER_AUTH_URL: https://localhost
-      BETTER_AUTH_SECRET: rgA2A6IlXcvQxhsu5QdRxXVDRndlZqz3ulZsJOpJwas=
-      SHOPNEX_SECRET: JZRReYAwObx6FoBpeGBODj9QLthU5K4bTWrIgsEsHNo=
+      BETTER_AUTH_SECRET: FK4yE+naTDprdstaEV81X5StrIUnaH5BfAZuv/gLKQ0=
+      SHOPNEX_SECRET: /CONSWUlDo2vxu6qcPIuQMtU0CuPKZxp7bOtV6W6Fv4=
       TENANCY_MODE: single
       DEFAULT_SHOP_NAME: ${DEFAULT_SHOP_NAME:-My Shop}
       SHOPNEX_BUNDLED_APPS: docker
@@ -73,7 +73,7 @@ x-casaos:
   - amd64
   - arm64
   version: "0.13.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://shopnex.ai
   repo: https://github.com/shopnex-ai/shopnex
   docs: https://docs.shopnex.ai/docs/self-hosting/dokploy

@@ -17,7 +17,7 @@ services:
       '
     environment:
     - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=6p8aFmlngsFnmnXx0otck0iqPhUGGlGJ
+    - POSTGRES_PASSWORD=b1waWuoyIMZw2aplPDyycGPl8Iaejw0k
     - POSTGRES_DB=postgres
     volumes:
     - pg-pinecone-data:/var/lib/postgresql
@@ -57,7 +57,7 @@ x-casaos:
   - amd64
   - arm64
   version: "pg18"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.pinecone.io/
   repo: https://github.com/pinecone-io/pg_pinecone
   docs: https://docs.pinecone.io/guides/pg-pinecone/overview

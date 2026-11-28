@@ -10,7 +10,7 @@ services:
     depends_on:
     - postgres-langflow
     environment:
-    - LANGFLOW_DATABASE_URL=postgresql://langflow:MEvFxgpPX0D1LShbyA44EUHsAUN1IsQk@postgres-langflow:5432/langflow
+    - LANGFLOW_DATABASE_URL=postgresql://langflow:GUzjWT3EchxdPHQhGfwJX14P8K3pn1om@postgres-langflow:5432/langflow
     - LANGFLOW_CONFIG_DIR=/app/config
     - LANGFLOW_SUPERUSER=email@domain.com
     - LANGFLOW_SUPERUSER_PASSWORD=changepassword
@@ -39,7 +39,7 @@ services:
       retries: 10
     environment:
       POSTGRES_USER: langflow
-      POSTGRES_PASSWORD: MEvFxgpPX0D1LShbyA44EUHsAUN1IsQk
+      POSTGRES_PASSWORD: GUzjWT3EchxdPHQhGfwJX14P8K3pn1om
       POSTGRES_DB: langflow
     volumes:
     - postgres-data:/var/lib/postgresql/data
@@ -68,7 +68,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.1.1"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://www.langflow.org/
   repo: https://github.com/langflow-ai/langflow/tree/main
   docs: https://docs.langflow.org/

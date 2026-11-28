@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://mavenwright.com/en/stitchkit/tools/embroidery-file-converter
   repo: https://github.com/mavenwright/embroidery-converter
   docs: https://github.com/mavenwright/embroidery-converter#readme

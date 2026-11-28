@@ -60,7 +60,7 @@ x-casaos:
   - amd64
   - arm64
   version: "3.8.17"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/diegosouzapw/OmniRoute
   repo: https://github.com/diegosouzapw/OmniRoute
   docs: https://github.com/diegosouzapw/OmniRoute/wiki

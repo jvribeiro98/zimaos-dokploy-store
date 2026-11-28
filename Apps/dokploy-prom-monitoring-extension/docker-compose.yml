@@ -33,7 +33,7 @@ x-casaos:
   - amd64
   - arm64
   version: "canary"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://dokploy.com/
   repo: https://github.com/Dokploy/dokploy
   docs: https://docs.dokploy.com/

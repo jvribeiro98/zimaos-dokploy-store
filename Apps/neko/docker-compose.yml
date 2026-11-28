@@ -27,7 +27,7 @@ x-casaos:
   - amd64
   - arm64
   version: "1.0.0"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://github.com/m1k1o/neko
   repo: https://github.com/m1k1o/neko
   docs: https://github.com/m1k1o/neko

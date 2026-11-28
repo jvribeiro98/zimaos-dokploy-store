@@ -179,7 +179,7 @@ services:
       SEARXNG_ENGINES: ''
       SEARXNG_CATEGORIES: ''
       SELF_HOSTED_WEBHOOK_URL: ''
-      SELF_HOSTED_WEBHOOK_HMAC_SECRET: d4b0115a5475feb06d07adb86ab0540c5925a94200954d31dff53091a041e584
+      SELF_HOSTED_WEBHOOK_HMAC_SECRET: c99fa518b516dccc5f731d6e22fcd42718ec6b5f6882213228e81195a30d2cb7
       PROXY_SERVER: ''
       PROXY_USERNAME: ''
       PROXY_PASSWORD: ''
@@ -610,7 +610,7 @@ x-casaos:
   - amd64
   - arm64
   version: "2.11.230"
-  update_at: "2026-11-27"
+  update_at: "2026-11-28"
   website: https://firecrawl.dev
   repo: https://github.com/firecrawl/firecrawl
   docs: https://docs.firecrawl.dev/contributing/self-host
